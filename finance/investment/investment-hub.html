@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/png" href="https://advaitpatel69-beep.github.io/Advait.github.io/favicon.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free investment calculators for SIP, FD, RD, mutual funds, and lumpsum investments. Plan wealth creation with accurate return projections.">
+    <link rel="canonical" href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/investment/investment-hub.html">
+    <title>Investment Calculators – SIP, FD, RD & Return Planning Tools</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.7;
+            color: #333;
+            background: #f5f7fa;
+        }
+
+        header {
+            background: linear-gradient(135deg, #0891b2 0%, #059669 100%);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .site-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+
+        nav a:hover {
+            opacity: 0.8;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+            background: none;
+            border: none;
+            padding: 0;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            border-radius: 3px;
+            transition: 0.3s;
+        }
+
+        .mobile-nav {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: #0891b2;
+            flex-direction: column;
+            padding: 1rem;
+            gap: 1rem;
+        }
+
+        .mobile-nav.active {
+            display: flex;
+        }
+
+        .mobile-nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .mobile-nav a:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 1rem;
+        }
+
+        .breadcrumb {
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+        }
+
+        .breadcrumb a {
+            color: #0891b2;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .breadcrumb a:hover {
+            color: #059669;
+            text-decoration: underline;
+        }
+
+        .breadcrumb span {
+            color: #64748b;
+            margin: 0 0.5rem;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        h1 {
+            font-size: 2.75rem;
+            color: #2d3748;
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+
+        .hero-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: #4a5568;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .intro-section {
+            background: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+            margin-bottom: 4rem;
+            line-height: 1.8;
+        }
+
+        .intro-section p {
+            margin-bottom: 1.25rem;
+            color: #4a5568;
+            font-size: 1.05rem;
+        }
+
+        .intro-section p:last-child {
+            margin-bottom: 0;
+        }
+
+        .intro-section a {
+            color: #0891b2;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .intro-section a:hover {
+            color: #059669;
+            text-decoration: underline;
+        }
+
+        .calculators-section {
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: #2d3748;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            border-left: 4px solid #0891b2;
+            padding-left: 1rem;
+        }
+
+        .calculators-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .calculator-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-top: 3px solid #0891b2;
+        }
+
+        .calculator-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.12);
+        }
+
+        .calculator-card h3 {
+            font-size: 1.4rem;
+            color: #2d3748;
+            margin-bottom: 0.75rem;
+            font-weight: 700;
+        }
+
+        .calculator-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        .calculator-description {
+            color: #4a5568;
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+
+        .calculator-link {
+            display: inline-block;
+            color: #0891b2;
+            font-weight: 600;
+            text-decoration: none;
+            padding: 0.65rem 1.25rem;
+            border: 2px solid #0891b2;
+            border-radius: 8px;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .calculator-link:hover {
+            background: #0891b2;
+            color: white;
+        }
+
+        .related-section {
+            background: linear-gradient(135deg, #059669 0%, #0891b2 100%);
+            color: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+            margin-bottom: 2rem;
+        }
+
+        .related-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.25rem;
+            font-weight: 700;
+        }
+
+        .related-section p {
+            margin-bottom: 1rem;
+            line-height: 1.8;
+            font-size: 1.05rem;
+            opacity: 0.95;
+        }
+
+        .related-section a {
+            color: white;
+            text-decoration: underline;
+            font-weight: 600;
+            transition: opacity 0.3s;
+        }
+
+        .related-section a:hover {
+            opacity: 0.8;
+        }
+
+        footer {
+            background: #2d3748;
+            color: white;
+            padding: 3rem 0 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: #cbd5e0;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .disclaimer {
+            background: rgba(0,0,0,0.2);
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: #cbd5e0;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #cbd5e0;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.05rem;
+            }
+
+            .intro-section {
+                padding: 1.5rem;
+            }
+
+            .calculators-grid {
+                grid-template-columns: 1fr;
+                gap: 1.25rem;
+            }
+
+            .calculator-card {
+                padding: 1.5rem;
+            }
+
+            .related-section {
+                padding: 2rem 1.5rem;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .section-title {
+                font-size: 1.6rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 2rem 1rem;
+            }
+
+            h1 {
+                font-size: 1.75rem;
+            }
+
+            .hero-icon {
+                font-size: 2.5rem;
+            }
+
+            .calculator-icon {
+                font-size: 1.75rem;
+            }
+
+            .calculator-card h3 {
+                font-size: 1.25rem;
+            }
+
+            .intro-section p,
+            .calculator-description,
+            .related-section p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="site-title">💰 Finance Calculators</div>
+            <nav>
+                <a href="https://advaitpatel69-beep.github.io/Advait.github.io/index.html">Home</a>
+
+                <span class="nav-disabled">Student Calculators (Coming Soon)</span>
+                <span class="nav-disabled">Medical Calculators (Coming Soon)</span>
+                <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/finance-hub.html">Finance Calculators</a>
+            </nav>
+            <button class="hamburger" id="hamburgerBtn" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        <div class="mobile-nav" id="mobileNav">
+            <a href="https://advaitpatel69-beep.github.io/Advait.github.io/index.html">Home</a>
+
+            <span class="nav-disabled">Student Calculators (Coming Soon)</span>
+            <span class="nav-disabled">Medical Calculators (Coming Soon)</span>
+            <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/finance-hub.html">Finance Calculators</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <nav class="breadcrumb">
+            <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/finance-hub.html">Finance Calculators</a>
+            <span>›</span>
+            <span>Investment Calculators</span>
+        </nav>
+
+        <div class="hero">
+            <div class="hero-icon">📈</div>
+            <h1>Investment Calculators</h1>
+            <p class="hero-subtitle">Plan your wealth creation journey with accurate return projections and systematic investment planning tools</p>
+        </div>
+
+        <section class="intro-section">
+            <p>Investment calculators are powerful planning tools that help you visualize how your money can grow over time through systematic savings and the magic of compound interest. Whether you're just starting your investment journey or optimizing an existing portfolio, these calculators provide clarity on future returns, required monthly contributions, and the time needed to reach your financial goals. By inputting basic parameters like investment amount, expected returns, and time horizon, you instantly see projected maturity values, total interest earned, and year-wise growth breakdowns that make abstract financial concepts tangible and actionable.</p>
+
+            <p>These tools serve everyone from college students planning their first systematic investment to seasoned professionals optimizing retirement corpus. For beginners, investment calculators demystify wealth creation by showing exactly how small monthly deposits accumulate into substantial amounts through disciplined saving. Salaried professionals use these tools to balance short-term needs with long-term goals, determining optimal SIP amounts that fit their budget while building adequate wealth. Conservative investors appreciate the guaranteed return projections offered by fixed instruments like FDs and RDs, while those comfortable with market exposure can explore mutual fund and lumpsum calculators to understand potential equity returns. Parents planning children's education, couples saving for down payments, and individuals building emergency funds all benefit from these calculators' ability to align savings strategy with specific life goals.</p>
+
+            <p>What makes investment calculators invaluable is their ability to demonstrate compounding's exponential impact on wealth. Simple interest calculations show linear growth, but compound interest calculators reveal how earnings on earnings accelerate wealth accumulation dramatically over longer periods. A monthly SIP of modest amounts can grow into significant corpus when given sufficient time, as each contribution earns returns that themselves generate returns. Investment calculators help you compare different investment vehicles by standardizing metrics like effective annual yield, total returns, and risk-adjusted performance. You can explore scenarios like increasing SIP amounts annually, comparing lumpsum versus systematic investments, or understanding how different interest rates impact final corpus, empowering informed decisions aligned with your risk tolerance and timeline.</p>
+
+            <p>Using these calculators requires no financial expertise or complex software. Each tool features intuitive interfaces where you input investment amounts, interest rates or expected returns, tenure, and compounding frequency. Within seconds, you receive comprehensive results including maturity amounts, total invested versus interest earned breakdowns, interactive growth charts comparing principal and returns, and detailed year-wise tables showing exactly how your investment grows month by month. Many calculators also offer currency selection, downloadable reports, and the ability to experiment with different scenarios by adjusting parameters. Whether you're exploring <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/investment/finance-rd-calculator.html">recurring deposit returns</a> for safe, guaranteed growth, calculating <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/investment/finance-fd-calculator.html">fixed deposit maturity</a> for short-term parking, or projecting SIP corpus for long-term wealth building, these free tools provide professional-grade financial planning at your fingertips.</p>
+        </section>
+
+        <section class="calculators-section" id="calculators">
+            <h2 class="section-title">Available Investment Calculators</h2>
+            
+            <div class="calculators-grid">
+                <div class="calculator-card">
+                    <span class="calculator-icon">💎</span>
+                    <h3>Fixed Deposit Calculator</h3>
+                    <p class="calculator-description">Calculate FD maturity amount, interest earned, and effective annual yield with different compounding frequencies. Compare cumulative versus non-cumulative FD returns for guaranteed savings growth.</p>
+                    <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/investment/finance-fd-calculator.html" class="calculator-link">Calculate FD Returns →</a>
+                </div>
+
+                <div class="calculator-card">
+                    <span class="calculator-icon">🏦</span>
+                    <h3>Recurring Deposit Calculator</h3>
+                    <p class="calculator-description">Plan monthly systematic savings with RD calculator showing maturity amount, total invested, interest earned, and effective annual return. Ideal for disciplined wealth building through regular deposits.</p>
+                    <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/investment/finance-rd-calculator.html" class="calculator-link">Calculate RD Returns →</a>
+                </div>
+
+                <div class="calculator-card">
+                    <span class="calculator-icon">📊</span>
+                    <h3>SIP Calculator</h3>
+                    <p class="calculator-description">Estimate mutual fund SIP returns based on expected annual growth rates. Visualize how regular monthly investments compound over time and calculate corpus needed for future financial goals.</p>
+                    <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/finance-sip-calculator.html" class="calculator-link">Calculate SIP Returns →</a>
+                </div>
+<!--
+                <div class="calculator-card">
+                    <span class="calculator-icon">💰</span>
+                    <h3>Lumpsum Investment Calculator</h3>
+                    <p class="calculator-description">Calculate returns on one-time investments with compound interest. Compare lumpsum versus SIP strategies and determine maturity amount for fixed deposits, bonds, or equity investments.</p>
+                    <a href="/lumpsum-calculator" class="calculator-link">Calculate Lumpsum Returns →</a>
+                </div>
+
+                <div class="calculator-card">
+                    <span class="calculator-icon">📈</span>
+                    <h3>CAGR Calculator</h3>
+                    <p class="calculator-description">Calculate Compound Annual Growth Rate to understand your investment's true annualized returns. Useful for comparing different investment performance over varying time periods.</p>
+                    <a href="/cagr-calculator" class="calculator-link">Calculate CAGR →</a>
+                </div>
+
+                <div class="calculator-card">
+                    <span class="calculator-icon">🏛️</span>
+                    <h3>PPF Calculator</h3>
+                    <p class="calculator-description">Calculate Public Provident Fund maturity amount with tax benefits and guaranteed returns. Plan long-term retirement corpus with this government-backed tax-saving investment scheme.</p>
+                    <a href="/ppf-calculator" class="calculator-link">Calculate PPF Returns →</a>
+                </div>
+
+                <div class="calculator-card">
+                    <span class="calculator-icon">📉</span>
+                    <h3>Mutual Fund Calculator</h3>
+                    <p class="calculator-description">Project mutual fund returns based on different categories like equity, debt, or hybrid funds. Compare fund performance and estimate future value of your portfolio investments.</p>
+                    <a href="/mutual-fund-calculator" class="calculator-link">Calculate MF Returns →</a>
+                </div>
+
+                <div class="calculator-card">
+                    <span class="calculator-icon">🎯</span>
+                    <h3>Goal Planning Calculator</h3>
+                    <p class="calculator-description">Plan investments for specific life goals like children's education, home down payment, or wedding expenses. Calculate required monthly SIP or lumpsum amount to achieve target corpus.</p>
+                    <a href="/goal-calculator" class="calculator-link">Plan Your Goals →</a>
+                </div>
+
+                <div class="calculator-card">
+                    <span class="calculator-icon">💵</span>
+                    <h3>Inflation Calculator</h3>
+                    <p class="calculator-description">Understand how inflation erodes purchasing power over time. Calculate future cost of goods and services, and determine investment returns needed to beat inflation.</p>
+                    <a href="/inflation-calculator" class="calculator-link">Calculate Inflation Impact →</a>
+                </div>
+
+                <div class="calculator-card">
+                    <span class="calculator-icon">⚖️</span>
+                    <h3>Asset Allocation Calculator</h3>
+                    <p class="calculator-description">Determine optimal portfolio allocation between equity, debt, and other asset classes based on your age, risk tolerance, and investment timeline for balanced wealth creation.</p>
+                    <a href="/asset-allocation-calculator" class="calculator-link">Plan Asset Mix →</a>
+                </div>
+
+                <div class="calculator-card">
+                    <span class="calculator-icon">🌐</span>
+                    <h3>NPS Calculator</h3>
+                    <p class="calculator-description">Calculate National Pension System returns and retirement corpus with tax benefits. Plan your retirement savings through this government-sponsored pension scheme with market-linked returns.</p>
+                    <a href="/nps-calculator" class="calculator-link">Calculate NPS Returns →</a>
+                </div>
+
+                <div class="calculator-card">
+                    <span class="calculator-icon">🔄</span>
+                    <h3>SWP Calculator</h3>
+                    <p class="calculator-description">Plan Systematic Withdrawal Plan from mutual funds for regular income during retirement. Calculate sustainable withdrawal rates without depleting your investment corpus prematurely.</p>
+                    <a href="/swp-calculator" class="calculator-link">Calculate SWP →</a>
+                </div>
+-->
+            </div>
+        </section>
+
+        <section class="related-section">
+            <h2>Explore Related Financial Tools</h2>
+            <p>Investment planning works best when combined with comprehensive financial management. Explore our <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/interest/interest-hub.html">Interest Calculators</a> to understand how simple versus compound interest impacts your returns, or use <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/saving-retirement/saving-retirement-hub.html">Savings Calculators</a> for bank deposit planning with guaranteed returns. Planning to borrow for investments? Check our <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/loan/loan-hub.html">Loan Calculators</a> to understand financing costs and EMI obligations.</p>
+            <p>For long-term wealth planning, our <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/saving-retirement/saving-retirement-hub.html">Retirement Calculators</a> help estimate corpus requirements and withdrawal strategies. Tax planning is crucial for investment efficiency, so visit <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/tax/tax-hub.html">Tax Calculators</a> to optimize tax-saving investments and understand capital gains implications. Return to the <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/finance-hub.html">Finance Calculators Hub</a> to explore all available tools and plan your complete financial journey.</p>
+        </section>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/index.html">Home</a></li>
+               	    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/about.html">About</a></li>
+               	    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/contact.html">Contact</a></li>
+               	    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/privacy-policy.html">Privacy Policy</a></li>
+
+                </ul>
+            </div>
+
+			<div class="footer-section">
+                <h3>Student Tools</h3>
+                <ul>
+					<li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/percentage-calculator.html">Percentage Calculator</a></li>
+					<li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/cgpa-calculator.html">CGPA Calculator</a></li>
+      				<li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/simple-compound-interest-calculator.html">Simple & Compound Interest Calculator</a></li>
+                
+                    <li><span class="coming-soon">MATRIX Calculator (Coming Soon)</span></li>
+                    <li><span class="coming-soon">STATISTIC Calculator (Coming Soon)</span></li>
+                </ul>
+            </div>
+
+			
+            <div class="footer-section">
+                <h3>Finance Tools</h3>
+                <ul>
+		            <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/interest/interest-hub.html">Interest Calculators</a></li>
+		            <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/investment/investment-hub.html">Investment Calculators</a></li>
+                    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/loan/loan-hub.html">Loan Calculators</a></li>
+                    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/tax/tax-hub.html">Tax Calculators</a></li>
+                    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/saving-retirement/saving-retirement-hub.html">Savings Calculators</a></li>
+                    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/saving-retirement/saving-retirement-hub.html">Retirement Calculators</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <div class="disclaimer">
+                    <strong>Disclaimer:</strong> The results provided by this calculator are estimates for informational purposes only. 
+                    Actual loan terms may vary. Please consult with your financial institution for accurate loan details.
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; Student Helper Tools. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById('mobileNav').classList.toggle('active');
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('hamburgerBtn').addEventListener('click', toggleMenu);
+        });
+    </script>
+</body>
+</html>
