@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/png" href="https://advaitpatel69-beep.github.io/Advait.github.io/favicon.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free tax calculators for GST, income tax, capital gains, and tax planning. Estimate tax liability and optimize deductions accurately.">
+    <link rel="canonical" href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/tax/tax-hub.html">
+    <title>Tax Calculators – GST, Income Tax & More</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.7;
+            color: #333;
+            background: #f5f7fa;
+        }
+
+        header {
+            background: linear-gradient(135deg, #0891b2 0%, #059669 100%);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .site-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+
+        nav a:hover {
+            opacity: 0.8;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+            background: none;
+            border: none;
+            padding: 0;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            border-radius: 3px;
+            transition: 0.3s;
+        }
+
+        .mobile-nav {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: #0891b2;
+            flex-direction: column;
+            padding: 1rem;
+            gap: 1rem;
+        }
+
+        .mobile-nav.active {
+            display: flex;
+        }
+
+        .mobile-nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .mobile-nav a:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 1rem;
+        }
+
+        .breadcrumb {
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+        }
+
+        .breadcrumb a {
+            color: #0891b2;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .breadcrumb a:hover {
+            color: #059669;
+            text-decoration: underline;
+        }
+
+        .breadcrumb span {
+            color: #64748b;
+            margin: 0 0.5rem;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        h1 {
+            font-size: 2.75rem;
+            color: #2d3748;
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+
+        .hero-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: #4a5568;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .intro-section {
+            background: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+            margin-bottom: 4rem;
+            line-height: 1.8;
+        }
+
+        .intro-section p {
+            margin-bottom: 1.25rem;
+            color: #4a5568;
+            font-size: 1.05rem;
+        }
+
+        .intro-section p:last-child {
+            margin-bottom: 0;
+        }
+
+        .intro-section a {
+            color: #0891b2;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .intro-section a:hover {
+            color: #059669;
+            text-decoration: underline;
+        }
+
+        .disclaimer1 {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            font-size: 0.95rem;
+            color: #92400e;
+        }
+
+        .calculators-section {
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: #2d3748;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            border-left: 4px solid #0891b2;
+            padding-left: 1rem;
+        }
+
+        .calculators-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .calculator-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-top: 3px solid #0891b2;
+        }
+
+        .calculator-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.12);
+        }
+
+        .calculator-card h3 {
+            font-size: 1.4rem;
+            color: #2d3748;
+            margin-bottom: 0.75rem;
+            font-weight: 700;
+        }
+
+        .calculator-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        .calculator-description {
+            color: #4a5568;
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+
+        .calculator-link {
+            display: inline-block;
+            color: #0891b2;
+            font-weight: 600;
+            text-decoration: none;
+            padding: 0.65rem 1.25rem;
+            border: 2px solid #0891b2;
+            border-radius: 8px;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .calculator-link:hover {
+            background: #0891b2;
+            color: white;
+        }
+
+        .related-section {
+            background: linear-gradient(135deg, #0891b2 0%, #059669 100%);
+            color: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+            margin-bottom: 2rem;
+        }
+
+        .related-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.25rem;
+            font-weight: 700;
+        }
+
+        .related-section p {
+            margin-bottom: 1rem;
+            line-height: 1.8;
+            font-size: 1.05rem;
+            opacity: 0.95;
+        }
+
+        .related-section a {
+            color: white;
+            text-decoration: underline;
+            font-weight: 600;
+            transition: opacity 0.3s;
+        }
+
+        .related-section a:hover {
+            opacity: 0.8;
+        }
+
+        footer {
+            background: #2d3748;
+            color: white;
+            padding: 3rem 0 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: #cbd5e0;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .disclaimer {
+            background: rgba(0,0,0,0.2);
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: #cbd5e0;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #cbd5e0;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.05rem;
+            }
+
+            .intro-section {
+                padding: 1.5rem;
+            }
+
+            .calculators-grid {
+                grid-template-columns: 1fr;
+                gap: 1.25rem;
+            }
+
+            .calculator-card {
+                padding: 1.5rem;
+            }
+
+            .related-section {
+                padding: 2rem 1.5rem;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .section-title {
+                font-size: 1.6rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 2rem 1rem;
+            }
+
+            h1 {
+                font-size: 1.75rem;
+            }
+
+            .hero-icon {
+                font-size: 2.5rem;
+            }
+
+            .calculator-icon {
+                font-size: 1.75rem;
+            }
+
+            .calculator-card h3 {
+                font-size: 1.25rem;
+            }
+
+            .intro-section p,
+            .calculator-description,
+            .related-section p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="site-title">💰 Finance Calculators</div>
+            <nav>
+                <a href="https://advaitpatel69-beep.github.io/Advait.github.io/index.html">Home</a>
+
+                <span class="nav-disabled">Student Calculators (Coming Soon)</span>
+                <span class="nav-disabled">Medical Calculators (Coming Soon)</span>
+                <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/finance-hub.html">Finance Calculators</a>
+            </nav>
+            <button class="hamburger" id="hamburgerBtn" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        <div class="mobile-nav" id="mobileNav">
+            <a href="https://advaitpatel69-beep.github.io/Advait.github.io/index.html">Home</a>
+
+            <span class="nav-disabled">Student Calculators (Coming Soon)</span>
+            <span class="nav-disabled">Medical Calculators (Coming Soon)</span>
+            <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/finance-hub.html">Finance Calculators</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <nav class="breadcrumb">
+            <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/finance-hub.html">Finance Calculators</a>
+            <span>›</span>
+            <span>Tax Calculators</span>
+        </nav>
+
+        <div class="hero">
+            <div class="hero-icon">🧾</div>
+            <h1>Tax Calculators</h1>
+            <p class="hero-subtitle">Estimate tax liability, understand deductions, and plan finances with accurate tax calculation tools</p>
+        </div>
+
+        <section class="intro-section">
+            <p>Tax calculators are essential planning tools that help individuals and businesses estimate their tax obligations accurately before deadlines, avoiding surprises and penalties. Whether you're a salaried employee trying to understand your take-home pay after income tax deductions, a business owner calculating sales tax on products, an investor evaluating capital gains tax on stock or property sales, or a freelancer managing quarterly tax payments, these calculators provide instant clarity on complex tax scenarios. By inputting income figures, deductions, and relevant tax parameters, you receive detailed breakdowns showing exactly how much tax you owe, which deductions can reduce your liability, and how different financial decisions impact your tax burden throughout the year.</p>
+
+            <p>These tools serve everyone from students filing their first tax returns to professionals optimizing tax-saving investments, small business owners managing GST or VAT compliance, and retirees planning tax-efficient withdrawal strategies from pension funds. Tax calculators democratize access to financial planning that was once available only through expensive accountants or tax consultants. They empower users to make informed decisions about investments, salary structures, business expenses, and timing of income or asset sales by revealing the tax implications upfront. For instance, understanding how different salary components like basic pay versus allowances affect your net income, or how long-term versus short-term capital gains are taxed differently, can result in thousands saved annually through better planning rather than scrambling at tax filing deadlines.</p>
+
+            <div class="disclaimer1">
+                <strong>⚠️ Important Disclaimer:</strong> These tax calculators provide estimates for educational and planning purposes only. Tax laws vary significantly by country, state, and jurisdiction, and change frequently. Results should not be considered legal or financial advice. Always consult qualified tax professionals or certified accountants for personalized tax planning and compliance guidance specific to your situation and location.
+            </div>
+
+            <p>What makes tax calculators invaluable is their ability to demonstrate the impact of various deductions, exemptions, and tax-saving strategies on your final liability. You can explore "what-if" scenarios like how contributing to retirement accounts reduces taxable income, how business expense deductions lower tax burden, or how timing asset sales in different financial years affects capital gains tax. Sales tax calculators like <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/tax/finance-gst-calculator.html">GST calculators</a> help businesses and consumers understand the tax component in product pricing, enabling accurate invoicing and transparent pricing. Tax brackets and progressive taxation become clear when you can instantly see how additional income pushes you into higher tax rates, motivating strategic decisions about bonuses, overtime, or investment timing to optimize overall tax efficiency.</p>
+
+            <p>Using tax calculators requires no accounting expertise or complicated software. Each calculator features intuitive interfaces where you input relevant financial figures like gross income, deductions claimed, business turnover, or transaction amounts, then receive comprehensive results showing gross tax, applicable deductions, net tax payable, and often detailed computation breakdowns. Many calculators support multiple tax regimes, allow comparison between different filing options, and provide downloadable summaries for record-keeping. Whether you're estimating annual income tax to plan <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/investment/investment-hub.html">tax-saving investments</a> early in the financial year, calculating GST on purchases for business expense tracking, determining capital gains tax before selling assets, or understanding payroll deductions as an employer, these free tools provide professional-grade tax planning capabilities that promote compliance while minimizing unnecessary tax burden through legal optimization strategies.</p>
+        </section>
+
+        <section class="calculators-section" id="calculators">
+            <h2 class="section-title">Available Tax Calculators</h2>
+            
+            <div class="calculators-grid">
+                <div class="calculator-card">
+                    <span class="calculator-icon">🧾</span>
+                    <h3>GST Calculator</h3>
+                    <p class="calculator-description">Calculate Goods and Services Tax amounts for inclusive and exclusive pricing. Add or remove GST from prices, view CGST/SGST/IGST breakdowns, and ensure accurate invoicing for business compliance.</p>
+                    <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/tax/finance-gst-calculator.html" class="calculator-link">Calculate GST →</a>
+                </div>
+<!--
+                <div class="calculator-card">
+                    <span class="calculator-icon">💼</span>
+                    <h3>Income Tax Calculator</h3>
+                    <p class="calculator-description">Estimate annual income tax liability based on gross salary, deductions, and tax regime options. Plan tax-saving investments and understand effective tax rate across different income brackets.</p>
+                    <a href="/income-tax-calculator" class="calculator-link">Calculate Income Tax →</a>
+                </div>
+
+                <div class="calculator-card">
+                    <span class="calculator-icon">📊</span>
+                    <h3>Capital Gains Tax Calculator</h3>
+                    <p class="calculator-description">Calculate tax on profits from sale of stocks, mutual funds, real estate, or other assets. Understand difference between short-term and long-term capital gains taxation.</p>
+                    <a href="/capital-gains-calculator" class="calculator-link">Calculate Capital Gains →</a>
+                </div>
+
+                <div class="calculator-card">
+                    <span class="calculator-icon">💰</span>
+                    <h3>Salary Tax Calculator</h3>
+                    <p class="calculator-description">Calculate in-hand salary after all tax deductions including TDS, professional tax, and statutory deductions. Understand salary structure optimization and take-home pay planning.</p>
+                    <a href="/salary-tax-calculator" class="calculator-link">Calculate Take-Home →</a>
+                </div>
+
+                <div class="calculator-card">
+                    <span class="calculator-icon">🏪</span>
+                    <h3>VAT Calculator</h3>
+                    <p class="calculator-description">Calculate Value Added Tax for goods and services where VAT applies. Add or remove VAT from prices and understand tax-inclusive versus tax-exclusive pricing for accurate billing.</p>
+                    <a href="/vat-calculator" class="calculator-link">Calculate VAT →</a>
+                </div>
+
+                <div class="calculator-card">
+                    <span class="calculator-icon">💵</span>
+                    <h3>TDS Calculator</h3>
+                    <p class="calculator-description">Calculate Tax Deducted at Source on salary, interest income, rent, professional fees, or contract payments. Estimate quarterly TDS liabilities and plan advance tax payments.</p>
+                    <a href="/tds-calculator" class="calculator-link">Calculate TDS →</a>
+                </div>
+
+                <div class="calculator-card">
+                    <span class="calculator-icon">📈</span>
+                    <h3>Tax Saving Calculator</h3>
+                    <p class="calculator-description">Explore various tax-saving investment options and deductions to minimize tax liability. Compare impact of different investments on net tax and optimize tax planning strategies.</p>
+                    <a href="/tax-saving-calculator" class="calculator-link">Plan Tax Savings →</a>
+                </div>
+
+                <div class="calculator-card">
+                    <span class="calculator-icon">🏢</span>
+                    <h3>Corporate Tax Calculator</h3>
+                    <p class="calculator-description">Calculate corporate income tax for businesses and companies based on net profit, applicable tax rates, and available deductions. Plan business tax liability and quarterly payments.</p>
+                    <a href="/corporate-tax-calculator" class="calculator-link">Calculate Corporate Tax →</a>
+                </div>
+
+                <div class="calculator-card">
+                    <span class="calculator-icon">🌐</span>
+                    <h3>Sales Tax Calculator</h3>
+                    <p class="calculator-description">Calculate sales tax for retail transactions across different jurisdictions and tax rates. Essential for e-commerce businesses and multi-state sellers managing tax compliance.</p>
+                    <a href="/sales-tax-calculator" class="calculator-link">Calculate Sales Tax →</a>
+                </div>
+
+                <div class="calculator-card">
+                    <span class="calculator-icon">🏠</span>
+                    <h3>Property Tax Calculator</h3>
+                    <p class="calculator-description">Estimate annual property tax liability based on property value, location, and applicable tax rates. Plan real estate expenses and understand property holding costs accurately.</p>
+                    <a href="/property-tax-calculator" class="calculator-link">Calculate Property Tax →</a>
+                </div>
+-->
+            </div>
+        </section>
+
+        <section class="related-section">
+            <h2>Explore Related Financial Tools</h2>
+            <p>Tax planning should be integrated with overall financial strategy. Before investing, use our <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/investment/investment-hub.html">Investment Calculators</a> to evaluate tax-saving instruments like retirement accounts, tax-free bonds, and long-term equity investments that offer favorable tax treatment. Understanding interest calculations helps optimize tax-deductible <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/interest/interest-hub.html">interest expenses on loans</a> versus taxable interest income from deposits.</p>
+            <p>Plan systematic savings with <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/saving-retirement/saving-retirement-hub.html">Savings Calculators</a> to build tax-efficient emergency funds and goal-based investments. If you're borrowing, our <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/loan/loan-hub.html">Loan Calculators</a> help calculate tax-deductible interest components on home loans and education loans. For comprehensive long-term planning, visit <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/saving-retirement/saving-retirement-hub.html">Retirement Calculators</a> to understand tax implications of pension withdrawals and structure tax-efficient retirement income. Return to the <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/finance-hub.html">Finance Calculators Hub</a> to explore all financial planning tools for holistic wealth management.</p>
+        </section>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/index.html">Home</a></li>
+               	    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/about.html">About</a></li>
+               	    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/contact.html">Contact</a></li>
+               	    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/privacy-policy.html">Privacy Policy</a></li>
+
+                </ul>
+            </div>
+
+			<div class="footer-section">
+                <h3>Student Tools</h3>
+                <ul>
+					<li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/percentage-calculator.html">Percentage Calculator</a></li>
+					<li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/cgpa-calculator.html">CGPA Calculator</a></li>
+      				<li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/simple-compound-interest-calculator.html">Simple & Compound Interest Calculator</a></li>
+                
+                    <li><span class="coming-soon">MATRIX Calculator (Coming Soon)</span></li>
+                    <li><span class="coming-soon">STATISTIC Calculator (Coming Soon)</span></li>
+                </ul>
+            </div>
+
+			
+            <div class="footer-section">
+                <h3>Finance Tools</h3>
+                <ul>
+		            <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/interest/interest-hub.html">Interest Calculators</a></li>
+		            <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/investment/investment-hub.html">Investment Calculators</a></li>
+                    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/loan/loan-hub.html">Loan Calculators</a></li>
+                    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/tax/tax-hub.html">Tax Calculators</a></li>
+                    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/saving-retirement/saving-retirement-hub.html">Savings Calculators</a></li>
+                    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/saving-retirement/saving-retirement-hub.html">Retirement Calculators</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <div class="disclaimer">
+                    <strong>Disclaimer:</strong> The results provided by this calculator are estimates for informational purposes only. 
+                    Actual loan terms may vary. Please consult with your financial institution for accurate loan details.
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; Student Helper Tools. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById('mobileNav').classList.toggle('active');
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('hamburgerBtn').addEventListener('click', toggleMenu);
+        });
+    </script>
+</body>
+</html>
