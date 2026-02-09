@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/png" href="https://advaitpatel69-beep.github.io/Advait.github.io/favicon.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free finance calculators for loans, investments, interest, taxes, and savings. Plan your financial future with accurate, easy-to-use tools.">
+    <link rel="canonical" href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/finance-hub.html">
+    <title>Finance Calculators Hub – Loans, Investments, Interest & Tax Tools</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.7;
+            color: #333;
+            background: #f5f7fa;
+        }
+
+        header {
+            background: linear-gradient(135deg, #0891b2 0%, #059669 100%);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .site-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+
+        nav a:hover {
+            opacity: 0.8;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+            background: none;
+            border: none;
+            padding: 0;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            border-radius: 3px;
+            transition: 0.3s;
+        }
+
+        .mobile-nav {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: #0891b2;
+            flex-direction: column;
+            padding: 1rem;
+            gap: 1rem;
+        }
+
+        .mobile-nav.active {
+            display: flex;
+        }
+
+        .mobile-nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .mobile-nav a:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 1rem;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        h1 {
+            font-size: 2.75rem;
+            color: #2d3748;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+        }
+
+        .hero-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .intro-section {
+            background: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+            margin-bottom: 4rem;
+            line-height: 1.8;
+        }
+
+        .intro-section p {
+            margin-bottom: 1.25rem;
+            color: #4a5568;
+            font-size: 1.05rem;
+        }
+
+        .intro-section p:last-child {
+            margin-bottom: 0;
+        }
+
+        .categories-section {
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: #2d3748;
+            margin-bottom: 2rem;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .category-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-left: 4px solid #0891b2;
+        }
+
+        .category-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.12);
+        }
+
+        .category-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .category-card h3 {
+            font-size: 1.5rem;
+            color: #2d3748;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .category-description {
+            color: #4a5568;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+
+        .category-link {
+            display: inline-block;
+            color: #0891b2;
+            font-weight: 600;
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            border: 2px solid #0891b2;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .category-link:hover {
+            background: #0891b2;
+            color: white;
+        }
+
+        .guidance-section {
+            background: linear-gradient(135deg, #0891b2 0%, #059669 100%);
+            color: white;
+            border-radius: 12px;
+            padding: 3rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+            margin-bottom: 2rem;
+        }
+
+        .guidance-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .guidance-section p {
+            margin-bottom: 1rem;
+            line-height: 1.8;
+            font-size: 1.05rem;
+            opacity: 0.95;
+        }
+
+        .guidance-section p:last-child {
+            margin-bottom: 0;
+        }
+
+        .guidance-list {
+            margin: 1.5rem 0;
+            padding-left: 1.5rem;
+        }
+
+        .guidance-list li {
+            margin-bottom: 0.75rem;
+            line-height: 1.7;
+        }
+
+        footer {
+            background: #2d3748;
+            color: white;
+            padding: 3rem 0 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: #cbd5e0;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .disclaimer {
+            background: rgba(0,0,0,0.2);
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: #cbd5e0;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #cbd5e0;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .intro-section {
+                padding: 1.5rem;
+            }
+
+            .categories-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .category-card {
+                padding: 1.5rem;
+            }
+
+            .guidance-section {
+                padding: 2rem 1.5rem;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .section-title {
+                font-size: 1.6rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 2rem 1rem;
+            }
+
+            h1 {
+                font-size: 1.75rem;
+            }
+
+            .hero-icon {
+                font-size: 2.5rem;
+            }
+
+            .category-icon {
+                font-size: 2rem;
+            }
+
+            .category-card h3 {
+                font-size: 1.3rem;
+            }
+
+            .intro-section p,
+            .category-description,
+            .guidance-section p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="site-title">💰 Finance Calculators</div>
+            <nav>
+                <a href="https://advaitpatel69-beep.github.io/Advait.github.io/index.html">Home</a>
+
+                <span class="nav-disabled">Student Calculators (Coming Soon)</span>
+                <span class="nav-disabled">Medical Calculators (Coming Soon)</span>
+                <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/finance-hub.html">Finance Calculators</a>
+
+            </nav>
+            <button class="hamburger" id="hamburgerBtn" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        <div class="mobile-nav" id="mobileNav">
+            <a href="https://advaitpatel69-beep.github.io/Advait.github.io/index.html">Home</a>
+
+            <span class="nav-disabled">Student Calculators (Coming Soon)</span>
+            <span class="nav-disabled">Medical Calculators (Coming Soon)</span>
+            <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/finance-hub.html">Finance Calculators</a>
+
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="hero">
+            <div class="hero-icon">📊</div>
+            <h1>Finance Calculators</h1>
+        </div>
+
+        <section class="intro-section" id="about">
+            <p>Finance calculators are essential digital tools designed to help individuals and businesses make informed financial decisions through accurate, instant calculations. Whether you're planning a major purchase, evaluating investment opportunities, managing debt, or preparing for retirement, these calculators eliminate guesswork and provide clarity on complex financial scenarios. By inputting basic information such as amounts, interest rates, and timeframes, you can quickly understand the true cost of loans, potential returns on investments, tax implications, and long-term savings growth.</p>
+
+            <p>These tools serve a wide audience spanning students learning to budget for the first time, young professionals navigating their first home or car loans, investors comparing different financial products, small business owners managing cash flow and expenses, and retirees planning sustainable withdrawal strategies. Finance calculators democratize financial literacy by making sophisticated calculations accessible to everyone, regardless of mathematical expertise or financial background. What once required expensive consultants or complex spreadsheets can now be accomplished in seconds through user-friendly interfaces.</p>
+
+            <p>The value of finance calculators extends beyond simple number crunching. They empower users to explore "what-if" scenarios, comparing how different interest rates, payment amounts, or investment strategies impact long-term outcomes. For loan planning, calculators reveal the true cost of borrowing by showing total interest paid over time, helping you choose between loan options and determine optimal repayment strategies. Investment calculators demonstrate the power of compound interest and systematic savings, motivating disciplined wealth-building habits. Tax calculators provide transparency on take-home income and help optimize tax-saving strategies. Interest calculators clarify how your money grows or shrinks over time, essential for both savers and borrowers.</p>
+
+            <p>Using these calculators requires no special training or software installation. Most are web-based, mobile-friendly, and designed with intuitive interfaces that guide you through the calculation process. You simply enter relevant figures like principal amounts, interest rates, tenures, and monthly contributions, and the calculator instantly generates comprehensive results including payment schedules, maturity amounts, interest breakdowns, and visual charts. Many calculators also provide downloadable reports and year-wise breakdowns to help you track your financial journey. Whether you're comparing EMI options for a home loan, evaluating recurring deposit returns, calculating GST on purchases, or projecting retirement corpus, finance calculators transform abstract numbers into actionable insights that drive smarter financial choices.</p>
+        </section>
+
+        <section class="categories-section" id="categories">
+            <h2 class="section-title">Calculator Categories</h2>
+            
+            <div class="categories-grid">
+                <div class="category-card">
+                    <span class="category-icon">🏠</span>
+                    <h3>Loan Calculators</h3>
+                    <p class="category-description">Calculate EMI, interest payable, and loan affordability for home loans, personal loans, car loans, and education loans. Understand your monthly obligations and total repayment amount before borrowing.</p>
+                    <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/loan/loan-hub.html" class="category-link">Explore Loan Tools →</a>
+                </div>
+
+                <div class="category-card">
+                    <span class="category-icon">📈</span>
+                    <h3>Investment Calculators</h3>
+                    <p class="category-description">Plan your wealth creation journey with tools for mutual funds, stocks, SIPs, lump sum investments, and portfolio growth projections. Visualize how your investments compound over time.</p>
+                    <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/investment/investment-hub.html" class="category-link">Explore Investment Tools →</a>
+                </div>
+
+                <div class="category-card">
+                    <span class="category-icon">💰</span>
+                    <h3>Interest Calculators</h3>
+                    <p class="category-description">Calculate simple and compound interest, compare different compounding frequencies, and understand how interest impacts your savings and borrowings across various financial instruments.</p>
+                    <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/interest/interest-hub.html" class="category-link">Explore Interest Tools →</a>
+                </div>
+
+                <div class="category-card">
+                    <span class="category-icon">🧾</span>
+                    <h3>Tax Calculators</h3>
+                    <p class="category-description">Estimate income tax liability, understand GST calculations, optimize tax-saving investments, and plan your finances to minimize tax burden while staying compliant with regulations.</p>
+                    <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/tax/tax-hub.html" class="category-link">Explore Tax Tools →</a>
+                </div>
+
+                <div class="category-card">
+                    <span class="category-icon">🏦</span>
+                    <h3>Savings Calculators</h3>
+                    <p class="category-description">Plan systematic savings through recurring deposits, fixed deposits, emergency fund planning, and goal-based savings strategies. Calculate maturity amounts and interest earnings on deposits.</p>
+                    <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/saving-retirement/saving-retirement-hub.html" class="category-link">Explore Savings Tools →</a>
+                </div>
+
+                <div class="category-card">
+                    <span class="category-icon">🌅</span>
+                    <h3>Retirement Calculators</h3>
+                    <p class="category-description">Estimate retirement corpus requirements, calculate pension payouts, plan systematic withdrawal strategies, and ensure financial security for your golden years through informed planning.</p>
+                    <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/saving-retirement/saving-retirement-hub.html" class="category-link">Explore Retirement Tools →</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="guidance-section" id="guidance">
+            <h2>Choose the Right Calculator for Your Needs</h2>
+            <p>Selecting the appropriate calculator depends on your current financial goal and the decision you're trying to make. Here's how to navigate our calculator categories effectively:</p>
+            
+            <ul class="guidance-list">
+                <li><strong>Planning to borrow money?</strong> Start with Loan Calculators to understand EMI obligations, compare different loan tenures, and determine how much you can afford to borrow without straining your budget.</li>
+                <li><strong>Want to grow your wealth?</strong> Visit Investment Calculators to explore systematic investment plans, lump sum investment growth, and compare different investment vehicles to match your risk appetite and timeline.</li>
+                <li><strong>Confused about interest rates?</strong> Use Interest Calculators to see how simple vs. compound interest affects your returns or borrowing costs, and understand the impact of different compounding frequencies.</li>
+                <li><strong>Need to estimate taxes?</strong> Head to Tax Calculators for income tax calculations, GST computations on purchases, and strategies to optimize your tax liability through legal deductions.</li>
+                <li><strong>Building an emergency fund or saving for goals?</strong> Explore Savings Calculators for recurring deposits, fixed deposits, and goal-based savings plans that ensure steady wealth accumulation.</li>
+                <li><strong>Preparing for retirement?</strong> Use Retirement Calculators to determine how much you need to save now, estimate your post-retirement income needs, and plan withdrawal strategies for sustainable retirement.</li>
+            </ul>
+            
+            <p>Each category contains specialized tools tailored to specific financial scenarios. Don't hesitate to explore multiple calculators to compare options and make comprehensive financial plans. All calculators are free, require no registration, and provide instant results with detailed breakdowns. Your financial clarity is just a few clicks away.</p>
+        </section>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/index.html">Home</a></li>
+               	    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/about.html">About</a></li>
+               	    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/contact.html">Contact</a></li>
+               	    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/privacy-policy.html">Privacy Policy</a></li>
+
+                </ul>
+            </div>
+
+			<div class="footer-section">
+                <h3>Student Tools</h3>
+                <ul>
+					<li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/percentage-calculator.html">Percentage Calculator</a></li>
+					<li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/cgpa-calculator.html">CGPA Calculator</a></li>
+      				<li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/simple-compound-interest-calculator.html">Simple & Compound Interest Calculator</a></li>
+                
+                    <li><span class="coming-soon">MATRIX Calculator (Coming Soon)</span></li>
+                    <li><span class="coming-soon">STATISTIC Calculator (Coming Soon)</span></li>
+                </ul>
+            </div>
+
+			
+            <div class="footer-section">
+                <h3>Finance Tools</h3>
+                <ul>
+		            <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/interest/interest-hub.html">Interest Calculators</a></li>
+		            <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/investment/investment-hub.html">Investment Calculators</a></li>
+                    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/loan/loan-hub.html">Loan Calculators</a></li>
+                    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/tax/tax-hub.html">Tax Calculators</a></li>
+                    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/saving-retirement/saving-retirement-hub.html">Savings Calculators</a></li>
+                    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/saving-retirement/saving-retirement-hub.html">Retirement Calculators</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <div class="disclaimer">
+                    <strong>Disclaimer:</strong> The results provided by this calculator are estimates for informational purposes only. 
+                    Actual loan terms may vary. Please consult with your financial institution for accurate loan details.
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; Student Helper Tools. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById('mobileNav').classList.toggle('active');
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('hamburgerBtn').addEventListener('click', toggleMenu);
+        });
+    </script>
+</body>
+</html>
