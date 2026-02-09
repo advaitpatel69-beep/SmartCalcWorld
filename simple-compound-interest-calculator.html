@@ -2,472 +2,1179 @@
 <html lang="en">
 <head>
     <link rel="icon" type="image/png" href="https://advaitpatel69-beep.github.io/Advait.github.io/favicon.png">
-    <link rel="canonical" href="https://advaitpatel69-beep.github.io/Advait.github.io/simple-compound-interest-calculator.html">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://advaitpatel69-beep.github.io/Advait.github.io/style.css">
-    <title>Simple & Compound Interest Calculator for Students</title>
-    <meta name="description" content="Free simple and compound interest calculator for students. Calculate SI, CI, total amount and interest with formulas and examples.">
-    <meta name="keywords" content="simple interest calculator, compound interest calculator, SI CI calculator, interest calculator for students, simple and compound interest formula, online interest calculator">
-    <meta name="robots" content="index, follow">
+    <meta name="description" content="Free Simple and Compound Interest Calculator. Calculate SI, CI, maturity amount with accurate formulas and visual breakdowns.">
+    <link rel="canonical" href="https://advaitpatel69-beep.github.io/Advait.github.io/simple-compound-interest-calculator.html">
+    <title>Interest Calculator – Simple & Compound Interest Calculator</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js" defer></script>
     
-    <script type="text/x-mathjax-config">
-        MathJax.Hub.Config({
-            tex2jax: {
-                inlineMath: [['$','$'], ['\\(','\\)']],
-                displayMath: [['$$','$$'], ['\\[','\\]']]
-            },
-            // Ensuring the engine is set for older systems
-            "HTML-CSS": { availableFonts: ["TeX"] }
-        });
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the difference between simple and compound interest?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Simple Interest (SI) is calculated only on the principal amount throughout the entire period using the formula SI = P × R × T / 100. Compound Interest (CI) is calculated on the principal plus accumulated interest from previous periods, using the formula A = P × (1 + R/N)^(N×T), where N is the compounding frequency. Compound interest generates higher returns because interest earns interest, creating exponential growth over time."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does compounding frequency affect returns?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Higher compounding frequency results in greater returns. For the same principal, rate, and time, monthly compounding gives more than quarterly, which gives more than half-yearly or annual compounding. This is because interest is calculated and added to the principal more frequently, allowing accumulated interest to earn interest sooner. The difference becomes more significant over longer periods and higher interest rates."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is a good interest rate for savings?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Good interest rates vary by economic conditions and investment type. For savings accounts, 3-4% is typical. Fixed deposits may offer 5-8%, while riskier investments like stocks historically average 8-12% over long periods. Always compare rates across multiple banks and consider whether the rate is simple or compound interest. Remember that higher returns usually come with higher risk, so balance your portfolio according to your risk tolerance and time horizon."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I use this calculator for loans?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, interest calculators work for both savings and loans. For loans, the calculated interest represents what you'll pay to the lender. Simple interest loans charge interest only on the original principal. Compound interest loans (like credit cards) charge interest on principal plus accumulated interest, making them more expensive. For loans, lower compounding frequency is better for borrowers, while higher frequency benefits lenders."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I calculate effective annual rate?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Effective Annual Rate (EAR) shows the true annual return accounting for compounding. Formula: EAR = (1 + R/N)^N - 1, where R is nominal annual rate and N is compounding frequency per year. For example, 6% compounded monthly has EAR = (1 + 0.06/12)^12 - 1 = 6.17%. This is higher than the nominal 6% due to monthly compounding. EAR allows accurate comparison between investments with different compounding frequencies."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What time period gives the best compound interest growth?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Compound interest benefits increase dramatically with time due to exponential growth. While any period shows compounding advantage, 5+ years demonstrates significant difference from simple interest. For example, ₹100,000 at 8% for 20 years: Simple Interest = ₹160,000 total, Compound Interest (annual) = ₹466,096 total - nearly 3x more! Starting early and staying invested long-term maximizes compound interest's wealth-building power."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is compound interest always better than simple interest?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For investments and savings, compound interest is always better as it generates higher returns. However, for borrowers (loans), simple interest is preferable as it results in lower total repayment. Credit cards use daily compound interest, making them expensive. Personal loans may use simple interest or reducing balance methods. When investing, always choose compound interest with the highest frequency available. When borrowing, seek simple interest or fastest repayment to minimize interest costs."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How accurate is this interest calculator?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "This calculator uses standard financial formulas: SI = P×R×T/100 for simple interest and A = P×(1+R/N)^(N×T) for compound interest. Results are mathematically accurate for the inputs provided. However, real-world returns may differ due to taxes, fees, inflation, varying rates, or early withdrawal penalties. Use calculator results for planning and comparison, but consult financial institutions for exact terms and actual interest rates applicable to your specific situation."
+          }
+        }
+      ]
+    }
     </script>
-    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
- <style>
-        /* UPDATED STYLES FOR PROFESSIONAL LOOK */
-        :root {
-            --primary: #198754; /* A solid, professional financial green */
-            --primary-hover: #157347;
-            --bg: #f8f9fa; /* Matches new body background from style.css */
-            --card: #ffffff;
-            --text: #212529; /* Darker text */
-            --border: #dee2e6;
-            --breakdown-bg: #e2f4ea; /* Light green for breakdown */
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f7fa;
+        }
+
+        header {
+            background: linear-gradient(135deg, #0891b2 0%, #059669 100%);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .site-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+
+        nav a:hover {
+            opacity: 0.8;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+            background: none;
+            border: none;
+            padding: 0;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            border-radius: 3px;
+            transition: 0.3s;
+        }
+
+        .mobile-nav {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: #0891b2;
+            flex-direction: column;
+            padding: 1rem;
+            gap: 1rem;
+        }
+
+        .mobile-nav.active {
+            display: flex;
+        }
+
+        .mobile-nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .mobile-nav a:hover {
+            background: rgba(255,255,255,0.1);
         }
 
         .container {
-            width: 100%;
-            max-width: 600px;
-            background: var(--card);
-            border-radius: 12px;
-            /* More defined, professional shadow */
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15); 
-            overflow: hidden;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
         }
 
-        /* HEADER & TABS */
-        .header {
+        .hero {
             text-align: center;
-            padding: 2rem 1rem 1rem;
-            /* Use the professional primary color */
-            background-color: var(--primary); 
-            color: white;
+            margin-bottom: 3rem;
         }
-        
-        h1 { margin: 0 0 5px 0; font-size: 1.8rem; }
-        .tabs {
+
+        h1 {
+            font-size: 2.5rem;
+            color: #2d3748;
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+
+        .hero-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+            color: #4a5568;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .calculator-section {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+            margin-bottom: 3rem;
+        }
+
+        .mode-tabs {
             display: flex;
-            border-bottom: 1px solid var(--border);
-            background: #f1f3f5; /* Light gray tab bar background */
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #e2e8f0;
         }
 
         .tab-btn {
             flex: 1;
-            padding: 15px;
+            padding: 1rem;
             border: none;
             background: transparent;
-            font-size: 1rem;
+            font-size: 1.1rem;
             font-weight: 600;
-            color: #6c757d; /* Muted tab text color */
+            color: #64748b;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+            margin-bottom: -2px;
         }
 
-        .tab-btn:hover { background: #e9ecef; color: var(--primary); }
-        
+        .tab-btn:hover {
+            color: #0891b2;
+        }
+
         .tab-btn.active {
-            border-bottom: 3px solid var(--primary);
-            color: var(--primary);
-            background: white;
-            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.05); /* Subtle lift effect */
+            color: #0891b2;
+            border-bottom-color: #0891b2;
         }
 
-        /* INPUT AREA */
-        .input-wrapper { padding: 2rem; }
-        
         .form-group {
-            margin-bottom: 18px; /* Slightly more spacing */
+            margin-bottom: 1.5rem;
         }
 
         label {
             display: block;
-            margin-bottom: 6px;
+            margin-bottom: 0.5rem;
             font-weight: 600;
-            color: var(--text);
-        }
-        
-        /* Group for Time/Currency Input and Selector */
-        .input-with-select {
-            display: flex;
-            gap: 10px;
-        }
-        .input-with-select input[type="number"] {
-            flex-grow: 1;
-        }
-        .input-with-select select {
-            width: 120px;
-            flex-shrink: 0;
-        }
-        #currencySelector {
-            width: 100%;
+            color: #2d3748;
         }
 
-
-        input[type="number"], select {
+        input[type="number"],
+        input[type="range"],
+        select {
             width: 100%;
-            padding: 10px;
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            box-sizing: border-box;
+            padding: 0.75rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
             font-size: 1rem;
-            /* Added focus styles for professionalism */
-            transition: border-color 0.2s;
-        }
-        input[type="number"]:focus, select:focus {
-            border-color: var(--primary);
-            outline: 0;
-            box-shadow: 0 0 0 0.2rem rgba(25, 135, 84, 0.25);
+            transition: border-color 0.3s;
         }
 
-        /* ACTIONS & ERROR */
-        .main-actions {
-            margin-top: 30px; /* Increased margin */
-            display: flex;
-            gap: 10px;
+        input[type="number"]:focus,
+        select:focus {
+            outline: none;
+            border-color: #0891b2;
         }
 
-        .btn-calc {
-            padding: 12px 20px;
+        input[type="range"] {
+            padding: 0;
+            height: 8px;
+            background: #e2e8f0;
             border: none;
-            border-radius: 6px;
-            font-weight: bold;
             cursor: pointer;
-            flex-grow: 1;
-            font-size: 1.1rem; /* Slightly larger button text */
-            background: var(--primary);
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: #0891b2;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+
+        input[type="range"]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            background: #0891b2;
+            cursor: pointer;
+            border-radius: 50%;
+            border: none;
+        }
+
+        .input-slider-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .slider-container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .slider-value {
+            font-size: 0.9rem;
+            color: #0891b2;
+            font-weight: 600;
+            margin-top: 0.25rem;
+        }
+
+        .time-group {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 1rem;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        button {
+            flex: 1;
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-calculate {
+            background: linear-gradient(135deg, #0891b2 0%, #059669 100%);
             color: white;
-            transition: background 0.2s, transform 0.1s;
-        }
-        .btn-calc:hover { 
-            background: var(--primary-hover); 
-            transform: translateY(-1px);
         }
 
-        .error { color: #dc3545; text-align: center; margin-top: 15px; display: none; font-weight: bold;}
+        .btn-reset {
+            background: #e2e8f0;
+            color: #4a5568;
+        }
 
-        /* OUTPUT RESULTS */
-        .results-section {
-            background: #f1f3f5; /* Light gray results background */
-            border-top: 1px solid var(--border);
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .results {
+            background: linear-gradient(135deg, #0891b2 0%, #059669 100%);
+            border-radius: 12px;
             padding: 2rem;
+            margin-top: 2rem;
+            color: white;
             display: none;
         }
-        
-        .summary-card {
-            padding: 1.5rem;
-            background: var(--card);
-            border: 2px solid var(--primary);
-            border-radius: 8px;
-            text-align: center;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+
+        .results.active {
+            display: block;
         }
 
-        .summary-card h3 { 
-            margin-top: 0; 
-            color: var(--primary); 
+        .result-item {
+            background: rgba(255,255,255,0.1);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .result-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .result-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+
+        .result-value {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .charts-section {
+            display: none;
+            margin-top: 3rem;
+        }
+
+        .charts-section.active {
+            display: block;
+        }
+
+        .chart-container {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+            margin-bottom: 2rem;
+        }
+
+        .chart-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .chart-wrapper {
+            position: relative;
+            height: 300px;
+        }
+
+        .comparison-section {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+            margin-top: 2rem;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .comparison-card {
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 2px solid #e2e8f0;
+            text-align: center;
+        }
+
+        .comparison-card h4 {
+            color: #2d3748;
+            margin-bottom: 1rem;
             font-size: 1.1rem;
         }
 
-        .summary-card .val {
-            font-size: 2.5rem; /* Larger result value */
+        .comparison-value {
+            font-size: 1.8rem;
             font-weight: 700;
-            color: var(--text);
-            display: block;
-        }
-        
-        /* Interest specific summary card - secondary color */
-        .summary-card[style*="border-color:#f59e0b"] {
-            border-color: #ffc107 !important; /* Professional yellow/orange for contrast */
-            background-color: #fff8e1 !important;
-        }
-        .summary-card[style*="border-color:#f59e0b"] .val {
-            color: #ffc107 !important;
-        }
-        
-        /* BREAKDOWN SECTION */
-        .breakdown-section {
-            margin-top: 2.5rem;
-        }
-        
-        .breakdown-section h2 { 
-            color: var(--primary-hover); 
-            font-size: 1.4rem; 
-            border-bottom: 2px solid var(--border); 
-            padding-bottom: 10px; 
-            margin-top: 0;
-        }
-        
-        .breakdown-item { 
-            margin-bottom: 20px; 
-            padding: 15px; 
-            background: var(--breakdown-bg); 
-            border-left: 5px solid var(--primary); 
-            border-radius: 6px;
-        }
-        
-        .math-output { 
-            padding: 12px; 
-            background: #ffffff; 
-            border: 1px solid var(--border); 
-            border-radius: 4px; 
-            overflow-x: auto; 
-            margin-top: 12px; 
-            font-size: 0.95rem; /* Slightly smaller for formulas */
+            color: #0891b2;
         }
 
-        /* EDUCATION SECTION STYLES */
-        .education-section {
-            margin-top: 30px;
-            padding: 25px;
-            background: #fff;
-            border: 1px solid var(--border);
+        .calculation-steps {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+            margin-top: 2rem;
+            display: none;
+        }
+
+        .calculation-steps.active {
+            display: block;
+        }
+
+        .steps-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .toggle-steps-btn {
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, #0891b2 0%, #059669 100%);
+            color: white;
+            border: none;
             border-radius: 8px;
-            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.03); /* Subtle inner shadow */
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            font-size: 0.95rem;
         }
-        .education-section h3 {
-            color: #0d6efd; /* Use a secondary blue for education headings */
-            font-size: 1.3rem;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 8px;
+
+        .toggle-steps-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
-        .education-section p {
-            margin-bottom: 15px;
+
+        .steps-content {
+            display: none;
+        }
+
+        .steps-content.show {
+            display: block;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .step-item {
+            background: #f8fafc;
+            border-left: 4px solid #0891b2;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .step-item h4 {
+            color: #0891b2;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .step-formula {
+            background: #fff;
+            border: 2px dashed #cbd5e1;
+            padding: 1rem;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+
+        .step-calculation {
+            background: #e0f2fe;
+            padding: 1rem;
+            border-radius: 6px;
+            margin: 0.5rem 0;
+            font-family: 'Courier New', monospace;
+        }
+
+        .step-result {
+            background: #dcfce7;
+            padding: 1rem;
+            border-radius: 6px;
+            margin-top: 1rem;
+            font-weight: 600;
+            color: #166534;
+        }
+
+        .step-explanation {
+            color: #64748b;
+            font-size: 0.95rem;
+            margin-top: 0.5rem;
             line-height: 1.6;
         }
-        .term-definition {
+
+        .comparison-value {
+            font-size: 1.8rem;
             font-weight: 700;
-            color: var(--primary); /* Highlight terms with primary color */
-            display: block;
-            margin-top: 15px;
+            color: #0891b2;
         }
-        .term-definition em {
-            font-weight: normal;
-            color: #6c757d;
+
+        .content-section {
+            background: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+            margin-top: 3rem;
+        }
+
+        .content-section h2 {
+            font-size: 2rem;
+            color: #2d3748;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid #0891b2;
+            padding-left: 1rem;
+        }
+
+        .content-section h3 {
+            font-size: 1.5rem;
+            color: #2d3748;
+            margin: 2rem 0 1rem;
+        }
+
+        .content-section p {
+            margin-bottom: 1rem;
+            color: #4a5568;
+            line-height: 1.8;
+        }
+
+        .content-section ul {
+            margin: 1rem 0 1rem 2rem;
+            color: #4a5568;
+        }
+
+        .content-section li {
+            margin-bottom: 0.5rem;
+            line-height: 1.8;
+        }
+
+        .formula-box {
+            background: #f0f9ff;
+            border-left: 4px solid #0891b2;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+        }
+
+        .faq-section {
+            margin-top: 3rem;
+        }
+
+        .faq-item {
+            background: #f7fafc;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .faq-question {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 0.75rem;
+        }
+
+        .faq-answer {
+            color: #4a5568;
+            line-height: 1.8;
+        }
+
+        .calculation-steps {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+        }
+
+        .step-item {
+            background: #f7fafc;
+            border-left: 4px solid #0891b2;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+        }
+
+        .step-title {
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 0.75rem;
+            font-size: 1.05rem;
+        }
+
+        .step-formula {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            padding: 1rem;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            margin: 0.5rem 0;
+            overflow-x: auto;
+            color: #0891b2;
+            font-size: 0.95rem;
+        }
+
+        .step-explanation {
+            color: #4a5568;
+            line-height: 1.7;
+            margin-top: 0.5rem;
+        }
+
+        .step-result {
+            background: #e0f2fe;
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-top: 0.75rem;
+            font-weight: 600;
+            color: #0891b2;
+        }
+
+        footer {
+            background: #2d3748;
+            color: white;
+            padding: 3rem 0 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: #cbd5e0;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .disclaimer {
+            background: rgba(0,0,0,0.2);
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: #cbd5e0;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #cbd5e0;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .calculator-section {
+                padding: 1.5rem;
+            }
+
+            .input-slider-group {
+                grid-template-columns: 1fr;
+            }
+
+            .time-group {
+                grid-template-columns: 1fr;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            .result-value {
+                font-size: 1.5rem;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .chart-wrapper {
+                height: 250px;
+            }
+
+            .content-section {
+                padding: 1.5rem;
+            }
+
+            .content-section h2 {
+                font-size: 1.5rem;
+            }
+
+            .content-section h3 {
+                font-size: 1.2rem;
+            }
+        }
+
+        .calculator-link {
+            display: block;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #f6f8fb 0%, #e9ecef 100%);
+            border-radius: 8px;
+            text-decoration: none;
+            color: #2d3748;
+            font-weight: 600;
+            text-align: left;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .calculator-link:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
         }
 
     </style>
-
-
-    <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "What is Simple Interest?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Simple Interest is calculated only on the principal amount using the formula SI = (P × R × T) / 100."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What is Compound Interest?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Compound Interest is calculated on the principal plus previously earned interest."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Which interest is better for long-term investment?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Compound interest is better for long-term investments because interest grows on accumulated interest."
-      }
-    }
-  ]
-}
-</script>
-    
 </head>
 <body>
-
-<header>
+    <header>
         <div class="header-container">
-            <h1 class="site-title">Student Helper Tools</h1>
-	    <p>Free online tools for students</p>
+            <div class="site-title">💰 Finance Calculators</div>
             <nav>
-                <a href="/Advait.github.io/index.html">Home</a>
+                <a href="https://advaitpatel69-beep.github.io/Advait.github.io/index.html">Home</a>
 
                 <span class="nav-disabled">Student Calculators (Coming Soon)</span>
                 <span class="nav-disabled">Medical Calculators (Coming Soon)</span>
-                <span class="nav-disabled">Finance Calculators (Coming Soon)</span>
+                <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/finance-hub.html">Finance Calculators</a>
             </nav>
-            <div class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation menu">
+            <div class="hamburger" id="hamburgerBtn" aria-label="Menu">
                 <span></span>
                 <span></span>
                 <span></span>
             </div>
         </div>
         <div class="mobile-nav" id="mobileNav">
-            <a href="/Advait.github.io/index.html">Home</a>
+            <a href="https://advaitpatel69-beep.github.io/Advait.github.io/index.html">Home</a>
 
             <span class="nav-disabled">Student Calculators (Coming Soon)</span>
             <span class="nav-disabled">Medical Calculators (Coming Soon)</span>
-            <span class="nav-disabled">Finance Calculators (Coming Soon)</span>
+            <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/finance-hub.html">Finance Calculators</a>
         </div>
     </header>
 
-
-    <main class="tool-wrapper">
-        <div class="tool-container">        
-
-<div class="container">
-    <div class="header">
-        <h1>💲 Simple & Compound Interest Calculator</h1>
-        <p style="margin:0; font-size: 0.9rem;">Calculate Simple (SI) and Compound (CI) Interest</p>
-    </div>
-
-    <div class="tabs">
-        <button class="tab-btn active" onclick="switchMode('simple')">Simple Interest</button>
-        <button class="tab-btn" onclick="switchMode('compound')">Compound Interest</button>
-    </div>
-
-    <div class="input-wrapper">
-
-        <div class="form-group">
-            <label for="currencySelector">Currency:</label>
-            <select id="currencySelector" onchange="resetResults()">
-                <option value="INR" data-symbol="₹" data-latex="\\text{₹}" selected>Indian Rupee (₹)</option>
-                <option value="USD" data-symbol="$" data-latex="\\$ ">US Dollar ($)</option>
-            </select>
-        </div>
-        
-        <div class="form-group">
-            <label for="principal">Principal Amount (P):</label>
-            <input type="number" id="principal" value="10000" min="0.01" step="0.01">
+    <div class="container">
+        <div class="hero">
+            <div class="hero-icon">💰</div>
+            <h1>Simple & Compound Interest Calculator</h1>
+            <p class="hero-subtitle">Calculate Simple Interest (SI) and Compound Interest (CI) with accurate formulas and visual comparisons</p>
         </div>
 
-        <div class="form-group">
-            <label for="rate">Annual Interest Rate (R) %:</label>
-            <input type="number" id="rate" value="7.5" min="0.01" step="0.01">
-        </div>
+        <div class="calculator-section" id="calculator">
+            <div class="mode-tabs">
+                <button class="tab-btn active" onclick="switchMode('simple')">Simple Interest</button>
+                <button class="tab-btn" onclick="switchMode('compound')">Compound Interest</button>
+            </div>
 
-        <div class="form-group">
-            <label for="timeValue">Time (T):</label>
-            <div class="input-with-select">
-                <input type="number" id="timeValue" value="5" min="1" step="1">
-                <select id="timeUnit" onchange="updateTimeInputAttributes()">
-                    <option value="years" selected>Years</option>
-                    <option value="months">Months</option>
+            <div class="form-group">
+                <label for="currency">Currency</label>
+                <select id="currency">
+                    <option value="INR">🇮🇳 Indian Rupee (₹)</option>
+                    <option value="USD">🇺🇸 US Dollar ($)</option>
+                    <option value="EUR">🇪🇺 Euro (€)</option>
+                    <option value="GBP">🇬🇧 British Pound (£)</option>
+                    <option value="JPY">🇯🇵 Japanese Yen (¥)</option>
+                    <option value="AUD">🇦🇺 Australian Dollar (A$)</option>
+                    <option value="CAD">🇨🇦 Canadian Dollar (C$)</option>
+                    <option value="CHF">🇨🇭 Swiss Franc (CHF)</option>
+                    <option value="CNY">🇨🇳 Chinese Yuan (¥)</option>
+                    <option value="SGD">🇸🇬 Singapore Dollar (S$)</option>
+                    <option value="AED">🇦🇪 UAE Dirham (AED)</option>
+                    <option value="SAR">🇸🇦 Saudi Riyal (SR)</option>
                 </select>
+            </div>
+
+            <div class="form-group">
+                <label for="principal">Principal Amount</label>
+                <div class="input-slider-group">
+                    <input type="number" id="principal" placeholder="Enter principal amount" min="100" step="100" value="10000">
+                    <div class="slider-container">
+                        <input type="range" id="principalSlider" min="100" max="10000000" step="100" value="10000">
+                        <div class="slider-value" id="principalSliderValue">₹ 10,000</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="rate">Annual Interest Rate (%)</label>
+                <div class="input-slider-group">
+                    <input type="number" id="rate" placeholder="Enter interest rate" min="0.1" max="30" step="0.1" value="8">
+                    <div class="slider-container">
+                        <input type="range" id="rateSlider" min="0.1" max="30" step="0.1" value="8">
+                        <div class="slider-value" id="rateSliderValue">8.0%</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="time">Time Period</label>
+                <div class="time-group">
+                    <div class="input-slider-group">
+                        <input type="number" id="time" placeholder="Enter time" min="1" step="1" value="5">
+                        <div class="slider-container">
+                            <input type="range" id="timeSlider" min="1" max="30" step="1" value="5">
+                            <div class="slider-value" id="timeSliderValue">5 Years</div>
+                        </div>
+                    </div>
+                    <select id="timeType">
+                        <option value="years">Years</option>
+                        <option value="months">Months</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group" id="compoundingGroup" style="display: none;">
+                <label for="compounding">Compounding Frequency</label>
+                <select id="compounding">
+                    <option value="1">Annually (1 time/year)</option>
+                    <option value="2">Semi-Annually (2 times/year)</option>
+                    <option value="4" selected>Quarterly (4 times/year)</option>
+                    <option value="12">Monthly (12 times/year)</option>
+                    <option value="365">Daily (365 times/year)</option>
+                </select>
+            </div>
+
+            <div class="button-group">
+                <button class="btn-calculate" id="calculateBtn">Calculate Interest</button>
+                <button class="btn-reset" id="resetBtn">Reset</button>
+            </div>
+
+            <div class="results" id="results">
+                <div class="result-item">
+                    <div class="result-label">Principal Amount</div>
+                    <div class="result-value" id="principalValue">₹ 0.00</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label" id="interestLabel">Total Interest</div>
+                    <div class="result-value" id="interestValue">₹ 0.00</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Maturity Amount</div>
+                    <div class="result-value" id="maturityValue">₹ 0.00</div>
+                </div>
+                <div class="result-item" id="earResult" style="display: none;">
+                    <div class="result-label">Effective Annual Rate (EAR)</div>
+                    <div class="result-value" id="earValue">0.00%</div>
+                </div>
+            </div>
+
+        </div>
+
+
+            <div class="calculation-steps" id="calculationSteps">
+                <div class="steps-header">
+                    <h3 class="chart-title" style="margin-bottom: 0;">📝 Detailed Calculation &nbsp;</h3>
+                    <button class="toggle-steps-btn" id="toggleStepsBtn" onclick="toggleSteps()">
+                        <span id="toggleStepsText">Show Steps</span>
+                    </button>
+                </div>
+                <div class="steps-content" id="stepsContent">
+                    <!-- Steps will be dynamically generated here -->
+                </div>
+            </div>
+
+
+        <div class="charts-section" id="chartsSection">
+
+            <div class="chart-container">
+                <h3 class="chart-title">📈 Interest Growth Visualization</h3>
+                <div class="chart-wrapper">
+                    <canvas id="interestChart"></canvas>
+                </div>
+            </div>
+
+            <div class="comparison-section">
+                <h3 class="chart-title">📊 Simple vs Compound Interest Comparison</h3>
+                <div class="comparison-grid">
+                    <div class="comparison-card">
+                        <h4>Simple Interest</h4>
+                        <div class="comparison-value" id="siComparison">₹ 0</div>
+                        <p style="margin-top: 0.5rem; color: #64748b;">Linear Growth</p>
+                    </div>
+                    <div class="comparison-card">
+                        <h4>Compound Interest</h4>
+                        <div class="comparison-value" id="ciComparison">₹ 0</div>
+                        <p style="margin-top: 0.5rem; color: #64748b;">Exponential Growth</p>
+                    </div>
+                    <div class="comparison-card">
+                        <h4>Difference</h4>
+                        <div class="comparison-value" id="diffComparison">₹ 0</div>
+                        <p style="margin-top: 0.5rem; color: #64748b;" id="diffPercent">0% More</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="content-section" id="guide">
+            <h2>💡 Understanding Interest - Complete Guide</h2>
+            
+            <h3>What is Interest? 💰</h3>
+            <p>Interest is the cost of borrowing money or the reward for saving/investing money. When you deposit money in a bank, the bank pays you interest for using your money. When you take a loan, you pay the lender interest for borrowing their money. Interest is typically expressed as an annual percentage rate (APR) of the principal amount.</p>
+
+            <h3>Simple Interest (SI) 📏</h3>
+            <p>Simple Interest is calculated only on the original principal amount throughout the entire period. The formula is straightforward and easy to understand:</p>
+            
+            <div class="formula-box">
+                <strong>Simple Interest Formula:</strong><br>
+                SI = (P × R × T) / 100<br><br>
+                Where:<br>
+                P = Principal Amount<br>
+                R = Annual Interest Rate (%)<br>
+                T = Time Period (in years)<br><br>
+                Total Amount = Principal + Simple Interest
+            </div>
+
+            <p><strong>Example:</strong> You invest ₹10,000 at 8% annual interest for 5 years. Simple Interest = (10,000 × 8 × 5) / 100 = ₹4,000. Total Amount = ₹10,000 + ₹4,000 = ₹14,000.</p>
+
+            <p>Simple interest is commonly used in short-term loans, some bonds, and specific financial products. It's predictable and easy to calculate, making it transparent for borrowers and lenders. However, it doesn't account for the compounding effect, resulting in lower returns for investors compared to compound interest over longer periods.</p>
+
+            <h3>Compound Interest (CI) 📈</h3>
+            <p>Compound Interest is calculated on the principal amount plus accumulated interest from previous periods. This creates exponential growth because you earn "interest on interest." Albert Einstein allegedly called it "the eighth wonder of the world."</p>
+
+            <div class="formula-box">
+                <strong>Compound Interest Formula:</strong><br>
+                A = P × (1 + R/N)^(N×T)<br><br>
+                Where:<br>
+                P = Principal Amount<br>
+                R = Annual Interest Rate (as decimal, e.g., 0.08 for 8%)<br>
+                N = Compounding Frequency per year<br>
+                T = Time Period (in years)<br>
+                A = Maturity Amount<br><br>
+                Compound Interest = A - P
+            </div>
+
+            <p><strong>Example:</strong> Same ₹10,000 at 8% for 5 years with quarterly compounding (N=4). A = 10,000 × (1 + 0.08/4)^(4×5) = 10,000 × (1.02)^20 = ₹14,859.47. Interest = ₹4,859.47 - significantly more than simple interest's ₹4,000!</p>
+
+            <h3>Impact of Compounding Frequency 🔄</h3>
+            <p>Compounding frequency dramatically affects returns. The more frequently interest is compounded, the higher the effective returns:</p>
+
+            <ul>
+                <li><strong>Annually (N=1):</strong> Interest calculated once per year</li>
+                <li><strong>Semi-Annually (N=2):</strong> Interest calculated twice per year</li>
+                <li><strong>Quarterly (N=4):</strong> Interest calculated four times per year (common for FDs)</li>
+                <li><strong>Monthly (N=12):</strong> Interest calculated twelve times per year</li>
+                <li><strong>Daily (N=365):</strong> Interest calculated every day (credit cards often use this)</li>
+            </ul>
+
+            <p>For ₹1,00,000 at 8% for 10 years:</p>
+            <ul>
+                <li>Annual Compounding: ₹2,15,892</li>
+                <li>Quarterly Compounding: ₹2,20,804</li>
+                <li>Monthly Compounding: ₹2,21,964</li>
+                <li>Daily Compounding: ₹2,22,554</li>
+            </ul>
+
+            <p>Notice how daily compounding gives ₹6,662 more than annual compounding on the same principal, rate, and time!</p>
+
+            <h3>Effective Annual Rate (EAR) 🎯</h3>
+            <p>The Effective Annual Rate shows the true annual return after accounting for compounding. It's calculated as: EAR = (1 + R/N)^N - 1. For example, 8% compounded quarterly has EAR = (1 + 0.08/4)^4 - 1 = 8.24%. This means you're actually earning 8.24% annually, not just 8%.</p>
+
+            <h3>When to Use Simple vs Compound Interest 🤔</h3>
+            <p><strong>Simple Interest is better for:</strong></p>
+            <ul>
+                <li>Borrowers - Lower total repayment</li>
+                <li>Short-term loans (car loans, personal loans)</li>
+                <li>Government bonds and treasury bills</li>
+                <li>Situations requiring transparency and predictability</li>
+            </ul>
+
+            <p><strong>Compound Interest is better for:</strong></p>
+            <ul>
+                <li>Investors and savers - Higher returns</li>
+                <li>Long-term investments (retirement, children's education)</li>
+                <li>Savings accounts, FDs, RDs, mutual funds</li>
+                <li>Maximizing wealth creation over time</li>
+            </ul>
+
+            <h3>The Power of Time ⏰</h3>
+            <p>Compound interest's advantage grows exponentially with time. Consider ₹1,00,000 at 10% annual compound interest:</p>
+            <ul>
+                <li>After 5 years: ₹1,61,051 (₹61,051 interest)</li>
+                <li>After 10 years: ₹2,59,374 (₹1,59,374 interest)</li>
+                <li>After 20 years: ₹6,72,750 (₹5,72,750 interest)</li>
+                <li>After 30 years: ₹17,44,940 (₹16,44,940 interest - more than 16x principal!)</li>
+            </ul>
+
+            <p>This demonstrates why starting early is crucial for retirement planning and long-term wealth building.</p>
+
+            <h3>Practical Tips 💡</h3>
+            <ul>
+                <li><strong>For Savings:</strong> Always choose compound interest with the highest compounding frequency available.</li>
+                <li><strong>For Loans:</strong> Prefer simple interest or pay off quickly to minimize compound interest costs.</li>
+                <li><strong>Start Early:</strong> Even small amounts benefit enormously from decades of compounding.</li>
+                <li><strong>Reinvest:</strong> Let interest accumulate rather than withdrawing it for maximum compound growth.</li>
+                <li><strong>Compare Effectively:</strong> Use EAR to compare investments with different compounding frequencies.</li>
+                <li><strong>Consider Inflation:</strong> Ensure your interest rate beats inflation to grow real purchasing power.</li>
+                <li><strong>Credit Cards:</strong> Beware of daily compound interest - pay full balance monthly to avoid exponential debt growth.</li>
+            </ul>
+        </div>
+
+        <div class="content-section">
+            <h2>Explore More Calculators</h2>
+            <div class="calculator-links">
+                <a  href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/investment/finance-fd-calculator.html" class="calculator-link">👉 Estimate long-term deposit returns using our <strong>Fixed Deposit (FD) Calculator</strong>.</a>
+                <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/investment/finance-rd-calculator.html" class="calculator-link">👉 Calculate how regular monthly savings grow with our <strong>Recurring Deposit (RD) Calculator</strong>.</a>
+                <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/finance-emi-calculator.html" class="calculator-link">👉 Plan loan repayments and interest costs easily using the <strong>EMI Calculator</strong>.</a>
+                <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/finance-sip-calculator.html" class="calculator-link">👉 Explore market-linked investment growth with our <strong>SIP Calculator</strong>.</a>
+                <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/finance-hub.html" class="calculator-link">👉 Discover more interest-based financial tools in our <strong>Finance Calculators</strong> section.</a>
             </div>
         </div>
 
-        <div class="form-group" id="compoundingFrequencyGroup" style="display:none;">
-            <label for="frequency">Compounding Frequency (n):</label>
-            <select id="frequency">
-                <option value="1">Annually (n=1)</option>
-                <option value="2">Semi-annually (n=2)</option>
-                <option value="4">Quarterly (n=4)</option>
-                <option value="12" selected>Monthly (n=12)</option>
-                <option value="365">Daily (n=365)</option>
-            </select>
-        </div>
+        <div class="content-section faq-section" id="faq">
+            <h2>❓ Frequently Asked Questions</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">What is the difference between simple and compound interest?</div>
+                <div class="faq-answer">Simple Interest (SI) is calculated only on the principal amount throughout the entire period using the formula SI = P × R × T / 100. Compound Interest (CI) is calculated on the principal plus accumulated interest from previous periods, using the formula A = P × (1 + R/N)^(N×T), where N is the compounding frequency. Compound interest generates higher returns because interest earns interest, creating exponential growth over time.</div>
+            </div>
 
-        <div class="error" id="errorMsg"></div>
+            <div class="faq-item">
+                <div class="faq-question">How does compounding frequency affect returns?</div>
+                <div class="faq-answer">Higher compounding frequency results in greater returns. For the same principal, rate, and time, monthly compounding gives more than quarterly, which gives more than half-yearly or annual compounding. This is because interest is calculated and added to the principal more frequently, allowing accumulated interest to earn interest sooner. The difference becomes more significant over longer periods and higher interest rates.</div>
+            </div>
 
-        <div class="main-actions">
-            <button class="btn-calc" onclick="calculateInterest()">Calculate</button>
+            <div class="faq-item">
+                <div class="faq-question">What is a good interest rate for savings?</div>
+                <div class="faq-answer">Good interest rates vary by economic conditions and investment type. For savings accounts, 3-4% is typical. Fixed deposits may offer 5-8%, while riskier investments like stocks historically average 8-12% over long periods. Always compare rates across multiple banks and consider whether the rate is simple or compound interest. Remember that higher returns usually come with higher risk, so balance your portfolio according to your risk tolerance and time horizon.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Can I use this calculator for loans?</div>
+                <div class="faq-answer">Yes, interest calculators work for both savings and loans. For loans, the calculated interest represents what you'll pay to the lender. Simple interest loans charge interest only on the original principal. Compound interest loans (like credit cards) charge interest on principal plus accumulated interest, making them more expensive. For loans, lower compounding frequency is better for borrowers, while higher frequency benefits lenders.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">How do I calculate effective annual rate?</div>
+                <div class="faq-answer">Effective Annual Rate (EAR) shows the true annual return accounting for compounding. Formula: EAR = (1 + R/N)^N - 1, where R is nominal annual rate and N is compounding frequency per year. For example, 6% compounded monthly has EAR = (1 + 0.06/12)^12 - 1 = 6.17%. This is higher than the nominal 6% due to monthly compounding. EAR allows accurate comparison between investments with different compounding frequencies.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">What time period gives the best compound interest growth?</div>
+                <div class="faq-answer">Compound interest benefits increase dramatically with time due to exponential growth. While any period shows compounding advantage, 5+ years demonstrates significant difference from simple interest. For example, ₹100,000 at 8% for 20 years: Simple Interest = ₹160,000 total, Compound Interest (annual) = ₹466,096 total - nearly 3x more! Starting early and staying invested long-term maximizes compound interest's wealth-building power.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Is compound interest always better than simple interest?</div>
+                <div class="faq-answer">For investments and savings, compound interest is always better as it generates higher returns. However, for borrowers (loans), simple interest is preferable as it results in lower total repayment. Credit cards use daily compound interest, making them expensive. Personal loans may use simple interest or reducing balance methods. When investing, always choose compound interest with the highest frequency available. When borrowing, seek simple interest or fastest repayment to minimize interest costs.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">How accurate is this interest calculator?</div>
+                <div class="faq-answer">This calculator uses standard financial formulas: SI = P×R×T/100 for simple interest and A = P×(1+R/N)^(N×T) for compound interest. Results are mathematically accurate for the inputs provided. However, real-world returns may differ due to taxes, fees, inflation, varying rates, or early withdrawal penalties. Use calculator results for planning and comparison, but consult financial institutions for exact terms and actual interest rates applicable to your specific situation.</div>
+            </div>
         </div>
     </div>
 
-    <div id="results" class="results-section">
-        
-        <div class="summary-card">
-            <h3>Total Future Value (Amount A)</h3>
-            <span class="val" id="resAmount">-</span>
-        </div>
-        
-        <div class="summary-card" style="border-color:#f59e0b; background-color:#fffbeb;">
-            <h3>Total Interest Earned (<span id="interestType">SI</span>)</h3>
-            <span class="val" id="resInterest" style="color:#f59e0b;">-</span>
-        </div>
-
-        <div class="breakdown-section">
-            <h2>Calculation Steps</h2>
-            <div id="breakdownContent">
-                </div>
-        </div>
-        
-        <div class="education-section">
-            <h2>Educational Overview</h2>
-            
-            <h3>What is Interest?</h3>
-            <p>Interest is the cost of borrowing money or the reward for lending money. It is almost always expressed as a percentage of the principal over a set period (usually a year).</p>
-            
-            <h3>Simple Interest (SI)</h3>
-            <p>Simple interest is calculated only on the <strong>initial principal amount</strong> for the entire duration. The interest earned in the first year is the same as the interest earned in the final year. This type of interest is often used for short-term loans or simple debt calculations.</p>
-            <p class="term-definition">Example:</p>
-            <p>If you deposit 1000 at 5% Simple Interest: You earn 50 every year. After 5 years, you earn $50 \times 5 = $250 interest total.</p>
-            
-            <h3>Compound Interest (CI)</h3>
-            <p>Compound interest is calculated on the <strong>principal amount plus any accumulated interest</strong> from previous periods. This is often called "interest on interest." It is the most common form of interest for savings accounts, mortgages, and long-term investments.</p>
-            <p class="term-definition">Example:</p>
-            <p>If you deposit $1000 at 5% Compound Interest (annual compounding):</p>
-            <ul>
-                <li><strong>Year 1:</strong> Interest is 50. New Balance: 1050.</li>
-                <li><strong>Year 2:</strong> Interest is 5% of 1050 = 52.50. New Balance: $1102.50.</li>
-            </ul>
-            <p>Because the interest earned in Year 1 was added to the principal, you earned more interest in Year 2. This creates faster growth over time. </p>
-
-            <h3>Related Terms Explained</h3>
-            <ul>
-                <li><span class="term-definition">Principal (P):</span> The initial sum of money borrowed or invested.</li>
-                <li><span class="term-definition">Rate (R or r):</span> The annual percentage rate at which interest is charged or paid. (We use $r$ as the decimal form $R/100$ in the formulas).</li>
-                <li><span class="term-definition">Time (T or t):</span> The duration for which the money is borrowed or invested, <strong>always expressed in years</strong> for the final calculation.</li>
-                <li><span class="term-definition">Amount (A):</span> The total final value, calculated as $A = P + \text{Interest}$.</li>
-                <li><span class="term-definition">Compounding Frequency (n):</span> (Only for CI) The number of times the interest is calculated and added back to the principal within one year. (e.g., Monthly $n=12$, Quarterly $n=4$).</li>
-            </ul>
-        </div>
-    </div>
-</div>
-        </div>
-    </main>
-
-
- <section class="internal-links">
-  <h2>Recommended Tools</h2>
-  <ul>
-    <li><a href="/Advait.github.io/finance/finance-sip-calculator.html">SIP Calculator</a></li>
-    <li><a href="/Advait.github.io/finance/finance-emi-calculator.html">EMI Calculator</a></li>
-    <li><a href="percentage-calculator.html">Percentage Calculator</a></li>
-    <li><a href="cgpa-calculator.html">CGPA Calculator</a></li>
-    <li><a href="index.html">All Student Tools</a></li>
-  </ul>
- </section>
-
-<footer>
+    <footer>
         <div class="footer-content">
             <div class="footer-section">
                 <h3>Quick Links</h3>
                 <ul>
-                    <li><a href="/Advait.github.io/index.html">Home</a></li>
-               	    <li><a href="/Advait.github.io/about.html">About</a></li>
-               	    <li><a href="/Advait.github.io/contact.html">Contact</a></li>
-               	    <li><a href="/Advait.github.io/privacy-policy.html">Privacy Policy</a></li>
+                    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/index.html">Home</a></li>
+               	    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/about.html">About</a></li>
+               	    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/contact.html">Contact</a></li>
+               	    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/privacy-policy.html">Privacy Policy</a></li>
 
                 </ul>
             </div>
-            <div class="footer-section">
+
+			<div class="footer-section">
                 <h3>Student Tools</h3>
                 <ul>
 					<li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/percentage-calculator.html">Percentage Calculator</a></li>
@@ -479,326 +1186,787 @@
                 </ul>
             </div>
 
-	    <div class="footer-section">
+			
+            <div class="footer-section">
                 <h3>Finance Tools</h3>
                 <ul>
-		    <li><a href="/Advait.github.io/finance/finance-emi-calculator.html">EMI Calculator</a></li>
-		    <li><a href="/Advait.github.io/finance/finance-sip-calculator.html">SIP Calculator</a></li>
-                    <li><a href="/Advait.github.io/simple-compound-interest-calculator.html">Simple & Compound Interest Calculator</a></li>
-                
-                    <li><span class="coming-soon">FD Calculator (Coming Soon)</span></li>
-                    <li><span class="coming-soon">GST Calculator (Coming Soon)</span></li>
+		            <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/interest/interest-hub.html">Interest Calculators</a></li>
+		            <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/investment/investment-hub.html">Investment Calculators</a></li>
+                    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/loan/loan-hub.html">Loan Calculators</a></li>
+                    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/tax/tax-hub.html">Tax Calculators</a></li>
+                    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/saving-retirement/saving-retirement-hub.html">Savings Calculators</a></li>
+                    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/saving-retirement/saving-retirement-hub.html">Retirement Calculators</a></li>
                 </ul>
             </div>
-
-            
+            <div class="footer-section">
+                <div class="disclaimer">
+                    <strong>Disclaimer:</strong> The results provided by this calculator are estimates for informational purposes only. 
+                    Actual loan terms may vary. Please consult with your financial institution for accurate loan details.
+                </div>
+            </div>
+        </div>
         <div class="copyright">
             <p>&copy; Student Helper Tools. All rights reserved.</p>
         </div>
     </footer>
-<script>
 
-function toggleMenu() {
-            const nav = document.getElementById('mobileNav');
-            nav.classList.toggle('active');
-        }
+    <script>
+        let interestChart = null;
+        let currentMode = 'simple';
+        let currentCurrency = 'INR';
 
-document.addEventListener('DOMContentLoaded', function() {
-	document.getElementById('hamburgerBtn').addEventListener('click', toggleMenu);
-
-});
-
-</script>
-
-
-<script>
-    let currentMode = 'simple';
-
-    // Function to get the current currency symbols
-    function getCurrency() {
-        const selector = document.getElementById('currencySelector');
-        const selectedOption = selector.options[selector.selectedIndex];
-        return {
-            symbol: selectedOption.getAttribute('data-symbol'),
-            latex: selectedOption.getAttribute('data-latex')
+        // Currency symbols and locales
+        const currencySymbols = {
+            'INR': '₹', 'USD': '$', 'EUR': '€', 'GBP': '£', 'JPY': '¥',
+            'AUD': 'A$', 'CAD': 'C$', 'CHF': 'CHF', 'CNY': '¥',
+            'SGD': 'S$', 'AED': 'AED', 'SAR': 'SR'
         };
-    }
-    
-    // Helper function to format a number as a clean string for LaTeX with 4 decimal places
-    const fmtLatex = n => Number(n).toFixed(4).toString();
 
-    // Helper function for currency formatting (for HTML display)
-    const formatCurrency = amount => {
-        const currency = getCurrency();
-        return `${currency.symbol}${Number(amount).toFixed(2)}`;
-    };
+        const currencyLocales = {
+            'INR': 'en-IN', 'USD': 'en-US', 'EUR': 'de-DE', 'GBP': 'en-GB',
+            'JPY': 'ja-JP', 'AUD': 'en-AU', 'CAD': 'en-CA', 'CHF': 'de-CH',
+            'CNY': 'zh-CN', 'SGD': 'en-SG', 'AED': 'ar-AE', 'SAR': 'ar-SA'
+        };
 
-    function resetResults() {
-        document.getElementById('results').style.display = 'none';
-        document.getElementById('errorMsg').style.display = 'none';
-    }
+        const currencyDecimals = {
+            'INR': 2, 'USD': 2, 'EUR': 2, 'GBP': 2, 'JPY': 0,
+            'AUD': 2, 'CAD': 2, 'CHF': 2, 'CNY': 2,
+            'SGD': 2, 'AED': 2, 'SAR': 2
+        };
 
-    // Updates min/step values when switching between years/months
-    function updateTimeInputAttributes() {
-        const timeInput = document.getElementById('timeValue');
-        const timeUnit = document.getElementById('timeUnit').value;
-
-        if (timeUnit === 'months') {
-            timeInput.setAttribute('min', '1');
-            timeInput.setAttribute('step', '1');
-            timeInput.value = '60'; // Default to 60 months (5 years)
-        } else { // years
-            timeInput.setAttribute('min', '0.1');
-            timeInput.setAttribute('step', '0.1');
-            timeInput.value = '5'; // Default to 5 years
-        }
-        resetResults();
-    }
-
-    // Switch between Simple and Compound tabs
-    function switchMode(mode) {
-        currentMode = mode;
-        
-        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-        if (mode === 'simple') {
-            document.querySelectorAll('.tab-btn')[0].classList.add('active');
-            document.getElementById('compoundingFrequencyGroup').style.display = 'none';
-            document.getElementById('interestType').textContent = 'SI';
-        } else {
-            document.querySelectorAll('.tab-btn')[1].classList.add('active');
-            document.getElementById('compoundingFrequencyGroup').style.display = 'block';
-            document.getElementById('interestType').textContent = 'CI';
-        }
-        resetResults();
-    }
-
-    window.onload = () => {
-        switchMode('simple');
-        updateTimeInputAttributes(); // Initialize time attributes
-    };
-
-
-    function calculateInterest() {
-        const P = parseFloat(document.getElementById('principal').value);
-        const R = parseFloat(document.getElementById('rate').value);
-        const timeValue = parseFloat(document.getElementById('timeValue').value);
-        const timeUnit = document.getElementById('timeUnit').value;
-        const errorDiv = document.getElementById('errorMsg');
-        errorDiv.style.display = 'none';
-
-        // --- CONVERT TIME TO YEARS (T) ---
-        let T;
-        let T_display_source = `${timeValue} ${timeUnit}`;
-
-        if (timeUnit === 'months') {
-            T = timeValue / 12;
-            T_display_source += ` (T = ${T.toFixed(4)} years)`;
-        } else {
-            T = timeValue;
+        function getCurrencySymbol() {
+            return currencySymbols[currentCurrency] || '₹';
         }
 
-        if (isNaN(P) || P <= 0 || isNaN(R) || R <= 0 || isNaN(timeValue) || timeValue <= 0) {
-            errorDiv.textContent = "Please enter valid, positive values for Principal, Rate, and Time.";
-            errorDiv.style.display = 'block';
-            document.getElementById('results').style.display = 'none';
-            return;
+        function getCurrencyLocale() {
+            return currencyLocales[currentCurrency] || 'en-IN';
         }
 
-        const r = R / 100;
+        function getCurrencyDecimals() {
+            return currencyDecimals[currentCurrency] || 2;
+        }
 
-        let totalAmount;
-        let totalInterest;
+        function formatCurrency(amount) {
+            const locale = getCurrencyLocale();
+            const decimals = getCurrencyDecimals();
+            return getCurrencySymbol() + ' ' + amount.toLocaleString(locale, {
+                minimumFractionDigits: decimals,
+                maximumFractionDigits: decimals
+            });
+        }
 
-        if (currentMode === 'simple') {
-            totalInterest = P * r * T;
-            totalAmount = P + totalInterest;
-            generateBreakdownSimple(P, R, r, T, totalInterest, totalAmount, T_display_source);
+        function updateCurrencyDisplay() {
+            currentCurrency = document.getElementById('currency').value;
+            const principalVal = document.getElementById('principalSlider').value;
+            document.getElementById('principalSliderValue').textContent = getCurrencySymbol() + ' ' + parseInt(principalVal).toLocaleString(getCurrencyLocale());
             
-        } else {
-            const n = parseInt(document.getElementById('frequency').value);
-            totalAmount = P * Math.pow((1 + r / n), (n * T));
-            totalInterest = totalAmount - P;
-            generateBreakdownCompound(P, R, r, T, n, totalInterest, totalAmount, T_display_source);
+            if (document.getElementById('results').classList.contains('active')) {
+                calculateInterest();
+            }
         }
 
-        // RENDER RESULTS
-        document.getElementById('resAmount').textContent = formatCurrency(totalAmount);
-        document.getElementById('resInterest').textContent = formatCurrency(totalInterest);
-
-        // MAX COMPATIBILITY MATHJAX RENDER
-        if (typeof MathJax !== 'undefined') {
-             MathJax.Hub.Queue(["Typeset", MathJax.Hub, "breakdownContent", function () {
-                document.getElementById('results').style.display = 'block';
-            }]);
-        } else {
-            document.getElementById('errorMsg').textContent = "MathJax library failed to load. Please check your internet connection.";
-            document.getElementById('errorMsg').style.display = 'block';
-            document.getElementById('results').style.display = 'block';
+        function switchMode(mode) {
+            currentMode = mode;
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            if (mode === 'compound') {
+                document.getElementById('compoundingGroup').style.display = 'block';
+                document.getElementById('earResult').style.display = 'block';
+                document.getElementById('interestLabel').textContent = 'Compound Interest';
+            } else {
+                document.getElementById('compoundingGroup').style.display = 'none';
+                document.getElementById('earResult').style.display = 'none';
+                document.getElementById('interestLabel').textContent = 'Simple Interest';
+            }
+            
+            if (document.getElementById('results').classList.contains('active')) {
+                calculateInterest();
+            }
         }
-    }
 
-    /* --- BREAKDOWN FUNCTIONS (using \begin{equation*} for stability) --- */
+        // Slider synchronization
+        document.getElementById('principal').addEventListener('input', function(e) {
+            const val = Math.min(Math.max(parseInt(e.target.value) || 0, 100), 10000000);
+            document.getElementById('principalSlider').value = val;
+            document.getElementById('principalSliderValue').textContent = getCurrencySymbol() + ' ' + val.toLocaleString(getCurrencyLocale());
+        });
 
-    function generateBreakdownSimple(P, R, r, T, SI, A, T_display_source) {
-        const content = document.getElementById('breakdownContent');
-        const currency = getCurrency();
-        content.innerHTML = '';
-        
-        // Pre-format ALL numerical variables for LaTeX
-        const P_latex = P.toString(); 
-        const r_latex = r.toFixed(4).toString();
-        const T_latex = T.toFixed(4).toString(); // T is now the calculated value in years
-        const SI_latex = fmtLatex(SI);
-        const A_latex = fmtLatex(A);
-        
-        // Simple Interest (SI)
-        content.innerHTML += `
-            <div class="breakdown-item">
-                <h3>1. Simple Interest (SI) Calculation</h3>
-                <p>Time input: ${T_display_source}. Calculation uses $T = ${T_latex}$ years.</p>
-                <div class="math-output">
-                    \\begin{equation*} 
-                        \\text{Formula:} \\quad SI = P \\times R \\times T 
-                    \\end{equation*}
-                    \\begin{equation*}
-                        \\text{Where:} \\quad P = ${currency.latex}${P_latex} \\quad \\text{(Principal)} 
-                    \\end{equation*}
-                    \\begin{equation*}
-                        \\quad R = \\frac{${R}}{100} = ${r_latex} \\quad \\text{(Rate as decimal)} 
-                    \\end{equation*}
-                    \\begin{equation*}
-                        \\quad T = ${T_latex} \\quad \\text{(Time in years)} 
-                    \\end{equation*}
-                    \\begin{equation*}
-                        \\text{Substitution:} \\quad SI = ${P_latex} \\times ${r_latex} \\times ${T_latex} 
-                    \\end{equation*}
-                    \\begin{equation*}
-                        \\text{Calculation:} \\quad SI = ${SI_latex} 
-                    \\end{equation*}
-                    \\begin{equation*}
-                        \\textbf{Result:} \\quad \\text{SI} = ${formatCurrency(SI)} 
-                    \\end{equation*}
-                </div>
-            </div>
-        `;
+        document.getElementById('principalSlider').addEventListener('input', function(e) {
+            const val = e.target.value;
+            document.getElementById('principal').value = val;
+            document.getElementById('principalSliderValue').textContent = getCurrencySymbol() + ' ' + parseInt(val).toLocaleString(getCurrencyLocale());
+        });
 
-        // Future Value (Amount A)
-        content.innerHTML += `
-            <div class="breakdown-item">
-                <h3>2. Total Future Value (Amount A)</h3>
-                <div class="math-output">
-                    \\begin{equation*}
-                        \\text{Formula:} \\quad A = P + SI 
-                    \\end{equation*}
-                    \\begin{equation*}
-                        \\text{Substitution:} \\quad A = ${P_latex} + ${SI_latex} 
-                    \\end{equation*}
-                    \\begin{equation*}
-                        \\text{Calculation:} \\quad A = ${A_latex} 
-                    \\end{equation*}
-                    \\begin{equation*}
-                        \\textbf{Result:} \\quad \\text{A} = ${formatCurrency(A)} 
-                    \\end{equation*}
-                </div>
-            </div>
-        `;
-    }
+        document.getElementById('rate').addEventListener('input', function(e) {
+            const val = Math.min(Math.max(parseFloat(e.target.value) || 0, 0.1), 30);
+            document.getElementById('rateSlider').value = val;
+            document.getElementById('rateSliderValue').textContent = val.toFixed(1) + '%';
+        });
 
-    function generateBreakdownCompound(P, R, r, T, n, CI, A, T_display_source) {
-        const content = document.getElementById('breakdownContent');
-        const currency = getCurrency();
-        content.innerHTML = '';
+        document.getElementById('rateSlider').addEventListener('input', function(e) {
+            const val = parseFloat(e.target.value);
+            document.getElementById('rate').value = val;
+            document.getElementById('rateSliderValue').textContent = val.toFixed(1) + '%';
+        });
 
-        // Pre-format ALL numerical variables for LaTeX
-        const P_latex = P.toString(); 
-        const r_latex = r.toFixed(4).toString();
-        const T_latex = T.toFixed(4).toString();
-        const CI_latex = fmtLatex(CI);
-        const A_latex = fmtLatex(A);
-        const rate_over_n = r / n;
-        const n_times_T = n * T;
-        const base = 1 + rate_over_n;
-        
-        // Future Value (Amount A)
-        content.innerHTML += `
-            <div class="breakdown-item">
-                <h3>1. Total Future Value (Amount A)</h3>
-                <p>Time input: ${T_display_source}. Calculation uses $T = ${T_latex}$ years.</p>
-                <p>The interest is compounded ${n} times per year, for a total of ${n_times_T.toFixed(4)} periods.</p>
-                <div class="math-output">
-                    \\begin{equation*}
-                        \\text{Formula:} \\quad A = P \\left(1 + \\frac{r}{n}\\right)^{nt} 
-                    \\end{equation*}
-                    \\begin{equation*}
-                        \\text{Where:} \\quad P = ${currency.latex}${P_latex} \\quad \\text{(Principal)} 
-                    \\end{equation*}
-                    \\begin{equation*}
-                        \\quad r = ${r_latex} \\quad \\text{(Rate as decimal)} 
-                    \\end{equation*}
-                    \\begin{equation*}
-                        \\quad n = ${n} \\quad \\text{(Compounding frequency)} 
-                    \\end{equation*}
-                    \\begin{equation*}
-                        \\quad t = ${T_latex} \\quad \\text{(Time in years)} 
-                    \\end{equation*}
-                    \\begin{equation*}
-                        \\text{Substitution:} \\quad A = ${P_latex} \\left(1 + \\frac{${r_latex}}{${n}}\\right)^{${n} \\times ${T_latex}} 
-                    \\end{equation*}
-                    \\begin{equation*}
-                        \\text{Step 1: } \\quad \\frac{r}{n} = \\frac{${r_latex}}{${n}} = ${fmtLatex(rate_over_n)} 
-                    \\end{equation*}
-                    \\begin{equation*}
-                        \\text{Step 2: } \\quad 1 + \\frac{r}{n} = 1 + ${fmtLatex(rate_over_n)} = ${fmtLatex(base)} 
-                    \\end{equation*}
-                    \\begin{equation*}
-                        \\text{Step 3: } \\quad nt = ${n} \\times ${T_latex} = ${fmtLatex(n_times_T)} \\text{ total periods} 
-                    \\end{equation*}
-                    \\begin{equation*}
-                        \\text{Step 4: } \\quad A = ${P_latex} \\times (${fmtLatex(base)})^{${fmtLatex(n_times_T)}} = ${A_latex} 
-                    \\end{equation*}
-                    \\begin{equation*}
-                        \\textbf{Result:} \\quad \\text{A} = ${formatCurrency(A)} 
-                    \\end{equation*}
-                </div>
-            </div>
-        `;
+        document.getElementById('time').addEventListener('input', function(e) {
+            const timeType = document.getElementById('timeType').value;
+            const maxVal = timeType === 'years' ? 30 : 360;
+            const val = Math.min(Math.max(parseInt(e.target.value) || 0, 1), maxVal);
+            document.getElementById('timeSlider').value = val;
+            document.getElementById('timeSliderValue').textContent = val + ' ' + (timeType === 'years' ? 'Years' : 'Months');
+            document.getElementById('timeSlider').max = maxVal;
+        });
 
-        // Compound Interest (CI)
-        content.innerHTML += `
-            <div class="breakdown-item">
-                <h3>2. Compound Interest (CI) Calculation</h3>
-                <div class="math-output">
-                    \\begin{equation*}
-                        \\text{Formula:} \\quad CI = A - P 
-                    \\end{equation*}
-                    \\begin{equation*}
-                        \\text{Substitution:} \\quad CI = ${A_latex} - ${P_latex} 
-                    \\end{equation*}
-                    \\begin{equation*}
-                        \\text{Calculation:} \\quad CI = ${CI_latex} 
-                    \\end{equation*}
-                    \\begin{equation*}
-                        \\textbf{Result:} \\quad \\text{CI} = ${formatCurrency(CI)} 
-                    \\end{equation*}
-                </div>
-            </div>
-        `;
-    }
+        document.getElementById('timeSlider').addEventListener('input', function(e) {
+            const val = e.target.value;
+            const timeType = document.getElementById('timeType').value;
+            document.getElementById('time').value = val;
+            document.getElementById('timeSliderValue').textContent = val + ' ' + (timeType === 'years' ? 'Years' : 'Months');
+        });
 
-</script>
+        document.getElementById('timeType').addEventListener('change', function(e) {
+            const isYears = e.target.value === 'years';
+            const maxVal = isYears ? 30 : 360;
+            const currentVal = parseInt(document.getElementById('time').value) || (isYears ? 5 : 60);
+            
+            document.getElementById('timeSlider').max = maxVal;
+            document.getElementById('timeSlider').value = Math.min(currentVal, maxVal);
+            document.getElementById('time').value = Math.min(currentVal, maxVal);
+            document.getElementById('timeSliderValue').textContent = Math.min(currentVal, maxVal) + ' ' + (isYears ? 'Years' : 'Months');
+        });
 
-   
+        function calculateInterest() {
+            const principal = parseFloat(document.getElementById('principal').value);
+            const rate = parseFloat(document.getElementById('rate').value);
+            const timeValue = parseInt(document.getElementById('time').value);
+            const timeType = document.getElementById('timeType').value;
+            const compounding = parseInt(document.getElementById('compounding').value);
 
+            if (!principal || principal <= 0 || !rate || rate <= 0 || !timeValue || timeValue <= 0) {
+                alert('Please enter valid values for all fields');
+                return;
+            }
+
+            const timeInYears = timeType === 'years' ? timeValue : timeValue / 12;
+            const r = rate / 100;
+
+            let interest, maturity, ear;
+
+            if (currentMode === 'simple') {
+                // Simple Interest: SI = P × R × T / 100
+                interest = principal * r * timeInYears;
+                maturity = principal + interest;
+                ear = rate; // For SI, EAR = nominal rate
+            } else {
+                // Compound Interest: A = P × (1 + R/N)^(N×T)
+                maturity = principal * Math.pow(1 + r / compounding, compounding * timeInYears);
+                interest = maturity - principal;
+                // Effective Annual Rate: (1 + R/N)^N - 1
+                ear = (Math.pow(1 + r / compounding, compounding) - 1) * 100;
+            }
+
+            // Display results
+            document.getElementById('principalValue').textContent = formatCurrency(principal);
+            document.getElementById('interestValue').textContent = formatCurrency(interest);
+            document.getElementById('maturityValue').textContent = formatCurrency(maturity);
+            document.getElementById('earValue').textContent = ear.toFixed(2) + '%';
+
+            document.getElementById('results').classList.add('active');
+
+            // Generate calculation steps
+            generateCalculationSteps(principal, rate, timeInYears, compounding, interest, maturity, ear);
+
+            // Generate chart and comparison
+            generateChart(principal, rate, timeInYears, compounding);
+            generateComparison(principal, rate, timeInYears, compounding);
+
+            document.getElementById('chartsSection').classList.add('active');
+            document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function generateCalculationSteps(principal, rate, years, compounding, interest, maturity, ear) {
+            const stepsDiv = document.getElementById('stepsContent');
+            const r = rate / 100;
+            const symbol = getCurrencySymbol();
+            
+            let stepsHTML = '';
+
+            if (currentMode === 'simple') {
+                // Simple Interest Steps
+                stepsHTML = `
+                    <div class="step-item">
+                        <div class="step-title">Step 1: Identify the values</div>
+                        <div class="step-explanation">
+                            • Principal (P) = ${formatCurrency(principal)}<br>
+                            • Annual Interest Rate (R) = ${rate}%<br>
+                            • Time Period (T) = ${years.toFixed(2)} years
+                        </div>
+                    </div>
+
+                    <div class="step-item">
+                        <div class="step-title">Step 2: Apply Simple Interest Formula</div>
+                        <div class="step-formula">
+                            SI = (P × R × T) / 100
+                        </div>
+                        <div class="step-explanation">
+                            Substitute the values into the formula
+                        </div>
+                    </div>
+
+                    <div class="step-item">
+                        <div class="step-title">Step 3: Calculate Simple Interest</div>
+                        <div class="step-formula">
+                            SI = (${principal.toFixed(2)} × ${rate} × ${years.toFixed(2)}) / 100
+                        </div>
+                        <div class="step-formula">
+                            SI = ${(principal * rate * years).toFixed(2)} / 100
+                        </div>
+                        <div class="step-formula">
+                            SI = ${interest.toFixed(2)}
+                        </div>
+                        <div class="step-result">
+                            ✓ Simple Interest = ${formatCurrency(interest)}
+                        </div>
+                    </div>
+
+                    <div class="step-item">
+                        <div class="step-title">Step 4: Calculate Maturity Amount</div>
+                        <div class="step-formula">
+                            Maturity Amount = Principal + Interest
+                        </div>
+                        <div class="step-formula">
+                            Maturity Amount = ${principal.toFixed(2)} + ${interest.toFixed(2)}
+                        </div>
+                        <div class="step-formula">
+                            Maturity Amount = ${maturity.toFixed(2)}
+                        </div>
+                        <div class="step-result">
+                            ✓ Total Maturity Amount = ${formatCurrency(maturity)}
+                        </div>
+                    </div>
+
+                    <div class="step-item">
+                        <div class="step-title">Summary</div>
+                        <div class="step-explanation">
+                            You invested ${formatCurrency(principal)} at ${rate}% simple interest for ${years.toFixed(2)} years.<br>
+                            You will earn ${formatCurrency(interest)} as interest.<br>
+                            Your total amount at maturity will be ${formatCurrency(maturity)}.
+                        </div>
+                    </div>
+                `;
+            } else {
+                // Compound Interest Steps
+                const compoundingNames = {
+                    1: 'Annually',
+                    2: 'Semi-Annually',
+                    4: 'Quarterly',
+                    12: 'Monthly',
+                    365: 'Daily'
+                };
+
+                stepsHTML = `
+                    <div class="step-item">
+                        <div class="step-title">Step 1: Identify the values</div>
+                        <div class="step-explanation">
+                            • Principal (P) = ${formatCurrency(principal)}<br>
+                            • Annual Interest Rate (R) = ${rate}% = ${r.toFixed(4)} (as decimal)<br>
+                            • Time Period (T) = ${years.toFixed(2)} years<br>
+                            • Compounding Frequency (N) = ${compounding} times per year (${compoundingNames[compounding]})
+                        </div>
+                    </div>
+
+                    <div class="step-item">
+                        <div class="step-title">Step 2: Apply Compound Interest Formula</div>
+                        <div class="step-formula">
+                            A = P × (1 + R/N)^(N×T)
+                        </div>
+                        <div class="step-explanation">
+                            Where A is the maturity amount<br>
+                            This formula calculates interest on principal + accumulated interest
+                        </div>
+                    </div>
+
+                    <div class="step-item">
+                        <div class="step-title">Step 3: Calculate (1 + R/N)</div>
+                        <div class="step-formula">
+                            1 + R/N = 1 + ${r.toFixed(6)}/${compounding}
+                        </div>
+                        <div class="step-formula">
+                            1 + R/N = 1 + ${(r/compounding).toFixed(6)}
+                        </div>
+                        <div class="step-formula">
+                            1 + R/N = ${(1 + r/compounding).toFixed(6)}
+                        </div>
+                        <div class="step-result">
+                            ✓ Rate per compounding period = ${(1 + r/compounding).toFixed(6)}
+                        </div>
+                    </div>
+
+                    <div class="step-item">
+                        <div class="step-title">Step 4: Calculate total number of compounding periods</div>
+                        <div class="step-formula">
+                            N × T = ${compounding} × ${years.toFixed(2)}
+                        </div>
+                        <div class="step-formula">
+                            N × T = ${(compounding * years).toFixed(2)}
+                        </div>
+                        <div class="step-result">
+                            ✓ Total compounding periods = ${(compounding * years).toFixed(2)}
+                        </div>
+                    </div>
+
+                    <div class="step-item">
+                        <div class="step-title">Step 5: Calculate (1 + R/N)^(N×T)</div>
+                        <div class="step-formula">
+                            (${(1 + r/compounding).toFixed(6)})^${(compounding * years).toFixed(2)}
+                        </div>
+                        <div class="step-formula">
+                            = ${Math.pow(1 + r/compounding, compounding * years).toFixed(6)}
+                        </div>
+                        <div class="step-result">
+                            ✓ Growth multiplier = ${Math.pow(1 + r/compounding, compounding * years).toFixed(6)}
+                        </div>
+                    </div>
+
+                    <div class="step-item">
+                        <div class="step-title">Step 6: Calculate Maturity Amount</div>
+                        <div class="step-formula">
+                            A = P × (1 + R/N)^(N×T)
+                        </div>
+                        <div class="step-formula">
+                            A = ${principal.toFixed(2)} × ${Math.pow(1 + r/compounding, compounding * years).toFixed(6)}
+                        </div>
+                        <div class="step-formula">
+                            A = ${maturity.toFixed(2)}
+                        </div>
+                        <div class="step-result">
+                            ✓ Maturity Amount = ${formatCurrency(maturity)}
+                        </div>
+                    </div>
+
+                    <div class="step-item">
+                        <div class="step-title">Step 7: Calculate Compound Interest</div>
+                        <div class="step-formula">
+                            CI = Maturity Amount - Principal
+                        </div>
+                        <div class="step-formula">
+                            CI = ${maturity.toFixed(2)} - ${principal.toFixed(2)}
+                        </div>
+                        <div class="step-formula">
+                            CI = ${interest.toFixed(2)}
+                        </div>
+                        <div class="step-result">
+                            ✓ Compound Interest = ${formatCurrency(interest)}
+                        </div>
+                    </div>
+
+                    <div class="step-item">
+                        <div class="step-title">Step 8: Calculate Effective Annual Rate (EAR)</div>
+                        <div class="step-formula">
+                            EAR = (1 + R/N)^N - 1
+                        </div>
+                        <div class="step-formula">
+                            EAR = (${(1 + r/compounding).toFixed(6)})^${compounding} - 1
+                        </div>
+                        <div class="step-formula">
+                            EAR = ${Math.pow(1 + r/compounding, compounding).toFixed(6)} - 1
+                        </div>
+                        <div class="step-formula">
+                            EAR = ${(Math.pow(1 + r/compounding, compounding) - 1).toFixed(6)}
+                        </div>
+                        <div class="step-formula">
+                            EAR = ${ear.toFixed(2)}%
+                        </div>
+                        <div class="step-result">
+                            ✓ Effective Annual Rate = ${ear.toFixed(2)}%
+                        </div>
+                        <div class="step-explanation" style="margin-top: 0.75rem;">
+                            Note: The effective rate (${ear.toFixed(2)}%) is higher than the nominal rate (${rate}%) due to compounding ${compoundingNames[compounding].toLowerCase()}.
+                        </div>
+                    </div>
+
+                    <div class="step-item">
+                        <div class="step-title">Summary</div>
+                        <div class="step-explanation">
+                            You invested ${formatCurrency(principal)} at ${rate}% annual interest compounded ${compoundingNames[compounding].toLowerCase()} for ${years.toFixed(2)} years.<br>
+                            Your money was compounded ${(compounding * years).toFixed(0)} times during this period.<br>
+                            You earned ${formatCurrency(interest)} as compound interest.<br>
+                            Your total amount at maturity is ${formatCurrency(maturity)}.<br>
+                            Your effective annual rate is ${ear.toFixed(2)}%, which is ${(ear - rate).toFixed(2)}% higher than the nominal rate due to compounding.
+                        </div>
+                    </div>
+                `;
+            }
+
+            stepsDiv.innerHTML = stepsHTML;
+            document.getElementById('calculationSteps').style.display = 'block';
+        }
+
+        function generateChart(principal, rate, years, compounding) {
+            if (interestChart) {
+                interestChart.destroy();
+            }
+
+            const r = rate / 100;
+            const labels = [];
+            const siData = [];
+            const ciData = [];
+
+            const steps = Math.min(Math.ceil(years), 30);
+            for (let i = 0; i <= steps; i++) {
+                const t = (years / steps) * i;
+                
+                // Simple Interest
+                const si = principal + (principal * r * t);
+                
+                // Compound Interest
+                const ci = principal * Math.pow(1 + r / compounding, compounding * t);
+                
+                labels.push(t.toFixed(1) + 'Y');
+                siData.push(si);
+                ciData.push(ci);
+            }
+
+            const ctx = document.getElementById('interestChart').getContext('2d');
+            interestChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Simple Interest',
+                            data: siData,
+                            borderColor: '#64748b',
+                            backgroundColor: 'rgba(100, 116, 139, 0.1)',
+                            borderWidth: 2,
+                            tension: 0
+                        },
+                        {
+                            label: 'Compound Interest',
+                            data: ciData,
+                            borderColor: '#0891b2',
+                            backgroundColor: 'rgba(8, 145, 178, 0.1)',
+                            borderWidth: 3,
+                            fill: true,
+                            tension: 0.4
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: { padding: 15, font: { size: 12 } }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const locale = getCurrencyLocale();
+                                    const decimals = getCurrencyDecimals();
+                                    return context.dataset.label + ': ' + getCurrencySymbol() + ' ' + context.parsed.y.toLocaleString(locale, {
+                                        minimumFractionDigits: decimals,
+                                        maximumFractionDigits: decimals
+                                    });
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    const symbol = getCurrencySymbol();
+                                    if (value >= 100000) {
+                                        return symbol + ' ' + (value / 100000).toFixed(1) + 'L';
+                                    }
+                                    if (value >= 1000) {
+                                        return symbol + ' ' + (value / 1000).toFixed(0) + 'k';
+                                    }
+                                    return symbol + ' ' + value.toFixed(0);
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function generateComparison(principal, rate, years, compounding) {
+            const r = rate / 100;
+            
+            // Calculate both SI and CI
+            const si = principal * r * years;
+            const siTotal = principal + si;
+            
+            const ciTotal = principal * Math.pow(1 + r / compounding, compounding * years);
+            const ci = ciTotal - principal;
+            
+            const difference = ci - si;
+            const percentMore = (difference / si) * 100;
+
+            document.getElementById('siComparison').textContent = formatCurrency(si);
+            document.getElementById('ciComparison').textContent = formatCurrency(ci);
+            document.getElementById('diffComparison').textContent = formatCurrency(difference);
+            document.getElementById('diffPercent').textContent = percentMore.toFixed(1) + '% More';
+
+            // Generate calculation steps
+            generateCalculationSteps(principal, rate, years, compounding, si, siTotal, ci, ciTotal);
+            document.getElementById('calculationSteps').classList.add('active');
+        }
+
+        function generateCalculationSteps(principal, rate, years, compounding, si, siTotal, ci, ciTotal) {
+            const stepsContainer = document.getElementById('stepsContent');
+            const symbol = getCurrencySymbol();
+            const locale = getCurrencyLocale();
+            const decimals = getCurrencyDecimals();
+            
+            const formatNum = (num) => num.toLocaleString(locale, {
+                minimumFractionDigits: decimals,
+                maximumFractionDigits: decimals
+            });
+
+            let stepsHTML = '';
+
+            if (currentMode === 'simple') {
+                // Simple Interest Steps
+                stepsHTML = `
+                    <div class="step-item">
+                        <h4>Step 1: Identify the Given Values</h4>
+                        <div class="step-calculation">
+                            Principal (P) = ${symbol} ${formatNum(principal)}<br>
+                            Annual Interest Rate (R) = ${rate}%<br>
+                            Time Period (T) = ${years.toFixed(2)} years
+                        </div>
+                        <p class="step-explanation">These are the input values we'll use in our calculation.</p>
+                    </div>
+
+                    <div class="step-item">
+                        <h4>Step 2: Apply the Simple Interest Formula</h4>
+                        <div class="step-formula">
+                            Simple Interest (SI) = (P × R × T) / 100
+                        </div>
+                        <p class="step-explanation">Simple interest is calculated only on the principal amount for the entire period.</p>
+                    </div>
+
+                    <div class="step-item">
+                        <h4>Step 3: Substitute the Values</h4>
+                        <div class="step-calculation">
+                            SI = (${formatNum(principal)} × ${rate} × ${years.toFixed(2)}) / 100
+                        </div>
+                        <p class="step-explanation">Replace P, R, and T with the actual values.</p>
+                    </div>
+
+                    <div class="step-item">
+                        <h4>Step 4: Calculate the Interest</h4>
+                        <div class="step-calculation">
+                            SI = (${formatNum(principal * rate * years)}) / 100<br>
+                            SI = ${symbol} ${formatNum(si)}
+                        </div>
+                        <div class="step-result">
+                            ✓ Total Simple Interest = ${symbol} ${formatNum(si)}
+                        </div>
+                    </div>
+
+                    <div class="step-item">
+                        <h4>Step 5: Calculate Total Maturity Amount</h4>
+                        <div class="step-formula">
+                            Total Amount (A) = Principal + Simple Interest<br>
+                            A = P + SI
+                        </div>
+                        <div class="step-calculation">
+                            A = ${symbol} ${formatNum(principal)} + ${symbol} ${formatNum(si)}<br>
+                            A = ${symbol} ${formatNum(siTotal)}
+                        </div>
+                        <div class="step-result">
+                            ✓ Maturity Amount = ${symbol} ${formatNum(siTotal)}
+                        </div>
+                        <p class="step-explanation">You will receive ${symbol} ${formatNum(siTotal)} at the end of ${years.toFixed(2)} years, which includes your original principal of ${symbol} ${formatNum(principal)} plus ${symbol} ${formatNum(si)} in interest.</p>
+                    </div>
+                `;
+            } else {
+                // Compound Interest Steps
+                const r = rate / 100;
+                const n = compounding;
+                const rOverN = r / n;
+                const nt = n * years;
+                const baseValue = 1 + rOverN;
+                const powerValue = Math.pow(baseValue, nt);
+
+                // Compounding frequency name
+                const freqNames = {
+                    1: 'Annually',
+                    2: 'Semi-Annually',
+                    4: 'Quarterly',
+                    12: 'Monthly',
+                    365: 'Daily'
+                };
+                const freqName = freqNames[n] || `${n} times/year`;
+
+                stepsHTML = `
+                    <div class="step-item">
+                        <h4>Step 1: Identify the Given Values</h4>
+                        <div class="step-calculation">
+                            Principal (P) = ${symbol} ${formatNum(principal)}<br>
+                            Annual Interest Rate (R) = ${rate}% = ${r.toFixed(6)} (as decimal)<br>
+                            Time Period (T) = ${years.toFixed(2)} years<br>
+                            Compounding Frequency (N) = ${n} (${freqName})
+                        </div>
+                        <p class="step-explanation">These are the input values. Note that we convert the percentage rate to decimal form by dividing by 100.</p>
+                    </div>
+
+                    <div class="step-item">
+                        <h4>Step 2: Apply the Compound Interest Formula</h4>
+                        <div class="step-formula">
+                            Maturity Amount (A) = P × (1 + R/N)^(N×T)
+                        </div>
+                        <p class="step-explanation">Compound interest calculates interest on both principal and accumulated interest from previous periods.</p>
+                    </div>
+
+                    <div class="step-item">
+                        <h4>Step 3: Substitute the Values</h4>
+                        <div class="step-calculation">
+                            A = ${formatNum(principal)} × (1 + ${r.toFixed(6)}/${n})^(${n}×${years.toFixed(2)})<br>
+                            A = ${formatNum(principal)} × (1 + ${rOverN.toFixed(6)})^${nt.toFixed(2)}
+                        </div>
+                        <p class="step-explanation">Replace all variables with their actual values.</p>
+                    </div>
+
+                    <div class="step-item">
+                        <h4>Step 4: Calculate the Base Value</h4>
+                        <div class="step-calculation">
+                            Base = 1 + ${rOverN.toFixed(6)}<br>
+                            Base = ${baseValue.toFixed(6)}
+                        </div>
+                        <p class="step-explanation">This is the growth factor for each compounding period.</p>
+                    </div>
+
+                    <div class="step-item">
+                        <h4>Step 5: Calculate the Power</h4>
+                        <div class="step-calculation">
+                            Number of Periods = ${n} × ${years.toFixed(2)} = ${nt.toFixed(2)} periods<br>
+                            (${baseValue.toFixed(6)})^${nt.toFixed(2)} = ${powerValue.toFixed(6)}
+                        </div>
+                        <p class="step-explanation">Raise the base to the power of total compounding periods.</p>
+                    </div>
+
+                    <div class="step-item">
+                        <h4>Step 6: Calculate Maturity Amount</h4>
+                        <div class="step-calculation">
+                            A = ${symbol} ${formatNum(principal)} × ${powerValue.toFixed(6)}<br>
+                            A = ${symbol} ${formatNum(ciTotal)}
+                        </div>
+                        <div class="step-result">
+                            ✓ Maturity Amount = ${symbol} ${formatNum(ciTotal)}
+                        </div>
+                    </div>
+
+                    <div class="step-item">
+                        <h4>Step 7: Calculate Compound Interest Earned</h4>
+                        <div class="step-formula">
+                            Compound Interest (CI) = Maturity Amount - Principal<br>
+                            CI = A - P
+                        </div>
+                        <div class="step-calculation">
+                            CI = ${symbol} ${formatNum(ciTotal)} - ${symbol} ${formatNum(principal)}<br>
+                            CI = ${symbol} ${formatNum(ci)}
+                        </div>
+                        <div class="step-result">
+                            ✓ Compound Interest = ${symbol} ${formatNum(ci)}
+                        </div>
+                        <p class="step-explanation">You will receive ${symbol} ${formatNum(ciTotal)} at the end of ${years.toFixed(2)} years, which includes your original principal of ${symbol} ${formatNum(principal)} plus ${symbol} ${formatNum(ci)} in compound interest.</p>
+                    </div>
+
+                    <div class="step-item">
+                        <h4>Step 8: Calculate Effective Annual Rate (EAR)</h4>
+                        <div class="step-formula">
+                            EAR = (1 + R/N)^N - 1
+                        </div>
+                        <div class="step-calculation">
+                            EAR = (1 + ${r.toFixed(6)}/${n})^${n} - 1<br>
+                            EAR = (${baseValue.toFixed(6)})^${n} - 1<br>
+                            EAR = ${(Math.pow(baseValue, n) - 1).toFixed(6)}<br>
+                            EAR = ${((Math.pow(baseValue, n) - 1) * 100).toFixed(2)}%
+                        </div>
+                        <div class="step-result">
+                            ✓ Effective Annual Rate = ${((Math.pow(baseValue, n) - 1) * 100).toFixed(2)}%
+                        </div>
+                        <p class="step-explanation">The effective annual rate is ${((Math.pow(baseValue, n) - 1) * 100).toFixed(2)}%, which is higher than the nominal rate of ${rate}% due to compounding.</p>
+                    </div>
+                `;
+            }
+
+            stepsContainer.innerHTML = stepsHTML;
+        }
+
+        function toggleSteps() {
+            const stepsContent = document.getElementById('stepsContent');
+            const toggleText = document.getElementById('toggleStepsText');
+            
+            if (stepsContent.classList.contains('show')) {
+                stepsContent.classList.remove('show');
+                toggleText.textContent = 'Show Steps';
+            } else {
+                stepsContent.classList.add('show');
+                toggleText.textContent = 'Hide Steps';
+                // Scroll to steps
+                document.getElementById('calculationSteps').scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'nearest' 
+                });
+            }
+        }
+
+        function resetForm() {
+            document.getElementById('principal').value = 10000;
+            document.getElementById('principalSlider').value = 10000;
+            document.getElementById('principalSliderValue').textContent = getCurrencySymbol() + ' 10,000';
+            
+            document.getElementById('rate').value = 8;
+            document.getElementById('rateSlider').value = 8;
+            document.getElementById('rateSliderValue').textContent = '8.0%';
+            
+            document.getElementById('time').value = 5;
+            document.getElementById('timeSlider').value = 5;
+            document.getElementById('timeSliderValue').textContent = '5 Years';
+            document.getElementById('timeType').value = 'years';
+            
+            document.getElementById('compounding').value = 4;
+            document.getElementById('currency').value = 'INR';
+            currentCurrency = 'INR';
+
+            document.getElementById('results').classList.remove('active');
+            document.getElementById('chartsSection').classList.remove('active');
+            document.getElementById('calculationSteps').classList.remove('active');
+
+            // Reset steps toggle
+            const stepsContent = document.getElementById('stepsContent');
+            if (stepsContent && stepsContent.classList.contains('show')) {
+                stepsContent.classList.remove('show');
+                document.getElementById('toggleStepsText').textContent = 'Show Steps';
+            }
+
+            if (interestChart) {
+                interestChart.destroy();
+                interestChart = null;
+            }
+        }
+
+        function toggleMenu() {
+            document.getElementById('mobileNav').classList.toggle('active');
+        }
+
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('calculateBtn').addEventListener('click', calculateInterest);
+            document.getElementById('resetBtn').addEventListener('click', resetForm);
+            document.getElementById('hamburgerBtn').addEventListener('click', toggleMenu);
+            document.getElementById('currency').addEventListener('change', updateCurrencyDisplay);
+        });
+    </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
