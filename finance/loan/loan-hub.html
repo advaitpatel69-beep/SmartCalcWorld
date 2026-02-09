@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/png" href="https://advaitpatel69-beep.github.io/Advait.github.io/favicon.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free loan calculators for EMI, home loans, car loans, personal loans, and eligibility. Plan borrowing with accurate repayment schedules.">
+    <link rel="canonical" href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/loan/loan-hub.html">
+    <title>Loan Calculators – EMI, Eligibility & Repayment Tools</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.7;
+            color: #333;
+            background: #f5f7fa;
+        }
+
+        header {
+            background: linear-gradient(135deg, #0891b2 0%, #059669 100%);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .site-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+
+        nav a:hover {
+            opacity: 0.8;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+            background: none;
+            border: none;
+            padding: 0;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            border-radius: 3px;
+            transition: 0.3s;
+        }
+
+        .mobile-nav {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: #0891b2;
+            flex-direction: column;
+            padding: 1rem;
+            gap: 1rem;
+        }
+
+        .mobile-nav.active {
+            display: flex;
+        }
+
+        .mobile-nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .mobile-nav a:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 1rem;
+        }
+
+        .breadcrumb {
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+        }
+
+        .breadcrumb a {
+            color: #0891b2;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .breadcrumb a:hover {
+            color: #059669;
+            text-decoration: underline;
+        }
+
+        .breadcrumb span {
+            color: #64748b;
+            margin: 0 0.5rem;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        h1 {
+            font-size: 2.75rem;
+            color: #2d3748;
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+
+        .hero-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: #4a5568;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .intro-section {
+            background: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+            margin-bottom: 4rem;
+            line-height: 1.8;
+        }
+
+        .intro-section p {
+            margin-bottom: 1.25rem;
+            color: #4a5568;
+            font-size: 1.05rem;
+        }
+
+        .intro-section p:last-child {
+            margin-bottom: 0;
+        }
+
+        .intro-section a {
+            color: #0891b2;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .intro-section a:hover {
+            color: #059669;
+            text-decoration: underline;
+        }
+
+        .calculators-section {
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: #2d3748;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            border-left: 4px solid #0891b2;
+            padding-left: 1rem;
+        }
+
+        .calculators-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .calculator-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-top: 3px solid #0891b2;
+        }
+
+        .calculator-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.12);
+        }
+
+        .calculator-card h3 {
+            font-size: 1.4rem;
+            color: #2d3748;
+            margin-bottom: 0.75rem;
+            font-weight: 700;
+        }
+
+        .calculator-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        .calculator-description {
+            color: #4a5568;
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+
+        .calculator-link {
+            display: inline-block;
+            color: #0891b2;
+            font-weight: 600;
+            text-decoration: none;
+            padding: 0.65rem 1.25rem;
+            border: 2px solid #0891b2;
+            border-radius: 8px;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .calculator-link:hover {
+            background: #0891b2;
+            color: white;
+        }
+
+        .related-section {
+            background: linear-gradient(135deg, #0891b2 0%, #059669 100%);
+            color: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+            margin-bottom: 2rem;
+        }
+
+        .related-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.25rem;
+            font-weight: 700;
+        }
+
+        .related-section p {
+            margin-bottom: 1rem;
+            line-height: 1.8;
+            font-size: 1.05rem;
+            opacity: 0.95;
+        }
+
+        .related-section a {
+            color: white;
+            text-decoration: underline;
+            font-weight: 600;
+            transition: opacity 0.3s;
+        }
+
+        .related-section a:hover {
+            opacity: 0.8;
+        }
+
+        footer {
+            background: #2d3748;
+            color: white;
+            padding: 3rem 0 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: #cbd5e0;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .disclaimer {
+            background: rgba(0,0,0,0.2);
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: #cbd5e0;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #cbd5e0;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.05rem;
+            }
+
+            .intro-section {
+                padding: 1.5rem;
+            }
+
+            .calculators-grid {
+                grid-template-columns: 1fr;
+                gap: 1.25rem;
+            }
+
+            .calculator-card {
+                padding: 1.5rem;
+            }
+
+            .related-section {
+                padding: 2rem 1.5rem;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .section-title {
+                font-size: 1.6rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 2rem 1rem;
+            }
+
+            h1 {
+                font-size: 1.75rem;
+            }
+
+            .hero-icon {
+                font-size: 2.5rem;
+            }
+
+            .calculator-icon {
+                font-size: 1.75rem;
+            }
+
+            .calculator-card h3 {
+                font-size: 1.25rem;
+            }
+
+            .intro-section p,
+            .calculator-description,
+            .related-section p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="site-title">💰 Finance Calculators</div>
+            <nav>
+                <a href="https://advaitpatel69-beep.github.io/Advait.github.io/index.html">Home</a>
+
+                <span class="nav-disabled">Student Calculators (Coming Soon)</span>
+                <span class="nav-disabled">Medical Calculators (Coming Soon)</span>
+                <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/finance-hub.html">Finance Calculators</a>
+            </nav>
+            <button class="hamburger" id="hamburgerBtn" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        <div class="mobile-nav" id="mobileNav">
+            <a href="https://advaitpatel69-beep.github.io/Advait.github.io/index.html">Home</a>
+
+            <span class="nav-disabled">Student Calculators (Coming Soon)</span>
+            <span class="nav-disabled">Medical Calculators (Coming Soon)</span>
+            <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/finance-hub.html">Finance Calculators</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <nav class="breadcrumb">
+            <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/finance-hub.html">Finance Calculators</a>
+            <span>›</span>
+            <span>Loan Calculators</span>
+        </nav>
+
+        <div class="hero">
+            <div class="hero-icon">🏠</div>
+            <h1>Loan Calculators</h1>
+            <p class="hero-subtitle">Understand your borrowing capacity, monthly payments, and total interest costs with accurate loan planning tools</p>
+        </div>
+
+        <section class="intro-section">
+            <p>Loan calculators are essential financial planning tools that help you understand the true cost of borrowing before you commit to any loan agreement. Whether you're planning to purchase your first home, buy a car, fund higher education, or meet personal financial needs, these calculators provide instant clarity on monthly installments (EMI), total interest payable, repayment tenure, and overall loan affordability. By entering basic loan parameters like principal amount, interest rate, and repayment period, you immediately see detailed payment schedules, interest breakdowns, and amortization tables that reveal exactly how much you'll pay month by month and year by year throughout the loan tenure.</p>
+
+            <p>These tools serve a diverse audience including students exploring education loan options for college or professional courses, young professionals planning their first major purchases like homes or vehicles, families evaluating personal loans for weddings or medical expenses, and entrepreneurs seeking business financing. First-time borrowers especially benefit from loan calculators as they demystify lending terminology and provide transparent cost projections without requiring you to approach multiple banks or lenders. Instead of relying on marketing pitches that highlight only monthly payments, these calculators reveal the complete picture including total interest cost that can sometimes exceed the principal amount for long-tenure loans, helping you negotiate better terms and make informed borrowing decisions aligned with your repayment capacity.</p>
+
+            <p>What makes loan calculators invaluable is their ability to answer critical "what-if" questions that directly impact your financial health. You can explore how increasing down payment reduces EMI burden, discover how shorter tenures save substantial interest despite higher monthly payments, compare different interest rate offerings from various lenders to quantify savings, and determine the exact loan amount you can afford based on your monthly budget without overextending financially. The calculators also demonstrate prepayment benefits, showing how extra payments toward principal can shorten loan tenure and reduce total interest by thousands or even lakhs of currency units. This scenario-planning capability ensures you choose loan structures that fit your income, lifestyle, and financial goals rather than blindly accepting lender recommendations.</p>
+
+            <p>Using loan calculators requires no financial expertise or registration on lending platforms. Each calculator features user-friendly interfaces where you input loan amount, annual interest rate, and tenure in months or years, then instantly receive comprehensive results including monthly EMI, total payment amount, total interest cost, and detailed amortization schedules. Many calculators offer interactive charts comparing principal versus interest components over time, currency selection for international users, and downloadable payment schedules in PDF or CSV formats for offline reference. Whether you're calculating <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/finance-emi-calculator.html">EMI for home loans</a> to plan your dream home purchase, evaluating car loan affordability, comparing personal loan offers, or checking eligibility before applying, these free tools provide bank-grade calculations that empower confident borrowing decisions without the pressure of salespersons or hidden clauses.</p>
+        </section>
+
+        <section class="calculators-section" id="calculators">
+            <h2 class="section-title">Available Loan Calculators</h2>
+            
+            <div class="calculators-grid">
+                <div class="calculator-card">
+                    <span class="calculator-icon">💳</span>
+                    <h3>EMI Calculator</h3>
+                    <p class="calculator-description">Calculate Equated Monthly Installment for any loan type with detailed amortization schedule. View principal vs interest breakdown, total payment, and year-wise repayment structure for informed borrowing.</p>
+                    <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/finance-emi-calculator.html" class="calculator-link">Calculate EMI →</a>
+                </div>
+<!--
+                <div class="calculator-card">
+                    <span class="calculator-icon">🏡</span>
+                    <h3>Home Loan Calculator</h3>
+                    <p class="calculator-description">Plan home purchase with mortgage EMI calculation, down payment impact analysis, and total interest costs. Compare loan tenure options to find affordable housing loan structure matching your budget.</p>
+                    <a href="/home-loan-calculator" class="calculator-link">Calculate Home Loan →</a>
+                </div>
+
+                <div class="calculator-card">
+                    <span class="calculator-icon">🚗</span>
+                    <h3>Car Loan Calculator</h3>
+                    <p class="calculator-description">Estimate auto loan EMI, total payable amount, and interest costs for vehicle financing. Understand how down payment and tenure affect monthly obligations to plan affordable car purchase.</p>
+                    <a href="/car-loan-calculator" class="calculator-link">Calculate Car Loan →</a>
+                </div>
+
+                <div class="calculator-card">
+                    <span class="calculator-icon">💼</span>
+                    <h3>Personal Loan Calculator</h3>
+                    <p class="calculator-description">Calculate unsecured personal loan EMI for weddings, medical needs, or debt consolidation. Compare interest rates from different lenders and determine optimal loan amount based on repayment capacity.</p>
+                    <a href="/personal-loan-calculator" class="calculator-link">Calculate Personal Loan →</a>
+                </div>
+
+                <div class="calculator-card">
+                    <span class="calculator-icon">🎓</span>
+                    <h3>Education Loan Calculator</h3>
+                    <p class="calculator-description">Plan education financing with student loan EMI calculation including moratorium period. Estimate repayment burden after course completion for college, postgraduate, or professional education abroad.</p>
+                    <a href="/education-loan-calculator" class="calculator-link">Calculate Education Loan →</a>
+                </div>
+
+                <div class="calculator-card">
+                    <span class="calculator-icon">✅</span>
+                    <h3>Loan Eligibility Calculator</h3>
+                    <p class="calculator-description">Determine maximum loan amount you qualify for based on income, existing EMIs, and debt-to-income ratio. Check borrowing capacity before applying to avoid rejection and improve approval chances.</p>
+                    <a href="/loan-eligibility-calculator" class="calculator-link">Check Eligibility →</a>
+                </div>
+
+                <div class="calculator-card">
+                    <span class="calculator-icon">⏱️</span>
+                    <h3>Loan Tenure Calculator</h3>
+                    <p class="calculator-description">Calculate required loan tenure based on affordable monthly EMI or determine reduced tenure when increasing EMI amount. Balance monthly budget with faster loan closure for interest savings.</p>
+                    <a href="/loan-tenure-calculator" class="calculator-link">Calculate Tenure →</a>
+                </div>
+
+                <div class="calculator-card">
+                    <span class="calculator-icon">⚡</span>
+                    <h3>Loan Prepayment Calculator</h3>
+                    <p class="calculator-description">Estimate interest savings and tenure reduction with lump sum or partial prepayments. Plan strategic prepayment schedules to close loans faster and minimize total interest burden significantly.</p>
+                    <a href="/loan-prepayment-calculator" class="calculator-link">Calculate Prepayment →</a>
+                </div>
+
+                <div class="calculator-card">
+                    <span class="calculator-icon">🔄</span>
+                    <h3>Loan Comparison Calculator</h3>
+                    <p class="calculator-description">Compare multiple loan offers side-by-side with different interest rates, processing fees, and tenures. Identify the most cost-effective loan option by evaluating total payable amount across lenders.</p>
+                    <a href="/loan-comparison-calculator" class="calculator-link">Compare Loans →</a>
+                </div>
+
+                <div class="calculator-card">
+                    <span class="calculator-icon">🏢</span>
+                    <h3>Business Loan Calculator</h3>
+                    <p class="calculator-description">Calculate business loan EMI for working capital, expansion, or equipment financing. Plan business financing costs and repayment schedules aligned with cash flow projections and revenue cycles.</p>
+                    <a href="/business-loan-calculator" class="calculator-link">Calculate Business Loan →</a>
+                </div>
+
+                <div class="calculator-card">
+                    <span class="calculator-icon">🔢</span>
+                    <h3>Loan Interest Calculator</h3>
+                    <p class="calculator-description">Calculate total interest payable on loans with flat rate or reducing balance methods. Understand different interest calculation approaches and their impact on overall borrowing costs.</p>
+                    <a href="/loan-interest-calculator" class="calculator-link">Calculate Interest →</a>
+                </div>
+
+                <div class="calculator-card">
+                    <span class="calculator-icon">📊</span>
+                    <h3>Debt-to-Income Calculator</h3>
+                    <p class="calculator-description">Calculate debt-to-income ratio to assess financial health and loan eligibility. Determine safe borrowing limits and understand how existing debts affect new loan approval and interest rates.</p>
+                    <a href="/debt-income-calculator" class="calculator-link">Calculate DTI Ratio →</a>
+                </div>
+-->
+            </div>
+        </section>
+
+        <section class="related-section">
+            <h2>Explore Related Financial Tools</h2>
+            <p>Loan planning should be complemented with comprehensive financial management. Before borrowing, explore our <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/investment/investment-hub.html">Investment Calculators</a> to ensure you're maximizing wealth creation through systematic savings and investments. Understanding interest calculations is crucial, so visit <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/interest/interest-hub.html">Interest Calculators</a> to grasp how different compounding methods affect your loan costs versus savings growth.</p>
+            <p>Once you've secured a loan, use our <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/saving-retirement/saving-retirement-hub.html">Savings Calculators</a> to build emergency funds that prevent future high-interest borrowing during financial stress. Tax planning helps optimize loan-related deductions, so check <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/tax/tax-hub.html">Tax Calculators</a> for home loan interest and principal repayment benefits. For long-term financial security beyond loans, our <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/saving-retirement/saving-retirement-hub.html">Retirement Calculators</a> ensure debt-free golden years. Return to the <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/finance-hub.html">Finance Calculators Hub</a> to access all financial planning tools.</p>
+        </section>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/index.html">Home</a></li>
+               	    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/about.html">About</a></li>
+               	    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/contact.html">Contact</a></li>
+               	    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/privacy-policy.html">Privacy Policy</a></li>
+
+                </ul>
+            </div>
+
+			<div class="footer-section">
+                <h3>Student Tools</h3>
+                <ul>
+					<li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/percentage-calculator.html">Percentage Calculator</a></li>
+					<li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/cgpa-calculator.html">CGPA Calculator</a></li>
+      				<li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/simple-compound-interest-calculator.html">Simple & Compound Interest Calculator</a></li>
+                
+                    <li><span class="coming-soon">MATRIX Calculator (Coming Soon)</span></li>
+                    <li><span class="coming-soon">STATISTIC Calculator (Coming Soon)</span></li>
+                </ul>
+            </div>
+
+			
+            <div class="footer-section">
+                <h3>Finance Tools</h3>
+                <ul>
+		            <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/interest/interest-hub.html">Interest Calculators</a></li>
+		            <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/investment/investment-hub.html">Investment Calculators</a></li>
+                    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/loan/loan-hub.html">Loan Calculators</a></li>
+                    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/tax/tax-hub.html">Tax Calculators</a></li>
+                    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/saving-retirement/saving-retirement-hub.html">Savings Calculators</a></li>
+                    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/saving-retirement/saving-retirement-hub.html">Retirement Calculators</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <div class="disclaimer">
+                    <strong>Disclaimer:</strong> The results provided by this calculator are estimates for informational purposes only. 
+                    Actual loan terms may vary. Please consult with your financial institution for accurate loan details.
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; Student Helper Tools. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById('mobileNav').classList.toggle('active');
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('hamburgerBtn').addEventListener('click', toggleMenu);
+        });
+    </script>
+</body>
+</html>
