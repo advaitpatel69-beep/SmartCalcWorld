@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/png" href="https://advaitpatel69-beep.github.io/Advait.github.io/favicon.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free interest calculators for simple interest, compound interest, and effective rates. Understand how interest impacts loans and investments.">
+    <link rel="canonical" href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/interest/interest-hub.html">
+    <title>Interest Calculators – Simple & Compound Interest Tools</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.7;
+            color: #333;
+            background: #f5f7fa;
+        }
+
+        header {
+            background: linear-gradient(135deg, #0891b2 0%, #059669 100%);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .site-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+
+        nav a:hover {
+            opacity: 0.8;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+            background: none;
+            border: none;
+            padding: 0;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            border-radius: 3px;
+            transition: 0.3s;
+        }
+
+        .mobile-nav {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: #0891b2;
+            flex-direction: column;
+            padding: 1rem;
+            gap: 1rem;
+        }
+
+        .mobile-nav.active {
+            display: flex;
+        }
+
+        .mobile-nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .mobile-nav a:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 1rem;
+        }
+
+        .breadcrumb {
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+        }
+
+        .breadcrumb a {
+            color: #0891b2;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .breadcrumb a:hover {
+            color: #059669;
+            text-decoration: underline;
+        }
+
+        .breadcrumb span {
+            color: #64748b;
+            margin: 0 0.5rem;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        h1 {
+            font-size: 2.75rem;
+            color: #2d3748;
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+
+        .hero-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: #4a5568;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .intro-section {
+            background: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+            margin-bottom: 4rem;
+            line-height: 1.8;
+        }
+
+        .intro-section p {
+            margin-bottom: 1.25rem;
+            color: #4a5568;
+            font-size: 1.05rem;
+        }
+
+        .intro-section p:last-child {
+            margin-bottom: 0;
+        }
+
+        .intro-section a {
+            color: #0891b2;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .intro-section a:hover {
+            color: #059669;
+            text-decoration: underline;
+        }
+
+        .calculators-section {
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: #2d3748;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            border-left: 4px solid #0891b2;
+            padding-left: 1rem;
+        }
+
+        .calculators-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .calculator-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-top: 3px solid #0891b2;
+        }
+
+        .calculator-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.12);
+        }
+
+        .calculator-card h3 {
+            font-size: 1.4rem;
+            color: #2d3748;
+            margin-bottom: 0.75rem;
+            font-weight: 700;
+        }
+
+        .calculator-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        .calculator-description {
+            color: #4a5568;
+            margin-bottom: 1.25rem;
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+
+        .calculator-link {
+            display: inline-block;
+            color: #0891b2;
+            font-weight: 600;
+            text-decoration: none;
+            padding: 0.65rem 1.25rem;
+            border: 2px solid #0891b2;
+            border-radius: 8px;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .calculator-link:hover {
+            background: #0891b2;
+            color: white;
+        }
+
+        .related-section {
+            background: linear-gradient(135deg, #0891b2 0%, #059669 100%);
+            color: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+            margin-bottom: 2rem;
+        }
+
+        .related-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.25rem;
+            font-weight: 700;
+        }
+
+        .related-section p {
+            margin-bottom: 1rem;
+            line-height: 1.8;
+            font-size: 1.05rem;
+            opacity: 0.95;
+        }
+
+        .related-section a {
+            color: white;
+            text-decoration: underline;
+            font-weight: 600;
+            transition: opacity 0.3s;
+        }
+
+        .related-section a:hover {
+            opacity: 0.8;
+        }
+
+        footer {
+            background: #2d3748;
+            color: white;
+            padding: 3rem 0 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: #cbd5e0;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .disclaimer {
+            background: rgba(0,0,0,0.2);
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: #cbd5e0;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #cbd5e0;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.05rem;
+            }
+
+            .intro-section {
+                padding: 1.5rem;
+            }
+
+            .calculators-grid {
+                grid-template-columns: 1fr;
+                gap: 1.25rem;
+            }
+
+            .calculator-card {
+                padding: 1.5rem;
+            }
+
+            .related-section {
+                padding: 2rem 1.5rem;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .section-title {
+                font-size: 1.6rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 2rem 1rem;
+            }
+
+            h1 {
+                font-size: 1.75rem;
+            }
+
+            .hero-icon {
+                font-size: 2.5rem;
+            }
+
+            .calculator-icon {
+                font-size: 1.75rem;
+            }
+
+            .calculator-card h3 {
+                font-size: 1.25rem;
+            }
+
+            .intro-section p,
+            .calculator-description,
+            .related-section p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="site-title">💰 Finance Calculators</div>
+            <nav>
+                <a href="https://advaitpatel69-beep.github.io/Advait.github.io/index.html">Home</a>
+
+                <span class="nav-disabled">Student Calculators (Coming Soon)</span>
+                <span class="nav-disabled">Medical Calculators (Coming Soon)</span>
+                <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/finance-hub.html">Finance Calculators</a>
+            </nav>
+            <button class="hamburger" id="hamburgerBtn" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        <div class="mobile-nav" id="mobileNav">
+            <a href="https://advaitpatel69-beep.github.io/Advait.github.io/index.html">Home</a>
+
+            <span class="nav-disabled">Student Calculators (Coming Soon)</span>
+            <span class="nav-disabled">Medical Calculators (Coming Soon)</span>
+            <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/finance-hub.html">Finance Calculators</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <nav class="breadcrumb">
+            <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/finance-hub.html">Finance Calculators</a>
+            <span>›</span>
+            <span>Interest Calculators</span>
+        </nav>
+
+        <div class="hero">
+            <div class="hero-icon">💰</div>
+            <h1>Interest Calculators</h1>
+            <p class="hero-subtitle">Understand how interest works, compare simple versus compound interest, and calculate returns on savings or costs of borrowing</p>
+        </div>
+
+        <section class="intro-section">
+            <p>Interest is the price of money—the cost paid by borrowers to lenders for using their capital, or conversely, the reward earned by savers and investors for allowing others to use their money temporarily. Whether you're depositing money in a savings account, investing in fixed instruments, or taking out a loan, interest determines how much you'll earn or owe over time. Understanding interest calculations is fundamental to making smart financial decisions, as even small differences in interest rates or compounding methods can result in thousands of currency units saved or earned over the course of loans and investments.</p>
+
+            <p>Interest comes in two primary forms with dramatically different impacts on your finances. Simple interest is calculated only on the principal amount throughout the entire period, making it straightforward but less powerful for wealth building. The formula is Interest = Principal × Rate × Time, meaning if you invest $10,000 at 5% for 3 years, you earn $1,500 regardless of previous years' earnings. Compound interest, however, calculates interest on both the original principal and accumulated interest from previous periods, creating exponential growth that Albert Einstein reportedly called "the eighth wonder of the world." Using the same $10,000 at 5% compounded annually for 3 years yields approximately $1,576, demonstrating how compounding generates additional earnings. This difference becomes staggering over longer periods—$10,000 at 8% for 30 years grows to $43,178 with simple interest but explodes to $100,627 with annual compounding.</p>
+
+            <p>Interest affects loans and investments in opposite but equally important ways. For loans, you pay interest to the lender, so lower rates and simple interest structures benefit you by minimizing total cost. Credit cards often use compound interest calculated daily, causing debt to balloon rapidly if unpaid—a $5,000 balance at 18% APR can cost over $900 annually in interest alone. Mortgages typically use compound interest calculated monthly, meaning your early payments go mostly toward interest rather than principal, which is why <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/loan/loan-hub.html">loan calculators</a> are essential to understand true borrowing costs. For savings and investments, you earn interest, so higher rates and frequent compounding maximize returns. A <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/investment/finance-fd-calculator.html">fixed deposit</a> or recurring deposit with quarterly compounding yields noticeably more than monthly compounding at the same nominal rate, while savings accounts with daily compounding give your balance more frequent growth opportunities.</p>
+
+            <p>Interest calculators are indispensable tools for everyday financial planning because they translate abstract percentages into concrete dollar amounts that reveal the true impact of financial decisions. Before opening a savings account or investment, you can compare how different banks' interest rates and compounding frequencies affect your returns over time. Before taking a loan, you can calculate total interest payable and explore how extra payments or shorter tenures reduce costs. Interest rate calculators help you determine what rate you're actually paying or earning when fees and compounding are factored in—the "effective" rate often differs significantly from the advertised "nominal" rate. Students planning education financing, professionals evaluating mortgage options, retirees managing pension corpus withdrawals, and small business owners assessing working capital costs all rely on interest calculators to make informed choices that align with their financial goals and constraints.</p>
+        </section>
+
+        <section class="calculators-section" id="calculators">
+            <h2 class="section-title">Available Interest Calculators</h2>
+            
+            <div class="calculators-grid">
+                <div class="calculator-card">
+                    <span class="calculator-icon">➕</span>
+                    <h3>Simple Interest Calculator</h3>
+                    <p class="calculator-description">Calculate interest earned or paid using simple interest formula (Principal × Rate × Time). Useful for understanding basic interest concepts and comparing with compound interest scenarios.</p>
+                    <a href="https://advaitpatel69-beep.github.io/Advait.github.io/simple-compound-interest-calculator.html" class="calculator-link">Calculate Simple Interest →</a>
+                </div>
+
+                <div class="calculator-card">
+                    <span class="calculator-icon">📈</span>
+                    <h3>Compound Interest Calculator</h3>
+                    <p class="calculator-description">Calculate investment growth with compound interest across different compounding frequencies. See how interest on interest accelerates wealth accumulation dramatically over time compared to simple interest.</p>
+                    <a href="https://advaitpatel69-beep.github.io/Advait.github.io/simple-compound-interest-calculator.html" class="calculator-link">Calculate Compound Interest →</a>
+                </div>
+<!--
+                <div class="calculator-card">
+                    <span class="calculator-icon">🔢</span>
+                    <h3>Effective Interest Rate Calculator</h3>
+                    <p class="calculator-description">Convert nominal interest rate to effective annual rate considering compounding frequency. Understand the true cost of loans or true yield of investments beyond advertised rates.</p>
+                    <a href="/effective-interest-calculator" class="calculator-link">Calculate Effective Rate →</a>
+                </div>
+
+                <div class="calculator-card">
+                    <span class="calculator-icon">🔄</span>
+                    <h3>Interest Rate Comparison Calculator</h3>
+                    <p class="calculator-description">Compare multiple interest rate scenarios side-by-side with different compounding methods. Evaluate which savings account, investment, or loan option provides better value over your timeline.</p>
+                    <a href="/interest-comparison-calculator" class="calculator-link">Compare Interest Rates →</a>
+                </div>
+
+                <div class="calculator-card">
+                    <span class="calculator-icon">⏱️</span>
+                    <h3>Time Period Calculator</h3>
+                    <p class="calculator-description">Determine how long it takes to reach a financial goal with given principal, interest rate, and target amount. Plan investment timelines or loan payoff schedules accurately.</p>
+                    <a href="/time-period-calculator" class="calculator-link">Calculate Time Period →</a>
+                </div>
+
+                <div class="calculator-card">
+                    <span class="calculator-icon">💵</span>
+                    <h3>Principal Amount Calculator</h3>
+                    <p class="calculator-description">Calculate required initial investment to reach a target maturity amount given interest rate and time period. Reverse-engineer savings goals to determine starting amount needed.</p>
+                    <a href="/principal-calculator" class="calculator-link">Calculate Principal →</a>
+                </div>
+
+                <div class="calculator-card">
+                    <span class="calculator-icon">📊</span>
+                    <h3>APR Calculator</h3>
+                    <p class="calculator-description">Calculate Annual Percentage Rate including fees, charges, and compounding to understand true borrowing cost. Essential for comparing credit cards, personal loans, and mortgage offers accurately.</p>
+                    <a href="/apr-calculator" class="calculator-link">Calculate APR →</a>
+                </div>
+
+                <div class="calculator-card">
+                    <span class="calculator-icon">💳</span>
+                    <h3>Credit Card Interest Calculator</h3>
+                    <p class="calculator-description">Calculate daily compounding interest on credit card balances and see how minimum payments extend debt duration. Understand true cost of carrying credit card debt month-to-month.</p>
+                    <a href="/credit-card-interest-calculator" class="calculator-link">Calculate CC Interest →</a>
+                </div>
+
+                <div class="calculator-card">
+                    <span class="calculator-icon">🎯</span>
+                    <h3>Rule of 72 Calculator</h3>
+                    <p class="calculator-description">Quickly estimate how long it takes to double your investment at a given interest rate using the Rule of 72. Simple mental math tool for investment doubling time approximation.</p>
+                    <a href="/rule-of-72-calculator" class="calculator-link">Calculate Doubling Time →</a>
+                </div>
+
+                <div class="calculator-card">
+                    <span class="calculator-icon">📉</span>
+                    <h3>Declining Balance Calculator</h3>
+                    <p class="calculator-description">Calculate interest on reducing or declining balance used in most loans where interest is charged only on outstanding principal. Compare with flat rate interest to understand cost differences.</p>
+                    <a href="/declining-balance-calculator" class="calculator-link">Calculate Declining Interest →</a>
+                </div>
+
+                <div class="calculator-card">
+                    <span class="calculator-icon">🔁</span>
+                    <h3>Continuous Compounding Calculator</h3>
+                    <p class="calculator-description">Calculate returns with continuous compounding (mathematical limit of infinite compounding frequency). Understand maximum theoretical growth rate and compare with daily compounding.</p>
+                    <a href="/continuous-compounding-calculator" class="calculator-link">Calculate Continuous →</a>
+                </div>
+
+                <div class="calculator-card">
+                    <span class="calculator-icon">💰</span>
+                    <h3>Interest Income Calculator</h3>
+                    <p class="calculator-description">Estimate monthly or annual interest income from savings accounts, FDs, bonds, and other fixed-income investments. Plan passive income streams and retirement cash flow requirements.</p>
+                    <a href="/interest-income-calculator" class="calculator-link">Calculate Interest Income →</a>
+                </div>
+-->
+            </div>           
+        </section>
+
+        <section class="related-section">
+            <h2>Explore Related Financial Tools</h2>
+            <p>Interest calculations are foundational to both saving and borrowing decisions. Apply interest knowledge to real investments using our <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/investment/investment-hub.html">Investment Calculators</a> for FDs, RDs, SIPs, and mutual funds with compound interest growth. Understanding loan interest is equally crucial, so explore <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/loan/loan-hub.html">Loan Calculators</a> to see how interest rates affect EMI, total repayment, and prepayment benefits on mortgages and personal loans.</p>
+            <p>Build systematic savings habits with <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/saving-retirement/saving-retirement-hub.html">Savings Calculators</a> that demonstrate how regular deposits grow through compound interest over time. Plan for debt-free retirement using <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/saving-retirement/saving-retirement-hub.html">Retirement Calculators</a> that factor interest earnings on pension corpus and withdrawal rates. Don't forget tax implications—visit <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/tax/tax-hub.html">Tax Calculators</a> to understand how interest income is taxed and optimize tax-saving investments. Return to the <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/finance-hub.html">Finance Calculators Hub</a> to explore all available financial planning tools.</p>
+        </section>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/index.html">Home</a></li>
+               	    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/about.html">About</a></li>
+               	    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/contact.html">Contact</a></li>
+               	    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/privacy-policy.html">Privacy Policy</a></li>
+
+                </ul>
+            </div>
+
+			<div class="footer-section">
+                <h3>Student Tools</h3>
+                <ul>
+					<li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/percentage-calculator.html">Percentage Calculator</a></li>
+					<li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/cgpa-calculator.html">CGPA Calculator</a></li>
+      				<li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/simple-compound-interest-calculator.html">Simple & Compound Interest Calculator</a></li>
+                
+                    <li><span class="coming-soon">MATRIX Calculator (Coming Soon)</span></li>
+                    <li><span class="coming-soon">STATISTIC Calculator (Coming Soon)</span></li>
+                </ul>
+            </div>
+
+			
+            <div class="footer-section">
+                <h3>Finance Tools</h3>
+                <ul>
+		            <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/interest/interest-hub.html">Interest Calculators</a></li>
+		            <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/investment/investment-hub.html">Investment Calculators</a></li>
+                    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/loan/loan-hub.html">Loan Calculators</a></li>
+                    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/tax/tax-hub.html">Tax Calculators</a></li>
+                    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/saving-retirement/saving-retirement-hub.html">Savings Calculators</a></li>
+                    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/saving-retirement/saving-retirement-hub.html">Retirement Calculators</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <div class="disclaimer">
+                    <strong>Disclaimer:</strong> The results provided by this calculator are estimates for informational purposes only. 
+                    Actual loan terms may vary. Please consult with your financial institution for accurate loan details.
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; Student Helper Tools. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById('mobileNav').classList.toggle('active');
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('hamburgerBtn').addEventListener('click', toggleMenu);
+        });
+    </script>
+</body>
+</html>
