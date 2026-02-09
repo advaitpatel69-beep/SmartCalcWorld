@@ -1,0 +1,1561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/png" href="https://advaitpatel69-beep.github.io/Advait.github.io/favicon.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculate Fixed Deposit maturity amount and interest returns with our free FD calculator. Compare cumulative vs non-cumulative FD returns instantly.">
+    <link rel="canonical" href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/investment/finance-fd-calculator.html">
+    <title>FD Calculator – Fixed Deposit Maturity & Interest Calculator</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js" defer></script>
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is my money safe in a Fixed Deposit?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Fixed Deposits are considered one of the safest investment options. In many countries, bank deposits are insured up to a certain limit by government agencies (like FDIC in the US or deposit insurance corporations in other countries). This means even if the bank fails, your principal amount up to the insured limit is protected. However, FDs are subject to the creditworthiness of the issuing bank, so it's wise to choose reputable, well-rated financial institutions."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens if I withdraw my FD before maturity?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Premature withdrawal of FDs is generally allowed but comes with penalties. Banks typically charge a penalty of 0.5% to 1% on the applicable interest rate, and you'll receive interest only for the period your deposit was held, calculated at a lower rate than originally agreed. Some banks offer special FDs without premature withdrawal facility at higher interest rates. Always check the terms and conditions regarding early withdrawal before investing."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Should I choose quarterly or monthly compounding?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "More frequent compounding results in higher returns due to the power of compound interest. Monthly compounding will give you better returns than quarterly, which is better than half-yearly or annual compounding. However, the difference may be marginal for shorter tenures or lower amounts. For cumulative FDs where interest is reinvested, choose the highest compounding frequency available (usually monthly or quarterly). For non-cumulative FDs where you receive regular interest payouts, compounding frequency affects how often you receive payments."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What's the difference between cumulative and non-cumulative FD?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Cumulative FDs reinvest the interest earned back into the principal, allowing your money to grow through compound interest. You receive the entire maturity amount (principal plus accumulated interest) at the end of the tenure. Non-cumulative FDs pay out interest at regular intervals (monthly, quarterly, or annually) and return only the principal at maturity. Cumulative FDs generate higher overall returns due to compounding, while non-cumulative FDs provide regular income, making them suitable for retirees or those needing steady cash flow."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much return can I expect from a Fixed Deposit?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "FD returns vary based on economic conditions, central bank policies, and individual bank rates. Typically, FD interest rates range from 3% to 8% per annum, with senior citizens often receiving an additional 0.25% to 0.75%. Longer tenure FDs usually offer higher rates. While FD returns are lower than equity or mutual funds, they provide guaranteed returns with minimal risk. The effective annual yield (EAY) will be higher than the nominal rate when interest is compounded frequently."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the ideal tenure for a Fixed Deposit?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The ideal FD tenure depends on your financial goals and liquidity needs. Longer tenures (3-5 years) typically offer higher interest rates but lock your money for extended periods. Shorter tenures (6-12 months) provide more liquidity and flexibility to reinvest at potentially higher rates if interest rates rise. Consider FD laddering – splitting your investment across multiple FDs with different maturity dates – to balance returns and liquidity. This strategy ensures you have regular access to maturing funds while maintaining long-term deposits at higher rates."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are FD returns taxable?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, interest earned on Fixed Deposits is generally taxable as per your income tax bracket in most countries. Banks typically deduct tax at source (TDS) if your total interest income exceeds certain thresholds during a financial year. Some countries offer tax-saving FD schemes with specific lock-in periods where you can claim deductions on the principal amount invested, up to specified limits. However, the interest earned is still taxable. Consult with a tax advisor to understand the tax implications based on your country's regulations and your individual tax situation."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I take a loan against my Fixed Deposit?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, most banks allow you to take a loan or overdraft facility against your Fixed Deposit. Typically, you can borrow up to 75-90% of the FD value at an interest rate slightly higher (1-2%) than your FD rate. This option is beneficial during emergencies as it provides liquidity without breaking the FD and losing interest. The FD continues to earn interest while you pay interest on the loan amount utilized. It's a smarter alternative to premature withdrawal when you need funds temporarily."
+          }
+        }
+      ]
+    }
+    </script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f7fa;
+        }
+
+        header {
+            background: linear-gradient(135deg, #0f766e 0%, #059669 100%);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .site-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+
+        nav a:hover {
+            opacity: 0.8;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+            background: none;
+            border: none;
+            padding: 0;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            border-radius: 3px;
+            transition: 0.3s;
+        }
+
+        .mobile-nav {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: #0f766e;
+            flex-direction: column;
+            padding: 1rem;
+            gap: 1rem;
+        }
+
+        .mobile-nav.active {
+            display: flex;
+        }
+
+        .mobile-nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .mobile-nav a:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #2d3748;
+            margin-bottom: 1rem;
+        }
+
+        .intro {
+            font-size: 1.1rem;
+            color: #4a5568;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .calculator-section {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+            margin-bottom: 3rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        input[type="number"],
+        input[type="range"],
+        select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        input[type="number"]:focus,
+        select:focus {
+            outline: none;
+            border-color: #059669;
+        }
+
+        input[type="range"] {
+            padding: 0;
+            height: 8px;
+            background: #e2e8f0;
+            border: none;
+            cursor: pointer;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: #059669;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+
+        input[type="range"]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            background: #059669;
+            cursor: pointer;
+            border-radius: 50%;
+            border: none;
+        }
+
+        .input-slider-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .slider-container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .slider-value {
+            font-size: 0.9rem;
+            color: #059669;
+            font-weight: 600;
+            margin-top: 0.25rem;
+        }
+
+        .tenure-group {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 1rem;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .radio-group label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .radio-group input[type="radio"] {
+            width: auto;
+            cursor: pointer;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        button {
+            flex: 1;
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-calculate {
+            background: linear-gradient(135deg, #0f766e 0%, #059669 100%);
+            color: white;
+        }
+
+        .btn-reset {
+            background: #e2e8f0;
+            color: #4a5568;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .results {
+            background: linear-gradient(135deg, #0f766e 0%, #059669 100%);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 2rem;
+            color: white;
+            display: none;
+        }
+
+        .results.active {
+            display: block;
+        }
+
+        .result-item {
+            background: rgba(255,255,255,0.1);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .result-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .result-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+
+        .result-value {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .charts-section {
+            display: none;
+            margin-top: 3rem;
+        }
+
+        .charts-section.active {
+            display: block;
+        }
+
+        .chart-container {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+            margin-bottom: 2rem;
+        }
+
+        .chart-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .chart-wrapper {
+            position: relative;
+            height: 300px;
+        }
+
+        .breakdown-section {
+            display: none;
+            margin-top: 2rem;
+        }
+
+        .breakdown-section.active {
+            display: block;
+        }
+
+        .table-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .export-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-export {
+            padding: 0.5rem 1rem;
+            background: #0f766e;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn-export:hover {
+            background: #059669;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background: linear-gradient(135deg, #0f766e 0%, #059669 100%);
+            color: white;
+        }
+
+        th {
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        tbody tr:hover {
+            background: #f7fafc;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .content-section {
+            background: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+            margin-top: 3rem;
+        }
+
+        .content-section h2 {
+            font-size: 2rem;
+            color: #2d3748;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid #059669;
+            padding-left: 1rem;
+        }
+
+        .content-section h3 {
+            font-size: 1.5rem;
+            color: #2d3748;
+            margin: 2rem 0 1rem;
+        }
+
+        .content-section p {
+            margin-bottom: 1rem;
+            color: #4a5568;
+            line-height: 1.8;
+        }
+
+        .content-section ul {
+            margin: 1rem 0 1rem 2rem;
+            color: #4a5568;
+        }
+
+        .content-section li {
+            margin-bottom: 0.5rem;
+            line-height: 1.8;
+        }
+
+        .faq-section {
+            margin-top: 3rem;
+        }
+
+        .faq-item {
+            background: #f7fafc;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .faq-question {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 0.75rem;
+        }
+
+        .faq-answer {
+            color: #4a5568;
+            line-height: 1.8;
+        }
+
+        footer {
+            background: #2d3748;
+            color: white;
+            padding: 3rem 0 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: #cbd5e0;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .disclaimer {
+            background: rgba(0,0,0,0.2);
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: #cbd5e0;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #cbd5e0;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .intro {
+                font-size: 1rem;
+            }
+
+            .calculator-section {
+                padding: 1.5rem;
+            }
+
+            .input-slider-group {
+                grid-template-columns: 1fr;
+            }
+
+            .tenure-group {
+                grid-template-columns: 1fr;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            .result-value {
+                font-size: 1.5rem;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .chart-wrapper {
+                height: 250px;
+            }
+
+            .table-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+            th, td {
+                padding: 0.75rem 0.5rem;
+                font-size: 0.9rem;
+            }
+
+            .content-section {
+                padding: 1.5rem;
+            }
+
+            .content-section h2 {
+                font-size: 1.5rem;
+            }
+
+            .content-section h3 {
+                font-size: 1.2rem;
+            }
+        }
+
+        .calculator-link {
+            display: block;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #f6f8fb 0%, #e9ecef 100%);
+            border-radius: 8px;
+            text-decoration: none;
+            color: #2d3748;
+            font-weight: 600;
+            text-align: left;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .calculator-link:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="site-title">💰 Finance Calculators</div>
+            <nav>
+                <a href="https://advaitpatel69-beep.github.io/Advait.github.io/index.html">Home</a>
+
+                <span class="nav-disabled">Student Calculators (Coming Soon)</span>
+                <span class="nav-disabled">Medical Calculators (Coming Soon)</span>
+                <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/finance-hub.html">Finance Calculators</a>
+            </nav>
+            <div class="hamburger" id="hamburgerBtn" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        <div class="mobile-nav" id="mobileNav">
+            <a href="https://advaitpatel69-beep.github.io/Advait.github.io/index.html">Home</a>
+
+            <span class="nav-disabled">Student Calculators (Coming Soon)</span>
+            <span class="nav-disabled">Medical Calculators (Coming Soon)</span>
+            <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/finance-hub.html">Finance Calculators</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="hero">
+            <h1>📊 Fixed Deposit Calculator</h1>
+            <p class="intro">Calculate your FD maturity amount, interest earnings, and compare cumulative vs non-cumulative returns instantly. Make informed investment decisions with accurate projections.</p>
+        </div>
+
+        <div class="calculator-section" id="calculator">
+
+            <div class="form-group">
+                <label for="currency">Currency</label>
+                <select id="currency">
+                    <option value="INR">🇮🇳 Indian Rupee (₹)</option>
+                    <option value="USD">🇺🇸 US Dollar ($)</option>
+                    <option value="EUR">🇪🇺 Euro (€)</option>
+                    <option value="GBP">🇬🇧 British Pound (£)</option>
+                    <option value="JPY">🇯🇵 Japanese Yen (¥)</option>
+                    <option value="AUD">🇦🇺 Australian Dollar (A$)</option>
+                    <option value="CAD">🇨🇦 Canadian Dollar (C$)</option>
+                    <option value="CHF">🇨🇭 Swiss Franc (CHF)</option>
+                    <option value="CNY">🇨🇳 Chinese Yuan (¥)</option>
+                    <option value="SGD">🇸🇬 Singapore Dollar (S$)</option>
+                    <option value="AED">🇦🇪 UAE Dirham (AED)</option>
+                    <option value="SAR">🇸🇦 Saudi Riyal (SR)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="depositAmount">Deposit Amount</label>
+                <div class="input-slider-group">
+                    <input type="number" id="depositAmount" placeholder="Enter deposit amount" min="1000" step="1000">
+                    <div class="slider-container">
+                        <input type="range" id="depositSlider" min="1000" max="10000000" step="1000" value="100000">
+                        <div class="slider-value" id="depositSliderValue">₹1,00,000</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="interestRate">Annual Interest Rate (%)</label>
+                <div class="input-slider-group">
+                    <input type="number" id="interestRate" placeholder="Enter interest rate" min="0.1" max="20" step="0.1">
+                    <div class="slider-container">
+                        <input type="range" id="rateSlider" min="1" max="15" step="0.1" value="7">
+                        <div class="slider-value" id="rateSliderValue">7.0%</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="tenure">Tenure</label>
+                <div class="tenure-group">
+                    <div class="input-slider-group">
+                        <input type="number" id="tenure" placeholder="Enter tenure" min="1" step="1">
+                        <div class="slider-container">
+                            <input type="range" id="tenureSlider" min="1" max="120" step="1" value="12">
+                            <div class="slider-value" id="tenureSliderValue">12 Months</div>
+                        </div>
+                    </div>
+                    <select id="tenureType">
+                        <option value="months">Months</option>
+                        <option value="years">Years</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="compoundingFreq">Compounding Frequency</label>
+                <select id="compoundingFreq">
+                    <option value="12">Monthly (12 times/year)</option>
+                    <option value="4" selected>Quarterly (4 times/year)</option>
+                    <option value="2">Half-Yearly (2 times/year)</option>
+                    <option value="1">Annually (1 time/year)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Interest Type</label>
+                <div class="radio-group">
+                    <label>
+                        <input type="radio" name="interestType" value="cumulative" checked>
+                        Cumulative (Reinvested)
+                    </label>
+                    <label>
+                        <input type="radio" name="interestType" value="non-cumulative">
+                        Non-Cumulative (Payout)
+                    </label>
+                </div>
+            </div>
+
+            <div class="button-group">
+                <button class="btn-calculate" id="calculateBtn">Calculate Returns</button>
+                <button class="btn-reset" id="resetBtn">Reset</button>
+            </div>
+
+            <div class="results" id="results">
+                <div class="result-item">
+                    <div class="result-label">Principal Amount</div>
+                    <div class="result-value" id="principalValue">₹0.00</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Total Interest Earned</div>
+                    <div class="result-value" id="interestValue">₹0.00</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Maturity Amount</div>
+                    <div class="result-value" id="maturityValue">₹0.00</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Effective Annual Yield (EAY)</div>
+                    <div class="result-value" id="eayValue">0.00%</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="charts-section" id="chartsSection">
+            <div class="chart-container">
+                <h3 class="chart-title">📈 Investment Growth Over Time</h3>
+                <div class="chart-wrapper">
+                    <canvas id="growthChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="breakdown-section" id="breakdownSection">
+            <div class="chart-container">
+                <div class="table-header">
+                    <h3 class="chart-title">📋 Year-wise Breakdown</h3>
+                    <div class="export-buttons">
+                        <button class="btn-export" id="exportCsvBtn">Download CSV</button>
+                        <button class="btn-export" id="exportPdfBtn">Download PDF</button>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table id="breakdownTable">
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th>Opening Balance</th>
+                                <th>Interest Earned</th>
+                                <th>Closing Balance</th>
+                            </tr>
+                        </thead>
+                        <tbody id="breakdownTableBody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section" id="guide">
+            <h2>💡 Understanding Fixed Deposits - Complete Guide</h2>
+            
+            <h3>What is a Fixed Deposit? 🏦</h3>
+            <p>A Fixed Deposit (FD), also known as a term deposit, is a financial instrument offered by banks and financial institutions where you deposit a lump sum amount for a predetermined period at a fixed interest rate. Unlike savings accounts where you can withdraw money anytime, FDs lock your money for the agreed tenure, offering higher interest rates in return for this commitment. 😊</p>
+            
+            <p>Fixed Deposits are considered one of the safest investment options because they provide guaranteed returns regardless of market fluctuations. When you open an FD, you know exactly how much money you'll receive at maturity, making them ideal for conservative investors and those seeking predictable returns. The interest rate is predetermined and doesn't change during the deposit period, protecting you from interest rate volatility. 📈</p>
+
+            <h3>How Does FD Interest Work? 💰</h3>
+            <p>FD interest is calculated using the compound interest formula: A = P × (1 + r/n)^(n×t), where A is the maturity amount, P is the principal, r is the annual interest rate (as a decimal), n is the compounding frequency per year, and t is the tenure in years. This mathematical formula ensures you earn interest not just on your principal but also on previously earned interest that gets added back to your deposit.</p>
+
+            <p>For example, if you deposit ₹1,00,000 at 7% annual interest compounded quarterly for 2 years, the calculation works as follows: r = 7/100 = 0.07, n = 4 (quarterly), t = 2 years. So A = 100,000 × (1 + 0.07/4)^(4×2) = 100,000 × (1.0175)^8 = ₹1,14,868. Your interest earned would be ₹14,868, which is higher than simple interest of ₹14,000 due to the power of compounding. 💪</p>
+
+            <h3>Impact of Compounding Frequency 🔄</h3>
+            <p>Compounding frequency significantly affects your returns. The more frequently interest is compounded, the higher your effective returns. Here's how different compounding frequencies impact a ₹1,00,000 deposit at 7% for 5 years:</p>
+            
+            <ul>
+                <li><strong>Annual Compounding:</strong> ₹1,40,255 (Interest: ₹40,255)</li>
+                <li><strong>Half-Yearly Compounding:</strong> ₹1,41,060 (Interest: ₹41,060)</li>
+                <li><strong>Quarterly Compounding:</strong> ₹1,41,478 (Interest: ₹41,478)</li>
+                <li><strong>Monthly Compounding:</strong> ₹1,41,787 (Interest: ₹41,787)</li>
+            </ul>
+
+            <p>As you can see, monthly compounding gives you ₹1,532 more than annual compounding on the same principal, rate, and tenure. Always choose the highest compounding frequency available to maximize your returns! 📊</p>
+
+            <h3>Cumulative vs Non-Cumulative Fixed Deposits 🎯</h3>
+            <p><strong>Cumulative FDs (Reinvestment Option):</strong> In cumulative FDs, the interest earned is not paid out but reinvested back into the principal. This creates a compounding effect where you earn interest on your interest, resulting in higher overall returns. The entire maturity amount (principal plus accumulated interest) is paid at the end of the tenure. Cumulative FDs are ideal for wealth accumulation and long-term financial goals where you don't need regular income. 💎</p>
+
+            <p><strong>Non-Cumulative FDs (Payout Option):</strong> Non-cumulative FDs pay out interest at regular intervals – monthly, quarterly, half-yearly, or annually, as per your choice. The principal amount remains constant, and only the interest earned during each period is paid out. At maturity, you receive only the principal back. While total returns are lower than cumulative FDs due to lack of compounding, non-cumulative FDs provide regular income streams, making them perfect for retirees or anyone needing steady cash flow. 💵</p>
+
+            <p>Example comparison: ₹5,00,000 at 7% for 3 years with quarterly compounding – Cumulative FD maturity: ₹6,15,394 (interest ₹1,15,394), while Non-cumulative FD with quarterly payout gives ₹1,05,000 interest distributed as regular payouts plus ₹5,00,000 principal at maturity. The cumulative option yields ₹10,394 more! 🎉</p>
+
+            <h3>Benefits of Fixed Deposits ✅</h3>
+            <ul>
+                <li><strong>Guaranteed Returns:</strong> Unlike stocks or mutual funds, FDs offer predetermined returns that don't depend on market performance, ensuring capital safety and predictable income. 🛡️</li>
+                <li><strong>Low Risk:</strong> FDs are among the safest investments, especially when held with reputable banks, and many countries provide deposit insurance protection up to certain limits. 🔒</li>
+                <li><strong>Flexible Tenures:</strong> Choose from 7 days to 10 years based on your financial goals and liquidity needs, allowing customization to your specific timeline. ⏰</li>
+                <li><strong>Regular Income Option:</strong> Non-cumulative FDs provide periodic interest payouts for those needing regular income without touching the principal. 💸</li>
+                <li><strong>Loan Facility:</strong> Most banks allow you to take loans or overdrafts against your FD (typically 75-90% of FD value) at competitive interest rates, providing liquidity without breaking the deposit. 🏦</li>
+                <li><strong>Senior Citizen Benefits:</strong> Banks typically offer additional interest of 0.25% to 0.75% for senior citizens, enhancing retirement income. 👵👴</li>
+            </ul>
+
+            <h3>Limitations to Consider ⚠️</h3>
+            <ul>
+                <li><strong>Lower Returns:</strong> FD returns are typically lower than equity investments or mutual funds over long periods, making them less suitable for aggressive wealth creation goals. 📉</li>
+                <li><strong>Liquidity Constraints:</strong> Premature withdrawal attracts penalties (usually 0.5-1% reduction in interest rate), reducing flexibility compared to savings accounts. 🔐</li>
+                <li><strong>Tax Implications:</strong> Interest earned is fully taxable at your income tax slab rate, and banks deduct TDS if annual interest exceeds threshold limits. 📝</li>
+                <li><strong>Inflation Risk:</strong> If FD returns don't beat inflation, your purchasing power decreases over time despite nominal gains. 📊</li>
+                <li><strong>Opportunity Cost:</strong> Money locked in FDs can't be used for potentially higher-returning opportunities that may arise during the tenure. 💭</li>
+            </ul>
+
+            <h3>FD vs Other Investment Options 🔍</h3>
+            <p><strong>FD vs Savings Account:</strong> Savings accounts offer complete liquidity but lower interest rates (typically 3-4%), while FDs provide 1-3% higher returns but lock your money. Use savings accounts for emergency funds and short-term needs, and FDs for funds you won't need in the near term. 🏧</p>
+
+            <p><strong>FD vs Recurring Deposit (RD):</strong> RDs require monthly installments whereas FDs need a lump sum investment. RDs suit salaried individuals building corpus through regular savings, while FDs work better when you have a lump sum to invest. Interest rates are usually similar. 💼</p>
+
+            <p><strong>FD vs Debt Mutual Funds:</strong> Debt mutual funds offer potentially higher returns and better tax efficiency for investments over 3 years, but carry market risk. FDs provide guaranteed returns without market exposure. Choose FDs for capital safety; debt funds for potentially higher post-tax returns. 📈</p>
+
+            <p><strong>FD vs Stocks/Equity Mutual Funds:</strong> Equity investments offer much higher long-term returns (historically 12-15% annually) but with significant volatility and risk. FDs provide stability with modest returns. A balanced portfolio often includes both – FDs for stability and equity for growth. 🎯</p>
+
+            <h3>Who Should Invest in Fixed Deposits? 👥</h3>
+            <p>Fixed Deposits are ideal for conservative investors who prioritize capital protection over high returns. If you're risk-averse and uncomfortable with market volatility, FDs provide peace of mind with guaranteed returns. Senior citizens benefit greatly from FDs due to additional interest rates and the availability of non-cumulative options for regular income. 😊</p>
+
+            <p>FDs are also excellent for short to medium-term goals (6 months to 5 years) like accumulating a down payment for a house, planning a wedding, or saving for a vacation. The fixed maturity date helps you plan expenses better. Additionally, FDs serve as a safe parking space for emergency funds beyond what you keep in savings accounts, earning higher interest while remaining relatively accessible through the loan facility. 🎯</p>
+
+            <h3>FD Laddering Strategy 🪜</h3>
+            <p>FD laddering is a smart strategy where you split your investment across multiple FDs with different maturity dates instead of putting all your money in one FD. For example, instead of investing ₹5,00,000 in a single 5-year FD, you could invest ₹1,00,000 each in 1-year, 2-year, 3-year, 4-year, and 5-year FDs. This approach provides several benefits:</p>
+
+            <ul>
+                <li>Regular liquidity as one FD matures each year, which you can reinvest or use as needed 💰</li>
+                <li>Protection against interest rate fluctuations – if rates increase, you can reinvest maturing FDs at higher rates ⬆️</li>
+                <li>Balance between high returns (from longer-tenure FDs) and liquidity (from shorter-tenure FDs) ⚖️</li>
+                <li>Reduced temptation for premature withdrawal since you have regular access to maturing funds 🔓</li>
+            </ul>
+
+            <p>FD laddering is particularly useful in uncertain interest rate environments and helps you optimize returns while maintaining financial flexibility. 🎪</p>
+
+            <h3>Risk and Safety Aspects 🛡️</h3>
+            <p>While FDs are among the safest investments, it's important to understand the risk factors. Bank FDs are backed by the bank's creditworthiness, so choosing financially stable, well-rated banks is crucial. In many countries, deposit insurance schemes protect your principal up to certain limits (for example, ₹5 lakh per bank in India, $250,000 per depositor in the USA) even if the bank fails. 🏦</p>
+
+            <p>However, FDs are not entirely risk-free. Inflation risk is real – if your FD earns 6% but inflation is 7%, your real returns are negative, meaning your purchasing power decreases. Interest rate risk affects FD investors when rates rise after you lock in your deposit; your money is stuck at lower rates while new FDs offer better returns. This is where the laddering strategy helps mitigate risk. 📊</p>
+
+            <p>Corporate FDs offered by companies typically provide 1-2% higher interest than bank FDs but carry higher risk as they're not covered by deposit insurance and depend on the company's financial health. Only invest in corporate FDs from highly-rated companies (AAA or AA+ ratings) and diversify across multiple issuers. 🏢</p>
+
+            <h3>Understanding Taxation (General Concepts) 📋</h3>
+            <p>Interest earned on Fixed Deposits is typically considered income and taxed according to your tax bracket in most countries. This reduces your effective returns, especially for higher income earners. For instance, if you're in the 30% tax bracket and earn 7% on your FD, your post-tax return is only 4.9%. This makes tax-efficient alternatives like certain bonds or equity investments more attractive for high-income individuals over longer periods. 💵</p>
+
+            <p>Banks usually deduct Tax Deducted at Source (TDS) if your annual interest income exceeds threshold limits (varies by country and regulations). You can submit forms to prevent TDS deduction if your total income is below taxable limits. Some countries offer tax-saving FD schemes with specific lock-in periods where you can claim deductions on the principal invested, though interest remains taxable. 📝</p>
+
+            <p>To optimize tax efficiency, consider splitting FD investments between family members in lower tax brackets, comparing post-tax returns with tax-free or tax-efficient instruments, and timing FD maturity to span across financial years to spread tax liability. Always consult a tax advisor to understand specific implications based on your country's tax laws and personal situation. 👨‍💼</p>
+
+            <h3>Making the Most of Your FD Investment 🎯</h3>
+            <p>To maximize returns from Fixed Deposits, compare interest rates across multiple banks as rates can vary significantly. Look for special promotions or higher rates for specific tenures. Choose the longest tenure you're comfortable with since longer tenures usually offer higher rates, but use laddering to maintain some liquidity. 🔍</p>
+
+            <p>Opt for cumulative FDs and the highest compounding frequency (monthly if available) to leverage the power of compound interest. Time your FD investments when interest rates are high or rising rather than when they're declining. Consider automatic renewal with interest payout if you're in non-cumulative mode to ensure you don't miss reinvestment opportunities. 🔄</p>
+
+            <p>Lastly, maintain a diversified portfolio – don't put all your savings in FDs. Use FDs as a stable foundation but include other instruments like equity mutual funds for growth, ensuring your overall portfolio matches your risk tolerance and financial goals. Remember, FDs are tools for capital preservation and modest growth, not aggressive wealth creation! 🌟</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Explore More Calculators</h2>
+            <div class="calculator-links">
+                <a  href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/finance-sip-calculator.html" class="calculator-link">👉 Compare Fixed Deposit returns with long-term SIP investments using our <strong>SIP Calculator</strong>.</a>
+                <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/investment/finance-rd-calculator.html" class="calculator-link">👉 See how monthly savings grow over time with our <strong>Recurring Deposit (RD) Calculator</strong>.</a>
+                <a href="https://advaitpatel69-beep.github.io/Advait.github.io/simple-compound-interest-calculator.html" class="calculator-link">👉 Understand how compound interest affects your FD maturity using this <strong>Compound Interest Calculator</strong>.</a>
+                <a href="https://advaitpatel69-beep.github.io/Advait.github.io/simple-compound-interest-calculator.html" class="calculator-link">👉 Calculate returns without compounding using our <strong>Simple Interest Calculator</strong>.</a>
+                <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/investment/investment-hub.html" class="calculator-link">👉 Explore more investment planning tools in our <strong>Investment Calculators</strong> section.</a>
+            </div>
+        </div>
+
+        <div class="content-section faq-section" id="faq">
+            <h2>❓ Frequently Asked Questions</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">Is my money safe in a Fixed Deposit?</div>
+                <div class="faq-answer">Fixed Deposits are considered one of the safest investment options. In many countries, bank deposits are insured up to a certain limit by government agencies (like FDIC in the US or deposit insurance corporations in other countries). This means even if the bank fails, your principal amount up to the insured limit is protected. However, FDs are subject to the creditworthiness of the issuing bank, so it's wise to choose reputable, well-rated financial institutions.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">What happens if I withdraw my FD before maturity?</div>
+                <div class="faq-answer">Premature withdrawal of FDs is generally allowed but comes with penalties. Banks typically charge a penalty of 0.5% to 1% on the applicable interest rate, and you'll receive interest only for the period your deposit was held, calculated at a lower rate than originally agreed. Some banks offer special FDs without premature withdrawal facility at higher interest rates. Always check the terms and conditions regarding early withdrawal before investing.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Should I choose quarterly or monthly compounding?</div>
+                <div class="faq-answer">More frequent compounding results in higher returns due to the power of compound interest. Monthly compounding will give you better returns than quarterly, which is better than half-yearly or annual compounding. However, the difference may be marginal for shorter tenures or lower amounts. For cumulative FDs where interest is reinvested, choose the highest compounding frequency available (usually monthly or quarterly). For non-cumulative FDs where you receive regular interest payouts, compounding frequency affects how often you receive payments.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">What's the difference between cumulative and non-cumulative FD?</div>
+                <div class="faq-answer">Cumulative FDs reinvest the interest earned back into the principal, allowing your money to grow through compound interest. You receive the entire maturity amount (principal plus accumulated interest) at the end of the tenure. Non-cumulative FDs pay out interest at regular intervals (monthly, quarterly, or annually) and return only the principal at maturity. Cumulative FDs generate higher overall returns due to compounding, while non-cumulative FDs provide regular income, making them suitable for retirees or those needing steady cash flow.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">How much return can I expect from a Fixed Deposit?</div>
+                <div class="faq-answer">FD returns vary based on economic conditions, central bank policies, and individual bank rates. Typically, FD interest rates range from 3% to 8% per annum, with senior citizens often receiving an additional 0.25% to 0.75%. Longer tenure FDs usually offer higher rates. While FD returns are lower than equity or mutual funds, they provide guaranteed returns with minimal risk. The effective annual yield (EAY) will be higher than the nominal rate when interest is compounded frequently.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">What is the ideal tenure for a Fixed Deposit?</div>
+                <div class="faq-answer">The ideal FD tenure depends on your financial goals and liquidity needs. Longer tenures (3-5 years) typically offer higher interest rates but lock your money for extended periods. Shorter tenures (6-12 months) provide more liquidity and flexibility to reinvest at potentially higher rates if interest rates rise. Consider FD laddering – splitting your investment across multiple FDs with different maturity dates – to balance returns and liquidity. This strategy ensures you have regular access to maturing funds while maintaining long-term deposits at higher rates.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Are FD returns taxable?</div>
+                <div class="faq-answer">Yes, interest earned on Fixed Deposits is generally taxable as per your income tax bracket in most countries. Banks typically deduct tax at source (TDS) if your total interest income exceeds certain thresholds during a financial year. Some countries offer tax-saving FD schemes with specific lock-in periods where you can claim deductions on the principal amount invested, up to specified limits. However, the interest earned is still taxable. Consult with a tax advisor to understand the tax implications based on your country's regulations and your individual tax situation.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Can I take a loan against my Fixed Deposit?</div>
+                <div class="faq-answer">Yes, most banks allow you to take a loan or overdraft facility against your Fixed Deposit. Typically, you can borrow up to 75-90% of the FD value at an interest rate slightly higher (1-2%) than your FD rate. This option is beneficial during emergencies as it provides liquidity without breaking the FD and losing interest. The FD continues to earn interest while you pay interest on the loan amount utilized. It's a smarter alternative to premature withdrawal when you need funds temporarily.</div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/index.html">Home</a></li>
+               	    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/about.html">About</a></li>
+               	    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/contact.html">Contact</a></li>
+               	    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/privacy-policy.html">Privacy Policy</a></li>
+
+                </ul>
+            </div>
+
+			<div class="footer-section">
+                <h3>Student Tools</h3>
+                <ul>
+					<li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/percentage-calculator.html">Percentage Calculator</a></li>
+					<li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/cgpa-calculator.html">CGPA Calculator</a></li>
+      				<li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/simple-compound-interest-calculator.html">Simple & Compound Interest Calculator</a></li>
+                
+                    <li><span class="coming-soon">MATRIX Calculator (Coming Soon)</span></li>
+                    <li><span class="coming-soon">STATISTIC Calculator (Coming Soon)</span></li>
+                </ul>
+            </div>
+
+			
+            <div class="footer-section">
+                <h3>Finance Tools</h3>
+                <ul>
+		            <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/interest/interest-hub.html">Interest Calculators</a></li>
+		            <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/investment/investment-hub.html">Investment Calculators</a></li>
+                    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/loan/loan-hub.html">Loan Calculators</a></li>
+                    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/tax/tax-hub.html">Tax Calculators</a></li>
+                    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/saving-retirement/saving-retirement-hub.html">Savings Calculators</a></li>
+                    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/saving-retirement/saving-retirement-hub.html">Retirement Calculators</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <div class="disclaimer">
+                    <strong>Disclaimer:</strong> The results provided by this calculator are estimates for informational purposes only. 
+                    Actual loan terms may vary. Please consult with your financial institution for accurate loan details.
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; Student Helper Tools. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        let growthChart = null;
+        let breakdownData = [];
+        let currentCurrency = 'INR';
+
+        // Currency symbols mapping
+        const currencySymbols = {
+            'INR': '₹',
+            'USD': '$',
+            'EUR': '€',
+            'GBP': '£',
+            'JPY': '¥',
+            'AUD': 'A$',
+            'CAD': 'C$',
+            'CHF': 'CHF',
+            'CNY': '¥',
+            'SGD': 'S$',
+            'AED': 'AED',
+            'SAR': 'SR'
+        };
+
+        // Currency locale mapping for proper number formatting
+        const currencyLocales = {
+            'INR': 'en-IN',
+            'USD': 'en-US',
+            'EUR': 'de-DE',
+            'GBP': 'en-GB',
+            'JPY': 'ja-JP',
+            'AUD': 'en-AU',
+            'CAD': 'en-CA',
+            'CHF': 'de-CH',
+            'CNY': 'zh-CN',
+            'SGD': 'en-SG',
+            'AED': 'ar-AE',
+            'SAR': 'ar-SA'
+        };
+
+        // Decimal places for each currency
+        const currencyDecimals = {
+            'INR': 2,
+            'USD': 2,
+            'EUR': 2,
+            'GBP': 2,
+            'JPY': 0,
+            'AUD': 2,
+            'CAD': 2,
+            'CHF': 2,
+            'CNY': 2,
+            'SGD': 2,
+            'AED': 2,
+            'SAR': 2
+        };
+
+        function getCurrencySymbol() {
+            return currencySymbols[currentCurrency] || '₹';
+        }
+
+        function getCurrencyLocale() {
+            return currencyLocales[currentCurrency] || 'en-IN';
+        }
+
+        function getCurrencyDecimals() {
+            return currencyDecimals[currentCurrency] || 2;
+        }
+
+        function updateCurrencyDisplay() {
+            currentCurrency = document.getElementById('currency').value;
+            const symbol = getCurrencySymbol();
+            const locale = getCurrencyLocale();
+            
+            // Update slider value display
+            const depositVal = document.getElementById('depositSlider').value;
+            document.getElementById('depositSliderValue').textContent = symbol + ' ' + parseInt(depositVal).toLocaleString(locale);
+            
+            // Update results if already calculated
+            const resultsDiv = document.getElementById('results');
+            if (resultsDiv.classList.contains('active')) {
+                // Recalculate with new currency symbol
+                calculateFD();
+            }
+        }
+
+        // Sync inputs with sliders
+        document.getElementById('depositAmount').addEventListener('input', function(e) {
+            const val = Math.min(Math.max(parseInt(e.target.value) || 0, 1000), 10000000);
+            document.getElementById('depositSlider').value = val;
+            document.getElementById('depositSliderValue').textContent = getCurrencySymbol() + ' ' + val.toLocaleString(getCurrencyLocale());
+        });
+
+        document.getElementById('depositSlider').addEventListener('input', function(e) {
+            const val = e.target.value;
+            document.getElementById('depositAmount').value = val;
+            document.getElementById('depositSliderValue').textContent = getCurrencySymbol() + ' ' + parseInt(val).toLocaleString(getCurrencyLocale());
+        });
+
+        document.getElementById('interestRate').addEventListener('input', function(e) {
+            const val = Math.min(Math.max(parseFloat(e.target.value) || 0, 0.1), 20);
+            document.getElementById('rateSlider').value = val;
+            document.getElementById('rateSliderValue').textContent = val.toFixed(1) + '%';
+        });
+
+        document.getElementById('rateSlider').addEventListener('input', function(e) {
+            const val = parseFloat(e.target.value);
+            document.getElementById('interestRate').value = val;
+            document.getElementById('rateSliderValue').textContent = val.toFixed(1) + '%';
+        });
+
+        document.getElementById('tenure').addEventListener('input', function(e) {
+            const tenureType = document.getElementById('tenureType').value;
+            const maxVal = tenureType === 'years' ? 10 : 120;
+            const val = Math.min(Math.max(parseInt(e.target.value) || 0, 1), maxVal);
+            document.getElementById('tenureSlider').value = val;
+            document.getElementById('tenureSliderValue').textContent = val + ' ' + (tenureType === 'years' ? 'Years' : 'Months');
+            document.getElementById('tenureSlider').max = maxVal;
+        });
+
+        document.getElementById('tenureSlider').addEventListener('input', function(e) {
+            const val = e.target.value;
+            const tenureType = document.getElementById('tenureType').value;
+            document.getElementById('tenure').value = val;
+            document.getElementById('tenureSliderValue').textContent = val + ' ' + (tenureType === 'years' ? 'Years' : 'Months');
+        });
+
+        document.getElementById('tenureType').addEventListener('change', function(e) {
+            const isYears = e.target.value === 'years';
+            const currentVal = parseInt(document.getElementById('tenure').value) || (isYears ? 1 : 12);
+            const maxVal = isYears ? 10 : 120;
+            
+            document.getElementById('tenureSlider').max = maxVal;
+            document.getElementById('tenureSlider').value = Math.min(currentVal, maxVal);
+            document.getElementById('tenure').value = Math.min(currentVal, maxVal);
+            document.getElementById('tenureSliderValue').textContent = Math.min(currentVal, maxVal) + ' ' + (isYears ? 'Years' : 'Months');
+        });
+
+        // Initialize sliders
+        document.getElementById('depositSlider').value = 100000;
+        document.getElementById('depositAmount').value = 100000;
+        document.getElementById('depositSliderValue').textContent = getCurrencySymbol() + ' ' + (100000).toLocaleString(getCurrencyLocale());
+        document.getElementById('rateSlider').value = 7;
+        document.getElementById('interestRate').value = 7;
+        document.getElementById('tenureSlider').value = 12;
+        document.getElementById('tenure').value = 12;
+
+        function formatCurrency(amount) {
+            const locale = getCurrencyLocale();
+            const decimals = getCurrencyDecimals();
+            
+            return getCurrencySymbol() + ' ' + amount.toLocaleString(locale, {
+                minimumFractionDigits: decimals,
+                maximumFractionDigits: decimals
+            });
+        }
+
+        function calculateFD() {
+            const principal = parseFloat(document.getElementById('depositAmount').value);
+            const annualRate = parseFloat(document.getElementById('interestRate').value);
+            const tenure = parseInt(document.getElementById('tenure').value);
+            const tenureType = document.getElementById('tenureType').value;
+            const compoundingFreq = parseInt(document.getElementById('compoundingFreq').value);
+            const interestType = document.querySelector('input[name="interestType"]:checked').value;
+
+            // Validation
+            if (!principal || principal <= 0) {
+                alert('Please enter a valid deposit amount');
+                return;
+            }
+            if (!annualRate || annualRate <= 0) {
+                alert('Please enter a valid interest rate');
+                return;
+            }
+            if (!tenure || tenure <= 0) {
+                alert('Please enter a valid tenure');
+                return;
+            }
+
+            // Convert tenure to years
+            const tenureInYears = tenureType === 'years' ? tenure : tenure / 12;
+            const tenureInMonths = tenureType === 'months' ? tenure : tenure * 12;
+            
+            // Interest rate as decimal
+            const r = annualRate / 100;
+            const n = compoundingFreq;
+            const t = tenureInYears;
+
+            let maturityAmount, totalInterest, effectiveYield;
+
+            if (interestType === 'cumulative') {
+                // Cumulative FD: A = P * (1 + r/n)^(n*t)
+                maturityAmount = principal * Math.pow(1 + r / n, n * t);
+                totalInterest = maturityAmount - principal;
+            } else {
+                // Non-cumulative FD: Interest calculated but not compounded
+                // Interest per period = P * (r/n)
+                const totalPeriods = n * t;
+                const interestPerPeriod = principal * (r / n);
+                totalInterest = interestPerPeriod * totalPeriods;
+                maturityAmount = principal + totalInterest;
+            }
+
+            // Effective Annual Yield: ((A/P)^(1/t) - 1) * 100
+            effectiveYield = (Math.pow(maturityAmount / principal, 1 / t) - 1) * 100;
+
+            // Display results
+            document.getElementById('principalValue').textContent = formatCurrency(principal);
+            document.getElementById('interestValue').textContent = formatCurrency(totalInterest);
+            document.getElementById('maturityValue').textContent = formatCurrency(maturityAmount);
+            document.getElementById('eayValue').textContent = effectiveYield.toFixed(2) + '%';
+
+            document.getElementById('results').classList.add('active');
+
+            // Generate charts and tables
+            generateGrowthChart(principal, annualRate, n, t, interestType);
+            generateBreakdownTable(principal, annualRate, n, tenureInMonths, interestType);
+
+            document.getElementById('chartsSection').classList.add('active');
+            document.getElementById('breakdownSection').classList.add('active');
+
+            // Scroll to results
+            document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function generateGrowthChart(principal, annualRate, n, tenureYears, interestType) {
+            if (growthChart) {
+                growthChart.destroy();
+            }
+
+            const r = annualRate / 100;
+            const labels = [];
+            const principalData = [];
+            const maturityData = [];
+
+            const steps = Math.min(Math.ceil(tenureYears * 12), 60); // Max 60 data points
+            const stepSize = (tenureYears * 12) / steps;
+
+            for (let i = 0; i <= steps; i++) {
+                const monthsElapsed = i * stepSize;
+                const yearsElapsed = monthsElapsed / 12;
+                
+                let value;
+                if (interestType === 'cumulative') {
+                    value = principal * Math.pow(1 + r / n, n * yearsElapsed);
+                } else {
+                    const totalPeriods = n * yearsElapsed;
+                    const interestPerPeriod = principal * (r / n);
+                    const totalInterest = interestPerPeriod * totalPeriods;
+                    value = principal + totalInterest;
+                }
+
+                if (monthsElapsed === 0) {
+                    labels.push('Start');
+                } else if (monthsElapsed < 12) {
+                    labels.push(Math.round(monthsElapsed) + 'M');
+                } else {
+                    labels.push((monthsElapsed / 12).toFixed(1) + 'Y');
+                }
+                
+                principalData.push(principal);
+                maturityData.push(value);
+            }
+
+            const ctx = document.getElementById('growthChart').getContext('2d');
+            growthChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Principal Amount',
+                            data: principalData,
+                            borderColor: '#94a3b8',
+                            backgroundColor: 'rgba(148, 163, 184, 0.1)',
+                            borderWidth: 2,
+                            borderDash: [5, 5],
+                            fill: false
+                        },
+                        {
+                            label: 'Total Value',
+                            data: maturityData,
+                            borderColor: '#059669',
+                            backgroundColor: 'rgba(5, 150, 105, 0.1)',
+                            borderWidth: 3,
+                            fill: true,
+                            tension: 0.4
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                padding: 15,
+                                font: { size: 12 }
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const locale = getCurrencyLocale();
+                                    const decimals = getCurrencyDecimals();
+                                    return context.dataset.label + ': ' + getCurrencySymbol() + ' ' + context.parsed.y.toLocaleString(locale, {
+                                        minimumFractionDigits: decimals,
+                                        maximumFractionDigits: decimals
+                                    });
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    const symbol = getCurrencySymbol();
+                                    if (value >= 100000) {
+                                        return symbol + ' ' + (value / 100000).toFixed(1) + 'L';
+                                    }
+                                    if (value >= 1000) {
+                                        return symbol + ' ' + (value / 1000).toFixed(0) + 'k';
+                                    }
+                                    return symbol + ' ' + value.toFixed(0);
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function generateBreakdownTable(principal, annualRate, n, tenureMonths, interestType) {
+            const tableBody = document.getElementById('breakdownTableBody');
+            tableBody.innerHTML = '';
+            breakdownData = [];
+
+            const r = annualRate / 100;
+            const tenureYears = tenureMonths / 12;
+            
+            // Generate year-wise breakdown
+            const years = Math.ceil(tenureYears);
+            let currentBalance = principal;
+
+            for (let year = 1; year <= years; year++) {
+                const yearsElapsed = Math.min(year, tenureYears);
+                const openingBalance = year === 1 ? principal : currentBalance;
+                
+                let closingBalance, interestEarned;
+                
+                if (interestType === 'cumulative') {
+                    // Cumulative: compound interest
+                    closingBalance = principal * Math.pow(1 + r / n, n * yearsElapsed);
+                    interestEarned = closingBalance - openingBalance;
+                } else {
+                    // Non-cumulative: simple interest for this year
+                    const periodsInYear = year < tenureYears ? n : n * (tenureYears - (year - 1));
+                    interestEarned = principal * (r / n) * periodsInYear;
+                    closingBalance = openingBalance + interestEarned;
+                }
+
+                currentBalance = closingBalance;
+
+                // Add to breakdown data for export
+                breakdownData.push({
+                    period: 'Year ' + year,
+                    opening: openingBalance,
+                    interest: interestEarned,
+                    closing: closingBalance
+                });
+
+                // Add table row
+                const row = tableBody.insertRow();
+                row.innerHTML = 
+                    '<td>Year ' + year + '</td>' +
+                    '<td>' + formatCurrency(openingBalance) + '</td>' +
+                    '<td>' + formatCurrency(interestEarned) + '</td>' +
+                    '<td>' + formatCurrency(closingBalance) + '</td>';
+            }
+        }
+
+        function exportToCSV() {
+            if (breakdownData.length === 0) {
+                alert('Please calculate FD first');
+                return;
+            }
+
+            let csv = 'Period,Opening Balance,Interest Earned,Closing Balance\n';
+            breakdownData.forEach(row => {
+                csv += `${row.period},${row.opening.toFixed(2)},${row.interest.toFixed(2)},${row.closing.toFixed(2)}\n`;
+            });
+
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'fd-breakdown.csv';
+            a.click();
+            window.URL.revokeObjectURL(url);
+        }
+
+        function exportToPDF() {
+            if (breakdownData.length === 0) {
+                alert('Please calculate FD first');
+                return;
+            }
+
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            doc.setFontSize(18);
+            doc.text('Fixed Deposit Breakdown', 14, 20);
+            
+            doc.setFontSize(12);
+            doc.text('Principal: ' + document.getElementById('principalValue').textContent, 14, 35);
+            doc.text('Total Interest: ' + document.getElementById('interestValue').textContent, 14, 42);
+            doc.text('Maturity Amount: ' + document.getElementById('maturityValue').textContent, 14, 49);
+            doc.text('Effective Annual Yield: ' + document.getElementById('eayValue').textContent, 14, 56);
+
+            const tableData = breakdownData.map(row => [
+                row.period,
+                formatCurrency(row.opening),
+                formatCurrency(row.interest),
+                formatCurrency(row.closing)
+            ]);
+
+            doc.autoTable({
+                startY: 65,
+                head: [['Period', 'Opening Balance', 'Interest Earned', 'Closing Balance']],
+                body: tableData,
+                theme: 'grid',
+                headStyles: { fillColor: [15, 118, 110] }
+            });
+
+            doc.save('fd-breakdown.pdf');
+        }
+
+        function resetForm() {
+            document.getElementById('depositAmount').value = 100000;
+            document.getElementById('depositSlider').value = 100000;
+            document.getElementById('depositSliderValue').textContent = getCurrencySymbol() + '1,00,000';
+            
+            document.getElementById('interestRate').value = 7;
+            document.getElementById('rateSlider').value = 7;
+            document.getElementById('rateSliderValue').textContent = '7.0%';
+            
+            document.getElementById('tenure').value = 12;
+            document.getElementById('tenureSlider').value = 12;
+            document.getElementById('tenureSliderValue').textContent = '12 Months';
+            document.getElementById('tenureType').value = 'months';
+            
+            document.getElementById('compoundingFreq').value = '4';
+            document.querySelector('input[name="interestType"][value="cumulative"]').checked = true;
+            document.getElementById('currency').value = 'INR';
+            currentCurrency = 'INR';
+
+            document.getElementById('principalValue').textContent = getCurrencySymbol() + '0.00';
+            document.getElementById('interestValue').textContent = getCurrencySymbol() + '0.00';
+            document.getElementById('maturityValue').textContent = getCurrencySymbol() + '0.00';
+            document.getElementById('eayValue').textContent = '0.00%';
+
+            document.getElementById('results').classList.remove('active');
+            document.getElementById('chartsSection').classList.remove('active');
+            document.getElementById('breakdownSection').classList.remove('active');
+
+            if (growthChart) {
+                growthChart.destroy();
+                growthChart = null;
+            }
+
+            breakdownData = [];
+            document.getElementById('breakdownTableBody').innerHTML = '';
+        }
+
+        function toggleMenu() {
+            document.getElementById('mobileNav').classList.toggle('active');
+        }
+
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('calculateBtn').addEventListener('click', calculateFD);
+            document.getElementById('resetBtn').addEventListener('click', resetForm);
+            document.getElementById('hamburgerBtn').addEventListener('click', toggleMenu);
+            document.getElementById('exportCsvBtn').addEventListener('click', exportToCSV);
+            document.getElementById('exportPdfBtn').addEventListener('click', exportToPDF);
+            document.getElementById('currency').addEventListener('change', updateCurrencyDisplay);
+        });
+    </script>
+</body>
+</html>
