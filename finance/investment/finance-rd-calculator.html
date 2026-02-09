@@ -1,0 +1,1535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/png" href="https://advaitpatel69-beep.github.io/Advait.github.io/favicon.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculate Recurring Deposit maturity amount and returns with our free RD calculator. Plan monthly savings with accurate interest calculations.">
+    <link rel="canonical" href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/investment/finance-rd-calculator.html">
+    <title>RD Calculator – Recurring Deposit Maturity Calculator</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js" defer></script>
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is my money safe in a Recurring Deposit?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Recurring Deposits are extremely safe investment instruments, especially when opened with reputable banks. In many countries, bank deposits including RDs are insured up to certain limits by government deposit insurance schemes. RDs offer guaranteed returns with zero market risk, making them ideal for risk-averse investors. The principal and interest are both secure, and the interest rate remains fixed throughout the tenure regardless of market fluctuations. However, always choose well-rated, established banks or post offices to minimize any institutional risk."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens if I miss an RD installment?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Missing RD installments typically attracts a penalty or late fee, which varies by bank (usually ₹1-2 per ₹100 of installment per month of delay). Most banks allow a grace period of 1-2 months for payments. If you consistently miss payments, the RD account may be declared defaulted or discontinued, and you'll receive back your deposited amount with applicable interest (usually lower than the agreed rate) minus penalties. Some banks allow you to make up missed installments by paying arrears with penalties. It's crucial to maintain regular deposits to get the full maturity benefit."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How is interest calculated on Recurring Deposits?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "RD interest is calculated using quarterly compounding in most cases, though the formula accounts for monthly deposits. The standard formula is: A = P × [((1 + r)^n - 1) / (1 - (1 + r)^(-1/n))], where P is monthly deposit, r is monthly interest rate (annual rate/12/100), and n is total months. Each monthly installment earns interest from its deposit date until maturity, so earlier deposits earn more interest than later ones. For example, if you deposit ₹5,000 monthly for 12 months at 7% annual interest, your first installment earns interest for 12 months, second for 11 months, and so on, resulting in higher total interest than simple multiplication."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What's the difference between RD and SIP?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "RD (Recurring Deposit) and SIP (Systematic Investment Plan) both involve regular monthly investments but differ fundamentally. RDs are bank/post office fixed-return instruments with guaranteed interest (typically 5-7% annually), zero risk, and assured maturity amount. SIPs are mutual fund investments with variable returns (potentially 10-15% or higher), market-linked risk, and no guaranteed maturity value. RDs suit conservative investors seeking safety and predictability, while SIPs are for those comfortable with market volatility seeking higher long-term wealth creation. RD returns are taxable as income, while equity SIP gains enjoy favorable long-term capital gains tax treatment in many countries."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I withdraw my RD before maturity?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, premature withdrawal of RDs is usually allowed but comes with reduced benefits. Banks typically allow withdrawal after 3-6 months of opening the account. Upon early withdrawal, you'll receive your deposited amount plus interest calculated at a lower rate (usually 1-2% less than the contracted rate) for the period the RD was held. Some banks also levy a premature withdrawal penalty (0.5-1% of the maturity value). A few banks offer special RDs without premature withdrawal facility at slightly higher interest rates. Always check your bank's specific terms before opening an RD."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the ideal tenure for a Recurring Deposit?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The ideal RD tenure depends on your savings goal and timeline. For short-term goals (6-12 months), choose shorter tenures for liquidity and flexibility. For medium-term goals like vacation, gadget purchase, or emergency corpus (1-3 years), RDs work excellently. For longer tenures (5+ years), consider comparing RD returns with other instruments like Public Provident Fund, debt mutual funds, or equity investments which may offer better inflation-adjusted returns. Most banks offer maximum RD tenure of 10 years. Generally, 2-3 year RDs strike a good balance between return optimization and goal flexibility."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I have to pay tax on RD interest?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, interest earned on Recurring Deposits is generally taxable as per your income tax slab in most countries. Banks deduct TDS (Tax Deducted at Source) if your total interest income from all bank deposits exceeds threshold limits during a financial year. Unlike some tax-saving FDs, regular RDs don't offer any tax deduction on the principal invested. However, you can submit forms to prevent TDS deduction if your total income is below the taxable limit. Some countries offer specific tax-advantaged recurring deposit schemes - consult a tax advisor for your jurisdiction. The taxation makes RDs less tax-efficient than instruments like equity mutual funds for long-term wealth building."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I increase or decrease my monthly RD installment?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Generally, you cannot change the monthly installment amount once an RD account is opened - the amount remains fixed for the entire tenure. If you want to increase your savings, you'll need to open a new RD account with the higher amount. However, some banks offer flexible or step-up RD schemes where installments can increase by a predetermined percentage annually. If your financial situation changes and you can't continue the current installment, it's better to complete the current RD and open a new one with a comfortable amount rather than defaulting, as defaults attract penalties and may affect your relationship with the bank."
+          }
+        }
+      ]
+    }
+    </script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f7fa;
+        }
+
+        header {
+            background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .site-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+
+        nav a:hover {
+            opacity: 0.8;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+            background: none;
+            border: none;
+            padding: 0;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            border-radius: 3px;
+            transition: 0.3s;
+        }
+
+        .mobile-nav {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: #0891b2;
+            flex-direction: column;
+            padding: 1rem;
+            gap: 1rem;
+        }
+
+        .mobile-nav.active {
+            display: flex;
+        }
+
+        .mobile-nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .mobile-nav a:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #2d3748;
+            margin-bottom: 1rem;
+        }
+
+        .intro {
+            font-size: 1.1rem;
+            color: #4a5568;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .calculator-section {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+            margin-bottom: 3rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        input[type="number"],
+        input[type="range"],
+        select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        input[type="number"]:focus,
+        select:focus {
+            outline: none;
+            border-color: #0891b2;
+        }
+
+        input[type="range"] {
+            padding: 0;
+            height: 8px;
+            background: #e2e8f0;
+            border: none;
+            cursor: pointer;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: #0891b2;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+
+        input[type="range"]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            background: #0891b2;
+            cursor: pointer;
+            border-radius: 50%;
+            border: none;
+        }
+
+        .input-slider-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .slider-container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .slider-value {
+            font-size: 0.9rem;
+            color: #0891b2;
+            font-weight: 600;
+            margin-top: 0.25rem;
+        }
+
+        .tenure-group {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 1rem;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        button {
+            flex: 1;
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-calculate {
+            background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%);
+            color: white;
+        }
+
+        .btn-reset {
+            background: #e2e8f0;
+            color: #4a5568;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .results {
+            background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 2rem;
+            color: white;
+            display: none;
+        }
+
+        .results.active {
+            display: block;
+        }
+
+        .result-item {
+            background: rgba(255,255,255,0.1);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .result-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .result-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+
+        .result-value {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .charts-section {
+            display: none;
+            margin-top: 3rem;
+        }
+
+        .charts-section.active {
+            display: block;
+        }
+
+        .chart-container {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+            margin-bottom: 2rem;
+        }
+
+        .chart-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .chart-wrapper {
+            position: relative;
+            height: 300px;
+        }
+
+        .breakdown-section {
+            display: none;
+            margin-top: 2rem;
+        }
+
+        .breakdown-section.active {
+            display: block;
+        }
+
+        .table-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .export-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-export {
+            padding: 0.5rem 1rem;
+            background: #0891b2;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn-export:hover {
+            background: #0e7490;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%);
+            color: white;
+        }
+
+        th {
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        tbody tr:hover {
+            background: #f7fafc;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .content-section {
+            background: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+            margin-top: 3rem;
+        }
+
+        .content-section h2 {
+            font-size: 2rem;
+            color: #2d3748;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid #0891b2;
+            padding-left: 1rem;
+        }
+
+        .content-section h3 {
+            font-size: 1.5rem;
+            color: #2d3748;
+            margin: 2rem 0 1rem;
+        }
+
+        .content-section p {
+            margin-bottom: 1rem;
+            color: #4a5568;
+            line-height: 1.8;
+        }
+
+        .content-section ul {
+            margin: 1rem 0 1rem 2rem;
+            color: #4a5568;
+        }
+
+        .content-section li {
+            margin-bottom: 0.5rem;
+            line-height: 1.8;
+        }
+
+        .faq-section {
+            margin-top: 3rem;
+        }
+
+        .faq-item {
+            background: #f7fafc;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .faq-question {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 0.75rem;
+        }
+
+        .faq-answer {
+            color: #4a5568;
+            line-height: 1.8;
+        }
+
+        footer {
+            background: #2d3748;
+            color: white;
+            padding: 3rem 0 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: #cbd5e0;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .disclaimer {
+            background: rgba(0,0,0,0.2);
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: #cbd5e0;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #cbd5e0;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .intro {
+                font-size: 1rem;
+            }
+
+            .calculator-section {
+                padding: 1.5rem;
+            }
+
+            .input-slider-group {
+                grid-template-columns: 1fr;
+            }
+
+            .tenure-group {
+                grid-template-columns: 1fr;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            .result-value {
+                font-size: 1.5rem;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .chart-wrapper {
+                height: 250px;
+            }
+
+            .table-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+            th, td {
+                padding: 0.75rem 0.5rem;
+                font-size: 0.9rem;
+            }
+
+            .content-section {
+                padding: 1.5rem;
+            }
+
+            .content-section h2 {
+                font-size: 1.5rem;
+            }
+
+            .content-section h3 {
+                font-size: 1.2rem;
+            }
+        }
+
+        .calculator-link {
+            display: block;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #f6f8fb 0%, #e9ecef 100%);
+            border-radius: 8px;
+            text-decoration: none;
+            color: #2d3748;
+            font-weight: 600;
+            text-align: left;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .calculator-link:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+    
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="site-title">💰 Finance Calculators</div>
+            <nav>
+                <a href="https://advaitpatel69-beep.github.io/Advait.github.io/index.html">Home</a>
+
+                <span class="nav-disabled">Student Calculators (Coming Soon)</span>
+                <span class="nav-disabled">Medical Calculators (Coming Soon)</span>
+                <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/finance-hub.html">Finance Calculators</a>
+            </nav>
+            <div class="hamburger" id="hamburgerBtn" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        <div class="mobile-nav" id="mobileNav">
+            <a href="https://advaitpatel69-beep.github.io/Advait.github.io/index.html">Home</a>
+
+            <span class="nav-disabled">Student Calculators (Coming Soon)</span>
+            <span class="nav-disabled">Medical Calculators (Coming Soon)</span>
+            <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/finance-hub.html">Finance Calculators</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="hero">
+            <h1>🏦 Recurring Deposit Calculator</h1>
+            <p class="intro">Calculate your RD maturity amount with monthly installments. Plan your recurring savings and visualize growth with accurate compound interest calculations.</p>
+        </div>
+
+        <div class="calculator-section" id="calculator">
+
+            <div class="form-group">
+                <label for="currency">Currency</label>
+                <select id="currency">
+                    <option value="INR">🇮🇳 Indian Rupee (₹)</option>
+                    <option value="USD">🇺🇸 US Dollar ($)</option>
+                    <option value="EUR">🇪🇺 Euro (€)</option>
+                    <option value="GBP">🇬🇧 British Pound (£)</option>
+                    <option value="JPY">🇯🇵 Japanese Yen (¥)</option>
+                    <option value="AUD">🇦🇺 Australian Dollar (A$)</option>
+                    <option value="CAD">🇨🇦 Canadian Dollar (C$)</option>
+                    <option value="CHF">🇨🇭 Swiss Franc (CHF)</option>
+                    <option value="CNY">🇨🇳 Chinese Yuan (¥)</option>
+                    <option value="SGD">🇸🇬 Singapore Dollar (S$)</option>
+                    <option value="AED">🇦🇪 UAE Dirham (AED)</option>
+                    <option value="SAR">🇸🇦 Saudi Riyal (SR)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="monthlyDeposit">Monthly Deposit Amount</label>
+                <div class="input-slider-group">
+                    <input type="number" id="monthlyDeposit" placeholder="Enter monthly deposit" min="100" step="100">
+                    <div class="slider-container">
+                        <input type="range" id="depositSlider" min="100" max="100000" step="100" value="5000">
+                        <div class="slider-value" id="depositSliderValue">₹5,000</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="interestRate">Annual Interest Rate (%)</label>
+                <div class="input-slider-group">
+                    <input type="number" id="interestRate" placeholder="Enter interest rate" min="0.1" max="20" step="0.1">
+                    <div class="slider-container">
+                        <input type="range" id="rateSlider" min="1" max="15" step="0.1" value="7">
+                        <div class="slider-value" id="rateSliderValue">7.0%</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="tenure">Tenure</label>
+                <div class="tenure-group">
+                    <div class="input-slider-group">
+                        <input type="number" id="tenure" placeholder="Enter tenure" min="1" step="1">
+                        <div class="slider-container">
+                            <input type="range" id="tenureSlider" min="6" max="120" step="1" value="12">
+                            <div class="slider-value" id="tenureSliderValue">12 Months</div>
+                        </div>
+                    </div>
+                    <select id="tenureType">
+                        <option value="months">Months</option>
+                        <option value="years">Years</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="button-group">
+                <button class="btn-calculate" id="calculateBtn">Calculate Returns</button>
+                <button class="btn-reset" id="resetBtn">Reset</button>
+            </div>
+
+            <div class="results" id="results">
+                <div class="result-item">
+                    <div class="result-label">Total Invested Amount</div>
+                    <div class="result-value" id="investedValue">₹0.00</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Total Interest Earned</div>
+                    <div class="result-value" id="interestValue">₹0.00</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Maturity Amount</div>
+                    <div class="result-value" id="maturityValue">₹0.00</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Effective Annual Return</div>
+                    <div class="result-value" id="returnValue">0.00%</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="charts-section" id="chartsSection">
+            <div class="chart-container">
+                <h3 class="chart-title">📈 Investment Growth Over Time</h3>
+                <div class="chart-wrapper">
+                    <canvas id="growthChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="breakdown-section" id="breakdownSection">
+            <div class="chart-container">
+                <div class="table-header">
+                    <h3 class="chart-title">📋 Year-wise Breakdown</h3>
+                    <div class="export-buttons">
+                        <button class="btn-export" id="exportCsvBtn">Download CSV</button>
+                        <button class="btn-export" id="exportPdfBtn">Download PDF</button>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table id="breakdownTable">
+                        <thead>
+                            <tr>
+                                <th>Year</th>
+                                <th>Deposits Made</th>
+                                <th>Total Invested</th>
+                                <th>Interest Earned</th>
+                                <th>Closing Balance</th>
+                            </tr>
+                        </thead>
+                        <tbody id="breakdownTableBody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section" id="guide">
+            <h2>💡 Understanding Recurring Deposits - Complete Guide</h2>
+            
+            <h3>What is a Recurring Deposit? 🏦</h3>
+            <p>A Recurring Deposit (RD) is a special savings instrument offered by banks and post offices that allows you to deposit a fixed amount every month for a predetermined period and earn interest on your savings. Unlike Fixed Deposits where you invest a lump sum once, RDs enable systematic monthly savings, making them perfect for salaried individuals who want to build a corpus gradually without the pressure of investing a large amount upfront. 😊</p>
+            
+            <p>Think of RD as a disciplined savings habit combined with guaranteed returns. You decide how much you can save each month (say ₹5,000) and for how long (say 2 years), and the bank gives you a fixed interest rate. Every month, you deposit that exact amount, and at maturity, you receive your total deposits plus accumulated interest. It's like having a personal savings goal with your bank ensuring you stay on track! 📈</p>
+
+            <h3>How Does RD Interest Work? 💰</h3>
+            <p>RD interest calculation is more complex than FD because each monthly installment earns interest for a different duration. Your first deposit earns interest for the entire tenure, the second deposit for (tenure - 1 month), and so on, with the last deposit earning interest for just one quarter. The interest is typically compounded quarterly, making the effective returns higher than simple interest. 🧮</p>
+
+            <p>The mathematical formula is: <strong>A = P × [((1 + r)^n - 1) / (1 - (1 + r)^(-1/n))]</strong>, where P is your monthly deposit, r is the monthly interest rate (annual rate ÷ 12 ÷ 100), n is the total number of months, and A is the maturity amount. This formula accounts for the compounding effect on each deposit made at different times. 📊</p>
+
+            <p><strong>Example:</strong> You deposit ₹5,000 monthly for 12 months at 7% annual interest (compounded quarterly). Your first ₹5,000 earns interest for 12 months, second for 11 months, and so on. Total invested = ₹60,000. Using the compound interest formula with quarterly compounding, maturity amount ≈ ₹62,210, meaning you earned ₹2,210 as interest. Simple interest would have given only about ₹1,950, showing the power of compounding! 💪</p>
+
+            <h3>Monthly Compounding Logic 🔄</h3>
+            <p>Understanding how your RD grows each month helps appreciate the compounding magic. Let's track a ₹5,000/month RD at 7% annual interest (0.5833% monthly rate) for 6 months:</p>
+
+            <ul>
+                <li><strong>Month 1:</strong> Deposit ₹5,000. Balance = ₹5,000</li>
+                <li><strong>Month 2:</strong> Previous balance earns interest (₹5,000 × 0.005833 = ₹29.17). New deposit ₹5,000. Balance = ₹5,029.17 + ₹5,000 = ₹10,029.17</li>
+                <li><strong>Month 3:</strong> ₹10,029.17 × 0.005833 = ₹58.50 interest. New deposit ₹5,000. Balance = ₹15,087.67</li>
+                <li><strong>Month 4:</strong> ₹15,087.67 × 0.005833 = ₹88.01 interest. New deposit ₹5,000. Balance = ₹20,175.68</li>
+                <li><strong>Month 5:</strong> ₹20,175.68 × 0.005833 = ₹117.69 interest. New deposit ₹5,000. Balance = ₹25,293.37</li>
+                <li><strong>Month 6:</strong> ₹25,293.37 × 0.005833 = ₹147.50 interest. New deposit ₹5,000. Final = ₹30,440.87</li>
+            </ul>
+
+            <p>Total deposits = ₹30,000. Interest earned = ₹440.87. Notice how interest keeps growing because it's calculated on an increasing balance! 🚀</p>
+
+            <h3>RD vs FD vs SIP - Which is Best? 🤔</h3>
+            <p><strong>Recurring Deposit (RD):</strong> Monthly installments, guaranteed returns (5-7% typically), zero risk, suitable for regular savers building short to medium-term corpus. Perfect for disciplined saving without market exposure. Ideal for goals like vacation fund, gadget purchase, emergency corpus. Tax on interest as per your slab. 🏦</p>
+
+            <p><strong>Fixed Deposit (FD):</strong> Lump sum investment, guaranteed returns (similar to RD rates), zero risk, suitable when you have a large amount to invest at once. Better for parking bonus, inheritance, or maturity proceeds. More flexible premature withdrawal than RD. Same tax treatment. 💎</p>
+
+            <p><strong>Systematic Investment Plan (SIP):</strong> Monthly investments in mutual funds, variable returns (potentially 10-15% or higher long-term), market-linked risk, suitable for long-term wealth creation (5+ years). Best for retirement, children's education, wealth building. More tax-efficient for long-term equity investments. 📈</p>
+
+            <p><strong>Which to choose?</strong> For guaranteed short-term goals with regular savings: RD. For guaranteed returns with lump sum: FD. For long-term wealth creation with risk tolerance: SIP. Many smart investors use all three - RD for short-term needs, FD for emergency fund, SIP for long-term growth! 🎯</p>
+
+            <h3>Benefits of Recurring Deposits ✅</h3>
+            <ul>
+                <li><strong>Disciplined Savings:</strong> Monthly installments create a savings habit, ensuring you set aside money regularly before spending on other things. Auto-debit option makes it effortless. 💪</li>
+                <li><strong>Guaranteed Returns:</strong> Fixed interest rate throughout the tenure ensures predictable maturity amount, unaffected by market volatility or economic changes. 🛡️</li>
+                <li><strong>Low Entry Barrier:</strong> Start with as little as ₹100-500/month (varies by bank), making it accessible even for students and entry-level professionals. 🌱</li>
+                <li><strong>Flexibility in Tenure:</strong> Choose from 6 months to 10 years based on your savings goal, with options to align maturity with specific financial needs. ⏰</li>
+                <li><strong>Safety and Security:</strong> Bank deposits are insured up to limits (like ₹5 lakhs per bank in India), making RDs very safe compared to market instruments. 🔒</li>
+                <li><strong>Loan Facility:</strong> Most banks allow loans/overdrafts against RDs (up to 80-90% of balance), providing emergency liquidity without breaking the deposit. 💳</li>
+                <li><strong>Senior Citizen Benefits:</strong> Additional interest rate (typically 0.5%) for senior citizens, making RDs attractive for retirement income planning. 👴👵</li>
+                <li><strong>Goal-Based Saving:</strong> Perfect for specific goals like buying a phone (6-month RD), vacation (1-year RD), or wedding expenses (3-year RD). 🎯</li>
+            </ul>
+
+            <h3>Limitations of Recurring Deposits ⚠️</h3>
+            <ul>
+                <li><strong>Lower Returns Than Equity:</strong> RD returns (5-7%) typically lag inflation and are much lower than long-term equity returns (10-15%), limiting wealth creation potential. 📉</li>
+                <li><strong>Mandatory Monthly Commitment:</strong> You must deposit every month; missing payments attracts penalties and may lead to account closure, unlike the flexibility of voluntary SIPs. 🚫</li>
+                <li><strong>Premature Withdrawal Penalty:</strong> Breaking RD before maturity reduces interest rate and may incur penalties, limiting liquidity compared to savings accounts. 💸</li>
+                <li><strong>Taxable Interest:</strong> Interest fully taxable at your income tax slab with TDS deduction if exceeding thresholds, making it less tax-efficient than equity investments. 📝</li>
+                <li><strong>Inflation Risk:</strong> Fixed returns may not beat inflation over time, eroding real purchasing power, especially in high-inflation periods. 💨</li>
+                <li><strong>No Increase in Installments:</strong> Monthly amount remains fixed; you can't increase it mid-term even if income grows (need to open new RD). 🔒</li>
+                <li><strong>Opportunity Cost:</strong> Money committed to RD can't be deployed in potentially higher-yielding investments during tenure. 💭</li>
+            </ul>
+
+            <h3>Who Should Invest in Recurring Deposits? 👥</h3>
+            <p>RDs are perfect for conservative, risk-averse individuals who prioritize capital safety over high returns. If you're someone who finds it difficult to save lump sums but can set aside a fixed amount monthly, RD enforces discipline while providing guaranteed growth. Salaried individuals can easily accommodate RDs in their monthly budget, making saving automatic and effortless. 💼</p>
+
+            <p>First-time investors or those new to savings instruments should start with RDs to understand systematic saving before graduating to market-linked products. Students can build initial corpus with small monthly RDs. Parents can open RDs for children's short-term needs like school fees, summer camps, or gadgets. Retirees seeking regular safe investment options can use RDs for parking small amounts with guaranteed returns. 🎓</p>
+
+            <p>RDs work excellently for specific short to medium-term goals (6 months to 3 years) like vacation planning, festival shopping, insurance premium payment, or down payment accumulation. However, for long-term goals (5+ years) like retirement or children's higher education, consider combining RDs with SIPs or other equity instruments for inflation-beating returns. 🏖️</p>
+
+            <h3>Ideal Tenure Selection Strategy 📅</h3>
+            <p><strong>Short-term RDs (6-12 months):</strong> Perfect for immediate goals like festival expenses, gadget purchase, or small vacation. Offers liquidity and quick access to funds. However, interest earned is lower due to short compounding period. Ideal when you have a specific date-bound expense approaching. 📱</p>
+
+            <p><strong>Medium-term RDs (1-3 years):</strong> Sweet spot for most savers - balances decent returns with reasonable lock-in. Works great for wedding expenses, car down payment, home renovation, or building emergency corpus. Interest accumulation is significant enough to make a difference while not locking money too long. 🚗</p>
+
+            <p><strong>Long-term RDs (3-10 years):</strong> Maximizes interest compounding and usually offers higher rates, but locks money for extended periods. Before committing to very long RDs, compare returns with other instruments like PPF, debt mutual funds, or hybrid funds that might offer better inflation-adjusted returns. Long RDs make sense if you're certain about not needing the money and want absolute safety. 🏠</p>
+
+            <p><strong>RD Laddering Strategy:</strong> Instead of one large RD, create multiple smaller RDs with staggered maturity dates. For example, instead of one ₹10,000/month RD for 3 years, create four ₹2,500/month RDs maturing in 1, 2, 2.5, and 3 years. This provides regular liquidity opportunities while maintaining long-term savings. 🪜</p>
+
+            <h3>Tax Implications (General Concepts) 💵</h3>
+            <p>Interest earned on Recurring Deposits is treated as "income from other sources" and is fully taxable at your applicable income tax slab rate in most countries. Unlike equity investments which enjoy favorable capital gains tax treatment, RD interest gets added to your total income and taxed accordingly. This makes RDs less tax-efficient, especially for higher income brackets. 📊</p>
+
+            <p>Banks deduct Tax Deducted at Source (TDS) on RD interest if your total interest income from all bank deposits exceeds threshold limits during a financial year (varies by country and regulations). For instance, if this threshold is ₹40,000 and your total bank interest is ₹50,000, TDS will be deducted. You can submit Form 15G/15H to prevent TDS if your total income is below taxable limits. 📝</p>
+
+            <p>Some countries offer specific tax-advantaged RD schemes (like 5-year tax-saver RD in India) where the principal invested qualifies for deduction under specific sections, subject to upper limits. However, the interest remains taxable. These tax-saving RDs have mandatory lock-in periods with no premature withdrawal allowed. 🔐</p>
+
+            <p>To optimize tax efficiency: Consider splitting RDs across family members in lower tax brackets, compare post-tax returns with tax-free instruments like certain government bonds, factor in TDS impact on cash flow, and maintain records for accurate tax filing. Always consult a tax professional for personalized advice based on your country's tax laws. 👨‍💼</p>
+
+            <h3>Tips for Maximizing RD Benefits 💡</h3>
+            <p>Compare interest rates across multiple banks before opening an RD - rates can vary by 0.5-1%, making a significant difference over time. Public sector banks, private banks, small finance banks, and post offices often have different rates; shop around! Look for special RD schemes for senior citizens, women, or specific tenure periods that offer higher rates. 🔍</p>
+
+            <p>Set up auto-debit to ensure you never miss an installment and avoid penalties. Choose a monthly date that aligns with your salary credit (say 5th of each month if salary comes on 1st) to maintain positive cash flow. Avoid the temptation to break RD prematurely; treat it as sacred for the goal you've designated. 📅</p>
+
+            <p>Start with comfortable amounts you can sustain long-term rather than overcommitting and struggling. It's better to have a ₹3,000/month RD you complete successfully than a ₹10,000/month RD you default on. As income grows, open additional RDs rather than increasing existing ones (since installments are fixed). 💪</p>
+
+            <p>Use RDs strategically as part of a diversified portfolio. Maintain 3-6 months' expenses in liquid savings, create RDs for short-term goals, invest in PPF or tax-saving instruments for tax benefits, and allocate to equity mutual funds for long-term growth. The 50-30-20 rule works well: 50% for needs, 30% for wants, 20% for savings (including RDs, SIPs, insurance). 🎯</p>
+
+            <p>Review your RD portfolio annually. As some RDs mature, evaluate if you should renew at new rates, switch to better-yielding instruments, or redeploy based on changed goals. Keep track of maturity dates and plan ahead for fund deployment - don't let maturity proceeds sit idle in low-interest savings accounts! 📊</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Explore More Calculators</h2>
+            <div class="calculator-links">
+                <a  href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/investment/finance-fd-calculator.html" class="calculator-link">👉 Compare monthly RD savings with lump-sum Fixed Deposit returns using the <strong>FD Calculator</strong>.</a>
+                <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/finance-sip-calculator.html" class="calculator-link">👉 Check potential market-linked returns with regular investing using our <strong>SIP Calculator</strong>.</a>
+                <a href="https://advaitpatel69-beep.github.io/Advait.github.io/simple-compound-interest-calculator.html" class="calculator-link">👉 Learn how compounding boosts RD growth using the <strong>Compound Interest Calculator</strong>.</a>
+                <a href="https://advaitpatel69-beep.github.io/Advait.github.io/simple-compound-interest-calculator.html" class="calculator-link">👉 Compare RD returns with simple interest calculations using this <strong>Simple Interest Calculator</strong>.</a>
+                <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/investment/investment-hub.html" class="calculator-link">👉 Discover more savings and investment tools in our <strong>Investment Calculators</strong> section.</a>
+            </div>
+        </div>
+
+        <div class="content-section faq-section" id="faq">
+            <h2>❓ Frequently Asked Questions</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">Is my money safe in a Recurring Deposit?</div>
+                <div class="faq-answer">Recurring Deposits are extremely safe investment instruments, especially when opened with reputable banks. In many countries, bank deposits including RDs are insured up to certain limits by government deposit insurance schemes. RDs offer guaranteed returns with zero market risk, making them ideal for risk-averse investors. The principal and interest are both secure, and the interest rate remains fixed throughout the tenure regardless of market fluctuations. However, always choose well-rated, established banks or post offices to minimize any institutional risk.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">What happens if I miss an RD installment?</div>
+                <div class="faq-answer">Missing RD installments typically attracts a penalty or late fee, which varies by bank (usually ₹1-2 per ₹100 of installment per month of delay). Most banks allow a grace period of 1-2 months for payments. If you consistently miss payments, the RD account may be declared defaulted or discontinued, and you'll receive back your deposited amount with applicable interest (usually lower than the agreed rate) minus penalties. Some banks allow you to make up missed installments by paying arrears with penalties. It's crucial to maintain regular deposits to get the full maturity benefit.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">How is interest calculated on Recurring Deposits?</div>
+                <div class="faq-answer">RD interest is calculated using quarterly compounding in most cases, though the formula accounts for monthly deposits. The standard formula is: A = P × [((1 + r)^n - 1) / (1 - (1 + r)^(-1/n))], where P is monthly deposit, r is monthly interest rate (annual rate/12/100), and n is total months. Each monthly installment earns interest from its deposit date until maturity, so earlier deposits earn more interest than later ones. For example, if you deposit ₹5,000 monthly for 12 months at 7% annual interest, your first installment earns interest for 12 months, second for 11 months, and so on, resulting in higher total interest than simple multiplication.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">What's the difference between RD and SIP?</div>
+                <div class="faq-answer">RD (Recurring Deposit) and SIP (Systematic Investment Plan) both involve regular monthly investments but differ fundamentally. RDs are bank/post office fixed-return instruments with guaranteed interest (typically 5-7% annually), zero risk, and assured maturity amount. SIPs are mutual fund investments with variable returns (potentially 10-15% or higher), market-linked risk, and no guaranteed maturity value. RDs suit conservative investors seeking safety and predictability, while SIPs are for those comfortable with market volatility seeking higher long-term wealth creation. RD returns are taxable as income, while equity SIP gains enjoy favorable long-term capital gains tax treatment in many countries.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Can I withdraw my RD before maturity?</div>
+                <div class="faq-answer">Yes, premature withdrawal of RDs is usually allowed but comes with reduced benefits. Banks typically allow withdrawal after 3-6 months of opening the account. Upon early withdrawal, you'll receive your deposited amount plus interest calculated at a lower rate (usually 1-2% less than the contracted rate) for the period the RD was held. Some banks also levy a premature withdrawal penalty (0.5-1% of the maturity value). A few banks offer special RDs without premature withdrawal facility at slightly higher interest rates. Always check your bank's specific terms before opening an RD.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">What is the ideal tenure for a Recurring Deposit?</div>
+                <div class="faq-answer">The ideal RD tenure depends on your savings goal and timeline. For short-term goals (6-12 months), choose shorter tenures for liquidity and flexibility. For medium-term goals like vacation, gadget purchase, or emergency corpus (1-3 years), RDs work excellently. For longer tenures (5+ years), consider comparing RD returns with other instruments like Public Provident Fund, debt mutual funds, or equity investments which may offer better inflation-adjusted returns. Most banks offer maximum RD tenure of 10 years. Generally, 2-3 year RDs strike a good balance between return optimization and goal flexibility.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Do I have to pay tax on RD interest?</div>
+                <div class="faq-answer">Yes, interest earned on Recurring Deposits is generally taxable as per your income tax slab in most countries. Banks deduct TDS (Tax Deducted at Source) if your total interest income from all bank deposits exceeds threshold limits during a financial year. Unlike some tax-saving FDs, regular RDs don't offer any tax deduction on the principal invested. However, you can submit forms to prevent TDS deduction if your total income is below the taxable limit. Some countries offer specific tax-advantaged recurring deposit schemes - consult a tax advisor for your jurisdiction. The taxation makes RDs less tax-efficient than instruments like equity mutual funds for long-term wealth building.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Can I increase or decrease my monthly RD installment?</div>
+                <div class="faq-answer">Generally, you cannot change the monthly installment amount once an RD account is opened - the amount remains fixed for the entire tenure. If you want to increase your savings, you'll need to open a new RD account with the higher amount. However, some banks offer flexible or step-up RD schemes where installments can increase by a predetermined percentage annually. If your financial situation changes and you can't continue the current installment, it's better to complete the current RD and open a new one with a comfortable amount rather than defaulting, as defaults attract penalties and may affect your relationship with the bank.</div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/index.html">Home</a></li>
+               	    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/about.html">About</a></li>
+               	    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/contact.html">Contact</a></li>
+               	    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/privacy-policy.html">Privacy Policy</a></li>
+
+                </ul>
+            </div>
+
+			<div class="footer-section">
+                <h3>Student Tools</h3>
+                <ul>
+					<li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/percentage-calculator.html">Percentage Calculator</a></li>
+					<li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/cgpa-calculator.html">CGPA Calculator</a></li>
+      				<li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/simple-compound-interest-calculator.html">Simple & Compound Interest Calculator</a></li>
+                
+                    <li><span class="coming-soon">MATRIX Calculator (Coming Soon)</span></li>
+                    <li><span class="coming-soon">STATISTIC Calculator (Coming Soon)</span></li>
+                </ul>
+            </div>
+
+			
+            <div class="footer-section">
+                <h3>Finance Tools</h3>
+                <ul>
+		            <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/interest/interest-hub.html">Interest Calculators</a></li>
+		            <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/investment/investment-hub.html">Investment Calculators</a></li>
+                    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/loan/loan-hub.html">Loan Calculators</a></li>
+                    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/tax/tax-hub.html">Tax Calculators</a></li>
+                    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/saving-retirement/saving-retirement-hub.html">Savings Calculators</a></li>
+                    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/saving-retirement/saving-retirement-hub.html">Retirement Calculators</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <div class="disclaimer">
+                    <strong>Disclaimer:</strong> The results provided by this calculator are estimates for informational purposes only. 
+                    Actual loan terms may vary. Please consult with your financial institution for accurate loan details.
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; Student Helper Tools. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        let growthChart = null;
+        let breakdownData = [];
+        let currentCurrency = 'INR';
+
+        // Currency symbols mapping
+        const currencySymbols = {
+            'INR': '₹',
+            'USD': '$',
+            'EUR': '€',
+            'GBP': '£',
+            'JPY': '¥',
+            'AUD': 'A$',
+            'CAD': 'C$',
+            'CHF': 'CHF',
+            'CNY': '¥',
+            'SGD': 'S$',
+            'AED': 'AED',
+            'SAR': 'SR'
+        };
+
+        // Currency locale mapping for proper number formatting
+        const currencyLocales = {
+            'INR': 'en-IN',
+            'USD': 'en-US',
+            'EUR': 'de-DE',
+            'GBP': 'en-GB',
+            'JPY': 'ja-JP',
+            'AUD': 'en-AU',
+            'CAD': 'en-CA',
+            'CHF': 'de-CH',
+            'CNY': 'zh-CN',
+            'SGD': 'en-SG',
+            'AED': 'ar-AE',
+            'SAR': 'ar-SA'
+        };
+
+        // Decimal places for each currency
+        const currencyDecimals = {
+            'INR': 2,
+            'USD': 2,
+            'EUR': 2,
+            'GBP': 2,
+            'JPY': 0,
+            'AUD': 2,
+            'CAD': 2,
+            'CHF': 2,
+            'CNY': 2,
+            'SGD': 2,
+            'AED': 2,
+            'SAR': 2
+        };
+
+        function getCurrencySymbol() {
+            return currencySymbols[currentCurrency] || '₹';
+        }
+
+        function getCurrencyLocale() {
+            return currencyLocales[currentCurrency] || 'en-IN';
+        }
+
+        function getCurrencyDecimals() {
+            return currencyDecimals[currentCurrency] || 2;
+        }
+
+        function updateCurrencyDisplay() {
+            currentCurrency = document.getElementById('currency').value;
+            const symbol = getCurrencySymbol();
+            const locale = getCurrencyLocale();
+            
+            // Update slider value display
+            const depositVal = document.getElementById('depositSlider').value;
+            document.getElementById('depositSliderValue').textContent = symbol + ' ' + parseInt(depositVal).toLocaleString(locale);
+            
+            // Update results if already calculated
+            const resultsDiv = document.getElementById('results');
+            if (resultsDiv.classList.contains('active')) {
+                calculateRD();
+            }
+        }
+
+        // Sync inputs with sliders
+        document.getElementById('monthlyDeposit').addEventListener('input', function(e) {
+            const val = Math.min(Math.max(parseInt(e.target.value) || 0, 100), 100000);
+            document.getElementById('depositSlider').value = val;
+            document.getElementById('depositSliderValue').textContent = getCurrencySymbol() + ' ' + val.toLocaleString(getCurrencyLocale());
+        });
+
+        document.getElementById('depositSlider').addEventListener('input', function(e) {
+            const val = e.target.value;
+            document.getElementById('monthlyDeposit').value = val;
+            document.getElementById('depositSliderValue').textContent = getCurrencySymbol() + ' ' + parseInt(val).toLocaleString(getCurrencyLocale());
+        });
+
+        document.getElementById('interestRate').addEventListener('input', function(e) {
+            const val = Math.min(Math.max(parseFloat(e.target.value) || 0, 0.1), 20);
+            document.getElementById('rateSlider').value = val;
+            document.getElementById('rateSliderValue').textContent = val.toFixed(1) + '%';
+        });
+
+        document.getElementById('rateSlider').addEventListener('input', function(e) {
+            const val = parseFloat(e.target.value);
+            document.getElementById('interestRate').value = val;
+            document.getElementById('rateSliderValue').textContent = val.toFixed(1) + '%';
+        });
+
+        document.getElementById('tenure').addEventListener('input', function(e) {
+            const tenureType = document.getElementById('tenureType').value;
+            const maxVal = tenureType === 'years' ? 10 : 120;
+            const minVal = tenureType === 'years' ? 1 : 6;
+            const val = Math.min(Math.max(parseInt(e.target.value) || 0, minVal), maxVal);
+            document.getElementById('tenureSlider').value = val;
+            document.getElementById('tenureSliderValue').textContent = val + ' ' + (tenureType === 'years' ? 'Years' : 'Months');
+            document.getElementById('tenureSlider').max = maxVal;
+            document.getElementById('tenureSlider').min = minVal;
+        });
+
+        document.getElementById('tenureSlider').addEventListener('input', function(e) {
+            const val = e.target.value;
+            const tenureType = document.getElementById('tenureType').value;
+            document.getElementById('tenure').value = val;
+            document.getElementById('tenureSliderValue').textContent = val + ' ' + (tenureType === 'years' ? 'Years' : 'Months');
+        });
+
+        document.getElementById('tenureType').addEventListener('change', function(e) {
+            const isYears = e.target.value === 'years';
+            const currentVal = parseInt(document.getElementById('tenure').value) || (isYears ? 1 : 12);
+            const maxVal = isYears ? 10 : 120;
+            const minVal = isYears ? 1 : 6;
+            
+            document.getElementById('tenureSlider').max = maxVal;
+            document.getElementById('tenureSlider').min = minVal;
+            document.getElementById('tenureSlider').value = Math.min(Math.max(currentVal, minVal), maxVal);
+            document.getElementById('tenure').value = Math.min(Math.max(currentVal, minVal), maxVal);
+            document.getElementById('tenureSliderValue').textContent = Math.min(Math.max(currentVal, minVal), maxVal) + ' ' + (isYears ? 'Years' : 'Months');
+        });
+
+        // Initialize sliders
+        document.getElementById('depositSlider').value = 5000;
+        document.getElementById('monthlyDeposit').value = 5000;
+        document.getElementById('depositSliderValue').textContent = getCurrencySymbol() + ' ' + (5000).toLocaleString(getCurrencyLocale());
+        document.getElementById('rateSlider').value = 7;
+        document.getElementById('interestRate').value = 7;
+        document.getElementById('tenureSlider').value = 12;
+        document.getElementById('tenure').value = 12;
+
+        function formatCurrency(amount) {
+            const locale = getCurrencyLocale();
+            const decimals = getCurrencyDecimals();
+            
+            return getCurrencySymbol() + ' ' + amount.toLocaleString(locale, {
+                minimumFractionDigits: decimals,
+                maximumFractionDigits: decimals
+            });
+        }
+
+        function calculateRD() {
+            const monthlyDeposit = parseFloat(document.getElementById('monthlyDeposit').value);
+            const annualRate = parseFloat(document.getElementById('interestRate').value);
+            const tenure = parseInt(document.getElementById('tenure').value);
+            const tenureType = document.getElementById('tenureType').value;
+
+            // Validation
+            if (!monthlyDeposit || monthlyDeposit <= 0) {
+                alert('Please enter a valid monthly deposit amount');
+                return;
+            }
+            if (!annualRate || annualRate <= 0) {
+                alert('Please enter a valid interest rate');
+                return;
+            }
+            if (!tenure || tenure <= 0) {
+                alert('Please enter a valid tenure');
+                return;
+            }
+
+            // Convert tenure to months
+            const tenureInMonths = tenureType === 'years' ? tenure * 12 : tenure;
+            const tenureInYears = tenureInMonths / 12;
+            
+            // Calculate using correct RD formula with quarterly compounding
+            // Standard RD formula: M = P × n × (n+1) × (r/2400)
+            // But we'll use the more accurate month-by-month calculation
+            const quarterlyRate = annualRate / 4 / 100;
+            const monthsPerQuarter = 3;
+            
+            let maturityAmount = 0;
+            
+            // Calculate maturity by compounding each deposit
+            for (let month = 1; month <= tenureInMonths; month++) {
+                // Calculate how many complete quarters this deposit will compound for
+                const remainingMonths = tenureInMonths - month + 1;
+                const quarters = Math.floor(remainingMonths / monthsPerQuarter);
+                
+                // Compound this month's deposit for the remaining quarters
+                let depositValue = monthlyDeposit;
+                if (quarters > 0) {
+                    depositValue = monthlyDeposit * Math.pow(1 + quarterlyRate, quarters);
+                }
+                
+                maturityAmount += depositValue;
+            }
+
+            const totalInvested = monthlyDeposit * tenureInMonths;
+            const totalInterest = maturityAmount - totalInvested;
+            
+            // Effective Annual Return
+            const effectiveReturn = tenureInYears > 0 ? 
+                (Math.pow(maturityAmount / totalInvested, 1 / tenureInYears) - 1) * 100 : 0;
+
+            // Display results
+            document.getElementById('investedValue').textContent = formatCurrency(totalInvested);
+            document.getElementById('interestValue').textContent = formatCurrency(totalInterest);
+            document.getElementById('maturityValue').textContent = formatCurrency(maturityAmount);
+            document.getElementById('returnValue').textContent = effectiveReturn.toFixed(2) + '%';
+
+            document.getElementById('results').classList.add('active');
+
+            // Generate charts and tables
+            generateGrowthChart(monthlyDeposit, annualRate, tenureInMonths);
+            generateBreakdownTable(monthlyDeposit, annualRate, tenureInMonths);
+
+            document.getElementById('chartsSection').classList.add('active');
+            document.getElementById('breakdownSection').classList.add('active');
+
+            // Scroll to results
+            document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function generateGrowthChart(monthlyDeposit, annualRate, tenureMonths) {
+            if (growthChart) {
+                growthChart.destroy();
+            }
+
+            const quarterlyRate = annualRate / 4 / 100;
+            const labels = [];
+            const investedData = [];
+            const maturityData = [];
+
+            const steps = Math.min(tenureMonths, 60);
+            const stepSize = tenureMonths / steps;
+
+            for (let i = 0; i <= steps; i++) {
+                const monthsElapsed = Math.round(i * stepSize);
+                
+                // Total invested
+                const invested = monthlyDeposit * monthsElapsed;
+                
+                // Maturity value calculation using correct quarterly compounding
+                let maturityValue = 0;
+                if (monthsElapsed > 0) {
+                    for (let month = 1; month <= monthsElapsed; month++) {
+                        const remainingMonths = monthsElapsed - month + 1;
+                        const quarters = Math.floor(remainingMonths / 3);
+                        
+                        let depositValue = monthlyDeposit;
+                        if (quarters > 0) {
+                            depositValue = monthlyDeposit * Math.pow(1 + quarterlyRate, quarters);
+                        }
+                        
+                        maturityValue += depositValue;
+                    }
+                }
+
+                if (monthsElapsed === 0) {
+                    labels.push('Start');
+                } else if (monthsElapsed < 12) {
+                    labels.push(monthsElapsed + 'M');
+                } else {
+                    labels.push((monthsElapsed / 12).toFixed(1) + 'Y');
+                }
+                
+                investedData.push(invested);
+                maturityData.push(maturityValue);
+            }
+
+            const ctx = document.getElementById('growthChart').getContext('2d');
+            growthChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Total Invested',
+                            data: investedData,
+                            borderColor: '#64748b',
+                            backgroundColor: 'rgba(100, 116, 139, 0.1)',
+                            borderWidth: 2,
+                            borderDash: [5, 5],
+                            fill: false
+                        },
+                        {
+                            label: 'Maturity Value',
+                            data: maturityData,
+                            borderColor: '#0891b2',
+                            backgroundColor: 'rgba(8, 145, 178, 0.1)',
+                            borderWidth: 3,
+                            fill: true,
+                            tension: 0.4
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                padding: 15,
+                                font: { size: 12 }
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const locale = getCurrencyLocale();
+                                    const decimals = getCurrencyDecimals();
+                                    return context.dataset.label + ': ' + getCurrencySymbol() + ' ' + context.parsed.y.toLocaleString(locale, {
+                                        minimumFractionDigits: decimals,
+                                        maximumFractionDigits: decimals
+                                    });
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    const symbol = getCurrencySymbol();
+                                    if (value >= 100000) {
+                                        return symbol + ' ' + (value / 100000).toFixed(1) + 'L';
+                                    }
+                                    if (value >= 1000) {
+                                        return symbol + ' ' + (value / 1000).toFixed(0) + 'k';
+                                    }
+                                    return symbol + ' ' + value.toFixed(0);
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function generateBreakdownTable(monthlyDeposit, annualRate, tenureMonths) {
+            const tableBody = document.getElementById('breakdownTableBody');
+            tableBody.innerHTML = '';
+            breakdownData = [];
+
+            const quarterlyRate = annualRate / 4 / 100;
+            const years = Math.ceil(tenureMonths / 12);
+
+            for (let year = 1; year <= years; year++) {
+                const monthsInYear = Math.min(12, tenureMonths - (year - 1) * 12);
+                const totalMonthsElapsed = Math.min(year * 12, tenureMonths);
+                
+                const depositsThisYear = monthsInYear;
+                const totalInvestedTillDate = monthlyDeposit * totalMonthsElapsed;
+                
+                // Calculate closing balance using correct quarterly compounding
+                let closingBalance = 0;
+                for (let month = 1; month <= totalMonthsElapsed; month++) {
+                    const remainingMonths = totalMonthsElapsed - month + 1;
+                    const quarters = Math.floor(remainingMonths / 3);
+                    
+                    let depositValue = monthlyDeposit;
+                    if (quarters > 0) {
+                        depositValue = monthlyDeposit * Math.pow(1 + quarterlyRate, quarters);
+                    }
+                    
+                    closingBalance += depositValue;
+                }
+                
+                const interestEarned = closingBalance - totalInvestedTillDate;
+
+                // Add to breakdown data for export
+                breakdownData.push({
+                    year: year,
+                    deposits: depositsThisYear,
+                    totalInvested: totalInvestedTillDate,
+                    interest: interestEarned,
+                    closing: closingBalance
+                });
+
+                // Add table row
+                const row = tableBody.insertRow();
+                row.innerHTML = 
+                    '<td>Year ' + year + '</td>' +
+                    '<td>' + depositsThisYear + ' × ' + formatCurrency(monthlyDeposit) + '</td>' +
+                    '<td>' + formatCurrency(totalInvestedTillDate) + '</td>' +
+                    '<td>' + formatCurrency(interestEarned) + '</td>' +
+                    '<td>' + formatCurrency(closingBalance) + '</td>';
+            }
+        }
+
+        function exportToCSV() {
+            if (breakdownData.length === 0) {
+                alert('Please calculate RD first');
+                return;
+            }
+
+            let csv = 'Year,Deposits Made,Total Invested,Interest Earned,Closing Balance\n';
+            breakdownData.forEach(row => {
+                csv += `Year ${row.year},${row.deposits},${row.totalInvested.toFixed(2)},${row.interest.toFixed(2)},${row.closing.toFixed(2)}\n`;
+            });
+
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'rd-breakdown.csv';
+            a.click();
+            window.URL.revokeObjectURL(url);
+        }
+
+        function exportToPDF() {
+            if (breakdownData.length === 0) {
+                alert('Please calculate RD first');
+                return;
+            }
+
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            doc.setFontSize(18);
+            doc.text('Recurring Deposit Breakdown', 14, 20);
+            
+            doc.setFontSize(12);
+            doc.text('Total Invested: ' + document.getElementById('investedValue').textContent, 14, 35);
+            doc.text('Total Interest: ' + document.getElementById('interestValue').textContent, 14, 42);
+            doc.text('Maturity Amount: ' + document.getElementById('maturityValue').textContent, 14, 49);
+            doc.text('Effective Annual Return: ' + document.getElementById('returnValue').textContent, 14, 56);
+
+            const tableData = breakdownData.map(row => [
+                'Year ' + row.year,
+                row.deposits.toString(),
+                formatCurrency(row.totalInvested),
+                formatCurrency(row.interest),
+                formatCurrency(row.closing)
+            ]);
+
+            doc.autoTable({
+                startY: 65,
+                head: [['Year', 'Deposits', 'Total Invested', 'Interest Earned', 'Closing Balance']],
+                body: tableData,
+                theme: 'grid',
+                headStyles: { fillColor: [8, 145, 178] }
+            });
+
+            doc.save('rd-breakdown.pdf');
+        }
+
+        function resetForm() {
+            document.getElementById('monthlyDeposit').value = 5000;
+            document.getElementById('depositSlider').value = 5000;
+            document.getElementById('depositSliderValue').textContent = getCurrencySymbol() + '5,000';
+            
+            document.getElementById('interestRate').value = 7;
+            document.getElementById('rateSlider').value = 7;
+            document.getElementById('rateSliderValue').textContent = '7.0%';
+            
+            document.getElementById('tenure').value = 12;
+            document.getElementById('tenureSlider').value = 12;
+            document.getElementById('tenureSliderValue').textContent = '12 Months';
+            document.getElementById('tenureType').value = 'months';
+            
+            document.getElementById('currency').value = 'INR';
+            currentCurrency = 'INR';
+
+            document.getElementById('investedValue').textContent = getCurrencySymbol() + '0.00';
+            document.getElementById('interestValue').textContent = getCurrencySymbol() + '0.00';
+            document.getElementById('maturityValue').textContent = getCurrencySymbol() + '0.00';
+            document.getElementById('returnValue').textContent = '0.00%';
+
+            document.getElementById('results').classList.remove('active');
+            document.getElementById('chartsSection').classList.remove('active');
+            document.getElementById('breakdownSection').classList.remove('active');
+
+            if (growthChart) {
+                growthChart.destroy();
+                growthChart = null;
+            }
+
+            breakdownData = [];
+            document.getElementById('breakdownTableBody').innerHTML = '';
+        }
+
+        function toggleMenu() {
+            document.getElementById('mobileNav').classList.toggle('active');
+        }
+
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('calculateBtn').addEventListener('click', calculateRD);
+            document.getElementById('resetBtn').addEventListener('click', resetForm);
+            document.getElementById('hamburgerBtn').addEventListener('click', toggleMenu);
+            document.getElementById('exportCsvBtn').addEventListener('click', exportToCSV);
+            document.getElementById('exportPdfBtn').addEventListener('click', exportToPDF);
+            document.getElementById('currency').addEventListener('change', updateCurrencyDisplay);
+        });
+    </script>
+</body>
+</html>
