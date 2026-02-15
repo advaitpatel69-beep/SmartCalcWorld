@@ -1,18 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<link rel="icon" type="image/png" href="https://advaitpatel69-beep.github.io/Advait.github.io/favicon.png">
-	<link rel="canonical" href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/finance-emi-calculator.html">
+    <link rel="icon" type="image/png" href="https://advaitpatel69-beep.github.io/Advait.github.io/favicon.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Free EMI Calculator - Calculate your Equated Monthly Installment for home loans, car loans, and personal loans. Accurate EMI calculation with detailed breakdown.">
-    <title>EMI Calculator - Calculate Loan EMI Online | Finance Calculators</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <meta name="description" content="Free EMI Calculator - Calculate monthly EMI for home loans, car loans, personal loans. Get accurate EMI with amortization schedule, interest breakdown & eligibility guide.">
+    <meta name="keywords" content="EMI calculator, loan EMI calculator, home loan EMI, car loan EMI, personal loan calculator, EMI calculation formula, loan repayment calculator, monthly installment calculator">
+    <link rel="canonical" href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/finance-emi-calculator.html">
+    <title>EMI Calculator 2026 - Calculate Monthly Loan Payments | Home, Car & Personal Loans</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js" defer></script>
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is EMI and how does it work?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "EMI (Equated Monthly Installment) is a fixed payment amount you make to the lender every month to repay a loan. Each EMI includes two components: principal repayment (the original loan amount) and interest charges. The EMI remains constant throughout the loan tenure, but the principal and interest portions change each month. Initially, a larger portion goes toward interest, and over time, more goes toward principal repayment."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How is EMI calculated?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "EMI is calculated using the formula: EMI = [P × R × (1+R)^N] / [(1+R)^N - 1], where P is the principal loan amount, R is the monthly interest rate (annual rate divided by 12), and N is the loan tenure in months. This formula ensures that you pay equal monthly installments that cover both principal and interest, fully repaying the loan by the end of the tenure."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How can I reduce my EMI amount?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You can reduce EMI by: 1) Making a larger down payment to reduce the principal amount, 2) Extending the loan tenure (though this increases total interest), 3) Negotiating for a lower interest rate, 4) Making prepayments when possible, 5) Choosing loans during promotional periods with reduced rates, 6) Improving your credit score before applying to qualify for better rates, 7) Comparing offers from multiple lenders."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is a good EMI to income ratio?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Financial experts recommend that your total EMI obligations should not exceed 40-50% of your monthly income. This is called the Fixed Obligation to Income Ratio (FOIR). For example, if your monthly income is ₹50,000, your total EMIs across all loans should ideally be below ₹20,000-₹25,000. This ensures you have sufficient income for other expenses, savings, and emergencies."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I prepay my loan to reduce EMI burden?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, making prepayments can significantly reduce your loan burden. You have two options: 1) Reduce the EMI amount while keeping the tenure same, or 2) Reduce the tenure while keeping EMI same. Most lenders allow prepayment, though some may charge a prepayment penalty of 2-4% for loans with floating rates. Many banks now offer prepayment without penalties after a certain period. Prepayments directly reduce the principal, substantially lowering total interest paid."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What documents are needed to start an EMI loan?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Common documents required include: 1) Identity proof (Aadhaar, PAN card, passport), 2) Address proof (utility bills, rental agreement), 3) Income proof (salary slips for last 3-6 months, bank statements), 4) Employment proof (offer letter, employment certificate), 5) For self-employed: ITR for 2-3 years, business proof, bank statements, 6) Property documents (for home loans), 7) Credit report (lenders check automatically), 8) Passport-sized photographs."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does EMI affect my credit score?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, EMI payment history significantly impacts your credit score. Timely EMI payments build a positive credit history and improve your score over time, making you eligible for better loan terms in the future. Missed or delayed EMI payments severely damage your credit score, making it difficult to get loans or credit cards. Even one missed payment stays on your credit report for up to 7 years. Setting up auto-debit ensures you never miss an EMI payment."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens if I miss an EMI payment?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Missing an EMI payment has serious consequences: 1) Late payment penalties and charges are added, 2) Your credit score drops significantly, 3) Lender may report default to credit bureaus, 4) Future loan applications become difficult, 5) Interest continues accumulating on unpaid amount, 6) After 3-6 missed payments, lender may initiate legal action or asset seizure (for secured loans). Contact your lender immediately if you anticipate difficulty paying EMI - many offer restructuring options."
+          }
+        }
+      ]
+    }
+    </script>
+    
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            overflow-x: hidden;
         }
 
         body {
@@ -67,7 +147,6 @@
             flex-direction: column;
             cursor: pointer;
             gap: 4px;
-            /* New styles to reset button defaults */
             background: none;
             border: none;
             padding: 0;
@@ -113,6 +192,8 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 2rem 1rem;
+            width: 100%;
+            overflow-x: hidden;
         }
 
         .hero {
@@ -124,21 +205,76 @@
             font-size: 2.5rem;
             color: #2d3748;
             margin-bottom: 1rem;
+            font-weight: 800;
         }
 
-        .intro {
+        .hero-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero-subtitle {
             font-size: 1.1rem;
             color: #4a5568;
             max-width: 800px;
             margin: 0 auto;
         }
 
+        .section-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #e2e8f0;
+            flex-wrap: wrap;
+        }
+
+        .section-tab {
+            flex: 1;
+            min-width: 200px;
+            padding: 1rem 2rem;
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-bottom: none;
+            border-radius: 12px 12px 0 0;
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #64748b;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .section-tab:hover {
+            background: #f7fafc;
+            color: #667eea;
+        }
+
+        .section-tab.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #667eea;
+            transform: translateY(2px);
+        }
+
+        .section-content {
+            display: none;
+            scroll-margin-top: 80px;
+        }
+
+        .section-content.active {
+            display: block;
+        }
+
         .calculator-section {
             background: white;
             border-radius: 12px;
             padding: 2rem;
+            scroll-margin-top: 80px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.07);
             margin-bottom: 3rem;
+            width: 100%;
+            max-width: 100%;
+            overflow: hidden;
         }
 
         .form-group {
@@ -152,7 +288,74 @@
             color: #2d3748;
         }
 
-        input[type="number"],
+        .input-slider-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        input[type="number"]:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            padding: 0;
+            height: 8px;
+            background: #e2e8f0;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: #667eea;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+
+        input[type="range"]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            background: #667eea;
+            cursor: pointer;
+            border-radius: 50%;
+            border: none;
+        }
+
+        .slider-container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .slider-value {
+            font-size: 0.9rem;
+            color: #667eea;
+            font-weight: 600;
+            margin-top: 0.25rem;
+        }
+
+        .tenure-group {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 1rem;
+        }
+
         select {
             width: 100%;
             padding: 0.75rem;
@@ -162,16 +365,9 @@
             transition: border-color 0.3s;
         }
 
-        input[type="number"]:focus,
         select:focus {
             outline: none;
             border-color: #667eea;
-        }
-
-        .tenure-group {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 1rem;
         }
 
         .button-group {
@@ -216,19 +412,20 @@
             padding: 2rem;
             margin-top: 2rem;
             color: white;
-            display: block;
+            display: none;
+        }
+
+        .results.active {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
         }
 
         .result-item {
             background: rgba(255,255,255,0.1);
             padding: 1.5rem;
             border-radius: 8px;
-            margin-bottom: 1rem;
             backdrop-filter: blur(10px);
-        }
-
-        .result-item:last-child {
-            margin-bottom: 0;
         }
 
         .result-label {
@@ -238,22 +435,25 @@
         }
 
         .result-value {
-            font-size: 2rem;
+            font-size: 1.75rem;
             font-weight: 700;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            word-break: break-word;
         }
 
-        .total-highlight {
-            background: rgba(255,255,255,0.2);
-            border: 2px solid rgba(255,255,255,0.3);
+        @media (max-width: 480px) {
+            .result-value {
+                font-size: 1.25rem;
+            }
         }
 
         .charts-section {
             display: none;
-            background: white;
-            border-radius: 12px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+            margin-top: 3rem;
+            width: 100%;
+            max-width: 100%;
+            overflow: hidden;
         }
 
         .charts-section.active {
@@ -264,20 +464,39 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
-            margin-top: 1.5rem;
+            margin-top: 2rem;
+            width: 100%;
+            max-width: 100%;
         }
 
         .chart-container {
-            position: relative;
-            height: 300px;
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+            width: 100%;
+            max-width: 100%;
+            overflow: hidden;
         }
 
         .chart-title {
-            text-align: center;
-            font-weight: 600;
+            font-size: 1.2rem;
+            font-weight: 700;
             color: #2d3748;
-            margin-bottom: 1rem;
-            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .chart-wrapper {
+            position: relative;
+            height: 300px;
+            width: 100%;
+            max-width: 100%;
+        }
+
+        .chart-wrapper canvas {
+            max-width: 100% !important;
+            height: auto !important;
         }
 
         .amortization-section {
@@ -285,129 +504,158 @@
             background: white;
             border-radius: 12px;
             padding: 2rem;
-            margin-bottom: 2rem;
             box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+            margin-top: 3rem;
+            width: 100%;
+            max-width: 100%;
+            overflow: hidden;
         }
 
         .amortization-section.active {
             display: block;
         }
 
+        .amortization-section h2 {
+            font-size: 1.8rem;
+            color: #2d3748;
+            margin-bottom: 1rem;
+        }
+
         .toggle-table-btn {
-            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             padding: 0.75rem 1.5rem;
             border: none;
             border-radius: 8px;
-            font-weight: 600;
             cursor: pointer;
-            margin-top: 1rem;
-            transition: transform 0.2s;
-        }
-
-        .toggle-table-btn:hover {
-            transform: translateY(-2px);
+            font-weight: 600;
+            margin: 1rem 0;
+            width: 100%;
+            max-width: 400px;
         }
 
         .table-container {
             overflow-x: auto;
-            margin-top: 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            margin-top: 1rem;
+            width: 100%;
+            max-width: 100%;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            background: white;
+            min-width: 600px;
         }
 
-        thead {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-        }
-
-        th {
-            padding: 1rem;
-            text-align: left;
-            font-weight: 600;
-            white-space: nowrap;
-        }
-
-        td {
-            padding: 0.75rem 1rem;
+        th, td {
+            padding: 0.75rem;
+            text-align: right;
             border-bottom: 1px solid #e2e8f0;
         }
 
-        tbody tr:hover {
+        th {
             background: #f7fafc;
+            font-weight: 600;
+            color: #2d3748;
         }
 
-        tbody tr:nth-child(even) {
-            background: #fafafa;
-        }
-
-        tbody tr:nth-child(even):hover {
-            background: #f0f0f0;
+        th:first-child, td:first-child {
+            text-align: left;
         }
 
         .content-section {
             background: white;
             border-radius: 12px;
-            padding: 2rem;
-            margin-bottom: 2rem;
+            padding: 2.5rem;
             box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+            margin-top: 3rem;
+            width: 100%;
+            max-width: 100%;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            scroll-margin-top: 80px;
         }
 
         .content-section h2 {
+            font-size: 2rem;
             color: #2d3748;
-            margin-bottom: 1rem;
-            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid #667eea;
+            padding-left: 1rem;
         }
 
         .content-section h3 {
-            color: #4a5568;
-            margin-top: 1.5rem;
-            margin-bottom: 0.75rem;
-            font-size: 1.3rem;
+            font-size: 1.5rem;
+            color: #2d3748;
+            margin: 2rem 0 1rem;
         }
 
         .content-section p {
-            color: #4a5568;
             margin-bottom: 1rem;
+            color: #4a5568;
+            line-height: 1.8;
         }
 
-        .calculator-links {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1rem;
-            margin-top: 1.5rem;
+        .content-section ul, .content-section ol {
+            margin: 1rem 0 1rem 2rem;
+            color: #4a5568;
         }
 
-        .calculator-link {
-            display: block;
+        .content-section li {
+            margin-bottom: 0.75rem;
+            line-height: 1.8;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #f0f4ff 0%, #f5f0ff 100%);
+            border-left: 4px solid #667eea;
             padding: 1.5rem;
-            background: linear-gradient(135deg, #f6f8fb 0%, #e9ecef 100%);
             border-radius: 8px;
-            text-decoration: none;
-            color: #2d3748;
-            font-weight: 600;
-            text-align: left;
-            transition: transform 0.3s, box-shadow 0.3s;
+            margin: 1.5rem 0;
         }
 
-        .calculator-link:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        .highlight-box strong {
+            color: #667eea;
+        }
+
+        .step-box {
+            background: #f7fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .step-number {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background: #667eea;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: 700;
+            margin-right: 0.5rem;
         }
 
         .faq-item {
-            margin-bottom: 1.5rem;
+            background: #f7fafc;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
         }
 
-        .faq-item h3 {
-            color: #667eea;
-            margin-bottom: 0.5rem;
+        .faq-question {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 0.75rem;
+        }
+
+        .faq-answer {
+            color: #4a5568;
+            line-height: 1.8;
         }
 
         footer {
@@ -465,17 +713,34 @@
             color: #cbd5e0;
         }
 
+        .calculator-link {
+            display: block;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #f6f8fb 0%, #e9ecef 100%);
+            border-radius: 8px;
+            text-decoration: none;
+            color: #2d3748;
+            font-weight: 600;
+            text-align: left;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .calculator-link:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+
         @media (max-width: 768px) {
-            nav {
-                display: none;
-            }
-
-            .hamburger {
-                display: flex;
-            }
-
             h1 {
                 font-size: 2rem;
+            }
+
+            .calculator-section {
+                padding: 1.5rem;
+            }
+
+            .input-slider-group {
+                grid-template-columns: 1fr;
             }
 
             .tenure-group {
@@ -486,112 +751,90 @@
                 flex-direction: column;
             }
 
+            .results.active {
+                grid-template-columns: 1fr;
+                gap: 0.75rem;
+            }
+
+            .result-item {
+                padding: 1rem;
+            }
+
             .result-value {
                 font-size: 1.5rem;
             }
 
-            .calculator-section {
+            nav {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .charts-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .chart-container {
                 padding: 1.5rem;
+            }
+
+            .chart-wrapper {
+                height: 250px;
             }
 
             .content-section {
                 padding: 1.5rem;
             }
 
-            .charts-grid {
-                grid-template-columns: 1fr;
+            .content-section h2 {
+                font-size: 1.5rem;
+            }
+
+            .content-section h3 {
+                font-size: 1.2rem;
+            }
+
+            .section-tabs {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .section-tab {
+                min-width: 100%;
+                padding: 0.75rem 1rem;
+                font-size: 0.95rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .result-item {
+                padding: 0.75rem;
+            }
+
+            .result-label {
+                font-size: 0.85rem;
+            }
+
+            .result-value {
+                font-size: 1.25rem;
             }
 
             .chart-container {
-                height: 250px;
+                padding: 1rem;
             }
 
-            th, td {
-                padding: 0.5rem;
-                font-size: 0.9rem;
+            .chart-title {
+                font-size: 1rem;
             }
-        }
 
-        @media (min-width: 769px) and (max-width: 1024px) {
-            .container {
-                padding: 2rem 2rem;
+            .chart-wrapper {
+                height: 220px;
             }
         }
     </style>
-
-	<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "What is EMI?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "EMI stands for Equated Monthly Installment. It is a fixed payment amount that you make to the lender every month until your loan is fully repaid."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How is EMI calculated?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "EMI is calculated using a mathematical formula that considers the loan amount, interest rate, and loan tenure. It ensures the borrower pays a fixed monthly amount over the loan period."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Does EMI include interest?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, each EMI includes both the principal repayment and the interest charged by the lender. In the early months, the interest portion is higher, and later the principal portion increases."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Can EMI change during the loan tenure?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "EMI remains fixed in loans with a fixed interest rate. However, in loans with a floating or variable interest rate, EMI may increase or decrease depending on changes in market interest rates."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What factors affect EMI amount?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "The EMI amount mainly depends on three factors: the loan amount, the annual interest rate, and the loan tenure. Higher loan amounts or interest rates increase EMI, while a longer tenure reduces monthly EMI but increases total interest."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Is the EMI calculator accurate?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, an EMI calculator uses the standard formula used by financial institutions. However, the final EMI from a lender may differ slightly due to processing fees, insurance, or other charges."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How can I reduce my EMI?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "You can reduce your EMI by increasing the loan tenure, making a larger down payment, choosing a lower interest rate, or making part-prepayments to reduce the outstanding principal."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Why should I use an EMI calculator before taking a loan?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "An EMI calculator helps you understand your monthly payment in advance, compare loan options, plan your budget, and avoid financial stress by knowing the total interest and repayment amount."
-      }
-    }
-  ]
-}
-</script>
-	
 </head>
 <body>
     <header>
@@ -603,13 +846,12 @@
                 <span class="nav-disabled">Student Calculators (Coming Soon)</span>
                 <span class="nav-disabled">Medical Calculators (Coming Soon)</span>
                 <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/finance-hub.html">Finance Calculators</a>
-
             </nav>
-            <button class="hamburger" id="hamburgerBtn" aria-label="Menu">
+            <div class="hamburger" id="hamburgerBtn" aria-label="Menu">
                 <span></span>
                 <span></span>
                 <span></span>
-            </button>
+            </div>
         </div>
         <div class="mobile-nav" id="mobileNav">
             <a href="https://advaitpatel69-beep.github.io/Advait.github.io/index.html">Home</a>
@@ -617,95 +859,120 @@
             <span class="nav-disabled">Student Calculators (Coming Soon)</span>
             <span class="nav-disabled">Medical Calculators (Coming Soon)</span>
             <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/finance-hub.html">Finance Calculators</a>
-
         </div>
     </header>
 
     <div class="container">
         <div class="hero">
+            <div class="hero-icon">💳</div>
             <h1>EMI Calculator</h1>
-            <p class="intro">
-                An Equated Monthly Installment (EMI) is a fixed payment amount made by a borrower to a lender at a specified date each month. 
-                This free EMI calculator helps you calculate your monthly loan payments for home loans, car loans, personal loans, and other types of loans. 
-                Simply enter your loan amount, interest rate, and loan period to get instant results with a detailed breakdown of your total interest and repayment amount.
-            </p>
+            <p class="hero-subtitle">Calculate your Equated Monthly Installment (EMI) for home loans, car loans, personal loans, and business loans instantly with detailed amortization schedule</p>
         </div>
 
-        <div class="calculator-section">
+        <div class="section-tabs">
+            <button class="section-tab active" onclick="switchSection('calculator')">
+                🧮 EMI Calculator
+            </button>
+            <button class="section-tab" onclick="switchSection('howto')">
+                🚀 How to Start EMI
+            </button>
+        </div>
+
+        <div class="section-content active" id="calculatorSection">
+        <div class="calculator-section" id="calculator">
             <div class="form-group">
-                <label for="currency">Currency</label>
-                <select id="currency">
-                    <option value="USD" selected>$ USD - US Dollar</option>
-                    <option value="EUR">€ EUR - Euro</option>
-                    <option value="GBP">£ GBP - British Pound</option>
-                    <option value="INR">₹ INR - Indian Rupee</option>
-                    <option value="JPY">¥ JPY - Japanese Yen</option>
-                    <option value="CNY">¥ CNY - Chinese Yuan</option>
-                    <option value="AUD">$ AUD - Australian Dollar</option>
-                    <option value="CAD">$ CAD - Canadian Dollar</option>
-                    <option value="CHF">CHF - Swiss Franc</option>
-                    <option value="AED">AED - UAE Dirham</option>
-                    <option value="SAR">SAR - Saudi Riyal</option>
-                    <option value="SGD">$ SGD - Singapore Dollar</option>
-                    <option value="MYR">RM MYR - Malaysian Ringgit</option>
-                    <option value="ZAR">R ZAR - South African Rand</option>
-                </select>
+                <label for="loanAmount">Loan Amount (Principal) 💰</label>
+                <div class="input-slider-group">
+                    <input type="number" id="loanAmount" placeholder="Enter loan amount" min="1000" step="1000" value="1000000">
+                    <div class="slider-container">
+                        <input type="range" id="loanSlider" min="1000" max="10000000" step="1000" value="1000000">
+                        <div class="slider-value" id="loanSliderValue">₹ 10,00,000</div>
+                    </div>
+                </div>
             </div>
 
             <div class="form-group">
-                <label for="loanAmount">Loan Amount</label>
-                <input type="number" id="loanAmount" min="1" step="any" placeholder="Enter loan amount" value="500000">
+                <label for="interestRate">Annual Interest Rate (%) 📊</label>
+                <div class="input-slider-group">
+                    <input type="number" id="interestRate" placeholder="Enter interest rate" min="0.1" max="30" step="0.1" value="9">
+                    <div class="slider-container">
+                        <input type="range" id="rateSlider" min="0.1" max="30" step="0.1" value="9">
+                        <div class="slider-value" id="rateSliderValue">9.0%</div>
+                    </div>
+                </div>
             </div>
 
             <div class="form-group">
-                <label for="interestRate">Annual Interest Rate (%)</label>
-                <input type="number" id="interestRate" min="0.1" step="0.1" placeholder="Enter interest rate" value="8.5">
-            </div>
-
-            <div class="form-group">
-                <label for="tenure">Loan Period</label>
+                <label for="tenure">Loan Tenure ⏰</label>
                 <div class="tenure-group">
-                    <input type="number" id="tenure" min="1" placeholder="Enter loan period" value="20">
+                    <div class="input-slider-group">
+                        <input type="number" id="tenure" placeholder="Enter tenure" min="1" step="1" value="20">
+                        <div class="slider-container">
+                            <input type="range" id="tenureSlider" min="1" max="30" step="1" value="20">
+                            <div class="slider-value" id="tenureSliderValue">20 Years</div>
+                        </div>
+                    </div>
                     <select id="tenureType">
+                        <option value="years">Years</option>
                         <option value="months">Months</option>
-                        <option value="years" selected>Years</option>
                     </select>
                 </div>
             </div>
 
+            <div class="form-group">
+                <label for="currency">Currency 💱</label>
+                <select id="currency">
+                    <option value="INR">🇮🇳 Indian Rupee (₹)</option>
+                    <option value="USD" selected>🇺🇸 US Dollar ($)</option>
+                    <option value="EUR">🇪🇺 Euro (€)</option>
+                    <option value="GBP">🇬🇧 British Pound (£)</option>
+                    <option value="JPY">🇯🇵 Japanese Yen (¥)</option>
+                    <option value="AUD">🇦🇺 Australian Dollar (A$)</option>
+                    <option value="CAD">🇨🇦 Canadian Dollar (C$)</option>
+                    <option value="CHF">🇨🇭 Swiss Franc (CHF)</option>
+                    <option value="CNY">🇨🇳 Chinese Yuan (¥)</option>
+                    <option value="SGD">🇸🇬 Singapore Dollar (S$)</option>
+                    <option value="AED">🇦🇪 UAE Dirham (AED)</option>
+                    <option value="SAR">🇸🇦 Saudi Riyal (SR)</option>
+                </select>
+            </div>
+
             <div class="button-group">
-                <button type="button" class="btn-calculate" id="calculateBtn">Calculate EMI</button>
-                <button type="button" class="btn-reset" id="resetBtn">Reset</button>
+                <button class="btn-calculate" id="calculateBtn">Calculate EMI 🧮</button>
+                <button class="btn-reset" id="resetBtn">Reset 🔄</button>
             </div>
 
             <div class="results" id="results">
                 <div class="result-item">
-                    <div class="result-label">Monthly EMI</div>
-                    <div class="result-value" id="emiValue">₹4,303.26</div>
+                    <div class="result-label">Monthly EMI 💳</div>
+                    <div class="result-value" id="emiValue">₹ 0</div>
                 </div>
                 <div class="result-item">
-                    <div class="result-label">Total Interest Payable</div>
-                    <div class="result-value" id="interestValue">₹5,32,782.40</div>
+                    <div class="result-label">Principal Amount 💰</div>
+                    <div class="result-value" id="principalValue">₹ 0</div>
                 </div>
-                <div class="result-item total-highlight">
-                    <div class="result-label">Total Amount Payable</div>
-                    <div class="result-value" id="totalValue">₹10,32,782.40</div>
+                <div class="result-item">
+                    <div class="result-label">Total Interest 📈</div>
+                    <div class="result-value" id="interestValue">₹ 0</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Total Amount 💵</div>
+                    <div class="result-value" id="totalValue">₹ 0</div>
                 </div>
             </div>
         </div>
 
         <div class="charts-section" id="chartsSection">
-            <h2>Visual Breakdown</h2>
             <div class="charts-grid">
-                <div>
-                    <div class="chart-title">Principal vs Interest</div>
-                    <div class="chart-container">
+                <div class="chart-container">
+                    <h3 class="chart-title">📊 Principal vs Interest Breakdown</h3>
+                    <div class="chart-wrapper">
                         <canvas id="pieChart"></canvas>
                     </div>
                 </div>
-                <div>
-                    <div class="chart-title">Loan Balance Over Time</div>
-                    <div class="chart-container">
+                <div class="chart-container">
+                    <h3 class="chart-title">📉 Loan Balance Over Time</h3>
+                    <div class="chart-wrapper">
                         <canvas id="lineChart"></canvas>
                     </div>
                 </div>
@@ -713,13 +980,12 @@
         </div>
 
         <div class="amortization-section" id="amortizationSection">
-            <h2>Payment Schedule</h2>
+            <h2>📅 Payment Schedule (Amortization Table)</h2>
             <p style="color: #4a5568; margin-bottom: 1rem;">
-                The payment schedule shows how your loan is paid off month by month. Each payment includes both principal (the original loan amount) 
-                and interest. In the early months, most of your payment goes toward interest, but over time, more goes toward paying down the principal.
+                The payment schedule shows exactly how your loan is paid off month by month. Each EMI payment includes both principal repayment and interest charges. In the early months, most of your payment goes toward interest 💸, but over time, more goes toward paying down the principal 💰. This is how EMI loans work!
             </p>
             <button class="toggle-table-btn" id="toggleTableBtn">
-                <span id="toggleText">Show Detailed Payment Schedule</span>
+                <span id="toggleText">📋 Show Detailed Payment Schedule</span>
             </button>
             <div class="table-container" id="tableContainer" style="display: none;">
                 <table>
@@ -738,92 +1004,260 @@
             </div>
         </div>
 
-        <div class="content-section">
-            <h2>What is an EMI Payment Schedule?</h2>
-            <p>
-                An EMI payment schedule (also called an amortization schedule) is a detailed table that shows exactly how your loan will be repaid over time. 
-                For each month of your loan, it breaks down your fixed EMI payment into two parts: how much goes toward paying back the money you borrowed (principal) 
-                and how much goes toward paying the cost of borrowing (interest).
-            </p>
-            <p>
-                In the beginning, most of your monthly payment goes toward interest because you owe more money. As time passes and you pay down the loan, 
-                less goes to interest and more goes to reducing what you owe. By the end of the loan, almost all of your payment is going toward principal. 
-                This schedule helps you see the complete picture of your loan repayment journey.
-            </p>
+        <div class="content-section" id="guide">
+            <h2>💡 Understanding EMI - Complete Guide</h2>
+            
+            <h3>What is EMI? 💳</h3>
+            <p>EMI stands for <strong>Equated Monthly Installment</strong> - a fixed payment amount you make to your lender every month to repay a loan. Think of EMI as your monthly commitment to clear your debt systematically. Each EMI you pay includes two components: <strong>principal repayment</strong> (returning the borrowed money) and <strong>interest charges</strong> (the cost of borrowing).</p>
+            
+            <p>The beauty of EMI is that it remains constant throughout your loan tenure, making it easier to budget your monthly expenses 📊. Whether you take a home loan, car loan, personal loan, or education loan, the EMI system ensures predictable and manageable repayments without sudden financial shocks.</p>
+
+            <h3>How EMI Works 🔄</h3>
+            <p>When you take a loan, the lender calculates a fixed monthly payment that will fully repay both the principal and interest by the end of the loan period. Here's the fascinating part: while your EMI remains the same, the <em>composition</em> of each payment changes every month!</p>
+
+            <div class="highlight-box">
+                <strong>📈 The EMI Journey:</strong><br>
+                <strong>Early Months:</strong> Larger portion goes to interest (60-80%), smaller portion to principal (20-40%)<br>
+                <strong>Middle Months:</strong> Interest and principal roughly equal (50-50%)<br>
+                <strong>Final Months:</strong> Larger portion pays principal (60-80%), minimal interest (20-40%)
+            </div>
+
+            <p>This happens because interest is calculated on the outstanding principal. As you repay principal over time, the interest amount reduces, allowing more of your EMI to chip away at the principal. By the loan's end, you're paying almost pure principal! 💪</p>
+
+            <h3>How is EMI Calculated? 🧮</h3>
+            <p>EMI calculation uses a mathematical formula that balances three factors:</p>
+
+            <div class="highlight-box">
+                <strong>EMI Formula:</strong><br>
+                EMI = [P × R × (1+R)^N] / [(1+R)^N - 1]<br><br>
+                Where:<br>
+                <strong>P</strong> = Principal loan amount<br>
+                <strong>R</strong> = Monthly interest rate (Annual Rate ÷ 12 ÷ 100)<br>
+                <strong>N</strong> = Loan tenure in months<br><br>
+                <strong>Example:</strong> ₹10,00,000 loan at 9% annual interest for 20 years<br>
+                Monthly Rate (R) = 9 ÷ 12 ÷ 100 = 0.0075<br>
+                Tenure (N) = 20 × 12 = 240 months<br>
+                EMI = ₹8,997 per month
+            </div>
+
+            <p>Don't worry about manual calculations - our EMI calculator does all the complex math instantly! Just input your loan amount, interest rate, and tenure to get accurate results in seconds ⚡</p>
+
+            <h3>Factors Affecting Your EMI 📊</h3>
+            <p>Three primary factors determine your monthly EMI amount:</p>
+
+            <ul>
+                <li><strong>💰 Loan Amount (Principal):</strong> Higher loan amount = Higher EMI. If you borrow ₹20 lakhs instead of ₹10 lakhs, your EMI roughly doubles (assuming same interest rate and tenure).</li>
+                <li><strong>📈 Interest Rate:</strong> Higher interest rate = Higher EMI. Even a 1-2% difference in interest rates can significantly impact your monthly outgo and total interest paid over the loan period.</li>
+                <li><strong>⏰ Loan Tenure:</strong> Longer tenure = Lower EMI but more total interest. Shorter tenure = Higher EMI but less total interest. This is the classic tradeoff - monthly affordability vs. long-term cost.</li>
+            </ul>
+
+            <h3>Types of Loans Using EMI 🏦</h3>
+            
+            <p><strong>🏠 Home Loan / Housing Loan:</strong> Longest tenure (up to 30 years), lowest interest rates (6.5-9%), highest loan amounts (₹50 lakhs to ₹5 crores+). EMIs are tax-deductible under Section 24(b) for interest up to ₹2 lakhs and Section 80C for principal up to ₹1.5 lakhs annually. Typically secured against the property being purchased.</p>
+
+            <p><strong>🚗 Car Loan / Auto Loan:</strong> Medium tenure (3-7 years), moderate interest rates (7-12%), loan amounts ₹3-50 lakhs. Secured against the vehicle. No tax benefits. Processing is fast - approval within 24-48 hours. Down payment typically 10-20% of vehicle cost.</p>
+
+            <p><strong>💼 Personal Loan:</strong> Short to medium tenure (1-5 years), higher interest rates (10-24%), loan amounts ₹50,000 to ₹25 lakhs. Unsecured (no collateral needed), hence higher rates. Quick disbursal. Used for weddings, medical emergencies, travel, debt consolidation, or any personal need.</p>
+
+            <p><strong>🎓 Education Loan:</strong> Long tenure (up to 15 years), low rates (7-14%), amounts up to ₹75 lakhs for foreign studies. Moratorium period available (no EMI during study + 6-12 months after). Interest paid during moratorium adds to principal. Tax deduction on interest under Section 80E.</p>
+
+            <p><strong>🏢 Business Loan:</strong> Flexible tenure (1-10 years), rates vary (11-20%), amounts from ₹1 lakh to ₹50 crores. Used for working capital, expansion, equipment purchase. Requires business financials and sometimes collateral for large amounts.</p>
+
+            <h3>How to Reduce Your EMI Burden 💡</h3>
+            
+            <ol>
+                <li><strong>💵 Make a Larger Down Payment:</strong> The more you pay upfront, the less you need to borrow. For a ₹30 lakh home, increasing down payment from 20% (₹6 lakhs) to 30% (₹9 lakhs) reduces your loan to ₹21 lakhs instead of ₹24 lakhs, significantly lowering EMI.</li>
+                
+                <li><strong>🔍 Shop for Lower Interest Rates:</strong> Compare offers from 3-5 lenders. A 0.5% difference might seem small but saves lakhs over 20 years. Online comparison tools and loan aggregators help find best rates. Credit score above 750 gets you better rates.</li>
+                
+                <li><strong>⏱️ Choose Optimal Tenure:</strong> Longer tenure means lower EMI but more total interest. Shorter tenure means higher EMI but massive interest savings. Choose based on your income stability and financial goals.</li>
+                
+                <li><strong>💸 Make Prepayments Regularly:</strong> Whenever you have surplus funds (bonus, tax refund, inheritance), prepay part of your loan. Even small prepayments significantly reduce principal and total interest. Most banks allow free prepayment for floating rate loans.</li>
+                
+                <li><strong>📈 Improve Your Credit Score:</strong> Before applying, spend 6-12 months building excellent credit. Pay all EMIs and credit card bills on time. Keep credit utilization below 30%. A score jump from 650 to 780 can reduce your interest rate by 2-3%!</li>
+                
+                <li><strong>💰 Balance Transfer:</strong> If you have an existing loan at high interest, transfer it to a bank offering lower rates. This refinancing can reduce your EMI or tenure significantly. Watch out for processing fees and charges though.</li>
+                
+                <li><strong>🎯 Negotiate:</strong> Everything is negotiable! If you have good credit and stable income, leverage competing offers to negotiate better rates, lower processing fees, or waiver of certain charges with your preferred lender.</li>
+            </ol>
         </div>
 
-        <div class="content-section">
-            <h2>What is EMI?</h2>
-            <p>
-                EMI stands for Equated Monthly Installment. It is a fixed amount of money you pay every month to repay your loan. 
-                The EMI includes both the principal amount (the money you borrowed) and the interest charged by the lender. 
-                The EMI amount remains the same throughout the loan period, making it easier for borrowers to plan their monthly budget.
-            </p>
+        </div><!-- End Calculator Section -->
 
-            <h3>How EMI is Calculated</h3>
-            <p>
-                The EMI calculation uses a mathematical formula that considers three main factors: the loan amount (principal), 
-                the annual interest rate, and the loan period. The formula ensures that by the end of your loan period, 
-                you have paid back both the principal and the interest in equal monthly installments.
-            </p>
+        <div class="section-content" id="howtoSection">
+        <div class="content-section" id="how-to-start">
+            <h2>🚀 How to Start EMI - Step-by-Step Guide</h2>
+            <p>Planning to take a loan but confused about where to start? Here's a comprehensive guide to help you navigate the EMI loan process smoothly from research to disbursement! 🎯</p>
+
+            <h3>Step 1: Assess Your Financial Situation 💰</h3>
+            <div class="step-box">
+                <span class="step-number">1</span>
+                <strong>Calculate Your Budget:</strong> Use the 40-50 rule - your total EMIs should not exceed 40-50% of your monthly income. For example, if you earn 60,000/month, your safe EMI limit is 24,000-30,000. This ensures you have enough for living expenses, savings, and emergencies.
+            </div>
+            <p><strong>Pro Tip:</strong> List all existing EMIs and commitments first. The new EMI should fit comfortably within your remaining budget without stretching you thin financially.</p>
+
+            <h3>Step 2: Check Your Credit Score 📊</h3>
+            <div class="step-box">
+                <span class="step-number">2</span>
+                <strong>Know Your CIBIL/Credit Score:</strong> Visit CIBIL.com, Experian, or other credit bureaus to get your free annual credit report. Aim for 750+ score for best interest rates. Below 650 may result in rejection or very high rates.
+            </div>
+            <p><strong>Improve Your Score:</strong> Pay all pending dues, reduce credit card balances, avoid multiple loan applications, and clear any errors in your credit report. Even 2-3 months of disciplined credit behavior can boost your score! ✨</p>
+
+            <h3>Step 3: Research Loan Options 🔍</h3>
+            <div class="step-box">
+                <span class="step-number">3</span>
+                <strong>Compare Lenders:</strong> Don't settle for the first offer! Check at least 4-5 banks/NBFCs. Compare interest rates, processing fees, prepayment charges, foreclosure options, and customer service quality. Online loan marketplaces make comparison easy.
+            </div>
+            <p><strong>Key Comparison Points:</strong> Interest rate, processing fee (1-3% of loan), prepayment charges, tenure flexibility, documentation requirements, approval time, and customer reviews. The lowest rate isn't always the best - consider the complete package! 📦</p>
+
+            <h3>Step 4: Calculate EMI & Affordability 🧮</h3>
+            <div class="step-box">
+                <span class="step-number">4</span>
+                <strong>Use EMI Calculator:</strong> Input different loan amounts, interest rates, and tenures in our calculator above. See how changes affect your monthly EMI. Calculate total interest paid. Choose a combination that's comfortable, not just barely affordable.
+            </div>
+            <p><strong>Smart Strategy:</strong> Opt for slightly shorter tenure if you can afford 10-15% higher EMI. This can save you 30-40% of total interest! For example, 10 lakh at 9% for 15 years (EMI 10,143) saves 3.5 lakhs compared to 20 years (EMI 8,997)! 💪</p>
+
+            <h3>Step 5: Gather Required Documents 📄</h3>
+            <div class="step-box">
+                <span class="step-number">5</span>
+                <strong>Prepare Documentation:</strong> Collect all necessary papers in advance to speed up approval. Most lenders need similar documents, so prepare one master set.
+            </div>
+            <p><strong>Standard Documents Required:</strong></p>
+            <ul>
+                <li><strong>🆔 Identity Proof:</strong> Aadhaar Card, PAN Card, Passport, Voter ID, Driving License (any 2)</li>
+                <li><strong>🏠 Address Proof:</strong> Aadhaar, Passport, Utility Bills (electricity, water), Rent Agreement, Property Tax Receipt (last 3 months)</li>
+                <li><strong>💼 Income Proof - Salaried:</strong> Last 6 months' salary slips, Form 16, Bank statements showing salary credit (6-12 months), Employment letter/offer letter</li>
+                <li><strong>💼 Income Proof - Self-Employed:</strong> Last 2-3 years' Income Tax Returns (ITR), Profit & Loss statements, Balance sheets, Business proof (GST certificate, business registration, shop license), Bank statements (12 months)</li>
+                <li><strong>📸 Additional:</strong> Passport-size photographs (4-6 copies), Existing loan statements if any, Property documents (for secured loans)</li>
+            </ul>
+
+            <h3>Step 6: Apply for the Loan 📝</h3>
+            <div class="step-box">
+                <span class="step-number">6</span>
+                <strong>Submit Application:</strong> Apply online through lender's website or visit branch. Fill accurate information - any mismatch with documents can cause rejection. Apply to only 1-2 lenders initially to avoid multiple credit inquiries hurting your score.
+            </div>
+            <p><strong>Application Tips:</strong> Double-check all entered information, upload clear document scans (not photos), provide accurate contact details, mention any existing relationships with the lender (savings account, insurance), and apply during promotional periods if any for better rates! 🎯</p>
+
+            <h3>Step 7: Loan Processing & Verification ⏰</h3>
+            <div class="step-box">
+                <span class="step-number">7</span>
+                <strong>Wait for Approval:</strong> Lender verifies your documents, checks credit score, assesses repayment capacity, and may conduct personal discussion. For secured loans, property/asset valuation happens. Processing takes 3-15 days typically.
+            </div>
+            <p><strong>During Processing:</strong> Respond promptly to any lender queries, provide additional documents if requested, keep your phone accessible for verification calls, and avoid taking new credit or making large purchases during this period. 📞</p>
+
+            <h3>Step 8: Review Loan Agreement 📋</h3>
+            <div class="step-box">
+                <span class="step-number">8</span>
+                <strong>Read Terms Carefully:</strong> Once approved, you'll receive a loan agreement. Read EVERY clause before signing! Check interest rate, EMI amount, tenure, processing fees, prepayment charges, late payment penalties, and any hidden charges.
+            </div>
+            <p><strong>Red Flags to Watch:</strong> Prepayment penalty above 3%, mandatory insurance products, unreasonably high late payment charges (should be ≤2% of EMI), annual maintenance fees, or any vague "other charges" clauses. Clarify everything BEFORE signing! ⚠️</p>
+
+            <h3>Step 9: Complete Formalities & Disbursement 💵</h3>
+            <div class="step-box">
+                <span class="step-number">9</span>
+                <strong>Final Steps:</strong> Sign loan agreement and provide post-dated cheques/set up ECS for EMI auto-debit. For secured loans, complete property documentation and insurance. Processing fee is deducted, and loan amount is disbursed to your account or directly to seller.
+            </div>
+            <p><strong>After Disbursement:</strong> Confirm EMI start date (usually after 1 month), save loan account number and agreement copy, set reminders for EMI dates, and ensure sufficient balance in EMI deduction account. Consider setting up standing instruction for hassle-free payments! ✅</p>
+
+            <h3>Step 10: Manage EMI Responsibly 💼</h3>
+            <div class="step-box">
+                <span class="step-number">10</span>
+                <strong>Stay on Track:</strong> Never miss an EMI! Set up auto-debit, maintain buffer balance in your account, and consider prepayments when you have surplus funds. Review your loan statement periodically and claim tax benefits if applicable.
+            </div>
+            
+            <div class="highlight-box">
+                <strong>🎯 Golden Rules for EMI Success:</strong><br>
+                ✅ Never exceed 40-50% of income in total EMIs<br>
+                ✅ Always pay on time - not even 1 day late!<br>
+                ✅ Prepay whenever possible - it compounds savings<br>
+                ✅ Keep 3-6 months EMI as emergency fund<br>
+                ✅ Review loan statement yearly<br>
+                ✅ Consider balance transfer if better rates available<br>
+                ✅ Claim tax benefits under applicable sections<br>
+                ✅ Avoid taking multiple loans simultaneously
+            </div>
+        </div>
+        </div><!-- End How-to Section -->
+
+        <div class="content-section">
+            <h2>📚 EMI vs Other Payment Options</h2>
+            
+            <h3>EMI vs Lump Sum Payment 💰</h3>
+            <p><strong>EMI Advantages:</strong> Preserves cash flow, allows you to buy assets beyond current savings, predictable monthly outgo, and potential tax benefits. <strong>Disadvantages:</strong> Total cost higher due to interest, long-term commitment, and opportunity cost of money.</p>
+            <p><strong>Lump Sum Advantages:</strong> No interest paid, complete ownership immediately, no long-term debt burden. <strong>Disadvantages:</strong> Requires large upfront capital, depletes savings/emergency fund, and locks money that could earn returns elsewhere.</p>
+            <p><strong>🎯 Smart Choice:</strong> Use EMI for big-ticket items (house, car, education) where value appreciates or generates returns. Pay lump sum for rapidly depreciating assets or small amounts where interest outweighs benefits.</p>
+
+            <h3>EMI vs Credit Card EMI 💳</h3>
+            <p><strong>Regular EMI (Bank Loan):</strong> Lower interest (7-15%), higher loan amounts possible, better terms, builds credit history positively, prepayment allowed. <strong>Credit Card EMI:</strong> Very high interest (15-36%), limited to credit limit, convenience-focused, minimal documentation, but expensive in long run.</p>
+            <p><strong>💡 Recommendation:</strong> Use regular bank loans for planned purchases. Reserve credit card EMI only for emergency small purchases or 0% EMI offers during sales (ensure truly 0%, not just "processing fee" disguised interest).</p>
+
+            <h3>EMI vs Rent (Property Context) 🏠</h3>
+            <p>The eternal debate! <strong>Buy with EMI if:</strong> You plan to stay 7+ years in same city, property prices appreciating, rental yields poor, tax benefits available, and you value ownership. <strong>Rent if:</strong> Job requires frequent relocations, property overvalued, rental yields good (rent 3-4% of property value annually), or you prefer investment flexibility.</p>
+            <p><strong>🧮 Simple Math:</strong> If EMI > 1.5× rent for same property, renting may be better financially. But also factor in tax savings, forced savings (principal repayment), appreciation potential, and emotional value of ownership!</p>
         </div>
 
         <div class="content-section">
             <h2>Explore More Calculators</h2>
             <div class="calculator-links">
-				<ul>
-	            <li><a href="/Advait.github.io/finance/finance-sip-calculator.html" class="calculator-link">Explore long-term investment growth options with our <strong>SIP Calculator</strong>.</a></li>
-                <li><a href="/Advait.github.io/simple-compound-interest-calculator.html" class="calculator-link">Understand how interest impacts your total repayment with our <strong>Simple and Compound Interest Calculator</strong>.</a></li>
-                <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/investment/finance-fd-calculator.html" class="calculator-link">Compare loan interest costs with safe investment returns using the <strong>Fixed Deposit (FD) Calculator</strong>.</a></li>
-                <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/finance-hub.html" class="calculator-link">Browse all financial planning tools in our <strong>Finance Calculators Hub</strong>.</a></li>
-				</ul>
+                <a  href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/finance-sip-calculator.html" class="calculator-link">👉 Compare Fixed Deposit returns with long-term SIP investments using our <strong>SIP Calculator</strong>.</a>
+                <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/investment/finance-fd-calculator.html" class="calculator-link">👉 See how monthly savings grow over time with our <strong>Recurring Deposit (RD) Calculator</strong>.</a>
+                <a href="https://advaitpatel69-beep.github.io/Advait.github.io/simple-compound-interest-calculator.html" class="calculator-link">👉 Understand how compound interest affects your FD maturity using this <strong>Compound Interest Calculator</strong>.</a>
+                <a href="https://advaitpatel69-beep.github.io/Advait.github.io/simple-compound-interest-calculator.html" class="calculator-link">👉 Calculate returns without compounding using our <strong>Simple Interest Calculator</strong>.</a>
+                <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/investment/investment-hub.html" class="calculator-link">👉 Explore more investment planning tools in our <strong>Investment Calculators</strong> section.</a>
             </div>
         </div>
 
         <div class="content-section">
-            <h2>Frequently Asked Questions (FAQ)</h2>
+            <h2>❓ Frequently Asked Questions (FAQ)</h2>
             
             <div class="faq-item">
-                <h3>What is EMI?</h3>
-                <p>
-                    EMI stands for Equated Monthly Installment. It is a fixed payment amount that you make to the lender every month 
-                    until your loan is fully repaid.
-                </p>
+                <div class="faq-question">What is EMI and how does it work? 💳</div>
+                <div class="faq-answer">EMI (Equated Monthly Installment) is a fixed payment amount you make to the lender every month to repay a loan. Each EMI includes two components: principal repayment (the original loan amount) and interest charges. The EMI remains constant throughout the loan tenure, but the principal and interest portions change each month. Initially, a larger portion goes toward interest, and over time, more goes toward principal repayment.</div>
             </div>
 
             <div class="faq-item">
-                <h3>Does EMI include interest?</h3>
-                <p>
-                    Yes, your EMI includes both the principal amount and the interest charged by the lender.
-                </p>
+                <div class="faq-question">How is EMI calculated? 🧮</div>
+                <div class="faq-answer">EMI is calculated using the formula: EMI = [P × R × (1+R)^N] / [(1+R)^N - 1], where P is the principal loan amount, R is the monthly interest rate (annual rate divided by 12), and N is the loan tenure in months. This formula ensures that you pay equal monthly installments that cover both principal and interest, fully repaying the loan by the end of the tenure.</div>
             </div>
 
             <div class="faq-item">
-                <h3>Can EMI change during the loan period?</h3>
-                <p>
-                    For loans with a fixed interest rate, your EMI remains constant. For floating rate loans, your EMI can change based on market conditions.
-                </p>
+                <div class="faq-question">How can I reduce my EMI amount? 💰</div>
+                <div class="faq-answer">You can reduce EMI by: 1) Making a larger down payment to reduce the principal amount, 2) Extending the loan tenure (though this increases total interest), 3) Negotiating for a lower interest rate, 4) Making prepayments when possible, 5) Choosing loans during promotional periods with reduced rates, 6) Improving your credit score before applying to qualify for better rates, 7) Comparing offers from multiple lenders.</div>
             </div>
 
             <div class="faq-item">
-                <h3>Is this EMI calculator accurate?</h3>
-                <p>
-                    This calculator provides highly accurate estimates based on the standard EMI formula used by financial institutions.
-                </p>
+                <div class="faq-question">What is a good EMI to income ratio? 📊</div>
+                <div class="faq-answer">Financial experts recommend that your total EMI obligations should not exceed 40-50% of your monthly income. This is called the Fixed Obligation to Income Ratio (FOIR). For example, if your monthly income is 50,000, your total EMIs across all loans should ideally be below 20,000-25,000. This ensures you have sufficient income for other expenses, savings, and emergencies.</div>
             </div>
 
             <div class="faq-item">
-                <h3>What is the difference between fixed and floating interest rates?</h3>
-                <p>
-                    Fixed rates remain constant throughout the loan period, while floating rates change based on market conditions.
-                </p>
+                <div class="faq-question">Can I prepay my loan to reduce EMI burden? ⚡</div>
+                <div class="faq-answer">Yes, making prepayments can significantly reduce your loan burden. You have two options: 1) Reduce the EMI amount while keeping the tenure same, or 2) Reduce the tenure while keeping EMI same. Most lenders allow prepayment, though some may charge a prepayment penalty of 2-4% for loans with floating rates. Many banks now offer prepayment without penalties after a certain period. Prepayments directly reduce the principal, substantially lowering total interest paid.</div>
             </div>
 
             <div class="faq-item">
-                <h3>Can I reduce my EMI?</h3>
-                <p>
-                    Yes, you can reduce your EMI by making a larger down payment, extending the loan period, or looking for lower interest rates.
-                </p>
+                <div class="faq-question">What documents are needed to start an EMI loan? 📄</div>
+                <div class="faq-answer">Common documents required include: 1) Identity proof (Aadhaar, PAN card, passport), 2) Address proof (utility bills, rental agreement), 3) Income proof (salary slips for last 3-6 months, bank statements), 4) Employment proof (offer letter, employment certificate), 5) For self-employed: ITR for 2-3 years, business proof, bank statements, 6) Property documents (for home loans), 7) Credit report (lenders check automatically), 8) Passport-sized photographs.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Does EMI affect my credit score? 📈</div>
+                <div class="faq-answer">Yes, EMI payment history significantly impacts your credit score. Timely EMI payments build a positive credit history and improve your score over time, making you eligible for better loan terms in the future. Missed or delayed EMI payments severely damage your credit score, making it difficult to get loans or credit cards. Even one missed payment stays on your credit report for up to 7 years. Setting up auto-debit ensures you never miss an EMI payment.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">What happens if I miss an EMI payment? ⚠️</div>
+                <div class="faq-answer">Missing an EMI payment has serious consequences: 1) Late payment penalties and charges are added, 2) Your credit score drops significantly, 3) Lender may report default to credit bureaus, 4) Future loan applications become difficult, 5) Interest continues accumulating on unpaid amount, 6) After 3-6 missed payments, lender may initiate legal action or asset seizure (for secured loans). Contact your lender immediately if you anticipate difficulty paying EMI - many offer restructuring options.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Is EMI Calculator accurate? ✅</div>
+                <div class="faq-answer">This EMI calculator uses the standard EMI formula employed by banks and financial institutions, providing highly accurate estimates. However, the actual EMI may vary slightly based on the lender's specific calculation method, processing fees, insurance charges, or other add-ons. Use the calculator for planning and comparison, but confirm final EMI with your lender before signing the loan agreement.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Can EMI change during the loan period? 🔄</div>
+                <div class="faq-answer">For fixed-rate loans, your EMI remains constant throughout the tenure. For floating-rate loans, EMI can change when the bank adjusts interest rates based on market conditions (RBI policy rate changes). When rates increase, your EMI goes up or tenure extends. When rates decrease, EMI reduces or tenure shortens. Most home loans in India are floating rate, while personal loans and car loans are typically fixed rate.</div>
             </div>
         </div>
     </div>
@@ -880,68 +1314,116 @@
     <script>
         let pieChart = null;
         let lineChart = null;
-        let currentCurrency = 'INR';
+        let currentCurrency = 'USD';
+        let fullAmortizationData = []; // Store complete amortization schedule
 
+        // Currency symbols and locales
         const currencySymbols = {
-            'USD': '$',
-            'EUR': '€',
-            'GBP': '£',
-            'INR': '₹',
-            'JPY': '¥',
-            'CNY': '¥',
-            'AUD': '$',
-            'CAD': '$',
-            'CHF': 'CHF ',
-            'AED': 'AED ',
-            'SAR': 'SAR ',
-            'SGD': '$',
-            'MYR': 'RM ',
-            'ZAR': 'R '
+            'INR': '₹', 'USD': '$', 'EUR': '€', 'GBP': '£', 'JPY': '¥',
+            'AUD': 'A$', 'CAD': 'C$', 'CHF': 'CHF', 'CNY': '¥',
+            'SGD': 'S$', 'AED': 'AED', 'SAR': 'SR'
         };
 
-        // New: Map currencies to their specific region formats
         const currencyLocales = {
-            'USD': 'en-US',
-            'EUR': 'de-DE', 
-            'GBP': 'en-GB',
-            'INR': 'en-IN', // This enables Lakh/Crore formatting (1,00,000)
-            'JPY': 'ja-JP',
-            'CNY': 'zh-CN',
-            // Default fallback for others
+            'INR': 'en-IN', 'USD': 'en-US', 'EUR': 'de-DE', 'GBP': 'en-GB',
+            'JPY': 'ja-JP', 'AUD': 'en-AU', 'CAD': 'en-CA', 'CHF': 'de-CH',
+            'CNY': 'zh-CN', 'SGD': 'en-SG', 'AED': 'ar-AE', 'SAR': 'ar-SA'
         };
 
-        function updateCurrencyDisplay() {
-            currentCurrency = document.getElementById('currency').value;
-        }
-
-        function toggleMenu() {
-            const nav = document.getElementById('mobileNav');
-            nav.classList.toggle('active');
-        }
+        const currencyDecimals = {
+            'INR': 2, 'USD': 2, 'EUR': 2, 'GBP': 2, 'JPY': 0,
+            'AUD': 2, 'CAD': 2, 'CHF': 2, 'CNY': 2,
+            'SGD': 2, 'AED': 2, 'SAR': 2
+        };
 
         function getCurrencySymbol() {
-            return currencySymbols[currentCurrency] || '';
+            return currencySymbols[currentCurrency] || '₹';
+        }
+
+        function getCurrencyLocale() {
+            return currencyLocales[currentCurrency] || 'en-IN';
+        }
+
+        function getCurrencyDecimals() {
+            return currencyDecimals[currentCurrency] || 2;
         }
 
         function formatCurrency(amount) {
-            const symbol = getCurrencySymbol();
-            
-            // Check if we have a specific locale for the selected currency, otherwise default to US
-            const locale = currencyLocales[currentCurrency] || 'en-US';
-            
-            const formattedNumber = amount.toLocaleString(locale, { 
-                minimumFractionDigits: 2, 
-                maximumFractionDigits: 2 
+            const locale = getCurrencyLocale();
+            const decimals = getCurrencyDecimals();
+            return getCurrencySymbol() + ' ' + amount.toLocaleString(locale, {
+                minimumFractionDigits: decimals,
+                maximumFractionDigits: decimals
             });
-            return symbol + formattedNumber;
         }
+
+        function updateCurrencyDisplay() {
+            currentCurrency = document.getElementById('currency').value;
+            const loanVal = document.getElementById('loanSlider').value;
+            document.getElementById('loanSliderValue').textContent = getCurrencySymbol() + ' ' + parseInt(loanVal).toLocaleString(getCurrencyLocale());
+            
+            if (document.getElementById('results').classList.contains('active')) {
+                calculateEMI();
+            }
+        }
+
+        // Slider synchronization
+        document.getElementById('loanAmount').addEventListener('input', function(e) {
+            const val = Math.min(Math.max(parseInt(e.target.value) || 0, 1000), 10000000);
+            document.getElementById('loanSlider').value = val;
+            document.getElementById('loanSliderValue').textContent = getCurrencySymbol() + ' ' + val.toLocaleString(getCurrencyLocale());
+        });
+
+        document.getElementById('loanSlider').addEventListener('input', function(e) {
+            const val = e.target.value;
+            document.getElementById('loanAmount').value = val;
+            document.getElementById('loanSliderValue').textContent = getCurrencySymbol() + ' ' + parseInt(val).toLocaleString(getCurrencyLocale());
+        });
+
+        document.getElementById('interestRate').addEventListener('input', function(e) {
+            const val = Math.min(Math.max(parseFloat(e.target.value) || 0, 0.1), 30);
+            document.getElementById('rateSlider').value = val;
+            document.getElementById('rateSliderValue').textContent = val.toFixed(1) + '%';
+        });
+
+        document.getElementById('rateSlider').addEventListener('input', function(e) {
+            const val = parseFloat(e.target.value);
+            document.getElementById('interestRate').value = val;
+            document.getElementById('rateSliderValue').textContent = val.toFixed(1) + '%';
+        });
+
+        document.getElementById('tenure').addEventListener('input', function(e) {
+            const tenureType = document.getElementById('tenureType').value;
+            const maxVal = tenureType === 'years' ? 30 : 360;
+            const val = Math.min(Math.max(parseInt(e.target.value) || 0, 1), maxVal);
+            document.getElementById('tenureSlider').value = val;
+            document.getElementById('tenureSliderValue').textContent = val + ' ' + (tenureType === 'years' ? 'Years' : 'Months');
+            document.getElementById('tenureSlider').max = maxVal;
+        });
+
+        document.getElementById('tenureSlider').addEventListener('input', function(e) {
+            const val = e.target.value;
+            const tenureType = document.getElementById('tenureType').value;
+            document.getElementById('tenure').value = val;
+            document.getElementById('tenureSliderValue').textContent = val + ' ' + (tenureType === 'years' ? 'Years' : 'Months');
+        });
+
+        document.getElementById('tenureType').addEventListener('change', function(e) {
+            const isYears = e.target.value === 'years';
+            const maxVal = isYears ? 30 : 360;
+            const currentVal = parseInt(document.getElementById('tenure').value) || (isYears ? 20 : 240);
+            
+            document.getElementById('tenureSlider').max = maxVal;
+            document.getElementById('tenureSlider').value = Math.min(currentVal, maxVal);
+            document.getElementById('tenure').value = Math.min(currentVal, maxVal);
+            document.getElementById('tenureSliderValue').textContent = Math.min(currentVal, maxVal) + ' ' + (isYears ? 'Years' : 'Months');
+        });
 
         function calculateEMI() {
             const loanAmount = parseFloat(document.getElementById('loanAmount').value);
             const interestRate = parseFloat(document.getElementById('interestRate').value);
-            const tenure = parseFloat(document.getElementById('tenure').value);
+            const tenure = parseInt(document.getElementById('tenure').value);
             const tenureType = document.getElementById('tenureType').value;
-            currentCurrency = document.getElementById('currency').value;
 
             if (!loanAmount || loanAmount <= 0) {
                 alert('Please enter a valid loan amount');
@@ -973,10 +1455,13 @@
             const totalInterest = totalAmount - loanAmount;
 
             document.getElementById('emiValue').textContent = formatCurrency(emi);
+            document.getElementById('principalValue').textContent = formatCurrency(loanAmount);
             document.getElementById('interestValue').textContent = formatCurrency(totalInterest);
             document.getElementById('totalValue').textContent = formatCurrency(totalAmount);
 
-            updateCharts(loanAmount, totalInterest, tenureInMonths, monthlyRate);
+            document.getElementById('results').classList.add('active');
+
+            updateCharts(loanAmount, totalInterest, tenureInMonths, monthlyRate, emi);
             generateAmortizationTable(loanAmount, emi, monthlyRate, tenureInMonths);
 
             document.getElementById('chartsSection').classList.add('active');
@@ -985,7 +1470,7 @@
             document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
 
-        function updateCharts(principal, interest, months, monthlyRate) {
+        function updateCharts(principal, interest, months, monthlyRate, emi) {
             if (pieChart) {
                 pieChart.destroy();
             }
@@ -994,6 +1479,8 @@
             }
 
             const symbol = getCurrencySymbol();
+            const locale = getCurrencyLocale();
+            const decimals = getCurrencyDecimals();
 
             const pieCtx = document.getElementById('pieChart').getContext('2d');
             pieChart = new Chart(pieCtx, {
@@ -1015,9 +1502,7 @@
                             position: 'bottom',
                             labels: {
                                 padding: 15,
-                                font: {
-                                    size: 12
-                                }
+                                font: { size: 12 }
                             }
                         },
                         tooltip: {
@@ -1027,9 +1512,9 @@
                                     const value = context.parsed || 0;
                                     const total = context.dataset.data.reduce((a, b) => a + b, 0);
                                     const percentage = ((value / total) * 100).toFixed(1);
-                                    return label + ': ' + symbol + value.toLocaleString('en-US', {
-                                        minimumFractionDigits: 2,
-                                        maximumFractionDigits: 2
+                                    return label + ': ' + symbol + ' ' + value.toLocaleString(locale, {
+                                        minimumFractionDigits: decimals,
+                                        maximumFractionDigits: decimals
                                     }) + ' (' + percentage + '%)';
                                 }
                             }
@@ -1041,7 +1526,6 @@
             const balanceData = [];
             const labels = [];
             let balance = principal;
-            const emi = (principal * monthlyRate * Math.pow(1 + monthlyRate, months)) / (Math.pow(1 + monthlyRate, months) - 1);
 
             const step = months > 60 ? Math.ceil(months / 60) : 1;
             
@@ -1050,13 +1534,17 @@
                     labels.push('Start');
                     balanceData.push(principal);
                 } else {
-                    const actualMonth = Math.min(i, months);
-                    const interestPaid = balance * monthlyRate;
-                    const principalPaid = emi - interestPaid;
-                    balance = Math.max(0, balance - principalPaid);
+                    const monthsElapsed = i;
+                    let currentBalance = principal;
                     
-                    labels.push('Month ' + actualMonth);
-                    balanceData.push(balance);
+                    for (let j = 1; j <= monthsElapsed; j++) {
+                        const interestPart = currentBalance * monthlyRate;
+                        const principalPart = emi - interestPart;
+                        currentBalance -= principalPart;
+                    }
+                    
+                    labels.push(i + 'M');
+                    balanceData.push(Math.max(0, currentBalance));
                 }
             }
 
@@ -1066,11 +1554,11 @@
                 data: {
                     labels: labels,
                     datasets: [{
-                        label: 'Remaining Balance',
+                        label: 'Outstanding Balance',
                         data: balanceData,
                         borderColor: '#667eea',
                         backgroundColor: 'rgba(102, 126, 234, 0.1)',
-                        borderWidth: 2,
+                        borderWidth: 3,
                         fill: true,
                         tension: 0.4
                     }]
@@ -1085,9 +1573,9 @@
                         tooltip: {
                             callbacks: {
                                 label: function(context) {
-                                    return 'Balance: ' + symbol + context.parsed.y.toLocaleString('en-US', {
-                                        minimumFractionDigits: 2,
-                                        maximumFractionDigits: 2
+                                    return 'Balance: ' + symbol + ' ' + context.parsed.y.toLocaleString(locale, {
+                                        minimumFractionDigits: decimals,
+                                        maximumFractionDigits: decimals
                                     });
                                 }
                             }
@@ -1098,17 +1586,14 @@
                             beginAtZero: true,
                             ticks: {
                                 callback: function(value) {
-                                    if (value >= 1000) {
-                                        return symbol + (value / 1000).toFixed(0) + 'k';
+                                    if (value >= 100000) {
+                                        return symbol + ' ' + (value / 100000).toFixed(1) + 'L';
                                     }
-                                    return symbol + value.toFixed(0);
+                                    if (value >= 1000) {
+                                        return symbol + ' ' + (value / 1000).toFixed(0) + 'k';
+                                    }
+                                    return symbol + ' ' + value.toFixed(0);
                                 }
-                            }
-                        },
-                        x: {
-                            ticks: {
-                                maxRotation: 45,
-                                minRotation: 45
                             }
                         }
                     }
@@ -1119,56 +1604,100 @@
         function generateAmortizationTable(principal, emi, monthlyRate, months) {
             const tableBody = document.getElementById('amortizationTableBody');
             tableBody.innerHTML = '';
+            fullAmortizationData = []; // Clear previous data
 
             let balance = principal;
 
+            // Generate all months data
             for (let i = 1; i <= months; i++) {
-                const interestPayment = balance * monthlyRate;
-                const principalPayment = emi - interestPayment;
-                balance = balance - principalPayment;
+                const interestPart = balance * monthlyRate;
+                const principalPart = emi - interestPart;
+                balance -= principalPart;
 
-                if (balance < 0) balance = 0;
+                fullAmortizationData.push({
+                    month: i,
+                    emi: emi,
+                    principal: principalPart,
+                    interest: interestPart,
+                    balance: Math.max(0, balance)
+                });
+            }
 
+            // Show only first 12 months initially
+            showAmortizationRows(12);
+        }
+
+        function showAmortizationRows(maxRows) {
+            const tableBody = document.getElementById('amortizationTableBody');
+            tableBody.innerHTML = '';
+
+            const rowsToShow = Math.min(fullAmortizationData.length, maxRows);
+
+            for (let i = 0; i < rowsToShow; i++) {
+                const data = fullAmortizationData[i];
                 const row = tableBody.insertRow();
-                row.innerHTML = '<td>' + i + '</td>' +
-                    '<td>' + formatCurrency(emi) + '</td>' +
-                    '<td>' + formatCurrency(principalPayment) + '</td>' +
-                    '<td>' + formatCurrency(interestPayment) + '</td>' +
-                    '<td>' + formatCurrency(balance) + '</td>';
+                row.innerHTML = 
+                    '<td>' + data.month + '</td>' +
+                    '<td>' + formatCurrency(data.emi) + '</td>' +
+                    '<td>' + formatCurrency(data.principal) + '</td>' +
+                    '<td>' + formatCurrency(data.interest) + '</td>' +
+                    '<td>' + formatCurrency(data.balance) + '</td>';
+            }
+
+            if (fullAmortizationData.length > maxRows) {
+                const row = tableBody.insertRow();
+                row.innerHTML = '<td colspan="5" style="text-align: center; font-style: italic; color: #64748b;">Showing first ' + maxRows + ' months. Total loan period: ' + fullAmortizationData.length + ' months.</td>';
             }
         }
 
         function toggleAmortizationTable() {
-            const tableContainer = document.getElementById('tableContainer');
+            const table = document.getElementById('tableContainer');
             const toggleText = document.getElementById('toggleText');
+            const isCurrentlyHidden = table.style.display === 'none' || table.style.display === '';
             
-            if (tableContainer.style.display === 'none') {
-                tableContainer.style.display = 'block';
-                toggleText.textContent = 'Hide Detailed Payment Schedule';
+            if (isCurrentlyHidden) {
+                // Show table with all months
+                showAmortizationRows(fullAmortizationData.length);
+                table.style.display = 'block';
+                toggleText.textContent = '📋 Hide Detailed Payment Schedule';
             } else {
-                tableContainer.style.display = 'none';
-                toggleText.textContent = 'Show Detailed Payment Schedule';
+                // Hide table and reset to show only first 12 months
+                showAmortizationRows(12);
+                table.style.display = 'none';
+                toggleText.textContent = '📋 Show Detailed Payment Schedule';
             }
         }
 
         function resetForm() {
-            document.getElementById('loanAmount').value = '';
-            document.getElementById('interestRate').value = '';
-            document.getElementById('tenure').value = '';
-            document.getElementById('tenureType').selectedIndex = 0;
-            document.getElementById('currency').value = 'INR';
-            currentCurrency = 'INR';
+            document.getElementById('loanAmount').value = 1000000;
+            document.getElementById('loanSlider').value = 1000000;
+            document.getElementById('loanSliderValue').textContent = getCurrencySymbol() + ' ' + (1000000).toLocaleString(getCurrencyLocale());
             
-            document.getElementById('emiValue').textContent = getCurrencySymbol() + '0.00';
-            document.getElementById('interestValue').textContent = getCurrencySymbol() + '0.00';
-            document.getElementById('totalValue').textContent = getCurrencySymbol() + '0.00';
+            document.getElementById('interestRate').value = 9;
+            document.getElementById('rateSlider').value = 9;
+            document.getElementById('rateSliderValue').textContent = '9.0%';
             
+            document.getElementById('tenure').value = 20;
+            document.getElementById('tenureSlider').value = 20;
+            document.getElementById('tenureSliderValue').textContent = '20 Years';
+            document.getElementById('tenureType').value = 'years';
+            
+            document.getElementById('currency').value = 'USD';
+            currentCurrency = 'USD';
+
+            document.getElementById('results').classList.remove('active');
             document.getElementById('chartsSection').classList.remove('active');
             document.getElementById('amortizationSection').classList.remove('active');
-            
-            document.getElementById('tableContainer').style.display = 'none';
-            document.getElementById('toggleText').textContent = 'Show Detailed Payment Schedule';
-            
+
+            // Reset table display state
+            const tableContainer = document.getElementById('tableContainer');
+            if (tableContainer) {
+                tableContainer.style.display = 'none';
+                document.getElementById('toggleText').textContent = '📋 Show Detailed Payment Schedule';
+            }
+
+            fullAmortizationData = [];
+
             if (pieChart) {
                 pieChart.destroy();
                 pieChart = null;
@@ -1179,11 +1708,45 @@
             }
         }
 
+        function toggleMenu() {
+            document.getElementById('mobileNav').classList.toggle('active');
+        }
+
+        function switchSection(section) {
+            // Remove active class from all tabs
+            document.querySelectorAll('.section-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Remove active class from all section contents
+            document.querySelectorAll('.section-content').forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Add active class to selected tab and content
+            if (section === 'calculator') {
+                document.querySelectorAll('.section-tab')[0].classList.add('active');
+                document.getElementById('calculatorSection').classList.add('active');
+                // Scroll to calculator
+                setTimeout(() => {
+                    document.getElementById('calculator').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 100);
+            } else if (section === 'howto') {
+                document.querySelectorAll('.section-tab')[1].classList.add('active');
+                document.getElementById('howtoSection').classList.add('active');
+                // Scroll to how-to section
+                setTimeout(() => {
+                    document.getElementById('how-to-start').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 100);
+            }
+        }
+
+        // Event listeners
         document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('calculateBtn').addEventListener('click', calculateEMI);
             document.getElementById('resetBtn').addEventListener('click', resetForm);
-            document.getElementById('currency').addEventListener('change', updateCurrencyDisplay);
             document.getElementById('hamburgerBtn').addEventListener('click', toggleMenu);
+            document.getElementById('currency').addEventListener('change', updateCurrencyDisplay);
             document.getElementById('toggleTableBtn').addEventListener('click', toggleAmortizationTable);
         });
     </script>
