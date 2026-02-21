@@ -1,0 +1,2340 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CAGR Calculator – Compound Annual Growth Rate Calculator | SmartCalc Hub</title>
+  <meta name="description"
+    content="Calculate compound annual growth rate (CAGR) online with advanced features including inflation adjustment, investment comparison, growth charts, and yearly projection table. Measure real investment performance easily.">
+  <link rel="canonical"
+    href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/investment/cagr-calculator.html">
+  <link rel="icon" type="image/png" href="https://advaitpatel69-beep.github.io/Advait.github.io/favicon.png">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://advaitpatel69-beep.github.io/Advait.github.io/#org",
+        "name": "SmartCalc Hub",
+        "url": "https://advaitpatel69-beep.github.io/Advait.github.io",
+        "description": "Free financial calculators for smart investment and retirement planning"
+      },
+      {
+        "@type": "WebApplication",
+        "name": "CAGR Calculator",
+        "url": "https://advaitpatel69-beep.github.io/Advait.github.io/finance/investment/cagr-calculator.html",
+        "applicationCategory": "FinanceApplication",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "description": "Advanced CAGR calculator with inflation adjustment, comparison tools, and growth projections"
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is CAGR and how is it calculated?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "CAGR (Compound Annual Growth Rate) is the rate at which an investment would have grown if it had grown at a steady rate every year. Formula: CAGR = (Final Value / Initial Value)^(1 / Years) − 1. It smooths out volatility to show the true annualized return."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the difference between CAGR and average return?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Average return is the arithmetic mean of yearly returns and can be misleading. CAGR is the geometric mean that accounts for compounding. Example: 50% loss then 50% gain = -25% total, not 0%. CAGR accurately reflects this reality while average return shows 0%."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can CAGR be negative?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Negative CAGR means your investment lost value over time. If you invested 10,000 and it's now worth 8,000 after 3 years, CAGR = -7.2%. This shows the annualized rate of decline."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is a good CAGR percentage?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "It depends on asset class and risk. Stock market historical CAGR ~10%, real estate ~8-12%, bonds ~5-7%. Crypto can show 50-200% but with extreme volatility. Always compare CAGR to inflation and benchmark index for your investment category."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the difference between CAGR and APY?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "APY (Annual Percentage Yield) is for interest-bearing accounts with predictable compounding. CAGR measures actual historical growth of volatile investments. Both are annualized rates, but CAGR is retrospective while APY is prospective."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I calculate inflation-adjusted CAGR?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Real CAGR = ((1 + Nominal CAGR) / (1 + Inflation Rate)) − 1. Example: 12% CAGR with 3% inflation = Real CAGR of 8.74%. This shows your true purchasing power growth after accounting for inflation."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can you give a manual CAGR calculation example?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Investment: 50,000 grew to 95,000 in 7 years. CAGR = (95,000 / 50,000)^(1/7) − 1 = (1.9)^0.1429 − 1 = 1.0957 − 1 = 0.0957 = 9.57% per year."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does CAGR account for volatility?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. CAGR only looks at start and end values, ignoring interim fluctuations. Two investments with identical CAGR can have vastly different risk profiles. Use CAGR with standard deviation or Sharpe ratio to assess risk-adjusted returns."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+  <style>
+    :root {
+      --primary: #667eea;
+      --primary-dark: #5a67d8;
+      --secondary: #48bb78;
+      --accent: #ed8936;
+      --danger: #f56565;
+      --slate-900: #0f172a;
+      --slate-800: #1e293b;
+      --slate-700: #334155;
+      --slate-600: #475569;
+      --slate-500: #64748b;
+      --slate-300: #cbd5e1;
+      --slate-200: #e2e8f0;
+      --slate-100: #f1f5f9;
+      --slate-50: #f8fafc;
+      --white: #ffffff;
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, .1);
+      --shadow-md: 0 4px 12px rgba(0, 0, 0, .12);
+      --shadow-lg: 0 10px 28px rgba(0, 0, 0, .15);
+      --header-height: 64px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: var(--slate-50);
+      color: var(--slate-800);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: linear-gradient(135deg, #0891b2 0%, #059669 100%);
+      color: white;
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .hdr-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .hdr-logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .hdr-nav {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .hdr-nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: opacity 0.3s;
+    }
+
+    .hdr-nav a:hover {
+      opacity: 0.8;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 4px;
+      background: none;
+      border: none;
+      padding: 0;
+    }
+
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background: white;
+      border-radius: 3px;
+      transition: 0.3s;
+    }
+
+    .mobile-nav {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: #0891b2;
+      flex-direction: column;
+      padding: 1rem;
+      gap: 1rem;
+    }
+
+    .mobile-nav.open {
+      display: flex;
+    }
+
+    .mobile-nav a {
+      color: white;
+      text-decoration: none;
+      padding: 0.5rem;
+      border-radius: 5px;
+      transition: background 0.3s;
+    }
+
+    .mobile-nav a:hover {
+      background: rgba(255, 255, 255, .1);
+    }
+
+    /* ── CONTAINER ── */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 1.25rem 4rem;
+      width: 100%;
+      overflow-x: hidden;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 800;
+      color: var(--slate-900);
+      margin-bottom: 1rem;
+    }
+
+    .hero-subtitle {
+      font-size: 1.05rem;
+      color: var(--slate-600);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    /* ── TABS ── */
+    .mode-tabs {
+      display: flex;
+      gap: .75rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      border-bottom: 2px solid var(--slate-200);
+    }
+
+    .mode-tab {
+      flex: 1;
+      min-width: 140px;
+      padding: .85rem 1.25rem;
+      background: var(--white);
+      border: 2px solid var(--slate-300);
+      border-bottom: none;
+      border-radius: 8px 8px 0 0;
+      font-size: .92rem;
+      font-weight: 600;
+      color: var(--slate-600);
+      cursor: pointer;
+      transition: all .25s;
+      text-align: center;
+    }
+
+    .mode-tab:hover {
+      background: var(--slate-50);
+      color: var(--primary);
+      border-color: var(--primary);
+    }
+
+    .mode-tab.active {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: #fff;
+      border-color: var(--primary);
+      transform: translateY(2px);
+      box-shadow: 0 4px 14px rgba(102, 126, 234, .35);
+    }
+
+    /* ── MODULE ── */
+    .module {
+      display: none;
+    }
+
+    .module.active {
+      display: block;
+      animation: fadeIn .35s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ── CARD ── */
+    .card {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: var(--shadow-md);
+      margin-bottom: 2rem;
+      width: 100%;
+      max-width: 100%;
+      overflow: hidden;
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--slate-900);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+
+    /* ── FORM ── */
+    .form-row {
+      margin-bottom: 1.25rem;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    label.lbl {
+      display: block;
+      font-weight: 600;
+      font-size: .9rem;
+      color: var(--slate-700);
+      margin-bottom: .45rem;
+    }
+
+    .input-slider-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .75rem;
+      align-items: center;
+    }
+
+    input[type="number"],
+    select {
+      width: 100%;
+      padding: .7rem .9rem;
+      border: 2px solid var(--slate-300);
+      border-radius: 8px;
+      font-size: 1rem;
+      background: var(--white);
+      color: var(--slate-800);
+      transition: border-color .2s;
+    }
+
+    input[type="number"]:focus,
+    select:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, .12);
+    }
+
+    input[type="range"] {
+      width: 100%;
+      height: 6px;
+      background: var(--slate-300);
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      accent-color: var(--primary);
+    }
+
+    .slider-value {
+      font-size: .85rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-top: .25rem;
+    }
+
+    .error-msg {
+      color: var(--danger);
+      font-size: .82rem;
+      margin-top: .35rem;
+      display: none;
+    }
+
+    /* ── BUTTONS ── */
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: .85rem 2rem;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      width: 100%;
+      transition: transform .2s, box-shadow .2s;
+      margin-top: .5rem;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(102, 126, 234, .4);
+    }
+
+    .btn-primary:active {
+      transform: translateY(0);
+    }
+
+    .btn-secondary {
+      background: var(--slate-200);
+      color: var(--slate-700);
+      border: 2px solid var(--slate-300);
+      border-radius: 8px;
+      padding: .85rem 2rem;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      width: 100%;
+      transition: all .2s;
+      margin-top: .5rem;
+    }
+
+    .btn-secondary:hover {
+      background: var(--slate-300);
+    }
+
+    .btn-row {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: .75rem;
+    }
+
+    .btn-copy {
+      background: var(--secondary);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: .6rem 1.25rem;
+      font-size: .88rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .2s;
+      margin-top: .75rem;
+    }
+
+    .btn-copy:hover {
+      background: #38a169;
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* ── RESULTS ── */
+    .result-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .result-card {
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+      color: #fff;
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+    }
+
+    .result-card.green {
+      background: linear-gradient(135deg, #38a169, var(--secondary));
+    }
+
+    .result-card.orange {
+      background: linear-gradient(135deg, #dd6b20, var(--accent));
+    }
+
+    .result-card.red {
+      background: linear-gradient(135deg, #e53e3e, var(--danger));
+    }
+
+    .result-card.slate {
+      background: linear-gradient(135deg, var(--slate-700), var(--slate-500));
+    }
+
+    .result-label {
+      font-size: .8rem;
+      opacity: .88;
+      margin-bottom: .35rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+    }
+
+    .result-value {
+      font-size: 1.75rem;
+      font-weight: 800;
+      word-break: break-word;
+      line-height: 1.1;
+    }
+
+    .result-sub {
+      font-size: .78rem;
+      opacity: .8;
+      margin-top: .3rem;
+    }
+
+    /* ── FORMULA ── */
+    .formula-box {
+      background: var(--slate-50);
+      border-left: 4px solid var(--primary);
+      border-radius: 0 8px 8px 0;
+      padding: 1rem 1.25rem;
+      margin-top: 1.25rem;
+      font-family: 'Courier New', monospace;
+      font-size: .92rem;
+      color: var(--slate-700);
+      overflow-x: auto;
+    }
+
+    .formula-box strong {
+      color: var(--primary-dark);
+    }
+
+    /* ── CHARTS ── */
+    .charts-section {
+      display: none;
+      margin-top: 2rem;
+    }
+
+    .charts-section.active {
+      display: block;
+    }
+
+    .charts-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .chart-wrap {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: var(--shadow-md);
+      width: 100%;
+      max-width: 100%;
+      overflow: hidden;
+    }
+
+    .chart-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--slate-900);
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .chart-canvas {
+      position: relative;
+      height: 280px;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .chart-canvas canvas {
+      max-width: 100% !important;
+      height: auto !important;
+    }
+
+    /* ── TABLE ── */
+    .table-section {
+      margin-top: 2rem;
+      display: none;
+    }
+
+    .table-section.active {
+      display: block;
+    }
+
+    .table-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: .75rem;
+    }
+
+    .table-header h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--slate-900);
+    }
+
+    .btn-download {
+      background: var(--secondary);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: .5rem 1rem;
+      font-size: .85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .2s;
+    }
+
+    .btn-download:hover {
+      background: #38a169;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border-radius: 8px;
+      border: 1px solid var(--slate-300);
+      width: 100%;
+      max-width: 100%;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 600px;
+    }
+
+    thead tr {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    th,
+    td {
+      padding: .65rem 1rem;
+      text-align: right;
+      font-size: .88rem;
+    }
+
+    th {
+      font-weight: 700;
+      font-size: .82rem;
+      text-transform: uppercase;
+      letter-spacing: .4px;
+    }
+
+    th:first-child,
+    td:first-child {
+      text-align: left;
+    }
+
+    tbody tr:nth-child(even) {
+      background: var(--slate-50);
+    }
+
+    tbody tr:hover {
+      background: #e0e7ff;
+    }
+
+    /* ── COMPARISON ── */
+    .comp-winner {
+      background: linear-gradient(135deg, #d4edda, #c3e6cb);
+      border: 2px solid var(--secondary);
+      border-radius: 10px;
+      padding: 1.25rem;
+      text-align: center;
+      margin-top: 1.25rem;
+    }
+
+    .comp-winner h4 {
+      color: #155724;
+      font-size: 1.1rem;
+      font-weight: 800;
+      margin-bottom: .5rem;
+    }
+
+    .comp-winner p {
+      color: #155724;
+      font-size: .95rem;
+    }
+
+    /* ── CONTENT SECTIONS ── */
+    .content-section {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 2.5rem;
+      box-shadow: var(--shadow-md);
+      margin-top: 3rem;
+      width: 100%;
+      max-width: 100%;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      scroll-margin-top: calc(var(--header-height) + 1rem);
+    }
+
+    .content-section h2 {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: var(--slate-900);
+      margin-bottom: 1.25rem;
+      padding-left: 1rem;
+      border-left: 4px solid var(--primary);
+    }
+
+    .content-section h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--slate-800);
+      margin: 1.75rem 0 .75rem;
+    }
+
+    .content-section p {
+      color: var(--slate-600);
+      margin-bottom: 1rem;
+      line-height: 1.8;
+    }
+
+    .content-section ul,
+    .content-section ol {
+      color: var(--slate-600);
+      margin: 0 0 1rem 1.5rem;
+    }
+
+    .content-section li {
+      margin-bottom: .6rem;
+      line-height: 1.7;
+    }
+
+    .callout {
+      background: linear-gradient(135deg, #e0e7ff, #dbeafe);
+      border-left: 4px solid var(--primary);
+      border-radius: 0 8px 8px 0;
+      padding: 1rem 1.25rem;
+      margin: 1.25rem 0;
+    }
+
+    .callout strong {
+      color: var(--primary-dark);
+    }
+
+    .callout-warning {
+      background: #fef3c7;
+      border-color: var(--accent);
+    }
+
+    .callout-warning strong {
+      color: #92400e;
+    }
+
+    /* ── LINKS GRID ── */
+    .links-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 1.25rem;
+    }
+
+    .link-card {
+      background: var(--slate-50);
+      border: 2px solid var(--slate-300);
+      border-radius: 10px;
+      padding: 1rem;
+      text-align: center;
+      transition: all .25s;
+      color: var(--slate-700);
+      font-weight: 600;
+      font-size: .92rem;
+      text-decoration: none;
+    }
+
+    .link-card:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-sm);
+      text-decoration: none;
+    }
+
+    .link-icon {
+      font-size: 1.6rem;
+      margin-bottom: .4rem;
+      display: block;
+    }
+
+    /* ── FAQ ── */
+    .faq-item {
+      background: var(--slate-50);
+      border-radius: 8px;
+      padding: 1.25rem;
+      margin-bottom: .85rem;
+    }
+
+    .faq-q {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--slate-900);
+      margin-bottom: .6rem;
+    }
+
+    .faq-a {
+      font-size: .93rem;
+      color: var(--slate-600);
+      line-height: 1.75;
+    }
+
+    /* ── DISCLAIMER ── */
+    .disclaimer1 {
+      background: #fef3c7;
+      border: 1px solid var(--accent);
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+      margin-top: 2rem;
+      font-size: .85rem;
+      color: #78350f;
+    }
+
+    .disclaimer1 strong {
+      color: #92400e;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #2d3748;
+      color: white;
+      padding: 3rem 0 1rem;
+      margin-top: 4rem;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .footer-section h3 {
+      margin-bottom: 1rem;
+      color: #667eea;
+    }
+
+    .footer-section ul {
+      list-style: none;
+    }
+
+    .footer-section ul li {
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-section a {
+      color: #cbd5e0;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-section a:hover {
+      color: white;
+    }
+
+    .disclaimer {
+      background: rgba(0, 0, 0, 0.2);
+      padding: 1rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      color: #cbd5e0;
+    }
+
+    .copyright {
+      text-align: center;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: #cbd5e0;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .hdr-nav {
+        display: none;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .form-grid,
+      .input-slider-group {
+        grid-template-columns: 1fr;
+      }
+
+      .charts-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .btn-row {
+        grid-template-columns: 1fr;
+      }
+
+      .chart-canvas {
+        height: 220px;
+      }
+
+      .result-value {
+        font-size: 1.5rem;
+      }
+
+      .content-section {
+        padding: 1.5rem;
+      }
+
+      h1 {
+        font-size: 1.85rem;
+      }
+
+      .mode-tab {
+        font-size: .85rem;
+        padding: .7rem .9rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .mode-tab {
+        font-size: .82rem;
+        padding: .65rem .75rem;
+      }
+
+      .result-value {
+        font-size: 1.3rem;
+      }
+
+      .card {
+        padding: 1.25rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="hdr-inner">
+      <div class="hdr-logo">💰 Finance Calculators</div>
+
+      <nav class="hdr-nav">
+        <a href="https://advaitpatel69-beep.github.io/Advait.github.io/index.html">Home</a>
+
+        <span class="nav-disabled">Student Calculators (Coming Soon)</span>
+        <span class="nav-disabled">Medical Calculators (Coming Soon)</span>
+        <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/finance-hub.html">Finance Calculators</a>
+      </nav>
+      <button class="hamburger" id="hamburgerBtn" aria-label="Menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <nav class="mobile-nav" id="mobileNav">
+      <a href="https://advaitpatel69-beep.github.io/Advait.github.io/index.html">Home</a>
+
+      <span class="nav-disabled">Student Calculators (Coming Soon)</span>
+      <span class="nav-disabled">Medical Calculators (Coming Soon)</span>
+      <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/finance-hub.html">Finance Calculators</a>
+    </nav>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="container">
+
+    <!-- HERO -->
+    <div class="hero">
+      <div class="hero-icon">📈</div>
+      <h1>CAGR Calculator</h1>
+      <p class="hero-subtitle">Calculate Compound Annual Growth Rate with inflation adjustment, investment comparison,
+        growth charts, and yearly projections 🚀</p>
+    </div>
+
+    <!-- MODE TABS -->
+    <div class="mode-tabs" id="modeTabs" role="tablist">
+      <button class="mode-tab active" onclick="switchMode('standard')" role="tab" aria-selected="true" type="button">📊
+        Standard CAGR</button>
+      <button class="mode-tab" onclick="switchMode('reverse')" role="tab" aria-selected="false" type="button">↩️ Reverse
+        CAGR</button>
+      <button class="mode-tab" onclick="switchMode('target')" role="tab" aria-selected="false" type="button">🎯 Target
+        CAGR</button>
+      <button class="mode-tab" onclick="switchMode('compare')" role="tab" aria-selected="false" type="button">⚖️
+        Compare</button>
+    </div>
+
+    <!-- ═══════════════════════════════════
+       MODULE 1: STANDARD CAGR
+  ═══════════════════════════════════ -->
+    <section class="module active" id="mod-standard">
+      <div class="card" id="calculator">
+        <div class="card-title">📊 Standard CAGR Calculator</div>
+
+        <!-- Currency Selection -->
+        <div class="form-row">
+          <label class="lbl" for="currency-select">Currency 💱</label>
+          <select id="currency-select" onchange="updateCurrencyDisplay()">
+            <option value="USD" selected>🇺🇸 US Dollar ($)</option>
+            <option value="EUR">🇪🇺 Euro (€)</option>
+            <option value="GBP">🇬🇧 British Pound (£)</option>
+            <option value="INR">🇮🇳 Indian Rupee (₹)</option>
+            <option value="JPY">🇯🇵 Japanese Yen (¥)</option>
+            <option value="AUD">🇦🇺 Australian Dollar (A$)</option>
+            <option value="CAD">🇨🇦 Canadian Dollar (C$)</option>
+            <option value="CHF">🇨🇭 Swiss Franc (CHF)</option>
+            <option value="CNY">🇨🇳 Chinese Yuan (¥)</option>
+            <option value="SGD">🇸🇬 Singapore Dollar (S$)</option>
+            <option value="AED">🇦🇪 UAE Dirham (AED)</option>
+            <option value="SAR">🇸🇦 Saudi Riyal (SR)</option>
+            <option value="BRL">🇧🇷 Brazilian Real (R$)</option>
+            <option value="MXN">🇲🇽 Mexican Peso (MX$)</option>
+          </select>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-row">
+            <label class="lbl" for="std-pv">Initial Value (PV)</label>
+            <div class="input-slider-group">
+              <div>
+                <input type="number" id="std-pv" min="0" step="1000" value="100000" placeholder="e.g. 100000">
+                <div class="error-msg" id="std-pv-err">Enter positive value</div>
+              </div>
+              <div>
+                <input type="range" id="std-pv-sl" min="0" max="10000000" step="10000" value="100000">
+                <div class="slider-value" id="std-pv-sl-lbl">100,000</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label class="lbl" for="std-fv">Final Value (FV)</label>
+            <div class="input-slider-group">
+              <div>
+                <input type="number" id="std-fv" min="0" step="1000" value="250000" placeholder="e.g. 250000">
+                <div class="error-msg" id="std-fv-err">Enter positive value</div>
+              </div>
+              <div>
+                <input type="range" id="std-fv-sl" min="0" max="10000000" step="10000" value="250000">
+                <div class="slider-value" id="std-fv-sl-lbl">250,000</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-row">
+            <label class="lbl" for="std-time">Time Period</label>
+            <div class="input-slider-group">
+              <div>
+                <input type="number" id="std-time" min="0.01" step="0.1" value="10" placeholder="e.g. 10">
+                <div class="error-msg" id="std-time-err">Enter positive time</div>
+              </div>
+              <div>
+                <input type="range" id="std-time-sl" min="0.1" max="40" step="0.1" value="10">
+                <div class="slider-value" id="std-time-sl-lbl">10 years</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label class="lbl" for="std-time-unit">Time Unit</label>
+            <select id="std-time-unit">
+              <option value="years" selected>Years</option>
+              <option value="months">Months</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label class="lbl" for="std-inflation">Inflation Rate (%) — Optional for Real CAGR</label>
+          <div class="input-slider-group">
+            <div>
+              <input type="number" id="std-inflation" min="0" max="50" step="0.1" value="0" placeholder="e.g. 3">
+            </div>
+            <div>
+              <input type="range" id="std-inflation-sl" min="0" max="20" step="0.1" value="0">
+              <div class="slider-value" id="std-inflation-sl-lbl">0.0%</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn-primary" onclick="calcStandard()" type="button">Calculate CAGR 📊</button>
+          <button class="btn-secondary" onclick="resetModule('standard')" type="button">Reset 🔄</button>
+        </div>
+
+        <div class="result-grid" id="std-results" style="display:none;">
+          <div class="result-card">
+            <div class="result-label">CAGR</div>
+            <div class="result-value" id="std-cagr">—</div>
+            <div class="result-sub">Compound Annual Growth Rate</div>
+          </div>
+          <div class="result-card green">
+            <div class="result-label">Absolute Profit</div>
+            <div class="result-value" id="std-profit">—</div>
+            <div class="result-sub">FV − PV</div>
+          </div>
+          <div class="result-card orange">
+            <div class="result-label">Total Growth</div>
+            <div class="result-value" id="std-growth">—</div>
+            <div class="result-sub">Percentage Growth</div>
+          </div>
+          <div class="result-card slate">
+            <div class="result-label">Growth Multiplier</div>
+            <div class="result-value" id="std-mult">—</div>
+            <div class="result-sub">FV / PV</div>
+          </div>
+        </div>
+
+        <div id="std-real-result" style="display:none;">
+          <div class="result-grid" style="margin-top:1rem;">
+            <div class="result-card red">
+              <div class="result-label">Real CAGR</div>
+              <div class="result-value" id="std-real-cagr">—</div>
+              <div class="result-sub">Inflation-Adjusted</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="formula-box" id="std-formula" style="display:none;"></div>
+        <button class="btn-copy" id="std-copy-btn" style="display:none;" onclick="copyResults('standard')"
+          type="button">📋 Copy Results</button>
+      </div>
+
+      <!-- Charts -->
+      <div class="charts-section" id="std-charts">
+        <div class="charts-grid">
+          <div class="chart-wrap">
+            <div class="chart-title">📈 Growth Projection</div>
+            <div class="chart-canvas"><canvas id="std-line-chart"></canvas></div>
+          </div>
+          <div class="chart-wrap">
+            <div class="chart-title">🥧 Principal vs Profit</div>
+            <div class="chart-canvas"><canvas id="std-pie-chart"></canvas></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Table -->
+      <div class="table-section" id="std-table">
+        <div class="card">
+          <div class="table-header">
+            <h3>📅 Year-by-Year Growth Projection</h3>
+            <button class="btn-download" onclick="downloadCSV('standard')" type="button">📥 Download CSV</button>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Year</th>
+                  <th>Projected Value</th>
+                  <th>Annual Increase</th>
+                  <th>Cumulative Growth %</th>
+                </tr>
+              </thead>
+              <tbody id="std-table-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════
+       MODULE 2: REVERSE CAGR
+  ═══════════════════════════════════ -->
+    <section class="module" id="mod-reverse">
+      <div class="card">
+        <div class="card-title">↩️ Reverse CAGR Calculator</div>
+
+        <div class="form-grid">
+          <div class="form-row">
+            <label class="lbl" for="rev-fv">Final Value (FV)</label>
+            <div class="input-slider-group">
+              <div>
+                <input type="number" id="rev-fv" min="0" step="1000" value="250000" placeholder="e.g. 250000">
+                <div class="error-msg" id="rev-fv-err">Enter positive value</div>
+              </div>
+              <div>
+                <input type="range" id="rev-fv-sl" min="0" max="10000000" step="10000" value="250000">
+                <div class="slider-value" id="rev-fv-sl-lbl">250,000</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label class="lbl" for="rev-cagr">Expected CAGR (%)</label>
+            <div class="input-slider-group">
+              <div>
+                <input type="number" id="rev-cagr" min="-50" max="500" step="0.1" value="10" placeholder="e.g. 10">
+                <div class="error-msg" id="rev-cagr-err">Enter valid CAGR</div>
+              </div>
+              <div>
+                <input type="range" id="rev-cagr-sl" min="0" max="50" step="0.1" value="10">
+                <div class="slider-value" id="rev-cagr-sl-lbl">10.0%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-row">
+            <label class="lbl" for="rev-time">Time Period</label>
+            <div class="input-slider-group">
+              <div>
+                <input type="number" id="rev-time" min="0.01" step="0.1" value="10" placeholder="e.g. 10">
+                <div class="error-msg" id="rev-time-err">Enter positive time</div>
+              </div>
+              <div>
+                <input type="range" id="rev-time-sl" min="0.1" max="40" step="0.1" value="10">
+                <div class="slider-value" id="rev-time-sl-lbl">10 years</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label class="lbl" for="rev-time-unit">Time Unit</label>
+            <select id="rev-time-unit">
+              <option value="years" selected>Years</option>
+              <option value="months">Months</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn-primary" onclick="calcReverse()" type="button">Calculate Initial Value ↩️</button>
+          <button class="btn-secondary" onclick="resetModule('reverse')" type="button">Reset 🔄</button>
+        </div>
+
+        <div class="result-grid" id="rev-results" style="display:none;">
+          <div class="result-card">
+            <div class="result-label">Required Initial Value</div>
+            <div class="result-value" id="rev-pv">—</div>
+            <div class="result-sub">To reach target FV</div>
+          </div>
+          <div class="result-card green">
+            <div class="result-label">Expected Growth</div>
+            <div class="result-value" id="rev-growth">—</div>
+            <div class="result-sub">Total Gain</div>
+          </div>
+        </div>
+
+        <div class="formula-box" id="rev-formula" style="display:none;"></div>
+        <button class="btn-copy" id="rev-copy-btn" style="display:none;" onclick="copyResults('reverse')"
+          type="button">📋 Copy Results</button>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════
+       MODULE 3: TARGET CAGR
+  ═══════════════════════════════════ -->
+    <section class="module" id="mod-target">
+      <div class="card">
+        <div class="card-title">🎯 Target CAGR Calculator</div>
+
+        <div class="form-grid">
+          <div class="form-row">
+            <label class="lbl" for="tgt-pv">Initial Value (PV)</label>
+            <div class="input-slider-group">
+              <div>
+                <input type="number" id="tgt-pv" min="0" step="1000" value="100000" placeholder="e.g. 100000">
+                <div class="error-msg" id="tgt-pv-err">Enter positive value</div>
+              </div>
+              <div>
+                <input type="range" id="tgt-pv-sl" min="0" max="10000000" step="10000" value="100000">
+                <div class="slider-value" id="tgt-pv-sl-lbl">100,000</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label class="lbl" for="tgt-fv">Target Final Value (FV)</label>
+            <div class="input-slider-group">
+              <div>
+                <input type="number" id="tgt-fv" min="0" step="1000" value="500000" placeholder="e.g. 500000">
+                <div class="error-msg" id="tgt-fv-err">Enter positive value</div>
+              </div>
+              <div>
+                <input type="range" id="tgt-fv-sl" min="0" max="10000000" step="10000" value="500000">
+                <div class="slider-value" id="tgt-fv-sl-lbl">500,000</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-row">
+            <label class="lbl" for="tgt-time">Time Period</label>
+            <div class="input-slider-group">
+              <div>
+                <input type="number" id="tgt-time" min="0.01" step="0.1" value="15" placeholder="e.g. 15">
+                <div class="error-msg" id="tgt-time-err">Enter positive time</div>
+              </div>
+              <div>
+                <input type="range" id="tgt-time-sl" min="0.1" max="40" step="0.1" value="15">
+                <div class="slider-value" id="tgt-time-sl-lbl">15 years</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label class="lbl" for="tgt-time-unit">Time Unit</label>
+            <select id="tgt-time-unit">
+              <option value="years" selected>Years</option>
+              <option value="months">Months</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn-primary" onclick="calcTarget()" type="button">Calculate Required CAGR 🎯</button>
+          <button class="btn-secondary" onclick="resetModule('target')" type="button">Reset 🔄</button>
+        </div>
+
+        <div class="result-grid" id="tgt-results" style="display:none;">
+          <div class="result-card">
+            <div class="result-label">Required CAGR</div>
+            <div class="result-value" id="tgt-cagr">—</div>
+            <div class="result-sub">To reach target</div>
+          </div>
+          <div class="result-card green">
+            <div class="result-label">Target Growth</div>
+            <div class="result-value" id="tgt-growth">—</div>
+            <div class="result-sub">Total Expected Gain</div>
+          </div>
+        </div>
+
+        <div class="formula-box" id="tgt-formula" style="display:none;"></div>
+        <button class="btn-copy" id="tgt-copy-btn" style="display:none;" onclick="copyResults('target')"
+          type="button">📋 Copy Results</button>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════
+       MODULE 4: COMPARISON
+  ═══════════════════════════════════ -->
+    <section class="module" id="mod-compare">
+      <div class="card">
+        <div class="card-title">⚖️ Investment Comparison Tool</div>
+
+        <!-- Investment A -->
+        <div style="background:#e0e7ff;border-radius:10px;padding:1.25rem;margin-bottom:1rem;">
+          <div style="font-weight:700;color:#3730a3;margin-bottom:.75rem;">🅐 Investment A</div>
+          <div class="form-grid">
+            <div class="form-row">
+              <label class="lbl" for="cmp-pv-a">Initial Value A</label>
+              <div class="input-slider-group">
+                <div>
+                  <input type="number" id="cmp-pv-a" min="0" step="1000" value="100000">
+                </div>
+                <div>
+                  <input type="range" id="cmp-pv-a-sl" min="0" max="10000000" step="10000" value="100000">
+                  <div class="slider-value" id="cmp-pv-a-sl-lbl">100,000</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <label class="lbl" for="cmp-fv-a">Final Value A</label>
+              <div class="input-slider-group">
+                <div>
+                  <input type="number" id="cmp-fv-a" min="0" step="1000" value="250000">
+                </div>
+                <div>
+                  <input type="range" id="cmp-fv-a-sl" min="0" max="10000000" step="10000" value="250000">
+                  <div class="slider-value" id="cmp-fv-a-sl-lbl">250,000</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-grid">
+            <div class="form-row">
+              <label class="lbl" for="cmp-time-a">Time Period A</label>
+              <div class="input-slider-group">
+                <div>
+                  <input type="number" id="cmp-time-a" min="0.01" step="0.1" value="10">
+                </div>
+                <div>
+                  <input type="range" id="cmp-time-a-sl" min="0.1" max="40" step="0.1" value="10">
+                  <div class="slider-value" id="cmp-time-a-sl-lbl">10 years</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <label class="lbl" for="cmp-unit-a">Unit A</label>
+              <select id="cmp-unit-a">
+                <option value="years">Years</option>
+                <option value="months">Months</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Investment B -->
+        <div style="background:#fef3c7;border-radius:10px;padding:1.25rem;margin-bottom:1rem;">
+          <div style="font-weight:700;color:#92400e;margin-bottom:.75rem;">🅑 Investment B</div>
+          <div class="form-grid">
+            <div class="form-row">
+              <label class="lbl" for="cmp-pv-b">Initial Value B</label>
+              <div class="input-slider-group">
+                <div>
+                  <input type="number" id="cmp-pv-b" min="0" step="1000" value="100000">
+                </div>
+                <div>
+                  <input type="range" id="cmp-pv-b-sl" min="0" max="10000000" step="10000" value="100000">
+                  <div class="slider-value" id="cmp-pv-b-sl-lbl">100,000</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <label class="lbl" for="cmp-fv-b">Final Value B</label>
+              <div class="input-slider-group">
+                <div>
+                  <input type="number" id="cmp-fv-b" min="0" step="1000" value="220000">
+                </div>
+                <div>
+                  <input type="range" id="cmp-fv-b-sl" min="0" max="10000000" step="10000" value="220000">
+                  <div class="slider-value" id="cmp-fv-b-sl-lbl">220,000</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-grid">
+            <div class="form-row">
+              <label class="lbl" for="cmp-time-b">Time Period B</label>
+              <div class="input-slider-group">
+                <div>
+                  <input type="number" id="cmp-time-b" min="0.01" step="0.1" value="10">
+                </div>
+                <div>
+                  <input type="range" id="cmp-time-b-sl" min="0.1" max="40" step="0.1" value="10">
+                  <div class="slider-value" id="cmp-time-b-sl-lbl">10 years</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <label class="lbl" for="cmp-unit-b">Unit B</label>
+              <select id="cmp-unit-b">
+                <option value="years">Years</option>
+                <option value="months">Months</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn-primary" onclick="calcCompare()" type="button">Compare Investments ⚖️</button>
+          <button class="btn-secondary" onclick="resetModule('compare')" type="button">Reset 🔄</button>
+        </div>
+
+        <div id="cmp-results" style="display:none;">
+          <div class="result-grid">
+            <div class="result-card">
+              <div class="result-label">Investment A CAGR</div>
+              <div class="result-value" id="cmp-cagr-a">—</div>
+              <div class="result-sub">Annualized Return</div>
+            </div>
+            <div class="result-card orange">
+              <div class="result-label">Investment B CAGR</div>
+              <div class="result-value" id="cmp-cagr-b">—</div>
+              <div class="result-sub">Annualized Return</div>
+            </div>
+            <div class="result-card green">
+              <div class="result-label">CAGR Difference</div>
+              <div class="result-value" id="cmp-diff">—</div>
+              <div class="result-sub">Performance Gap</div>
+            </div>
+            <div class="result-card slate">
+              <div class="result-label">Wealth Difference</div>
+              <div class="result-value" id="cmp-wealth">—</div>
+              <div class="result-sub">Final Value Gap</div>
+            </div>
+          </div>
+
+          <div class="comp-winner" id="cmp-winner"></div>
+
+          <div class="charts-section active">
+            <div class="charts-grid" style="grid-template-columns:1fr;">
+              <div class="chart-wrap">
+                <div class="chart-title">📈 Investment A vs B — Growth Comparison</div>
+                <div class="chart-canvas" style="height:320px;"><canvas id="cmp-chart"></canvas></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════
+       EDUCATIONAL CONTENT
+  ═══════════════════════════════════ -->
+    <article class="content-section" id="guide">
+      <h2>📚 Complete Guide to CAGR</h2>
+
+      <h3>What is CAGR? 📈</h3>
+      <p>CAGR stands for <strong>Compound Annual Growth Rate</strong> — the steady annual rate at which an investment
+        would have grown if it compounded at a constant pace every single year. Unlike volatile year-to-year returns,
+        CAGR smooths everything into one clean number that shows the <em>true</em> annualized performance from start to
+        finish. 🎯</p>
+
+      <p>Think of it this way: if you invested 10,000 and it became 25,000 after 7 years, CAGR tells you the equivalent
+        fixed annual growth rate that would produce the same result. In this case, CAGR = (25,000 / 10,000)^(1/7) − 1 =
+        <strong>14.87%</strong> per year. That means if your investment had grown at exactly 14.87% every year like
+        clockwork, you'd end up with 25,000.
+      </p>
+
+      <div class="callout">
+        <strong>🔑 Formula:</strong> CAGR = (Final Value / Initial Value)^(1 / Years) − 1
+      </div>
+
+      <h3>Why CAGR is Better Than Simple Average Return 💡</h3>
+      <p>This is where most beginners get confused. Let's say your investment had these yearly returns:</p>
+      <ul>
+        <li>Year 1: +50%</li>
+        <li>Year 2: −50%</li>
+      </ul>
+      <p>The arithmetic average is (50% + (−50%)) / 2 = <strong>0%</strong>. Looks like you broke even, right?
+        <strong>WRONG!</strong> ❌
+      </p>
+
+      <p>Here's the reality: You start with 10,000. After Year 1 (+50%), you have 15,000. After Year 2 (−50% of 15,000),
+        you have only 7,500. You lost 2,500 total — a <strong>−25% loss</strong>, not 0%! 😱</p>
+
+      <p>CAGR gets this right. CAGR = (7,500 / 10,000)^(1/2) − 1 = <strong>−13.4%</strong> per year. This accurately
+        reflects the compounded damage. The lesson? <strong>Average returns lie. CAGR tells the truth.</strong> Always
+        use CAGR when evaluating multi-year investment performance. 📉</p>
+
+      <h3>CAGR vs APY — What's the Difference? 💰</h3>
+      <p>People often confuse these. <strong>APY (Annual Percentage Yield)</strong> is used for predictable,
+        interest-bearing products like savings accounts or bonds where the rate is fixed and compounding happens
+        regularly. APY tells you what you'll <em>earn</em> going forward with certainty.</p>
+
+      <p><strong>CAGR</strong>, on the other hand, measures <em>historical</em> growth of volatile investments like
+        stocks, real estate, crypto, or business revenue. CAGR looks backward at actual results, not forward at promised
+        yields. You can't predict future CAGR — you can only calculate past CAGR based on what actually happened. 🔍</p>
+
+      <div class="callout">
+        <strong>💡 Quick Rule:</strong> Use APY for savings/deposits. Use CAGR for investments/assets with variable
+        returns.
+      </div>
+
+      <h3>Real vs Nominal CAGR 🌍</h3>
+      <p>Your nominal CAGR is the raw number — say, 15% per year. But inflation eats into that. If inflation averages
+        3%, your <em>real</em> purchasing-power growth is less than 15%. To calculate real CAGR:</p>
+
+      <div class="callout">
+        <strong>Real CAGR = ((1 + Nominal CAGR) / (1 + Inflation)) − 1</strong><br><br>
+        Example: Nominal CAGR = 15%, Inflation = 3%<br>
+        Real CAGR = ((1.15) / (1.03)) − 1 = 1.1165 − 1 = <strong>11.65%</strong>
+      </div>
+
+      <p>So while your investment grew 15% nominally, your real wealth (after inflation) only grew 11.65%. This is
+        critical for long-term planning — always account for inflation to understand your <em>actual</em> wealth
+        creation! 💸</p>
+
+      <h3>How Investors Use CAGR 🚀</h3>
+
+      <p><strong>📊 Stock Market Performance:</strong> "The S&P 500 has delivered ~10% CAGR over the last 50 years" —
+        this tells you the steady annualized growth despite crashes, booms, and volatility. Individual stock pickers
+        compare their portfolio CAGR to the index CAGR to measure outperformance or underperformance.</p>
+
+      <p><strong>🏠 Real Estate:</strong> "My property appreciated from 500,000 to 1,200,000 in 12 years — that's 7.6%
+        CAGR" — investors use this to compare real estate returns against stocks, bonds, or other asset classes. It
+        answers: was tying up capital in property worth it vs other opportunities?</p>
+
+      <p><strong>🪙 Crypto & High-Volatility Assets:</strong> Bitcoin went from 1,000 in 2017 to 40,000 in 2024 (7
+        years) — CAGR = 65.3%. Sounds amazing! But that hides 80% drawdowns and extreme volatility. CAGR alone doesn't
+        show <em>risk</em>. Always pair CAGR with standard deviation or max drawdown to get the full picture. ⚠️</p>
+
+      <p><strong>💼 Business Growth:</strong> "Our revenue grew from 10M to 50M in 5 years — 38% CAGR" — companies and
+        investors use revenue CAGR to measure business scaling. Venture capitalists often target startups with 30-50%+
+        CAGRs to justify high valuations.</p>
+
+      <p><strong>📈 ETFs & Mutual Funds:</strong> Fund managers advertise 5-year or 10-year CAGR to show track record.
+        Always check CAGR over multiple periods (1yr, 3yr, 5yr, 10yr) to see consistency. A fund with 20% 1-year CAGR
+        but 5% 10-year CAGR likely had one lucky year and mediocre long-term performance.</p>
+
+      <h3>Limitations of CAGR ⚠️</h3>
+      <p>CAGR is powerful but not perfect. Here's what it <em>doesn't</em> tell you:</p>
+
+      <ul>
+        <li><strong>❌ Volatility:</strong> CAGR only cares about start and end points. Two investments with identical
+          CAGR can have completely different risk. One might be a smooth ride, the other a rollercoaster. Use standard
+          deviation or Sharpe ratio alongside CAGR.</li>
+        <li><strong>❌ Interim Cash Flows:</strong> CAGR assumes you invest once and withdraw once. If you're adding
+          money monthly (SIP) or withdrawing dividends, CAGR doesn't accurately reflect your experience. Use XIRR or IRR
+          for cash-flow-adjusted returns.</li>
+        <li><strong>❌ Timing Luck:</strong> CAGR is extremely sensitive to start/end dates. Measure from market peak to
+          trough and CAGR looks terrible. Measure from trough to peak and it looks amazing. Always use consistent,
+          representative periods.</li>
+        <li><strong>❌ Short Periods:</strong> 1-year or 2-year CAGR is almost meaningless for volatile assets. Focus on
+          5+ year CAGR to smooth out noise and capture real trends.</li>
+        <li><strong>❌ Future Performance:</strong> Past CAGR ≠ future CAGR. Just because a stock delivered 30% CAGR over
+          10 years doesn't mean the next 10 will be the same. Markets mean-revert; high CAGRs rarely persist forever.
+        </li>
+      </ul>
+
+      <div class="callout callout-warning">
+        <strong>⚠️ Warning:</strong> Never rely on CAGR alone. It's one metric in a toolkit. Pair it with volatility
+        measures, benchmark comparisons, and risk-adjusted returns (Sharpe, Sortino) for a complete picture.
+      </div>
+
+      <h3>Practical CAGR Benchmarks 🎯</h3>
+      <p>What's a "good" CAGR? It depends on asset class and risk:</p>
+
+      <ul>
+        <li><strong>🏦 Savings Accounts / Bonds:</strong> 3-6% CAGR (low risk, inflation-matching)</li>
+        <li><strong>📊 Stock Market Index Funds:</strong> 8-12% CAGR (moderate risk, historical average)</li>
+        <li><strong>🏠 Real Estate:</strong> 6-12% CAGR (depends on location and leverage)</li>
+        <li><strong>💼 Small Business / Startups:</strong> 20-50%+ CAGR (high risk, high reward potential)</li>
+        <li><strong>🪙 Crypto / Venture Capital:</strong> −50% to +200% CAGR (extreme risk, wide dispersion)</li>
+      </ul>
+
+      <p>Always compare your investment's CAGR to a relevant benchmark. Beating the S&P 500's ~10% CAGR is the goal for
+        active stock pickers. Underperforming it over 10+ years means you should've just bought an index fund and saved
+        yourself the stress! 😅</p>
+
+      <h3>Using CAGR for Goal Planning 🎯</h3>
+      <p>CAGR works backward (historical analysis) but you can also use it forward for planning:</p>
+
+      <p><strong>Goal:</strong> You want 1,000,000 for retirement in 20 years. You have 100,000 today. What CAGR do you
+        need?</p>
+      <p><strong>Required CAGR</strong> = (1,000,000 / 100,000)^(1/20) − 1 = (10)^0.05 − 1 = 1.1220 − 1 =
+        <strong>12.2%</strong> per year.
+      </p>
+
+      <p>Now you know you need investments averaging 12.2% annual growth to hit your goal. If you're only comfortable
+        with 8% CAGR (index funds), you'd need to save more upfront or extend the timeline. This is how financial
+        planners use CAGR for reverse-engineering retirement targets! 💰</p>
+
+      <h3>Common CAGR Mistakes to Avoid 🚫</h3>
+
+      <ul>
+        <li><strong>❌ Ignoring Inflation:</strong> 10% nominal CAGR with 6% inflation = only 4% real growth. Always
+          adjust for inflation in long-term planning.</li>
+        <li><strong>❌ Cherry-Picking Dates:</strong> "My stock did 50% CAGR!" — measured from its all-time low to
+          all-time high. That's marketing, not analysis.</li>
+        <li><strong>❌ Comparing Apples to Oranges:</strong> Comparing 1-year CAGR of a tech stock to 10-year CAGR of
+          bonds. Use matching periods and risk profiles.</li>
+        <li><strong>❌ Forgetting Taxes & Fees:</strong> Gross CAGR ≠ net CAGR. Subtract transaction costs, management
+          fees, and taxes for true after-cost returns.</li>
+        <li><strong>❌ Extrapolating Forever:</strong> "If this keeps up, I'll be a billionaire in 20 years!" —
+          exponential growth rarely sustains. Reversion to mean is real.</li>
+      </ul>
+
+      <h3>Final Thoughts 💭</h3>
+      <p>CAGR is one of the most important metrics in finance, but it's not magic. It's a tool — use it wisely. Combine
+        CAGR with volatility analysis, diversification, and realistic expectations. The best investors don't chase the
+        highest CAGR; they chase the highest <em>risk-adjusted</em> CAGR over the long haul. Slow and steady (12% CAGR
+        with low volatility) beats fast and fragile (30% CAGR with 50% crashes) every time. 🐢💰</p>
+
+      <p>Now go forth and calculate! Use this tool to measure your investments honestly, compare options fairly, and
+        plan your financial future with confidence. 🚀</p>
+    </article>
+
+    <!-- INTERNAL LINKS -->
+    <div class="content-section">
+      <h2>🔗 Explore More Calculators</h2>
+      <p>Maximize your financial planning with these complementary tools:</p>
+      <div class="links-grid">
+        <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/finance-sip-calculator.html"
+          class="link-card">
+          <span class="link-icon">📊</span>SIP Calculator
+        </a>
+
+        <!-- <a href="/finance/investment/lumpsum-calculator.html" class="link-card">
+          <span class="link-icon">💰</span>Lumpsum Calculator
+        </a> -->
+
+        <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/investment/apy-calculator.html"
+          class="link-card">
+          <span class="link-icon">📈</span>APY Calculator
+        </a>
+
+        <!-- <a href="/finance/inflation-calculator.html" class="link-card">
+          <span class="link-icon">📉</span>Inflation Calculator
+        </a> -->
+
+        <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/saving-retirement/saving-retirement-hub.html"
+          class="link-card">
+          <span class="link-icon">🏖️</span>Retirement Calculator
+        </a>
+        <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/finance-emi-calculator.html"
+          class="link-card">
+          <span class="link-icon">💳</span>EMI Calculator
+        </a>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="content-section" id="faq">
+      <h2>❓ Frequently Asked Questions</h2>
+
+      <div class="faq-item">
+        <div class="faq-q">What is CAGR and how is it calculated? 📊</div>
+        <div class="faq-a">CAGR (Compound Annual Growth Rate) is the rate at which an investment would have grown if it
+          had grown at a steady rate every year. Formula: CAGR = (Final Value / Initial Value)^(1 / Years) − 1. It
+          smooths out volatility to show the true annualized return.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">What is the difference between CAGR and average return? 💡</div>
+        <div class="faq-a">Average return is the arithmetic mean of yearly returns and can be misleading. CAGR is the
+          geometric mean that accounts for compounding. Example: 50% loss then 50% gain = −25% total, not 0%. CAGR
+          accurately reflects this reality while average return shows 0%.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Can CAGR be negative? 📉</div>
+        <div class="faq-a">Yes. Negative CAGR means your investment lost value over time. If you invested 10,000 and
+          it's now worth 8,000 after 3 years, CAGR = −7.2%. This shows the annualized rate of decline.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">What is a good CAGR percentage? 🎯</div>
+        <div class="faq-a">It depends on asset class and risk. Stock market historical CAGR ~10%, real estate ~8-12%,
+          bonds ~5-7%. Crypto can show 50-200% but with extreme volatility. Always compare CAGR to inflation and
+          benchmark index for your investment category.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">What is the difference between CAGR and APY? 💰</div>
+        <div class="faq-a">APY (Annual Percentage Yield) is for interest-bearing accounts with predictable compounding.
+          CAGR measures actual historical growth of volatile investments. Both are annualized rates, but CAGR is
+          retrospective while APY is prospective.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">How do I calculate inflation-adjusted CAGR? 🌍</div>
+        <div class="faq-a">Real CAGR = ((1 + Nominal CAGR) / (1 + Inflation Rate)) − 1. Example: 12% CAGR with 3%
+          inflation = Real CAGR of 8.74%. This shows your true purchasing power growth after accounting for inflation.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Can you give a manual CAGR calculation example? 🧮</div>
+        <div class="faq-a">Investment: 50,000 grew to 95,000 in 7 years. CAGR = (95,000 / 50,000)^(1/7) − 1 =
+          (1.9)^0.1429 − 1 = 1.0957 − 1 = 0.0957 = 9.57% per year.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Does CAGR account for volatility? ⚠️</div>
+        <div class="faq-a">No. CAGR only looks at start and end values, ignoring interim fluctuations. Two investments
+          with identical CAGR can have vastly different risk profiles. Use CAGR with standard deviation or Sharpe ratio
+          to assess risk-adjusted returns.</div>
+      </div>
+    </div>
+
+    <!-- DISCLAIMER -->
+    <div class="disclaimer1">
+      <strong>⚠️ Disclaimer:</strong> This CAGR calculator is for educational purposes only. Past performance does not
+      guarantee future results. CAGR calculations are estimates based on inputs provided. Actual investment returns vary
+      based on market conditions, fees, taxes, and timing. This is not financial advice. Consult a qualified financial
+      advisor before making investment decisions.
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/index.html">Home</a></li>
+          <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/about.html">About</a></li>
+          <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/contact.html">Contact</a></li>
+          <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/privacy-policy.html">Privacy Policy</a>
+          </li>
+
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h3>Student Tools</h3>
+        <ul>
+          <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/percentage-calculator.html">Percentage
+              Calculator</a></li>
+          <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/cgpa-calculator.html">CGPA Calculator</a>
+          </li>
+          <li><a
+              href="https://advaitpatel69-beep.github.io/Advait.github.io/simple-compound-interest-calculator.html">Simple
+              & Compound Interest Calculator</a></li>
+
+          <li><span class="coming-soon">MATRIX Calculator (Coming Soon)</span></li>
+          <li><span class="coming-soon">STATISTIC Calculator (Coming Soon)</span></li>
+        </ul>
+      </div>
+
+
+      <div class="footer-section">
+        <h3>Finance Tools</h3>
+        <ul>
+          <li><a
+              href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/interest/interest-hub.html">Interest
+              Calculators</a></li>
+          <li><a
+              href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/investment/investment-hub.html">Investment
+              Calculators</a></li>
+          <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/loan/loan-hub.html">Loan
+              Calculators</a></li>
+          <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/tax/tax-hub.html">Tax
+              Calculators</a></li>
+          <li><a
+              href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/saving-retirement/saving-retirement-hub.html">Savings
+              Calculators</a></li>
+          <li><a
+              href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/saving-retirement/saving-retirement-hub.html">Retirement
+              Calculators</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <div class="disclaimer">
+          <strong>Disclaimer:</strong> The results provided by this calculator are estimates for informational purposes
+          only.
+          Actual loan terms may vary. Please consult with your financial institution for accurate loan details.
+        </div>
+      </div>
+    </div>
+    <div class="copyright">
+      <p>&copy; Student Helper Tools. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- ═══════════════════════════════════════
+     JAVASCRIPT
+═══════════════════════════════════════ -->
+  <script>
+    // ── UTILS ──
+    let currentCurrency = 'USD';
+
+    const currencySymbols = {
+      'USD': '$', 'EUR': '€', 'GBP': '£', 'INR': '₹', 'JPY': '¥',
+      'AUD': 'A$', 'CAD': 'C$', 'CHF': 'CHF', 'CNY': '¥',
+      'SGD': 'S$', 'AED': 'AED', 'SAR': 'SR', 'BRL': 'R$', 'MXN': 'MX$'
+    };
+
+    const currencyLocales = {
+      'USD': 'en-US', 'EUR': 'de-DE', 'GBP': 'en-GB', 'INR': 'en-IN',
+      'JPY': 'ja-JP', 'AUD': 'en-AU', 'CAD': 'en-CA', 'CHF': 'de-CH',
+      'CNY': 'zh-CN', 'SGD': 'en-SG', 'AED': 'ar-AE', 'SAR': 'ar-SA',
+      'BRL': 'pt-BR', 'MXN': 'es-MX'
+    };
+
+    const currencyDecimals = {
+      'USD': 2, 'EUR': 2, 'GBP': 2, 'INR': 2, 'JPY': 0,
+      'AUD': 2, 'CAD': 2, 'CHF': 2, 'CNY': 2,
+      'SGD': 2, 'AED': 2, 'SAR': 2, 'BRL': 2, 'MXN': 2
+    };
+
+    const getCurrencySymbol = () => currencySymbols[currentCurrency] || '$';
+    const getCurrencyLocale = () => currencyLocales[currentCurrency] || 'en-US';
+    const getCurrencyDecimals = () => currencyDecimals[currentCurrency] || 2;
+
+    const fmt = (n, dec) => {
+      if (dec === undefined) dec = getCurrencyDecimals();
+      return Number(n).toLocaleString(getCurrencyLocale(), { minimumFractionDigits: dec, maximumFractionDigits: dec });
+    };
+
+    const fmtCurrency = (n) => {
+      const symbol = getCurrencySymbol();
+      const decimals = getCurrencyDecimals();
+      return symbol + ' ' + Number(n).toLocaleString(getCurrencyLocale(), { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
+    };
+
+    const pct = (n, dec = 2) => fmt(n * 100, dec) + '%';
+    const $ = id => document.getElementById(id);
+
+    function updateCurrencyDisplay() {
+      currentCurrency = $('currency-select').value;
+      // Update all slider labels
+      updateSliderLabel('std-pv-sl', 'std-pv-sl-lbl');
+      updateSliderLabel('std-fv-sl', 'std-fv-sl-lbl');
+      updateSliderLabel('rev-pv-sl', 'rev-pv-sl-lbl');
+      updateSliderLabel('rev-fv-sl', 'rev-fv-sl-lbl');
+      updateSliderLabel('tgt-pv-sl', 'tgt-pv-sl-lbl');
+      updateSliderLabel('tgt-fv-sl', 'tgt-fv-sl-lbl');
+      updateSliderLabel('cmp-pv-a-sl', 'cmp-pv-a-sl-lbl');
+      updateSliderLabel('cmp-fv-a-sl', 'cmp-fv-a-sl-lbl');
+      updateSliderLabel('cmp-pv-b-sl', 'cmp-pv-b-sl-lbl');
+      updateSliderLabel('cmp-fv-b-sl', 'cmp-fv-b-sl-lbl');
+    }
+
+    function updateSliderLabel(sliderId, labelId) {
+      const slider = $(sliderId);
+      const label = $(labelId);
+      if (slider && label) {
+        label.textContent = fmt(parseFloat(slider.value), 0);
+      }
+    }
+
+    // ── CHARTS ──
+    let stdLineChart = null, stdPieChart = null, cmpChart = null;
+    function destroyChart(c) { if (c) { c.destroy(); } return null; }
+
+    // ── HAMBURGER ──
+    const hamburgerBtn = $('hamburgerBtn');
+    const mobileNav = $('mobileNav');
+    hamburgerBtn.addEventListener('click', () => {
+      const isOpen = mobileNav.classList.toggle('open');
+      hamburgerBtn.setAttribute('aria-expanded', isOpen);
+    });
+
+    // ── MODULE SWITCH ──
+    const MODES = ['standard', 'reverse', 'target', 'compare'];
+    function switchMode(name) {
+      document.querySelectorAll('.module').forEach(m => m.classList.remove('active'));
+      $('mod-' + name).classList.add('active');
+      document.querySelectorAll('.mode-tab').forEach((tab, i) => {
+        const isActive = MODES[i] === name;
+        tab.classList.toggle('active', isActive);
+        tab.setAttribute('aria-selected', isActive);
+      });
+      window.scrollTo({ top: $('modeTabs').offsetTop - 80, behavior: 'smooth' });
+    }
+
+    // ── SLIDER SYNC ──
+    function syncSlider(inputId, sliderId, lblId, fmt_fn) {
+      const inp = $(inputId), sl = $(sliderId), lbl = lblId ? $(lblId) : null;
+      if (!inp || !sl) return;
+      sl.addEventListener('input', () => { inp.value = sl.value; if (lbl) lbl.textContent = fmt_fn(sl.value); });
+      inp.addEventListener('input', () => { sl.value = inp.value; if (lbl) lbl.textContent = fmt_fn(inp.value); });
+    }
+
+    syncSlider('std-pv', 'std-pv-sl', 'std-pv-sl-lbl', v => fmt(parseFloat(v), 0));
+    syncSlider('std-fv', 'std-fv-sl', 'std-fv-sl-lbl', v => fmt(parseFloat(v), 0));
+    syncSlider('std-time', 'std-time-sl', 'std-time-sl-lbl', v => v + ' years');
+    syncSlider('std-inflation', 'std-inflation-sl', 'std-inflation-sl-lbl', v => parseFloat(v).toFixed(1) + '%');
+
+    syncSlider('rev-fv', 'rev-fv-sl', 'rev-fv-sl-lbl', v => fmt(parseFloat(v), 0));
+    syncSlider('rev-cagr', 'rev-cagr-sl', 'rev-cagr-sl-lbl', v => parseFloat(v).toFixed(1) + '%');
+    syncSlider('rev-time', 'rev-time-sl', 'rev-time-sl-lbl', v => v + ' years');
+
+    syncSlider('tgt-pv', 'tgt-pv-sl', 'tgt-pv-sl-lbl', v => fmt(parseFloat(v), 0));
+    syncSlider('tgt-fv', 'tgt-fv-sl', 'tgt-fv-sl-lbl', v => fmt(parseFloat(v), 0));
+    syncSlider('tgt-time', 'tgt-time-sl', 'tgt-time-sl-lbl', v => v + ' years');
+
+    syncSlider('cmp-pv-a', 'cmp-pv-a-sl', 'cmp-pv-a-sl-lbl', v => fmt(parseFloat(v), 0));
+    syncSlider('cmp-fv-a', 'cmp-fv-a-sl', 'cmp-fv-a-sl-lbl', v => fmt(parseFloat(v), 0));
+    syncSlider('cmp-time-a', 'cmp-time-a-sl', 'cmp-time-a-sl-lbl', v => v + ' years');
+
+    syncSlider('cmp-pv-b', 'cmp-pv-b-sl', 'cmp-pv-b-sl-lbl', v => fmt(parseFloat(v), 0));
+    syncSlider('cmp-fv-b', 'cmp-fv-b-sl', 'cmp-fv-b-sl-lbl', v => fmt(parseFloat(v), 0));
+    syncSlider('cmp-time-b', 'cmp-time-b-sl', 'cmp-time-b-sl-lbl', v => v + ' years');
+
+    // ── VALIDATE ──
+    function validate(val, min, max, errId) {
+      const el = $(errId);
+      if (isNaN(val) || val < min || val > max) { if (el) el.style.display = 'block'; return false; }
+      if (el) el.style.display = 'none';
+      return true;
+    }
+
+    // ── STANDARD CAGR ──
+    let stdProjection = [];
+    function calcStandard() {
+      const pv = parseFloat($('std-pv').value);
+      const fv = parseFloat($('std-fv').value);
+      let time = parseFloat($('std-time').value);
+      const unit = $('std-time-unit').value;
+      const inflation = parseFloat($('std-inflation').value) || 0;
+
+      if (!validate(pv, 0.01, 1e15, 'std-pv-err')) return;
+      if (!validate(fv, 0.01, 1e15, 'std-fv-err')) return;
+      if (!validate(time, 0.01, 1000, 'std-time-err')) return;
+
+      if (unit === 'months') time = time / 12;
+      if (pv === 0 || time === 0) { alert('PV and Time must be > 0'); return; }
+
+      const cagr = Math.pow(fv / pv, 1 / time) - 1;
+      const profit = fv - pv;
+      const growth = ((fv - pv) / pv) * 100;
+      const mult = fv / pv;
+
+      $('std-cagr').textContent = pct(cagr);
+      $('std-profit').textContent = fmtCurrency(profit);
+      $('std-growth').textContent = fmt(growth, 2) + '%';
+      $('std-mult').textContent = fmt(mult, 2) + 'x';
+
+      $('std-results').style.display = 'grid';
+
+      if (inflation > 0) {
+        const realCAGR = ((1 + cagr) / (1 + inflation / 100)) - 1;
+        $('std-real-cagr').textContent = pct(realCAGR);
+        $('std-real-result').style.display = 'block';
+      } else {
+        $('std-real-result').style.display = 'none';
+      }
+
+      $('std-formula').style.display = 'block';
+      $('std-formula').innerHTML = `<strong>CAGR = (FV / PV)<sup>1/t</sup> − 1</strong><br>
+CAGR = (${fmtCurrency(fv)} / ${fmtCurrency(pv)})<sup>1/${fmt(time, 2)}</sup> − 1<br>
+CAGR = (${fmt(fv / pv, 4)})<sup>${fmt(1 / time, 4)}</sup> − 1<br>
+CAGR = ${pct(cagr)}<br><br>
+Absolute Profit = ${fmtCurrency(fv)} − ${fmtCurrency(pv)} = ${fmtCurrency(profit)}<br>
+Total Growth % = ((${fmtCurrency(fv)} − ${fmtCurrency(pv)}) / ${fmtCurrency(pv)}) × 100 = ${fmt(growth, 2)}%<br>
+Growth Multiplier = ${fmtCurrency(fv)} / ${fmtCurrency(pv)} = ${fmt(mult, 2)}x` +
+        (inflation > 0 ? `<br><br><strong>Real CAGR (Inflation-Adjusted):</strong><br>Real CAGR = ((1 + ${pct(cagr)}) / (1 + ${inflation}%)) − 1 = ${pct(((1 + cagr) / (1 + inflation / 100)) - 1)}` : '');
+
+      $('std-copy-btn').style.display = 'block';
+
+      // Generate projection
+      stdProjection = [];
+      const years = Math.ceil(time);
+      for (let y = 0; y <= years; y++) {
+        const val = pv * Math.pow(1 + cagr, y);
+        const increase = y === 0 ? 0 : val - pv * Math.pow(1 + cagr, y - 1);
+        const cumGrowth = ((val - pv) / pv) * 100;
+        stdProjection.push({ year: y, value: val, increase, cumGrowth });
+      }
+
+      // Table
+      const tbody = $('std-table-body');
+      tbody.innerHTML = stdProjection.map(p => `<tr>
+    <td>${p.year}</td>
+    <td>${fmtCurrency(p.value)}</td>
+    <td>${fmtCurrency(p.increase)}</td>
+    <td>${fmt(p.cumGrowth, 2)}%</td>
+  </tr>`).join('');
+      $('std-table').classList.add('active');
+
+      // Charts
+      if (typeof Chart !== 'undefined') {
+        stdLineChart = destroyChart(stdLineChart);
+        stdPieChart = destroyChart(stdPieChart);
+
+        const lineCtx = $('std-line-chart').getContext('2d');
+        stdLineChart = new Chart(lineCtx, {
+          type: 'line',
+          data: {
+            labels: stdProjection.map(p => 'Yr ' + p.year),
+            datasets: [{
+              label: 'Projected Value',
+              data: stdProjection.map(p => p.value),
+              borderColor: '#667eea',
+              backgroundColor: 'rgba(102,126,234,.1)',
+              borderWidth: 3,
+              fill: true,
+              tension: .4,
+              pointRadius: stdProjection.length > 20 ? 0 : 4
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { display: false },
+              tooltip: { callbacks: { label: ctx => 'Value: ' + fmtCurrency(ctx.parsed.y) } }
+            },
+            scales: {
+              y: { ticks: { callback: v => v >= 1e6 ? getCurrencySymbol() + fmt(v / 1e6, 1) + 'M' : v >= 1e3 ? getCurrencySymbol() + fmt(v / 1e3, 0) + 'k' : fmtCurrency(v) } }
+            }
+          }
+        });
+
+        const pieCtx = $('std-pie-chart').getContext('2d');
+        stdPieChart = new Chart(pieCtx, {
+          type: 'pie',
+          data: {
+            labels: ['Principal', 'Profit'],
+            datasets: [{
+              data: [pv, Math.max(0, profit)],
+              backgroundColor: ['#667eea', '#48bb78'],
+              borderWidth: 3,
+              borderColor: '#fff'
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { position: 'bottom', labels: { padding: 14, font: { size: 12 } } },
+              tooltip: {
+                callbacks: {
+                  label: ctx => {
+                    const total = ctx.dataset.data.reduce((a, b) => a + b, 0);
+                    return ctx.label + ': ' + fmt(ctx.parsed, 0) + ' (' + ((ctx.parsed / total) * 100).toFixed(1) + '%)';
+                  }
+                }
+              }
+            }
+          }
+        });
+      }
+
+      $('std-charts').classList.add('active');
+      $('std-results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    // ── REVERSE CAGR ──
+    function calcReverse() {
+      const fv = parseFloat($('rev-fv').value);
+      const cagrPct = parseFloat($('rev-cagr').value);
+      let time = parseFloat($('rev-time').value);
+      const unit = $('rev-time-unit').value;
+
+      if (!validate(fv, 0.01, 1e15, 'rev-fv-err')) return;
+      if (!validate(cagrPct, -100, 1000, 'rev-cagr-err')) return;
+      if (!validate(time, 0.01, 1000, 'rev-time-err')) return;
+
+      if (unit === 'months') time = time / 12;
+      const cagr = cagrPct / 100;
+      const pv = fv / Math.pow(1 + cagr, time);
+      const growth = fv - pv;
+
+      $('rev-pv').textContent = fmtCurrency(pv);
+      $('rev-growth').textContent = fmtCurrency(growth);
+      $('rev-results').style.display = 'grid';
+
+      $('rev-formula').style.display = 'block';
+      $('rev-formula').innerHTML = `<strong>PV = FV / (1 + r)<sup>t</sup></strong><br>
+PV = ${fmtCurrency(fv)} / (1 + ${pct(cagr, 4)})<sup>${fmt(time, 2)}</sup><br>
+PV = ${fmtCurrency(fv)} / ${fmt(Math.pow(1 + cagr, time), 4)}<br>
+PV = ${fmtCurrency(pv)}<br><br>
+Expected Growth = ${fmtCurrency(fv)} − ${fmtCurrency(pv)} = ${fmtCurrency(growth)}`;
+
+      $('rev-copy-btn').style.display = 'block';
+    }
+
+    // ── TARGET CAGR ──
+    function calcTarget() {
+      const pv = parseFloat($('tgt-pv').value);
+      const fv = parseFloat($('tgt-fv').value);
+      let time = parseFloat($('tgt-time').value);
+      const unit = $('tgt-time-unit').value;
+
+      if (!validate(pv, 0.01, 1e15, 'tgt-pv-err')) return;
+      if (!validate(fv, 0.01, 1e15, 'tgt-fv-err')) return;
+      if (!validate(time, 0.01, 1000, 'tgt-time-err')) return;
+
+      if (unit === 'months') time = time / 12;
+      if (pv === 0 || time === 0) { alert('PV and Time must be > 0'); return; }
+
+      const cagr = Math.pow(fv / pv, 1 / time) - 1;
+      const growth = fv - pv;
+
+      $('tgt-cagr').textContent = pct(cagr);
+      $('tgt-growth').textContent = fmtCurrency(growth);
+      $('tgt-results').style.display = 'grid';
+
+      $('tgt-formula').style.display = 'block';
+      $('tgt-formula').innerHTML = `<strong>Required CAGR = (FV / PV)<sup>1/t</sup> − 1</strong><br>
+CAGR = (${fmtCurrency(fv)} / ${fmtCurrency(pv)})<sup>1/${fmt(time, 2)}</sup> − 1<br>
+CAGR = ${pct(cagr)}<br><br>
+Target Growth = ${fmtCurrency(fv)} − ${fmtCurrency(pv)} = ${fmtCurrency(growth)}`;
+
+      $('tgt-copy-btn').style.display = 'block';
+    }
+
+    // ── COMPARE ──
+    function calcCompare() {
+      const pvA = parseFloat($('cmp-pv-a').value);
+      const fvA = parseFloat($('cmp-fv-a').value);
+      let timeA = parseFloat($('cmp-time-a').value);
+      const unitA = $('cmp-unit-a').value;
+
+      const pvB = parseFloat($('cmp-pv-b').value);
+      const fvB = parseFloat($('cmp-fv-b').value);
+      let timeB = parseFloat($('cmp-time-b').value);
+      const unitB = $('cmp-unit-b').value;
+
+      if (pvA <= 0 || fvA <= 0 || timeA <= 0 || pvB <= 0 || fvB <= 0 || timeB <= 0) {
+        alert('All values must be positive');
+        return;
+      }
+
+      if (unitA === 'months') timeA = timeA / 12;
+      if (unitB === 'months') timeB = timeB / 12;
+
+      const cagrA = Math.pow(fvA / pvA, 1 / timeA) - 1;
+      const cagrB = Math.pow(fvB / pvB, 1 / timeB) - 1;
+      const diff = cagrA - cagrB;
+      const wealth = fvA - fvB;
+      const winner = cagrA >= cagrB ? 'A' : 'B';
+      const diffPct = Math.abs(diff);
+
+      $('cmp-cagr-a').textContent = pct(cagrA);
+      $('cmp-cagr-b').textContent = pct(cagrB);
+      $('cmp-diff').textContent = (diff >= 0 ? '+' : '') + pct(diff);
+      $('cmp-wealth').textContent = fmtCurrency(wealth);
+
+      $('cmp-winner').innerHTML = `
+    <h4>🏆 Investment ${winner} Wins!</h4>
+    <p>Investment ${winner} delivered <strong>${pct(diffPct)}</strong> higher CAGR.<br>
+    Wealth difference: <strong>${fmtCurrency(Math.abs(wealth))}</strong><br>
+    A: ${pct(cagrA)} CAGR → ${fmtCurrency(fvA)} final value<br>
+    B: ${pct(cagrB)} CAGR → ${fmtCurrency(fvB)} final value</p>
+  `;
+
+      $('cmp-results').style.display = 'block';
+
+      // Chart
+      if (typeof Chart !== 'undefined') {
+        cmpChart = destroyChart(cmpChart);
+        const maxTime = Math.max(timeA, timeB);
+        const years = Math.ceil(maxTime);
+        const labelsC = [], dataA = [], dataB = [];
+        for (let y = 0; y <= years; y++) {
+          labelsC.push('Yr ' + y);
+          dataA.push(y <= timeA ? pvA * Math.pow(1 + cagrA, y) : null);
+          dataB.push(y <= timeB ? pvB * Math.pow(1 + cagrB, y) : null);
+        }
+
+        const cmpCtx = $('cmp-chart').getContext('2d');
+        cmpChart = new Chart(cmpCtx, {
+          type: 'line',
+          data: {
+            labels: labelsC,
+            datasets: [
+              {
+                label: 'Investment A',
+                data: dataA,
+                borderColor: '#667eea',
+                backgroundColor: 'rgba(102,126,234,.1)',
+                borderWidth: 3,
+                fill: true,
+                tension: .4,
+                pointRadius: labelsC.length > 20 ? 0 : 4
+              },
+              {
+                label: 'Investment B',
+                data: dataB,
+                borderColor: '#ed8936',
+                backgroundColor: 'rgba(237,137,54,.1)',
+                borderWidth: 3,
+                fill: true,
+                tension: .4,
+                pointRadius: labelsC.length > 20 ? 0 : 4
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { position: 'bottom', labels: { padding: 14, font: { size: 12 } } },
+              tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': ' + fmtCurrency(ctx.parsed.y) } }
+            },
+            scales: {
+              y: { ticks: { callback: v => v >= 1e6 ? getCurrencySymbol() + fmt(v / 1e6, 1) + 'M' : v >= 1e3 ? getCurrencySymbol() + fmt(v / 1e3, 0) + 'k' : fmtCurrency(v) } }
+            }
+          }
+        });
+      }
+
+      $('cmp-results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    // ── COPY RESULTS ──
+    function copyResults(mode) {
+      let text = '';
+      if (mode === 'standard') {
+        text = `Currency: ${currentCurrency}\nCAGR: ${$('std-cagr').textContent}\nProfit: ${$('std-profit').textContent}\nGrowth: ${$('std-growth').textContent}\nMultiplier: ${$('std-mult').textContent}`;
+        if ($('std-real-result').style.display !== 'none') {
+          text += `\nReal CAGR: ${$('std-real-cagr').textContent}`;
+        }
+      } else if (mode === 'reverse') {
+        text = `Currency: ${currentCurrency}\nRequired Initial Value: ${$('rev-pv').textContent}\nExpected Growth: ${$('rev-growth').textContent}`;
+      } else if (mode === 'target') {
+        text = `Currency: ${currentCurrency}\nRequired CAGR: ${$('tgt-cagr').textContent}\nTarget Growth: ${$('tgt-growth').textContent}`;
+      }
+      navigator.clipboard.writeText(text).then(() => alert('✅ Results copied to clipboard!'));
+    }
+
+    // ── CSV DOWNLOAD ──
+    function downloadCSV(mode) {
+      if (mode === 'standard' && stdProjection.length) {
+        let csv = 'Year,Projected Value,Annual Increase,Cumulative Growth %\n';
+        stdProjection.forEach(p => {
+          csv += `${p.year},${p.value.toFixed(2)},${p.increase.toFixed(2)},${p.cumGrowth.toFixed(2)}\n`;
+        });
+        const blob = new Blob([csv], { type: 'text/csv' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'cagr-projection.csv';
+        a.click();
+        URL.revokeObjectURL(url);
+      }
+    }
+
+    // ── RESET ──
+    function resetModule(mode) {
+      const hides = {
+        standard: ['std-results', 'std-real-result', 'std-formula', 'std-copy-btn', 'std-charts', 'std-table'],
+        reverse: ['rev-results', 'rev-formula', 'rev-copy-btn'],
+        target: ['tgt-results', 'tgt-formula', 'tgt-copy-btn'],
+        compare: ['cmp-results']
+      };
+      (hides[mode] || []).forEach(id => { if ($(id)) $(id).style.display = 'none'; });
+      document.querySelectorAll('.error-msg').forEach(e => e.style.display = 'none');
+      stdLineChart = destroyChart(stdLineChart);
+      stdPieChart = destroyChart(stdPieChart);
+      cmpChart = destroyChart(cmpChart);
+    }
+  </script>
+
+</body>
+
+</html>
