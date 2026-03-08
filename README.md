@@ -1,28 +1,37 @@
+<p align="center">
+  <img src="banner.png" alt="SmartCalcWorld Banner"/>
+</p>
 # 🧮 SmartCalcWorld
 
-![Website](https://img.shields.io/badge/Website-smartcalcworld.com-blue)
-![Built With](https://img.shields.io/badge/Built%20With-HTML%20CSS%20JS-orange)
-![License](https://img.shields.io/badge/License-Educational-green)
+![Repo Views](https://komarev.com/ghpvc/?username=advaitpatel69-beep&repo=Advait.github.io&label=Repo%20Views&color=blue&style=for-the-badge)
+![Website](https://img.shields.io/badge/Live%20Website-smartcalcworld.com-blue?style=for-the-badge)
+![Built With](https://img.shields.io/badge/Built%20With-HTML%20CSS%20JS-orange?style=for-the-badge)
+![Status](https://img.shields.io/badge/Project-Active-brightgreen?style=for-the-badge)
 
-**SmartCalcWorld** is a collection of fast, accurate, and easy-to-use online calculators designed to help students, professionals, and everyday users solve calculations quickly.
+![GitHub stars](https://img.shields.io/github/stars/advaitpatel69-beep/Advait.github.io?style=social)
+![GitHub forks](https://img.shields.io/github/forks/advaitpatel69-beep/Advait.github.io?style=social)
+![GitHub last commit](https://img.shields.io/github/last-commit/advaitpatel69-beep/Advait.github.io)
 
 🌐 **Live Website:** https://smartcalcworld.com
 
 ---
 
-## 🚀 Features
+## 🚀 About SmartCalcWorld
 
-✔ Fast and lightweight calculators
-✔ Works on desktop and mobile devices
-✔ No login required
-✔ Accurate mathematical formulas
-✔ Clean and simple interface
+**SmartCalcWorld** is a collection of fast, accurate, and easy-to-use online calculators designed to help students, professionals, and everyday users solve calculations quickly.
+
+The platform focuses on:
+
+* ⚡ Fast performance
+* 📱 Mobile-friendly design
+* 🎓 Student and education tools
+* 📊 Accurate mathematical formulas
 
 ---
 
 ## 📊 Calculator Categories
 
-SmartCalcWorld provides calculators for:
+SmartCalcWorld includes calculators for:
 
 * 📐 Math Calculations
 * 💰 Finance Calculators
@@ -30,7 +39,7 @@ SmartCalcWorld provides calculators for:
 * 📅 Date & Time Calculators
 * 📈 Percentage & Statistics Tools
 
-New calculators are continuously added to improve the platform.
+More calculators are continuously added.
 
 ---
 
@@ -40,13 +49,13 @@ New calculators are continuously added to improve the platform.
 * CSS
 * JavaScript
 
-These technologies ensure fast performance and compatibility across modern browsers.
+These technologies keep the calculators lightweight and fast.
 
 ---
 
 ## 💡 Example Calculators
 
-Some tools available on SmartCalcWorld include:
+Some tools available on SmartCalcWorld:
 
 * Age Calculator
 * Percentage Calculator
@@ -56,21 +65,22 @@ Some tools available on SmartCalcWorld include:
 
 ---
 
-## 📢 Contributing
+## 📢 Suggestions
 
-Have an idea for a new calculator?
+Have an idea for a useful calculator?
 
-Feel free to open an **Issue** or start a **Discussion** in this repository.
+You can open an **Issue** or start a **Discussion** in this repository.
 
 ---
 
-## ⭐ Support The Project
+## ⭐ Support
 
-If you find SmartCalcWorld useful, please consider giving this repository a **star ⭐**.
-It helps the project reach more users.
+If you find SmartCalcWorld useful, please give the repository a **star ⭐**.
+
+It helps the project grow.
 
 ---
 
 ## 📜 License
 
-This project is open for educational and learning purposes.
+This project is open for learning and educational purposes.
