@@ -1,5 +1,9 @@
 # 🧮 SmartCalcWorld
 
+![Website](https://img.shields.io/badge/Website-smartcalcworld.com-blue)
+![Built With](https://img.shields.io/badge/Built%20With-HTML%20CSS%20JS-orange)
+![License](https://img.shields.io/badge/License-Educational-green)
+
 **SmartCalcWorld** is a collection of fast, accurate, and easy-to-use online calculators designed to help students, professionals, and everyday users solve calculations quickly.
 
 🌐 **Live Website:** https://smartcalcworld.com
@@ -16,17 +20,17 @@
 
 ---
 
-## 📊 Types of Calculators
+## 📊 Calculator Categories
 
-SmartCalcWorld includes calculators for:
+SmartCalcWorld provides calculators for:
 
-* 📐 **Math Calculations**
-* 💰 **Finance Calculators**
-* 🎓 **Student Tools**
-* 📅 **Date & Time Calculators**
-* 📈 **Percentage & Statistics Tools**
+* 📐 Math Calculations
+* 💰 Finance Calculators
+* 🎓 Student Tools
+* 📅 Date & Time Calculators
+* 📈 Percentage & Statistics Tools
 
-More calculators will be added regularly.
+New calculators are continuously added to improve the platform.
 
 ---
 
@@ -36,38 +40,37 @@ More calculators will be added regularly.
 * CSS
 * JavaScript
 
-These technologies ensure fast performance and compatibility across all modern browsers.
+These technologies ensure fast performance and compatibility across modern browsers.
 
 ---
 
 ## 💡 Example Calculators
 
-Some of the tools available on SmartCalcWorld include:
+Some tools available on SmartCalcWorld include:
 
 * Age Calculator
 * Percentage Calculator
 * BMI Calculator
 * EMI Calculator
-* Unit Converters
+* Unit Converter
 
 ---
 
 ## 📢 Contributing
 
-Suggestions for new calculators are welcome!
+Have an idea for a new calculator?
 
-If you have an idea for a useful calculator, feel free to open a discussion or issue in this repository.
+Feel free to open an **Issue** or start a **Discussion** in this repository.
 
 ---
 
-## ⭐ Support
+## ⭐ Support The Project
 
-If you find SmartCalcWorld helpful, consider giving this repository a **star ⭐**.
-
-It helps the project grow and reach more users.
+If you find SmartCalcWorld useful, please consider giving this repository a **star ⭐**.
+It helps the project reach more users.
 
 ---
 
 ## 📜 License
 
-This project is open for learning and educational purposes.
+This project is open for educational and learning purposes.
