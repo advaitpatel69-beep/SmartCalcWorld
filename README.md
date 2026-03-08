@@ -9,13 +9,23 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Website-smartcalcworld.com-blue?style=for-the-badge">
-  <img src="https://img.shields.io/badge/Built%20With-HTML%20CSS%20JS-orange?style=for-the-badge">
-  <img src="https://img.shields.io/badge/Project-Active-brightgreen?style=for-the-badge">
+
+<a href="https://smartcalcworld.com">
+  <img src="https://img.shields.io/badge/🌐%20Visit%20Website-smartcalcworld.com-blue?style=for-the-badge" />
+</a>
+
+<a href="https://github.com/advaitpatel69-beep/Advait.github.io">
+  <img src="https://img.shields.io/badge/⭐%20Star%20This%20Repo-GitHub-yellow?style=for-the-badge" />
+</a>
+
+<img src="https://img.shields.io/badge/Built%20With-HTML%20CSS%20JS-orange?style=for-the-badge"/>
+
+<img src="https://img.shields.io/badge/Project-Active-brightgreen?style=for-the-badge"/>
+
 </p>
 
 <p align="center">
-  <img src="https://komarev.com/ghpvc/?username=Advait-coder&repo=smartcalcworld&label=Repo%20Views&color=blue&style=for-the-badge">
+  <img src="https://komarev.com/ghpvc/?username=advaitpatel69-beep&repo=Advait.github.io&label=Repo%20Views&color=blue&style=for-the-badge">
 </p>
 
 ---
