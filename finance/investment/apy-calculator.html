@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="index,follow">
-  <title>APY & APR Calculator Online – Convert, Compare & Calculate Interest Rates</title>
-  <meta name="description" content="Free APY & APR Calculator 2026 – Convert APR to APY, APY to APR, calculate Effective Annual Rate, Future Value, and compare investments side-by-side. Supports daily, monthly, quarterly & annual compounding.">
-  <link rel="canonical" href="https://smartcalcworld.com/finance/investment/apy-calculator.html">
-  <link rel="icon" type="image/png" href="https://smartcalcworld.com/favicon.png">
 
-  <!-- Structured Data: Organization + WebPage + Article + FAQ + BreadcrumbList -->
-  <script type="application/ld+json">
-  {
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index,follow">
+    <title>APY & APR Calculator Online – Convert, Compare & Calculate Interest Rates</title>
+    <meta name="description"
+        content="Free APY & APR Calculator 2026 – Convert APR to APY, APY to APR, calculate Effective Annual Rate, Future Value, and compare investments side-by-side. Supports daily, monthly, quarterly & annual compounding.">
+    <link rel="canonical" href="https://smartcalcworld.com/finance/investment/apy-calculator.html">
+    <link rel="icon" type="image/png" href="https://smartcalcworld.com/favicon.png">
+
+    <script type="application/ld+json">
+    {
     "@context":"https://schema.org",
     "@graph":[
       {
@@ -64,112 +65,114 @@
         ]
       }
     ]
-  }
+    }
   </script>
 
-  <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 
-  <style>
-    /* ── DESIGN TOKENS ── */
-    :root {
-      --teal:       #0d9488;
-      --teal-dark:  #0f766e;
-      --teal-light: #ccfbf1;
-      --amber:      #f59e0b;
-      --amber-light:#fef3c7;
-      --rose:       #f43f5e;
-      --rose-light: #ffe4e6;
-      --slate-900:  #0f172a;
-      --slate-800:  #1e293b;
-      --slate-700:  #334155;
-      --slate-500:  #64748b;
-      --slate-300:  #cbd5e1;
-      --slate-100:  #f1f5f9;
-      --slate-50:   #f8fafc;
-      --white:      #ffffff;
-      --radius:     10px;
-      --shadow-sm:  0 1px 3px rgba(0,0,0,.08);
-      --shadow-md:  0 4px 16px rgba(0,0,0,.1);
-      --shadow-lg:  0 8px 32px rgba(0,0,0,.14);
-      --font-main:  'Segoe UI', system-ui, sans-serif;
-      --header-h:   64px;
-    }
+    <style>
+        /* ── DESIGN TOKENS ── */
+        :root {
+            --teal: #0d9488;
+            --teal-dark: #0f766e;
+            --teal-light: #ccfbf1;
+            --amber: #f59e0b;
+            --amber-light: #fef3c7;
+            --rose: #f43f5e;
+            --rose-light: #ffe4e6;
+            --slate-900: #0f172a;
+            --slate-800: #1e293b;
+            --slate-700: #334155;
+            --slate-500: #64748b;
+            --slate-300: #cbd5e1;
+            --slate-100: #f1f5f9;
+            --slate-50: #f8fafc;
+            --white: #ffffff;
+            --radius: 10px;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, .08);
+            --shadow-md: 0 4px 16px rgba(0, 0, 0, .1);
+            --shadow-lg: 0 8px 32px rgba(0, 0, 0, .14);
+            --font-main: 'Segoe UI', system-ui, sans-serif;
+            --header-h: 64px;
+        }
 
-    /* ── RESET ── */
-    *, *::before, *::after { 
-        margin:0; 
-        padding:0; 
-        box-sizing:border-box; 
-    }
+        /* ── RESET ── */
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    html { 
-        scroll-behavior:smooth; 
-        overflow-x:hidden; 
-    }
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
 
-    body { 
-        font-family:var(--font-main); 
-        background:var(--slate-50); 
-        color:var(--slate-800); 
-        line-height:1.7; 
-        overflow-x:hidden; 
-    }
+        body {
+            font-family: var(--font-main);
+            background: var(--slate-50);
+            color: var(--slate-800);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
 
-    img  { 
-        max-width:100%; 
-    }
+        img {
+            max-width: 100%;
+        }
 
-    a    { 
-        color:var(--teal); 
-        text-decoration:none; 
-    }
+        a {
+            color: var(--teal);
+            text-decoration: none;
+        }
 
-    a:hover { 
-        text-decoration:underline; 
-    }
+        a:hover {
+            text-decoration: underline;
+        }
 
-    /* ── HEADER ── */
-    header {
+        /* ── HEADER ── */
+        header {
             background: linear-gradient(135deg, #0891b2 0%, #059669 100%);
             color: white;
             padding: 1rem 0;
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
 
-    .hdr-inner {
+        .hdr-inner {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 1rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-    }
+        }
 
-    .hdr-logo { 
+        .hdr-logo {
             font-size: 1.5rem;
             font-weight: 700;
-    }
+        }
 
-    .hdr-nav  { 
+        .hdr-nav {
             display: flex;
             gap: 2rem;
-    }
+        }
 
-    .hdr-nav a { 
+        .hdr-nav a {
             color: white;
             text-decoration: none;
             font-weight: 500;
             transition: opacity 0.3s;
-    }
+        }
 
-    .hdr-nav a:hover { 
-            opacity: 0.8; 
-    }
+        .hdr-nav a:hover {
+            opacity: 0.8;
+        }
 
-    .hamburger { 
+        .hamburger {
             display: none;
             flex-direction: column;
             cursor: pointer;
@@ -177,17 +180,17 @@
             background: none;
             border: none;
             padding: 0;
-    }
+        }
 
-    .hamburger span { 
+        .hamburger span {
             width: 25px;
             height: 3px;
             background: white;
             border-radius: 3px;
             transition: 0.3s;
-    }
+        }
 
-    .mobile-nav { 
+        .mobile-nav {
             display: none;
             position: absolute;
             top: 100%;
@@ -197,163 +200,564 @@
             flex-direction: column;
             padding: 1rem;
             gap: 1rem;
-    }
+        }
 
-    .mobile-nav.open { 
-      display:flex; 
-    }
+        .mobile-nav.open {
+            display: flex;
+        }
 
-    .mobile-nav a { 
+        .mobile-nav a {
             color: white;
             text-decoration: none;
             padding: 0.5rem;
             border-radius: 5px;
             transition: background 0.3s;
-    }
+        }
 
-    .mobile-nav a:hover { 
-            background: rgba(255,255,255,.1); 
-    }
+        .mobile-nav a:hover {
+            background: rgba(255, 255, 255, .1);
+        }
 
-    /* ── LAYOUT ── */
-    .page { max-width:1200px; margin:0 auto; padding:2rem 1.25rem 4rem; }
+        /* ── LAYOUT ── */
+        .page {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1.25rem 4rem;
+        }
 
-    /* ── HERO ── */
-    .hero { text-align:center; margin-bottom:2.5rem; }
-    .hero-badge { display:inline-block; background:var(--teal-light); color:var(--teal-dark); font-size:.8rem; font-weight:700; padding:.3rem .9rem; border-radius:99px; margin-bottom:.9rem; letter-spacing:.5px; text-transform:uppercase; }
-    h1 { font-size:clamp(1.75rem,4vw,2.8rem); font-weight:800; color:var(--slate-900); line-height:1.2; margin-bottom:.8rem; }
-    .hero-sub { font-size:1.05rem; color:var(--slate-500); max-width:700px; margin:0 auto; }
+        /* ── HERO ── */
+        .hero {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
 
-    /* ── QUICK-NAV TABS ── */
-    .qnav { display:flex; gap:.75rem; margin-bottom:2rem; flex-wrap:wrap; }
-    .qnav-btn {
-      flex:1; min-width:160px; padding:.75rem 1rem; border:2px solid var(--slate-300);
-      border-radius:var(--radius); background:#fff; font-size:.9rem; font-weight:600; color:var(--slate-500);
-      cursor:pointer; transition:all .25s; text-align:center; white-space:nowrap;
-    }
-    .qnav-btn:hover  { border-color:var(--teal); color:var(--teal); transform:translateY(-2px); box-shadow:var(--shadow-sm); }
-    .qnav-btn.active { background:var(--teal); border-color:var(--teal); color:#fff; box-shadow:0 4px 14px rgba(13,148,136,.35); }
+        .hero-badge {
+            display: inline-block;
+            background: var(--teal-light);
+            color: var(--teal-dark);
+            font-size: .8rem;
+            font-weight: 700;
+            padding: .3rem .9rem;
+            border-radius: 99px;
+            margin-bottom: .9rem;
+            letter-spacing: .5px;
+            text-transform: uppercase;
+        }
 
-    /* ── MODULE WRAPPER ── */
-    .module { display:none; }
-    .module.active { display:block; animation:fadeUp .35s ease; }
-    @keyframes fadeUp { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+        h1 {
+            font-size: clamp(1.75rem, 4vw, 2.8rem);
+            font-weight: 800;
+            color: var(--slate-900);
+            line-height: 1.2;
+            margin-bottom: .8rem;
+        }
 
-    /* ── CARDS ── */
-    .card { background:#fff; border-radius:12px; padding:2rem; box-shadow:var(--shadow-md); margin-bottom:2rem; }
-    .card-title { font-size:1.25rem; font-weight:700; color:var(--slate-900); margin-bottom:1.5rem; display:flex; align-items:center; gap:.5rem; }
+        .hero-sub {
+            font-size: 1.05rem;
+            color: var(--slate-500);
+            max-width: 700px;
+            margin: 0 auto;
+        }
 
-    /* ── FORM ELEMENTS ── */
-    .form-row { margin-bottom:1.25rem; }
-    label.lbl { display:block; font-weight:600; font-size:.9rem; color:var(--slate-700); margin-bottom:.45rem; }
-    .input-slider { display:grid; grid-template-columns:1fr 1fr; gap:.75rem; align-items:center; }
-    input[type=number], select {
-      width:100%; padding:.7rem .9rem; border:2px solid var(--slate-300); border-radius:8px;
-      font-size:1rem; background:#fff; color:var(--slate-800); transition:border-color .2s;
-    }
-    input[type=number]:focus, select:focus { outline:none; border-color:var(--teal); box-shadow:0 0 0 3px rgba(13,148,136,.12); }
-    input[type=range] {
-      width:100%; height:6px; background:var(--slate-300); border:none; border-radius:3px;
-      cursor:pointer; accent-color:var(--teal);
-    }
-    .slider-lbl { font-size:.82rem; font-weight:700; color:var(--teal); margin-top:.25rem; }
-    .field-pair { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
-    .error-msg { color:var(--rose); font-size:.82rem; margin-top:.35rem; display:none; }
+        /* ── QUICK-NAV TABS ── */
+        .qnav {
+            display: flex;
+            gap: .75rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
 
-    /* ── BUTTONS ── */
-    .btn-primary {
-      background:linear-gradient(135deg,var(--teal-dark),var(--teal));
-      color:#fff; border:none; border-radius:8px; padding:.85rem 2rem;
-      font-size:1rem; font-weight:700; cursor:pointer; width:100%;
-      transition:transform .2s, box-shadow .2s; margin-top:.5rem;
-    }
-    .btn-primary:hover { transform:translateY(-2px); box-shadow:0 6px 20px rgba(13,148,136,.4); }
-    .btn-primary:active { transform:translateY(0); }
-    .btn-secondary {
-      background:var(--slate-100); color:var(--slate-700); border:2px solid var(--slate-300);
-      border-radius:8px; padding:.85rem 2rem; font-size:1rem; font-weight:600;
-      cursor:pointer; width:100%; transition:all .2s; margin-top:.5rem;
-    }
-    .btn-secondary:hover { background:var(--slate-300); }
-    .btn-row { display:grid; grid-template-columns:2fr 1fr; gap:.75rem; }
+        .qnav-btn {
+            flex: 1;
+            min-width: 160px;
+            padding: .75rem 1rem;
+            border: 2px solid var(--slate-300);
+            border-radius: var(--radius);
+            background: #fff;
+            font-size: .9rem;
+            font-weight: 600;
+            color: var(--slate-500);
+            cursor: pointer;
+            transition: all .25s;
+            text-align: center;
+            white-space: nowrap;
+        }
 
-    /* ── RESULT CARDS ── */
-    .result-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:1rem; margin-top:1.5rem; }
-    .result-card {
-      background:linear-gradient(135deg,var(--teal-dark),var(--teal));
-      color:#fff; border-radius:10px; padding:1.25rem 1.5rem;
-    }
-    .result-card.amber { background:linear-gradient(135deg,#d97706,var(--amber)); }
-    .result-card.rose  { background:linear-gradient(135deg,#e11d48,var(--rose)); }
-    .result-card.slate { background:linear-gradient(135deg,var(--slate-700),var(--slate-500)); }
-    .result-lbl  { font-size:.8rem; opacity:.88; margin-bottom:.35rem; font-weight:600; text-transform:uppercase; letter-spacing:.5px; }
-    .result-val  { font-size:1.9rem; font-weight:800; word-break:break-word; line-height:1.1; }
-    .result-sub  { font-size:.78rem; opacity:.8; margin-top:.3rem; }
+        .qnav-btn:hover {
+            border-color: var(--teal);
+            color: var(--teal);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-sm);
+        }
 
-    /* ── FORMULA BOX ── */
-    .formula-box {
-      background:var(--slate-50); border-left:4px solid var(--teal); border-radius:0 8px 8px 0;
-      padding:1rem 1.25rem; margin-top:1.25rem; font-family:'Courier New',monospace;
-      font-size:.92rem; color:var(--slate-700); overflow-x:auto;
-    }
-    .formula-box strong { color:var(--teal-dark); }
+        .qnav-btn.active {
+            background: var(--teal);
+            border-color: var(--teal);
+            color: #fff;
+            box-shadow: 0 4px 14px rgba(13, 148, 136, .35);
+        }
 
-    /* ── CHARTS ── */
-    .charts-row { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; margin-top:1.5rem; }
-    .chart-wrap { background:#fff; border-radius:12px; padding:1.5rem; box-shadow:var(--shadow-md); }
-    .chart-title { font-size:1rem; font-weight:700; color:var(--slate-900); margin-bottom:1rem; text-align:center; }
-    .chart-canvas { position:relative; height:280px; width:100%; }
+        /* ── MODULE WRAPPER ── */
+        .module {
+            display: none;
+        }
 
-    /* ── YEAR TABLE ── */
-    .tbl-wrap { overflow-x:auto; margin-top:1.25rem; border-radius:8px; border:1px solid var(--slate-300); }
-    table { width:100%; border-collapse:collapse; min-width:480px; }
-    thead tr { background:var(--teal); color:#fff; }
-    th, td { padding:.65rem 1rem; text-align:right; font-size:.88rem; }
-    th { font-weight:700; font-size:.82rem; text-transform:uppercase; letter-spacing:.4px; }
-    th:first-child, td:first-child { text-align:left; }
-    tbody tr:nth-child(even) { background:var(--slate-50); }
-    tbody tr:hover { background:var(--teal-light); }
+        .module.active {
+            display: block;
+            animation: fadeUp .35s ease;
+        }
 
-    /* ── COMPARISON ── */
-    .comp-winner {
-      background:linear-gradient(135deg,var(--teal-light),#e0f2fe);
-      border:2px solid var(--teal); border-radius:10px; padding:1.25rem;
-      text-align:center; margin-top:1.25rem;
-    }
-    .comp-winner h4 { color:var(--teal-dark); font-size:1.1rem; font-weight:800; margin-bottom:.5rem; }
-    .comp-winner p  { color:var(--slate-700); font-size:.95rem; }
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(12px)
+            }
 
-    /* ── CONTENT SECTIONS ── */
-    .content-section { background:#fff; border-radius:12px; padding:2.5rem; box-shadow:var(--shadow-md); margin-bottom:2rem; scroll-margin-top:calc(var(--header-h) + 1rem); }
-    .content-section h2 { font-size:1.75rem; font-weight:800; color:var(--slate-900); margin-bottom:1.25rem; padding-left:1rem; border-left:4px solid var(--teal); }
-    .content-section h3 { font-size:1.2rem; font-weight:700; color:var(--slate-800); margin:1.75rem 0 .75rem; }
-    .content-section p  { color:var(--slate-600); margin-bottom:1rem; }
-    .content-section ul { color:var(--slate-600); margin:0 0 1rem 1.5rem; }
-    .content-section li { margin-bottom:.6rem; line-height:1.7; }
-    .callout { background:linear-gradient(135deg,var(--teal-light),#dbeafe); border-left:4px solid var(--teal); border-radius:0 8px 8px 0; padding:1rem 1.25rem; margin:1.25rem 0; }
-    .callout strong { color:var(--teal-dark); }
-    .callout-amber { background:var(--amber-light); border-color:var(--amber); }
-    .callout-amber strong { color:#92400e; }
-    .callout-rose { background:var(--rose-light); border-color:var(--rose); }
-    .callout-rose strong { color:#9f1239; }
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
 
-    /* ── INTERNAL LINKS ── */
-    .links-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:1rem; margin-top:1.25rem; }
-    .link-card {
-      background:var(--slate-50); border:2px solid var(--slate-300); border-radius:10px;
-      padding:1rem; text-align:center; transition:all .25s; color:var(--slate-700); font-weight:600; font-size:.92rem;
-    }
-    .link-card:hover { border-color:var(--teal); color:var(--teal); transform:translateY(-3px); box-shadow:var(--shadow-sm); text-decoration:none; }
-    .link-icon { font-size:1.6rem; margin-bottom:.4rem; display:block; }
+        /* ── CARDS ── */
+        .card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 2rem;
+        }
 
-    /* ── FAQ ── */
-    .faq-item { background:var(--slate-50); border-radius:8px; padding:1.25rem; margin-bottom:.85rem; }
-    .faq-q { font-size:1rem; font-weight:700; color:var(--slate-900); margin-bottom:.6rem; }
-    .faq-a { font-size:.93rem; color:var(--slate-600); line-height:1.75; }
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--slate-900);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+        }
 
-    /* ── DISCLAIMER ── */
-    .disclaimer1 { background:var(--amber-light); border:1px solid var(--amber); border-radius:10px; padding:1.25rem 1.5rem; margin-top:2rem; font-size:.85rem; color:#78350f; }
-    .disclaimer1 strong { color:#92400e; }
+        /* ── FORM ELEMENTS ── */
+        .form-row {
+            margin-bottom: 1.25rem;
+        }
+
+        label.lbl {
+            display: block;
+            font-weight: 600;
+            font-size: .9rem;
+            color: var(--slate-700);
+            margin-bottom: .45rem;
+        }
+
+        .input-slider {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: .75rem;
+            align-items: center;
+        }
+
+        input[type=number],
+        select {
+            width: 100%;
+            padding: .7rem .9rem;
+            border: 2px solid var(--slate-300);
+            border-radius: 8px;
+            font-size: 1rem;
+            background: #fff;
+            color: var(--slate-800);
+            transition: border-color .2s;
+        }
+
+        input[type=number]:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--teal);
+            box-shadow: 0 0 0 3px rgba(13, 148, 136, .12);
+        }
+
+        input[type=range] {
+            width: 100%;
+            height: 6px;
+            background: var(--slate-300);
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            accent-color: var(--teal);
+        }
+
+        .slider-lbl {
+            font-size: .82rem;
+            font-weight: 700;
+            color: var(--teal);
+            margin-top: .25rem;
+        }
+
+        .field-pair {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .error-msg {
+            color: var(--rose);
+            font-size: .82rem;
+            margin-top: .35rem;
+            display: none;
+        }
+
+        /* ── BUTTONS ── */
+        .btn-primary {
+            background: linear-gradient(135deg, var(--teal-dark), var(--teal));
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: .85rem 2rem;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+            transition: transform .2s, box-shadow .2s;
+            margin-top: .5rem;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(13, 148, 136, .4);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary {
+            background: var(--slate-100);
+            color: var(--slate-700);
+            border: 2px solid var(--slate-300);
+            border-radius: 8px;
+            padding: .85rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: all .2s;
+            margin-top: .5rem;
+        }
+
+        .btn-secondary:hover {
+            background: var(--slate-300);
+        }
+
+        .btn-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: .75rem;
+        }
+
+        /* ── RESULT CARDS ── */
+        .result-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .result-card {
+            background: linear-gradient(135deg, var(--teal-dark), var(--teal));
+            color: #fff;
+            border-radius: 10px;
+            padding: 1.25rem 1.5rem;
+        }
+
+        .result-card.amber {
+            background: linear-gradient(135deg, #d97706, var(--amber));
+        }
+
+        .result-card.rose {
+            background: linear-gradient(135deg, #e11d48, var(--rose));
+        }
+
+        .result-card.slate {
+            background: linear-gradient(135deg, var(--slate-700), var(--slate-500));
+        }
+
+        .result-lbl {
+            font-size: .8rem;
+            opacity: .88;
+            margin-bottom: .35rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: .5px;
+        }
+
+        .result-val {
+            font-size: 1.9rem;
+            font-weight: 800;
+            word-break: break-word;
+            line-height: 1.1;
+        }
+
+        .result-sub {
+            font-size: .78rem;
+            opacity: .8;
+            margin-top: .3rem;
+        }
+
+        /* ── FORMULA BOX ── */
+        .formula-box {
+            background: var(--slate-50);
+            border-left: 4px solid var(--teal);
+            border-radius: 0 8px 8px 0;
+            padding: 1rem 1.25rem;
+            margin-top: 1.25rem;
+            font-family: 'Courier New', monospace;
+            font-size: .92rem;
+            color: var(--slate-700);
+            overflow-x: auto;
+        }
+
+        .formula-box strong {
+            color: var(--teal-dark);
+        }
+
+        /* ── CHARTS ── */
+        .charts-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .chart-wrap {
+            background: #fff;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .chart-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--slate-900);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .chart-canvas {
+            position: relative;
+            height: 280px;
+            width: 100%;
+        }
+
+        /* ── YEAR TABLE ── */
+        .tbl-wrap {
+            overflow-x: auto;
+            margin-top: 1.25rem;
+            border-radius: 8px;
+            border: 1px solid var(--slate-300);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 480px;
+        }
+
+        thead tr {
+            background: var(--teal);
+            color: #fff;
+        }
+
+        th,
+        td {
+            padding: .65rem 1rem;
+            text-align: right;
+            font-size: .88rem;
+        }
+
+        th {
+            font-weight: 700;
+            font-size: .82rem;
+            text-transform: uppercase;
+            letter-spacing: .4px;
+        }
+
+        th:first-child,
+        td:first-child {
+            text-align: left;
+        }
+
+        tbody tr:nth-child(even) {
+            background: var(--slate-50);
+        }
+
+        tbody tr:hover {
+            background: var(--teal-light);
+        }
+
+        /* ── COMPARISON ── */
+        .comp-winner {
+            background: linear-gradient(135deg, var(--teal-light), #e0f2fe);
+            border: 2px solid var(--teal);
+            border-radius: 10px;
+            padding: 1.25rem;
+            text-align: center;
+            margin-top: 1.25rem;
+        }
+
+        .comp-winner h4 {
+            color: var(--teal-dark);
+            font-size: 1.1rem;
+            font-weight: 800;
+            margin-bottom: .5rem;
+        }
+
+        .comp-winner p {
+            color: var(--slate-700);
+            font-size: .95rem;
+        }
+
+        /* ── CONTENT SECTIONS ── */
+        .content-section {
+            background: #fff;
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 2rem;
+            scroll-margin-top: calc(var(--header-h) + 1rem);
+        }
+
+        .content-section h2 {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--slate-900);
+            margin-bottom: 1.25rem;
+            padding-left: 1rem;
+            border-left: 4px solid var(--teal);
+        }
+
+        .content-section h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--slate-800);
+            margin: 1.75rem 0 .75rem;
+        }
+
+        .content-section p {
+            color: var(--slate-600);
+            margin-bottom: 1rem;
+        }
+
+        .content-section ul {
+            color: var(--slate-600);
+            margin: 0 0 1rem 1.5rem;
+        }
+
+        .content-section li {
+            margin-bottom: .6rem;
+            line-height: 1.7;
+        }
+
+        .callout {
+            background: linear-gradient(135deg, var(--teal-light), #dbeafe);
+            border-left: 4px solid var(--teal);
+            border-radius: 0 8px 8px 0;
+            padding: 1rem 1.25rem;
+            margin: 1.25rem 0;
+        }
+
+        .callout strong {
+            color: var(--teal-dark);
+        }
+
+        .callout-amber {
+            background: var(--amber-light);
+            border-color: var(--amber);
+        }
+
+        .callout-amber strong {
+            color: #92400e;
+        }
+
+        .callout-rose {
+            background: var(--rose-light);
+            border-color: var(--rose);
+        }
+
+        .callout-rose strong {
+            color: #9f1239;
+        }
+
+        /* ── INTERNAL LINKS ── */
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1.25rem;
+        }
+
+        .link-card {
+            background: var(--slate-50);
+            border: 2px solid var(--slate-300);
+            border-radius: 10px;
+            padding: 1rem;
+            text-align: center;
+            transition: all .25s;
+            color: var(--slate-700);
+            font-weight: 600;
+            font-size: .92rem;
+        }
+
+        .link-card:hover {
+            border-color: var(--teal);
+            color: var(--teal);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-sm);
+            text-decoration: none;
+        }
+
+        .link-icon {
+            font-size: 1.6rem;
+            margin-bottom: .4rem;
+            display: block;
+        }
+
+        /* ── FAQ ── */
+        .faq-item {
+            background: var(--slate-50);
+            border-radius: 8px;
+            padding: 1.25rem;
+            margin-bottom: .85rem;
+        }
+
+        .faq-q {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--slate-900);
+            margin-bottom: .6rem;
+        }
+
+        .faq-a {
+            font-size: .93rem;
+            color: var(--slate-600);
+            line-height: 1.75;
+        }
+
+        /* ── DISCLAIMER ── */
+        .disclaimer1 {
+            background: var(--amber-light);
+            border: 1px solid var(--amber);
+            border-radius: 10px;
+            padding: 1.25rem 1.5rem;
+            margin-top: 2rem;
+            font-size: .85rem;
+            color: #78350f;
+        }
+
+        .disclaimer1 strong {
+            color: #92400e;
+        }
 
         /* ── FOOTER ── */
         footer {
@@ -397,7 +801,7 @@
         }
 
         .disclaimer {
-            background: rgba(0,0,0,0.2);
+            background: rgba(0, 0, 0, 0.2);
             padding: 1rem;
             border-radius: 8px;
             font-size: 0.9rem;
@@ -407,740 +811,917 @@
         .copyright {
             text-align: center;
             padding-top: 2rem;
-            border-top: 1px solid rgba(255,255,255,0.1);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
             color: #cbd5e0;
         }
 
         /* ── RESPONSIVE ── */
         @media(max-width:768px) {
-          .hdr-nav { display:none; }
-          .hamburger { display:flex; }
-          .input-slider { grid-template-columns:1fr; }
-          .field-pair { grid-template-columns:1fr; }
-          .charts-row { grid-template-columns:1fr; }
-          .btn-row { grid-template-columns:1fr; }
-          .chart-canvas { height:220px; }
-          .result-val { font-size:1.5rem; }
-          .content-section { padding:1.5rem; }
-          h1 { font-size:1.85rem; }
-        }
-        @media(max-width:480px) {
-            .qnav-btn { 
-            font-size:.82rem; 
-            padding:.65rem .75rem; 
+            .hdr-nav {
+                display: none;
             }
-          .result-val { font-size:1.3rem; }
-          .card { padding:1.25rem; }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .input-slider {
+                grid-template-columns: 1fr;
+            }
+
+            .field-pair {
+                grid-template-columns: 1fr;
+            }
+
+            .charts-row {
+                grid-template-columns: 1fr;
+            }
+
+            .btn-row {
+                grid-template-columns: 1fr;
+            }
+
+            .chart-canvas {
+                height: 220px;
+            }
+
+            .result-val {
+                font-size: 1.5rem;
+            }
+
+            .content-section {
+                padding: 1.5rem;
+            }
+
+            h1 {
+                font-size: 1.85rem;
+            }
         }
-      </style>
-    </head>
+
+        @media(max-width:480px) {
+            .qnav-btn {
+                font-size: .82rem;
+                padding: .65rem .75rem;
+            }
+
+            .result-val {
+                font-size: 1.3rem;
+            }
+
+            .card {
+                padding: 1.25rem;
+            }
+        }
+    </style>
+</head>
 
 <body>
 
-  <!-- ══ HEADER ══ -->
-  <header>
-      <div class="hdr-inner">
-        <div class="hdr-logo">💰 Finance Calculators</div>
+    <!-- ══ HEADER ══ -->
+    <header>
+        <div class="hdr-inner">
+            <div class="hdr-logo">💰 Finance Calculators</div>
 
-        <nav class="hdr-nav">
-          <a href="https://advaitpatel69-beep.github.io/Advait.github.io/index.html">Home</a>
+            <nav class="hdr-nav">
+                <a href="https://smartcalcworld.com/index.html">Home</a>
 
-          <span class="nav-disabled">Student Calculators (Coming Soon)</span>
-          <span class="nav-disabled">Medical Calculators (Coming Soon)</span>
-          <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/finance-hub.html">Finance Calculators</a>
+                <span class="nav-disabled">Student Calculators (Coming Soon)</span>
+                <span class="nav-disabled">Medical Calculators (Coming Soon)</span>
+                <a href="https://smartcalcworld.com/finance/finance-hub.html">Finance
+                    Calculators</a>
+            </nav>
+            <button class="hamburger" id="hamburgerBtn" aria-label="Menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        <nav class="mobile-nav" id="mobileNav">
+            <a href="https://smartcalcworld.com/index.html">Home</a>
+
+            <span class="nav-disabled">Student Calculators (Coming Soon)</span>
+            <span class="nav-disabled">Medical Calculators (Coming Soon)</span>
+            <a href="https://smartcalcworld.com/finance/finance-hub.html">Finance
+                Calculators</a>
         </nav>
-          <button class="hamburger" id="hamburgerBtn" aria-label="Menu" aria-expanded="false">
-            <span></span>
-            <span></span>
-            <span></span>
-          </button>
-      </div>
-      <nav class="mobile-nav" id="mobileNav">
-        <a href="https://advaitpatel69-beep.github.io/Advait.github.io/index.html">Home</a>
+    </header>
 
-        <span class="nav-disabled">Student Calculators (Coming Soon)</span>
-        <span class="nav-disabled">Medical Calculators (Coming Soon)</span>
-        <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/finance-hub.html">Finance Calculators</a>
-      </nav>
-  </header>
+    <!-- ══ PAGE ══ -->
+    <main class="page">
 
-<!-- ══ PAGE ══ -->
-<main class="page">
+        <!-- BREADCRUMB -->
+        <nav aria-label="breadcrumb" style="font-size:.83rem;color:var(--slate-500);margin-bottom:1.5rem;">
+            <a href="https://smartcalcworld.com/index.html">Home</a> › <a
+                href="https://smartcalcworld.com/finance/finance-hub.html">Finance</a> › <a
+                href="https://smartcalcworld.com/finance/investment/investment-hub.html">Investment</a>
+            › APY & APR Calculator
+        </nav>
 
-  <!-- BREADCRUMB -->
-  <nav aria-label="breadcrumb" style="font-size:.83rem;color:var(--slate-500);margin-bottom:1.5rem;">
-    <a href="https://advaitpatel69-beep.github.io/Advait.github.io/index.html">Home</a> › <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/finance-hub.html">Finance</a> › <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/investment/investment-hub.html">Investment</a> › APY & APR Calculator
-  </nav>
+        <!-- HERO -->
+        <div class="hero">
+            <span class="hero-badge">📈 Investment Calculators</span>
+            <h1>APY & APR Calculator</h1>
+            <p class="hero-sub">Convert interest rates, calculate effective yield, project future value, and compare
+                investments side-by-side — all in one free tool 🚀</p>
+        </div>
 
-  <!-- HERO -->
-  <div class="hero">
-    <span class="hero-badge">📈 Investment Calculators</span>
-    <h1>APY & APR Calculator</h1>
-    <p class="hero-sub">Convert interest rates, calculate effective yield, project future value, and compare investments side-by-side — all in one free tool 🚀</p>
-  </div>
+        <!-- QUICK NAV TABS -->
+        <div class="qnav" id="qnav" role="tablist">
+            <button type="button" class="qnav-btn active" role="tab" aria-selected="true"
+                onclick="switchModule('apr2apy')">🔄 APR → APY</button>
+            <button type="button" class="qnav-btn" role="tab" aria-selected="false" onclick="switchModule('apy2apr')">↩️
+                APY → APR</button>
+            <button type="button" class="qnav-btn" role="tab" aria-selected="false" onclick="switchModule('ear')">📐
+                EAR</button>
+            <button type="button" class="qnav-btn" role="tab" aria-selected="false" onclick="switchModule('fv')">💰
+                Future Value</button>
+            <button type="button" class="qnav-btn" role="tab" aria-selected="false" onclick="switchModule('compare')">⚖️
+                Compare</button>
+        </div>
 
-  <!-- QUICK NAV TABS -->
-  <div class="qnav" id="qnav" role="tablist">
-    <button type="button" class="qnav-btn active" role="tab" aria-selected="true"  onclick="switchModule('apr2apy')">🔄 APR → APY</button>
-    <button type="button" class="qnav-btn" role="tab" aria-selected="false" onclick="switchModule('apy2apr')">↩️ APY → APR</button>
-    <button type="button" class="qnav-btn" role="tab" aria-selected="false" onclick="switchModule('ear')">📐 EAR</button>
-    <button type="button" class="qnav-btn" role="tab" aria-selected="false" onclick="switchModule('fv')">💰 Future Value</button>
-    <button type="button" class="qnav-btn" role="tab" aria-selected="false" onclick="switchModule('compare')">⚖️ Compare</button>
-  </div>
-
-  <!-- ═══════════════════════════════════════
+        <!-- ═══════════════════════════════════════
        MODULE 1 : APR → APY
   ═══════════════════════════════════════ -->
-  <section class="module active" id="mod-apr2apy" role="tabpanel" aria-label="APR to APY Converter">
-    <div class="card">
-      <div class="card-title">🔄 APR to APY Converter</div>
+        <section class="module active" id="mod-apr2apy" role="tabpanel" aria-label="APR to APY Converter">
+            <div class="card">
+                <div class="card-title">🔄 APR to APY Converter</div>
 
-      <div class="form-row">
-        <label class="lbl" for="a2a-apr">Annual Percentage Rate — APR (%)</label>
-        <div class="input-slider">
-          <div>
-            <input type="number" id="a2a-apr" min="0" max="500" step="0.01" value="5" placeholder="e.g. 5">
-            <div class="error-msg" id="a2a-apr-err">Please enter a valid rate (0–500%)</div>
-          </div>
-          <div>
-            <input type="range" id="a2a-apr-sl" min="0" max="500" step="0.1" value="5">
-            <div class="slider-lbl" id="a2a-apr-sl-lbl">5.00%</div>
-          </div>
-        </div>
-      </div>
+                <div class="form-row">
+                    <label class="lbl" for="a2a-apr">Annual Percentage Rate — APR (%)</label>
+                    <div class="input-slider">
+                        <div>
+                            <input type="number" id="a2a-apr" min="0" max="500" step="0.01" value="5"
+                                placeholder="e.g. 5">
+                            <div class="error-msg" id="a2a-apr-err">Please enter a valid rate (0–500%)</div>
+                        </div>
+                        <div>
+                            <input type="range" id="a2a-apr-sl" min="0" max="500" step="0.1" value="5">
+                            <div class="slider-lbl" id="a2a-apr-sl-lbl">5.00%</div>
+                        </div>
+                    </div>
+                </div>
 
-      <div class="form-row">
-        <label class="lbl" for="a2a-freq">Compounding Frequency</label>
-        <select id="a2a-freq">
-          <option value="365">Daily (365×/year)</option>
-          <option value="12" selected>Monthly (12×/year)</option>
-          <option value="4">Quarterly (4×/year)</option>
-          <option value="2">Semi-Annual (2×/year)</option>
-          <option value="1">Annually (1×/year)</option>
-          <option value="0">∞ Continuous (e^r)</option>
-        </select>
-      </div>
+                <div class="form-row">
+                    <label class="lbl" for="a2a-freq">Compounding Frequency</label>
+                    <select id="a2a-freq">
+                        <option value="365">Daily (365×/year)</option>
+                        <option value="12" selected>Monthly (12×/year)</option>
+                        <option value="4">Quarterly (4×/year)</option>
+                        <option value="2">Semi-Annual (2×/year)</option>
+                        <option value="1">Annually (1×/year)</option>
+                        <option value="0">∞ Continuous (e^r)</option>
+                    </select>
+                </div>
 
-      <div class="btn-row">
-        <button type="button" class="btn-primary" onclick="calcApr2Apy()">Calculate APY ✨</button>
-        <button type="button" class="btn-secondary" onclick="resetModule('apr2apy')">Reset 🔄</button>
-      </div>
+                <div class="btn-row">
+                    <button type="button" class="btn-primary" onclick="calcApr2Apy()">Calculate APY ✨</button>
+                    <button type="button" class="btn-secondary" onclick="resetModule('apr2apy')">Reset 🔄</button>
+                </div>
 
-      <div class="result-grid" id="a2a-results" style="display:none;">
-        <div class="result-card">
-          <div class="result-lbl">Annual Percentage Yield</div>
-          <div class="result-val" id="a2a-apy">—</div>
-          <div class="result-sub">APY</div>
-        </div>
-        <div class="result-card amber">
-          <div class="result-lbl">Nominal Rate (APR)</div>
-          <div class="result-val" id="a2a-aprv">—</div>
-          <div class="result-sub">APR</div>
-        </div>
-        <div class="result-card slate">
-          <div class="result-lbl">Extra Yield vs APR</div>
-          <div class="result-val" id="a2a-diff">—</div>
-          <div class="result-sub">Compounding Bonus</div>
-        </div>
-      </div>
+                <div class="result-grid" id="a2a-results" style="display:none;">
+                    <div class="result-card">
+                        <div class="result-lbl">Annual Percentage Yield</div>
+                        <div class="result-val" id="a2a-apy">—</div>
+                        <div class="result-sub">APY</div>
+                    </div>
+                    <div class="result-card amber">
+                        <div class="result-lbl">Nominal Rate (APR)</div>
+                        <div class="result-val" id="a2a-aprv">—</div>
+                        <div class="result-sub">APR</div>
+                    </div>
+                    <div class="result-card slate">
+                        <div class="result-lbl">Extra Yield vs APR</div>
+                        <div class="result-val" id="a2a-diff">—</div>
+                        <div class="result-sub">Compounding Bonus</div>
+                    </div>
+                </div>
 
-      <div class="formula-box" id="a2a-formula" style="display:none;"></div>
-    </div>
-  </section>
+                <div class="formula-box" id="a2a-formula" style="display:none;"></div>
+            </div>
+        </section>
 
-  <!-- ═══════════════════════════════════════
+        <!-- ═══════════════════════════════════════
        MODULE 2 : APY → APR
   ═══════════════════════════════════════ -->
-  <section class="module" id="mod-apy2apr" role="tabpanel" aria-label="APY to APR Converter">
-    <div class="card">
-      <div class="card-title">↩️ APY to APR Converter</div>
+        <section class="module" id="mod-apy2apr" role="tabpanel" aria-label="APY to APR Converter">
+            <div class="card">
+                <div class="card-title">↩️ APY to APR Converter</div>
 
-      <div class="form-row">
-        <label class="lbl" for="y2r-apy">Annual Percentage Yield — APY (%)</label>
-        <div class="input-slider">
-          <div>
-            <input type="number" id="y2r-apy" min="0" max="1000" step="0.01" value="5.12" placeholder="e.g. 5.12">
-            <div class="error-msg" id="y2r-apy-err">Please enter a valid APY (0–1000%)</div>
-          </div>
-          <div>
-            <input type="range" id="y2r-apy-sl" min="0" max="1000" step="0.1" value="5.12">
-            <div class="slider-lbl" id="y2r-apy-sl-lbl">5.12%</div>
-          </div>
-        </div>
-      </div>
+                <div class="form-row">
+                    <label class="lbl" for="y2r-apy">Annual Percentage Yield — APY (%)</label>
+                    <div class="input-slider">
+                        <div>
+                            <input type="number" id="y2r-apy" min="0" max="1000" step="0.01" value="5.12"
+                                placeholder="e.g. 5.12">
+                            <div class="error-msg" id="y2r-apy-err">Please enter a valid APY (0–1000%)</div>
+                        </div>
+                        <div>
+                            <input type="range" id="y2r-apy-sl" min="0" max="1000" step="0.1" value="5.12">
+                            <div class="slider-lbl" id="y2r-apy-sl-lbl">5.12%</div>
+                        </div>
+                    </div>
+                </div>
 
-      <div class="form-row">
-        <label class="lbl" for="y2r-freq">Compounding Frequency</label>
-        <select id="y2r-freq">
-          <option value="365">Daily (365×/year)</option>
-          <option value="12" selected>Monthly (12×/year)</option>
-          <option value="4">Quarterly (4×/year)</option>
-          <option value="2">Semi-Annual (2×/year)</option>
-          <option value="1">Annually (1×/year)</option>
-          <option value="0">∞ Continuous (e^r)</option>
-        </select>
-      </div>
+                <div class="form-row">
+                    <label class="lbl" for="y2r-freq">Compounding Frequency</label>
+                    <select id="y2r-freq">
+                        <option value="365">Daily (365×/year)</option>
+                        <option value="12" selected>Monthly (12×/year)</option>
+                        <option value="4">Quarterly (4×/year)</option>
+                        <option value="2">Semi-Annual (2×/year)</option>
+                        <option value="1">Annually (1×/year)</option>
+                        <option value="0">∞ Continuous (e^r)</option>
+                    </select>
+                </div>
 
-      <div class="btn-row">
-        <button type="button" class="btn-primary" onclick="calcApy2Apr()">Calculate APR 🎯</button>
-        <button type="button" class="btn-secondary" onclick="resetModule('apy2apr')">Reset 🔄</button>
-      </div>
+                <div class="btn-row">
+                    <button type="button" class="btn-primary" onclick="calcApy2Apr()">Calculate APR 🎯</button>
+                    <button type="button" class="btn-secondary" onclick="resetModule('apy2apr')">Reset 🔄</button>
+                </div>
 
-      <div class="result-grid" id="y2r-results" style="display:none;">
-        <div class="result-card">
-          <div class="result-lbl">Annual Percentage Rate</div>
-          <div class="result-val" id="y2r-apr">—</div>
-          <div class="result-sub">APR (Nominal)</div>
-        </div>
-        <div class="result-card amber">
-          <div class="result-lbl">Input APY</div>
-          <div class="result-val" id="y2r-apyv">—</div>
-          <div class="result-sub">APY (Effective)</div>
-        </div>
-        <div class="result-card slate">
-          <div class="result-lbl">Difference</div>
-          <div class="result-val" id="y2r-diff">—</div>
-          <div class="result-sub">APY minus APR</div>
-        </div>
-      </div>
+                <div class="result-grid" id="y2r-results" style="display:none;">
+                    <div class="result-card">
+                        <div class="result-lbl">Annual Percentage Rate</div>
+                        <div class="result-val" id="y2r-apr">—</div>
+                        <div class="result-sub">APR (Nominal)</div>
+                    </div>
+                    <div class="result-card amber">
+                        <div class="result-lbl">Input APY</div>
+                        <div class="result-val" id="y2r-apyv">—</div>
+                        <div class="result-sub">APY (Effective)</div>
+                    </div>
+                    <div class="result-card slate">
+                        <div class="result-lbl">Difference</div>
+                        <div class="result-val" id="y2r-diff">—</div>
+                        <div class="result-sub">APY minus APR</div>
+                    </div>
+                </div>
 
-      <div class="formula-box" id="y2r-formula" style="display:none;"></div>
-    </div>
-  </section>
+                <div class="formula-box" id="y2r-formula" style="display:none;"></div>
+            </div>
+        </section>
 
-  <!-- ═══════════════════════════════════════
+        <!-- ═══════════════════════════════════════
        MODULE 3 : EAR
   ═══════════════════════════════════════ -->
-  <section class="module" id="mod-ear" role="tabpanel" aria-label="Effective Annual Rate Calculator">
-    <div class="card">
-      <div class="card-title">📐 Effective Annual Rate (EAR) Calculator</div>
+        <section class="module" id="mod-ear" role="tabpanel" aria-label="Effective Annual Rate Calculator">
+            <div class="card">
+                <div class="card-title">📐 Effective Annual Rate (EAR) Calculator</div>
 
-      <div class="form-row">
-        <label class="lbl" for="ear-rate">Nominal Annual Rate (%)</label>
-        <div class="input-slider">
-          <div>
-            <input type="number" id="ear-rate" min="0" max="500" step="0.01" value="6" placeholder="e.g. 6">
-            <div class="error-msg" id="ear-rate-err">Please enter a valid rate (0–500%)</div>
-          </div>
-          <div>
-            <input type="range" id="ear-rate-sl" min="0" max="500" step="0.1" value="6">
-            <div class="slider-lbl" id="ear-rate-sl-lbl">6.00%</div>
-          </div>
-        </div>
-      </div>
+                <div class="form-row">
+                    <label class="lbl" for="ear-rate">Nominal Annual Rate (%)</label>
+                    <div class="input-slider">
+                        <div>
+                            <input type="number" id="ear-rate" min="0" max="500" step="0.01" value="6"
+                                placeholder="e.g. 6">
+                            <div class="error-msg" id="ear-rate-err">Please enter a valid rate (0–500%)</div>
+                        </div>
+                        <div>
+                            <input type="range" id="ear-rate-sl" min="0" max="500" step="0.1" value="6">
+                            <div class="slider-lbl" id="ear-rate-sl-lbl">6.00%</div>
+                        </div>
+                    </div>
+                </div>
 
-      <div class="form-row">
-        <label class="lbl" for="ear-freq">Compounding Frequency</label>
-        <select id="ear-freq">
-          <option value="365">Daily (365×/year)</option>
-          <option value="12" selected>Monthly (12×/year)</option>
-          <option value="4">Quarterly (4×/year)</option>
-          <option value="2">Semi-Annual (2×/year)</option>
-          <option value="1">Annually (1×/year)</option>
-          <option value="0">∞ Continuous (e^r)</option>
-        </select>
-      </div>
+                <div class="form-row">
+                    <label class="lbl" for="ear-freq">Compounding Frequency</label>
+                    <select id="ear-freq">
+                        <option value="365">Daily (365×/year)</option>
+                        <option value="12" selected>Monthly (12×/year)</option>
+                        <option value="4">Quarterly (4×/year)</option>
+                        <option value="2">Semi-Annual (2×/year)</option>
+                        <option value="1">Annually (1×/year)</option>
+                        <option value="0">∞ Continuous (e^r)</option>
+                    </select>
+                </div>
 
-      <div class="btn-row">
-        <button type="button" class="btn-primary" onclick="calcEAR()">Calculate EAR 📐</button>
-        <button type="button" class="btn-secondary" onclick="resetModule('ear')">Reset 🔄</button>
-      </div>
+                <div class="btn-row">
+                    <button type="button" class="btn-primary" onclick="calcEAR()">Calculate EAR 📐</button>
+                    <button type="button" class="btn-secondary" onclick="resetModule('ear')">Reset 🔄</button>
+                </div>
 
-      <div class="result-grid" id="ear-results" style="display:none;">
-        <div class="result-card">
-          <div class="result-lbl">Effective Annual Rate</div>
-          <div class="result-val" id="ear-val">—</div>
-          <div class="result-sub">EAR = APY</div>
-        </div>
-        <div class="result-card amber">
-          <div class="result-lbl">Nominal Rate</div>
-          <div class="result-val" id="ear-nom">—</div>
-          <div class="result-sub">APR</div>
-        </div>
-        <div class="result-card slate">
-          <div class="result-lbl">Uplift</div>
-          <div class="result-val" id="ear-uplift">—</div>
-          <div class="result-sub">EAR − Nominal</div>
-        </div>
-      </div>
+                <div class="result-grid" id="ear-results" style="display:none;">
+                    <div class="result-card">
+                        <div class="result-lbl">Effective Annual Rate</div>
+                        <div class="result-val" id="ear-val">—</div>
+                        <div class="result-sub">EAR = APY</div>
+                    </div>
+                    <div class="result-card amber">
+                        <div class="result-lbl">Nominal Rate</div>
+                        <div class="result-val" id="ear-nom">—</div>
+                        <div class="result-sub">APR</div>
+                    </div>
+                    <div class="result-card slate">
+                        <div class="result-lbl">Uplift</div>
+                        <div class="result-val" id="ear-uplift">—</div>
+                        <div class="result-sub">EAR − Nominal</div>
+                    </div>
+                </div>
 
-      <div class="formula-box" id="ear-formula" style="display:none;"></div>
+                <div class="formula-box" id="ear-formula" style="display:none;"></div>
 
-      <!-- EAR comparison across frequencies -->
-      <div id="ear-freq-table" style="display:none;margin-top:1.5rem;">
-        <div style="font-weight:700;color:var(--slate-900);margin-bottom:.75rem;">📊 EAR at Different Compounding Frequencies</div>
-        <div class="tbl-wrap">
-          <table>
-            <thead><tr><th>Frequency</th><th>Periods/yr</th><th>EAR</th></tr></thead>
-            <tbody id="ear-freq-body"></tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </section>
+                <!-- EAR comparison across frequencies -->
+                <div id="ear-freq-table" style="display:none;margin-top:1.5rem;">
+                    <div style="font-weight:700;color:var(--slate-900);margin-bottom:.75rem;">📊 EAR at Different
+                        Compounding Frequencies</div>
+                    <div class="tbl-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Frequency</th>
+                                    <th>Periods/yr</th>
+                                    <th>EAR</th>
+                                </tr>
+                            </thead>
+                            <tbody id="ear-freq-body"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-  <!-- ═══════════════════════════════════════
+        <!-- ═══════════════════════════════════════
        MODULE 4 : FUTURE VALUE
   ═══════════════════════════════════════ -->
-  <section class="module" id="mod-fv" role="tabpanel" aria-label="Future Value Calculator">
-    <div class="card">
-      <div class="card-title">💰 Future Value Calculator</div>
+        <section class="module" id="mod-fv" role="tabpanel" aria-label="Future Value Calculator">
+            <div class="card">
+                <div class="card-title">💰 Future Value Calculator</div>
 
-      <div class="field-pair">
-        <div class="form-row">
-          <label class="lbl" for="fv-p">Principal Amount</label>
-          <div class="input-slider">
-            <div>
-              <input type="number" id="fv-p" min="0" max="1000000" step="100" value="10000" placeholder="e.g. 10000">
-              <div class="error-msg" id="fv-p-err">Enter a positive amount</div>
+                <div class="field-pair">
+                    <div class="form-row">
+                        <label class="lbl" for="fv-p">Principal Amount</label>
+                        <div class="input-slider">
+                            <div>
+                                <input type="number" id="fv-p" min="0" max="1000000" step="100" value="10000"
+                                    placeholder="e.g. 10000">
+                                <div class="error-msg" id="fv-p-err">Enter a positive amount</div>
+                            </div>
+                            <div>
+                                <input type="range" id="fv-p-sl" min="0" max="1000000" step="1000" value="10000">
+                                <div class="slider-lbl" id="fv-p-sl-lbl">10,000</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <label class="lbl" for="fv-r">Annual Interest Rate (%)</label>
+                        <div class="input-slider">
+                            <div>
+                                <input type="number" id="fv-r" min="0" max="500" step="0.1" value="7"
+                                    placeholder="e.g. 7">
+                                <div class="error-msg" id="fv-r-err">Enter 0–500%</div>
+                            </div>
+                            <div>
+                                <input type="range" id="fv-r-sl" min="0" max="30" step="0.1" value="7">
+                                <div class="slider-lbl" id="fv-r-sl-lbl">7.00%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="field-pair">
+                    <div class="form-row">
+                        <label class="lbl" for="fv-t">Time Period (Years)</label>
+                        <div class="input-slider">
+                            <div>
+                                <input type="number" id="fv-t" min="0" max="40" step="1" value="10"
+                                    placeholder="e.g. 10">
+                                <div class="error-msg" id="fv-t-err">Enter 1–40 years</div>
+                            </div>
+                            <div>
+                                <input type="range" id="fv-t-sl" min="0" max="40" step="1" value="10">
+                                <div class="slider-lbl" id="fv-t-sl-lbl">10 yrs</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <label class="lbl" for="fv-freq">Compounding Frequency</label>
+                        <select id="fv-freq">
+                            <option value="365">Daily (365×/year)</option>
+                            <option value="12" selected>Monthly (12×/year)</option>
+                            <option value="4">Quarterly (4×/year)</option>
+                            <option value="2">Semi-Annual (2×/year)</option>
+                            <option value="1">Annually (1×/year)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <label class="lbl" for="fv-cur">Currency (Display Only)</label>
+                    <select id="fv-cur">
+                        <option value="">— None (raw numbers) —</option>
+                        <option value="USD">$ USD</option>
+                        <option value="EUR">€ EUR</option>
+                        <option value="GBP">£ GBP</option>
+                        <option value="INR">₹ INR</option>
+                        <option value="JPY">¥ JPY</option>
+                        <option value="AUD">A$ AUD</option>
+                        <option value="CAD">C$ CAD</option>
+                        <option value="SGD">S$ SGD</option>
+                        <option value="AED">AED</option>
+                    </select>
+                </div>
+
+                <div class="form-row">
+                    <label class="lbl" for="fv-inf">Expected Annual Inflation (%) <span
+                            style="font-weight:400;color:var(--slate-500)">— optional, for Real Return</span></label>
+                    <div class="input-slider">
+                        <div>
+                            <input type="number" id="fv-inf" min="0" max="50" step="0.1" value="3" placeholder="e.g. 3">
+                        </div>
+                        <div>
+                            <input type="range" id="fv-inf-sl" min="0" max="20" step="0.1" value="3">
+                            <div class="slider-lbl" id="fv-inf-sl-lbl">3.0%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="btn-row">
+                    <button type="button" class="btn-primary" onclick="calcFV()">Calculate Future Value 🚀</button>
+                    <button type="button" class="btn-secondary" onclick="resetModule('fv')">Reset 🔄</button>
+                </div>
+
+                <!-- Results -->
+                <div id="fv-results" style="display:none;">
+                    <div class="result-grid">
+                        <div class="result-card">
+                            <div class="result-lbl">Future Value</div>
+                            <div class="result-val" id="fv-val">—</div>
+                            <div class="result-sub">After compounding</div>
+                        </div>
+                        <div class="result-card amber">
+                            <div class="result-lbl">Principal</div>
+                            <div class="result-val" id="fv-principal">—</div>
+                            <div class="result-sub">Your deposit</div>
+                        </div>
+                        <div class="result-card rose">
+                            <div class="result-lbl">Total Interest</div>
+                            <div class="result-val" id="fv-interest">—</div>
+                            <div class="result-sub">Earned via compounding</div>
+                        </div>
+                        <div class="result-card slate">
+                            <div class="result-lbl">Effective APY</div>
+                            <div class="result-val" id="fv-apy">—</div>
+                            <div class="result-sub">After compounding</div>
+                        </div>
+                    </div>
+                    <div id="fv-rr-card"
+                        style="display:none;margin-top:.75rem;background:linear-gradient(135deg,#14b8a6,#0891b2);color:#fff;border-radius:10px;padding:1.25rem 1.5rem;">
+                        <div
+                            style="font-size:.8rem;opacity:.88;margin-bottom:.35rem;font-weight:600;text-transform:uppercase;letter-spacing:.5px;">
+                            Real Return (Inflation-Adjusted) 📉</div>
+                        <div style="font-size:1.9rem;font-weight:800;" id="fv-rr">—</div>
+                        <div style="font-size:.78rem;opacity:.8;margin-top:.3rem;">Real Return = (1 + APY) ÷ (1 +
+                            Inflation) − 1</div>
+                    </div>
+
+                    <div class="formula-box" id="fv-formula"></div>
+
+                    <!-- Charts -->
+                    <div class="charts-row">
+                        <div class="chart-wrap">
+                            <div class="chart-title">📈 Year-by-Year Growth</div>
+                            <div class="chart-canvas"><canvas id="fv-line-chart"></canvas></div>
+                        </div>
+                        <div class="chart-wrap">
+                            <div class="chart-title">🥧 Principal vs Interest</div>
+                            <div class="chart-canvas"><canvas id="fv-pie-chart"></canvas></div>
+                        </div>
+                    </div>
+
+                    <!-- Year-by-year table -->
+                    <div style="margin-top:1.5rem;">
+                        <div style="font-weight:700;color:var(--slate-900);margin-bottom:.75rem;">📅 Year-by-Year Growth
+                            Table</div>
+                        <div class="tbl-wrap">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Year</th>
+                                        <th>Value</th>
+                                        <th>Interest Earned</th>
+                                        <th>Growth %</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="fv-year-body"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div>
-              <input type="range" id="fv-p-sl" min="0" max="1000000" step="1000" value="10000">
-              <div class="slider-lbl" id="fv-p-sl-lbl">10,000</div>
-            </div>
-          </div>
-        </div>
+        </section>
 
-        <div class="form-row">
-          <label class="lbl" for="fv-r">Annual Interest Rate (%)</label>
-          <div class="input-slider">
-            <div>
-              <input type="number" id="fv-r" min="0" max="500" step="0.1" value="7" placeholder="e.g. 7">
-              <div class="error-msg" id="fv-r-err">Enter 0–500%</div>
-            </div>
-            <div>
-              <input type="range" id="fv-r-sl" min="0" max="30" step="0.1" value="7">
-              <div class="slider-lbl" id="fv-r-sl-lbl">7.00%</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="field-pair">
-        <div class="form-row">
-          <label class="lbl" for="fv-t">Time Period (Years)</label>
-          <div class="input-slider">
-            <div>
-              <input type="number" id="fv-t" min="0" max="40" step="1" value="10" placeholder="e.g. 10">
-              <div class="error-msg" id="fv-t-err">Enter 1–40 years</div>
-            </div>
-            <div>
-              <input type="range" id="fv-t-sl" min="0" max="40" step="1" value="10">
-              <div class="slider-lbl" id="fv-t-sl-lbl">10 yrs</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="form-row">
-          <label class="lbl" for="fv-freq">Compounding Frequency</label>
-          <select id="fv-freq">
-            <option value="365">Daily (365×/year)</option>
-            <option value="12" selected>Monthly (12×/year)</option>
-            <option value="4">Quarterly (4×/year)</option>
-            <option value="2">Semi-Annual (2×/year)</option>
-            <option value="1">Annually (1×/year)</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="form-row">
-        <label class="lbl" for="fv-cur">Currency (Display Only)</label>
-        <select id="fv-cur">
-          <option value="">— None (raw numbers) —</option>
-          <option value="USD">$ USD</option>
-          <option value="EUR">€ EUR</option>
-          <option value="GBP">£ GBP</option>
-          <option value="INR">₹ INR</option>
-          <option value="JPY">¥ JPY</option>
-          <option value="AUD">A$ AUD</option>
-          <option value="CAD">C$ CAD</option>
-          <option value="SGD">S$ SGD</option>
-          <option value="AED">AED</option>
-        </select>
-      </div>
-
-      <div class="form-row">
-        <label class="lbl" for="fv-inf">Expected Annual Inflation (%) <span style="font-weight:400;color:var(--slate-500)">— optional, for Real Return</span></label>
-        <div class="input-slider">
-          <div>
-            <input type="number" id="fv-inf" min="0" max="50" step="0.1" value="3" placeholder="e.g. 3">
-          </div>
-          <div>
-            <input type="range" id="fv-inf-sl" min="0" max="20" step="0.1" value="3">
-            <div class="slider-lbl" id="fv-inf-sl-lbl">3.0%</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="btn-row">
-        <button type="button" class="btn-primary" onclick="calcFV()">Calculate Future Value 🚀</button>
-        <button type="button" class="btn-secondary" onclick="resetModule('fv')">Reset 🔄</button>
-      </div>
-
-      <!-- Results -->
-      <div id="fv-results" style="display:none;">
-        <div class="result-grid">
-          <div class="result-card">
-            <div class="result-lbl">Future Value</div>
-            <div class="result-val" id="fv-val">—</div>
-            <div class="result-sub">After compounding</div>
-          </div>
-          <div class="result-card amber">
-            <div class="result-lbl">Principal</div>
-            <div class="result-val" id="fv-principal">—</div>
-            <div class="result-sub">Your deposit</div>
-          </div>
-          <div class="result-card rose">
-            <div class="result-lbl">Total Interest</div>
-            <div class="result-val" id="fv-interest">—</div>
-            <div class="result-sub">Earned via compounding</div>
-          </div>
-          <div class="result-card slate">
-            <div class="result-lbl">Effective APY</div>
-            <div class="result-val" id="fv-apy">—</div>
-            <div class="result-sub">After compounding</div>
-          </div>
-        </div>
-        <div id="fv-rr-card" style="display:none;margin-top:.75rem;background:linear-gradient(135deg,#14b8a6,#0891b2);color:#fff;border-radius:10px;padding:1.25rem 1.5rem;">
-          <div style="font-size:.8rem;opacity:.88;margin-bottom:.35rem;font-weight:600;text-transform:uppercase;letter-spacing:.5px;">Real Return (Inflation-Adjusted) 📉</div>
-          <div style="font-size:1.9rem;font-weight:800;" id="fv-rr">—</div>
-          <div style="font-size:.78rem;opacity:.8;margin-top:.3rem;">Real Return = (1 + APY) ÷ (1 + Inflation) − 1</div>
-        </div>
-
-        <div class="formula-box" id="fv-formula"></div>
-
-        <!-- Charts -->
-        <div class="charts-row">
-          <div class="chart-wrap">
-            <div class="chart-title">📈 Year-by-Year Growth</div>
-            <div class="chart-canvas"><canvas id="fv-line-chart"></canvas></div>
-          </div>
-          <div class="chart-wrap">
-            <div class="chart-title">🥧 Principal vs Interest</div>
-            <div class="chart-canvas"><canvas id="fv-pie-chart"></canvas></div>
-          </div>
-        </div>
-
-        <!-- Year-by-year table -->
-        <div style="margin-top:1.5rem;">
-          <div style="font-weight:700;color:var(--slate-900);margin-bottom:.75rem;">📅 Year-by-Year Growth Table</div>
-          <div class="tbl-wrap">
-            <table>
-              <thead>
-                <tr><th>Year</th><th>Value</th><th>Interest Earned</th><th>Growth %</th></tr>
-              </thead>
-              <tbody id="fv-year-body"></tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════
+        <!-- ═══════════════════════════════════════
        MODULE 5 : COMPARISON TOOL
   ═══════════════════════════════════════ -->
-  <section class="module" id="mod-compare" role="tabpanel" aria-label="Investment Comparison Tool">
-    <div class="card">
-      <div class="card-title">⚖️ Investment Comparison Tool</div>
-      <p style="color:var(--slate-500);font-size:.92rem;margin-bottom:1.5rem;">Enter two different rates / compounding frequencies. We'll compute FV for both and show you which wins! 🏆</p>
+        <section class="module" id="mod-compare" role="tabpanel" aria-label="Investment Comparison Tool">
+            <div class="card">
+                <div class="card-title">⚖️ Investment Comparison Tool</div>
+                <p style="color:var(--slate-500);font-size:.92rem;margin-bottom:1.5rem;">Enter two different rates /
+                    compounding frequencies. We'll compute FV for both and show you which wins! 🏆</p>
 
-      <!-- Common inputs -->
-      <div class="field-pair">
-        <div class="form-row">
-          <label class="lbl" for="cmp-p">Principal Amount</label>
-          <div class="input-slider">
-            <div>
-              <input type="number" id="cmp-p" min="0" max="1000000" step="100" value="10000">
-              <div class="error-msg" id="cmp-p-err">Enter a positive amount</div>
+                <!-- Common inputs -->
+                <div class="field-pair">
+                    <div class="form-row">
+                        <label class="lbl" for="cmp-p">Principal Amount</label>
+                        <div class="input-slider">
+                            <div>
+                                <input type="number" id="cmp-p" min="0" max="1000000" step="100" value="10000">
+                                <div class="error-msg" id="cmp-p-err">Enter a positive amount</div>
+                            </div>
+                            <div>
+                                <input type="range" id="cmp-p-sl" min="0" max="1000000" step="1000" value="10000">
+                                <div class="slider-lbl" id="cmp-p-sl-lbl">10,000</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <label class="lbl" for="cmp-t">Time Period (Years)</label>
+                        <div class="input-slider">
+                            <div>
+                                <input type="number" id="cmp-t" min="1" max="40" step="1" value="10">
+                                <div class="error-msg" id="cmp-t-err">Enter 1–40 years</div>
+                            </div>
+                            <div>
+                                <input type="range" id="cmp-t-sl" min="1" max="40" step="1" value="10">
+                                <div class="slider-lbl" id="cmp-t-sl-lbl">10 yrs</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Option A -->
+                <div style="background:var(--teal-light);border-radius:10px;padding:1.25rem;margin-bottom:1rem;">
+                    <div style="font-weight:700;color:var(--teal-dark);margin-bottom:.75rem;">🅐 Investment Option A
+                    </div>
+                    <div class="field-pair">
+                        <div class="form-row">
+                            <label class="lbl" for="cmp-ra">Rate A (%)</label>
+                            <input type="number" id="cmp-ra" min="0" max="500" step="0.1" value="6">
+                        </div>
+                        <div class="form-row">
+                            <label class="lbl" for="cmp-fa">Compounding A</label>
+                            <select id="cmp-fa">
+                                <option value="365">Daily (365×)</option>
+                                <option value="12" selected>Monthly (12×)</option>
+                                <option value="4">Quarterly (4×)</option>
+                                <option value="2">Semi-Annual (2×)</option>
+                                <option value="1">Annually (1×)</option>
+                                <option value="0">∞ Continuous</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Option B -->
+                <div style="background:var(--amber-light);border-radius:10px;padding:1.25rem;margin-bottom:1rem;">
+                    <div style="font-weight:700;color:#92400e;margin-bottom:.75rem;">🅑 Investment Option B</div>
+                    <div class="field-pair">
+                        <div class="form-row">
+                            <label class="lbl" for="cmp-rb">Rate B (%)</label>
+                            <input type="number" id="cmp-rb" min="0" max="500" step="0.1" value="5.8">
+                        </div>
+                        <div class="form-row">
+                            <label class="lbl" for="cmp-fb">Compounding B</label>
+                            <select id="cmp-fb">
+                                <option value="365">Daily (365×)</option>
+                                <option value="12">Monthly (12×)</option>
+                                <option value="4">Quarterly (4×)</option>
+                                <option value="2">Semi-Annual (2×)</option>
+                                <option value="1" selected>Annually (1×)</option>
+                                <option value="0">∞ Continuous</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="btn-row">
+                    <button type="button" class="btn-primary" onclick="calcCompare()">Compare Now ⚖️</button>
+                    <button type="button" class="btn-secondary" onclick="resetModule('compare')">Reset 🔄</button>
+                </div>
+
+                <div id="cmp-results" style="display:none;">
+                    <div class="result-grid">
+                        <div class="result-card">
+                            <div class="result-lbl">Option A — Future Value</div>
+                            <div class="result-val" id="cmp-fva">—</div>
+                            <div class="result-sub" id="cmp-apy-a">APY: —</div>
+                        </div>
+                        <div class="result-card amber">
+                            <div class="result-lbl">Option B — Future Value</div>
+                            <div class="result-val" id="cmp-fvb">—</div>
+                            <div class="result-sub" id="cmp-apy-b">APY: —</div>
+                        </div>
+                    </div>
+
+                    <div class="comp-winner" id="cmp-winner"></div>
+
+                    <div class="charts-row" style="margin-top:1.25rem;">
+                        <div class="chart-wrap" style="grid-column:1/-1;">
+                            <div class="chart-title">📈 A vs B — Growth Over Time</div>
+                            <div class="chart-canvas" style="height:300px;"><canvas id="cmp-line-chart"></canvas></div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top:1.25rem;">
+                        <div style="font-weight:700;color:var(--slate-900);margin-bottom:.75rem;">📅 Year-by-Year
+                            Comparison</div>
+                        <div class="tbl-wrap">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Year</th>
+                                        <th>Option A</th>
+                                        <th>Option B</th>
+                                        <th>Difference</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="cmp-year-body"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div>
-              <input type="range" id="cmp-p-sl" min="0" max="1000000" step="1000" value="10000">
-              <div class="slider-lbl" id="cmp-p-sl-lbl">10,000</div>
-            </div>
-          </div>
-        </div>
-        <div class="form-row">
-          <label class="lbl" for="cmp-t">Time Period (Years)</label>
-          <div class="input-slider">
-            <div>
-              <input type="number" id="cmp-t" min="1" max="40" step="1" value="10">
-              <div class="error-msg" id="cmp-t-err">Enter 1–40 years</div>
-            </div>
-            <div>
-              <input type="range" id="cmp-t-sl" min="1" max="40" step="1" value="10">
-              <div class="slider-lbl" id="cmp-t-sl-lbl">10 yrs</div>
-            </div>
-          </div>
-        </div>
-      </div>
+        </section>
 
-      <!-- Option A -->
-      <div style="background:var(--teal-light);border-radius:10px;padding:1.25rem;margin-bottom:1rem;">
-        <div style="font-weight:700;color:var(--teal-dark);margin-bottom:.75rem;">🅐 Investment Option A</div>
-        <div class="field-pair">
-          <div class="form-row">
-            <label class="lbl" for="cmp-ra">Rate A (%)</label>
-            <input type="number" id="cmp-ra" min="0" max="500" step="0.1" value="6">
-          </div>
-          <div class="form-row">
-            <label class="lbl" for="cmp-fa">Compounding A</label>
-            <select id="cmp-fa">
-              <option value="365">Daily (365×)</option>
-              <option value="12" selected>Monthly (12×)</option>
-              <option value="4">Quarterly (4×)</option>
-              <option value="2">Semi-Annual (2×)</option>
-              <option value="1">Annually (1×)</option>
-              <option value="0">∞ Continuous</option>
-            </select>
-          </div>
-        </div>
-      </div>
-
-      <!-- Option B -->
-      <div style="background:var(--amber-light);border-radius:10px;padding:1.25rem;margin-bottom:1rem;">
-        <div style="font-weight:700;color:#92400e;margin-bottom:.75rem;">🅑 Investment Option B</div>
-        <div class="field-pair">
-          <div class="form-row">
-            <label class="lbl" for="cmp-rb">Rate B (%)</label>
-            <input type="number" id="cmp-rb" min="0" max="500" step="0.1" value="5.8">
-          </div>
-          <div class="form-row">
-            <label class="lbl" for="cmp-fb">Compounding B</label>
-            <select id="cmp-fb">
-              <option value="365">Daily (365×)</option>
-              <option value="12">Monthly (12×)</option>
-              <option value="4">Quarterly (4×)</option>
-              <option value="2">Semi-Annual (2×)</option>
-              <option value="1" selected>Annually (1×)</option>
-              <option value="0">∞ Continuous</option>
-            </select>
-          </div>
-        </div>
-      </div>
-
-      <div class="btn-row">
-        <button type="button" class="btn-primary" onclick="calcCompare()">Compare Now ⚖️</button>
-        <button type="button" class="btn-secondary" onclick="resetModule('compare')">Reset 🔄</button>
-      </div>
-
-      <div id="cmp-results" style="display:none;">
-        <div class="result-grid">
-          <div class="result-card">
-            <div class="result-lbl">Option A — Future Value</div>
-            <div class="result-val" id="cmp-fva">—</div>
-            <div class="result-sub" id="cmp-apy-a">APY: —</div>
-          </div>
-          <div class="result-card amber">
-            <div class="result-lbl">Option B — Future Value</div>
-            <div class="result-val" id="cmp-fvb">—</div>
-            <div class="result-sub" id="cmp-apy-b">APY: —</div>
-          </div>
-        </div>
-
-        <div class="comp-winner" id="cmp-winner"></div>
-
-        <div class="charts-row" style="margin-top:1.25rem;">
-          <div class="chart-wrap" style="grid-column:1/-1;">
-            <div class="chart-title">📈 A vs B — Growth Over Time</div>
-            <div class="chart-canvas" style="height:300px;"><canvas id="cmp-line-chart"></canvas></div>
-          </div>
-        </div>
-
-        <div style="margin-top:1.25rem;">
-          <div style="font-weight:700;color:var(--slate-900);margin-bottom:.75rem;">📅 Year-by-Year Comparison</div>
-          <div class="tbl-wrap">
-            <table>
-              <thead><tr><th>Year</th><th>Option A</th><th>Option B</th><th>Difference</th></tr></thead>
-              <tbody id="cmp-year-body"></tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════
+        <!-- ═══════════════════════════════════════
        EDUCATIONAL CONTENT
   ═══════════════════════════════════════ -->
-  <article class="content-section" id="guide">
-    <h2>📚 APY vs APR — Complete Guide</h2>
+        <article class="content-section" id="guide">
+            <h2>📚 APY vs APR — Complete Guide</h2>
 
-    <h3>What is APR? 📄</h3>
-    <p>APR stands for <strong>Annual Percentage Rate</strong> — the <em>nominal</em> (stated) annual interest rate on a financial product. It does <em>not</em> account for compounding within the year. Banks and lenders typically advertise APR because it looks smaller and more attractive than APY. For example, a loan advertised at 12% APR means 12% is the stated annual rate — but the true cost depends on how frequently it compounds.</p>
+            <h3>What is APR? 📄</h3>
+            <p>APR stands for <strong>Annual Percentage Rate</strong> — the <em>nominal</em> (stated) annual interest
+                rate on a financial product. It does <em>not</em> account for compounding within the year. Banks and
+                lenders typically advertise APR because it looks smaller and more attractive than APY. For example, a
+                loan advertised at 12% APR means 12% is the stated annual rate — but the true cost depends on how
+                frequently it compounds.</p>
 
-    <h3>What is APY? 📈</h3>
-    <p>APY stands for <strong>Annual Percentage Yield</strong> — the <em>effective</em> annual rate that accounts for compounding. It tells you what you will <em>actually</em> earn (or pay) over a full year. APY is always ≥ APR. The gap between them grows with higher rates and more frequent compounding. Savings accounts and CDs in many countries are required by law to advertise APY so consumers see the real yield.</p>
+            <h3>What is APY? 📈</h3>
+            <p>APY stands for <strong>Annual Percentage Yield</strong> — the <em>effective</em> annual rate that
+                accounts for compounding. It tells you what you will <em>actually</em> earn (or pay) over a full year.
+                APY is always ≥ APR. The gap between them grows with higher rates and more frequent compounding. Savings
+                accounts and CDs in many countries are required by law to advertise APY so consumers see the real yield.
+            </p>
 
-    <div class="callout">
-      <strong>🔑 One-Line Rule:</strong> Use APY to compare savings products. Use APR to compare loan costs. APY always tells the true story for investors.
-    </div>
+            <div class="callout">
+                <strong>🔑 One-Line Rule:</strong> Use APY to compare savings products. Use APR to compare loan costs.
+                APY always tells the true story for investors.
+            </div>
 
-    <h3>Nominal vs Effective Rate 🧮</h3>
-    <p>The <strong>nominal rate</strong> (APR) is what you see on the label. The <strong>effective rate</strong> (APY/EAR) is what you actually get. The formula connecting them is:</p>
-    <div class="formula-box">APY = (1 + r/n)^n − 1 &nbsp;&nbsp; where r = APR (decimal), n = compounding periods/year</div>
-    <p>Example: 10% nominal, compounded monthly → APY = (1 + 0.10/12)^12 − 1 = <strong>10.47%</strong>. That extra 0.47% is free money from compounding! 🎁</p>
+            <h3>Nominal vs Effective Rate 🧮</h3>
+            <p>The <strong>nominal rate</strong> (APR) is what you see on the label. The <strong>effective rate</strong>
+                (APY/EAR) is what you actually get. The formula connecting them is:</p>
+            <div class="formula-box">APY = (1 + r/n)^n − 1 &nbsp;&nbsp; where r = APR (decimal), n = compounding
+                periods/year</div>
+            <p>Example: 10% nominal, compounded monthly → APY = (1 + 0.10/12)^12 − 1 = <strong>10.47%</strong>. That
+                extra 0.47% is free money from compounding! 🎁</p>
 
-    <h3>How Compounding Frequency Changes Everything 🔄</h3>
-    <p>At the same nominal rate of 10%, here is how APY changes with frequency:</p>
-    <ul>
-      <li>📅 <strong>Annually (n=1):</strong> APY = 10.00%</li>
-      <li>🗓️ <strong>Semi-Annual (n=2):</strong> APY = 10.25%</li>
-      <li>📆 <strong>Quarterly (n=4):</strong> APY = 10.38%</li>
-      <li>🌙 <strong>Monthly (n=12):</strong> APY = 10.47%</li>
-      <li>☀️ <strong>Daily (n=365):</strong> APY = 10.52%</li>
-    </ul>
-    <p>As n → ∞ (continuous compounding), APY approaches e^r − 1 = <strong>10.517%</strong> at 10%. Practical takeaway: daily vs monthly is a tiny difference; the <em>rate</em> matters far more than the compounding frequency for typical savings scenarios. 💡</p>
+            <h3>How Compounding Frequency Changes Everything 🔄</h3>
+            <p>At the same nominal rate of 10%, here is how APY changes with frequency:</p>
+            <ul>
+                <li>📅 <strong>Annually (n=1):</strong> APY = 10.00%</li>
+                <li>🗓️ <strong>Semi-Annual (n=2):</strong> APY = 10.25%</li>
+                <li>📆 <strong>Quarterly (n=4):</strong> APY = 10.38%</li>
+                <li>🌙 <strong>Monthly (n=12):</strong> APY = 10.47%</li>
+                <li>☀️ <strong>Daily (n=365):</strong> APY = 10.52%</li>
+            </ul>
+            <p>As n → ∞ (continuous compounding), APY approaches e^r − 1 = <strong>10.517%</strong> at 10%. Practical
+                takeaway: daily vs monthly is a tiny difference; the <em>rate</em> matters far more than the compounding
+                frequency for typical savings scenarios. 💡</p>
 
-    <h3>Daily vs Monthly Compounding — Real Numbers 💵</h3>
-    <p>Let's invest 10,000 at 6% APR for 20 years under two scenarios:</p>
-    <ul>
-      <li>📅 <strong>Monthly compounding:</strong> FV = 10,000 × (1 + 0.06/12)^(12×20) = <strong>33,102</strong></li>
-      <li>☀️ <strong>Daily compounding:</strong> FV = 10,000 × (1 + 0.06/365)^(365×20) = <strong>33,198</strong></li>
-    </ul>
-    <p>Difference = only <strong>96</strong> over 20 years! This confirms that chasing "daily compounding" is less important than securing a higher rate in the first place. A bank offering 6.1% APR monthly beats a 6% APR daily every time. 🏆</p>
+            <h3>Daily vs Monthly Compounding — Real Numbers 💵</h3>
+            <p>Let's invest 10,000 at 6% APR for 20 years under two scenarios:</p>
+            <ul>
+                <li>📅 <strong>Monthly compounding:</strong> FV = 10,000 × (1 + 0.06/12)^(12×20) =
+                    <strong>33,102</strong></li>
+                <li>☀️ <strong>Daily compounding:</strong> FV = 10,000 × (1 + 0.06/365)^(365×20) =
+                    <strong>33,198</strong></li>
+            </ul>
+            <p>Difference = only <strong>96</strong> over 20 years! This confirms that chasing "daily compounding" is
+                less important than securing a higher rate in the first place. A bank offering 6.1% APR monthly beats a
+                6% APR daily every time. 🏆</p>
 
-    <h3>Bank Savings Account Example 🏦</h3>
-    <p>Suppose Bank A offers <strong>4.5% APY</strong> and Bank B offers <strong>4.4% APR compounded monthly</strong>. Which is better?</p>
-    <p>Bank B's APY = (1 + 0.044/12)^12 − 1 = <strong>4.49%</strong>. So Bank A wins with 4.5% APY — even though Bank B's APR sounds competitive. Always convert everything to APY before comparing. Our APR → APY converter does this instantly! ⚡</p>
+            <h3>Bank Savings Account Example 🏦</h3>
+            <p>Suppose Bank A offers <strong>4.5% APY</strong> and Bank B offers <strong>4.4% APR compounded
+                    monthly</strong>. Which is better?</p>
+            <p>Bank B's APY = (1 + 0.044/12)^12 − 1 = <strong>4.49%</strong>. So Bank A wins with 4.5% APY — even though
+                Bank B's APR sounds competitive. Always convert everything to APY before comparing. Our APR → APY
+                converter does this instantly! ⚡</p>
 
-    <h3>Crypto Staking & High-Yield APY 🪙</h3>
-    <p>Crypto platforms often advertise eye-catching APYs — 50%, 100%, even 200%. These figures are typically calculated assuming the current reward rate holds for a full year and rewards are auto-compounded. In reality:</p>
-    <ul>
-      <li>🔻 Reward rates fluctuate daily based on network demand</li>
-      <li>📉 Token prices can drop, reducing real-world value</li>
-      <li>⏰ Lock-up periods may prevent withdrawal</li>
-      <li>🔒 Smart contract risk is real</li>
-    </ul>
-    <div class="callout callout-rose">
-      <strong>⚠️ Crypto Warning:</strong> A 200% APY on a volatile token can still result in total loss if the token price drops 90%. Always factor in price risk, not just yield.
-    </div>
-    <p>Use this Future Value calculator to model crypto staking <em>conservatively</em> — plug in a fraction of the advertised APY to stress-test your scenario.</p>
+            <h3>Crypto Staking & High-Yield APY 🪙</h3>
+            <p>Crypto platforms often advertise eye-catching APYs — 50%, 100%, even 200%. These figures are typically
+                calculated assuming the current reward rate holds for a full year and rewards are auto-compounded. In
+                reality:</p>
+            <ul>
+                <li>🔻 Reward rates fluctuate daily based on network demand</li>
+                <li>📉 Token prices can drop, reducing real-world value</li>
+                <li>⏰ Lock-up periods may prevent withdrawal</li>
+                <li>🔒 Smart contract risk is real</li>
+            </ul>
+            <div class="callout callout-rose">
+                <strong>⚠️ Crypto Warning:</strong> A 200% APY on a volatile token can still result in total loss if the
+                token price drops 90%. Always factor in price risk, not just yield.
+            </div>
+            <p>Use this Future Value calculator to model crypto staking <em>conservatively</em> — plug in a fraction of
+                the advertised APY to stress-test your scenario.</p>
 
-    <h3>How Inflation Reduces Your Real Return 📉</h3>
-    <p>Even a great APY can be eaten by inflation. The real return formula is simple:</p>
-    <div class="formula-box"><strong>Real Return ≈ APY − Inflation Rate</strong></div>
-    <p>If your savings account earns <strong>5% APY</strong> but inflation is <strong>4%</strong>, your real purchasing-power gain is only <strong>~1%</strong>. More precisely, Real Rate = (1 + APY) / (1 + Inflation) − 1 (Fisher equation). Historically, many savings accounts have failed to beat inflation, meaning savers are losing real wealth. Always check current inflation rates in your country and subtract from your APY to find your true gain. 💸</p>
+            <h3>How Inflation Reduces Your Real Return 📉</h3>
+            <p>Even a great APY can be eaten by inflation. The real return formula is simple:</p>
+            <div class="formula-box"><strong>Real Return ≈ APY − Inflation Rate</strong></div>
+            <p>If your savings account earns <strong>5% APY</strong> but inflation is <strong>4%</strong>, your real
+                purchasing-power gain is only <strong>~1%</strong>. More precisely, Real Rate = (1 + APY) / (1 +
+                Inflation) − 1 (Fisher equation). Historically, many savings accounts have failed to beat inflation,
+                meaning savers are losing real wealth. Always check current inflation rates in your country and subtract
+                from your APY to find your true gain. 💸</p>
 
-    <div class="callout callout-amber">
-      <strong>🌍 Global Tip:</strong> In high-inflation economies (Argentina, Turkey, etc.), nominal interest rates can be 40–80%, but real returns may still be negative if inflation runs higher. Always use real return, not nominal APY, to judge investment quality.
-    </div>
+            <div class="callout callout-amber">
+                <strong>🌍 Global Tip:</strong> In high-inflation economies (Argentina, Turkey, etc.), nominal interest
+                rates can be 40–80%, but real returns may still be negative if inflation runs higher. Always use real
+                return, not nominal APY, to judge investment quality.
+            </div>
 
-    <h3>Common Beginner Mistakes ❌</h3>
-    <ul>
-      <li>❌ <strong>Comparing APR to APY directly</strong> — always convert to same basis first</li>
-      <li>❌ <strong>Ignoring compounding frequency</strong> — two products with same APR can have different APYs</li>
-      <li>❌ <strong>Forgetting taxes</strong> — after-tax APY = APY × (1 − tax rate); use post-tax figures</li>
-      <li>❌ <strong>Neglecting inflation</strong> — nominal yield ≠ real wealth growth</li>
-      <li>❌ <strong>Trusting crypto APY blindly</strong> — rates change hourly; past APY ≠ future APY</li>
-      <li>❌ <strong>Short time horizons</strong> — compounding is most powerful over 10+ year periods; don't withdraw early</li>
-      <li>❌ <strong>Underestimating fees</strong> — a 0.5% annual management fee on a 5% APY product reduces effective yield to only 4.5%</li>
-    </ul>
+            <h3>Common Beginner Mistakes ❌</h3>
+            <ul>
+                <li>❌ <strong>Comparing APR to APY directly</strong> — always convert to same basis first</li>
+                <li>❌ <strong>Ignoring compounding frequency</strong> — two products with same APR can have different
+                    APYs</li>
+                <li>❌ <strong>Forgetting taxes</strong> — after-tax APY = APY × (1 − tax rate); use post-tax figures
+                </li>
+                <li>❌ <strong>Neglecting inflation</strong> — nominal yield ≠ real wealth growth</li>
+                <li>❌ <strong>Trusting crypto APY blindly</strong> — rates change hourly; past APY ≠ future APY</li>
+                <li>❌ <strong>Short time horizons</strong> — compounding is most powerful over 10+ year periods; don't
+                    withdraw early</li>
+                <li>❌ <strong>Underestimating fees</strong> — a 0.5% annual management fee on a 5% APY product reduces
+                    effective yield to only 4.5%</li>
+            </ul>
 
-    <h3>Quick Comparison: APR vs APY at a Glance 📊</h3>
-    <div class="tbl-wrap" style="margin-top:.75rem;">
-      <table>
-        <thead><tr><th>Feature</th><th>APR</th><th>APY</th></tr></thead>
-        <tbody>
-          <tr><td>Accounts for compounding?</td><td>❌ No</td><td>✅ Yes</td></tr>
-          <tr><td>Better for comparing savings?</td><td>❌</td><td>✅ Always use APY</td></tr>
-          <tr><td>Used by lenders to advertise?</td><td>✅ Often lower-looking</td><td>Sometimes</td></tr>
-          <tr><td>Formula</td><td>r (nominal)</td><td>(1+r/n)^n − 1</td></tr>
-          <tr><td>Which is higher?</td><td>—</td><td>Always ≥ APR</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </article>
+            <h3>Quick Comparison: APR vs APY at a Glance 📊</h3>
+            <div class="tbl-wrap" style="margin-top:.75rem;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>APR</th>
+                            <th>APY</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Accounts for compounding?</td>
+                            <td>❌ No</td>
+                            <td>✅ Yes</td>
+                        </tr>
+                        <tr>
+                            <td>Better for comparing savings?</td>
+                            <td>❌</td>
+                            <td>✅ Always use APY</td>
+                        </tr>
+                        <tr>
+                            <td>Used by lenders to advertise?</td>
+                            <td>✅ Often lower-looking</td>
+                            <td>Sometimes</td>
+                        </tr>
+                        <tr>
+                            <td>Formula</td>
+                            <td>r (nominal)</td>
+                            <td>(1+r/n)^n − 1</td>
+                        </tr>
+                        <tr>
+                            <td>Which is higher?</td>
+                            <td>—</td>
+                            <td>Always ≥ APR</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </article>
 
-  <!-- INTERNAL LINKS -->
-  <div class="content-section">
-    <h2>🔗 Explore More Calculators</h2>
-    <p>These tools work best together — use them to build your complete financial picture!</p>
-    <div class="links-grid">
+        <!-- INTERNAL LINKS -->
+        <div class="content-section">
+            <h2>🔗 Explore More Calculators</h2>
+            <p>These tools work best together — use them to build your complete financial picture!</p>
+            <div class="links-grid">
 
-      <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/finance-sip-calculator.html" class="link-card">
-        <span class="link-icon">📊</span>SIP Calculator
-      </a>
+                <a href="https://smartcalcworld.com/finance/finance-sip-calculator.html"
+                    class="link-card">
+                    <span class="link-icon">📊</span>SIP Calculator
+                </a>
 
-      <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/investment/finance-fd-calculator.html" class="link-card">
-        <span class="link-icon">🏦</span>FD Calculator
-      </a>
+                <a href="https://smartcalcworld.com/finance/investment/finance-fd-calculator.html"
+                    class="link-card">
+                    <span class="link-icon">🏦</span>FD Calculator
+                </a>
 
-      <a href="https://advaitpatel69-beep.github.io/Advait.github.io/simple-compound-interest-calculator.html" class="link-card">
-        <span class="link-icon">💹</span>Compound Interest Calculator
-      </a>
+                <a href="https://smartcalcworld.com/simple-compound-interest-calculator.html"
+                    class="link-card">
+                    <span class="link-icon">💹</span>Compound Interest Calculator
+                </a>
 
-      <!-- <a href="/finance/inflation-calculator.html" class="link-card">
+                <!-- <a href="/finance/inflation-calculator.html" class="link-card">
         <span class="link-icon">📉</span>Inflation Calculator
       </a> -->
 
-      <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/finance-emi-calculator.html" class="link-card">
-        <span class="link-icon">💳</span>EMI Calculator
-      </a>
+                <a href="https://smartcalcworld.com/finance/finance-emi-calculator.html"
+                    class="link-card">
+                    <span class="link-icon">💳</span>EMI Calculator
+                </a>
 
-      <a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/investment/cagr-calculator.html" class="link-card">
-        <span class="link-icon">📈</span>CAGR Calculator
-      </a>
+                <a href="https://smartcalcworld.com/finance/investment/cagr-calculator.html"
+                    class="link-card">
+                    <span class="link-icon">📈</span>CAGR Calculator
+                </a>
 
-    </div>
-  </div>
+            </div>
+        </div>
 
-  <!-- FAQ -->
-  <div class="content-section" id="faq">
-    <h2>❓ Frequently Asked Questions</h2>
+        <!-- FAQ -->
+        <div class="content-section" id="faq">
+            <h2>❓ Frequently Asked Questions</h2>
 
-    <div class="faq-item">
-      <div class="faq-q">What is the difference between APR and APY? 🤔</div>
-      <div class="faq-a">APR (Annual Percentage Rate) is the nominal rate — the number on the label, without compounding. APY (Annual Percentage Yield) is the effective rate — what you actually earn after compounding is applied. APY is always ≥ APR. The more frequently interest compounds, the bigger the gap. Always compare APY for savings and APR for loans.</div>
-    </div>
+            <div class="faq-item">
+                <div class="faq-q">What is the difference between APR and APY? 🤔</div>
+                <div class="faq-a">APR (Annual Percentage Rate) is the nominal rate — the number on the label, without
+                    compounding. APY (Annual Percentage Yield) is the effective rate — what you actually earn after
+                    compounding is applied. APY is always ≥ APR. The more frequently interest compounds, the bigger the
+                    gap. Always compare APY for savings and APR for loans.</div>
+            </div>
 
-    <div class="faq-item">
-      <div class="faq-q">Why is APY always higher than or equal to APR? 📈</div>
-      <div class="faq-a">Because compounding means you earn interest on previously earned interest. Each compounding period adds a small amount to your principal, and the next period's interest is calculated on this larger base. This snowball effect means the effective (APY) return always exceeds the nominal (APR) rate — except when compounded once per year, where APY = APR.</div>
-    </div>
+            <div class="faq-item">
+                <div class="faq-q">Why is APY always higher than or equal to APR? 📈</div>
+                <div class="faq-a">Because compounding means you earn interest on previously earned interest. Each
+                    compounding period adds a small amount to your principal, and the next period's interest is
+                    calculated on this larger base. This snowball effect means the effective (APY) return always exceeds
+                    the nominal (APR) rate — except when compounded once per year, where APY = APR.</div>
+            </div>
 
-    <div class="faq-item">
-      <div class="faq-q">How does daily compounding compare to monthly? ☀️</div>
-      <div class="faq-a">Daily compounding (n=365) gives slightly more than monthly (n=12), but the difference is very small in practice. On 10,000 at 6% for 10 years: monthly gives ~18,194, daily gives ~18,220. The 26 difference is negligible. Focus on finding the highest APY rate, not obsessing over compounding frequency.</div>
-    </div>
+            <div class="faq-item">
+                <div class="faq-q">How does daily compounding compare to monthly? ☀️</div>
+                <div class="faq-a">Daily compounding (n=365) gives slightly more than monthly (n=12), but the difference
+                    is very small in practice. On 10,000 at 6% for 10 years: monthly gives ~18,194, daily gives ~18,220.
+                    The 26 difference is negligible. Focus on finding the highest APY rate, not obsessing over
+                    compounding frequency.</div>
+            </div>
 
-    <div class="faq-item">
-      <div class="faq-q">What is the Effective Annual Rate (EAR)? 📐</div>
-      <div class="faq-a">EAR is another name for APY. It is the true annual interest rate accounting for intra-year compounding. EAR = (1 + r/n)^n − 1. It is the most transparent metric for comparing financial products with different compounding schedules. Regulators in many countries require banks to disclose EAR/APY so consumers can compare fairly.</div>
-    </div>
+            <div class="faq-item">
+                <div class="faq-q">What is the Effective Annual Rate (EAR)? 📐</div>
+                <div class="faq-a">EAR is another name for APY. It is the true annual interest rate accounting for
+                    intra-year compounding. EAR = (1 + r/n)^n − 1. It is the most transparent metric for comparing
+                    financial products with different compounding schedules. Regulators in many countries require banks
+                    to disclose EAR/APY so consumers can compare fairly.</div>
+            </div>
 
-    <div class="faq-item">
-      <div class="faq-q">How does inflation affect my real return? 📉</div>
-      <div class="faq-a">Real Return ≈ APY − Inflation Rate. If your savings account pays 5% APY and inflation runs at 3%, your real purchasing-power gain is approximately 2%. At 5% inflation, you are actually losing real wealth even at 5% APY. Always look at real (inflation-adjusted) return when evaluating long-term savings decisions.</div>
-    </div>
+            <div class="faq-item">
+                <div class="faq-q">How does inflation affect my real return? 📉</div>
+                <div class="faq-a">Real Return ≈ APY − Inflation Rate. If your savings account pays 5% APY and inflation
+                    runs at 3%, your real purchasing-power gain is approximately 2%. At 5% inflation, you are actually
+                    losing real wealth even at 5% APY. Always look at real (inflation-adjusted) return when evaluating
+                    long-term savings decisions.</div>
+            </div>
 
-    <div class="faq-item">
-      <div class="faq-q">What is the difference between nominal and effective interest rate? 🔢</div>
-      <div class="faq-a">Nominal rate = the stated/advertised rate (APR), which ignores compounding. Effective rate = the true annual yield after compounding (APY/EAR). A 6% nominal rate compounded monthly gives an effective rate of 6.17%. Use the effective rate for any serious financial comparison.</div>
-    </div>
+            <div class="faq-item">
+                <div class="faq-q">What is the difference between nominal and effective interest rate? 🔢</div>
+                <div class="faq-a">Nominal rate = the stated/advertised rate (APR), which ignores compounding. Effective
+                    rate = the true annual yield after compounding (APY/EAR). A 6% nominal rate compounded monthly gives
+                    an effective rate of 6.17%. Use the effective rate for any serious financial comparison.</div>
+            </div>
 
-    <div class="faq-item">
-      <div class="faq-q">How do I compare savings accounts from different banks? 🏦</div>
-      <div class="faq-a">Always compare APY, not APR. APY standardises rates regardless of compounding frequency. Use our APR → APY converter to convert any nominal rate to APY. Then compare APYs directly. Also consider fees, minimum balance requirements, and deposit insurance. A slightly lower APY with zero fees may beat a higher APY with monthly maintenance charges.</div>
-    </div>
+            <div class="faq-item">
+                <div class="faq-q">How do I compare savings accounts from different banks? 🏦</div>
+                <div class="faq-a">Always compare APY, not APR. APY standardises rates regardless of compounding
+                    frequency. Use our APR → APY converter to convert any nominal rate to APY. Then compare APYs
+                    directly. Also consider fees, minimum balance requirements, and deposit insurance. A slightly lower
+                    APY with zero fees may beat a higher APY with monthly maintenance charges.</div>
+            </div>
 
-    <div class="faq-item">
-      <div class="faq-q">Is APY used in crypto staking? 🪙</div>
-      <div class="faq-a">Yes, crypto platforms advertise APY for staking. However, crypto APY is highly volatile and often assumes rewards are auto-compounded at current rates. A 200% APY can drop to 5% within weeks as more stakers join the pool. Additionally, token price drops can wipe out nominal gains. Always model crypto APY conservatively and never invest more than you can afford to lose.</div>
-    </div>
+            <div class="faq-item">
+                <div class="faq-q">Is APY used in crypto staking? 🪙</div>
+                <div class="faq-a">Yes, crypto platforms advertise APY for staking. However, crypto APY is highly
+                    volatile and often assumes rewards are auto-compounded at current rates. A 200% APY can drop to 5%
+                    within weeks as more stakers join the pool. Additionally, token price drops can wipe out nominal
+                    gains. Always model crypto APY conservatively and never invest more than you can afford to lose.
+                </div>
+            </div>
 
-    <div class="faq-item">
-      <div class="faq-q">What compounding frequency is best for savers? 🗓️</div>
-      <div class="faq-a">Daily compounding is theoretically best, but the practical difference vs monthly is tiny. Far more important is maximising the actual APY rate offered. A 4.5% APY with monthly compounding beats a 4.0% APY with daily compounding. Also check for fees, lock-up periods, and FDIC/deposit insurance coverage.</div>
-    </div>
-  </div>
+            <div class="faq-item">
+                <div class="faq-q">What compounding frequency is best for savers? 🗓️</div>
+                <div class="faq-a">Daily compounding is theoretically best, but the practical difference vs monthly is
+                    tiny. Far more important is maximising the actual APY rate offered. A 4.5% APY with monthly
+                    compounding beats a 4.0% APY with daily compounding. Also check for fees, lock-up periods, and
+                    FDIC/deposit insurance coverage.</div>
+            </div>
+        </div>
 
-  <!-- DISCLAIMER -->
-  <div class="disclaimer1">
-    <strong>⚠️ Disclaimer:</strong> This calculator is for educational and informational purposes only. Results are mathematical estimates based on inputs provided. Actual investment returns depend on many factors including market conditions, fees, taxes, and specific product terms. This is not financial advice. Please consult a qualified financial advisor before making investment decisions.
-  </div>
+        <!-- DISCLAIMER -->
+        <div class="disclaimer1">
+            <strong>⚠️ Disclaimer:</strong> This calculator is for educational and informational purposes only. Results
+            are mathematical estimates based on inputs provided. Actual investment returns depend on many factors
+            including market conditions, fees, taxes, and specific product terms. This is not financial advice. Please
+            consult a qualified financial advisor before making investment decisions.
+        </div>
 
-</main>
+    </main>
 
     <!-- FOOTER -->
     <footer>
@@ -1148,42 +1729,59 @@
             <div class="footer-section">
                 <h3>Quick Links</h3>
                 <ul>
-                    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/index.html">Home</a></li>
-               	    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/about.html">About</a></li>
-               	    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/contact.html">Contact</a></li>
-               	    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/privacy-policy.html">Privacy Policy</a></li>
+                    <li><a href="https://smartcalcworld.com/index.html">Home</a></li>
+                    <li><a href="https://smartcalcworld.com/about.html">About</a></li>
+                    <li><a href="https://smartcalcworld.com/contact.html">Contact</a></li>
+                    <li><a href="https://smartcalcworld.com/privacy-policy.html">Privacy
+                            Policy</a></li>
 
                 </ul>
             </div>
 
-			<div class="footer-section">
+            <div class="footer-section">
                 <h3>Student Tools</h3>
                 <ul>
-                    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/percentage-calculator.html">Percentage Calculator</a></li>
-                    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/cgpa-calculator.html">CGPA Calculator</a></li>
-                    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/simple-compound-interest-calculator.html">Simple & Compound Interest Calculator</a></li>
-                
+                    <li><a href="https://smartcalcworld.com/percentage-calculator.html">Percentage
+                            Calculator</a></li>
+                    <li><a href="https://smartcalcworld.com/cgpa-calculator.html">CGPA
+                            Calculator</a></li>
+                    <li><a
+                            href="https://smartcalcworld.com/simple-compound-interest-calculator.html">Simple
+                            & Compound Interest Calculator</a></li>
+
                     <li><span class="coming-soon">MATRIX Calculator (Coming Soon)</span></li>
                     <li><span class="coming-soon">STATISTIC Calculator (Coming Soon)</span></li>
                 </ul>
             </div>
 
-			
+
             <div class="footer-section">
                 <h3>Finance Tools</h3>
                 <ul>
-		                <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/interest/interest-hub.html">Interest Calculators</a></li>
-		                <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/investment/investment-hub.html">Investment Calculators</a></li>
-                    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/loan/loan-hub.html">Loan Calculators</a></li>
-                    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/tax/tax-hub.html">Tax Calculators</a></li>
-                    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/saving-retirement/saving-retirement-hub.html">Savings Calculators</a></li>
-                    <li><a href="https://advaitpatel69-beep.github.io/Advait.github.io/finance/saving-retirement/saving-retirement-hub.html">Retirement Calculators</a></li>
+                    <li><a
+                            href="https://smartcalcworld.com/finance/interest/interest-hub.html">Interest
+                            Calculators</a></li>
+                    <li><a
+                            href="https://smartcalcworld.com/finance/investment/investment-hub.html">Investment
+                            Calculators</a></li>
+                    <li><a href="https://smartcalcworld.com/finance/loan/loan-hub.html">Loan
+                            Calculators</a></li>
+                    <li><a href="https://smartcalcworld.com/finance/tax/tax-hub.html">Tax
+                            Calculators</a></li>
+                    <li><a
+                            href="https://smartcalcworld.com/finance/saving-retirement/saving-retirement-hub.html">Savings
+                            Calculators</a></li>
+                    <li><a
+                            href="https://smartcalcworld.com/finance/saving-retirement/saving-retirement-hub.html">Retirement
+                            Calculators</a></li>
                 </ul>
             </div>
             <div class="footer-section">
                 <div class="disclaimer">
-                    <strong>Disclaimer:</strong> The results provided by this calculator are estimates for informational purposes only. 
-                    Actual loan terms may vary. Please consult with your financial institution for accurate loan details.
+                    <strong>Disclaimer:</strong> The results provided by this calculator are estimates for informational
+                    purposes only.
+                    Actual loan terms may vary. Please consult with your financial institution for accurate loan
+                    details.
                 </div>
             </div>
         </div>
@@ -1192,383 +1790,384 @@
         </div>
     </footer>
 
-<!-- ══════════════════════════════════════════
+    <!-- ══════════════════════════════════════════
      JAVASCRIPT
 ══════════════════════════════════════════ -->
-<script>
-/* ── UTILS ── */
-const fmt  = (n, dec=2) => Number(n).toLocaleString(undefined,{minimumFractionDigits:dec,maximumFractionDigits:dec});
-const pct  = (n, dec=4) => fmt(n*100, dec) + '%';
-const fmtV = (n, cur) => {
-  const syms = {USD:'$',EUR:'€',GBP:'£',INR:'₹',JPY:'¥',AUD:'A$',CAD:'C$',SGD:'S$',AED:'AED'};
-  const sym = cur && syms[cur] ? syms[cur]+' ' : '';
-  return sym + fmt(n, cur==='JPY'?0:2);
-};
-const freqName = n => ({365:'Daily',12:'Monthly',4:'Quarterly',2:'Semi-Annual',1:'Annual',0:'Continuous'}[n]||n+'/yr');
-const $ = id => document.getElementById(id);
+    <script>
+        /* ── UTILS ── */
+        const fmt = (n, dec = 2) => Number(n).toLocaleString(undefined, { minimumFractionDigits: dec, maximumFractionDigits: dec });
+        const pct = (n, dec = 4) => fmt(n * 100, dec) + '%';
+        const fmtV = (n, cur) => {
+            const syms = { USD: '$', EUR: '€', GBP: '£', INR: '₹', JPY: '¥', AUD: 'A$', CAD: 'C$', SGD: 'S$', AED: 'AED' };
+            const sym = cur && syms[cur] ? syms[cur] + ' ' : '';
+            return sym + fmt(n, cur === 'JPY' ? 0 : 2);
+        };
+        const freqName = n => ({ 365: 'Daily', 12: 'Monthly', 4: 'Quarterly', 2: 'Semi-Annual', 1: 'Annual', 0: 'Continuous' }[n] || n + '/yr');
+        const $ = id => document.getElementById(id);
 
-/* ── CHARTS storage ── */
-let fvLineChart=null, fvPieChart=null, cmpLineChart=null;
-function destroyChart(c){ if(c){ c.destroy(); } return null; }
+        /* ── CHARTS storage ── */
+        let fvLineChart = null, fvPieChart = null, cmpLineChart = null;
+        function destroyChart(c) { if (c) { c.destroy(); } return null; }
 
-/* ── HAMBURGER ── */
-$('hamburgerBtn').addEventListener('click',()=>{
-  const nav = $('mobileNav');
-  const isOpen = nav.classList.toggle('open');
-  $('hamburgerBtn').setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-});
+        /* ── HAMBURGER ── */
+        $('hamburgerBtn').addEventListener('click', () => {
+            const nav = $('mobileNav');
+            const isOpen = nav.classList.toggle('open');
+            $('hamburgerBtn').setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
 
-/* ── MODULE SWITCH ── */
-const MODULES = ['apr2apy','apy2apr','ear','fv','compare'];
+        /* ── MODULE SWITCH ── */
+        const MODULES = ['apr2apy', 'apy2apr', 'ear', 'fv', 'compare'];
 
-function switchModule(name){
-  document.querySelectorAll('.module').forEach(m=>m.classList.remove('active'));
+        function switchModule(name) {
+            document.querySelectorAll('.module').forEach(m => m.classList.remove('active'));
 
-  const moduleMap = {
-    'apr2apy': $('mod-apr2apy'),
-    'apy2apr': $('mod-apy2apr'),
-    'ear':     $('mod-ear'),
-    'fv':      $('mod-fv'),
-    'compare': $('mod-compare')
-  };
+            const moduleMap = {
+                'apr2apy': $('mod-apr2apy'),
+                'apy2apr': $('mod-apy2apr'),
+                'ear': $('mod-ear'),
+                'fv': $('mod-fv'),
+                'compare': $('mod-compare')
+            };
 
-  const moduleEl = moduleMap[name];
-  if(moduleEl){
-    moduleEl.classList.add('active');
-    moduleEl.scrollIntoView({behavior:'smooth', block:'start'});
-  }
+            const moduleEl = moduleMap[name];
+            if (moduleEl) {
+                moduleEl.classList.add('active');
+                moduleEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
 
-  document.querySelectorAll('.qnav-btn').forEach((btn,i)=>{
-    const isActive = MODULES[i]===name;
-    btn.classList.toggle('active', isActive);
-    btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
-  });
-}
+            document.querySelectorAll('.qnav-btn').forEach((btn, i) => {
+                const isActive = MODULES[i] === name;
+                btn.classList.toggle('active', isActive);
+                btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+            });
+        }
 
-/* ── SLIDER SYNC helper ── */
-function syncSlider(inputId, sliderId, lblId, fmt_fn){
-  const inp = $(inputId), sl = $(sliderId), lbl = lblId ? $(lblId) : null;
-  if(!inp||!sl) return;
-  sl.addEventListener('input',()=>{ inp.value=sl.value; if(lbl) lbl.textContent=fmt_fn(sl.value); });
-  inp.addEventListener('input',()=>{ sl.value=inp.value; if(lbl) lbl.textContent=fmt_fn(inp.value); });
-}
+        /* ── SLIDER SYNC helper ── */
+        function syncSlider(inputId, sliderId, lblId, fmt_fn) {
+            const inp = $(inputId), sl = $(sliderId), lbl = lblId ? $(lblId) : null;
+            if (!inp || !sl) return;
+            sl.addEventListener('input', () => { inp.value = sl.value; if (lbl) lbl.textContent = fmt_fn(sl.value); });
+            inp.addEventListener('input', () => { sl.value = inp.value; if (lbl) lbl.textContent = fmt_fn(inp.value); });
+        }
 
-syncSlider('a2a-apr','a2a-apr-sl','a2a-apr-sl-lbl', v=>parseFloat(v).toFixed(2)+'%');
-syncSlider('y2r-apy','y2r-apy-sl','y2r-apy-sl-lbl', v=>parseFloat(v).toFixed(2)+'%');
-syncSlider('ear-rate','ear-rate-sl','ear-rate-sl-lbl', v=>parseFloat(v).toFixed(2)+'%');
-syncSlider('fv-p','fv-p-sl','fv-p-sl-lbl', v=>parseFloat(v).toLocaleString());
-syncSlider('fv-r','fv-r-sl','fv-r-sl-lbl', v=>parseFloat(v).toFixed(2)+'%');
-syncSlider('fv-t','fv-t-sl','fv-t-sl-lbl', v=>v+' yrs');
-syncSlider('cmp-p','cmp-p-sl','cmp-p-sl-lbl', v=>parseFloat(v).toLocaleString());
-syncSlider('cmp-t','cmp-t-sl','cmp-t-sl-lbl', v=>v+' yrs');
-syncSlider('fv-inf','fv-inf-sl','fv-inf-sl-lbl', v=>parseFloat(v).toFixed(1)+'%');
+        syncSlider('a2a-apr', 'a2a-apr-sl', 'a2a-apr-sl-lbl', v => parseFloat(v).toFixed(2) + '%');
+        syncSlider('y2r-apy', 'y2r-apy-sl', 'y2r-apy-sl-lbl', v => parseFloat(v).toFixed(2) + '%');
+        syncSlider('ear-rate', 'ear-rate-sl', 'ear-rate-sl-lbl', v => parseFloat(v).toFixed(2) + '%');
+        syncSlider('fv-p', 'fv-p-sl', 'fv-p-sl-lbl', v => parseFloat(v).toLocaleString());
+        syncSlider('fv-r', 'fv-r-sl', 'fv-r-sl-lbl', v => parseFloat(v).toFixed(2) + '%');
+        syncSlider('fv-t', 'fv-t-sl', 'fv-t-sl-lbl', v => v + ' yrs');
+        syncSlider('cmp-p', 'cmp-p-sl', 'cmp-p-sl-lbl', v => parseFloat(v).toLocaleString());
+        syncSlider('cmp-t', 'cmp-t-sl', 'cmp-t-sl-lbl', v => v + ' yrs');
+        syncSlider('fv-inf', 'fv-inf-sl', 'fv-inf-sl-lbl', v => parseFloat(v).toFixed(1) + '%');
 
-/* ── VALIDATE ── */
-function validate(val, min, max, errId){
-  const el = $(errId);
-  if(isNaN(val)||val<min||val>max){ if(el) el.style.display='block'; return false; }
-  if(el) el.style.display='none';
-  return true;
-}
+        /* ── VALIDATE ── */
+        function validate(val, min, max, errId) {
+            const el = $(errId);
+            if (isNaN(val) || val < min || val > max) { if (el) el.style.display = 'block'; return false; }
+            if (el) el.style.display = 'none';
+            return true;
+        }
 
-/* ── MODULE 1: APR → APY ── */
-function calcApr2Apy(){
-  const apr = parseFloat($('a2a-apr').value);
-  const n   = parseInt($('a2a-freq').value);
-  if(!validate(apr,0,500,'a2a-apr-err')) return;
-  const r   = apr/100;
-  const apy = n===0 ? Math.exp(r)-1 : Math.pow(1+r/n,n)-1;
-  const diff= apy-r;
-  $('a2a-apy').textContent  = pct(apy);
-  $('a2a-aprv').textContent = pct(r);
-  $('a2a-diff').textContent = '+'+pct(diff);
-  $('a2a-results').style.display='grid';
-  $('a2a-formula').style.display='block';
-  if(n===0){
-    $('a2a-formula').innerHTML = `<strong>APY = e<sup>r</sup> − 1 (Continuous)</strong><br>
-APY = e<sup>${r.toFixed(4)}</sup> − 1 = ${fmt(apy*100,4)}%`;
-  } else {
-    $('a2a-formula').innerHTML = `<strong>APY = (1 + r/n)<sup>n</sup> − 1</strong><br>
+        /* ── MODULE 1: APR → APY ── */
+        function calcApr2Apy() {
+            const apr = parseFloat($('a2a-apr').value);
+            const n = parseInt($('a2a-freq').value);
+            if (!validate(apr, 0, 500, 'a2a-apr-err')) return;
+            const r = apr / 100;
+            const apy = n === 0 ? Math.exp(r) - 1 : Math.pow(1 + r / n, n) - 1;
+            const diff = apy - r;
+            $('a2a-apy').textContent = pct(apy);
+            $('a2a-aprv').textContent = pct(r);
+            $('a2a-diff').textContent = '+' + pct(diff);
+            $('a2a-results').style.display = 'grid';
+            $('a2a-formula').style.display = 'block';
+            if (n === 0) {
+                $('a2a-formula').innerHTML = `<strong>APY = e<sup>r</sup> − 1 (Continuous)</strong><br>
+APY = e<sup>${r.toFixed(4)}</sup> − 1 = ${fmt(apy * 100, 4)}%`;
+            } else {
+                $('a2a-formula').innerHTML = `<strong>APY = (1 + r/n)<sup>n</sup> − 1</strong><br>
 APY = (1 + ${r.toFixed(4)}/${n})<sup>${n}</sup> − 1<br>
-APY = (1 + ${(r/n).toFixed(6)})<sup>${n}</sup> − 1<br>
-APY = ${fmt(apy*100,4)}% &nbsp;|&nbsp; Compounding: ${freqName(n)}`;
-  }
-}
+APY = (1 + ${(r / n).toFixed(6)})<sup>${n}</sup> − 1<br>
+APY = ${fmt(apy * 100, 4)}% &nbsp;|&nbsp; Compounding: ${freqName(n)}`;
+            }
+        }
 
-/* ── MODULE 2: APY → APR ── */
-function calcApy2Apr(){
-  const apy = parseFloat($('y2r-apy').value);
-  const n   = parseInt($('y2r-freq').value);
-  if(!validate(apy,0,1000,'y2r-apy-err')) return;
-  const apyD = apy/100;
-  const apr  = n===0 ? Math.log(1+apyD) : n*(Math.pow(1+apyD,1/n)-1);
-  const diff = apyD-apr;
-  $('y2r-apr').textContent  = pct(apr);
-  $('y2r-apyv').textContent = pct(apyD);
-  $('y2r-diff').textContent = '+'+pct(diff);
-  $('y2r-results').style.display='grid';
-  $('y2r-formula').style.display='block';
-  if(n===0){
-    $('y2r-formula').innerHTML = `<strong>APR = ln(1 + APY) (Continuous)</strong><br>
+        /* ── MODULE 2: APY → APR ── */
+        function calcApy2Apr() {
+            const apy = parseFloat($('y2r-apy').value);
+            const n = parseInt($('y2r-freq').value);
+            if (!validate(apy, 0, 1000, 'y2r-apy-err')) return;
+            const apyD = apy / 100;
+            const apr = n === 0 ? Math.log(1 + apyD) : n * (Math.pow(1 + apyD, 1 / n) - 1);
+            const diff = apyD - apr;
+            $('y2r-apr').textContent = pct(apr);
+            $('y2r-apyv').textContent = pct(apyD);
+            $('y2r-diff').textContent = '+' + pct(diff);
+            $('y2r-results').style.display = 'grid';
+            $('y2r-formula').style.display = 'block';
+            if (n === 0) {
+                $('y2r-formula').innerHTML = `<strong>APR = ln(1 + APY) (Continuous)</strong><br>
 APR = ln(1 + ${apyD.toFixed(4)}) = ${pct(apr)}`;
-  } else {
-    $('y2r-formula').innerHTML = `<strong>APR = n × ((1 + APY)<sup>1/n</sup> − 1)</strong><br>
+            } else {
+                $('y2r-formula').innerHTML = `<strong>APR = n × ((1 + APY)<sup>1/n</sup> − 1)</strong><br>
 APR = ${n} × ((1 + ${apyD.toFixed(4)})<sup>1/${n}</sup> − 1)<br>
-APR = ${n} × (${(1+apyD).toFixed(6)}<sup>${(1/n).toFixed(6)}</sup> − 1)<br>
+APR = ${n} × (${(1 + apyD).toFixed(6)}<sup>${(1 / n).toFixed(6)}</sup> − 1)<br>
 APR = ${pct(apr)} &nbsp;|&nbsp; Compounding: ${freqName(n)}`;
-  }
-}
+            }
+        }
 
-/* ── MODULE 3: EAR ── */
-function calcEAR(){
-  const rate = parseFloat($('ear-rate').value);
-  const n    = parseInt($('ear-freq').value);
-  if(!validate(rate,0,500,'ear-rate-err')) return;
-  const r   = rate/100;
-  const ear = n===0 ? Math.exp(r)-1 : Math.pow(1+r/n,n)-1;
-  const uplift = ear-r;
-  $('ear-val').textContent    = pct(ear);
-  $('ear-nom').textContent    = pct(r);
-  $('ear-uplift').textContent = '+'+pct(uplift);
-  $('ear-results').style.display='grid';
-  $('ear-formula').style.display='block';
-  if(n===0){
-    $('ear-formula').innerHTML = `<strong>EAR = e<sup>r</sup> − 1 (Continuous Compounding)</strong><br>
+        /* ── MODULE 3: EAR ── */
+        function calcEAR() {
+            const rate = parseFloat($('ear-rate').value);
+            const n = parseInt($('ear-freq').value);
+            if (!validate(rate, 0, 500, 'ear-rate-err')) return;
+            const r = rate / 100;
+            const ear = n === 0 ? Math.exp(r) - 1 : Math.pow(1 + r / n, n) - 1;
+            const uplift = ear - r;
+            $('ear-val').textContent = pct(ear);
+            $('ear-nom').textContent = pct(r);
+            $('ear-uplift').textContent = '+' + pct(uplift);
+            $('ear-results').style.display = 'grid';
+            $('ear-formula').style.display = 'block';
+            if (n === 0) {
+                $('ear-formula').innerHTML = `<strong>EAR = e<sup>r</sup> − 1 (Continuous Compounding)</strong><br>
 EAR = e<sup>${r.toFixed(4)}</sup> − 1 = ${pct(ear)}`;
-  } else {
-    $('ear-formula').innerHTML = `<strong>EAR = (1 + r/n)<sup>n</sup> − 1</strong><br>
+            } else {
+                $('ear-formula').innerHTML = `<strong>EAR = (1 + r/n)<sup>n</sup> − 1</strong><br>
 EAR = (1 + ${r.toFixed(4)}/${n})<sup>${n}</sup> − 1 = ${pct(ear)}<br>
 Compounding: ${freqName(n)} | Nominal: ${pct(r)} | Effective: ${pct(ear)}`;
-  }
+            }
 
-  // freq comparison table
-  const freqs=[{n:1,name:'Annually'},{n:2,name:'Semi-Annual'},{n:4,name:'Quarterly'},{n:12,name:'Monthly'},{n:365,name:'Daily'},{n:0,name:'Continuous (e^r)'}];
-  const tbody = $('ear-freq-body');
-  tbody.innerHTML = freqs.map(f=>{
-    const e=f.n===0 ? (Math.exp(r)-1)*100 : (Math.pow(1+r/f.n,f.n)-1)*100;
-    return `<tr><td>${f.name}</td><td>${f.n}</td><td><strong>${e.toFixed(4)}%</strong></td></tr>`;
-  }).join('');
-  $('ear-freq-table').style.display='block';
-}
+            // freq comparison table
+            const freqs = [{ n: 1, name: 'Annually' }, { n: 2, name: 'Semi-Annual' }, { n: 4, name: 'Quarterly' }, { n: 12, name: 'Monthly' }, { n: 365, name: 'Daily' }, { n: 0, name: 'Continuous (e^r)' }];
+            const tbody = $('ear-freq-body');
+            tbody.innerHTML = freqs.map(f => {
+                const e = f.n === 0 ? (Math.exp(r) - 1) * 100 : (Math.pow(1 + r / f.n, f.n) - 1) * 100;
+                return `<tr><td>${f.name}</td><td>${f.n}</td><td><strong>${e.toFixed(4)}%</strong></td></tr>`;
+            }).join('');
+            $('ear-freq-table').style.display = 'block';
+        }
 
-/* ── MODULE 4: FUTURE VALUE ── */
-function calcFV(){
-  const P  = parseFloat($('fv-p').value);
-  const r  = parseFloat($('fv-r').value)/100;
-  const t  = parseInt($('fv-t').value);
-  const n  = parseInt($('fv-freq').value);
-  const cur = $('fv-cur').value;
-  if(!validate(P,0,1e9,'fv-p-err')) return;
-  if(!validate(r*100,0,500,'fv-r-err')) return;
-  if(!validate(t,0,40,'fv-t-err')) return;
+        /* ── MODULE 4: FUTURE VALUE ── */
+        function calcFV() {
+            const P = parseFloat($('fv-p').value);
+            const r = parseFloat($('fv-r').value) / 100;
+            const t = parseInt($('fv-t').value);
+            const n = parseInt($('fv-freq').value);
+            const cur = $('fv-cur').value;
+            if (!validate(P, 0, 1e9, 'fv-p-err')) return;
+            if (!validate(r * 100, 0, 500, 'fv-r-err')) return;
+            if (!validate(t, 0, 40, 'fv-t-err')) return;
 
-  const FV    = r===0 ? P : n===0 ? P*Math.exp(r*t) : P*Math.pow(1+r/n,n*t);
-  const inter = FV - P;
-  const apy   = r===0 ? 0 : n===0 ? Math.exp(r)-1 : Math.pow(1+r/n,n)-1;
-  const inf   = (parseFloat($('fv-inf').value)||0)/100;
-  const realR = inf>0 ? (1+apy)/(1+inf)-1 : null;
+            const FV = r === 0 ? P : n === 0 ? P * Math.exp(r * t) : P * Math.pow(1 + r / n, n * t);
+            const inter = FV - P;
+            const apy = r === 0 ? 0 : n === 0 ? Math.exp(r) - 1 : Math.pow(1 + r / n, n) - 1;
+            const inf = (parseFloat($('fv-inf').value) || 0) / 100;
+            const realR = inf > 0 ? (1 + apy) / (1 + inf) - 1 : null;
 
-  $('fv-val').textContent      = fmtV(FV, cur);
-  $('fv-principal').textContent= fmtV(P, cur);
-  $('fv-interest').textContent = fmtV(inter, cur);
-  $('fv-apy').textContent      = pct(apy);
-  const rrCard = $('fv-rr-card');
-  if(realR!==null && rrCard){
-    rrCard.style.display='block';
-    $('fv-rr').textContent = pct(realR) + (realR<0?' ⚠️ Losing value!':' ✅');
-  } else if(rrCard){ rrCard.style.display='none'; }
+            $('fv-val').textContent = fmtV(FV, cur);
+            $('fv-principal').textContent = fmtV(P, cur);
+            $('fv-interest').textContent = fmtV(inter, cur);
+            $('fv-apy').textContent = pct(apy);
+            const rrCard = $('fv-rr-card');
+            if (realR !== null && rrCard) {
+                rrCard.style.display = 'block';
+                $('fv-rr').textContent = pct(realR) + (realR < 0 ? ' ⚠️ Losing value!' : ' ✅');
+            } else if (rrCard) { rrCard.style.display = 'none'; }
 
-  let fvFormula;
-  if(r===0) fvFormula = `<strong>FV = P (zero-interest)</strong><br>FV = ${fmtV(P,cur)}`;
-  else if(n===0) fvFormula = `<strong>FV = P × e<sup>r×t</sup> (Continuous Compounding)</strong><br>
-FV = ${fmtV(P,cur)} × e<sup>${r.toFixed(4)}×${t}</sup><br>
-FV = ${fmtV(FV,cur)} &nbsp;|&nbsp; Interest = ${fmtV(inter,cur)} &nbsp;|&nbsp; APY = ${pct(apy)}${realR!==null?' &nbsp;|&nbsp; Real Return = '+pct(realR):''}`;
-  else fvFormula = `<strong>FV = P × (1 + r/n)<sup>n×t</sup></strong><br>
-FV = ${fmtV(P,cur)} × (1 + ${r.toFixed(4)}/${n})<sup>${n}×${t}</sup><br>
-FV = ${fmtV(P,cur)} × (${(1+r/n).toFixed(6)})<sup>${n*t}</sup><br>
-FV = ${fmtV(FV,cur)} &nbsp;|&nbsp; Interest = ${fmtV(inter,cur)} &nbsp;|&nbsp; APY = ${pct(apy)}${realR!==null?' &nbsp;|&nbsp; Real Return = '+pct(realR):''}`;
-  $('fv-formula').innerHTML = fvFormula;
+            let fvFormula;
+            if (r === 0) fvFormula = `<strong>FV = P (zero-interest)</strong><br>FV = ${fmtV(P, cur)}`;
+            else if (n === 0) fvFormula = `<strong>FV = P × e<sup>r×t</sup> (Continuous Compounding)</strong><br>
+FV = ${fmtV(P, cur)} × e<sup>${r.toFixed(4)}×${t}</sup><br>
+FV = ${fmtV(FV, cur)} &nbsp;|&nbsp; Interest = ${fmtV(inter, cur)} &nbsp;|&nbsp; APY = ${pct(apy)}${realR !== null ? ' &nbsp;|&nbsp; Real Return = ' + pct(realR) : ''}`;
+            else fvFormula = `<strong>FV = P × (1 + r/n)<sup>n×t</sup></strong><br>
+FV = ${fmtV(P, cur)} × (1 + ${r.toFixed(4)}/${n})<sup>${n}×${t}</sup><br>
+FV = ${fmtV(P, cur)} × (${(1 + r / n).toFixed(6)})<sup>${n * t}</sup><br>
+FV = ${fmtV(FV, cur)} &nbsp;|&nbsp; Interest = ${fmtV(inter, cur)} &nbsp;|&nbsp; APY = ${pct(apy)}${realR !== null ? ' &nbsp;|&nbsp; Real Return = ' + pct(realR) : ''}`;
+            $('fv-formula').innerHTML = fvFormula;
 
-  // Year-by-year table
-  const tbody=$('fv-year-body');
-  tbody.innerHTML='';
-  const yearData=[], yearLabels=[];
-  for(let yr=0;yr<=t;yr++){
-    const v = r===0 ? P : n===0 ? P*Math.exp(r*yr) : P*Math.pow(1+r/n,n*yr);
-    yearLabels.push('Yr '+yr);
-    yearData.push(v);
-    if(yr>0){
-      const intEarned=v-P;
-      const growth=((v-P)/P)*100;
-      tbody.innerHTML+=`<tr><td>${yr}</td><td>${fmtV(v,cur)}</td><td>${fmtV(intEarned,cur)}</td><td>${growth.toFixed(2)}%</td></tr>`;
-    }
-  }
+            // Year-by-year table
+            const tbody = $('fv-year-body');
+            tbody.innerHTML = '';
+            const yearData = [], yearLabels = [];
+            for (let yr = 0; yr <= t; yr++) {
+                const v = r === 0 ? P : n === 0 ? P * Math.exp(r * yr) : P * Math.pow(1 + r / n, n * yr);
+                yearLabels.push('Yr ' + yr);
+                yearData.push(v);
+                if (yr > 0) {
+                    const intEarned = v - P;
+                    const growth = ((v - P) / P) * 100;
+                    tbody.innerHTML += `<tr><td>${yr}</td><td>${fmtV(v, cur)}</td><td>${fmtV(intEarned, cur)}</td><td>${growth.toFixed(2)}%</td></tr>`;
+                }
+            }
 
-  // FIX 10: loading cursor while rendering
-  document.body.style.cursor = 'wait';
-  setTimeout(()=>{
-  // FIX 5 + Charts
-  fvLineChart = destroyChart(fvLineChart);
-  fvPieChart  = destroyChart(fvPieChart);
+            // FIX 10: loading cursor while rendering
+            document.body.style.cursor = 'wait';
+            setTimeout(() => {
+                // FIX 5 + Charts
+                fvLineChart = destroyChart(fvLineChart);
+                fvPieChart = destroyChart(fvPieChart);
 
-  if(typeof Chart !== 'undefined'){
-  const lineCtx = $('fv-line-chart').getContext('2d');
-  fvLineChart = new Chart(lineCtx,{
-    type:'line',
-    data:{
-      labels:yearLabels,
-      datasets:[{
-        label:'Total Value',
-        data:yearData,
-        borderColor:'#0d9488',
-        backgroundColor:'rgba(13,148,136,.12)',
-        borderWidth:3,
-        fill:true,
-        tension:.4,
-        pointRadius:yearData.length>20?0:4,
-        pointBackgroundColor:'#0d9488'
-      }]
-    },
-    options:{
-      responsive:true, maintainAspectRatio:false,
-      plugins:{
-        legend:{display:false},
-        tooltip:{callbacks:{label:ctx=>'Value: '+fmtV(ctx.parsed.y,cur)}}
-      },
-      scales:{
-        y:{ticks:{callback:v=>v>=1e6?fmtV(v/1e6,cur)+'M':v>=1e3?fmtV(v/1e3,cur)+'k':fmtV(v,cur)}}
-      }
-    }
-  });
+                if (typeof Chart !== 'undefined') {
+                    const lineCtx = $('fv-line-chart').getContext('2d');
+                    fvLineChart = new Chart(lineCtx, {
+                        type: 'line',
+                        data: {
+                            labels: yearLabels,
+                            datasets: [{
+                                label: 'Total Value',
+                                data: yearData,
+                                borderColor: '#0d9488',
+                                backgroundColor: 'rgba(13,148,136,.12)',
+                                borderWidth: 3,
+                                fill: true,
+                                tension: .4,
+                                pointRadius: yearData.length > 20 ? 0 : 4,
+                                pointBackgroundColor: '#0d9488'
+                            }]
+                        },
+                        options: {
+                            responsive: true, maintainAspectRatio: false,
+                            plugins: {
+                                legend: { display: false },
+                                tooltip: { callbacks: { label: ctx => 'Value: ' + fmtV(ctx.parsed.y, cur) } }
+                            },
+                            scales: {
+                                y: { ticks: { callback: v => v >= 1e6 ? fmtV(v / 1e6, cur) + 'M' : v >= 1e3 ? fmtV(v / 1e3, cur) + 'k' : fmtV(v, cur) } }
+                            }
+                        }
+                    });
 
-  } // end Chart check
-  if(typeof Chart !== 'undefined'){
-  const pieCtx = $('fv-pie-chart').getContext('2d');
-  fvPieChart = new Chart(pieCtx,{
-    type:'pie',
-    data:{
-      labels:['Principal','Interest Earned'],
-      datasets:[{data:[P, Math.max(0,inter)], backgroundColor:['#0d9488','#f59e0b'], borderWidth:3, borderColor:'#fff'}]
-    },
-    options:{
-      responsive:true, maintainAspectRatio:false,
-      plugins:{
-        legend:{position:'bottom',labels:{padding:14,font:{size:12}}},
-        tooltip:{callbacks:{label:ctx=>{
-          const total=ctx.dataset.data.reduce((a,b)=>a+b,0);
-          return ctx.label+': '+fmtV(ctx.parsed,cur)+' ('+((ctx.parsed/total)*100).toFixed(1)+'%)';
-        }}}
-      }
-    }
-  });
+                } // end Chart check
+                if (typeof Chart !== 'undefined') {
+                    const pieCtx = $('fv-pie-chart').getContext('2d');
+                    fvPieChart = new Chart(pieCtx, {
+                        type: 'pie',
+                        data: {
+                            labels: ['Principal', 'Interest Earned'],
+                            datasets: [{ data: [P, Math.max(0, inter)], backgroundColor: ['#0d9488', '#f59e0b'], borderWidth: 3, borderColor: '#fff' }]
+                        },
+                        options: {
+                            responsive: true, maintainAspectRatio: false,
+                            plugins: {
+                                legend: { position: 'bottom', labels: { padding: 14, font: { size: 12 } } },
+                                tooltip: {
+                                    callbacks: {
+                                        label: ctx => {
+                                            const total = ctx.dataset.data.reduce((a, b) => a + b, 0);
+                                            return ctx.label + ': ' + fmtV(ctx.parsed, cur) + ' (' + ((ctx.parsed / total) * 100).toFixed(1) + '%)';
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    });
 
-  } // end Chart check
+                } // end Chart check
 
-  if(typeof Chart === 'undefined'){
-  console.warn('Chart.js failed to load');
-}
+                if (typeof Chart === 'undefined') {
+                    console.warn('Chart.js failed to load');
+                }
 
-  $('fv-results').style.display='block';
-  document.body.style.cursor = 'default';
-  }, 10); // end setTimeout
-  $('fv-results').scrollIntoView({behavior:'smooth',block:'nearest'});
-}
+                $('fv-results').style.display = 'block';
+                document.body.style.cursor = 'default';
+            }, 10); // end setTimeout
+            $('fv-results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
 
-/* ── MODULE 5: COMPARE ── */
-function calcCompare(){
-  const P  = parseFloat($('cmp-p').value);
-  const t  = parseInt($('cmp-t').value);
-  const rA = parseFloat($('cmp-ra').value)/100;
-  const nA = parseInt($('cmp-fa').value);
-  const rB = parseFloat($('cmp-rb').value)/100;
-  const nB = parseInt($('cmp-fb').value);
-  if(!validate(P,0,1e9,'cmp-p-err')) return;
-  if(!validate(t,1,40,'cmp-t-err')) return;
+        /* ── MODULE 5: COMPARE ── */
+        function calcCompare() {
+            const P = parseFloat($('cmp-p').value);
+            const t = parseInt($('cmp-t').value);
+            const rA = parseFloat($('cmp-ra').value) / 100;
+            const nA = parseInt($('cmp-fa').value);
+            const rB = parseFloat($('cmp-rb').value) / 100;
+            const nB = parseInt($('cmp-fb').value);
+            if (!validate(P, 0, 1e9, 'cmp-p-err')) return;
+            if (!validate(t, 1, 40, 'cmp-t-err')) return;
 
-  const FVA = rA===0?P:nA===0?P*Math.exp(rA*t):P*Math.pow(1+rA/nA,nA*t);
-  const FVB = rB===0?P:nB===0?P*Math.exp(rB*t):P*Math.pow(1+rB/nB,nB*t);
-  const apyA= rA===0?0:nA===0?Math.exp(rA)-1:Math.pow(1+rA/nA,nA)-1;
-  const apyB= rB===0?0:nB===0?Math.exp(rB)-1:Math.pow(1+rB/nB,nB)-1;
-  const winner = FVA>=FVB ? 'A' : 'B';
-  const diff = Math.abs(FVA-FVB);
-  const base=Math.max(FVA,FVB); const diffPct=((diff/base)*100).toFixed(2);
+            const FVA = rA === 0 ? P : nA === 0 ? P * Math.exp(rA * t) : P * Math.pow(1 + rA / nA, nA * t);
+            const FVB = rB === 0 ? P : nB === 0 ? P * Math.exp(rB * t) : P * Math.pow(1 + rB / nB, nB * t);
+            const apyA = rA === 0 ? 0 : nA === 0 ? Math.exp(rA) - 1 : Math.pow(1 + rA / nA, nA) - 1;
+            const apyB = rB === 0 ? 0 : nB === 0 ? Math.exp(rB) - 1 : Math.pow(1 + rB / nB, nB) - 1;
+            const winner = FVA >= FVB ? 'A' : 'B';
+            const diff = Math.abs(FVA - FVB);
+            const base = Math.max(FVA, FVB); const diffPct = ((diff / base) * 100).toFixed(2);
 
-  $('cmp-fva').textContent   = fmt(FVA);
-  $('cmp-apy-a').textContent = 'APY: '+pct(apyA)+' | '+freqName(nA)+' compounding';
-  $('cmp-fvb').textContent   = fmt(FVB);
-  $('cmp-apy-b').textContent = 'APY: '+pct(apyB)+' | '+freqName(nB)+' compounding';
+            $('cmp-fva').textContent = fmt(FVA);
+            $('cmp-apy-a').textContent = 'APY: ' + pct(apyA) + ' | ' + freqName(nA) + ' compounding';
+            $('cmp-fvb').textContent = fmt(FVB);
+            $('cmp-apy-b').textContent = 'APY: ' + pct(apyB) + ' | ' + freqName(nB) + ' compounding';
 
-  $('cmp-winner').innerHTML = `
+            $('cmp-winner').innerHTML = `
     <h4>🏆 Option ${winner} Wins!</h4>
     <p>Option ${winner} yields <strong>${fmt(diff)}</strong> more (${diffPct}% better) over ${t} years.<br>
     A: ${$('cmp-ra').value}% APR ${freqName(nA)} → APY ${pct(apyA)} → FV <strong>${fmt(FVA)}</strong><br>
     B: ${$('cmp-rb').value}% APR ${freqName(nB)} → APY ${pct(apyB)} → FV <strong>${fmt(FVB)}</strong></p>`;
 
-  // Year-by-year table + chart data
-  const tbody=$('cmp-year-body');
-  tbody.innerHTML='';
-  const labelsC=[],dataA=[],dataB=[];
-  labelsC.push('Yr 0'); dataA.push(P); dataB.push(P);
-  for(let yr=1;yr<=t;yr++){
-    const va=rA===0?P:nA===0?P*Math.exp(rA*yr):P*Math.pow(1+rA/nA,nA*yr);
-    const vb=rB===0?P:nB===0?P*Math.exp(rB*yr):P*Math.pow(1+rB/nB,nB*yr);
-    labelsC.push('Yr '+yr); dataA.push(va); dataB.push(vb);
-    const d=va-vb;
-    tbody.innerHTML+=`<tr><td>${yr}</td><td>${fmt(va)}</td><td>${fmt(vb)}</td><td style="color:${d>0?'#0d9488':d<0?'#f43f5e':''}">${d>=0?'+':''}${fmt(d)}</td></tr>`;
-  }
+            // Year-by-year table + chart data
+            const tbody = $('cmp-year-body');
+            tbody.innerHTML = '';
+            const labelsC = [], dataA = [], dataB = [];
+            labelsC.push('Yr 0'); dataA.push(P); dataB.push(P);
+            for (let yr = 1; yr <= t; yr++) {
+                const va = rA === 0 ? P : nA === 0 ? P * Math.exp(rA * yr) : P * Math.pow(1 + rA / nA, nA * yr);
+                const vb = rB === 0 ? P : nB === 0 ? P * Math.exp(rB * yr) : P * Math.pow(1 + rB / nB, nB * yr);
+                labelsC.push('Yr ' + yr); dataA.push(va); dataB.push(vb);
+                const d = va - vb;
+                tbody.innerHTML += `<tr><td>${yr}</td><td>${fmt(va)}</td><td>${fmt(vb)}</td><td style="color:${d > 0 ? '#0d9488' : d < 0 ? '#f43f5e' : ''}">${d >= 0 ? '+' : ''}${fmt(d)}</td></tr>`;
+            }
 
-  document.body.style.cursor = 'wait';
-  setTimeout(()=>{
-  cmpLineChart = destroyChart(cmpLineChart);
-  if(typeof Chart !== 'undefined'){
-  const cmpCtx = $('cmp-line-chart').getContext('2d');
-  cmpLineChart = new Chart(cmpCtx,{
-    type:'line',
-    data:{
-      labels:labelsC,
-      datasets:[
-        {label:'Option A',data:dataA,borderColor:'#0d9488',backgroundColor:'rgba(13,148,136,.1)',borderWidth:3,fill:true,tension:.4,pointRadius:dataA.length>20?0:4},
-        {label:'Option B',data:dataB,borderColor:'#f59e0b',backgroundColor:'rgba(245,158,11,.1)',borderWidth:3,fill:true,tension:.4,pointRadius:dataB.length>20?0:4}
-      ]
-    },
-    options:{
-      responsive:true,maintainAspectRatio:false,
-      plugins:{
-        legend:{position:'bottom',labels:{padding:14,font:{size:12}}},
-        tooltip:{callbacks:{label:ctx=>'Option '+(ctx.datasetIndex===0?'A':'B')+': '+fmt(ctx.parsed.y)}}
-      },
-      scales:{
-        y:{ticks:{callback:v=>v>=1e6?fmt(v/1e6)+'M':v>=1e3?fmt(v/1e3)+'k':fmt(v)}}
-      }
-    }
-  });
+            document.body.style.cursor = 'wait';
+            setTimeout(() => {
+                cmpLineChart = destroyChart(cmpLineChart);
+                if (typeof Chart !== 'undefined') {
+                    const cmpCtx = $('cmp-line-chart').getContext('2d');
+                    cmpLineChart = new Chart(cmpCtx, {
+                        type: 'line',
+                        data: {
+                            labels: labelsC,
+                            datasets: [
+                                { label: 'Option A', data: dataA, borderColor: '#0d9488', backgroundColor: 'rgba(13,148,136,.1)', borderWidth: 3, fill: true, tension: .4, pointRadius: dataA.length > 20 ? 0 : 4 },
+                                { label: 'Option B', data: dataB, borderColor: '#f59e0b', backgroundColor: 'rgba(245,158,11,.1)', borderWidth: 3, fill: true, tension: .4, pointRadius: dataB.length > 20 ? 0 : 4 }
+                            ]
+                        },
+                        options: {
+                            responsive: true, maintainAspectRatio: false,
+                            plugins: {
+                                legend: { position: 'bottom', labels: { padding: 14, font: { size: 12 } } },
+                                tooltip: { callbacks: { label: ctx => 'Option ' + (ctx.datasetIndex === 0 ? 'A' : 'B') + ': ' + fmt(ctx.parsed.y) } }
+                            },
+                            scales: {
+                                y: { ticks: { callback: v => v >= 1e6 ? fmt(v / 1e6) + 'M' : v >= 1e3 ? fmt(v / 1e3) + 'k' : fmt(v) } }
+                            }
+                        }
+                    });
 
-  } // end Chart check
-  document.body.style.cursor = 'default';
-  },10); // end setTimeout
-  $('cmp-results').style.display='block';
-  $('cmp-results').scrollIntoView({behavior:'smooth',block:'nearest'});
-}
+                } // end Chart check
+                document.body.style.cursor = 'default';
+            }, 10); // end setTimeout
+            $('cmp-results').style.display = 'block';
+            $('cmp-results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
 
-/* ── RESETS ── */
-function resetModule(name){
-  const hides={
-    apr2apy:['a2a-results','a2a-formula'],
-    apy2apr:['y2r-results','y2r-formula'],
-    ear:    ['ear-results','ear-formula','ear-freq-table'],
-    fv:     ['fv-results'],
-    compare:['cmp-results']
-  };
-  (hides[name]||[]).forEach(id=>{ if($(id)) $(id).style.display='none'; });
-  document.querySelectorAll('.error-msg').forEach(e=>e.style.display='none');
-  fvLineChart  = destroyChart(fvLineChart);
-  fvPieChart   = destroyChart(fvPieChart);
-  cmpLineChart = destroyChart(cmpLineChart);
-}
-</script>
+        /* ── RESETS ── */
+        function resetModule(name) {
+            const hides = {
+                apr2apy: ['a2a-results', 'a2a-formula'],
+                apy2apr: ['y2r-results', 'y2r-formula'],
+                ear: ['ear-results', 'ear-formula', 'ear-freq-table'],
+                fv: ['fv-results'],
+                compare: ['cmp-results']
+            };
+            (hides[name] || []).forEach(id => { if ($(id)) $(id).style.display = 'none'; });
+            document.querySelectorAll('.error-msg').forEach(e => e.style.display = 'none');
+            fvLineChart = destroyChart(fvLineChart);
+            fvPieChart = destroyChart(fvPieChart);
+            cmpLineChart = destroyChart(cmpLineChart);
+        }
+    </script>
 </body>
+
 </html>
-
-
-
-
