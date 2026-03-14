@@ -111,11 +111,15 @@
 
   <style>
     :root {
-      --primary: #667eea;
-      --primary-dark: #5a67d8;
-      --secondary: #48bb78;
-      --accent: #ed8936;
-      --danger: #f56565;
+      --primary: #0d9488;
+      --primary-dark: #0f766e;
+      --secondary: #10b981;
+      --accent: #f59e0b;
+      --danger: #e11d48;
+      --teal-light: #ccfbf1;
+      --sky-light: #e0f2fe;
+      --amber-light: #fef3c7;
+      --rose-light: #ffe4e6;
       --slate-900: #0f172a;
       --slate-800: #1e293b;
       --slate-700: #334155;
@@ -126,9 +130,9 @@
       --slate-100: #f1f5f9;
       --slate-50: #f8fafc;
       --white: #ffffff;
-      --shadow-sm: 0 1px 3px rgba(0, 0, 0, .1);
-      --shadow-md: 0 4px 12px rgba(0, 0, 0, .12);
-      --shadow-lg: 0 10px 28px rgba(0, 0, 0, .15);
+      --shadow-sm: 0 8px 20px rgba(15, 23, 42, 0.06);
+      --shadow-md: 0 18px 40px rgba(15, 23, 42, 0.1);
+      --shadow-lg: 0 30px 60px rgba(15, 23, 42, 0.12);
       --header-height: 64px;
     }
 
@@ -145,7 +149,9 @@
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-      background: var(--slate-50);
+      background:
+        radial-gradient(circle at top left, rgba(13, 148, 136, 0.08), transparent 30%),
+        linear-gradient(180deg, #effcfb 0%, #f8fafc 24%, #f8fafc 100%);
       color: var(--slate-800);
       line-height: 1.7;
       overflow-x: hidden;
@@ -153,43 +159,54 @@
 
     /* ── HEADER ── */
     header {
-      background: linear-gradient(135deg, #0891b2 0%, #059669 100%);
+      background: linear-gradient(135deg, #0b7694 0%, #0f766e 100%);
       color: white;
-      padding: 1rem 0;
+      padding: 0;
       position: sticky;
       top: 0;
       z-index: 1000;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.12);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.14);
     }
 
     .hdr-inner {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 0 1rem;
+      padding: 1rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 1rem;
     }
 
     .hdr-logo {
-      font-size: 1.5rem;
-      font-weight: 700;
+      font-size: 1.2rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
     }
 
     .hdr-nav {
       display: flex;
-      gap: 2rem;
+      gap: 1.5rem;
+      align-items: center;
     }
 
-    .hdr-nav a {
+    .hdr-nav a,
+    .hdr-nav span {
       color: white;
       text-decoration: none;
-      font-weight: 500;
+      font-weight: 600;
+      font-size: 0.95rem;
+      opacity: 0.96;
       transition: opacity 0.3s;
     }
 
     .hdr-nav a:hover {
       opacity: 0.8;
+    }
+
+    .nav-disabled {
+      opacity: 0.74;
     }
 
     .hamburger {
@@ -216,10 +233,10 @@
       top: 100%;
       left: 0;
       right: 0;
-      background: #0891b2;
+      background: #0b7694;
       flex-direction: column;
       padding: 1rem;
-      gap: 1rem;
+      gap: 0.9rem;
     }
 
     .mobile-nav.open {
@@ -238,77 +255,131 @@
       background: rgba(255, 255, 255, .1);
     }
 
+    .mobile-nav .nav-disabled {
+      padding: 0.5rem;
+      color: white;
+      opacity: 0.75;
+    }
+
     /* ── CONTAINER ── */
     .container {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 2rem 1.25rem 4rem;
+      padding: 1.5rem 1rem 4rem;
       width: 100%;
       overflow-x: hidden;
     }
 
     /* ── HERO ── */
     .hero {
-      text-align: center;
-      margin-bottom: 2.5rem;
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(135deg, rgba(13, 148, 136, 0.14), rgba(14, 165, 233, 0.08)),
+        var(--white);
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      border-radius: 22px;
+      box-shadow: var(--shadow-md);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      text-align: left;
     }
 
-    .hero-icon {
-      font-size: 3rem;
-      margin-bottom: 1rem;
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -80px -80px auto;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle, rgba(13, 148, 136, 0.14), transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      background: var(--teal-light);
+      color: var(--primary-dark);
+      font-size: .76rem;
+      font-weight: 800;
+      padding: .4rem .9rem;
+      border-radius: 999px;
+      margin-bottom: .9rem;
+      letter-spacing: .06em;
+      text-transform: uppercase;
     }
 
     h1 {
-      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-size: clamp(2rem, 5vw, 3.25rem);
       font-weight: 800;
       color: var(--slate-900);
-      margin-bottom: 1rem;
+      line-height: 1.1;
+      margin-bottom: .8rem;
     }
 
     .hero-subtitle {
-      font-size: 1.05rem;
+      font-size: 1rem;
       color: var(--slate-600);
-      max-width: 700px;
-      margin: 0 auto;
+      max-width: 760px;
+    }
+
+    .hero-highlights {
+      display: grid;
+      gap: 0.85rem;
+      margin-top: 1.25rem;
+    }
+
+    .hero-chip {
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid rgba(148, 163, 184, 0.28);
+      border-radius: 14px;
+      padding: 0.9rem 1rem;
+      box-shadow: var(--shadow-sm);
+      color: var(--slate-600);
+    }
+
+    .hero-chip strong {
+      display: block;
+      color: var(--slate-900);
+      margin-bottom: 0.2rem;
     }
 
     /* ── TABS ── */
     .mode-tabs {
-      display: flex;
+      display: grid;
       gap: .75rem;
-      margin-bottom: 2rem;
-      flex-wrap: wrap;
-      border-bottom: 2px solid var(--slate-200);
+      margin-bottom: 1.5rem;
     }
 
     .mode-tab {
-      flex: 1;
-      min-width: 140px;
-      padding: .85rem 1.25rem;
+      width: 100%;
+      min-width: 0;
+      padding: .95rem 1rem;
       background: var(--white);
       border: 2px solid var(--slate-300);
-      border-bottom: none;
-      border-radius: 8px 8px 0 0;
+      border-radius: 14px;
       font-size: .92rem;
-      font-weight: 600;
+      font-weight: 800;
       color: var(--slate-600);
       cursor: pointer;
       transition: all .25s;
       text-align: center;
+      box-shadow: var(--shadow-sm);
     }
 
     .mode-tab:hover {
-      background: var(--slate-50);
-      color: var(--primary);
       border-color: var(--primary);
+      color: var(--primary);
+      transform: translateY(-2px);
     }
 
     .mode-tab.active {
-      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
       color: #fff;
       border-color: var(--primary);
-      transform: translateY(2px);
-      box-shadow: 0 4px 14px rgba(102, 126, 234, .35);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(13, 148, 136, .24);
     }
 
     /* ── MODULE ── */
@@ -335,9 +406,10 @@
 
     /* ── CARD ── */
     .card {
-      background: var(--white);
-      border-radius: 12px;
-      padding: 2rem;
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid rgba(148, 163, 184, 0.22);
+      border-radius: 20px;
+      padding: 1.75rem;
       box-shadow: var(--shadow-md);
       margin-bottom: 2rem;
       width: 100%;
@@ -346,10 +418,10 @@
     }
 
     .card-title {
-      font-size: 1.25rem;
-      font-weight: 700;
+      font-size: 1.2rem;
+      font-weight: 800;
       color: var(--slate-900);
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.35rem;
       display: flex;
       align-items: center;
       gap: .5rem;
@@ -384,20 +456,20 @@
     input[type="number"],
     select {
       width: 100%;
-      padding: .7rem .9rem;
+      padding: .8rem .95rem;
       border: 2px solid var(--slate-300);
-      border-radius: 8px;
+      border-radius: 12px;
       font-size: 1rem;
       background: var(--white);
       color: var(--slate-800);
-      transition: border-color .2s;
+      transition: border-color .2s, box-shadow .2s, transform .2s;
     }
 
     input[type="number"]:focus,
     select:focus {
       outline: none;
       border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(102, 126, 234, .12);
+      box-shadow: 0 0 0 4px rgba(13, 148, 136, .12);
     }
 
     input[type="range"] {
@@ -405,7 +477,7 @@
       height: 6px;
       background: var(--slate-300);
       border: none;
-      border-radius: 3px;
+      border-radius: 999px;
       cursor: pointer;
       accent-color: var(--primary);
     }
@@ -429,19 +501,20 @@
       background: linear-gradient(135deg, var(--primary-dark), var(--primary));
       color: #fff;
       border: none;
-      border-radius: 8px;
-      padding: .85rem 2rem;
+      border-radius: 12px;
+      padding: .9rem 2rem;
       font-size: 1rem;
-      font-weight: 700;
+      font-weight: 800;
       cursor: pointer;
       width: 100%;
       transition: transform .2s, box-shadow .2s;
       margin-top: .5rem;
+      box-shadow: 0 10px 24px rgba(13, 148, 136, 0.2);
     }
 
     .btn-primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(102, 126, 234, .4);
+      box-shadow: 0 14px 28px rgba(13, 148, 136, .28);
     }
 
     .btn-primary:active {
@@ -449,13 +522,13 @@
     }
 
     .btn-secondary {
-      background: var(--slate-200);
+      background: var(--slate-100);
       color: var(--slate-700);
       border: 2px solid var(--slate-300);
-      border-radius: 8px;
+      border-radius: 12px;
       padding: .85rem 2rem;
       font-size: 1rem;
-      font-weight: 600;
+      font-weight: 700;
       cursor: pointer;
       width: 100%;
       transition: all .2s;
@@ -463,7 +536,8 @@
     }
 
     .btn-secondary:hover {
-      background: var(--slate-300);
+      background: var(--slate-200);
+      border-color: var(--primary);
     }
 
     .btn-row {
@@ -473,20 +547,21 @@
     }
 
     .btn-copy {
-      background: var(--secondary);
+      background: linear-gradient(135deg, var(--secondary), var(--primary));
       color: #fff;
       border: none;
-      border-radius: 6px;
-      padding: .6rem 1.25rem;
+      border-radius: 10px;
+      padding: .7rem 1.25rem;
       font-size: .88rem;
-      font-weight: 600;
+      font-weight: 700;
       cursor: pointer;
       transition: all .2s;
       margin-top: .75rem;
     }
 
     .btn-copy:hover {
-      background: #38a169;
+      background: linear-gradient(135deg, #059669, var(--primary-dark));
+      transform: translateY(-1px);
       box-shadow: var(--shadow-sm);
     }
 
@@ -501,20 +576,21 @@
     .result-card {
       background: linear-gradient(135deg, var(--primary-dark), var(--primary));
       color: #fff;
-      border-radius: 10px;
-      padding: 1.25rem 1.5rem;
+      border-radius: 16px;
+      padding: 1.3rem 1.5rem;
+      box-shadow: 0 16px 30px rgba(13, 148, 136, 0.16);
     }
 
     .result-card.green {
-      background: linear-gradient(135deg, #38a169, var(--secondary));
+      background: linear-gradient(135deg, #047857, var(--secondary));
     }
 
     .result-card.orange {
-      background: linear-gradient(135deg, #dd6b20, var(--accent));
+      background: linear-gradient(135deg, #d97706, var(--accent));
     }
 
     .result-card.red {
-      background: linear-gradient(135deg, #e53e3e, var(--danger));
+      background: linear-gradient(135deg, #be123c, var(--danger));
     }
 
     .result-card.slate {
@@ -545,9 +621,9 @@
 
     /* ── FORMULA ── */
     .formula-box {
-      background: var(--slate-50);
+      background: linear-gradient(135deg, rgba(13, 148, 136, 0.08), rgba(255, 255, 255, 0.98));
       border-left: 4px solid var(--primary);
-      border-radius: 0 8px 8px 0;
+      border-radius: 0 14px 14px 0;
       padding: 1rem 1.25rem;
       margin-top: 1.25rem;
       font-family: 'Courier New', monospace;
@@ -580,8 +656,9 @@
     }
 
     .chart-wrap {
-      background: var(--white);
-      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid rgba(148, 163, 184, 0.22);
+      border-radius: 20px;
       padding: 1.5rem;
       box-shadow: var(--shadow-md);
       width: 100%;
@@ -633,27 +710,30 @@
     }
 
     .btn-download {
-      background: var(--secondary);
+      background: linear-gradient(135deg, var(--secondary), var(--primary));
       color: #fff;
       border: none;
-      border-radius: 6px;
-      padding: .5rem 1rem;
+      border-radius: 10px;
+      padding: .6rem 1rem;
       font-size: .85rem;
-      font-weight: 600;
+      font-weight: 700;
       cursor: pointer;
       transition: all .2s;
     }
 
     .btn-download:hover {
-      background: #38a169;
+      background: linear-gradient(135deg, #059669, var(--primary-dark));
+      transform: translateY(-1px);
     }
 
     .table-wrap {
       overflow-x: auto;
-      border-radius: 8px;
-      border: 1px solid var(--slate-300);
+      border-radius: 16px;
+      border: 1px solid rgba(148, 163, 184, 0.3);
       width: 100%;
       max-width: 100%;
+      background: var(--white);
+      box-shadow: var(--shadow-sm);
     }
 
     table {
@@ -663,7 +743,7 @@
     }
 
     thead tr {
-      background: var(--primary);
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
       color: #fff;
     }
 
@@ -691,17 +771,18 @@
     }
 
     tbody tr:hover {
-      background: #e0e7ff;
+      background: var(--sky-light);
     }
 
     /* ── COMPARISON ── */
     .comp-winner {
-      background: linear-gradient(135deg, #d4edda, #c3e6cb);
-      border: 2px solid var(--secondary);
-      border-radius: 10px;
+      background: linear-gradient(135deg, #dcfce7, #ecfdf5);
+      border: 2px solid rgba(16, 185, 129, 0.35);
+      border-radius: 16px;
       padding: 1.25rem;
       text-align: center;
       margin-top: 1.25rem;
+      box-shadow: var(--shadow-sm);
     }
 
     .comp-winner h4 {
@@ -718,11 +799,12 @@
 
     /* ── CONTENT SECTIONS ── */
     .content-section {
-      background: var(--white);
-      border-radius: 12px;
-      padding: 2.5rem;
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid rgba(148, 163, 184, 0.22);
+      border-radius: 20px;
+      padding: 2.25rem;
       box-shadow: var(--shadow-md);
-      margin-top: 3rem;
+      margin-top: 2rem;
       width: 100%;
       max-width: 100%;
       overflow-wrap: break-word;
@@ -764,9 +846,9 @@
     }
 
     .callout {
-      background: linear-gradient(135deg, #e0e7ff, #dbeafe);
+      background: linear-gradient(135deg, rgba(13, 148, 136, 0.1), rgba(224, 242, 254, 0.95));
       border-left: 4px solid var(--primary);
-      border-radius: 0 8px 8px 0;
+      border-radius: 0 14px 14px 0;
       padding: 1rem 1.25rem;
       margin: 1.25rem 0;
     }
@@ -776,7 +858,7 @@
     }
 
     .callout-warning {
-      background: #fef3c7;
+      background: linear-gradient(135deg, var(--amber-light), #fff7ed);
       border-color: var(--accent);
     }
 
@@ -793,11 +875,11 @@
     }
 
     .link-card {
-      background: var(--slate-50);
-      border: 2px solid var(--slate-300);
-      border-radius: 10px;
+      background: linear-gradient(180deg, var(--white), var(--slate-50));
+      border: 2px solid var(--slate-200);
+      border-radius: 16px;
       padding: 1rem;
-      text-align: center;
+      text-align: left;
       transition: all .25s;
       color: var(--slate-700);
       font-weight: 600;
@@ -814,16 +896,36 @@
     }
 
     .link-icon {
-      font-size: 1.6rem;
-      margin-bottom: .4rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.2rem;
+      height: 2.2rem;
+      font-size: 1.15rem;
+      margin-bottom: .75rem;
+      border-radius: 12px;
+      background: var(--teal-light);
+    }
+
+    .link-card strong {
       display: block;
+      color: var(--slate-900);
+      margin-bottom: .35rem;
+    }
+
+    .link-card p {
+      margin: 0;
+      color: var(--slate-500);
+      font-size: .9rem;
+      font-weight: 500;
     }
 
     /* ── FAQ ── */
     .faq-item {
       background: var(--slate-50);
-      border-radius: 8px;
-      padding: 1.25rem;
+      border: 1px solid var(--slate-200);
+      border-radius: 14px;
+      padding: 1.1rem 1.15rem;
       margin-bottom: .85rem;
     }
 
@@ -842,12 +944,12 @@
 
     /* ── DISCLAIMER ── */
     .disclaimer1 {
-      background: #fef3c7;
-      border: 1px solid var(--accent);
-      border-radius: 10px;
+      background: linear-gradient(135deg, var(--amber-light), #fff7ed);
+      border: 1px solid rgba(245, 158, 11, 0.26);
+      border-radius: 16px;
       padding: 1.25rem 1.5rem;
       margin-top: 2rem;
-      font-size: .85rem;
+      font-size: .88rem;
       color: #78350f;
     }
 
@@ -857,7 +959,7 @@
 
     /* ── FOOTER ── */
     footer {
-      background: #2d3748;
+      background: #1f2937;
       color: white;
       padding: 3rem 0 1rem;
       margin-top: 4rem;
@@ -865,17 +967,16 @@
 
     .footer-content {
       max-width: 1200px;
-      margin: 0 auto;
+      margin: 0 auto 2rem;
       padding: 0 1rem;
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 2rem;
-      margin-bottom: 2rem;
     }
 
     .footer-section h3 {
       margin-bottom: 1rem;
-      color: #667eea;
+      color: #5eead4;
     }
 
     .footer-section ul {
@@ -897,11 +998,11 @@
     }
 
     .disclaimer {
-      background: rgba(0, 0, 0, 0.2);
+      background: rgba(255, 255, 255, 0.06);
       padding: 1rem;
-      border-radius: 8px;
+      border-radius: 14px;
       font-size: 0.9rem;
-      color: #cbd5e0;
+      color: #dbeafe;
     }
 
     .copyright {
@@ -912,6 +1013,34 @@
     }
 
     /* ── RESPONSIVE ── */
+    .coming-soon {
+      color: #94a3b8;
+    }
+
+    @media (min-width: 640px) {
+      .hero {
+        padding: 2rem;
+      }
+
+      .hero-highlights {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .mode-tabs {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (min-width: 960px) {
+      .hero-highlights {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .mode-tabs {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+    }
+
     @media (max-width: 768px) {
       .hdr-nav {
         display: none;
@@ -934,6 +1063,12 @@
         grid-template-columns: 1fr;
       }
 
+      .table-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+      }
+
       .chart-canvas {
         height: 220px;
       }
@@ -950,16 +1085,12 @@
         font-size: 1.85rem;
       }
 
-      .mode-tab {
-        font-size: .85rem;
-        padding: .7rem .9rem;
-      }
     }
 
     @media (max-width: 480px) {
       .mode-tab {
         font-size: .82rem;
-        padding: .65rem .75rem;
+        padding: .8rem .75rem;
       }
 
       .result-value {
@@ -978,14 +1109,16 @@
   <!-- HEADER -->
   <header>
     <div class="hdr-inner">
-      <div class="hdr-logo">💰 Finance Calculators</div>
+      <div class="hdr-logo">💰 SmartCalc World</div>
 
       <nav class="hdr-nav">
         <a href="https://smartcalcworld.com/index.html">Home</a>
 
-        <span class="nav-disabled">Student Calculators (Coming Soon)</span>
-        <span class="nav-disabled">Medical Calculators (Coming Soon)</span>
-        <a href="https://smartcalcworld.com/finance/finance-hub.html">Finance Calculators</a>
+        <a href="https://smartcalcworld.com/finance/finance-hub.html">Finance Hub</a>
+        <span class="nav-disabled">Medical Hub (Coming Soon)</span>
+        <span class="nav-disabled">Student Hub (Coming Soon)</span>
+
+        <a href="#faq">FAQ</a>
       </nav>
       <button class="hamburger" id="hamburgerBtn" aria-label="Menu" aria-expanded="false">
         <span></span>
@@ -996,9 +1129,11 @@
     <nav class="mobile-nav" id="mobileNav">
       <a href="https://smartcalcworld.com/index.html">Home</a>
 
-      <span class="nav-disabled">Student Calculators (Coming Soon)</span>
-      <span class="nav-disabled">Medical Calculators (Coming Soon)</span>
-      <a href="https://smartcalcworld.com/finance/finance-hub.html">Finance Calculators</a>
+      <a href="https://smartcalcworld.com/finance/finance-hub.html">Finance Hub</a>
+      <span class="nav-disabled">Medical Hub (Coming Soon)</span>
+      <span class="nav-disabled">Student Hub (Coming Soon)</span>
+
+      <a href="#faq">FAQ</a>
     </nav>
   </header>
 
@@ -1007,10 +1142,24 @@
 
     <!-- HERO -->
     <div class="hero">
-      <div class="hero-icon">📈</div>
+      <span class="hero-badge">📈 Investment Growth Tools</span>
       <h1>CAGR Calculator</h1>
       <p class="hero-subtitle">Calculate Compound Annual Growth Rate with inflation adjustment, investment comparison,
         growth charts, and yearly projections 🚀</p>
+      <div class="hero-highlights">
+        <div class="hero-chip">
+          <strong>Measure performance with clarity</strong>
+          See annualized growth in a cleaner format so long-term returns feel easier to compare across investments.
+        </div>
+        <div class="hero-chip">
+          <strong>Connect CAGR with real decisions</strong>
+          Use reverse, target, and comparison modes to turn simple rate math into smarter planning choices.
+        </div>
+        <div class="hero-chip">
+          <strong>Learn the story behind the number 💡</strong>
+          Charts, tables, and guide content help explain what CAGR says well and what it can hide.
+        </div>
+      </div>
     </div>
 
     <!-- MODE TABS -->
@@ -1699,7 +1848,9 @@
       <div class="links-grid">
         <a href="https://smartcalcworld.com/finance/finance-sip-calculator.html"
           class="link-card">
-          <span class="link-icon">📊</span>SIP Calculator
+          <span class="link-icon">📊</span>
+          <strong>SIP Calculator</strong>
+          <p>Track recurring investments and see how disciplined contributions build long-term wealth.</p>
         </a>
 
         <!-- <a href="/finance/investment/lumpsum-calculator.html" class="link-card">
@@ -1708,20 +1859,28 @@
 
         <a href="https://smartcalcworld.com/finance/investment/apy-calculator.html"
           class="link-card">
-          <span class="link-icon">📈</span>APY Calculator
+          <span class="link-icon">📈</span>
+          <strong>APY Calculator</strong>
+          <p>Compare effective yield, compounding frequency, and interest growth with more confidence.</p>
         </a>
 
-        <!-- <a href="/finance/inflation-calculator.html" class="link-card">
-          <span class="link-icon">📉</span>Inflation Calculator
-        </a> -->
+        <a href="https://smartcalcworld.com/finance/investment/inflation-calculator.html" class="link-card">
+          <span class="link-icon">📉</span>
+          <strong>Inflation Calculator</strong>
+          <p>Adjust your investment returns for inflation to see the true purchasing power of your money.</p>
+        </a>
 
-        <a href="https://smartcalcworld.com/finance/saving-retirement/saving-retirement-hub.html"
+        <!-- <a href="https://smartcalcworld.com/finance/saving-retirement/saving-retirement-hub.html"
           class="link-card">
-          <span class="link-icon">🏖️</span>Retirement Calculator
-        </a>
+          <span class="link-icon">🏖️</span>
+          <strong>Retirement Calculator</strong>
+          <p>Estimate how today’s savings habits can translate into future financial freedom.</p>
+        </a> -->
         <a href="https://smartcalcworld.com/finance/finance-emi-calculator.html"
           class="link-card">
-          <span class="link-icon">💳</span>EMI Calculator
+          <span class="link-icon">💳</span>
+          <strong>EMI Calculator</strong>
+          <p>Balance borrowing costs with investment plans so cash flow stays healthy and realistic.</p>
         </a>
       </div>
     </div>
@@ -1787,10 +1946,10 @@
 
     <!-- DISCLAIMER -->
     <div class="disclaimer1">
-      <strong>⚠️ Disclaimer:</strong> This CAGR calculator is for educational purposes only. Past performance does not
-      guarantee future results. CAGR calculations are estimates based on inputs provided. Actual investment returns vary
-      based on market conditions, fees, taxes, and timing. This is not financial advice. Consult a qualified financial
-      advisor before making investment decisions.
+      <strong>⚠️ Disclaimer:</strong> This CAGR calculator is for educational purposes only. CAGR simplifies growth into
+      a smooth annual rate, so it does not capture volatility, sequence risk, taxes, fees, or changing market
+      conditions. Use these results as a planning guide, not personal financial advice, and consult a qualified advisor
+      before making investment decisions.
     </div>
 
   </main>
@@ -1804,9 +1963,16 @@
           <li><a href="https://smartcalcworld.com/index.html">Home</a></li>
           <li><a href="https://smartcalcworld.com/about.html">About</a></li>
           <li><a href="https://smartcalcworld.com/contact.html">Contact</a></li>
-          <li><a href="https://smartcalcworld.com/privacy-policy.html">Privacy Policy</a>
-          </li>
+          <li><a href="https://smartcalcworld.com/privacy-policy.html">Privacy Policy</a></li>
+        </ul>
+      </div>
 
+      <div class="footer-section">
+        <h3>Content</h3>
+        <ul>
+          <li><a href="#calculator">CAGR Calculator</a></li>
+          <li><a href="#guide">CAGR Guide</a></li>
+          <li><a href="#faq">FAQ</a></li>
         </ul>
       </div>
 
@@ -1850,9 +2016,8 @@
       </div>
       <div class="footer-section">
         <div class="disclaimer">
-          <strong>Disclaimer:</strong> The results provided by this calculator are estimates for informational purposes
-          only.
-          Actual loan terms may vary. Please consult with your financial institution for accurate loan details.
+          <strong>SmartCalc World Note:</strong> CAGR is powerful for comparing long-term growth, but it smooths away
+          volatility. Pair it with inflation, fees, and risk analysis before using it for real money decisions.
         </div>
       </div>
     </div>
