@@ -1,0 +1,2887 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow">
+  <title>Inflation Calculator – Purchasing Power & Real Return Tool | SmartCalc World</title>
+  <meta name="description"
+    content="Calculate inflation impact, real returns, and future purchasing power with our advanced Inflation Calculator. Compare nominal vs real value and understand how inflation affects your money.">
+  <link rel="canonical" href="https://smartcalcworld.com/finance/investment/inflation-calculator.html">
+  <link rel="icon" type="image/png" href="https://smartcalcworld.com/favicon.png">
+  <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://smartcalcworld.com/#org",
+        "name": "SmartCalc World",
+        "url": "https://smartcalcworld.com",
+        "description": "Free financial calculators for investing, saving, retirement and planning."
+      },
+      {
+        "@type": "WebApplication",
+        "@id": "https://smartcalcworld.com/finance/investment/inflation-calculator.html#app",
+        "name": "Inflation Calculator",
+        "url": "https://smartcalcworld.com/finance/investment/inflation-calculator.html",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Any",
+        "description": "Calculate inflation impact, future purchasing power, required nominal return, investment inflation drag, and salary growth versus inflation.",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Finance",
+            "item": "https://smartcalcworld.com/finance/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Investment",
+            "item": "https://smartcalcworld.com/finance/investment/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Inflation Calculator",
+            "item": "https://smartcalcworld.com/finance/investment/inflation-calculator.html"
+          }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is inflation?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Inflation is the rate at which the average price of goods and services rises over time. As prices rise, the same amount of money buys fewer things, which means purchasing power falls."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does CPI mean?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "CPI stands for Consumer Price Index. It tracks the changing cost of a basket of everyday goods and services and is widely used to estimate inflation."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the difference between nominal and real return?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Nominal return is the stated investment return before inflation. Real return adjusts for inflation using the formula ((1 plus nominal return) divided by (1 plus inflation)) minus 1, which shows true purchasing power growth."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the Rule of 72?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The Rule of 72 is a quick estimate for how long compounding takes. Divide 72 by an inflation rate to estimate how many years it takes for money to lose roughly half its purchasing power."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How can I beat inflation?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "To beat inflation, many investors focus on assets that have historically outpaced price growth over long periods, such as diversified equities, productive businesses, some real assets, and inflation-aware fixed income."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is a safe inflation rate?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Many central banks aim for inflation around 2 percent over time because very low inflation can slow spending while high inflation reduces purchasing power too quickly."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is hyperinflation?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Hyperinflation is extremely rapid inflation, often defined as prices rising more than 50 percent per month. It can quickly destroy the value of savings and disrupt the economy."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How does inflation affect salary growth?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "If salary raises grow more slowly than inflation, real income falls. Even when your paycheck is higher in nominal terms, your standard of living can still decline."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+  <style>
+    :root {
+      --teal: #0d9488;
+      --teal-dark: #0f766e;
+      --teal-light: #ccfbf1;
+      --amber: #f59e0b;
+      --amber-light: #fef3c7;
+      --rose: #f43f5e;
+      --rose-light: #ffe4e6;
+      --sky: #0284c7;
+      --sky-light: #dbeafe;
+      --slate-950: #020617;
+      --slate-900: #0f172a;
+      --slate-800: #1e293b;
+      --slate-700: #334155;
+      --slate-600: #475569;
+      --slate-500: #64748b;
+      --slate-400: #94a3b8;
+      --slate-300: #cbd5e1;
+      --slate-200: #e2e8f0;
+      --slate-100: #f1f5f9;
+      --slate-50: #f8fafc;
+      --white: #ffffff;
+      --radius: 14px;
+      --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.08);
+      --shadow-md: 0 10px 28px rgba(15, 23, 42, 0.12);
+      --shadow-lg: 0 20px 48px rgba(15, 23, 42, 0.16);
+      --header-h: 68px;
+    }
+
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(13, 148, 136, 0.14), transparent 32%),
+        linear-gradient(180deg, #f8fafc 0%, #eff6ff 44%, #f8fafc 100%);
+      color: var(--slate-800);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    img,
+    canvas {
+      max-width: 100%;
+    }
+
+    a {
+      color: var(--teal);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: linear-gradient(135deg, #0891b2 0%, #059669 100%);
+      color: var(--white);
+      box-shadow: 0 2px 10px rgba(15, 23, 42, 0.12);
+    }
+
+    .hdr-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .hdr-logo {
+      font-size: 1.2rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+    }
+
+    .hdr-nav {
+      display: none;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .hdr-nav a,
+    .hdr-nav span {
+      color: var(--white);
+      font-weight: 600;
+      font-size: 0.95rem;
+      opacity: 0.96;
+    }
+
+    .hdr-nav span {
+      opacity: 0.78;
+    }
+
+    .hamburger {
+      display: inline-flex;
+      flex-direction: column;
+      gap: 4px;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .hamburger span {
+      width: 24px;
+      height: 3px;
+      background: var(--white);
+      border-radius: 999px;
+    }
+
+    .mobile-nav {
+      display: none;
+      flex-direction: column;
+      gap: 0.85rem;
+      padding: 1rem;
+      background: #0b7694;
+    }
+
+    .mobile-nav.open {
+      display: flex;
+    }
+
+    .mobile-nav a,
+    .mobile-nav span {
+      color: var(--white);
+      padding: 0.4rem 0;
+      font-weight: 600;
+    }
+
+    .mobile-nav span {
+      opacity: 0.75;
+    }
+
+    .page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1.5rem 1rem 4rem;
+    }
+
+    .breadcrumb {
+      font-size: 0.84rem;
+      color: var(--slate-500);
+      margin-bottom: 1.25rem;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(135deg, rgba(13, 148, 136, 0.14), rgba(2, 132, 199, 0.08)),
+        var(--white);
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      border-radius: 22px;
+      box-shadow: var(--shadow-md);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -80px -80px auto;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle, rgba(13, 148, 136, 0.14), transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.4rem 0.9rem;
+      background: var(--teal-light);
+      color: var(--teal-dark);
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 0.76rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 5vw, 3.25rem);
+      line-height: 1.1;
+      color: var(--slate-900);
+      margin: 0.95rem 0 0.9rem;
+    }
+
+    .hero-sub {
+      color: var(--slate-600);
+      font-size: 1rem;
+      max-width: 760px;
+    }
+
+    .hero-highlights {
+      display: grid;
+      gap: 0.85rem;
+      margin-top: 1.25rem;
+    }
+
+    .hero-chip {
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid rgba(148, 163, 184, 0.28);
+      border-radius: 14px;
+      padding: 0.9rem 1rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .hero-chip strong {
+      display: block;
+      color: var(--slate-900);
+      margin-bottom: 0.2rem;
+    }
+
+    .card,
+    .content-section {
+      background: rgba(255, 255, 255, 0.96);
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      border-radius: 18px;
+      box-shadow: var(--shadow-md);
+      margin-bottom: 1.5rem;
+    }
+
+    .card {
+      padding: 1.35rem;
+    }
+
+    .content-section {
+      padding: 1.5rem;
+      scroll-margin-top: calc(var(--header-h) + 1rem);
+    }
+
+    .card-title,
+    .content-section h2 {
+      font-size: 1.38rem;
+      font-weight: 800;
+      color: var(--slate-900);
+      margin-bottom: 1.2rem;
+    }
+
+    .content-section h2 {
+      padding-left: 0.9rem;
+      border-left: 4px solid var(--teal);
+    }
+
+    .content-section h3 {
+      font-size: 1.12rem;
+      color: var(--slate-900);
+      margin: 1.4rem 0 0.75rem;
+    }
+
+    .content-section p,
+    .content-section li {
+      color: var(--slate-600);
+    }
+
+    .content-section ul {
+      margin: 0 0 1rem 1.25rem;
+    }
+
+    .content-section li {
+      margin-bottom: 0.55rem;
+    }
+
+    .toolbar-grid,
+    .field-pair,
+    .metrics-grid,
+    .charts-grid,
+    .links-grid,
+    .footer-content {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .toolbar-grid {
+      margin-bottom: 1.2rem;
+    }
+
+    .toolbar-box {
+      background: linear-gradient(135deg, var(--slate-50), #eef6ff);
+      border: 1px solid var(--slate-200);
+      border-radius: 16px;
+      padding: 1rem;
+    }
+
+    .toolbar-box h2 {
+      font-size: 0.95rem;
+      color: var(--slate-900);
+      margin-bottom: 0.65rem;
+      padding: 0;
+      border: 0;
+    }
+
+    .toolbar-help {
+      font-size: 0.88rem;
+      color: var(--slate-500);
+    }
+
+    .info-list {
+      display: grid;
+      gap: 0.7rem;
+    }
+
+    .info-pill {
+      background: var(--white);
+      border: 1px solid var(--slate-200);
+      border-radius: 12px;
+      padding: 0.8rem 0.9rem;
+      color: var(--slate-600);
+      font-size: 0.9rem;
+    }
+
+    .qnav {
+      display: grid;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .qnav-btn {
+      width: 100%;
+      padding: 0.9rem 1rem;
+      border: 2px solid var(--slate-300);
+      border-radius: 14px;
+      background: var(--white);
+      color: var(--slate-600);
+      font-weight: 800;
+      font-size: 0.92rem;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s, color 0.2s;
+    }
+
+    .qnav-btn:hover {
+      border-color: var(--teal);
+      color: var(--teal);
+      transform: translateY(-2px);
+    }
+
+    .qnav-btn.active {
+      background: linear-gradient(135deg, var(--teal-dark), var(--teal));
+      border-color: var(--teal);
+      color: var(--white);
+      box-shadow: 0 8px 24px rgba(13, 148, 136, 0.24);
+    }
+
+    .module {
+      display: none;
+      animation: fadeUp 0.3s ease;
+    }
+
+    .module.active {
+      display: block;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .module-intro {
+      font-size: 0.93rem;
+      color: var(--slate-500);
+      margin-bottom: 1rem;
+    }
+
+    .form-row {
+      margin-bottom: 1.15rem;
+    }
+
+    label.lbl {
+      display: block;
+      font-weight: 700;
+      color: var(--slate-800);
+      margin-bottom: 0.45rem;
+      font-size: 0.92rem;
+    }
+
+    .hint {
+      display: block;
+      margin-top: 0.3rem;
+      font-size: 0.82rem;
+      color: var(--slate-500);
+    }
+
+    .input-slider {
+      display: grid;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    input[type="number"],
+    input[type="text"],
+    select {
+      width: 100%;
+      padding: 0.8rem 0.9rem;
+      border: 2px solid var(--slate-300);
+      border-radius: 12px;
+      background: var(--white);
+      color: var(--slate-800);
+      font-size: 1rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    input[type="number"]:focus,
+    input[type="text"]:focus,
+    select:focus {
+      outline: none;
+      border-color: var(--teal);
+      box-shadow: 0 0 0 4px rgba(13, 148, 136, 0.12);
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--teal);
+      cursor: pointer;
+    }
+
+    .slider-lbl {
+      font-size: 0.84rem;
+      font-weight: 800;
+      color: var(--teal);
+      margin-top: 0.35rem;
+    }
+
+    .cpi-box {
+      background: linear-gradient(135deg, rgba(2, 132, 199, 0.08), rgba(13, 148, 136, 0.08));
+      border: 1px solid rgba(2, 132, 199, 0.16);
+      border-radius: 16px;
+      padding: 1rem;
+      margin-top: 0.25rem;
+    }
+
+    .cpi-title {
+      font-weight: 800;
+      color: var(--slate-900);
+      margin-bottom: 0.8rem;
+    }
+
+    .btn-row,
+    .result-actions,
+    .table-head {
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .btn-primary,
+    .btn-secondary,
+    .btn-ghost {
+      border-radius: 12px;
+      padding: 0.9rem 1rem;
+      font-size: 0.96rem;
+      font-weight: 800;
+      cursor: pointer;
+      border: 0;
+      transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--teal-dark), var(--teal));
+      color: var(--white);
+      box-shadow: 0 8px 24px rgba(13, 148, 136, 0.25);
+    }
+
+    .btn-secondary {
+      background: linear-gradient(135deg, #1d4ed8, var(--sky));
+      color: var(--white);
+      box-shadow: 0 8px 24px rgba(2, 132, 199, 0.2);
+    }
+
+    .btn-ghost {
+      background: var(--slate-100);
+      color: var(--slate-700);
+      border: 2px solid var(--slate-300);
+    }
+
+    .btn-primary:hover,
+    .btn-secondary:hover,
+    .btn-ghost:hover {
+      transform: translateY(-2px);
+    }
+
+    .result-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+
+    .mode-pill,
+    .copy-note {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.45rem 0.8rem;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 800;
+    }
+
+    .mode-pill {
+      background: var(--teal-light);
+      color: var(--teal-dark);
+    }
+
+    .copy-note {
+      background: var(--slate-100);
+      color: var(--slate-600);
+    }
+
+    .status-banner {
+      display: none;
+      margin-bottom: 1rem;
+      padding: 0.9rem 1rem;
+      border-radius: 14px;
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .status-banner.info {
+      display: block;
+      background: var(--sky-light);
+      color: #1d4ed8;
+      border: 1px solid rgba(29, 78, 216, 0.18);
+    }
+
+    .status-banner.error {
+      display: block;
+      background: var(--rose-light);
+      color: #be123c;
+      border: 1px solid rgba(244, 63, 94, 0.18);
+    }
+
+    .result-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .result-card {
+      border-radius: 16px;
+      padding: 1.1rem;
+      color: var(--white);
+      min-height: 122px;
+    }
+
+    .result-card.teal {
+      background: linear-gradient(135deg, #0f766e, #14b8a6);
+    }
+
+    .result-card.amber {
+      background: linear-gradient(135deg, #b45309, #f59e0b);
+    }
+
+    .result-card.rose {
+      background: linear-gradient(135deg, #be123c, #f43f5e);
+    }
+
+    .result-card.slate {
+      background: linear-gradient(135deg, #334155, #64748b);
+    }
+
+    .result-lbl {
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      opacity: 0.9;
+      margin-bottom: 0.4rem;
+    }
+
+    .result-val {
+      font-size: clamp(1.3rem, 4vw, 2rem);
+      line-height: 1.1;
+      font-weight: 800;
+      word-break: break-word;
+    }
+
+    .result-sub {
+      margin-top: 0.45rem;
+      font-size: 0.8rem;
+      opacity: 0.84;
+    }
+
+    .formula-box,
+    .callout,
+    .rule72-box {
+      border-radius: 14px;
+      padding: 1rem 1.1rem;
+      margin-top: 1rem;
+    }
+
+    .formula-box {
+      background: var(--slate-50);
+      border-left: 4px solid var(--teal);
+      color: var(--slate-700);
+      font-family: "Courier New", monospace;
+      font-size: 0.92rem;
+      overflow-x: auto;
+    }
+
+    .rule72-box {
+      display: none;
+      background: linear-gradient(135deg, var(--amber-light), #fff7ed);
+      border: 1px solid rgba(245, 158, 11, 0.22);
+      color: #92400e;
+    }
+
+    .callout {
+      background: linear-gradient(135deg, var(--teal-light), #e0f2fe);
+      border-left: 4px solid var(--teal);
+      color: var(--slate-700);
+    }
+
+    .callout.rose {
+      background: var(--rose-light);
+      border-left-color: var(--rose);
+    }
+
+    .callout.amber {
+      background: var(--amber-light);
+      border-left-color: var(--amber);
+    }
+
+    .charts-grid {
+      margin-top: 1rem;
+    }
+
+    .chart-wrap {
+      background: linear-gradient(180deg, rgba(248, 250, 252, 0.9), rgba(255, 255, 255, 1));
+      border: 1px solid var(--slate-200);
+      border-radius: 16px;
+      padding: 1rem;
+    }
+
+    .chart-title {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--slate-900);
+      margin-bottom: 0.75rem;
+    }
+
+    .chart-note {
+      font-size: 0.86rem;
+      color: var(--slate-500);
+      margin-bottom: 0.75rem;
+    }
+
+    .chart-canvas {
+      position: relative;
+      height: 260px;
+    }
+
+    .table-head {
+      align-items: start;
+      margin-bottom: 0.95rem;
+    }
+
+    .table-context {
+      color: var(--slate-500);
+      font-size: 0.9rem;
+    }
+
+    .tbl-wrap {
+      border: 1px solid var(--slate-200);
+      border-radius: 16px;
+      overflow: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 720px;
+      background: var(--white);
+    }
+
+    thead tr {
+      background: linear-gradient(135deg, var(--teal-dark), var(--teal));
+      color: var(--white);
+    }
+
+    th,
+    td {
+      padding: 0.8rem 0.9rem;
+      text-align: right;
+      border-bottom: 1px solid var(--slate-200);
+      font-size: 0.9rem;
+    }
+
+    th {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    th:first-child,
+    td:first-child {
+      text-align: left;
+    }
+
+    tbody tr:nth-child(even) {
+      background: rgba(248, 250, 252, 0.78);
+    }
+
+    tbody tr:hover {
+      background: rgba(204, 251, 241, 0.5);
+    }
+
+    .comparison-grid {
+      display: grid;
+      gap: 1.25rem;
+    }
+
+    .links-grid {
+      margin-top: 1rem;
+    }
+
+    .link-card {
+      display: block;
+      background: linear-gradient(180deg, var(--white), var(--slate-50));
+      border: 2px solid var(--slate-200);
+      border-radius: 16px;
+      padding: 1rem;
+      transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .link-card:hover {
+      border-color: var(--teal);
+      text-decoration: none;
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .link-icon {
+      display: inline-flex;
+      width: 2.2rem;
+      height: 2.2rem;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      background: var(--teal-light);
+      margin-bottom: 0.75rem;
+      font-size: 1.15rem;
+    }
+
+    .link-card strong {
+      display: block;
+      color: var(--slate-900);
+      margin-bottom: 0.3rem;
+    }
+
+    .link-card p {
+      margin: 0;
+      color: var(--slate-500);
+      font-size: 0.9rem;
+    }
+
+    .faq-item {
+      background: var(--slate-50);
+      border: 1px solid var(--slate-200);
+      border-radius: 14px;
+      padding: 1rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .faq-q {
+      font-weight: 800;
+      color: var(--slate-900);
+      margin-bottom: 0.45rem;
+    }
+
+    .faq-a {
+      color: var(--slate-600);
+      font-size: 0.93rem;
+    }
+
+    .disclaimer1 {
+      background: linear-gradient(135deg, var(--amber-light), #fff7ed);
+      border: 1px solid rgba(245, 158, 11, 0.26);
+      border-radius: 16px;
+      padding: 1.15rem 1.2rem;
+      color: #92400e;
+      font-size: 0.88rem;
+    }
+
+    footer {
+      background: #1f2937;
+      color: var(--white);
+      margin-top: 4rem;
+      padding: 3rem 0 1rem;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto 2rem;
+      padding: 0 1rem;
+    }
+
+    .footer-section h3 {
+      font-size: 1.05rem;
+      color: #5eead4;
+      margin-bottom: 0.9rem;
+    }
+
+    .footer-section ul {
+      list-style: none;
+    }
+
+    .footer-section li {
+      margin-bottom: 0.55rem;
+    }
+
+    .footer-section a,
+    .footer-section span {
+      color: #cbd5e1;
+    }
+
+    .footer-disclaimer {
+      background: rgba(255, 255, 255, 0.06);
+      border-radius: 14px;
+      padding: 1rem;
+      color: #dbeafe;
+      font-size: 0.9rem;
+    }
+
+    .copyright {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1.25rem 1rem 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      text-align: center;
+      color: #cbd5e1;
+      font-size: 0.92rem;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    @media (min-width: 640px) {
+      .hero {
+        padding: 2rem;
+      }
+
+      .hero-highlights,
+      .toolbar-grid,
+      .field-pair,
+      .metrics-grid,
+      .links-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .result-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .qnav {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .btn-row,
+      .result-actions,
+      .table-head {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (min-width: 768px) {
+      .hdr-nav {
+        display: flex;
+      }
+
+      .hamburger {
+        display: none;
+      }
+
+      .toolbar-grid {
+        grid-template-columns: 1.1fr 0.9fr;
+      }
+
+      .input-slider {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .qnav {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .result-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .charts-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .charts-grid .chart-wrap:last-child {
+        grid-column: span 2;
+      }
+
+      .links-grid,
+      .footer-content {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @media (min-width: 960px) {
+      .hero-highlights {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .field-pair,
+      .comparison-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .metrics-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .footer-content {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="hdr-inner">
+      <div class="hdr-logo">💰 SmartCalc World</div>
+      <nav class="hdr-nav">
+        <a href="https://smartcalcworld.com/index.html">Home</a>
+        <a href="https://smartcalcworld.com/finance/finance-hub.html">Finance Hub</a>
+
+        <span class="nav-disabled">Medical Hub (Coming Soon)</span>
+        <span class="nav-disabled">Student Hub (Coming Soon)</span>
+
+        <a href="#faq">FAQ</a>
+      </nav>
+      <button class="hamburger" id="hamburgerBtn" type="button" aria-label="Toggle menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <nav class="mobile-nav" id="mobileNav">
+        <a href="https://smartcalcworld.com/index.html">Home</a>
+        <a href="https://smartcalcworld.com/finance/finance-hub.html">Finance Hub</a>
+
+        <span class="nav-disabled">Medical Hub (Coming Soon)</span>
+        <span class="nav-disabled">Student Hub (Coming Soon)</span>
+
+        <a href="#faq">FAQ</a>
+    </nav>
+  </header>
+
+  <main class="page">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="https://smartcalcworld.com/index.html">Home</a> ›
+      <a href="https://smartcalcworld.com/finance/finance-hub.html">Finance</a> ›
+      <a href="https://smartcalcworld.com/finance/investment/">Investment</a> › Inflation
+      Calculator
+    </nav>
+
+    <section class="hero">
+      <span class="hero-badge">📈 Premium Investment Tool</span>
+      <h1>Inflation Calculator</h1>
+      <p class="hero-sub">Measure future purchasing power, inflation drag, required nominal returns, and salary growth
+        in
+        one mobile-first calculator. This page mirrors our flagship APY experience while focusing on the question that
+        matters most: how much of your money is still real after inflation?</p>
+
+      <div class="hero-highlights">
+        <div class="hero-chip">
+          <strong>Multi-mode analysis</strong>
+          Standard inflation, required return, investment impact, and salary vs inflation in the same workflow.
+        </div>
+        <div class="hero-chip">
+          <strong>Currency-aware visuals</strong>
+          USD, EUR, GBP, INR, AUD, CAD, and a custom symbol update outputs, charts, and tables instantly.
+        </div>
+        <div class="hero-chip">
+          <strong>Built for clear decisions</strong>
+          Use CPI estimates, Rule of 72 guidance, CSV export, and real-vs-nominal comparisons without conversion logic.
+        </div>
+      </div>
+    </section>
+
+    <section class="card" id="calculator">
+      <div class="card-title">🧮 Inflation Calculator Dashboard</div>
+
+      <div class="toolbar-grid">
+        <div class="toolbar-box">
+          <h2>Display Currency</h2>
+          <div class="field-pair">
+            <div class="form-row">
+              <label class="lbl" for="global-currency">Choose currency</label>
+              <select id="global-currency">
+                <option value="USD">USD $</option>
+                <option value="EUR">EUR €</option>
+                <option value="GBP">GBP £</option>
+                <option value="INR">INR ₹</option>
+                <option value="AUD">AUD $</option>
+                <option value="CAD">CAD $</option>
+                <option value="CUSTOM">Custom symbol</option>
+              </select>
+              <span class="hint">Display only. No exchange-rate conversion is applied.</span>
+            </div>
+
+            <div class="form-row hidden" id="custom-symbol-wrap">
+              <label class="lbl" for="custom-symbol">Custom symbol</label>
+              <input type="text" id="custom-symbol" maxlength="6" value="$" placeholder="e.g. CHF or ৳">
+              <span class="hint">Use any prefix symbol or short code you want to display.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="toolbar-box">
+          <h2>What this tool answers</h2>
+          <div class="info-list">
+            <div class="info-pill">💸 How much buying power will <strong>today's money</strong> keep after inflation?
+            </div>
+            <div class="info-pill">🌍 What nominal return do you need to hit a <strong>real return target</strong>?
+            </div>
+            <div class="info-pill">🏦 Is your <strong>salary or portfolio</strong> actually beating inflation?</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="qnav" id="qnav" role="tablist" aria-label="Inflation calculator modes">
+        <button type="button" class="qnav-btn active" data-module="standard" role="tab" aria-selected="true"
+          onclick="switchModule('standard')">📉 Standard Inflation</button>
+        <button type="button" class="qnav-btn" data-module="required" role="tab" aria-selected="false"
+          onclick="switchModule('required')">🎯 Required Return</button>
+        <button type="button" class="qnav-btn" data-module="investment" role="tab" aria-selected="false"
+          onclick="switchModule('investment')">💼 Investment Impact</button>
+        <button type="button" class="qnav-btn" data-module="salary" role="tab" aria-selected="false"
+          onclick="switchModule('salary')">💰 Salary vs Inflation</button>
+      </div>
+
+      <section class="module active" id="mod-standard" role="tabpanel" aria-label="Standard inflation calculator">
+        <p class="module-intro">See how inflation changes the future nominal amount needed to match today's value and
+          how
+          much purchasing power your current money keeps over time.</p>
+
+        <div class="field-pair">
+          <div class="form-row">
+            <label class="lbl" for="std-amount">Current Amount (<span data-currency-symbol>$</span>)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="std-amount" min="1" max="100000000" step="100" value="10000">
+                <span class="hint">Principal or current basket value.</span>
+              </div>
+              <div>
+                <input type="range" id="std-amount-sl" min="100" max="1000000" step="100" value="10000">
+                <div class="slider-lbl" id="std-amount-lbl">$10,000.00</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label class="lbl" for="std-rate">Inflation Rate (%)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="std-rate" min="0.1" max="100" step="0.01" value="6">
+                <span class="hint">Enter annual inflation as a percentage.</span>
+              </div>
+              <div>
+                <input type="range" id="std-rate-sl" min="0.1" max="20" step="0.1" value="6">
+                <div class="slider-lbl" id="std-rate-lbl">6.00%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="field-pair">
+          <div class="form-row">
+            <label class="lbl" for="std-time">Time (Years)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="std-time" min="1" max="80" step="1" value="20">
+                <span class="hint">Time must be greater than zero.</span>
+              </div>
+              <div>
+                <input type="range" id="std-time-sl" min="1" max="60" step="1" value="20">
+                <div class="slider-lbl" id="std-time-lbl">20 years</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="cpi-box">
+            <div class="cpi-title">📊 Estimate average inflation from CPI sample data</div>
+            <div class="field-pair">
+              <div class="form-row">
+                <label class="lbl" for="cpi-country">Country</label>
+                <select id="cpi-country"></select>
+              </div>
+              <div class="form-row">
+                <label class="lbl" for="cpi-start">Start Year</label>
+                <select id="cpi-start"></select>
+              </div>
+            </div>
+            <div class="field-pair">
+              <div class="form-row">
+                <label class="lbl" for="cpi-end">End Year</label>
+                <select id="cpi-end"></select>
+              </div>
+              <div class="form-row">
+                <label class="lbl" for="cpi-country-note">Embedded dataset note</label>
+                <div class="toolbar-help" id="cpi-country-note">Sample CPI values are embedded in the page for quick
+                  offline-style estimation.</div>
+              </div>
+            </div>
+            <div class="btn-row">
+              <button type="button" class="btn-secondary" onclick="calculateFromCpi()">Use CPI Rate</button>
+              <button type="button" class="btn-ghost" onclick="resetCpiSelectors()">Reset CPI Picks</button>
+            </div>
+            <div class="toolbar-help" id="cpi-result-note" style="margin-top:0.8rem;"></div>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <button type="button" class="btn-primary" onclick="calculateStandard()">Calculate Inflation Impact</button>
+          <button type="button" class="btn-ghost" onclick="resetModule('standard')">Reset Standard Mode</button>
+        </div>
+      </section>
+
+      <section class="module" id="mod-required" role="tabpanel" aria-label="Required nominal return calculator">
+        <p class="module-intro">Use the Fisher-style relationship between real return and inflation to estimate the
+          nominal return your investment needs to target.</p>
+
+        <div class="field-pair">
+          <div class="form-row">
+            <label class="lbl" for="req-real">Desired Real Return (%)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="req-real" min="0" max="50" step="0.01" value="5">
+                <span class="hint">This is your inflation-adjusted goal.</span>
+              </div>
+              <div>
+                <input type="range" id="req-real-sl" min="0" max="20" step="0.1" value="5">
+                <div class="slider-lbl" id="req-real-lbl">5.00%</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label class="lbl" for="req-inflation">Expected Inflation (%)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="req-inflation" min="0" max="50" step="0.01" value="6">
+                <span class="hint">Inflation assumptions shape the required nominal return.</span>
+              </div>
+              <div>
+                <input type="range" id="req-inflation-sl" min="0" max="20" step="0.1" value="6">
+                <div class="slider-lbl" id="req-inflation-lbl">6.00%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <button type="button" class="btn-primary" onclick="calculateRequired()">Calculate Required Return</button>
+          <button type="button" class="btn-ghost" onclick="resetModule('required')">Reset Required Mode</button>
+        </div>
+      </section>
+
+      <section class="module" id="mod-investment" role="tabpanel" aria-label="Investment inflation impact calculator">
+        <p class="module-intro">Compare nominal growth with inflation-adjusted growth and see how much of your headline
+          return survives after inflation.</p>
+
+        <div class="field-pair">
+          <div class="form-row">
+            <label class="lbl" for="inv-principal">Principal (<span data-currency-symbol>$</span>)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="inv-principal" min="1" max="200000000" step="1000" value="100000">
+                <span class="hint">Starting investment amount.</span>
+              </div>
+              <div>
+                <input type="range" id="inv-principal-sl" min="1000" max="10000000" step="1000" value="100000">
+                <div class="slider-lbl" id="inv-principal-lbl">$100,000.00</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label class="lbl" for="inv-return">Nominal Return (%)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="inv-return" min="0" max="50" step="0.01" value="10">
+                <span class="hint">Headline investment return before inflation.</span>
+              </div>
+              <div>
+                <input type="range" id="inv-return-sl" min="0" max="30" step="0.1" value="10">
+                <div class="slider-lbl" id="inv-return-lbl">10.00%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="field-pair">
+          <div class="form-row">
+            <label class="lbl" for="inv-inflation">Inflation (%)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="inv-inflation" min="0" max="50" step="0.01" value="6">
+                <span class="hint">Annual inflation to strip out from nominal growth.</span>
+              </div>
+              <div>
+                <input type="range" id="inv-inflation-sl" min="0" max="20" step="0.1" value="6">
+                <div class="slider-lbl" id="inv-inflation-lbl">6.00%</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label class="lbl" for="inv-time">Time (Years)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="inv-time" min="1" max="80" step="1" value="20">
+                <span class="hint">Long horizons make inflation drag easier to see.</span>
+              </div>
+              <div>
+                <input type="range" id="inv-time-sl" min="1" max="60" step="1" value="20">
+                <div class="slider-lbl" id="inv-time-lbl">20 years</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <button type="button" class="btn-primary" onclick="calculateInvestment()">Calculate Real vs Nominal
+            Growth</button>
+          <button type="button" class="btn-ghost" onclick="resetModule('investment')">Reset Investment Mode</button>
+        </div>
+      </section>
+
+      <section class="module" id="mod-salary" role="tabpanel" aria-label="Salary versus inflation calculator">
+        <p class="module-intro">Check whether your annual raise grows faster than inflation and whether your future
+          salary
+          really improves your lifestyle in real terms.</p>
+
+        <div class="field-pair">
+          <div class="form-row">
+            <label class="lbl" for="sal-current">Current Salary (<span data-currency-symbol>$</span>)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="sal-current" min="1" max="100000000" step="1000" value="60000">
+                <span class="hint">Current annual salary or income.</span>
+              </div>
+              <div>
+                <input type="range" id="sal-current-sl" min="1000" max="1000000" step="1000" value="60000">
+                <div class="slider-lbl" id="sal-current-lbl">$60,000.00</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label class="lbl" for="sal-raise">Annual Raise (%)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="sal-raise" min="0" max="50" step="0.01" value="4">
+                <span class="hint">Expected yearly salary increase.</span>
+              </div>
+              <div>
+                <input type="range" id="sal-raise-sl" min="0" max="20" step="0.1" value="4">
+                <div class="slider-lbl" id="sal-raise-lbl">4.00%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="field-pair">
+          <div class="form-row">
+            <label class="lbl" for="sal-inflation">Inflation (%)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="sal-inflation" min="0" max="50" step="0.01" value="6">
+                <span class="hint">Annual inflation assumption.</span>
+              </div>
+              <div>
+                <input type="range" id="sal-inflation-sl" min="0" max="20" step="0.1" value="6">
+                <div class="slider-lbl" id="sal-inflation-lbl">6.00%</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label class="lbl" for="sal-time">Time (Years)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="sal-time" min="1" max="60" step="1" value="10">
+                <span class="hint">Time must stay above zero for compounding to work.</span>
+              </div>
+              <div>
+                <input type="range" id="sal-time-sl" min="1" max="40" step="1" value="10">
+                <div class="slider-lbl" id="sal-time-lbl">10 years</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <button type="button" class="btn-primary" onclick="calculateSalary()">Calculate Salary Growth</button>
+          <button type="button" class="btn-ghost" onclick="resetModule('salary')">Reset Salary Mode</button>
+        </div>
+      </section>
+    </section>
+
+    <section class="card" id="results-section" aria-live="polite">
+      <div class="result-meta">
+        <div class="mode-pill" id="result-mode-pill">Latest Result: Standard Inflation</div>
+        <div class="result-actions">
+          <button type="button" class="btn-secondary" onclick="copyResults()">Copy Results</button>
+          <div class="copy-note" id="copy-note">Nothing copied yet.</div>
+        </div>
+      </div>
+
+      <div class="status-banner" id="status-banner"></div>
+
+      <div class="result-grid">
+        <div class="result-card teal" id="result-card-0">
+          <div class="result-lbl" id="result-lbl-0">Future Nominal Value</div>
+          <div class="result-val" id="result-val-0">—</div>
+          <div class="result-sub" id="result-sub-0">Standard inflation mode</div>
+        </div>
+        <div class="result-card amber" id="result-card-1">
+          <div class="result-lbl" id="result-lbl-1">Purchasing Power</div>
+          <div class="result-val" id="result-val-1">—</div>
+          <div class="result-sub" id="result-sub-1">Inflation-adjusted value</div>
+        </div>
+        <div class="result-card rose" id="result-card-2">
+          <div class="result-lbl" id="result-lbl-2">Value Erosion</div>
+          <div class="result-val" id="result-val-2">—</div>
+          <div class="result-sub" id="result-sub-2">How much buying power disappears</div>
+        </div>
+        <div class="result-card slate" id="result-card-3">
+          <div class="result-lbl" id="result-lbl-3">Erosion %</div>
+          <div class="result-val" id="result-val-3">—</div>
+          <div class="result-sub" id="result-sub-3">Share of value lost</div>
+        </div>
+      </div>
+
+      <div class="rule72-box" id="rule72-box"></div>
+      <div class="formula-box" id="formula-box"></div>
+    </section>
+
+    <section class="card" id="charts-section">
+      <div class="card-title">📊 Visual Inflation Dashboard</div>
+      <p class="chart-note" id="charts-context">Charts track the most recent time-based scenario.</p>
+
+      <div class="charts-grid">
+        <div class="chart-wrap">
+          <div class="chart-title" id="decline-title">Purchasing Power Decline</div>
+          <div class="chart-note" id="decline-note">Year vs inflation-adjusted value.</div>
+          <div class="chart-canvas">
+            <canvas id="decline-chart"></canvas>
+          </div>
+        </div>
+
+        <div class="chart-wrap">
+          <div class="chart-title" id="comparison-title">Nominal vs Real Comparison</div>
+          <div class="chart-note" id="comparison-note">Two curves show headline growth versus real growth.</div>
+          <div class="chart-canvas">
+            <canvas id="comparison-chart"></canvas>
+          </div>
+        </div>
+
+        <div class="chart-wrap">
+          <div class="chart-title" id="pie-title">Inflation Erosion Pie</div>
+          <div class="chart-note" id="pie-note">How much value is preserved versus lost.</div>
+          <div class="chart-canvas">
+            <canvas id="erosion-chart"></canvas>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" id="projection-section">
+      <div class="table-head">
+        <div>
+          <div class="card-title" style="margin-bottom:0.3rem;">🗂️ Projection Table</div>
+          <div class="table-context" id="projection-context">Year-by-year purchasing power and inflation impact.</div>
+        </div>
+        <button type="button" class="btn-secondary" onclick="downloadCsv()">Download CSV</button>
+      </div>
+
+      <div class="tbl-wrap">
+        <table>
+          <thead>
+            <tr id="projection-head-row"></tr>
+          </thead>
+          <tbody id="projection-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="content-section" id="comparison-tables">
+      <h2>🧾 Comparison Tables</h2>
+      <p>These quick tables make it easier to explain inflation in plain language during planning conversations. The
+        first compares nominal and real return using the real return formula, and the second shows how inflation erodes
+        value over 10, 20, and 30 years.</p>
+
+      <div class="comparison-grid">
+        <div>
+          <h3>Nominal vs Real Return Comparison</h3>
+          <div class="formula-box"><strong>Real Return</strong> = ((1 + r) / (1 + i)) − 1</div>
+          <div class="tbl-wrap" style="margin-top:0.8rem;">
+            <table>
+              <thead>
+                <tr>
+                  <th>Scenario</th>
+                  <th>Nominal Return</th>
+                  <th>Inflation</th>
+                  <th>Real Return</th>
+                  <th>Formula</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Growth equities</td>
+                  <td>12%</td>
+                  <td>3%</td>
+                  <td>8.74%</td>
+                  <td>((1.12)/(1.03)) − 1</td>
+                </tr>
+                <tr>
+                  <td>Diversified portfolio</td>
+                  <td>10%</td>
+                  <td>5%</td>
+                  <td>4.76%</td>
+                  <td>((1.10)/(1.05)) − 1</td>
+                </tr>
+                <tr>
+                  <td>Moderate fund</td>
+                  <td>8%</td>
+                  <td>6%</td>
+                  <td>1.89%</td>
+                  <td>((1.08)/(1.06)) − 1</td>
+                </tr>
+                <tr>
+                  <td>Savings account</td>
+                  <td>5%</td>
+                  <td>4%</td>
+                  <td>0.96%</td>
+                  <td>((1.05)/(1.04)) − 1</td>
+                </tr>
+                <tr>
+                  <td>Low-yield cash</td>
+                  <td>3%</td>
+                  <td>5%</td>
+                  <td>-1.90%</td>
+                  <td>((1.03)/(1.05)) − 1</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div>
+          <h3>Inflation Impact Over 10 / 20 / 30 Years</h3>
+          <div class="tbl-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Inflation Rate</th>
+                  <th>10 Years</th>
+                  <th>20 Years</th>
+                  <th>30 Years</th>
+                  <th>Rule of 72</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>2%</td>
+                  <td>18.05%</td>
+                  <td>32.70%</td>
+                  <td>44.77%</td>
+                  <td>36 years</td>
+                </tr>
+                <tr>
+                  <td>3%</td>
+                  <td>25.59%</td>
+                  <td>44.63%</td>
+                  <td>58.80%</td>
+                  <td>24 years</td>
+                </tr>
+                <tr>
+                  <td>4%</td>
+                  <td>32.44%</td>
+                  <td>54.38%</td>
+                  <td>69.19%</td>
+                  <td>18 years</td>
+                </tr>
+                <tr>
+                  <td>5%</td>
+                  <td>38.61%</td>
+                  <td>62.31%</td>
+                  <td>76.86%</td>
+                  <td>14.4 years</td>
+                </tr>
+                <tr>
+                  <td>6%</td>
+                  <td>44.16%</td>
+                  <td>68.82%</td>
+                  <td>82.57%</td>
+                  <td>12 years</td>
+                </tr>
+                <tr>
+                  <td>8%</td>
+                  <td>53.68%</td>
+                  <td>78.54%</td>
+                  <td>90.06%</td>
+                  <td>9 years</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="hint" style="margin-top:0.75rem;">Erosion % = 1 − (1 / (1 + inflation rate)<sup>years</sup>)</p>
+        </div>
+      </div>
+    </section>
+
+    <article class="content-section" id="guide">
+      <h2>📚 What Inflation Means for Real Money Decisions</h2>
+
+      <h3>What is inflation? 📈</h3>
+      <p>Inflation is the steady rise in the average price of goods and services over time. When inflation is 3%, a
+        basket of items that costs <span data-currency-symbol>$</span>100 today will cost about
+        <span data-currency-symbol>$</span>103 next year if price growth continues at the same rate. That sounds small,
+        but inflation compounds year after year, so the long-term effect becomes powerful. The key takeaway is simple:
+        inflation reduces the purchasing power of money. In other words, the amount printed on your bank balance may
+        stay the same while the amount of real life it can buy gets smaller.
+      </p>
+
+      <p>Economists often use CPI, or the Consumer Price Index, to estimate inflation. CPI tracks the price of a sample
+        basket of common goods and services such as housing, food, transport, clothing, health care, and education. No
+        single index is perfect for every household, but CPI is a practical benchmark because it gives us a broad view
+        of how the cost of living changes over time. That is why this calculator includes a built-in CPI sample dataset
+        so you can estimate an average inflation rate directly from indexed values.</p>
+
+      <h3>Why money loses purchasing power over time 💸</h3>
+      <p>Money loses purchasing power because prices rarely stay still for long. Wages rise, raw materials become more
+        expensive, energy costs move, supply chains tighten, tax rules change, and demand shifts across the economy.
+        When businesses face higher costs or stronger demand, they often pass some of that increase on to consumers.
+        Over time, this process pushes average prices higher. That is why keeping cash in a drawer or in a very low
+        yield account can feel safe in nominal terms while still creating a real loss.</p>
+
+      <p>Take a practical example: if you have <span data-currency-symbol>$</span>10,000 today and inflation averages 6%
+        for 20 years, the purchasing power of that money falls to roughly <span data-currency-symbol>$</span>3,118 in
+        today's terms. The balance is still 10,000 on paper, but its real value is much lower. That is the silent
+        danger of inflation. It usually does not look dramatic day to day, yet over long periods it can reduce the real
+        value of savings more than many people expect.</p>
+
+      <div class="callout">
+        <strong>Simple rule:</strong> if your money grows slower than inflation, your real wealth is shrinking even if
+        your account balance is rising.
+      </div>
+
+      <h3>Nominal return vs real return 🌍</h3>
+      <p>One of the most important ideas in finance is the difference between nominal return and real return.
+        <strong>Nominal return</strong> is the headline number. If your fund gained 8%, that is the nominal return.
+        <strong>Real return</strong> adjusts that growth for inflation. Real return answers the better question: how
+        much
+        extra purchasing power did I really gain?
+      </p>
+
+      <p>The exact formula is <strong>((1 + r) / (1 + i)) − 1</strong>, where <strong>r</strong> is nominal return and
+        <strong>i</strong> is inflation. This is why a 5% return is not a 5% real return. If inflation is 3%, then your
+        real return is roughly 1.94%, not 5%. The gap may look small, but over long periods it matters a lot because
+        compounding works on both gains and inflation.
+      </p>
+
+      <p>Here is a quick way to think about it: nominal return tells you what happened in money terms, while real return
+        tells you what happened in lifestyle terms. If your investment gained 10% but prices rose 6%, your wealth did
+        grow, but not by the full 10% in real life. That distinction helps investors avoid false comfort and compare
+        opportunities more honestly.</p>
+
+      <h3>Why 5% return is not 5% real return</h3>
+      <p>This point deserves special attention because it is where many savings decisions go wrong. Suppose a deposit
+        account or bond pays 5% a year. If inflation also runs at 5%, you did not really get richer in purchasing power
+        terms. Using the exact formula, real return is ((1.05 / 1.05) − 1) = 0%. If inflation is 4%, then real return
+        is only about 0.96%. If inflation is 6%, your real return is negative. So the statement “I am earning 5%” is
+        incomplete without also asking, “and what is inflation doing?”</p>
+
+      <p>This is why inflation-adjusted analysis is especially important for long-term goals. You do not invest for a
+        bigger number on a screen. You invest so future money can still pay for future life: rent, food, health care,
+        school fees, travel, or retirement spending. Real return is the measure that stays connected to those goals.</p>
+
+      <h3>How central banks influence inflation in simple terms 🏦</h3>
+      <p>Central banks try to keep inflation under control because very high inflation makes planning difficult and
+        hurts
+        savings, while very low inflation or deflation can slow business activity. Their main tool is interest rates.
+        When inflation is too high, central banks often raise policy rates. Higher rates make borrowing more expensive,
+        which can cool spending and slow price increases. When inflation is too low or growth is weak, central banks may
+        lower rates to encourage borrowing, investment, and spending.</p>
+
+      <p>They also influence inflation through money supply, liquidity programs, and communication. In simple terms,
+        central banks try to balance growth and price stability. Most of them prefer moderate inflation rather than zero
+        inflation because a small amount of price growth can support economic activity. For households and investors,
+        the
+        practical lesson is this: inflation is not random noise. It responds to policy, supply shocks, labor markets,
+        and economic behavior, which is why your assumptions should stay realistic and flexible.</p>
+
+      <h3>How inflation affects retirement savings 🏦</h3>
+      <p>Inflation is one of the biggest risks in retirement planning because retirement is usually a very long period.
+        A person who retires at 60 may need their money to last 25 to 35 years. Over a horizon like that, even moderate
+        inflation can double or triple living costs. If retirement income grows too slowly, the same lifestyle becomes
+        harder to maintain each year.</p>
+
+      <p>Imagine a retiree needs <span data-currency-symbol>$</span>4,000 per month today. At 3% inflation, that same
+        lifestyle would require about <span data-currency-symbol>$</span>7,224 in 20 years and around
+        <span data-currency-symbol>$</span>9,708 in 30 years. That is why retirement plans should not focus only on a
+        target corpus. They also need to consider the real spending power of that corpus. A portfolio that looks safe in
+        nominal terms can still fail if inflation steadily eats into withdrawals.
+      </p>
+
+      <p>This is one reason diversified retirement portfolios usually hold more than cash and short-term deposits. Many
+        savers need growth assets so a portion of the portfolio can outrun inflation across decades. The challenge is
+        balancing short-term stability with long-term real growth.</p>
+
+      <h3>How to protect against inflation</h3>
+      <p><strong>Equities:</strong> Over long periods, diversified equities have often outpaced inflation because
+        companies can grow earnings and raise prices. They are volatile in the short run, but they are one of the most
+        common long-term inflation defenses.</p>
+
+      <p><strong>Real assets:</strong> Property, infrastructure, and some commodity-linked assets often benefit when
+        nominal prices rise. Real assets are not perfect hedges, but they can help preserve value because they are tied
+        to physical economic activity.</p>
+
+      <p><strong>Gold and commodities:</strong> Gold is often discussed as an inflation hedge because it is a hard asset
+        with global recognition. Commodities can also rise during inflationary periods, though both can be volatile and
+        may go through long stretches of weak performance. They are usually best viewed as part of a broader mix rather
+        than a full solution by themselves.</p>
+
+      <p><strong>Inflation-aware fixed income:</strong> Some countries offer inflation-linked bonds, such as TIPS in the
+        United States. These can help preserve real purchasing power because principal or payments adjust with inflation
+        benchmarks.</p>
+
+      <p><strong>Skills and earning power:</strong> A practical but underrated hedge is human capital. Better skills,
+        productivity, and career mobility can support salary growth that beats inflation. If your income can rise faster
+        than living costs, your financial resilience improves even before investment returns are counted.</p>
+
+      <div class="callout amber">
+        <strong>Professional framing:</strong> protecting against inflation usually means combining growth assets,
+        liquidity, and realistic expectations instead of relying on a single “perfect” hedge.
+      </div>
+
+      <h3>Understanding the Rule of 72 clearly 💡</h3>
+      <p>The Rule of 72 is a shortcut. Divide 72 by a growth rate to estimate how many years it takes for something to
+        double. For inflation, the same shortcut is used in reverse to estimate how long it takes for money to lose
+        about
+        half its purchasing power. At 6% inflation, 72 ÷ 6 = 12. That means your money loses roughly half its buying
+        power in about 12 years. It is not exact, but it is fast and surprisingly useful for mental math.</p>
+
+      <p>This page goes one step further and also shows the exact compounding-based half-life. That is helpful because
+        the Rule of 72 is only an estimate. Still, it remains one of the best simple tools for explaining why inflation
+        should not be ignored. When someone says “prices are only rising a little,” the Rule of 72 helps show what that
+        “little” means over a decade or two.</p>
+
+      <div class="callout rose">
+        <strong>Key idea:</strong> inflation does not need to be extreme to be dangerous. Moderate inflation maintained
+        over many years can quietly cut the real value of money by half or more.
+      </div>
+    </article>
+
+    <section class="content-section" id="more-tools">
+      <h2>🔗 Explore More Calculators</h2>
+      <p>Inflation works best when it is part of a wider planning workflow. Use these related calculators to compare
+        real
+        growth, savings discipline, yield, and retirement readiness.</p>
+
+      <div class="links-grid">
+        <!-- <a class="link-card" href="https://smartcalcworld.com/finance/investment/lumpsum-calculator.html">
+          <span class="link-icon">💰</span>
+          <strong>Lumpsum Calculator</strong>
+          <p>Project one-time investments, then compare the result with inflation-adjusted purchasing power.</p>
+        </a> -->
+
+        <a class="link-card" href="https://smartcalcworld.com/finance/investment/cagr-calculator.html">
+          <span class="link-icon">📈</span>
+          <strong>CAGR Calculator</strong>
+          <p>Measure annualized growth and compare nominal CAGR with inflation-adjusted real performance.</p>
+        </a>
+
+        <a class="link-card" href="https://smartcalcworld.com/finance/finance-sip-calculator.html">
+          <span class="link-icon">📊</span>
+          <strong>SIP Calculator</strong>
+          <p>Understand how regular contributions compound and whether the final corpus really beats inflation.</p>
+        </a>
+
+        <a class="link-card" href="https://smartcalcworld.com/finance/investment/apy-calculator.html">
+          <span class="link-icon">💹</span>
+          <strong>APY Calculator</strong>
+          <p>Compare headline yield with real return so higher APY does not create a false sense of growth.</p>
+        </a>
+
+        <!-- <a class="link-card" href="https://smartcalcworld.com/finance/retirement/retirement-calculator.html">
+          <span class="link-icon">🌅</span>
+          <strong>Retirement Calculator</strong>
+          <p>Plan future income needs with inflation-adjusted spending assumptions for retirement security.</p>
+        </a> -->
+      </div>
+    </section>
+
+    <section class="content-section" id="faq">
+      <h2>❓ Frequently Asked Questions</h2>
+
+      <div class="faq-item">
+        <div class="faq-q">What is inflation?</div>
+        <div class="faq-a">Inflation is the rate at which prices rise across the economy. When inflation rises, each
+          unit
+          of money buys fewer goods and services, so purchasing power falls over time.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">What does CPI mean?</div>
+        <div class="faq-a">CPI means Consumer Price Index. It tracks the cost of a sample basket of everyday goods and
+          services and is commonly used to estimate inflation.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">What is the difference between nominal and real return?</div>
+        <div class="faq-a">Nominal return is the headline return before inflation. Real return adjusts for inflation
+          using ((1 + r) / (1 + i)) − 1, which shows the true change in purchasing power.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">How does the Rule of 72 work for inflation?</div>
+        <div class="faq-a">Divide 72 by the inflation rate to estimate how many years it takes for money to lose about
+          half its purchasing power. At 6% inflation, the estimate is about 12 years.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">How can I beat inflation?</div>
+        <div class="faq-a">Many people try to beat inflation through diversified investments such as equities, selected
+          real assets, inflation-linked bonds, and disciplined long-term saving. The right mix depends on your risk,
+          timeline, and goals.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">What is considered a safe inflation rate?</div>
+        <div class="faq-a">Many central banks aim for inflation around 2% over time because it balances economic
+          activity
+          and price stability better than very high or very low inflation.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">What is hyperinflation?</div>
+        <div class="faq-a">Hyperinflation is an extreme inflation spiral, often defined as prices rising more than 50%
+          per month. It can quickly destroy savings and confidence in a currency.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">How does inflation affect salary growth?</div>
+        <div class="faq-a">If raises are lower than inflation, real income falls. A bigger paycheck does not always mean
+          a better standard of living if living costs are rising faster.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Why is 5% return not really 5% real return?</div>
+        <div class="faq-a">Because inflation reduces the value of the gain. If you earn 5% and inflation is 3%, your
+          real return is about 1.94%, not 5%.</div>
+      </div>
+    </section>
+
+    <div class="disclaimer1">
+      <strong>Disclaimer:</strong> This calculator is for educational and planning use only. Built-in CPI values are a
+      static sample dataset for estimation, not official live statistics. Actual inflation varies by country, region,
+      product category, taxes, and time period. Investment returns, salary growth, and future inflation are uncertain.
+      Please use this tool alongside independent research or professional advice before making financial decisions.
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="https://smartcalcworld.com/index.html">Home</a></li>
+          <li><a href="https://smartcalcworld.com/about.html">About</a></li>
+          <li><a href="https://smartcalcworld.com/contact.html">Contact</a></li>
+          <li><a href="https://smartcalcworld.com/privacy-policy.html">Privacy Policy</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h3>Content</h3>
+        <ul>
+          <li><a href="#calculator">Inflation Calculator</a></li>
+          <li><a href="#guide">Inflation Guide</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h3>Student Tools</h3>
+        <ul>
+          <li><a href="https://smartcalcworld.com/percentage-calculator.html">Percentage Calculator</a></li>
+          <li><a href="https://smartcalcworld.com/cgpa-calculator.html">CGPA Calculator</a></li>
+          <li><a href="https://smartcalcworld.com/simple-compound-interest-calculator.html">Simple & Compound Interest Calculator</a></li>
+
+          <li><span class="coming-soon">MATRIX Calculator (Coming Soon)</span></li>
+          <li><span class="coming-soon">STATISTIC Calculator (Coming Soon)</span></li>
+        </ul>
+      </div>
+
+
+      <div class="footer-section">
+        <h3>Finance Tools</h3>
+        <ul>
+          <li><a href="https://smartcalcworld.com/finance/interest/interest-hub.html">Interest Calculators</a></li>
+          <li><a href="https://smartcalcworld.com/finance/investment/investment-hub.html">Investment Calculators</a></li>
+          <li><a href="https://smartcalcworld.com/finance/loan/loan-hub.html">Loan Calculators</a></li>
+          <li><a href="https://smartcalcworld.com/finance/tax/tax-hub.html">Tax Calculators</a></li>
+          <li><a href="https://smartcalcworld.com/finance/saving-retirement/saving-retirement-hub.html">Savings Calculators</a></li>
+          <li><a href="https://smartcalcworld.com/finance/saving-retirement/saving-retirement-hub.html">Retirement Calculators</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <div class="footer-disclaimer">
+          <strong>SmartCalc World Note:</strong> Inflation analysis is most useful when combined with realistic return
+          assumptions, taxes, fees, and personal risk tolerance. Use real return thinking, not just nominal numbers.
+        </div>
+      </div>
+    </div>
+    <div class="copyright">
+      <p>&copy; SmartCalc World. All rights reserved.</p>
+    </div>
+  </footer>
+  <script>
+    const $ = (id) => document.getElementById(id);
+
+    const cpiData = {
+      "United States": { 2018: 251.11, 2019: 255.66, 2020: 258.84, 2021: 271.05, 2022: 292.66, 2023: 304.13, 2024: 312.45, 2025: 321.82 },
+      "Euro Area": { 2018: 101.70, 2019: 102.82, 2020: 103.46, 2021: 106.12, 2022: 115.53, 2023: 122.01, 2024: 125.20, 2025: 128.64 },
+      "United Kingdom": { 2018: 106.20, 2019: 108.50, 2020: 109.80, 2021: 114.30, 2022: 125.60, 2023: 131.20, 2024: 135.70, 2025: 139.50 },
+      "India": { 2018: 112.80, 2019: 117.50, 2020: 124.30, 2021: 132.10, 2022: 142.80, 2023: 151.30, 2024: 159.80, 2025: 169.20 },
+      "Australia": { 2018: 106.80, 2019: 108.70, 2020: 109.30, 2021: 113.10, 2022: 121.70, 2023: 127.20, 2024: 131.00, 2025: 134.90 },
+      "Canada": { 2018: 133.40, 2019: 136.00, 2020: 137.00, 2021: 141.60, 2022: 152.40, 2023: 157.10, 2024: 160.60, 2025: 164.10 }
+    };
+
+    const currencies = {
+      USD: { symbol: "$", locale: "en-US" },
+      EUR: { symbol: "€", locale: "de-DE" },
+      GBP: { symbol: "£", locale: "en-GB" },
+      INR: { symbol: "₹", locale: "en-IN" },
+      AUD: { symbol: "$", locale: "en-AU" },
+      CAD: { symbol: "$", locale: "en-CA" },
+      CUSTOM: { symbol: "$", locale: "en-US" }
+    };
+
+    const state = {
+      activeModule: "standard",
+      currentCurrency: "USD",
+      customSymbol: "$",
+      copyText: "",
+      lastResultMode: "standard",
+      lastTimeBasedMode: "standard",
+      charts: {
+        decline: null,
+        comparison: null,
+        erosion: null
+      },
+      projectionColumns: [],
+      projectionRows: [],
+      projectionFilename: "inflation_projection.csv"
+    };
+
+    const sliderConfigs = [
+      { input: "std-amount", slider: "std-amount-sl", label: "std-amount-lbl", type: "money", digits: 2 },
+      { input: "std-rate", slider: "std-rate-sl", label: "std-rate-lbl", type: "percent", digits: 2 },
+      { input: "std-time", slider: "std-time-sl", label: "std-time-lbl", type: "years" },
+      { input: "req-real", slider: "req-real-sl", label: "req-real-lbl", type: "percent", digits: 2 },
+      { input: "req-inflation", slider: "req-inflation-sl", label: "req-inflation-lbl", type: "percent", digits: 2 },
+      { input: "inv-principal", slider: "inv-principal-sl", label: "inv-principal-lbl", type: "money", digits: 2 },
+      { input: "inv-return", slider: "inv-return-sl", label: "inv-return-lbl", type: "percent", digits: 2 },
+      { input: "inv-inflation", slider: "inv-inflation-sl", label: "inv-inflation-lbl", type: "percent", digits: 2 },
+      { input: "inv-time", slider: "inv-time-sl", label: "inv-time-lbl", type: "years" },
+      { input: "sal-current", slider: "sal-current-sl", label: "sal-current-lbl", type: "money", digits: 2 },
+      { input: "sal-raise", slider: "sal-raise-sl", label: "sal-raise-lbl", type: "percent", digits: 2 },
+      { input: "sal-inflation", slider: "sal-inflation-sl", label: "sal-inflation-lbl", type: "percent", digits: 2 },
+      { input: "sal-time", slider: "sal-time-sl", label: "sal-time-lbl", type: "years" }
+    ];
+
+    function currentSymbol() {
+      if (state.currentCurrency === "CUSTOM") {
+        return state.customSymbol.trim() || "$";
+      }
+      return currencies[state.currentCurrency].symbol;
+    }
+
+    function currentLocale() {
+      return currencies[state.currentCurrency === "CUSTOM" ? "USD" : state.currentCurrency].locale;
+    }
+
+    function formatMoney(value, digits = 2) {
+      const number = Number(value) || 0;
+      const negative = number < 0 ? "-" : "";
+      const amount = Math.abs(number).toLocaleString(currentLocale(), {
+        minimumFractionDigits: digits,
+        maximumFractionDigits: digits
+      });
+      return `${negative}${currentSymbol()}${amount}`;
+    }
+
+    function formatPercentFromDecimal(value, digits = 2) {
+      return `${(Number(value) * 100).toLocaleString(undefined, {
+        minimumFractionDigits: digits,
+        maximumFractionDigits: digits
+      })}%`;
+    }
+
+    function formatPercentValue(value, digits = 2) {
+      return `${Number(value).toLocaleString(undefined, {
+        minimumFractionDigits: digits,
+        maximumFractionDigits: digits
+      })}%`;
+    }
+
+    function formatSliderValue(type, value, digits = 0) {
+      if (type === "money") return formatMoney(value, digits);
+      if (type === "percent") return formatPercentValue(value, digits);
+      if (type === "years") return `${Math.round(Number(value))} years`;
+      return String(value);
+    }
+
+    function destroyChart(chart) {
+      if (chart) chart.destroy();
+      return null;
+    }
+
+    function setStatus(message = "", tone = "") {
+      const banner = $("status-banner");
+      banner.className = "status-banner";
+      banner.textContent = message;
+      if (!message) return;
+      banner.classList.add(tone || "info");
+    }
+
+    function setCopyNote(message) {
+      $("copy-note").textContent = message;
+    }
+
+    function updateCurrencyIndicators() {
+      document.querySelectorAll("[data-currency-symbol]").forEach((node) => {
+        node.textContent = currentSymbol();
+      });
+      sliderConfigs.forEach((config) => updateSliderLabel(config));
+      rerenderLastResult();
+    }
+
+    function updateSliderLabel(config) {
+      const input = $(config.input);
+      const label = $(config.label);
+      if (!input || !label) return;
+      label.textContent = formatSliderValue(config.type, input.value, config.digits || 0);
+    }
+
+    function clampToSlider(inputEl, sliderEl) {
+      if (!inputEl.value) return;
+      let value = Number(inputEl.value);
+      if (!Number.isFinite(value)) value = Number(sliderEl.min);
+      value = Math.max(Number(sliderEl.min), Math.min(Number(sliderEl.max), value));
+      inputEl.value = value;
+      sliderEl.value = value;
+    }
+
+    function bindSliderPair(config) {
+      const inputEl = $(config.input);
+      const sliderEl = $(config.slider);
+      if (!inputEl || !sliderEl) return;
+
+      updateSliderLabel(config);
+
+      inputEl.addEventListener("input", () => {
+        clampToSlider(inputEl, sliderEl);
+        updateSliderLabel(config);
+      });
+
+      sliderEl.addEventListener("input", () => {
+        inputEl.value = sliderEl.value;
+        updateSliderLabel(config);
+      });
+    }
+
+    function switchModule(name) {
+      state.activeModule = name;
+      document.querySelectorAll(".module").forEach((module) => {
+        module.classList.toggle("active", module.id === `mod-${name}`);
+      });
+      document.querySelectorAll(".qnav-btn").forEach((button) => {
+        const active = button.dataset.module === name;
+        button.classList.toggle("active", active);
+        button.setAttribute("aria-selected", active ? "true" : "false");
+      });
+      setStatus("");
+    }
+
+    function getYears(country) {
+      return Object.keys(cpiData[country]).map(Number).sort((a, b) => a - b);
+    }
+
+    function populateCpiSelectors() {
+      const countrySelect = $("cpi-country");
+      countrySelect.innerHTML = Object.keys(cpiData)
+        .map((country) => `<option value="${country}">${country}</option>`)
+        .join("");
+      countrySelect.value = "United States";
+      refreshCpiYears();
+    }
+
+    function refreshCpiYears() {
+      const country = $("cpi-country").value;
+      const years = getYears(country);
+      $("cpi-start").innerHTML = years.map((year) => `<option value="${year}">${year}</option>`).join("");
+      $("cpi-end").innerHTML = years.map((year) => `<option value="${year}">${year}</option>`).join("");
+      $("cpi-start").value = String(years[Math.max(0, years.length - 6)]);
+      $("cpi-end").value = String(years[years.length - 1]);
+    }
+
+    function resetCpiSelectors() {
+      $("cpi-country").value = "United States";
+      refreshCpiYears();
+      $("cpi-result-note").textContent = "";
+    }
+
+    function calculateFromCpi() {
+      const country = $("cpi-country").value;
+      const startYear = Number($("cpi-start").value);
+      const endYear = Number($("cpi-end").value);
+
+      if (!(endYear > startYear)) {
+        setStatus("End year must be later than start year when calculating average inflation from CPI.", "error");
+        return;
+      }
+
+      const cpiStart = cpiData[country][startYear];
+      const cpiEnd = cpiData[country][endYear];
+      const years = endYear - startYear;
+      const averageInflation = (Math.pow(cpiEnd / cpiStart, 1 / years) - 1) * 100;
+
+      $("std-rate").value = averageInflation.toFixed(2);
+      $("std-rate-sl").value = Math.min(Number($("std-rate-sl").max), Math.max(Number($("std-rate-sl").min), averageInflation));
+      updateSliderLabel(sliderConfigs.find((item) => item.input === "std-rate"));
+      $("cpi-result-note").textContent = `${country}: average inflation from ${startYear} to ${endYear} is ${averageInflation.toFixed(2)}% using Avg Inflation = (CPI end / CPI start)^(1 / t) − 1.`;
+      setStatus("CPI-based average inflation applied to Standard Inflation mode.", "info");
+      calculateStandard();
+    }
+
+    function buildResultCards(modeTitle, cards, formula, rule72Text, copyText) {
+      $("result-mode-pill").textContent = `Latest Result: ${modeTitle}`;
+      cards.forEach((card, index) => {
+        const cardEl = $(`result-card-${index}`);
+        cardEl.className = `result-card ${card.tone}`;
+        $(`result-lbl-${index}`).textContent = card.label;
+        $(`result-val-${index}`).textContent = card.value;
+        $(`result-sub-${index}`).textContent = card.sub;
+      });
+      $("formula-box").innerHTML = formula;
+      const ruleBox = $("rule72-box");
+      if (rule72Text) {
+        ruleBox.style.display = "block";
+        ruleBox.innerHTML = `<strong>💡 Rule of 72:</strong> ${rule72Text}`;
+      } else {
+        ruleBox.style.display = "none";
+        ruleBox.innerHTML = "";
+      }
+      state.copyText = copyText;
+      setCopyNote("Results ready to copy.");
+    }
+
+    function updateProjection(columns, rows, filename, contextText) {
+      state.projectionColumns = columns;
+      state.projectionRows = rows;
+      state.projectionFilename = filename;
+      $("projection-context").textContent = contextText;
+      $("projection-head-row").innerHTML = columns.map((column) => `<th>${column.label}</th>`).join("");
+      $("projection-body").innerHTML = rows.map((row) => {
+        return `<tr>${columns.map((column) => `<td>${formatCell(row[column.key], column.type)}</td>`).join("")}</tr>`;
+      }).join("");
+    }
+
+    function formatCell(value, type) {
+      if (type === "money") return formatMoney(value);
+      if (type === "percentDecimal") return formatPercentFromDecimal(value);
+      if (type === "percentValue") return formatPercentValue(value);
+      if (type === "text") return value;
+      if (type === "years") return `${value}`;
+      return Number(value).toLocaleString(undefined, { maximumFractionDigits: 2 });
+    }
+
+    function commonChartOptions() {
+      return {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: { mode: "index", intersect: false },
+        plugins: {
+          legend: {
+            position: "bottom",
+            labels: { boxWidth: 14, usePointStyle: true }
+          }
+        }
+      };
+    }
+
+    function renderCharts(config) {
+      $("charts-context").textContent = config.context;
+      $("decline-title").textContent = config.declineTitle;
+      $("decline-note").textContent = config.declineNote;
+      $("comparison-title").textContent = config.comparisonTitle;
+      $("comparison-note").textContent = config.comparisonNote;
+      $("pie-title").textContent = config.pieTitle;
+      $("pie-note").textContent = config.pieNote;
+
+      const declineCtx = $("decline-chart").getContext("2d");
+      state.charts.decline = destroyChart(state.charts.decline);
+      state.charts.decline = new Chart(declineCtx, {
+        type: "line",
+        data: {
+          labels: config.labels,
+          datasets: [
+            {
+              label: config.declineDatasetLabel,
+              data: config.declineValues,
+              borderColor: "#0d9488",
+              backgroundColor: "rgba(13, 148, 136, 0.16)",
+              fill: true,
+              tension: 0.28,
+              pointRadius: 2
+            }
+          ]
+        },
+        options: {
+          ...commonChartOptions(),
+          scales: {
+            y: {
+              ticks: {
+                callback: (value) => formatMoney(value, 0)
+              }
+            }
+          },
+          plugins: {
+            ...commonChartOptions().plugins,
+            tooltip: {
+              callbacks: {
+                label: (ctx) => `${ctx.dataset.label}: ${formatMoney(ctx.parsed.y)}`
+              }
+            }
+          }
+        }
+      });
+
+      const comparisonCtx = $("comparison-chart").getContext("2d");
+      state.charts.comparison = destroyChart(state.charts.comparison);
+      state.charts.comparison = new Chart(comparisonCtx, {
+        type: "line",
+        data: {
+          labels: config.labels,
+          datasets: [
+            {
+              label: config.nominalLabel,
+              data: config.nominalValues,
+              borderColor: "#0284c7",
+              backgroundColor: "rgba(2, 132, 199, 0.12)",
+              tension: 0.25,
+              pointRadius: 2
+            },
+            {
+              label: config.realLabel,
+              data: config.realValues,
+              borderColor: "#f43f5e",
+              backgroundColor: "rgba(244, 63, 94, 0.12)",
+              tension: 0.25,
+              pointRadius: 2
+            }
+          ]
+        },
+        options: {
+          ...commonChartOptions(),
+          scales: {
+            y: {
+              ticks: {
+                callback: (value) => formatMoney(value, 0)
+              }
+            }
+          },
+          plugins: {
+            ...commonChartOptions().plugins,
+            tooltip: {
+              callbacks: {
+                label: (ctx) => `${ctx.dataset.label}: ${formatMoney(ctx.parsed.y)}`
+              }
+            }
+          }
+        }
+      });
+
+      const pieCtx = $("erosion-chart").getContext("2d");
+      state.charts.erosion = destroyChart(state.charts.erosion);
+      state.charts.erosion = new Chart(pieCtx, {
+        type: "pie",
+        data: {
+          labels: config.pieLabels,
+          datasets: [
+            {
+              data: config.pieValues,
+              backgroundColor: ["#14b8a6", "#f59e0b"],
+              borderColor: "#ffffff",
+              borderWidth: 2
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: "bottom",
+              labels: { boxWidth: 14, usePointStyle: true }
+            },
+            tooltip: {
+              callbacks: {
+                label: (ctx) => {
+                  const total = ctx.dataset.data.reduce((sum, item) => sum + item, 0);
+                  const share = total ? (ctx.parsed / total) * 100 : 0;
+                  return `${ctx.label}: ${formatMoney(ctx.parsed)} (${share.toFixed(1)}%)`;
+                }
+              }
+            }
+          }
+        }
+      });
+    }
+
+    function calculateStandard() {
+      const P = Number($("std-amount").value);
+      const inflationPct = Number($("std-rate").value);
+      const t = Number($("std-time").value);
+
+      if (!(P > 0) || !(inflationPct >= 0) || !(t > 0)) {
+        setStatus("Enter a positive amount, a non-negative inflation rate, and a time greater than zero.", "error");
+        return;
+      }
+
+      const i = inflationPct / 100;
+      const futureNominalValue = P * Math.pow(1 + i, t);
+      const purchasingPower = P / Math.pow(1 + i, t);
+      const valueErosion = P - purchasingPower;
+      const erosionPct = P ? valueErosion / P : 0;
+      const rule72Years = inflationPct > 0 ? 72 / inflationPct : null;
+      const exactHalfLife = inflationPct > 0 ? Math.log(2) / Math.log(1 + i) : null;
+
+      buildResultCards(
+        "Standard Inflation",
+        [
+          { tone: "teal", label: "Future Nominal Value", value: formatMoney(futureNominalValue), sub: "P × (1 + i)^t" },
+          { tone: "amber", label: "Purchasing Power", value: formatMoney(purchasingPower), sub: "P ÷ (1 + i)^t" },
+          { tone: "rose", label: "Value Erosion", value: formatMoney(valueErosion), sub: "P − Purchasing Power" },
+          { tone: "slate", label: "Erosion %", value: formatPercentFromDecimal(erosionPct), sub: "((P − PP) ÷ P) × 100" }
+        ],
+        `<strong>Standard Inflation Mode</strong><br>Future Nominal Value = P × (1 + i)^t<br>Purchasing Power = P ÷ (1 + i)^t<br>Value Erosion = P − Purchasing Power<br>Erosion % = ((P − Purchasing Power) ÷ P) × 100`,
+        inflationPct > 0
+          ? `At ${inflationPct.toFixed(2)}% inflation, the Rule of 72 estimates money loses half its purchasing power in about ${rule72Years.toFixed(1)} years. Exact compounding gives roughly ${exactHalfLife.toFixed(1)} years.`
+          : `At 0.00% inflation, purchasing power does not halve because prices are assumed to stay flat.`,
+        `Standard Inflation Mode
+Current amount: ${formatMoney(P)}
+Inflation rate: ${inflationPct.toFixed(2)}%
+Time: ${t} years
+Future nominal value: ${formatMoney(futureNominalValue)}
+Purchasing power: ${formatMoney(purchasingPower)}
+Value erosion: ${formatMoney(valueErosion)}
+Erosion: ${formatPercentFromDecimal(erosionPct)}`
+      );
+
+      const labels = [];
+      const declineValues = [];
+      const nominalValues = [];
+      const rows = [];
+      for (let year = 0; year <= t; year += 1) {
+        const realValue = P / Math.pow(1 + i, year);
+        const nominalCost = P * Math.pow(1 + i, year);
+        labels.push(`Year ${year}`);
+        declineValues.push(realValue);
+        nominalValues.push(nominalCost);
+        rows.push({
+          year: year,
+          base: P,
+          real: realValue,
+          lost: P - realValue,
+          erosion: P ? ((P - realValue) / P) * 100 : 0
+        });
+      }
+
+      renderCharts({
+        context: "Charts currently reflect Standard Inflation mode.",
+        labels,
+        declineTitle: "Purchasing Power Decline",
+        declineNote: "How much today's money is worth in today's terms each year.",
+        declineDatasetLabel: "Real value",
+        declineValues,
+        comparisonTitle: "Nominal vs Real Comparison",
+        comparisonNote: "Nominal future cost of today's basket versus inflation-adjusted current value.",
+        nominalLabel: "Future nominal cost",
+        nominalValues,
+        realLabel: "Purchasing power",
+        realValues: declineValues,
+        pieTitle: "Inflation Erosion Pie",
+        pieNote: "Buying power preserved versus lost after the selected time period.",
+        pieLabels: ["Purchasing power preserved", "Lost purchasing power"],
+        pieValues: [purchasingPower, valueErosion]
+      });
+
+      updateProjection(
+        [
+          { key: "year", label: "Year", type: "years" },
+          { key: "base", label: "Current Amount", type: "money" },
+          { key: "real", label: "Purchasing Power", type: "money" },
+          { key: "lost", label: "Value Lost", type: "money" },
+          { key: "erosion", label: "Erosion %", type: "percentValue" }
+        ],
+        rows,
+        "inflation_projection.csv",
+        "Yearly purchasing power decline using Value year = P ÷ (1 + i)^year."
+      );
+
+      state.lastResultMode = "standard";
+      state.lastTimeBasedMode = "standard";
+      setStatus("Standard inflation results updated.", "info");
+    }
+
+    function calculateRequired() {
+      const realReturnPct = Number($("req-real").value);
+      const inflationPct = Number($("req-inflation").value);
+
+      if (!(realReturnPct >= 0) || !(inflationPct >= 0)) {
+        setStatus("Enter non-negative values for real return and inflation.", "error");
+        return;
+      }
+
+      const realReturn = realReturnPct / 100;
+      const inflation = inflationPct / 100;
+      const requiredNominal = (1 + realReturn) * (1 + inflation) - 1;
+      const inflationLift = requiredNominal - realReturn;
+
+      buildResultCards(
+        "Required Return",
+        [
+          { tone: "teal", label: "Required Nominal Return", value: formatPercentFromDecimal(requiredNominal), sub: "(1 + r real)(1 + i) − 1" },
+          { tone: "amber", label: "Desired Real Return", value: formatPercentValue(realReturnPct), sub: "Inflation-adjusted goal" },
+          { tone: "rose", label: "Inflation Assumption", value: formatPercentValue(inflationPct), sub: "Expected inflation input" },
+          { tone: "slate", label: "Inflation Lift Needed", value: formatPercentFromDecimal(inflationLift), sub: "Extra nominal return over the real target" }
+        ],
+        `<strong>Required Return Mode</strong><br>Required Nominal Return = (1 + r<sub>real</sub>) × (1 + i) − 1`,
+        "",
+        `Required Return Mode
+Desired real return: ${realReturnPct.toFixed(2)}%
+Inflation assumption: ${inflationPct.toFixed(2)}%
+Required nominal return: ${formatPercentFromDecimal(requiredNominal)}
+Inflation lift needed: ${formatPercentFromDecimal(inflationLift)}`
+      );
+
+      state.lastResultMode = "required";
+      setStatus("Required nominal return calculated. Charts remain on the latest time-based scenario.", "info");
+    }
+
+    function calculateInvestment() {
+      const P = Number($("inv-principal").value);
+      const nominalPct = Number($("inv-return").value);
+      const inflationPct = Number($("inv-inflation").value);
+      const t = Number($("inv-time").value);
+
+      if (!(P > 0) || !(t > 0) || !(nominalPct >= 0) || !(inflationPct >= 0)) {
+        setStatus("Enter a positive principal, non-negative rates, and a time greater than zero.", "error");
+        return;
+      }
+
+      const r = nominalPct / 100;
+      const i = inflationPct / 100;
+      const realRate = ((1 + r) / (1 + i)) - 1;
+      const nominalFutureValue = P * Math.pow(1 + r, t);
+      const realFutureValue = P * Math.pow(1 + realRate, t);
+      const inflationDrag = nominalFutureValue - realFutureValue;
+
+      buildResultCards(
+        "Investment Impact",
+        [
+          { tone: "teal", label: "Nominal Future Value", value: formatMoney(nominalFutureValue), sub: "P × (1 + r)^t" },
+          { tone: "amber", label: "Inflation-Adjusted Future Value", value: formatMoney(realFutureValue), sub: "P × (1 + real r)^t" },
+          { tone: "rose", label: "Inflation Drag", value: formatMoney(inflationDrag), sub: "Difference between nominal and real growth" },
+          { tone: "slate", label: "Real Return", value: formatPercentFromDecimal(realRate), sub: "((1 + r) ÷ (1 + i)) − 1" }
+        ],
+        `<strong>Investment Inflation Impact Mode</strong><br>Real Return = ((1 + r) ÷ (1 + i)) − 1<br>Nominal Future Value = P × (1 + r)^t<br>Inflation-Adjusted Future Value = P × (1 + real r)^t`,
+        "",
+        `Investment Impact Mode
+Principal: ${formatMoney(P)}
+Nominal return: ${nominalPct.toFixed(2)}%
+Inflation: ${inflationPct.toFixed(2)}%
+Time: ${t} years
+Nominal future value: ${formatMoney(nominalFutureValue)}
+Real future value: ${formatMoney(realFutureValue)}
+Inflation drag: ${formatMoney(inflationDrag)}
+Real return: ${formatPercentFromDecimal(realRate)}`
+      );
+
+      const labels = [];
+      const declineValues = [];
+      const nominalValues = [];
+      const realValues = [];
+      const rows = [];
+
+      for (let year = 0; year <= t; year += 1) {
+        const realPurchasingValue = P / Math.pow(1 + i, year);
+        const nominalValue = P * Math.pow(1 + r, year);
+        const realValue = P * Math.pow(1 + realRate, year);
+        labels.push(`Year ${year}`);
+        declineValues.push(realPurchasingValue);
+        nominalValues.push(nominalValue);
+        realValues.push(realValue);
+        rows.push({
+          year,
+          nominal: nominalValue,
+          real: realValue,
+          drag: nominalValue - realValue,
+          realPct: P ? ((realValue / P) - 1) * 100 : 0
+        });
+      }
+
+      renderCharts({
+        context: "Charts currently reflect Investment Impact mode.",
+        labels,
+        declineTitle: "Purchasing Power Decline",
+        declineNote: "Inflation alone reduces the real value of the starting principal over time.",
+        declineDatasetLabel: "Purchasing power of principal",
+        declineValues,
+        comparisonTitle: "Nominal vs Real Comparison",
+        comparisonNote: "Nominal growth curve versus inflation-adjusted investment growth.",
+        nominalLabel: "Nominal value",
+        nominalValues,
+        realLabel: "Real value",
+        realValues,
+        pieTitle: "Inflation Erosion Pie",
+        pieNote: "How much of the ending nominal value survives after inflation.",
+        pieLabels: ["Real future value", "Inflation drag"],
+        pieValues: [realFutureValue, Math.max(inflationDrag, 0)]
+      });
+
+      updateProjection(
+        [
+          { key: "year", label: "Year", type: "years" },
+          { key: "nominal", label: "Nominal Value", type: "money" },
+          { key: "real", label: "Real Value", type: "money" },
+          { key: "drag", label: "Inflation Drag", type: "money" },
+          { key: "realPct", label: "Real Growth %", type: "percentValue" }
+        ],
+        rows,
+        "investment_inflation_projection.csv",
+        "Nominal growth versus inflation-adjusted growth for the selected investment scenario."
+      );
+
+      state.lastResultMode = "investment";
+      state.lastTimeBasedMode = "investment";
+      setStatus("Investment impact results updated.", "info");
+    }
+
+    function calculateSalary() {
+      const salary = Number($("sal-current").value);
+      const raisePct = Number($("sal-raise").value);
+      const inflationPct = Number($("sal-inflation").value);
+      const t = Number($("sal-time").value);
+
+      if (!(salary > 0) || !(t > 0) || !(raisePct >= 0) || !(inflationPct >= 0)) {
+        setStatus("Enter a positive salary, non-negative rates, and a time greater than zero.", "error");
+        return;
+      }
+
+      const raise = raisePct / 100;
+      const inflation = inflationPct / 100;
+      const futureSalary = salary * Math.pow(1 + raise, t);
+      const realSalary = futureSalary / Math.pow(1 + inflation, t);
+      const change = salary ? (realSalary / salary) - 1 : 0;
+      let verdict = "Matches inflation";
+      let verdictTone = "slate";
+
+      if (change > 0.005) {
+        verdict = "Beats inflation";
+        verdictTone = "teal";
+      } else if (change < -0.005) {
+        verdict = "Loses to inflation";
+        verdictTone = "rose";
+      }
+
+      buildResultCards(
+        "Salary vs Inflation",
+        [
+          { tone: "teal", label: "Future Salary", value: formatMoney(futureSalary), sub: "S × (1 + raise)^t" },
+          { tone: "amber", label: "Real Salary", value: formatMoney(realSalary), sub: "Future salary ÷ (1 + i)^t" },
+          { tone: verdictTone, label: "Purchasing Power Change", value: formatPercentFromDecimal(change), sub: "Change versus today's salary" },
+          { tone: "slate", label: "Verdict", value: verdict, sub: "Does salary growth beat inflation?" }
+        ],
+        `<strong>Salary vs Inflation Mode</strong><br>Future Salary = S × (1 + raise)^t<br>Real Salary = Future Salary ÷ (1 + i)^t`,
+        "",
+        `Salary vs Inflation Mode
+Current salary: ${formatMoney(salary)}
+Annual raise: ${raisePct.toFixed(2)}%
+Inflation: ${inflationPct.toFixed(2)}%
+Time: ${t} years
+Future salary: ${formatMoney(futureSalary)}
+Real salary: ${formatMoney(realSalary)}
+Purchasing power change: ${formatPercentFromDecimal(change)}
+Verdict: ${verdict}`
+      );
+
+      const labels = [];
+      const declineValues = [];
+      const nominalValues = [];
+      const realValues = [];
+      const rows = [];
+
+      for (let year = 0; year <= t; year += 1) {
+        const currentPurchasingPower = salary / Math.pow(1 + inflation, year);
+        const nominalValue = salary * Math.pow(1 + raise, year);
+        const realValue = nominalValue / Math.pow(1 + inflation, year);
+        const yearChange = salary ? ((realValue / salary) - 1) * 100 : 0;
+        labels.push(`Year ${year}`);
+        declineValues.push(currentPurchasingPower);
+        nominalValues.push(nominalValue);
+        realValues.push(realValue);
+        rows.push({
+          year,
+          nominal: nominalValue,
+          real: realValue,
+          change: yearChange,
+          status: yearChange > 0.5 ? "Beats inflation" : yearChange < -0.5 ? "Loses to inflation" : "Matches inflation"
+        });
+      }
+
+      renderCharts({
+        context: "Charts currently reflect Salary vs Inflation mode.",
+        labels,
+        declineTitle: "Purchasing Power Decline",
+        declineNote: "What today's salary is worth in today's terms if only inflation moves.",
+        declineDatasetLabel: "Current salary purchasing power",
+        declineValues,
+        comparisonTitle: "Nominal vs Real Comparison",
+        comparisonNote: "Nominal pay growth versus inflation-adjusted salary value.",
+        nominalLabel: "Nominal salary",
+        nominalValues,
+        realLabel: "Real salary",
+        realValues,
+        pieTitle: "Inflation Erosion Pie",
+        pieNote: "How much of the ending salary survives in real terms.",
+        pieLabels: ["Real salary value", "Inflation gap"],
+        pieValues: [realSalary, Math.max(futureSalary - realSalary, 0)]
+      });
+
+      updateProjection(
+        [
+          { key: "year", label: "Year", type: "years" },
+          { key: "nominal", label: "Future Salary", type: "money" },
+          { key: "real", label: "Real Salary", type: "money" },
+          { key: "change", label: "Change vs Today", type: "percentValue" },
+          { key: "status", label: "Status", type: "text" }
+        ],
+        rows,
+        "salary_vs_inflation_projection.csv",
+        "Salary growth compared with inflation-adjusted salary value year by year."
+      );
+
+      state.lastResultMode = "salary";
+      state.lastTimeBasedMode = "salary";
+      setStatus("Salary versus inflation results updated.", "info");
+    }
+
+    function copyResults() {
+      if (!state.copyText) {
+        setCopyNote("Run a calculation first.");
+        return;
+      }
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(state.copyText)
+          .then(() => setCopyNote("Results copied to clipboard."))
+          .catch(() => setCopyNote("Clipboard blocked. Please copy manually."));
+      } else {
+        setCopyNote("Clipboard API is not available in this browser.");
+      }
+    }
+
+    function downloadCsv() {
+      if (!state.projectionColumns.length || !state.projectionRows.length) {
+        setStatus("Generate a time-based result before exporting CSV.", "error");
+        return;
+      }
+
+      const lines = [];
+      lines.push(state.projectionColumns.map((column) => `"${column.label}"`).join(","));
+      state.projectionRows.forEach((row) => {
+        const line = state.projectionColumns.map((column) => {
+          const value = formatCell(row[column.key], column.type);
+          return `"${String(value).replace(/"/g, "\"\"")}"`;
+        }).join(",");
+        lines.push(line);
+      });
+
+      const blob = new Blob([lines.join("\n")], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = state.projectionFilename;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+      setStatus("CSV download started.", "info");
+    }
+
+    function rerenderLastResult() {
+      if (state.lastResultMode === "required") {
+        calculateRequired();
+        return;
+      }
+      if (state.lastResultMode === "investment") {
+        calculateInvestment();
+        return;
+      }
+      if (state.lastResultMode === "salary") {
+        calculateSalary();
+        return;
+      }
+      calculateStandard();
+    }
+
+    function resetModule(name) {
+      if (name === "standard") {
+        $("std-amount").value = 10000;
+        $("std-amount-sl").value = 10000;
+        $("std-rate").value = 6;
+        $("std-rate-sl").value = 6;
+        $("std-time").value = 20;
+        $("std-time-sl").value = 20;
+        resetCpiSelectors();
+        sliderConfigs.filter((item) => item.input.startsWith("std-")).forEach(updateSliderLabel);
+        calculateStandard();
+        return;
+      }
+
+      if (name === "required") {
+        $("req-real").value = 5;
+        $("req-real-sl").value = 5;
+        $("req-inflation").value = 6;
+        $("req-inflation-sl").value = 6;
+        sliderConfigs.filter((item) => item.input.startsWith("req-")).forEach(updateSliderLabel);
+        calculateRequired();
+        return;
+      }
+
+      if (name === "investment") {
+        $("inv-principal").value = 100000;
+        $("inv-principal-sl").value = 100000;
+        $("inv-return").value = 10;
+        $("inv-return-sl").value = 10;
+        $("inv-inflation").value = 6;
+        $("inv-inflation-sl").value = 6;
+        $("inv-time").value = 20;
+        $("inv-time-sl").value = 20;
+        sliderConfigs.filter((item) => item.input.startsWith("inv-")).forEach(updateSliderLabel);
+        calculateInvestment();
+        return;
+      }
+
+      if (name === "salary") {
+        $("sal-current").value = 60000;
+        $("sal-current-sl").value = 60000;
+        $("sal-raise").value = 4;
+        $("sal-raise-sl").value = 4;
+        $("sal-inflation").value = 6;
+        $("sal-inflation-sl").value = 6;
+        $("sal-time").value = 10;
+        $("sal-time-sl").value = 10;
+        sliderConfigs.filter((item) => item.input.startsWith("sal-")).forEach(updateSliderLabel);
+        calculateSalary();
+      }
+    }
+
+    function setupCurrencyControls() {
+      $("global-currency").addEventListener("change", (event) => {
+        state.currentCurrency = event.target.value;
+        $("custom-symbol-wrap").classList.toggle("hidden", state.currentCurrency !== "CUSTOM");
+        updateCurrencyIndicators();
+      });
+
+      $("custom-symbol").addEventListener("input", (event) => {
+        state.customSymbol = event.target.value || "$";
+        if (state.currentCurrency === "CUSTOM") {
+          updateCurrencyIndicators();
+        }
+      });
+    }
+
+    function setupCpiControls() {
+      $("cpi-country").addEventListener("change", refreshCpiYears);
+    }
+
+    function setupMenu() {
+      $("hamburgerBtn").addEventListener("click", () => {
+        const nav = $("mobileNav");
+        const isOpen = nav.classList.toggle("open");
+        $("hamburgerBtn").setAttribute("aria-expanded", isOpen ? "true" : "false");
+      });
+    }
+
+    function init() {
+      setupMenu();
+      setupCurrencyControls();
+      sliderConfigs.forEach(bindSliderPair);
+      populateCpiSelectors();
+      setupCpiControls();
+      switchModule("standard");
+      calculateStandard();
+    }
+
+    document.addEventListener("DOMContentLoaded", init);
+  </script>
+</body>
+
+</html>
