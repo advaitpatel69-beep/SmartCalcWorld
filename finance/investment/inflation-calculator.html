@@ -868,6 +868,17 @@
       gap: 1.25rem;
     }
 
+    .comparison-grid>div {
+      min-width: 0;
+    }
+
+    #comparison-tables .tbl-wrap {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
     .links-grid {
       margin-top: 1rem;
     }
@@ -1077,6 +1088,17 @@
 
       .footer-content {
         grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      #comparison-tables {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+
+      #comparison-tables table {
+        min-width: 620px;
       }
     }
   </style>
