@@ -1,0 +1,2665 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow">
+  <title>Retirement Calculator &ndash; Plan Your Retirement Savings &amp; Future Income | SmartCalcWorld</title>
+  <meta name="description"
+    content="Calculate retirement corpus, future investment value, inflation-adjusted income, and retirement readiness with SmartCalcWorld's Retirement Calculator.">
+  <link rel="canonical" href="https://smartcalcworld.com/finance/investment/retirement-calculator.html">
+  <link rel="icon" type="image/png" href="https://smartcalcworld.com/favicon.png">
+  <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://smartcalcworld.com/#org",
+        "name": "SmartCalc World",
+        "url": "https://smartcalcworld.com",
+        "description": "Free finance calculators for investing, saving, retirement and long-term planning."
+      },
+      {
+        "@type": "WebApplication",
+        "@id": "https://smartcalcworld.com/finance/investment/retirement-calculator.html#app",
+        "name": "Retirement Calculator",
+        "url": "https://smartcalcworld.com/finance/investment/retirement-calculator.html",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Any",
+        "creator": {
+          "@id": "https://smartcalcworld.com/#org"
+        },
+        "description": "Estimate retirement corpus, future value of savings, inflation-adjusted retirement income, savings gap, and required monthly contribution.",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Finance",
+            "item": "https://smartcalcworld.com/finance/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Investment",
+            "item": "https://smartcalcworld.com/finance/investment/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Retirement Calculator",
+            "item": "https://smartcalcworld.com/finance/investment/retirement-calculator.html"
+          }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How much money do I need to retire?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The answer depends on your future spending, retirement age, inflation, expected returns, and how long retirement may last. Many people estimate it by first finding annual retirement expenses and then applying either a safe withdrawal rule or a more detailed drawdown formula."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is a safe withdrawal rate?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A safe withdrawal rate is a planning rule used to estimate how much of a retirement corpus can be withdrawn each year without running out too quickly. A common starting point is 4%, but the right rate depends on returns, inflation, and retirement length."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How does inflation affect retirement savings?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Inflation raises the future cost of living, so the income you want in retirement must usually be adjusted upward over time. It also reduces real purchasing power if investment returns do not stay ahead of price increases."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What return rate should I assume?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Use a realistic long-term assumption based on your asset mix and risk tolerance rather than an optimistic best-case number. Many planners also test multiple return scenarios to understand how sensitive the outcome is."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What happens if I start saving late?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Starting late usually means you need higher monthly contributions, a later retirement age, or a more modest retirement income target. Time is a major advantage because compounding needs years to do its best work."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is SIP good for retirement planning?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "For many people, yes. Regular monthly investing can be an effective retirement habit because it matches monthly income, builds discipline, and gives compounding more time to work."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How long will my retirement corpus last?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "That depends on your withdrawal rate, post-retirement return, inflation, and retirement duration. This calculator models a sustainability path so you can see how quickly the corpus may fall during retirement."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Should I adjust retirement plans for inflation?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Planning without inflation can make a retirement target look easier than it really is. Future expenses should usually be estimated in inflated terms so the corpus target reflects real living costs."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can this retirement calculator tell me if I have a shortfall?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. It compares your projected retirement corpus with the required corpus and shows whether you have a projected surplus or shortfall. It also estimates the monthly contribution needed to close the gap."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+  <style>
+    :root {
+      --teal: #0d9488;
+      --teal-dark: #0f766e;
+      --teal-light: #ccfbf1;
+      --amber: #f59e0b;
+      --amber-light: #fef3c7;
+      --rose: #f43f5e;
+      --rose-light: #ffe4e6;
+      --sky: #0284c7;
+      --sky-light: #dbeafe;
+      --slate-950: #020617;
+      --slate-900: #0f172a;
+      --slate-800: #1e293b;
+      --slate-700: #334155;
+      --slate-600: #475569;
+      --slate-500: #64748b;
+      --slate-400: #94a3b8;
+      --slate-300: #cbd5e1;
+      --slate-200: #e2e8f0;
+      --slate-100: #f1f5f9;
+      --slate-50: #f8fafc;
+      --white: #ffffff;
+      --radius: 14px;
+      --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.08);
+      --shadow-md: 0 10px 28px rgba(15, 23, 42, 0.12);
+      --shadow-lg: 0 20px 48px rgba(15, 23, 42, 0.16);
+      --header-h: 68px;
+    }
+
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(13, 148, 136, 0.14), transparent 32%),
+        linear-gradient(180deg, #f8fafc 0%, #eff6ff 44%, #f8fafc 100%);
+      color: var(--slate-800);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    img,
+    canvas {
+      max-width: 100%;
+    }
+
+    a {
+      color: var(--teal);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: linear-gradient(135deg, #0891b2 0%, #059669 100%);
+      color: var(--white);
+      box-shadow: 0 2px 10px rgba(15, 23, 42, 0.12);
+    }
+
+    .hdr-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .hdr-logo {
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+    }
+
+    .hdr-nav {
+      display: flex;
+      gap: 1.25rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .hdr-nav a,
+    .hdr-nav span {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      opacity: 0.96;
+      transition: opacity 0.3s ease;
+    }
+
+    .hdr-nav a:hover {
+      opacity: 0.82;
+      text-decoration: none;
+    }
+
+    .nav-disabled {
+      opacity: 0.74;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 4px;
+      background: none;
+      border: none;
+      padding: 0;
+    }
+
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background: var(--white);
+      border-radius: 999px;
+      transition: 0.3s ease;
+    }
+
+    .mobile-nav {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: #0b7694;
+      flex-direction: column;
+      padding: 1rem;
+      gap: 0.9rem;
+      box-shadow: 0 12px 28px rgba(15, 23, 42, 0.16);
+    }
+
+    .mobile-nav.open {
+      display: flex;
+    }
+
+    .mobile-nav a,
+    .mobile-nav span {
+      color: var(--white);
+      text-decoration: none;
+      padding: 0.45rem 0.5rem;
+      border-radius: 8px;
+    }
+
+    .mobile-nav a:hover {
+      background: rgba(255, 255, 255, 0.08);
+      text-decoration: none;
+    }
+
+    .page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1.5rem 1rem 4rem;
+    }
+
+    .breadcrumb {
+      font-size: 0.84rem;
+      color: var(--slate-500);
+      margin-bottom: 1.25rem;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(135deg, rgba(13, 148, 136, 0.14), rgba(2, 132, 199, 0.08)),
+        var(--white);
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      border-radius: 22px;
+      box-shadow: var(--shadow-md);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -80px -80px auto;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle, rgba(13, 148, 136, 0.14), transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      background: var(--teal-light);
+      color: var(--teal-dark);
+      font-size: 0.76rem;
+      font-weight: 800;
+      padding: 0.4rem 0.9rem;
+      border-radius: 999px;
+      margin-bottom: 0.85rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 5vw, 3.25rem);
+      line-height: 1.08;
+      color: var(--slate-900);
+      margin-bottom: 0.8rem;
+    }
+
+    .hero-sub {
+      font-size: 1rem;
+      color: var(--slate-600);
+      max-width: 760px;
+    }
+
+    .hero-highlights {
+      display: grid;
+      gap: 0.85rem;
+      margin-top: 1.25rem;
+    }
+
+    .hero-chip {
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid rgba(148, 163, 184, 0.28);
+      border-radius: 14px;
+      padding: 0.95rem 1rem;
+      box-shadow: var(--shadow-sm);
+      color: var(--slate-600);
+    }
+
+    .hero-chip strong {
+      display: block;
+      color: var(--slate-900);
+      margin-bottom: 0.2rem;
+    }
+
+    .card,
+    .content-section {
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid rgba(148, 163, 184, 0.22);
+      border-radius: 20px;
+      box-shadow: var(--shadow-md);
+      margin-top: 2rem;
+    }
+
+    .card {
+      padding: 1.5rem;
+    }
+
+    .content-section {
+      padding: 2rem;
+      scroll-margin-top: calc(var(--header-h) + 1rem);
+    }
+
+    .card-title,
+    .content-section h2 {
+      font-size: clamp(1.25rem, 3vw, 1.75rem);
+      font-weight: 800;
+      color: var(--slate-900);
+      margin-bottom: 1rem;
+    }
+
+    .content-section h2 {
+      padding-left: 1rem;
+      border-left: 4px solid var(--teal);
+    }
+
+    .content-section h3 {
+      font-size: 1.15rem;
+      color: var(--slate-900);
+      margin: 1.6rem 0 0.65rem;
+    }
+
+    .content-section p,
+    .content-section li {
+      color: var(--slate-600);
+    }
+
+    .content-section ul {
+      margin: 0.2rem 0 1rem 1.25rem;
+    }
+
+    .content-section li {
+      margin-bottom: 0.55rem;
+    }
+
+    .toolbar-grid,
+    .field-pair,
+    .result-grid,
+    .charts-grid,
+    .comparison-grid,
+    .links-grid,
+    .footer-content {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .toolbar-box {
+      background: linear-gradient(180deg, rgba(13, 148, 136, 0.08), rgba(255, 255, 255, 0.94));
+      border: 1px solid rgba(148, 163, 184, 0.24);
+      border-radius: 16px;
+      padding: 1rem;
+    }
+
+    .toolbar-box h2 {
+      font-size: 1.02rem;
+      color: var(--slate-900);
+      margin-bottom: 0.55rem;
+    }
+
+    .toolbar-help,
+    .hint,
+    .chart-note,
+    .table-context,
+    .copy-note {
+      font-size: 0.86rem;
+      color: var(--slate-500);
+    }
+
+    .info-list {
+      display: grid;
+      gap: 0.7rem;
+      margin-top: 0.7rem;
+    }
+
+    .info-pill {
+      padding: 0.8rem 0.9rem;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid rgba(148, 163, 184, 0.22);
+      color: var(--slate-700);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .qnav {
+      display: grid;
+      gap: 0.75rem;
+      margin: 1.25rem 0 1rem;
+    }
+
+    .qnav-btn {
+      width: 100%;
+      border: 2px solid var(--slate-300);
+      border-radius: 14px;
+      background: var(--white);
+      padding: 0.95rem 1rem;
+      font-size: 0.92rem;
+      font-weight: 800;
+      color: var(--slate-600);
+      cursor: pointer;
+      transition: 0.25s ease;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .qnav-btn:hover {
+      border-color: var(--teal);
+      color: var(--teal);
+      transform: translateY(-2px);
+    }
+
+    .qnav-btn.active {
+      background: linear-gradient(135deg, var(--teal-dark), var(--teal));
+      color: var(--white);
+      border-color: var(--teal);
+      box-shadow: 0 8px 24px rgba(13, 148, 136, 0.24);
+    }
+
+    .module {
+      display: none;
+    }
+
+    .module.active {
+      display: block;
+      animation: fadeUp 0.25s ease;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .module-intro {
+      margin-bottom: 1rem;
+      color: var(--slate-600);
+      font-size: 0.97rem;
+    }
+
+    .form-row {
+      display: grid;
+      gap: 0.45rem;
+      margin-bottom: 1rem;
+    }
+
+    .lbl {
+      font-weight: 700;
+      color: var(--slate-800);
+      font-size: 0.92rem;
+    }
+
+    input[type="number"],
+    input[type="text"],
+    select {
+      width: 100%;
+      border: 2px solid var(--slate-300);
+      border-radius: 12px;
+      padding: 0.78rem 0.92rem;
+      font-size: 1rem;
+      color: var(--slate-800);
+      background: var(--white);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    input[type="number"]:focus,
+    input[type="text"]:focus,
+    select:focus {
+      outline: none;
+      border-color: var(--teal);
+      box-shadow: 0 0 0 4px rgba(13, 148, 136, 0.12);
+    }
+
+    input[type="number"]:disabled,
+    input[type="text"]:disabled {
+      background: var(--slate-100);
+      color: var(--slate-400);
+      cursor: not-allowed;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--teal);
+    }
+
+    .input-slider {
+      display: grid;
+      gap: 0.8rem;
+    }
+
+    .slider-lbl {
+      font-size: 0.84rem;
+      color: var(--teal-dark);
+      font-weight: 700;
+      margin-top: 0.3rem;
+    }
+
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      flex-wrap: wrap;
+      margin-top: 0.3rem;
+    }
+
+    .toggle-row input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--teal);
+    }
+
+    .btn-row {
+      display: grid;
+      gap: 0.75rem;
+      margin-top: 0.5rem;
+    }
+
+    .btn-primary,
+    .btn-secondary,
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      border-radius: 12px;
+      padding: 0.85rem 1rem;
+      font-size: 0.96rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: 0.22s ease;
+    }
+
+    .btn-primary {
+      border: none;
+      color: var(--white);
+      background: linear-gradient(135deg, var(--teal-dark), var(--teal));
+      box-shadow: 0 10px 24px rgba(13, 148, 136, 0.2);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 28px rgba(13, 148, 136, 0.28);
+    }
+
+    .btn-secondary {
+      border: 2px solid var(--slate-300);
+      color: var(--slate-700);
+      background: var(--slate-100);
+    }
+
+    .btn-secondary:hover,
+    .btn-ghost:hover {
+      border-color: var(--teal);
+      color: var(--teal-dark);
+      transform: translateY(-1px);
+    }
+
+    .btn-ghost {
+      border: 2px solid rgba(13, 148, 136, 0.22);
+      color: var(--teal-dark);
+      background: rgba(13, 148, 136, 0.06);
+    }
+
+    .result-meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      margin-bottom: 0.9rem;
+    }
+
+    .mode-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--teal-light);
+      color: var(--teal-dark);
+      border-radius: 999px;
+      padding: 0.5rem 0.85rem;
+      font-size: 0.82rem;
+      font-weight: 800;
+    }
+
+    .result-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .status-banner {
+      display: none;
+      padding: 0.85rem 1rem;
+      border-radius: 14px;
+      margin-bottom: 1rem;
+      font-weight: 600;
+      font-size: 0.92rem;
+    }
+
+    .status-banner.info {
+      display: block;
+      background: var(--sky-light);
+      color: #0c4a6e;
+      border: 1px solid rgba(2, 132, 199, 0.2);
+    }
+
+    .status-banner.error {
+      display: block;
+      background: var(--rose-light);
+      color: #9f1239;
+      border: 1px solid rgba(244, 63, 94, 0.24);
+    }
+
+    .status-banner.success {
+      display: block;
+      background: var(--teal-light);
+      color: var(--teal-dark);
+      border: 1px solid rgba(13, 148, 136, 0.24);
+    }
+
+    .result-grid {
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      margin-top: 1rem;
+    }
+
+    .result-card {
+      color: var(--white);
+      border-radius: 18px;
+      padding: 1.2rem 1.1rem;
+      min-height: 142px;
+      min-width: 0;
+      box-shadow: var(--shadow-md);
+    }
+
+    .result-card.teal {
+      background: linear-gradient(135deg, var(--teal-dark), var(--teal));
+    }
+
+    .result-card.amber {
+      background: linear-gradient(135deg, #d97706, var(--amber));
+    }
+
+    .result-card.rose {
+      background: linear-gradient(135deg, #be123c, var(--rose));
+    }
+
+    .result-card.slate {
+      background: linear-gradient(135deg, var(--slate-800), var(--slate-600));
+    }
+
+    .result-card.sky {
+      background: linear-gradient(135deg, #0369a1, var(--sky));
+    }
+
+    .result-lbl {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      opacity: 0.92;
+      margin-bottom: 0.45rem;
+    }
+
+    .result-val {
+      font-size: clamp(0.96rem, 2.1vw, 1.55rem);
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.35rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .result-sub {
+      font-size: 0.82rem;
+      opacity: 0.86;
+    }
+
+    .insight-box,
+    .formula-box,
+    .callout {
+      margin-top: 1rem;
+      border-radius: 14px;
+      padding: 1rem 1.1rem;
+    }
+
+    .insight-box {
+      display: none;
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.12), rgba(255, 255, 255, 0.95));
+      border: 1px solid rgba(245, 158, 11, 0.24);
+      color: #78350f;
+    }
+
+    .formula-box {
+      background: linear-gradient(135deg, rgba(13, 148, 136, 0.08), rgba(255, 255, 255, 0.98));
+      border-left: 4px solid var(--teal);
+      color: var(--slate-700);
+      font-family: "Courier New", monospace;
+      font-size: 0.93rem;
+      overflow-x: auto;
+    }
+
+    .comparison-summary {
+      margin-top: 1rem;
+    }
+
+    .compare-box {
+      border-radius: 20px;
+      padding: 1.15rem;
+      border: 1px solid rgba(148, 163, 184, 0.24);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .compare-box+.compare-box,
+    .compare-box+.field-pair,
+    .field-pair+.compare-box {
+      margin-top: 1rem;
+    }
+
+    .compare-box.compare-a {
+      background: linear-gradient(180deg, rgba(219, 234, 254, 0.98), rgba(255, 255, 255, 0.96));
+      border-color: rgba(37, 99, 235, 0.22);
+    }
+
+    .compare-box.compare-b {
+      background: linear-gradient(180deg, rgba(254, 243, 199, 0.98), rgba(255, 255, 255, 0.96));
+      border-color: rgba(217, 119, 6, 0.24);
+    }
+
+    .compare-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.5rem 0.85rem;
+      border-radius: 999px;
+      font-size: 0.92rem;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+      margin-bottom: 0.95rem;
+    }
+
+    .compare-tag .compare-letter {
+      width: 1.7rem;
+      height: 1.7rem;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.86rem;
+      color: var(--white);
+    }
+
+    .compare-a .compare-tag {
+      background: rgba(37, 99, 235, 0.1);
+      color: #1d4ed8;
+    }
+
+    .compare-a .compare-letter {
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    }
+
+    .compare-b .compare-tag {
+      background: rgba(217, 119, 6, 0.12);
+      color: #b45309;
+    }
+
+    .compare-b .compare-letter {
+      background: linear-gradient(135deg, #d97706, #b45309);
+    }
+
+    .comparison-summary thead th:nth-child(2) {
+      color: #dbeafe;
+    }
+
+    .comparison-summary thead th:nth-child(3) {
+      color: #fde68a;
+    }
+
+    .comparison-summary tbody td.compare-a-cell {
+      color: #1d4ed8;
+      font-weight: 700;
+      background: rgba(219, 234, 254, 0.45);
+    }
+
+    .comparison-summary tbody td.compare-b-cell {
+      color: #b45309;
+      font-weight: 700;
+      background: rgba(254, 243, 199, 0.55);
+    }
+
+    .table-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+
+    .charts-grid {
+      margin-top: 1rem;
+    }
+
+    .chart-wrap {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), var(--slate-50));
+      border: 1px solid rgba(148, 163, 184, 0.22);
+      border-radius: 18px;
+      padding: 1rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .chart-title {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--slate-900);
+      margin-bottom: 0.35rem;
+    }
+
+    .chart-canvas {
+      position: relative;
+      height: 280px;
+      margin-top: 0.8rem;
+    }
+
+    .tbl-wrap {
+      overflow-x: auto;
+      border-radius: 16px;
+      border: 1px solid rgba(148, 163, 184, 0.24);
+      background: var(--white);
+      box-shadow: var(--shadow-sm);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 640px;
+    }
+
+    thead tr {
+      background: linear-gradient(135deg, var(--teal-dark), var(--teal));
+      color: var(--white);
+    }
+
+    th,
+    td {
+      padding: 0.75rem 0.9rem;
+      text-align: right;
+      font-size: 0.9rem;
+      border-bottom: 1px solid var(--slate-200);
+    }
+
+    th {
+      font-size: 0.8rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    th:first-child,
+    td:first-child {
+      text-align: left;
+    }
+
+    tbody tr:nth-child(even) {
+      background: var(--slate-50);
+    }
+
+    tbody tr:hover {
+      background: rgba(13, 148, 136, 0.06);
+    }
+
+    .comparison-grid {
+      margin-top: 1rem;
+    }
+
+    .comparison-grid>div {
+      min-width: 0;
+    }
+
+    #comparison-tables .tbl-wrap {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .callout {
+      background: linear-gradient(135deg, rgba(13, 148, 136, 0.1), rgba(224, 242, 254, 0.95));
+      border-left: 4px solid var(--teal);
+      color: var(--slate-700);
+    }
+
+    .callout strong {
+      color: var(--slate-900);
+    }
+
+    .links-grid {
+      margin-top: 1rem;
+    }
+
+    .link-card {
+      background: linear-gradient(180deg, var(--white), var(--slate-50));
+      border: 2px solid var(--slate-200);
+      border-radius: 16px;
+      padding: 1rem;
+      color: var(--slate-700);
+      transition: 0.25s ease;
+      text-decoration: none;
+    }
+
+    .link-card:hover {
+      border-color: var(--teal);
+      color: var(--teal);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-sm);
+      text-decoration: none;
+    }
+
+    .link-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 12px;
+      background: var(--teal-light);
+      margin-bottom: 0.75rem;
+      font-size: 1.15rem;
+    }
+
+    .link-card strong {
+      display: block;
+      color: var(--slate-900);
+      margin-bottom: 0.35rem;
+    }
+
+    .link-card p {
+      margin: 0;
+      color: var(--slate-500);
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .faq-item {
+      background: var(--slate-50);
+      border: 1px solid var(--slate-200);
+      border-radius: 14px;
+      padding: 1.1rem 1.15rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .faq-q {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--slate-900);
+      margin-bottom: 0.45rem;
+    }
+
+    .faq-a {
+      color: var(--slate-600);
+      font-size: 0.94rem;
+    }
+
+    .disclaimer1 {
+      background: linear-gradient(135deg, var(--amber-light), #fff7ed);
+      border: 1px solid rgba(245, 158, 11, 0.24);
+      border-radius: 16px;
+      padding: 1.2rem 1.3rem;
+      margin-top: 2rem;
+      color: #78350f;
+      font-size: 0.9rem;
+    }
+
+    .disclaimer1 strong {
+      color: #92400e;
+    }
+
+    footer {
+      background: #1f2937;
+      color: var(--white);
+      padding: 3rem 0 1rem;
+      margin-top: 4rem;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto 2rem;
+      padding: 0 1rem;
+    }
+
+    .footer-section h3 {
+      color: #5eead4;
+      margin-bottom: 0.9rem;
+      font-size: 1rem;
+    }
+
+    .footer-section ul {
+      list-style: none;
+    }
+
+    .footer-section li {
+      margin-bottom: 0.55rem;
+    }
+
+    .footer-section a,
+    .footer-section span {
+      color: #cbd5e0;
+      text-decoration: none;
+    }
+
+    .footer-section a:hover {
+      color: var(--white);
+    }
+
+    .footer-disclaimer {
+      background: rgba(255, 255, 255, 0.06);
+      padding: 1rem;
+      border-radius: 14px;
+      color: #dbeafe;
+      font-size: 0.9rem;
+    }
+
+    .copyright {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1.5rem 1rem 0;
+      text-align: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: #cbd5e0;
+    }
+
+    @media (min-width: 640px) {
+      .hero {
+        padding: 2rem;
+      }
+
+      .hero-highlights,
+      .toolbar-grid,
+      .field-pair,
+      .links-grid,
+      .footer-content {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .result-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .qnav {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .btn-row {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (min-width: 768px) {
+      .input-slider {
+        grid-template-columns: 1.1fr 1fr;
+        align-items: center;
+      }
+
+      .toolbar-grid {
+        grid-template-columns: 1.1fr 1fr;
+      }
+
+      .qnav {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .result-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .charts-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .charts-grid .chart-wrap:last-child {
+        grid-column: span 2;
+      }
+
+      .footer-content {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+    }
+
+    @media (min-width: 960px) {
+      .hero-highlights {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .result-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .comparison-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 767px) {
+      .hdr-nav {
+        display: none;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .result-actions {
+        width: 100%;
+      }
+
+      .result-actions .btn-secondary {
+        width: 100%;
+      }
+
+      .table-head {
+        flex-direction: column;
+      }
+
+      .result-val {
+        font-size: 1rem;
+      }
+    }
+
+    @media (max-width: 640px) {
+      #comparison-tables {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+
+      #comparison-tables table {
+        min-width: 620px;
+      }
+    }
+
+    @media (max-width: 479px) {
+      .page {
+        padding-inline: 0.8rem;
+      }
+
+      .card,
+      .content-section {
+        padding: 1.1rem;
+      }
+
+      .chart-canvas {
+        height: 240px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="hdr-inner">
+      <div class="hdr-logo">💰 SmartCalc World</div>
+      <nav class="hdr-nav">
+        <a href="https://smartcalcworld.com/index.html">Home</a>
+        <a href="https://smartcalcworld.com/finance/finance-hub.html">Finance Hub</a>
+        <span class="nav-disabled">Medical Hub (Coming Soon)</span>
+        <span class="nav-disabled">Student Hub (Coming Soon)</span>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <button class="hamburger" id="hamburgerBtn" type="button" aria-label="Toggle menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <nav class="mobile-nav" id="mobileNav">
+      <a href="https://smartcalcworld.com/index.html">Home</a>
+      <a href="https://smartcalcworld.com/finance/finance-hub.html">Finance Hub</a>
+      <span class="nav-disabled">Medical Hub (Coming Soon)</span>
+      <span class="nav-disabled">Student Hub (Coming Soon)</span>
+      <a href="#faq">FAQ</a>
+    </nav>
+  </header>
+
+  <main class="page">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="https://smartcalcworld.com/index.html">Home</a> &rsaquo;
+      <a href="https://smartcalcworld.com/finance/finance-hub.html">Finance</a> &rsaquo;
+      <a href="https://smartcalcworld.com/finance/investment/investment-hub.html">Investment</a> &rsaquo;
+      Retirement Calculator
+    </nav>
+
+    <section class="hero">
+      <span class="hero-badge">Premium Retirement Tool</span>
+      <h1>Retirement Calculator</h1>
+      <p class="hero-sub">Estimate how much money you may need for retirement, project how your savings and monthly
+        investing can grow, adjust your income target for inflation, and check whether your current plan is on track in
+        one clean SmartCalcWorld dashboard.</p>
+
+      <div class="hero-highlights">
+        <div class="hero-chip">
+          <strong>Build a retirement target with clarity</strong>
+          Combine current savings, monthly investing, inflation, and safe withdrawal logic to understand the size of the
+          corpus your future lifestyle may need.
+        </div>
+        <div class="hero-chip">
+          <strong>See both accumulation and drawdown</strong>
+          Track how money can grow before retirement, then view how the corpus may behave after retirement as spending
+          begins.
+        </div>
+        <div class="hero-chip">
+          <strong>Stay practical</strong>
+          This page shows retirement readiness, savings gap, and the monthly contribution needed to improve your plan
+          instead of stopping at one headline number.
+        </div>
+      </div>
+    </section>
+
+    <section class="card" id="calculator">
+      <div class="card-title">Retirement Planning Dashboard</div>
+
+      <div class="toolbar-grid">
+        <div class="toolbar-box">
+          <h2>Display Currency</h2>
+          <div class="field-pair">
+            <div class="form-row">
+              <label class="lbl" for="global-currency">Choose currency</label>
+              <select id="global-currency">
+                <option value="USD">USD $</option>
+                <option value="EUR">EUR &euro;</option>
+                <option value="GBP">GBP &pound;</option>
+                <option value="INR">INR &#8377;</option>
+                <option value="AUD">AUD $</option>
+                <option value="CAD">CAD $</option>
+                <option value="CUSTOM">Custom symbol</option>
+              </select>
+              <span class="hint">Display only. This calculator does not apply exchange-rate conversion.</span>
+            </div>
+
+            <div class="form-row hidden" id="custom-symbol-wrap">
+              <label class="lbl" for="custom-symbol">Custom symbol</label>
+              <input type="text" id="custom-symbol" maxlength="6" value="$" placeholder="e.g. CHF or AED">
+              <span class="hint">Use any symbol or short code you want to show on the page.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="toolbar-box">
+          <h2>What this tool answers</h2>
+          <div class="info-list">
+            <div class="info-pill">How much can your <strong>current savings and monthly investing</strong> grow by
+              retirement?</div>
+            <div class="info-pill">How much monthly income may you need after <strong>inflation lifts future living
+                costs</strong>?</div>
+            <div class="info-pill">Will your projected corpus create a <strong>surplus or a shortfall</strong>, and what
+              monthly investment may close the gap?</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="qnav retirement-qnav" id="qnav" role="tablist" aria-label="Retirement calculator sections">
+        <button type="button" class="qnav-btn active" data-module="basics" role="tab" aria-selected="true"
+          onclick="switchModule('basics')">Basics</button>
+        <button type="button" class="qnav-btn" data-module="assumptions" role="tab" aria-selected="false"
+          onclick="switchModule('assumptions')">Returns &amp; Inflation</button>
+        <button type="button" class="qnav-btn" data-module="income" role="tab" aria-selected="false"
+          onclick="switchModule('income')">Income Goal</button>
+      </div>
+
+      <section class="module active" id="mod-basics" role="tabpanel" aria-label="Retirement basics">
+        <p class="module-intro">Start with age, timeline, and current saving behavior. These inputs define how many
+          years you have to build a retirement corpus and how long the retirement phase may last.</p>
+
+        <div class="field-pair">
+          <div class="form-row">
+            <label class="lbl" for="rt-current-age">Current Age (Years)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="rt-current-age" min="18" max="75" step="1" value="30">
+                <span class="hint">Your present age today.</span>
+              </div>
+              <div>
+                <input type="range" id="rt-current-age-sl" min="18" max="75" step="1" value="30">
+                <div class="slider-lbl" id="rt-current-age-lbl">30 years</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label class="lbl" for="rt-retirement-age">Retirement Age (Years)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="rt-retirement-age" min="35" max="85" step="1" value="60">
+                <span class="hint">The age when you expect full retirement to begin.</span>
+              </div>
+              <div>
+                <input type="range" id="rt-retirement-age-sl" min="35" max="85" step="1" value="60">
+                <div class="slider-lbl" id="rt-retirement-age-lbl">60 years</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="field-pair">
+          <div class="form-row">
+            <label class="lbl" for="rt-life-expectancy">Life Expectancy (Years)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="rt-life-expectancy" min="60" max="110" step="1" value="90">
+                <span class="hint">Used to estimate retirement duration.</span>
+              </div>
+              <div>
+                <input type="range" id="rt-life-expectancy-sl" min="60" max="110" step="1" value="90">
+                <div class="slider-lbl" id="rt-life-expectancy-lbl">90 years</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label class="lbl" for="rt-current-savings">Current Retirement Savings (<span
+                data-currency-symbol>$</span>)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="rt-current-savings" min="0" max="1000000000" step="1000" value="50000">
+                <span class="hint">All retirement assets already saved for this goal.</span>
+              </div>
+              <div>
+                <input type="range" id="rt-current-savings-sl" min="0" max="10000000" step="1000" value="50000">
+                <div class="slider-lbl" id="rt-current-savings-lbl">$50,000.00</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="field-pair">
+          <div class="form-row">
+            <label class="lbl" for="rt-monthly-contribution">Monthly Investment Contribution (<span
+                data-currency-symbol>$</span>)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="rt-monthly-contribution" min="0" max="1000000" step="50" value="500">
+                <span class="hint">Monthly amount you expect to keep investing until retirement.</span>
+              </div>
+              <div>
+                <input type="range" id="rt-monthly-contribution-sl" min="0" max="25000" step="50" value="500">
+                <div class="slider-lbl" id="rt-monthly-contribution-lbl">$500.00</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <button type="button" class="btn-primary" onclick="calculateRetirement(true)">Update Retirement Plan</button>
+          <button type="button" class="btn-ghost" onclick="resetPlanner()">Reset Inputs</button>
+        </div>
+      </section>
+
+      <section class="module" id="mod-assumptions" role="tabpanel" aria-label="Retirement assumptions">
+        <p class="module-intro">Set return, inflation, and withdrawal assumptions. These estimates shape both the
+          projected retirement corpus and the corpus needed to support your retirement income goal.</p>
+
+        <div class="field-pair">
+          <div class="form-row">
+            <label class="lbl" for="rt-pre-return">Expected Annual Return Before Retirement (%)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="rt-pre-return" min="0" max="20" step="0.01" value="10">
+                <span class="hint">Used for current savings and monthly contribution growth before retirement.</span>
+              </div>
+              <div>
+                <input type="range" id="rt-pre-return-sl" min="0" max="20" step="0.1" value="10">
+                <div class="slider-lbl" id="rt-pre-return-lbl">10.00%</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label class="lbl" for="rt-post-return">Expected Annual Return After Retirement (%)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="rt-post-return" min="0" max="15" step="0.01" value="6">
+                <span class="hint">Used for drawdown planning after retirement begins.</span>
+              </div>
+              <div>
+                <input type="range" id="rt-post-return-sl" min="0" max="15" step="0.1" value="6">
+                <div class="slider-lbl" id="rt-post-return-lbl">6.00%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="field-pair">
+          <div class="form-row">
+            <label class="lbl" for="rt-inflation">Expected Inflation Rate (%)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="rt-inflation" min="0" max="12" step="0.01" value="5">
+                <span class="hint">Inflation adjusts your retirement income target into future money.</span>
+              </div>
+              <div>
+                <input type="range" id="rt-inflation-sl" min="0" max="12" step="0.1" value="5">
+                <div class="slider-lbl" id="rt-inflation-lbl">5.00%</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label class="lbl" for="rt-salary-growth">Annual Salary Growth (%) Optional</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="rt-salary-growth" min="0" max="15" step="0.01" value="6">
+                <span class="hint">Used as a lifestyle-growth reference against inflation.</span>
+              </div>
+              <div>
+                <input type="range" id="rt-salary-growth-sl" min="0" max="15" step="0.1" value="6">
+                <div class="slider-lbl" id="rt-salary-growth-lbl">6.00%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="field-pair">
+          <div class="form-row">
+            <label class="lbl" for="rt-corpus-method">Required Corpus Method</label>
+            <select id="rt-corpus-method">
+              <option value="withdrawal" selected>Safe Withdrawal Rule</option>
+              <option value="precise">Inflation-Adjusted Drawdown Method</option>
+            </select>
+            <span class="hint">Switch between a classic withdrawal rule and a more detailed real-return annuity
+              method.</span>
+          </div>
+
+          <div class="form-row">
+            <label class="lbl" for="rt-withdrawal-rate">Withdrawal Rate (%)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="rt-withdrawal-rate" min="1" max="8" step="0.01" value="4">
+                <span class="hint">Used when the safe withdrawal rule is selected.</span>
+              </div>
+              <div>
+                <input type="range" id="rt-withdrawal-rate-sl" min="1" max="8" step="0.1" value="4">
+                <div class="slider-lbl" id="rt-withdrawal-rate-lbl">4.00%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <button type="button" class="btn-primary" onclick="calculateRetirement(true)">Update Retirement Plan</button>
+          <button type="button" class="btn-ghost" onclick="resetPlanner()">Reset Inputs</button>
+        </div>
+      </section>
+
+      <section class="module" id="mod-income" role="tabpanel" aria-label="Retirement income goal">
+        <p class="module-intro">Set the lifestyle you want your money to support in retirement. The calculator will
+          inflate this monthly income target from today into retirement-age spending.</p>
+
+        <div class="field-pair">
+          <div class="form-row">
+            <label class="lbl" for="rt-income-today">Desired Monthly Retirement Income Today (<span
+                data-currency-symbol>$</span>)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="rt-income-today" min="100" max="1000000" step="100" value="3000">
+                <span class="hint">Enter the amount you would want per month in today's buying power.</span>
+              </div>
+              <div>
+                <input type="range" id="rt-income-today-sl" min="100" max="50000" step="100" value="3000">
+                <div class="slider-lbl" id="rt-income-today-lbl">$3,000.00</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="toolbar-box">
+          <h2>How the income target is used</h2>
+          <div class="info-list">
+            <div class="info-pill">Today's monthly income target is first increased by inflation until retirement age.
+            </div>
+            <div class="info-pill">Annual retirement expense is then used to estimate a required corpus.</div>
+            <div class="info-pill">If there is a gap, the page estimates the monthly investment that may be needed to
+              close it.</div>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <button type="button" class="btn-primary" onclick="calculateRetirement(true)">Update Retirement Plan</button>
+          <button type="button" class="btn-ghost" onclick="resetPlanner()">Reset Inputs</button>
+        </div>
+      </section>
+    </section>
+
+    <section class="card" id="results-section" aria-live="polite">
+      <div class="result-meta">
+        <div class="mode-pill" id="result-mode-pill">Latest Result: Retirement Plan</div>
+        <div class="result-actions">
+          <button type="button" class="btn-secondary" onclick="copyResults()">Copy Results</button>
+          <div class="copy-note" id="copy-note">Nothing copied yet.</div>
+        </div>
+      </div>
+
+      <div class="status-banner" id="status-banner"></div>
+
+      <div class="result-grid">
+        <div class="result-card teal" id="result-card-0">
+          <div class="result-lbl" id="result-lbl-0">Projected Retirement Corpus</div>
+          <div class="result-val" id="result-val-0">—</div>
+          <div class="result-sub" id="result-sub-0">Run the calculator</div>
+        </div>
+        <div class="result-card amber" id="result-card-1">
+          <div class="result-lbl" id="result-lbl-1">Required Retirement Corpus</div>
+          <div class="result-val" id="result-val-1">—</div>
+          <div class="result-sub" id="result-sub-1">Retirement target</div>
+        </div>
+        <div class="result-card rose" id="result-card-2">
+          <div class="result-lbl" id="result-lbl-2">Future Monthly Income Need</div>
+          <div class="result-val" id="result-val-2">—</div>
+          <div class="result-sub" id="result-sub-2">Inflation-adjusted monthly need</div>
+        </div>
+        <div class="result-card slate" id="result-card-3">
+          <div class="result-lbl" id="result-lbl-3">Retirement Readiness</div>
+          <div class="result-val" id="result-val-3">—</div>
+          <div class="result-sub" id="result-sub-3">Surplus or shortfall</div>
+        </div>
+        <div class="result-card sky" id="result-card-4">
+          <div class="result-lbl" id="result-lbl-4">Required Monthly Investment</div>
+          <div class="result-val" id="result-val-4">—</div>
+          <div class="result-sub" id="result-sub-4">Estimated monthly amount to hit the goal</div>
+        </div>
+      </div>
+
+      <div class="insight-box" id="insight-box"></div>
+      <div class="formula-box" id="formula-box"></div>
+
+      <div class="comparison-summary" id="retirement-summary">
+        <div class="table-head">
+          <div>
+            <div class="card-title" style="margin-bottom:0.3rem;">Retirement Snapshot</div>
+            <div class="table-context">Quick planning metrics behind the retirement forecast.</div>
+          </div>
+        </div>
+        <div class="tbl-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Metric</th>
+                <th class="compare-a-cell">Value</th>
+                <th class="compare-b-cell">Planner Note</th>
+              </tr>
+            </thead>
+            <tbody id="retirement-summary-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" id="charts-section">
+      <div class="card-title">Visual Retirement Dashboard</div>
+      <p class="chart-note" id="charts-context">Charts show how your retirement plan builds up and then gets used.</p>
+
+      <div class="charts-grid">
+        <div class="chart-wrap">
+          <div class="chart-title" id="growth-title">Retirement Growth Line Chart</div>
+          <div class="chart-note" id="growth-note">Year-by-year corpus growth until retirement.</div>
+          <div class="chart-canvas">
+            <canvas id="growth-chart"></canvas>
+          </div>
+        </div>
+
+        <div class="chart-wrap">
+          <div class="chart-title" id="pie-title">Money Added vs Investment Growth</div>
+          <div class="chart-note" id="pie-note">See how much of the final corpus comes from money invested versus
+            returns.</div>
+          <div class="chart-canvas">
+            <canvas id="profit-chart"></canvas>
+          </div>
+        </div>
+
+        <div class="chart-wrap">
+          <div class="chart-title" id="comparison-title">Retirement Income Sustainability</div>
+          <div class="chart-note" id="comparison-note">Projected corpus path during retirement based on returns and
+            withdrawals.</div>
+          <div class="chart-canvas">
+            <canvas id="comparison-chart"></canvas>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" id="projection-section">
+      <div class="table-head">
+        <div>
+          <div class="card-title" style="margin-bottom:0.3rem;">Projection Table</div>
+          <div class="table-context" id="projection-context">Year-by-year retirement corpus growth until your retirement
+            age.</div>
+        </div>
+        <button type="button" class="btn-secondary" onclick="downloadCsv()">Download CSV</button>
+      </div>
+
+      <div class="tbl-wrap">
+        <table>
+          <thead>
+            <tr id="projection-head-row"></tr>
+          </thead>
+          <tbody id="projection-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="content-section" id="comparison-tables">
+      <h2>Comparison Tables</h2>
+      <p>These quick tables help explain retirement planning with simple planning rules. The first compares how
+        withdrawal rates change the corpus target, and the second shows why starting early can dramatically reduce the
+        monthly saving burden.</p>
+
+      <div class="comparison-grid">
+        <div>
+          <h3>Withdrawal Rate vs Required Corpus</h3>
+          <div class="tbl-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Withdrawal Rate</th>
+                  <th>Corpus Multiple</th>
+                  <th>Annual Expense</th>
+                  <th>Required Corpus</th>
+                  <th>Use Case</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>3%</td>
+                  <td>33.33x</td>
+                  <td><span data-currency-symbol>$</span>36,000</td>
+                  <td><span data-currency-symbol>$</span>1,200,000</td>
+                  <td>Very cautious retirement planning</td>
+                </tr>
+                <tr>
+                  <td>4%</td>
+                  <td>25x</td>
+                  <td><span data-currency-symbol>$</span>36,000</td>
+                  <td><span data-currency-symbol>$</span>900,000</td>
+                  <td>Classic starting rule for many planners</td>
+                </tr>
+                <tr>
+                  <td>5%</td>
+                  <td>20x</td>
+                  <td><span data-currency-symbol>$</span>36,000</td>
+                  <td><span data-currency-symbol>$</span>720,000</td>
+                  <td>Higher withdrawal risk, lower initial target</td>
+                </tr>
+                <tr>
+                  <td>6%</td>
+                  <td>16.67x</td>
+                  <td><span data-currency-symbol>$</span>36,000</td>
+                  <td><span data-currency-symbol>$</span>600,000</td>
+                  <td>More aggressive and less conservative</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div>
+          <h3>Starting Early vs Starting Late</h3>
+          <div class="tbl-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Start Age</th>
+                  <th>Years to 60</th>
+                  <th>Monthly Saving Needed</th>
+                  <th>Compounding Room</th>
+                  <th>Planner Insight</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>25</td>
+                  <td>35</td>
+                  <td><span data-currency-symbol>$</span>420</td>
+                  <td>Very high</td>
+                  <td>Time does more of the heavy lifting</td>
+                </tr>
+                <tr>
+                  <td>35</td>
+                  <td>25</td>
+                  <td><span data-currency-symbol>$</span>810</td>
+                  <td>Moderate</td>
+                  <td>Still manageable with discipline</td>
+                </tr>
+                <tr>
+                  <td>45</td>
+                  <td>15</td>
+                  <td><span data-currency-symbol>$</span>1,780</td>
+                  <td>Limited</td>
+                  <td>Late starts often need stronger monthly effort</td>
+                </tr>
+                <tr>
+                  <td>50</td>
+                  <td>10</td>
+                  <td><span data-currency-symbol>$</span>3,020</td>
+                  <td>Low</td>
+                  <td>Higher savings or later retirement may be needed</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <article class="content-section" id="guide">
+      <h2>What Retirement Planning Means in Real Life</h2>
+
+      <h3>Why Retirement Planning Matters &#129491;&#128176;</h3>
+      <p>Retirement planning is really about freedom. It is the process of building enough money so your future life can
+        keep running even when salary stops. For some people that means complete retirement. For others it means
+        part-time work, consulting, or simply having the option to choose work instead of needing it. The key point is
+        that retirement is not only about age. It is about replacing earned income with savings, investments, and a plan
+        that can last for many years.</p>
+      <p>Many people delay retirement planning because it feels far away. But retirement is one of the biggest financial
+        goals most people will ever face. It usually needs decades of saving, years of compounding, and realistic
+        thinking about inflation. When planning starts early, even modest monthly investments can become meaningful.
+        When planning starts late, the monthly burden usually rises quickly. That is why retirement planning rewards
+        consistency more than perfection. ?</p>
+      <p>This calculator is built to make retirement less abstract. Instead of one simple corpus number, it shows how
+        current savings grow, how monthly contributions help, how inflation changes future income needs, and whether
+        your plan points to a projected surplus or shortfall. That combination makes the result more useful for real
+        decisions.</p>
+
+      <h3>How Compound Interest Builds Wealth &#128200;</h3>
+      <p>Compound growth is the engine behind long-term retirement wealth. At first, progress can feel slow. Then growth
+        starts earning growth. That is compounding. If your money earns a return, that return becomes part of the
+        balance, and future returns are calculated on a bigger base. Over many years, this can create a powerful curve.
+      </p>
+      <p>Retirement planning shows why time matters so much. A saver who starts in their 20s or 30s may not need to
+        invest as aggressively each month as someone who begins in their 40s or 50s. That is not because younger savers
+        are smarter. It is because time gives the money more chances to compound. Current savings matter, but regular
+        monthly investing matters too because it keeps feeding the growth engine.</p>
+      <p>One reason retirement planning fails is that people expect the line to look dramatic too early. Compounding
+        often looks quiet in the beginning and impressive later. The first years build momentum. The later years often
+        deliver the visible jump. That is why patience and discipline are so important in retirement portfolios.</p>
+
+      <div class="callout">
+        <strong>Helpful mindset:</strong> retirement wealth usually grows from time, regular investing, and compounding
+        working together, not from one perfect year in the market.
+      </div>
+
+      <h3>Inflation and Purchasing Power &#128293;</h3>
+      <p>Inflation is one of the most important retirement risks because retirement spending happens in the future, not
+        today. If you say you want <span data-currency-symbol>$</span>3,000 per month in retirement and retirement is 25
+        years away, that same lifestyle may cost much more by the time you actually need it. Housing, food, utilities,
+        transport, and health care do not usually stay flat for decades.</p>
+      <p>That is why retirement planning should not stop at today's income number. A strong plan asks what that income
+        target becomes after inflation. This calculator uses your expected inflation rate to estimate future retirement
+        spending. That helps turn today's lifestyle goal into a future-money target that is more realistic.</p>
+      <p>Inflation also matters after retirement starts. If withdrawals stay flat while prices rise, real lifestyle may
+        slowly weaken. That is why the sustainability view matters. It shows how a corpus can behave when retirement
+        spending keeps moving higher over time. For long retirements, inflation can be just as important as return
+        assumptions.</p>
+
+      <h3>How Much Money Do You Need to Retire &#129504;</h3>
+      <p>There is no single retirement number that fits everyone. The right answer depends on spending needs, retirement
+        age, expected return, inflation, and how long retirement may last. Even so, there are two common planning
+        methods. The first is the safe withdrawal method. In simple terms, it asks how large your corpus should be if
+        you withdraw a small percentage every year. A common planning anchor is 4%, which turns annual expenses into a
+        target of about 25 times annual spending.</p>
+      <p>The second method is more detailed. Instead of using only a withdrawal rule, it looks at post-retirement
+        return, inflation, and the number of retirement years. That approach can be more precise because it treats
+        retirement as a drawdown problem, not just a simple rule. This page lets you compare both ideas so you can
+        decide whether you want the simplicity of a rule or the detail of a real-return model.</p>
+      <p>Your retirement target also depends on lifestyle choices. Someone planning a lower-cost retirement may need a
+        smaller corpus than someone planning higher travel, private health care, or more family support. A good
+        retirement number is not random. It should come from a realistic estimate of future living costs.</p>
+
+      <h3>What Happens If You Start Saving Late?</h3>
+      <p>Starting late does not make retirement planning impossible, but it does usually make it more demanding. With
+        fewer years left, compounding has less time to do the heavy lifting. That often means a later starter needs
+        higher monthly contributions, a later retirement age, or a lower income target. The good news is that a late
+        start is still far better than no start. Progress matters at every stage.</p>
+      <p>If the calculator shows a gap, try not to read it as failure. A shortfall is a planning signal. It tells you
+        where the stress is. You can respond by increasing monthly contributions, adjusting retirement age, lowering the
+        retirement income target, or checking whether your return assumption is realistic for your portfolio.</p>
+
+      <h3>Safe Withdrawal Strategies and Sustainability</h3>
+      <p>A retirement corpus does not only need to be built. It also needs to last. That is why withdrawal strategy
+        matters. If withdrawals are too high, the corpus can shrink too quickly. If withdrawals are too low, you may
+        live more tightly than necessary. A safe withdrawal rate is not a guarantee, but it is a helpful planning
+        starting point.</p>
+      <p>The challenge is that retirement rarely follows one perfect market path. Returns can be stronger or weaker than
+        expected. Inflation can be mild or stubborn. Health costs can surprise you. That is why the retirement
+        sustainability chart is useful. It helps you see whether the corpus may remain above zero through the full
+        retirement period or whether it may run out too soon.</p>
+      <p>A professional way to use withdrawal rules is to treat them as guidance, not destiny. They are excellent for
+        first estimates. After that, it is wise to test more than one scenario and review the plan regularly.</p>
+
+      <div class="callout">
+        <strong>Good planning habit:</strong> check retirement from two angles at the same time: how much corpus you can
+        build before retirement, and how responsibly that corpus may be used after retirement.
+      </div>
+
+      <h3>Strategies to Increase Your Retirement Savings &#128640;</h3>
+      <p>If your plan shows a shortfall, the most direct action is usually increasing monthly investment. Even moderate
+        increases made consistently can improve a retirement forecast in a big way over time. Another strong lever is
+        retirement age. Delaying retirement by even a few years can help in multiple ways: more time to save, more time
+        for compounding, and fewer years that the corpus must support.</p>
+      <p>Regular investing often works well for retirement because it matches the way most people earn income. SIP-style
+        investing is useful for this reason, while lumpsum investing can help when bonuses, windfalls, or maturing
+        deposits arrive. Diversification matters too. A portfolio built for retirement usually benefits from balancing
+        growth assets with stability according to the years remaining before retirement.</p>
+      <p>Retirement planning also improves when you review it regularly. Salary changes, inflation changes, and life
+        goals change. A yearly review can keep the plan realistic before small gaps become large ones. That is one
+        reason calculators like this are useful over and over again. They help turn retirement from a vague idea into a
+        measurable plan.</p>
+    </article>
+
+    <section class="content-section" id="more-tools">
+      <h2>Explore More Calculators</h2>
+      <p>Retirement planning becomes stronger when it connects with recurring investing, inflation planning, annualized
+        growth, and yield comparison across the SmartCalcWorld finance toolkit.</p>
+
+      <div class="links-grid">
+        <a class="link-card" href="https://smartcalcworld.com/finance/finance-sip-calculator.html">
+          <span class="link-icon">&#128202;</span>
+          <strong>SIP Calculator</strong>
+          <p>Compare regular monthly investing plans and understand how SIP discipline can help build a retirement
+            corpus.</p>
+        </a>
+
+        <a class="link-card" href="https://smartcalcworld.com/finance/investment/cagr-calculator.html">
+          <span class="link-icon">&#128200;</span>
+          <strong>CAGR Calculator</strong>
+          <p>Turn total growth into a cleaner annualized return view when reviewing long retirement timelines.</p>
+        </a>
+
+        <a class="link-card" href="https://smartcalcworld.com/finance/investment/lumpsum-calculator.html">
+          <span class="link-icon">&#128176;</span>
+          <strong>Lumpsum Calculator</strong>
+          <p>Estimate how bonuses, windfalls, or one-time investments can strengthen your retirement target.</p>
+        </a>
+
+        <a class="link-card" href="https://smartcalcworld.com/finance/investment/inflation-calculator.html">
+          <span class="link-icon">&#127757;</span>
+          <strong>Inflation Calculator</strong>
+          <p>Check how inflation changes purchasing power so your retirement plan stays realistic in real-life terms.
+          </p>
+        </a>
+
+        <a class="link-card" href="https://smartcalcworld.com/finance/investment/apy-calculator.html">
+          <span class="link-icon">&#128185;</span>
+          <strong>APY Calculator</strong>
+          <p>Compare quoted yields and effective yield math when reviewing deposit-style retirement options.</p>
+        </a>
+      </div>
+    </section>
+
+    <section class="content-section" id="faq">
+      <h2>Frequently Asked Questions</h2>
+
+      <div class="faq-item">
+        <div class="faq-q">How much money do I need to retire?</div>
+        <div class="faq-a">It depends on your retirement age, expected lifestyle, inflation, and how long retirement may
+          last. A common approach is to estimate annual retirement expenses first and then convert that into a corpus
+          target using a withdrawal rule or a drawdown formula.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">What is a safe withdrawal rate?</div>
+        <div class="faq-a">A safe withdrawal rate is a planning rate used to estimate how much can be withdrawn each
+          year from a retirement corpus. Many people start with 4%, but the right figure depends on risk, inflation, and
+          retirement duration.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">How does inflation affect retirement savings?</div>
+        <div class="faq-a">Inflation raises the future cost of your retirement lifestyle. That means the monthly income
+          you want in today's money will likely need to be much higher by the time retirement begins.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">What return rate should I assume?</div>
+        <div class="faq-a">Use a realistic long-term estimate based on your expected portfolio mix. Conservative,
+          moderate, and optimistic scenarios are often useful so you can see how sensitive your plan is.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">What happens if I start saving late?</div>
+        <div class="faq-a">A later start usually means you may need higher monthly contributions, a later retirement
+          age, or a smaller retirement income target. Time is one of the strongest advantages in retirement planning.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Is SIP good for retirement planning?</div>
+        <div class="faq-a">For many people, yes. SIP-style investing is often effective for retirement because it
+          matches monthly income, builds discipline, and gives compounding many years to work.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">How long will my retirement corpus last?</div>
+        <div class="faq-a">That depends on your spending, post-retirement returns, inflation, and how large the corpus
+          is when retirement begins. This page includes a sustainability chart to help visualize that path.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Should I adjust retirement plans for inflation?</div>
+        <div class="faq-a">Yes. Planning in nominal numbers alone can understate how much money you may really need in
+          the future. Inflation adjustment helps keep the target realistic.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Can this calculator show whether I have a surplus or shortfall?</div>
+        <div class="faq-a">Yes. It compares your projected retirement corpus with the required corpus and then shows a
+          retirement readiness result along with an estimated monthly investment needed to close the gap.</div>
+      </div>
+    </section>
+
+    <div class="disclaimer1">
+      <strong>Disclaimer:</strong> This retirement calculator is for educational and planning purposes only. Results are
+      estimates based on the assumptions you enter and do not include taxes, investment fees, employer-specific
+      retirement plan rules, pension details, health-care shocks, or market volatility beyond the return assumptions
+      used here. Please use this page as a planning guide, not personal financial advice.
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="https://smartcalcworld.com/index.html">Home</a>
+          <li><a href="https://smartcalcworld.com/about.html">About</a></li>
+          <li><a href="https://smartcalcworld.com/contact.html">Contact</a></li>
+          <li><a href="https://smartcalcworld.com/privacy-policy.html">Privacy Policy</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h3>Content</h3>
+        <ul>
+          <li><a href="#calculator">Retirement Calculator</a></li>
+          <li><a href="#guide">Retirement Guide</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h3>Finance Tools</h3>
+        <ul>
+          <li><a href="https://smartcalcworld.com/finance/interest/interest-hub.html">Interest Calculators</a></li>
+          <li><a href="https://smartcalcworld.com/finance/investment/investment-hub.html">Investment Calculators</a>
+          </li>
+          <li><a href="https://smartcalcworld.com/finance/loan/loan-hub.html">Loan Calculators</a></li>
+          <li><a href="https://smartcalcworld.com/finance/tax/tax-hub.html">Tax Calculators</a></li>
+          <li><a href="https://smartcalcworld.com/finance/saving-retirement/saving-retirement-hub.html">Savings
+              Calculators</a></li>
+          <li><a href="https://smartcalcworld.com/finance/saving-retirement/saving-retirement-hub.html">Retirement
+              Calculators</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <div class="footer-disclaimer">
+          <strong>SmartCalc World Note:</strong> retirement planning becomes more useful when you compare savings
+          behavior, inflation, withdrawal assumptions, and long-term compounding together instead of focusing on only
+          one number.
+        </div>
+      </div>
+    </div>
+
+    <div class="copyright">
+      <p>&copy; SmartCalc World. All rights reserved.</p>
+    </div>
+
+  </footer>
+
+  <script>
+
+    const $ = (id) => document.getElementById(id);
+
+    const currencySymbols = {
+      USD: "$",
+      EUR: "\u20AC",
+      GBP: "\u00A3",
+      INR: "\u20B9",
+      AUD: "$",
+      CAD: "$",
+      CUSTOM: "$"
+    };
+
+    const state = {
+      activeModule: "basics",
+      currentCurrency: "USD",
+      customSymbol: "$",
+      charts: { growth: null, profit: null, comparison: null },
+      projectionColumns: [],
+      projectionRows: [],
+      projectionFilename: "retirement_projection.csv",
+      copyText: "",
+      lastResultMode: "retirement"
+    };
+
+    const sliderConfigs = [
+      { input: "rt-current-age", slider: "rt-current-age-sl", label: "rt-current-age-lbl", type: "years", digits: 0 },
+      { input: "rt-retirement-age", slider: "rt-retirement-age-sl", label: "rt-retirement-age-lbl", type: "years", digits: 0 },
+      { input: "rt-life-expectancy", slider: "rt-life-expectancy-sl", label: "rt-life-expectancy-lbl", type: "years", digits: 0 },
+      { input: "rt-current-savings", slider: "rt-current-savings-sl", label: "rt-current-savings-lbl", type: "money", digits: 2 },
+      { input: "rt-monthly-contribution", slider: "rt-monthly-contribution-sl", label: "rt-monthly-contribution-lbl", type: "money", digits: 2 },
+      { input: "rt-pre-return", slider: "rt-pre-return-sl", label: "rt-pre-return-lbl", type: "percent", digits: 2 },
+      { input: "rt-post-return", slider: "rt-post-return-sl", label: "rt-post-return-lbl", type: "percent", digits: 2 },
+      { input: "rt-inflation", slider: "rt-inflation-sl", label: "rt-inflation-lbl", type: "percent", digits: 2 },
+      { input: "rt-salary-growth", slider: "rt-salary-growth-sl", label: "rt-salary-growth-lbl", type: "percent", digits: 2 },
+      { input: "rt-income-today", slider: "rt-income-today-sl", label: "rt-income-today-lbl", type: "money", digits: 2 },
+      { input: "rt-withdrawal-rate", slider: "rt-withdrawal-rate-sl", label: "rt-withdrawal-rate-lbl", type: "percent", digits: 2 }
+    ];
+
+    function currentSymbol() {
+      return state.currentCurrency === "CUSTOM"
+        ? ($("custom-symbol").value.trim() || state.customSymbol || "$")
+        : currencySymbols[state.currentCurrency];
+    }
+
+    function currentNumberLocale() {
+      return state.currentCurrency === "INR" ? "en-IN" : "en-US";
+    }
+
+    function formatMoney(value, digits = 2) {
+      const number = Number(value) || 0;
+      const sign = number < 0 ? "-" : "";
+      const formatted = Math.abs(number).toLocaleString(currentNumberLocale(), {
+        minimumFractionDigits: digits,
+        maximumFractionDigits: digits
+      });
+      const symbol = currentSymbol();
+      const prefix = /^[A-Za-z]{2,}$/.test(symbol) ? `${symbol} ` : symbol;
+      return `${sign}${prefix}${formatted}`;
+    }
+
+    function formatPercentValue(value, digits = 2) {
+      return `${Number(value).toFixed(digits)}%`;
+    }
+
+    function formatPercentFromDecimal(value, digits = 2) {
+      return `${(Number(value) * 100).toFixed(digits)}%`;
+    }
+
+    function formatSliderValue(type, value, digits = 0) {
+      if (type === "money") return formatMoney(value, digits);
+      if (type === "percent") return formatPercentValue(value, digits);
+      if (type === "years") return `${Number(value).toFixed(digits)} years`;
+      return String(value);
+    }
+
+    function destroyChart(chart) {
+      if (chart) chart.destroy();
+      return null;
+    }
+
+    function setStatus(message = "", tone = "") {
+      const banner = $("status-banner");
+      banner.className = "status-banner";
+      banner.textContent = message;
+      if (!message) return;
+      banner.classList.add(tone || "info");
+    }
+
+    function setCopyNote(message) {
+      $("copy-note").textContent = message;
+    }
+
+    function updateSliderLabel(config) {
+      const input = $(config.input);
+      const label = $(config.label);
+      if (!input || !label) return;
+      label.textContent = formatSliderValue(config.type, input.value, config.digits || 0);
+    }
+
+    function clampToSlider(inputEl, sliderEl) {
+      if (inputEl.value === "") return;
+      let value = Number(inputEl.value);
+      if (!Number.isFinite(value)) value = Number(sliderEl.min);
+      value = Math.max(Number(sliderEl.min), Math.min(Number(sliderEl.max), value));
+      inputEl.value = value;
+      sliderEl.value = value;
+    }
+
+    function bindSliderPair(config) {
+      const inputEl = $(config.input);
+      const sliderEl = $(config.slider);
+      if (!inputEl || !sliderEl) return;
+      updateSliderLabel(config);
+      inputEl.addEventListener("input", () => {
+        clampToSlider(inputEl, sliderEl);
+        updateSliderLabel(config);
+      });
+      inputEl.addEventListener("change", () => {
+        clampToSlider(inputEl, sliderEl);
+        updateSliderLabel(config);
+        calculateRetirement(false);
+      });
+      sliderEl.addEventListener("input", () => {
+        inputEl.value = sliderEl.value;
+        updateSliderLabel(config);
+        calculateRetirement(false);
+      });
+    }
+
+    function updateCurrencyIndicators() {
+      document.querySelectorAll("[data-currency-symbol]").forEach((node) => {
+        node.textContent = currentSymbol();
+      });
+      sliderConfigs.forEach(updateSliderLabel);
+      calculateRetirement(false);
+    }
+
+    function futureValueCurrentSavings(pv, annualRate, years) {
+      return pv * Math.pow(1 + annualRate, years);
+    }
+
+    function futureValueMonthlyContribution(pmt, annualRate, years) {
+      const months = years * 12;
+      if (months <= 0 || !(pmt > 0)) return 0;
+      const monthlyRate = annualRate / 12;
+      if (Math.abs(monthlyRate) < 1e-12) return pmt * months;
+      return pmt * ((Math.pow(1 + monthlyRate, months) - 1) / monthlyRate);
+    }
+
+    function inflationAdjustedExpense(monthlyExpenseToday, inflationRate, years) {
+      return monthlyExpenseToday * Math.pow(1 + inflationRate, years);
+    }
+
+    function realAnnualRate(nominalRate, inflationRate) {
+      return ((1 + nominalRate) / (1 + inflationRate)) - 1;
+    }
+
+    function requiredCorpusSafeWithdrawal(annualExpense, withdrawalRate) {
+      return annualExpense / withdrawalRate;
+    }
+
+    function requiredCorpusPrecise(annualExpense, nominalPostReturn, inflationRate, yearsInRetirement) {
+      if (!(yearsInRetirement > 0)) return annualExpense;
+      const realRate = realAnnualRate(nominalPostReturn, inflationRate);
+      if (!Number.isFinite(realRate) || (1 + realRate) <= 0 || Math.abs(realRate) < 1e-9) {
+        return annualExpense * yearsInRetirement;
+      }
+      return annualExpense * ((1 - Math.pow(1 + realRate, -yearsInRetirement)) / realRate);
+    }
+
+    function requiredMonthlyContribution(goalCorpus, fvCurrentSavings, annualRate, years) {
+      const months = years * 12;
+      const shortfallAtRetirement = Math.max(goalCorpus - fvCurrentSavings, 0);
+      if (!(months > 0) || !(shortfallAtRetirement > 0)) return 0;
+      const monthlyRate = annualRate / 12;
+      if (Math.abs(monthlyRate) < 1e-12) return shortfallAtRetirement / months;
+      const factor = Math.pow(1 + monthlyRate, months) - 1;
+      if (factor <= 0) return shortfallAtRetirement / months;
+      return shortfallAtRetirement * monthlyRate / factor;
+    }
+
+    function sustainableMonthlyIncome(projectedCorpus, method, withdrawalRate, postReturn, inflationRate, yearsInRetirement) {
+      if (!(projectedCorpus > 0)) return 0;
+      if (method === "withdrawal") return (projectedCorpus * withdrawalRate) / 12;
+      const realRate = realAnnualRate(postReturn, inflationRate);
+      if (!(yearsInRetirement > 0)) return projectedCorpus / 12;
+      if (!Number.isFinite(realRate) || (1 + realRate) <= 0 || Math.abs(realRate) < 1e-9) {
+        return projectedCorpus / (yearsInRetirement * 12);
+      }
+      const factor = (1 - Math.pow(1 + realRate, -yearsInRetirement)) / realRate;
+      return factor > 0 ? (projectedCorpus / factor) / 12 : 0;
+    }
+
+    function buildResultCards(modeTitle, cards, formulaHtml, insightHtml, copyText) {
+      $("result-mode-pill").textContent = `Latest Result: ${modeTitle}`;
+      for (let index = 0; index < 5; index += 1) {
+        const card = cards[index];
+        const cardEl = $(`result-card-${index}`);
+        if (!card) {
+          cardEl.className = "result-card slate";
+          $(`result-lbl-${index}`).textContent = "—";
+          $(`result-val-${index}`).textContent = "—";
+          $(`result-sub-${index}`).textContent = "";
+          continue;
+        }
+        cardEl.className = `result-card ${card.tone}`;
+        $(`result-lbl-${index}`).textContent = card.label;
+        $(`result-val-${index}`).textContent = card.value;
+        $(`result-sub-${index}`).textContent = card.sub;
+      }
+      $("formula-box").innerHTML = formulaHtml;
+      const insightBox = $("insight-box");
+      if (insightHtml) {
+        insightBox.style.display = "block";
+        insightBox.innerHTML = insightHtml;
+      } else {
+        insightBox.style.display = "none";
+        insightBox.innerHTML = "";
+      }
+      state.copyText = copyText;
+      setCopyNote("Results ready to copy.");
+    }
+
+    function showRetirementSummary(rows) {
+      $("retirement-summary-body").innerHTML = rows.map((row) => `
+        <tr>
+          <td>${row.metric}</td>
+          <td class="compare-a-cell">${row.value}</td>
+          <td class="compare-b-cell">${row.note}</td>
+        </tr>
+      `).join("");
+    }
+
+    function updateProjection(columns, rows, filename, contextText) {
+      state.projectionColumns = columns;
+      state.projectionRows = rows;
+      state.projectionFilename = filename;
+      $("projection-context").textContent = contextText;
+      $("projection-head-row").innerHTML = columns.map((column) => `<th>${column.label}</th>`).join("");
+      $("projection-body").innerHTML = rows.map((row) => `<tr>${columns.map((column) => `<td>${formatCell(row[column.key], column.type)}</td>`).join("")}</tr>`).join("");
+    }
+
+    function formatCell(value, type) {
+      if (type === "money") return formatMoney(value);
+      if (type === "percentValue") return formatPercentValue(value);
+      if (type === "percentDecimal") return formatPercentFromDecimal(value);
+      if (type === "years") return Number(value).toLocaleString(currentNumberLocale(), { maximumFractionDigits: 2 });
+      if (type === "text") return String(value);
+      return Number(value).toLocaleString(currentNumberLocale(), { maximumFractionDigits: 2 });
+    }
+
+    function commonChartOptions() {
+      return {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: { mode: "index", intersect: false },
+        plugins: { legend: { position: "bottom", labels: { boxWidth: 14, usePointStyle: true } } }
+      };
+    }
+
+    function renderCharts(config) {
+      $("charts-context").textContent = config.context;
+      $("growth-title").textContent = config.growthTitle;
+      $("growth-note").textContent = config.growthNote;
+      $("pie-title").textContent = config.pieTitle;
+      $("pie-note").textContent = config.pieNote;
+      $("comparison-title").textContent = config.comparisonTitle;
+      $("comparison-note").textContent = config.comparisonNote;
+
+      const growthCtx = $("growth-chart").getContext("2d");
+      state.charts.growth = destroyChart(state.charts.growth);
+      state.charts.growth = new Chart(growthCtx, {
+        type: "line",
+        data: { labels: config.growthLabels, datasets: [{ label: config.growthDatasetLabel, data: config.growthValues, borderColor: "#0d9488", backgroundColor: "rgba(13, 148, 136, 0.16)", fill: true, tension: 0.28, pointRadius: 2 }] },
+        options: {
+          ...commonChartOptions(),
+          scales: { y: { ticks: { callback: (value) => formatMoney(value, 0) } } },
+          plugins: { ...commonChartOptions().plugins, tooltip: { callbacks: { label: (ctx) => `${ctx.dataset.label}: ${formatMoney(ctx.parsed.y)}` } } }
+        }
+      });
+
+      const pieCtx = $("profit-chart").getContext("2d");
+      state.charts.profit = destroyChart(state.charts.profit);
+      state.charts.profit = new Chart(pieCtx, {
+        type: "pie",
+        data: { labels: config.pieLabels, datasets: [{ data: config.pieValues, backgroundColor: ["#14b8a6", "#f59e0b", "#f43f5e"], borderColor: "#ffffff", borderWidth: 2 }] },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { position: "bottom", labels: { boxWidth: 14, usePointStyle: true } },
+            tooltip: { callbacks: { label: (ctx) => { const total = ctx.dataset.data.reduce((sum, item) => sum + item, 0); const share = total ? (ctx.parsed / total) * 100 : 0; return `${ctx.label}: ${formatMoney(ctx.parsed)} (${share.toFixed(1)}%)`; } } }
+          }
+        }
+      });
+
+      const sustainCtx = $("comparison-chart").getContext("2d");
+      state.charts.comparison = destroyChart(state.charts.comparison);
+      state.charts.comparison = new Chart(sustainCtx, {
+        type: "line",
+        data: {
+          labels: config.sustainabilityLabels,
+          datasets: config.sustainabilityDatasets.map((dataset) => ({ label: dataset.label, data: dataset.values, borderColor: dataset.color, backgroundColor: dataset.background, tension: 0.25, pointRadius: 2, fill: false }))
+        },
+        options: {
+          ...commonChartOptions(),
+          scales: { y: { ticks: { callback: (value) => formatMoney(value, 0) } } },
+          plugins: { ...commonChartOptions().plugins, tooltip: { callbacks: { label: (ctx) => `${ctx.dataset.label}: ${formatMoney(ctx.parsed.y)}` } } }
+        }
+      });
+    }
+
+    function switchModule(name) {
+      state.activeModule = name;
+      document.querySelectorAll(".module").forEach((module) => module.classList.toggle("active", module.id === `mod-${name}`));
+      document.querySelectorAll(".qnav-btn").forEach((button) => {
+        const active = button.dataset.module === name;
+        button.classList.toggle("active", active);
+        button.setAttribute("aria-selected", active ? "true" : "false");
+      });
+      setStatus("");
+    }
+
+    function simulateRetirementDrawdown(startCorpus, annualExpenseAtRetirement, postReturn, inflationRate, yearsInRetirement, retirementAge) {
+      const labels = [];
+      const balances = [];
+      let balance = startCorpus;
+      let depletionAge = null;
+      for (let year = 0; year <= yearsInRetirement; year += 1) {
+        const age = retirementAge + year;
+        labels.push(`Age ${age}`);
+        balances.push(Math.max(balance, 0));
+        const annualExpense = annualExpenseAtRetirement * Math.pow(1 + inflationRate, year);
+        balance = (balance * (1 + postReturn)) - annualExpense;
+        if (depletionAge === null && balance <= 0) {
+          depletionAge = age + 1;
+          balance = 0;
+        }
+      }
+      return { labels, balances, depletionAge };
+    }
+
+    function calculateRetirement(announce = false) {
+      const currentAge = Number($("rt-current-age").value);
+      const retirementAge = Number($("rt-retirement-age").value);
+      const lifeExpectancy = Number($("rt-life-expectancy").value);
+      const currentSavings = Number($("rt-current-savings").value);
+      const monthlyContribution = Number($("rt-monthly-contribution").value);
+      const preReturnPct = Number($("rt-pre-return").value);
+      const postReturnPct = Number($("rt-post-return").value);
+      const inflationPct = Number($("rt-inflation").value);
+      const salaryGrowthPct = Number($("rt-salary-growth").value);
+      const incomeToday = Number($("rt-income-today").value);
+      const withdrawalRatePct = Number($("rt-withdrawal-rate").value);
+      const corpusMethod = $("rt-corpus-method").value;
+
+      if (!(retirementAge > currentAge)) {
+        setStatus("Retirement age must be greater than current age.", "error");
+        return;
+      }
+      if (!(lifeExpectancy > retirementAge)) {
+        setStatus("Life expectancy must be greater than retirement age.", "error");
+        return;
+      }
+      if (currentSavings < 0 || monthlyContribution < 0 || incomeToday <= 0) {
+        setStatus("Current savings and monthly contribution cannot be negative, and desired retirement income must be above zero.", "error");
+        return;
+      }
+      if (preReturnPct < 0 || postReturnPct < 0 || inflationPct < 0 || salaryGrowthPct < 0 || withdrawalRatePct <= 0) {
+        setStatus("Return, inflation, salary growth, and withdrawal assumptions must be valid positive planning inputs.", "error");
+        return;
+      }
+
+      const yearsToRetirement = retirementAge - currentAge;
+      const yearsInRetirement = lifeExpectancy - retirementAge;
+      const preReturn = preReturnPct / 100;
+      const postReturn = postReturnPct / 100;
+      const inflationRate = inflationPct / 100;
+      const salaryGrowthRate = salaryGrowthPct / 100;
+      const withdrawalRate = withdrawalRatePct / 100;
+
+      const fvCurrentSavings = futureValueCurrentSavings(currentSavings, preReturn, yearsToRetirement);
+      const fvMonthlyContribution = futureValueMonthlyContribution(monthlyContribution, preReturn, yearsToRetirement);
+      const projectedCorpus = fvCurrentSavings + fvMonthlyContribution;
+      const monthlyIncomeAtRetirement = inflationAdjustedExpense(incomeToday, inflationRate, yearsToRetirement);
+      const annualExpenseAtRetirement = monthlyIncomeAtRetirement * 12;
+      const requiredSafe = requiredCorpusSafeWithdrawal(annualExpenseAtRetirement, withdrawalRate);
+      const requiredPrecise = requiredCorpusPrecise(annualExpenseAtRetirement, postReturn, inflationRate, yearsInRetirement);
+      const requiredCorpus = corpusMethod === "withdrawal" ? requiredSafe : requiredPrecise;
+      const savingsGap = requiredCorpus - projectedCorpus;
+      const isShortfall = savingsGap > 0;
+      const requiredMonthlyTotal = requiredMonthlyContribution(requiredCorpus, fvCurrentSavings, preReturn, yearsToRetirement);
+      const additionalMonthlyNeeded = Math.max(requiredMonthlyTotal - monthlyContribution, 0);
+      const totalMoneyAdded = currentSavings + (monthlyContribution * yearsToRetirement * 12);
+      const investmentGrowth = projectedCorpus - totalMoneyAdded;
+      const realPostRetirementReturn = realAnnualRate(postReturn, inflationRate);
+      const supportedMonthlyIncome = sustainableMonthlyIncome(projectedCorpus, corpusMethod, withdrawalRate, postReturn, inflationRate, yearsInRetirement);
+
+      const growthYears = Array.from({ length: yearsToRetirement + 1 }, (_, index) => index);
+      const growthLabels = growthYears.map((year) => `Age ${currentAge + year}`);
+      const growthValues = growthYears.map((year) => futureValueCurrentSavings(currentSavings, preReturn, year) + futureValueMonthlyContribution(monthlyContribution, preReturn, year));
+      const projectionRows = growthYears.map((year) => {
+        const corpus = futureValueCurrentSavings(currentSavings, preReturn, year) + futureValueMonthlyContribution(monthlyContribution, preReturn, year);
+        const invested = currentSavings + (monthlyContribution * year * 12);
+        return { age: currentAge + year, years: year, corpus, invested, growth: corpus - invested, incomeNeed: inflationAdjustedExpense(incomeToday, inflationRate, year) };
+      });
+      const sustainability = simulateRetirementDrawdown(projectedCorpus, annualExpenseAtRetirement, postReturn, inflationRate, yearsInRetirement, retirementAge);
+      const salaryLifestyleTarget = incomeToday * Math.pow(1 + Math.max(inflationRate, salaryGrowthRate), yearsToRetirement);
+      const methodLabel = corpusMethod === "withdrawal" ? "Safe Withdrawal Rule" : "Inflation-Adjusted Drawdown";
+      const readinessLabel = isShortfall ? "Shortfall" : "Surplus";
+
+      buildResultCards(
+        "Retirement Plan",
+        [
+          { tone: "teal", label: "Projected Retirement Corpus", value: formatMoney(projectedCorpus), sub: "Current savings grown plus future monthly contributions" },
+          { tone: "amber", label: "Required Retirement Corpus", value: formatMoney(requiredCorpus), sub: `${methodLabel} based target` },
+          { tone: "rose", label: "Future Monthly Income Need", value: formatMoney(monthlyIncomeAtRetirement), sub: "Desired monthly retirement income adjusted for inflation" },
+          { tone: isShortfall ? "rose" : "slate", label: `Retirement Readiness: ${readinessLabel}`, value: formatMoney(Math.abs(savingsGap)), sub: isShortfall ? "Projected shortfall at retirement age" : "Projected surplus above required corpus" },
+          { tone: "sky", label: "Required Monthly Investment", value: formatMoney(requiredMonthlyTotal), sub: isShortfall ? `About ${formatMoney(additionalMonthlyNeeded)} more than your current monthly plan` : "Current plan already covers the goal under these assumptions" }
+        ],
+        `<strong>Retirement Plan Formulas</strong><br>FV Current Savings = PV × (1 + r)^n<br>FV Monthly Contributions = PMT × [((1 + r / 12)^(12 × n) - 1) / (r / 12)]<br>Projected Corpus = FV Current Savings + FV Monthly Contributions<br>Future Monthly Expense = Present Expense × (1 + inflation)^n<br>Required Corpus (${methodLabel}) = ${corpusMethod === "withdrawal" ? "Annual Expense ÷ Withdrawal Rate" : "Annual Expense × [(1 - (1 + real r)^-t) / real r]"}<br>Savings Gap = Required Corpus - Projected Corpus`,
+        `${isShortfall ? `<strong>Planning gap:</strong> Your projected corpus is ${formatMoney(projectedCorpus)}, while the current target is ${formatMoney(requiredCorpus)}. That creates a projected shortfall of ${formatMoney(savingsGap)}. To fully aim for this target, total monthly investing may need to be about ${formatMoney(requiredMonthlyTotal)}.` : `<strong>On-track signal:</strong> Your projected corpus is ${formatMoney(projectedCorpus)}, which is about ${formatMoney(Math.abs(savingsGap))} above the current required corpus estimate of ${formatMoney(requiredCorpus)}.`}<br><br><strong>Extra context:</strong> Future monthly retirement spending is estimated at ${formatMoney(monthlyIncomeAtRetirement)}. ${salaryGrowthRate > inflationRate ? `If your lifestyle grows more with salary than inflation, a richer target could move closer to ${formatMoney(salaryLifestyleTarget)} per month.` : `With salary growth at or below inflation, the inflation-adjusted target stays a sensible starting point.`} ${sustainability.depletionAge ? `Under the selected drawdown assumptions, the retirement corpus may run out around age ${sustainability.depletionAge}.` : `Under the selected drawdown assumptions, the corpus lasts through the full retirement horizon to age ${lifeExpectancy}.`}`,
+        `Retirement Calculator Summary\nCurrent age: ${currentAge}\nRetirement age: ${retirementAge}\nLife expectancy: ${lifeExpectancy}\nYears to retirement: ${yearsToRetirement}\nYears in retirement: ${yearsInRetirement}\nCurrent savings: ${formatMoney(currentSavings)}\nMonthly contribution: ${formatMoney(monthlyContribution)}\nExpected return before retirement: ${formatPercentValue(preReturnPct)}\nExpected return after retirement: ${formatPercentValue(postReturnPct)}\nExpected inflation: ${formatPercentValue(inflationPct)}\nDesired monthly retirement income today: ${formatMoney(incomeToday)}\nFuture monthly retirement income need: ${formatMoney(monthlyIncomeAtRetirement)}\nFuture value of current savings: ${formatMoney(fvCurrentSavings)}\nFuture value of monthly contributions: ${formatMoney(fvMonthlyContribution)}\nProjected retirement corpus: ${formatMoney(projectedCorpus)}\nRequired retirement corpus: ${formatMoney(requiredCorpus)}\nRetirement readiness: ${readinessLabel} ${formatMoney(Math.abs(savingsGap))}\nRequired monthly investment: ${formatMoney(requiredMonthlyTotal)}\nSupported monthly income from projected corpus: ${formatMoney(supportedMonthlyIncome)}`
+      );
+
+      showRetirementSummary([
+        { metric: "Years Until Retirement", value: `${yearsToRetirement} years`, note: "Time available for savings and compounding before retirement begins." },
+        { metric: "Years In Retirement", value: `${yearsInRetirement} years`, note: "Estimated drawdown period from retirement age to life expectancy." },
+        { metric: "Future Value of Current Savings", value: formatMoney(fvCurrentSavings), note: "Current retirement assets grown at the pre-retirement return assumption." },
+        { metric: "Future Value of Monthly Contributions", value: formatMoney(fvMonthlyContribution), note: "Value created by your monthly investing habit before retirement." },
+        { metric: "Supported Monthly Income", value: formatMoney(supportedMonthlyIncome), note: "Approximate monthly income the projected corpus may support at retirement." },
+        { metric: "Real Post-Retirement Return", value: formatPercentFromDecimal(realPostRetirementReturn), note: "Nominal post-retirement return adjusted for inflation." }
+      ]);
+
+      renderCharts({
+        context: "Charts currently reflect your latest retirement assumptions.",
+        growthTitle: "Retirement Growth Line Chart",
+        growthNote: "How your retirement corpus may build over time until retirement age.",
+        growthLabels,
+        growthDatasetLabel: "Projected corpus",
+        growthValues,
+        pieTitle: "Money Added vs Investment Growth",
+        pieNote: "How much of the final corpus comes from your own money versus compounding.",
+        pieLabels: ["Money added", "Investment growth"],
+        pieValues: [Math.max(totalMoneyAdded, 0), Math.max(investmentGrowth, 0)],
+        comparisonTitle: "Retirement Income Sustainability",
+        comparisonNote: sustainability.depletionAge ? `Corpus may decline to zero around age ${sustainability.depletionAge} under the selected assumptions.` : `Corpus stays above zero through age ${lifeExpectancy} under the selected assumptions.`,
+        sustainabilityLabels: sustainability.labels,
+        sustainabilityDatasets: [
+          { label: "Retirement corpus", values: sustainability.balances, color: "#0284c7", background: "rgba(2, 132, 199, 0.12)" }
+        ]
+      });
+
+      updateProjection(
+        [
+          { key: "age", label: "Age", type: "years" },
+          { key: "years", label: "Years From Now", type: "years" },
+          { key: "corpus", label: "Projected Corpus", type: "money" },
+          { key: "invested", label: "Money Added", type: "money" },
+          { key: "growth", label: "Investment Growth", type: "money" },
+          { key: "incomeNeed", label: "Monthly Income Need", type: "money" }
+        ],
+        projectionRows,
+        "retirement_projection.csv",
+        "Year-by-year retirement projection until retirement age, including corpus growth and future income need."
+      );
+
+      setStatus(announce ? "Retirement forecast updated." : "", announce ? "success" : "");
+    }
+
+    function copyResults() {
+      if (!state.copyText) {
+        setCopyNote("Run a calculation first.");
+        return;
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(state.copyText)
+          .then(() => setCopyNote("Results copied to clipboard."))
+          .catch(() => setCopyNote("Clipboard blocked. Please copy manually."));
+      } else {
+        setCopyNote("Clipboard API is not available in this browser.");
+      }
+    }
+
+    function downloadCsv() {
+      if (!state.projectionColumns.length || !state.projectionRows.length) {
+        setStatus("Generate a retirement projection before exporting CSV.", "error");
+        return;
+      }
+      const lines = [state.projectionColumns.map((column) => `"${column.label}"`).join(",")];
+      state.projectionRows.forEach((row) => {
+        lines.push(state.projectionColumns.map((column) => `"${String(formatCell(row[column.key], column.type)).replace(/"/g, '""')}"`).join(","));
+      });
+      const blob = new Blob([lines.join("\n")], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = state.projectionFilename;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+      setStatus("CSV download started.", "info");
+    }
+
+    function resetPlanner() {
+      $("rt-current-age").value = 30;
+      $("rt-current-age-sl").value = 30;
+      $("rt-retirement-age").value = 60;
+      $("rt-retirement-age-sl").value = 60;
+      $("rt-life-expectancy").value = 90;
+      $("rt-life-expectancy-sl").value = 90;
+      $("rt-current-savings").value = 50000;
+      $("rt-current-savings-sl").value = 50000;
+      $("rt-monthly-contribution").value = 500;
+      $("rt-monthly-contribution-sl").value = 500;
+      $("rt-pre-return").value = 10;
+      $("rt-pre-return-sl").value = 10;
+      $("rt-post-return").value = 6;
+      $("rt-post-return-sl").value = 6;
+      $("rt-inflation").value = 5;
+      $("rt-inflation-sl").value = 5;
+      $("rt-salary-growth").value = 6;
+      $("rt-salary-growth-sl").value = 6;
+      $("rt-income-today").value = 3000;
+      $("rt-income-today-sl").value = 3000;
+      $("rt-withdrawal-rate").value = 4;
+      $("rt-withdrawal-rate-sl").value = 4;
+      $("rt-corpus-method").value = "withdrawal";
+      sliderConfigs.forEach(updateSliderLabel);
+      calculateRetirement(true);
+    }
+
+    function bindCommonEvents() {
+      $("global-currency").addEventListener("change", (event) => {
+        state.currentCurrency = event.target.value;
+        $("custom-symbol-wrap").classList.toggle("hidden", state.currentCurrency !== "CUSTOM");
+        updateCurrencyIndicators();
+      });
+      $("custom-symbol").addEventListener("input", () => {
+        state.customSymbol = $("custom-symbol").value.trim() || "$";
+        if (state.currentCurrency === "CUSTOM") updateCurrencyIndicators();
+      });
+      $("rt-corpus-method").addEventListener("change", () => calculateRetirement(false));
+    }
+
+    function initMobileNav() {
+      const button = $("hamburgerBtn");
+      const menu = $("mobileNav");
+      button.addEventListener("click", () => {
+        const open = menu.classList.toggle("open");
+        button.setAttribute("aria-expanded", open ? "true" : "false");
+      });
+    }
+
+    function init() {
+      sliderConfigs.forEach(bindSliderPair);
+      bindCommonEvents();
+      initMobileNav();
+      state.currentCurrency = $("global-currency").value;
+      updateCurrencyIndicators();
+      calculateRetirement(false);
+    }
+
+    window.addEventListener("DOMContentLoaded", init);
+  </script>
+</body>
+
+</html>
