@@ -1,0 +1,3273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow">
+  <title>Lumpsum Investment Calculator – Future Value & Growth Tool | SmartCalc World</title>
+  <meta name="description"
+    content="Calculate the future value of your one-time investment with our advanced Lumpsum Investment Calculator. Includes growth charts, inflation adjustment, comparison mode, and yearly projection table.">
+  <link rel="canonical" href="https://smartcalcworld.com/finance/investment/lumpsum-calculator.html">
+  <link rel="icon" type="image/png" href="https://smartcalcworld.com/favicon.png">
+  <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://smartcalcworld.com/#org",
+        "name": "SmartCalc World",
+        "url": "https://smartcalcworld.com",
+        "description": "Free finance calculators for investing, saving, retirement and long-term planning."
+      },
+      {
+        "@type": "WebApplication",
+        "@id": "https://smartcalcworld.com/finance/investment/lumpsum-calculator.html#app",
+        "name": "Lumpsum Investment Calculator",
+        "url": "https://smartcalcworld.com/finance/investment/lumpsum-calculator.html",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Any",
+        "description": "Calculate the future value of a one-time investment, reverse engineer required return, estimate target time, compare two lumpsum scenarios, and adjust for inflation.",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Finance",
+            "item": "https://smartcalcworld.com/finance/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Investment",
+            "item": "https://smartcalcworld.com/finance/investment/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Lumpsum Calculator",
+            "item": "https://smartcalcworld.com/finance/investment/lumpsum-calculator.html"
+          }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is lumpsum investing?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Lumpsum investing means investing a single large amount of money at one time instead of spreading money out through regular contributions. The investment then grows based on the return rate, duration, and compounding frequency."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What formula does this lumpsum calculator use?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The standard future value formula is FV = P times (1 plus r divided by n) raised to the power of n times t, where P is principal, r is annual return, n is compounding frequency, and t is time in years."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How does compounding frequency affect the final value?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "More frequent compounding means gains are added to the balance more often, which can slightly increase the ending value compared with annual compounding at the same nominal return."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How does inflation adjustment work?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Inflation adjustment uses the real return formula ((1 plus nominal return) divided by (1 plus inflation)) minus 1. That real return is then used to estimate the inflation-adjusted future value."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is lumpsum investing riskier than SIP?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Lumpsum investing usually has higher timing risk because all money enters the market at once, while SIP spreads entry points over time. The right choice depends on cash availability, risk tolerance, and investment horizon."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Should I choose lumpsum or SIP?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Lumpsum may suit investors with cash already available and a long horizon, while SIP may suit people who invest gradually from monthly income or want to reduce timing stress."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is lumpsum better than a fixed deposit?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Lumpsum investing can offer higher long-term growth potential, but it usually comes with market risk. Fixed deposits are more stable and predictable, but they may struggle to beat inflation over long periods."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Are taxes included in the calculator?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. This calculator shows gross estimates based on the return assumptions you enter. Actual post-tax outcomes depend on your local tax rules, holding period, and product structure."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does market timing matter for lumpsum investing?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Because the full amount is invested at once, short-term entry timing can affect early performance. Over long periods, the quality of the asset, the return earned, and the investment horizon often matter more."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+  <style>
+    :root {
+      --teal: #0d9488;
+      --teal-dark: #0f766e;
+      --teal-light: #ccfbf1;
+      --amber: #f59e0b;
+      --amber-light: #fef3c7;
+      --rose: #f43f5e;
+      --rose-light: #ffe4e6;
+      --sky: #0284c7;
+      --sky-light: #dbeafe;
+      --slate-950: #020617;
+      --slate-900: #0f172a;
+      --slate-800: #1e293b;
+      --slate-700: #334155;
+      --slate-600: #475569;
+      --slate-500: #64748b;
+      --slate-400: #94a3b8;
+      --slate-300: #cbd5e1;
+      --slate-200: #e2e8f0;
+      --slate-100: #f1f5f9;
+      --slate-50: #f8fafc;
+      --white: #ffffff;
+      --radius: 14px;
+      --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.08);
+      --shadow-md: 0 10px 28px rgba(15, 23, 42, 0.12);
+      --shadow-lg: 0 20px 48px rgba(15, 23, 42, 0.16);
+      --header-h: 68px;
+    }
+
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(13, 148, 136, 0.14), transparent 32%),
+        linear-gradient(180deg, #f8fafc 0%, #eff6ff 44%, #f8fafc 100%);
+      color: var(--slate-800);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    img,
+    canvas {
+      max-width: 100%;
+    }
+
+    a {
+      color: var(--teal);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: linear-gradient(135deg, #0891b2 0%, #059669 100%);
+      color: var(--white);
+      box-shadow: 0 2px 10px rgba(15, 23, 42, 0.12);
+    }
+
+    .hdr-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .hdr-logo {
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+    }
+
+    .hdr-nav {
+      display: flex;
+      gap: 1.25rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .hdr-nav a,
+    .hdr-nav span {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      opacity: 0.96;
+      transition: opacity 0.3s ease;
+    }
+
+    .hdr-nav a:hover {
+      opacity: 0.82;
+      text-decoration: none;
+    }
+
+    .nav-disabled {
+      opacity: 0.74;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 4px;
+      background: none;
+      border: none;
+      padding: 0;
+    }
+
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background: var(--white);
+      border-radius: 999px;
+      transition: 0.3s ease;
+    }
+
+    .mobile-nav {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: #0b7694;
+      flex-direction: column;
+      padding: 1rem;
+      gap: 0.9rem;
+      box-shadow: 0 12px 28px rgba(15, 23, 42, 0.16);
+    }
+
+    .mobile-nav.open {
+      display: flex;
+    }
+
+    .mobile-nav a,
+    .mobile-nav span {
+      color: var(--white);
+      text-decoration: none;
+      padding: 0.45rem 0.5rem;
+      border-radius: 8px;
+    }
+
+    .mobile-nav a:hover {
+      background: rgba(255, 255, 255, 0.08);
+      text-decoration: none;
+    }
+
+    .page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1.5rem 1rem 4rem;
+    }
+
+    .breadcrumb {
+      font-size: 0.84rem;
+      color: var(--slate-500);
+      margin-bottom: 1.25rem;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(135deg, rgba(13, 148, 136, 0.14), rgba(2, 132, 199, 0.08)),
+        var(--white);
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      border-radius: 22px;
+      box-shadow: var(--shadow-md);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -80px -80px auto;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle, rgba(13, 148, 136, 0.14), transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      background: var(--teal-light);
+      color: var(--teal-dark);
+      font-size: 0.76rem;
+      font-weight: 800;
+      padding: 0.4rem 0.9rem;
+      border-radius: 999px;
+      margin-bottom: 0.85rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 5vw, 3.25rem);
+      line-height: 1.08;
+      color: var(--slate-900);
+      margin-bottom: 0.8rem;
+    }
+
+    .hero-sub {
+      font-size: 1rem;
+      color: var(--slate-600);
+      max-width: 760px;
+    }
+
+    .hero-highlights {
+      display: grid;
+      gap: 0.85rem;
+      margin-top: 1.25rem;
+    }
+
+    .hero-chip {
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid rgba(148, 163, 184, 0.28);
+      border-radius: 14px;
+      padding: 0.95rem 1rem;
+      box-shadow: var(--shadow-sm);
+      color: var(--slate-600);
+    }
+
+    .hero-chip strong {
+      display: block;
+      color: var(--slate-900);
+      margin-bottom: 0.2rem;
+    }
+
+    .card,
+    .content-section {
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid rgba(148, 163, 184, 0.22);
+      border-radius: 20px;
+      box-shadow: var(--shadow-md);
+      margin-top: 2rem;
+    }
+
+    .card {
+      padding: 1.5rem;
+    }
+
+    .content-section {
+      padding: 2rem;
+      scroll-margin-top: calc(var(--header-h) + 1rem);
+    }
+
+    .card-title,
+    .content-section h2 {
+      font-size: clamp(1.25rem, 3vw, 1.75rem);
+      font-weight: 800;
+      color: var(--slate-900);
+      margin-bottom: 1rem;
+    }
+
+    .content-section h2 {
+      padding-left: 1rem;
+      border-left: 4px solid var(--teal);
+    }
+
+    .content-section h3 {
+      font-size: 1.15rem;
+      color: var(--slate-900);
+      margin: 1.6rem 0 0.65rem;
+    }
+
+    .content-section p,
+    .content-section li {
+      color: var(--slate-600);
+    }
+
+    .content-section ul {
+      margin: 0.2rem 0 1rem 1.25rem;
+    }
+
+    .content-section li {
+      margin-bottom: 0.55rem;
+    }
+
+    .toolbar-grid,
+    .field-pair,
+    .result-grid,
+    .charts-grid,
+    .comparison-grid,
+    .links-grid,
+    .footer-content {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .toolbar-box {
+      background: linear-gradient(180deg, rgba(13, 148, 136, 0.08), rgba(255, 255, 255, 0.94));
+      border: 1px solid rgba(148, 163, 184, 0.24);
+      border-radius: 16px;
+      padding: 1rem;
+    }
+
+    .toolbar-box h2 {
+      font-size: 1.02rem;
+      color: var(--slate-900);
+      margin-bottom: 0.55rem;
+    }
+
+    .toolbar-help,
+    .hint,
+    .chart-note,
+    .table-context,
+    .copy-note {
+      font-size: 0.86rem;
+      color: var(--slate-500);
+    }
+
+    .info-list {
+      display: grid;
+      gap: 0.7rem;
+      margin-top: 0.7rem;
+    }
+
+    .info-pill {
+      padding: 0.8rem 0.9rem;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid rgba(148, 163, 184, 0.22);
+      color: var(--slate-700);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .qnav {
+      display: grid;
+      gap: 0.75rem;
+      margin: 1.25rem 0 1rem;
+    }
+
+    .qnav-btn {
+      width: 100%;
+      border: 2px solid var(--slate-300);
+      border-radius: 14px;
+      background: var(--white);
+      padding: 0.95rem 1rem;
+      font-size: 0.92rem;
+      font-weight: 800;
+      color: var(--slate-600);
+      cursor: pointer;
+      transition: 0.25s ease;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .qnav-btn:hover {
+      border-color: var(--teal);
+      color: var(--teal);
+      transform: translateY(-2px);
+    }
+
+    .qnav-btn.active {
+      background: linear-gradient(135deg, var(--teal-dark), var(--teal));
+      color: var(--white);
+      border-color: var(--teal);
+      box-shadow: 0 8px 24px rgba(13, 148, 136, 0.24);
+    }
+
+    .module {
+      display: none;
+    }
+
+    .module.active {
+      display: block;
+      animation: fadeUp 0.25s ease;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .module-intro {
+      margin-bottom: 1rem;
+      color: var(--slate-600);
+      font-size: 0.97rem;
+    }
+
+    .form-row {
+      display: grid;
+      gap: 0.45rem;
+      margin-bottom: 1rem;
+    }
+
+    .lbl {
+      font-weight: 700;
+      color: var(--slate-800);
+      font-size: 0.92rem;
+    }
+
+    input[type="number"],
+    input[type="text"],
+    select {
+      width: 100%;
+      border: 2px solid var(--slate-300);
+      border-radius: 12px;
+      padding: 0.78rem 0.92rem;
+      font-size: 1rem;
+      color: var(--slate-800);
+      background: var(--white);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    input[type="number"]:focus,
+    input[type="text"]:focus,
+    select:focus {
+      outline: none;
+      border-color: var(--teal);
+      box-shadow: 0 0 0 4px rgba(13, 148, 136, 0.12);
+    }
+
+    input[type="number"]:disabled,
+    input[type="text"]:disabled {
+      background: var(--slate-100);
+      color: var(--slate-400);
+      cursor: not-allowed;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--teal);
+    }
+
+    .input-slider {
+      display: grid;
+      gap: 0.8rem;
+    }
+
+    .slider-lbl {
+      font-size: 0.84rem;
+      color: var(--teal-dark);
+      font-weight: 700;
+      margin-top: 0.3rem;
+    }
+
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      flex-wrap: wrap;
+      margin-top: 0.3rem;
+    }
+
+    .toggle-row input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--teal);
+    }
+
+    .btn-row {
+      display: grid;
+      gap: 0.75rem;
+      margin-top: 0.5rem;
+    }
+
+    .btn-primary,
+    .btn-secondary,
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      border-radius: 12px;
+      padding: 0.85rem 1rem;
+      font-size: 0.96rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: 0.22s ease;
+    }
+
+    .btn-primary {
+      border: none;
+      color: var(--white);
+      background: linear-gradient(135deg, var(--teal-dark), var(--teal));
+      box-shadow: 0 10px 24px rgba(13, 148, 136, 0.2);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 28px rgba(13, 148, 136, 0.28);
+    }
+
+    .btn-secondary {
+      border: 2px solid var(--slate-300);
+      color: var(--slate-700);
+      background: var(--slate-100);
+    }
+
+    .btn-secondary:hover,
+    .btn-ghost:hover {
+      border-color: var(--teal);
+      color: var(--teal-dark);
+      transform: translateY(-1px);
+    }
+
+    .btn-ghost {
+      border: 2px solid rgba(13, 148, 136, 0.22);
+      color: var(--teal-dark);
+      background: rgba(13, 148, 136, 0.06);
+    }
+
+    .result-meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      margin-bottom: 0.9rem;
+    }
+
+    .mode-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--teal-light);
+      color: var(--teal-dark);
+      border-radius: 999px;
+      padding: 0.5rem 0.85rem;
+      font-size: 0.82rem;
+      font-weight: 800;
+    }
+
+    .result-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .status-banner {
+      display: none;
+      padding: 0.85rem 1rem;
+      border-radius: 14px;
+      margin-bottom: 1rem;
+      font-weight: 600;
+      font-size: 0.92rem;
+    }
+
+    .status-banner.info {
+      display: block;
+      background: var(--sky-light);
+      color: #0c4a6e;
+      border: 1px solid rgba(2, 132, 199, 0.2);
+    }
+
+    .status-banner.error {
+      display: block;
+      background: var(--rose-light);
+      color: #9f1239;
+      border: 1px solid rgba(244, 63, 94, 0.24);
+    }
+
+    .status-banner.success {
+      display: block;
+      background: var(--teal-light);
+      color: var(--teal-dark);
+      border: 1px solid rgba(13, 148, 136, 0.24);
+    }
+
+    .result-grid {
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      margin-top: 1rem;
+    }
+
+    .result-card {
+      color: var(--white);
+      border-radius: 18px;
+      padding: 1.2rem 1.1rem;
+      min-height: 142px;
+      min-width: 0;
+      box-shadow: var(--shadow-md);
+    }
+
+    .result-card.teal {
+      background: linear-gradient(135deg, var(--teal-dark), var(--teal));
+    }
+
+    .result-card.amber {
+      background: linear-gradient(135deg, #d97706, var(--amber));
+    }
+
+    .result-card.rose {
+      background: linear-gradient(135deg, #be123c, var(--rose));
+    }
+
+    .result-card.slate {
+      background: linear-gradient(135deg, var(--slate-800), var(--slate-600));
+    }
+
+    .result-card.sky {
+      background: linear-gradient(135deg, #0369a1, var(--sky));
+    }
+
+    .result-lbl {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      opacity: 0.92;
+      margin-bottom: 0.45rem;
+    }
+
+    .result-val {
+      font-size: clamp(0.96rem, 2.1vw, 1.55rem);
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.35rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .result-sub {
+      font-size: 0.82rem;
+      opacity: 0.86;
+    }
+
+    .insight-box,
+    .formula-box,
+    .callout {
+      margin-top: 1rem;
+      border-radius: 14px;
+      padding: 1rem 1.1rem;
+    }
+
+    .insight-box {
+      display: none;
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.12), rgba(255, 255, 255, 0.95));
+      border: 1px solid rgba(245, 158, 11, 0.24);
+      color: #78350f;
+    }
+
+    .formula-box {
+      background: linear-gradient(135deg, rgba(13, 148, 136, 0.08), rgba(255, 255, 255, 0.98));
+      border-left: 4px solid var(--teal);
+      color: var(--slate-700);
+      font-family: "Courier New", monospace;
+      font-size: 0.93rem;
+      overflow-x: auto;
+    }
+
+    .comparison-summary {
+      margin-top: 1rem;
+    }
+
+    .compare-box {
+      border-radius: 20px;
+      padding: 1.15rem;
+      border: 1px solid rgba(148, 163, 184, 0.24);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .compare-box + .compare-box,
+    .compare-box + .field-pair,
+    .field-pair + .compare-box {
+      margin-top: 1rem;
+    }
+
+    .compare-box.compare-a {
+      background: linear-gradient(180deg, rgba(219, 234, 254, 0.98), rgba(255, 255, 255, 0.96));
+      border-color: rgba(37, 99, 235, 0.22);
+    }
+
+    .compare-box.compare-b {
+      background: linear-gradient(180deg, rgba(254, 243, 199, 0.98), rgba(255, 255, 255, 0.96));
+      border-color: rgba(217, 119, 6, 0.24);
+    }
+
+    .compare-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.5rem 0.85rem;
+      border-radius: 999px;
+      font-size: 0.92rem;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+      margin-bottom: 0.95rem;
+    }
+
+    .compare-tag .compare-letter {
+      width: 1.7rem;
+      height: 1.7rem;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.86rem;
+      color: var(--white);
+    }
+
+    .compare-a .compare-tag {
+      background: rgba(37, 99, 235, 0.1);
+      color: #1d4ed8;
+    }
+
+    .compare-a .compare-letter {
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    }
+
+    .compare-b .compare-tag {
+      background: rgba(217, 119, 6, 0.12);
+      color: #b45309;
+    }
+
+    .compare-b .compare-letter {
+      background: linear-gradient(135deg, #d97706, #b45309);
+    }
+
+    .comparison-summary thead th:nth-child(2) {
+      color: #dbeafe;
+    }
+
+    .comparison-summary thead th:nth-child(3) {
+      color: #fde68a;
+    }
+
+    .comparison-summary tbody td.compare-a-cell {
+      color: #1d4ed8;
+      font-weight: 700;
+      background: rgba(219, 234, 254, 0.45);
+    }
+
+    .comparison-summary tbody td.compare-b-cell {
+      color: #b45309;
+      font-weight: 700;
+      background: rgba(254, 243, 199, 0.55);
+    }
+
+    .table-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+
+    .charts-grid {
+      margin-top: 1rem;
+    }
+
+    .chart-wrap {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), var(--slate-50));
+      border: 1px solid rgba(148, 163, 184, 0.22);
+      border-radius: 18px;
+      padding: 1rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .chart-title {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--slate-900);
+      margin-bottom: 0.35rem;
+    }
+
+    .chart-canvas {
+      position: relative;
+      height: 280px;
+      margin-top: 0.8rem;
+    }
+
+    .tbl-wrap {
+      overflow-x: auto;
+      border-radius: 16px;
+      border: 1px solid rgba(148, 163, 184, 0.24);
+      background: var(--white);
+      box-shadow: var(--shadow-sm);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 640px;
+    }
+
+    thead tr {
+      background: linear-gradient(135deg, var(--teal-dark), var(--teal));
+      color: var(--white);
+    }
+
+    th,
+    td {
+      padding: 0.75rem 0.9rem;
+      text-align: right;
+      font-size: 0.9rem;
+      border-bottom: 1px solid var(--slate-200);
+    }
+
+    th {
+      font-size: 0.8rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    th:first-child,
+    td:first-child {
+      text-align: left;
+    }
+
+    tbody tr:nth-child(even) {
+      background: var(--slate-50);
+    }
+
+    tbody tr:hover {
+      background: rgba(13, 148, 136, 0.06);
+    }
+
+    .comparison-grid {
+      margin-top: 1rem;
+    }
+
+    .callout {
+      background: linear-gradient(135deg, rgba(13, 148, 136, 0.1), rgba(224, 242, 254, 0.95));
+      border-left: 4px solid var(--teal);
+      color: var(--slate-700);
+    }
+
+    .callout strong {
+      color: var(--slate-900);
+    }
+
+    .links-grid {
+      margin-top: 1rem;
+    }
+
+    .link-card {
+      background: linear-gradient(180deg, var(--white), var(--slate-50));
+      border: 2px solid var(--slate-200);
+      border-radius: 16px;
+      padding: 1rem;
+      color: var(--slate-700);
+      transition: 0.25s ease;
+      text-decoration: none;
+    }
+
+    .link-card:hover {
+      border-color: var(--teal);
+      color: var(--teal);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-sm);
+      text-decoration: none;
+    }
+
+    .link-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 12px;
+      background: var(--teal-light);
+      margin-bottom: 0.75rem;
+      font-size: 1.15rem;
+    }
+
+    .link-card strong {
+      display: block;
+      color: var(--slate-900);
+      margin-bottom: 0.35rem;
+    }
+
+    .link-card p {
+      margin: 0;
+      color: var(--slate-500);
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .faq-item {
+      background: var(--slate-50);
+      border: 1px solid var(--slate-200);
+      border-radius: 14px;
+      padding: 1.1rem 1.15rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .faq-q {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--slate-900);
+      margin-bottom: 0.45rem;
+    }
+
+    .faq-a {
+      color: var(--slate-600);
+      font-size: 0.94rem;
+    }
+
+    .disclaimer1 {
+      background: linear-gradient(135deg, var(--amber-light), #fff7ed);
+      border: 1px solid rgba(245, 158, 11, 0.24);
+      border-radius: 16px;
+      padding: 1.2rem 1.3rem;
+      margin-top: 2rem;
+      color: #78350f;
+      font-size: 0.9rem;
+    }
+
+    .disclaimer1 strong {
+      color: #92400e;
+    }
+
+    footer {
+      background: #1f2937;
+      color: var(--white);
+      padding: 3rem 0 1rem;
+      margin-top: 4rem;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto 2rem;
+      padding: 0 1rem;
+    }
+
+    .footer-section h3 {
+      color: #5eead4;
+      margin-bottom: 0.9rem;
+      font-size: 1rem;
+    }
+
+    .footer-section ul {
+      list-style: none;
+    }
+
+    .footer-section li {
+      margin-bottom: 0.55rem;
+    }
+
+    .footer-section a,
+    .footer-section span {
+      color: #cbd5e0;
+      text-decoration: none;
+    }
+
+    .footer-section a:hover {
+      color: var(--white);
+    }
+
+    .footer-disclaimer {
+      background: rgba(255, 255, 255, 0.06);
+      padding: 1rem;
+      border-radius: 14px;
+      color: #dbeafe;
+      font-size: 0.9rem;
+    }
+
+    .copyright {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1.5rem 1rem 0;
+      text-align: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: #cbd5e0;
+    }
+
+    @media (min-width: 640px) {
+      .hero {
+        padding: 2rem;
+      }
+
+      .hero-highlights,
+      .toolbar-grid,
+      .field-pair,
+      .links-grid,
+      .footer-content {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .result-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .qnav {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .btn-row {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (min-width: 768px) {
+      .input-slider {
+        grid-template-columns: 1.1fr 1fr;
+        align-items: center;
+      }
+
+      .toolbar-grid {
+        grid-template-columns: 1.1fr 1fr;
+      }
+
+      .qnav {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .result-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .charts-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .charts-grid .chart-wrap:last-child {
+        grid-column: span 2;
+      }
+
+      .footer-content {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+    }
+
+    @media (min-width: 960px) {
+      .hero-highlights {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .result-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .comparison-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 767px) {
+      .hdr-nav {
+        display: none;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .result-actions {
+        width: 100%;
+      }
+
+      .result-actions .btn-secondary {
+        width: 100%;
+      }
+
+      .table-head {
+        flex-direction: column;
+      }
+
+      .result-val {
+        font-size: 1rem;
+      }
+    }
+
+    @media (max-width: 479px) {
+      .page {
+        padding-inline: 0.8rem;
+      }
+
+      .card,
+      .content-section {
+        padding: 1.1rem;
+      }
+
+      .chart-canvas {
+        height: 240px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="hdr-inner">
+      <div class="hdr-logo">💰 SmartCalc World</div>
+      <nav class="hdr-nav">
+        <a href="https://smartcalcworld.com/index.html">Home</a>
+        <a href="https://smartcalcworld.com/finance/finance-hub.html">Finance Hub</a>
+        <span class="nav-disabled">Medical Hub (Coming Soon)</span>
+        <span class="nav-disabled">Student Hub (Coming Soon)</span>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <button class="hamburger" id="hamburgerBtn" type="button" aria-label="Toggle menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <nav class="mobile-nav" id="mobileNav">
+      <a href="https://smartcalcworld.com/index.html">Home</a>
+      <a href="https://smartcalcworld.com/finance/finance-hub.html">Finance Hub</a>
+      <span class="nav-disabled">Medical Hub (Coming Soon)</span>
+      <span class="nav-disabled">Student Hub (Coming Soon)</span>
+      <a href="#faq">FAQ</a>
+    </nav>
+  </header>
+
+  <main class="page">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="https://smartcalcworld.com/index.html">Home</a> ›
+      <a href="https://smartcalcworld.com/finance/finance-hub.html">Finance</a> ›
+      <a href="https://smartcalcworld.com/finance/investment/investment-hub.html">Investment</a> ›
+      Lumpsum Calculator
+    </nav>
+
+    <section class="hero">
+      <span class="hero-badge">💰 Premium Investment Tool</span>
+      <h1>Lumpsum Investment Calculator</h1>
+      <p class="hero-sub">Project the future value of a one-time investment, reverse engineer return requirements,
+        estimate target timelines, compare two lumpsum strategies, and understand how inflation changes the real outcome
+        in one clean mobile-first dashboard.</p>
+
+      <div class="hero-highlights">
+        <div class="hero-chip">
+          <strong>Multi-mode investing workflow</strong>
+          Standard future value, reverse return, target time, and side-by-side comparison live in one flagship page.
+        </div>
+        <div class="hero-chip">
+          <strong>Charts and tables that explain the story</strong>
+          Use growth curves, profit breakdowns, yearly tables, and copy-ready summaries to make results easier to trust.
+        </div>
+        <div class="hero-chip">
+          <strong>Real-world framing 🌍</strong>
+          Optional inflation adjustment helps translate a big nominal number into something more honest and useful.
+        </div>
+      </div>
+    </section>
+
+    <section class="card" id="calculator">
+      <div class="card-title">💰 Lumpsum Investment Calculator Dashboard</div>
+
+      <div class="toolbar-grid">
+        <div class="toolbar-box">
+          <h2>Display Currency</h2>
+          <div class="field-pair">
+            <div class="form-row">
+              <label class="lbl" for="global-currency">Choose currency</label>
+              <select id="global-currency">
+                <option value="USD">USD $</option>
+                <option value="EUR">EUR €</option>
+                <option value="GBP">GBP £</option>
+                <option value="INR">INR ₹</option>
+                <option value="AUD">AUD $</option>
+                <option value="CAD">CAD $</option>
+                <option value="CUSTOM">Custom symbol</option>
+              </select>
+              <span class="hint">Display only. This page does not apply exchange-rate conversion.</span>
+            </div>
+
+            <div class="form-row hidden" id="custom-symbol-wrap">
+              <label class="lbl" for="custom-symbol">Custom symbol</label>
+              <input type="text" id="custom-symbol" maxlength="6" value="$" placeholder="e.g. CHF or AED">
+              <span class="hint">Use any symbol or short code you want to show on results.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="toolbar-box">
+          <h2>What this tool answers</h2>
+          <div class="info-list">
+            <div class="info-pill">📈 How big can a <strong>one-time investment</strong> become over time?</div>
+            <div class="info-pill">🎯 What return or time do you need to hit a <strong>target future value</strong>?</div>
+            <div class="info-pill">🌍 How much of the final value is still <strong>real after inflation</strong>?</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="qnav" id="qnav" role="tablist" aria-label="Lumpsum calculator modes">
+        <button type="button" class="qnav-btn active" data-module="standard" role="tab" aria-selected="true"
+          onclick="switchModule('standard')">📈 Standard Mode</button>
+        <button type="button" class="qnav-btn" data-module="reverse" role="tab" aria-selected="false"
+          onclick="switchModule('reverse')">↩️ Reverse Return</button>
+        <button type="button" class="qnav-btn" data-module="target" role="tab" aria-selected="false"
+          onclick="switchModule('target')">⏳ Target Time</button>
+        <button type="button" class="qnav-btn" data-module="compare" role="tab" aria-selected="false"
+          onclick="switchModule('compare')">⚖️ Comparison Mode</button>
+      </div>
+
+      <section class="module active" id="mod-standard" role="tabpanel" aria-label="Standard lumpsum calculator">
+        <p class="module-intro">Project future value using FV = P × (1 + r / n)<sup>n × t</sup>, then check profit,
+          total growth, multiplier, and optional inflation-adjusted value.</p>
+
+        <div class="field-pair">
+          <div class="form-row">
+            <label class="lbl" for="std-principal">Principal (<span data-currency-symbol>$</span>)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="std-principal" min="100" max="100000000" step="100" value="10000">
+                <span class="hint">One-time amount invested today.</span>
+              </div>
+              <div>
+                <input type="range" id="std-principal-sl" min="100" max="1000000" step="100" value="10000">
+                <div class="slider-lbl" id="std-principal-lbl">$10,000.00</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label class="lbl" for="std-return">Expected Annual Return (%)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="std-return" min="-20" max="40" step="0.01" value="12">
+                <span class="hint">Nominal annual return before inflation.</span>
+              </div>
+              <div>
+                <input type="range" id="std-return-sl" min="-20" max="40" step="0.1" value="12">
+                <div class="slider-lbl" id="std-return-lbl">12.00%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="field-pair">
+          <div class="form-row">
+            <label class="lbl" for="std-time">Investment Duration (Years)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="std-time" min="0.1" max="80" step="0.1" value="20">
+                <span class="hint">Duration must be greater than zero.</span>
+              </div>
+              <div>
+                <input type="range" id="std-time-sl" min="1" max="50" step="1" value="20">
+                <div class="slider-lbl" id="std-time-lbl">20 years</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label class="lbl" for="std-frequency">Compounding Frequency</label>
+            <select id="std-frequency">
+              <option value="1" selected>1 - Annually</option>
+              <option value="2">2 - Half-Yearly</option>
+              <option value="4">4 - Quarterly</option>
+              <option value="12">12 - Monthly</option>
+              <option value="52">52 - Weekly</option>
+              <option value="365">365 - Daily</option>
+            </select>
+            <span class="hint">Default is annual compounding.</span>
+          </div>
+        </div>
+
+        <div class="toolbar-box">
+          <h2>Optional inflation adjustment</h2>
+          <div class="toggle-row">
+            <input type="checkbox" id="std-use-inflation" checked>
+            <label for="std-use-inflation">Enable inflation adjustment and real future value</label>
+          </div>
+          <div class="field-pair" style="margin-top:1rem;">
+            <div class="form-row">
+              <label class="lbl" for="std-inflation">Inflation Rate (%)</label>
+              <div class="input-slider">
+                <div>
+                  <input type="number" id="std-inflation" min="0" max="20" step="0.01" value="4">
+                  <span class="hint">Used with Real r = ((1 + r) / (1 + i)) − 1.</span>
+                </div>
+                <div>
+                  <input type="range" id="std-inflation-sl" min="0" max="15" step="0.1" value="4">
+                  <div class="slider-lbl" id="std-inflation-lbl">4.00%</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <button type="button" class="btn-primary" onclick="calculateStandard()">Calculate Future Value</button>
+          <button type="button" class="btn-ghost" onclick="resetModule('standard')">Reset Standard Mode</button>
+        </div>
+      </section>
+
+      <section class="module" id="mod-reverse" role="tabpanel" aria-label="Reverse return calculator">
+        <p class="module-intro">Solve for the annual return needed to turn a starting principal into a target future
+          value over a fixed period.</p>
+
+        <div class="field-pair">
+          <div class="form-row">
+            <label class="lbl" for="rev-principal">Principal (<span data-currency-symbol>$</span>)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="rev-principal" min="100" max="100000000" step="100" value="10000">
+                <span class="hint">Starting one-time investment.</span>
+              </div>
+              <div>
+                <input type="range" id="rev-principal-sl" min="100" max="1000000" step="100" value="10000">
+                <div class="slider-lbl" id="rev-principal-lbl">$10,000.00</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label class="lbl" for="rev-target">Target Future Value (<span data-currency-symbol>$</span>)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="rev-target" min="100" max="500000000" step="100" value="50000">
+                <span class="hint">Goal amount you want to reach.</span>
+              </div>
+              <div>
+                <input type="range" id="rev-target-sl" min="100" max="1000000" step="100" value="50000">
+                <div class="slider-lbl" id="rev-target-lbl">$50,000.00</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="field-pair">
+          <div class="form-row">
+            <label class="lbl" for="rev-time">Time (Years)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="rev-time" min="0.1" max="80" step="0.1" value="10">
+                <span class="hint">Time must stay above zero.</span>
+              </div>
+              <div>
+                <input type="range" id="rev-time-sl" min="1" max="50" step="1" value="10">
+                <div class="slider-lbl" id="rev-time-lbl">10 years</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label class="lbl" for="rev-frequency">Compounding Frequency</label>
+            <select id="rev-frequency">
+              <option value="1" selected>1 - Annually</option>
+              <option value="2">2 - Half-Yearly</option>
+              <option value="4">4 - Quarterly</option>
+              <option value="12">12 - Monthly</option>
+              <option value="52">52 - Weekly</option>
+              <option value="365">365 - Daily</option>
+            </select>
+            <span class="hint">The required annual rate changes with compounding frequency.</span>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <button type="button" class="btn-primary" onclick="calculateReverse()">Calculate Required Return</button>
+          <button type="button" class="btn-ghost" onclick="resetModule('reverse')">Reset Reverse Mode</button>
+        </div>
+      </section>
+
+      <section class="module" id="mod-target" role="tabpanel" aria-label="Target time calculator">
+        <p class="module-intro">Estimate how long a lumpsum needs to reach a future value target at your selected annual
+          return and compounding frequency.</p>
+
+        <div class="field-pair">
+          <div class="form-row">
+            <label class="lbl" for="tgt-principal">Principal (<span data-currency-symbol>$</span>)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="tgt-principal" min="100" max="100000000" step="100" value="10000">
+                <span class="hint">Starting one-time investment amount.</span>
+              </div>
+              <div>
+                <input type="range" id="tgt-principal-sl" min="100" max="1000000" step="100" value="10000">
+                <div class="slider-lbl" id="tgt-principal-lbl">$10,000.00</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label class="lbl" for="tgt-target">Target Future Value (<span data-currency-symbol>$</span>)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="tgt-target" min="100" max="500000000" step="100" value="100000">
+                <span class="hint">The goal amount you want the investment to reach.</span>
+              </div>
+              <div>
+                <input type="range" id="tgt-target-sl" min="100" max="2000000" step="100" value="100000">
+                <div class="slider-lbl" id="tgt-target-lbl">$100,000.00</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="field-pair">
+          <div class="form-row">
+            <label class="lbl" for="tgt-return">Annual Return (%)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="tgt-return" min="-20" max="40" step="0.01" value="12">
+                <span class="hint">Return assumption used for the target time estimate.</span>
+              </div>
+              <div>
+                <input type="range" id="tgt-return-sl" min="-20" max="40" step="0.1" value="12">
+                <div class="slider-lbl" id="tgt-return-lbl">12.00%</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label class="lbl" for="tgt-frequency">Compounding Frequency</label>
+            <select id="tgt-frequency">
+              <option value="1" selected>1 - Annually</option>
+              <option value="2">2 - Half-Yearly</option>
+              <option value="4">4 - Quarterly</option>
+              <option value="12">12 - Monthly</option>
+              <option value="52">52 - Weekly</option>
+              <option value="365">365 - Daily</option>
+            </select>
+            <span class="hint">Time uses t = ln(FV / P) / (n × ln(1 + r / n)).</span>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <button type="button" class="btn-primary" onclick="calculateTarget()">Calculate Target Time</button>
+          <button type="button" class="btn-ghost" onclick="resetModule('target')">Reset Target Mode</button>
+        </div>
+      </section>
+
+      <section class="module" id="mod-compare" role="tabpanel" aria-label="Comparison mode">
+        <p class="module-intro">Compare two lumpsum investment ideas using the same compounding frequency and see which
+          one finishes ahead in value, profit, and percentage outperformance.</p>
+
+        <div class="compare-box compare-a">
+          <div class="compare-tag">
+            <span class="compare-letter">A</span>
+            <span>Investment A</span>
+          </div>
+
+          <div class="field-pair">
+            <div class="form-row">
+              <label class="lbl" for="cmp-p1">Investment A Principal (<span data-currency-symbol>$</span>)</label>
+              <div class="input-slider">
+                <div>
+                  <input type="number" id="cmp-p1" min="100" max="100000000" step="100" value="10000">
+                  <span class="hint">Starting amount for investment A.</span>
+                </div>
+                <div>
+                  <input type="range" id="cmp-p1-sl" min="100" max="1000000" step="100" value="10000">
+                  <div class="slider-lbl" id="cmp-p1-lbl">$10,000.00</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <label class="lbl" for="cmp-r1">Investment A Return (%)</label>
+              <div class="input-slider">
+                <div>
+                  <input type="number" id="cmp-r1" min="-20" max="40" step="0.01" value="12">
+                  <span class="hint">Annual return for investment A.</span>
+                </div>
+                <div>
+                  <input type="range" id="cmp-r1-sl" min="-20" max="40" step="0.1" value="12">
+                  <div class="slider-lbl" id="cmp-r1-lbl">12.00%</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="field-pair">
+            <div class="form-row">
+              <label class="lbl" for="cmp-t1">Investment A Time (Years)</label>
+              <div class="input-slider">
+                <div>
+                  <input type="number" id="cmp-t1" min="0.1" max="80" step="0.1" value="20">
+                  <span class="hint">Duration for investment A.</span>
+                </div>
+                <div>
+                  <input type="range" id="cmp-t1-sl" min="1" max="50" step="1" value="20">
+                  <div class="slider-lbl" id="cmp-t1-lbl">20 years</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="compare-box compare-b">
+          <div class="compare-tag">
+            <span class="compare-letter">B</span>
+            <span>Investment B</span>
+          </div>
+
+          <div class="field-pair">
+            <div class="form-row">
+              <label class="lbl" for="cmp-p2">Investment B Principal (<span data-currency-symbol>$</span>)</label>
+              <div class="input-slider">
+                <div>
+                  <input type="number" id="cmp-p2" min="100" max="100000000" step="100" value="10000">
+                  <span class="hint">Starting amount for investment B.</span>
+                </div>
+                <div>
+                  <input type="range" id="cmp-p2-sl" min="100" max="1000000" step="100" value="10000">
+                  <div class="slider-lbl" id="cmp-p2-lbl">$10,000.00</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <label class="lbl" for="cmp-r2">Investment B Return (%)</label>
+              <div class="input-slider">
+                <div>
+                  <input type="number" id="cmp-r2" min="-20" max="40" step="0.01" value="10">
+                  <span class="hint">Annual return for investment B.</span>
+                </div>
+                <div>
+                  <input type="range" id="cmp-r2-sl" min="-20" max="40" step="0.1" value="10">
+                  <div class="slider-lbl" id="cmp-r2-lbl">10.00%</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="field-pair">
+            <div class="form-row">
+              <label class="lbl" for="cmp-t2">Investment B Time (Years)</label>
+              <div class="input-slider">
+                <div>
+                  <input type="number" id="cmp-t2" min="0.1" max="80" step="0.1" value="20">
+                  <span class="hint">Duration for investment B.</span>
+                </div>
+                <div>
+                  <input type="range" id="cmp-t2-sl" min="1" max="50" step="1" value="20">
+                  <div class="slider-lbl" id="cmp-t2-lbl">20 years</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="field-pair">
+          <div class="form-row">
+            <label class="lbl" for="cmp-frequency">Compounding Frequency</label>
+            <select id="cmp-frequency">
+              <option value="1" selected>1 - Annually</option>
+              <option value="2">2 - Half-Yearly</option>
+              <option value="4">4 - Quarterly</option>
+              <option value="12">12 - Monthly</option>
+              <option value="52">52 - Weekly</option>
+              <option value="365">365 - Daily</option>
+            </select>
+            <span class="hint">The same compounding frequency is applied to both scenarios for fair comparison.</span>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <button type="button" class="btn-primary" onclick="calculateCompare()">Compare Investments</button>
+          <button type="button" class="btn-ghost" onclick="resetModule('compare')">Reset Comparison Mode</button>
+        </div>
+      </section>
+    </section>
+
+    <section class="card" id="results-section" aria-live="polite">
+      <div class="result-meta">
+        <div class="mode-pill" id="result-mode-pill">Latest Result: Standard Mode</div>
+        <div class="result-actions">
+          <button type="button" class="btn-secondary" onclick="copyResults()">Copy Results</button>
+          <div class="copy-note" id="copy-note">Nothing copied yet.</div>
+        </div>
+      </div>
+
+      <div class="status-banner" id="status-banner"></div>
+
+      <div class="result-grid">
+        <div class="result-card teal" id="result-card-0">
+          <div class="result-lbl" id="result-lbl-0">Future Value</div>
+          <div class="result-val" id="result-val-0">—</div>
+          <div class="result-sub" id="result-sub-0">Run a calculation</div>
+        </div>
+        <div class="result-card amber" id="result-card-1">
+          <div class="result-lbl" id="result-lbl-1">Total Profit</div>
+          <div class="result-val" id="result-val-1">—</div>
+          <div class="result-sub" id="result-sub-1">Profit above principal</div>
+        </div>
+        <div class="result-card rose" id="result-card-2">
+          <div class="result-lbl" id="result-lbl-2">Growth %</div>
+          <div class="result-val" id="result-val-2">—</div>
+          <div class="result-sub" id="result-sub-2">Total percentage growth</div>
+        </div>
+        <div class="result-card slate" id="result-card-3">
+          <div class="result-lbl" id="result-lbl-3">Growth Multiplier</div>
+          <div class="result-val" id="result-val-3">—</div>
+          <div class="result-sub" id="result-sub-3">How many times the principal grows</div>
+        </div>
+        <div class="result-card sky" id="result-card-4">
+          <div class="result-lbl" id="result-lbl-4">Real Future Value</div>
+          <div class="result-val" id="result-val-4">—</div>
+          <div class="result-sub" id="result-sub-4">Shown when inflation adjustment is active</div>
+        </div>
+      </div>
+
+      <div class="insight-box" id="insight-box"></div>
+      <div class="formula-box" id="formula-box"></div>
+
+      <div class="comparison-summary hidden" id="comparison-summary">
+        <div class="table-head">
+          <div>
+            <div class="card-title" style="margin-bottom:0.3rem;">📋 Comparison Summary</div>
+            <div class="table-context">This dynamic table appears when Comparison Mode is active.</div>
+          </div>
+        </div>
+        <div class="tbl-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Metric</th>
+                <th class="compare-a-cell">Investment A</th>
+                <th class="compare-b-cell">Investment B</th>
+              </tr>
+            </thead>
+            <tbody id="comparison-summary-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" id="charts-section">
+      <div class="card-title">📊 Visual Lumpsum Dashboard</div>
+      <p class="chart-note" id="charts-context">Charts track the most recent time-based scenario.</p>
+
+      <div class="charts-grid">
+        <div class="chart-wrap">
+          <div class="chart-title" id="growth-title">Growth Line Chart</div>
+          <div class="chart-note" id="growth-note">Year-by-year investment value progression.</div>
+          <div class="chart-canvas">
+            <canvas id="growth-chart"></canvas>
+          </div>
+        </div>
+
+        <div class="chart-wrap">
+          <div class="chart-title" id="pie-title">Principal vs Total Profit</div>
+          <div class="chart-note" id="pie-note">How much of the final amount comes from your initial money vs growth.</div>
+          <div class="chart-canvas">
+            <canvas id="profit-chart"></canvas>
+          </div>
+        </div>
+
+        <div class="chart-wrap">
+          <div class="chart-title" id="comparison-title">Nominal vs Real or Comparison View</div>
+          <div class="chart-note" id="comparison-note">This panel switches to comparison mode when two investments are evaluated.</div>
+          <div class="chart-canvas">
+            <canvas id="comparison-chart"></canvas>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" id="projection-section">
+      <div class="table-head">
+        <div>
+          <div class="card-title" style="margin-bottom:0.3rem;">🗂️ Projection Table</div>
+          <div class="table-context" id="projection-context">Year-by-year value, profit, and growth for the latest
+            time-based scenario.</div>
+        </div>
+        <button type="button" class="btn-secondary" onclick="downloadCsv()">Download CSV</button>
+      </div>
+
+      <div class="tbl-wrap">
+        <table>
+          <thead>
+            <tr id="projection-head-row"></tr>
+          </thead>
+          <tbody id="projection-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="content-section" id="comparison-tables">
+      <h2>🧾 Comparison Tables</h2>
+      <p>These quick comparison tables help explain how lumpsum investing fits into broader financial planning. The
+        first compares lumpsum investing with SIP and fixed deposits, while the second shows the difference between
+        nominal and real return using the exact formula.</p>
+
+      <div class="comparison-grid">
+        <div>
+          <h3>Lumpsum vs SIP vs Fixed Deposit</h3>
+          <div class="tbl-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Aspect</th>
+                  <th>Lumpsum</th>
+                  <th>SIP</th>
+                  <th>Fixed Deposit</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Cash flow style</td>
+                  <td>One-time investment</td>
+                  <td>Regular installments</td>
+                  <td>One-time deposit</td>
+                </tr>
+                <tr>
+                  <td>Growth potential</td>
+                  <td>High if return and timing are favorable</td>
+                  <td>High over long periods with disciplined investing</td>
+                  <td>Usually lower but predictable</td>
+                </tr>
+                <tr>
+                  <td>Timing risk</td>
+                  <td>High at entry</td>
+                  <td>Lower because entry is spread out</td>
+                  <td>Low market timing risk</td>
+                </tr>
+                <tr>
+                  <td>Volatility</td>
+                  <td>Depends on the asset chosen</td>
+                  <td>Depends on the asset chosen</td>
+                  <td>Usually stable</td>
+                </tr>
+                <tr>
+                  <td>Inflation defense</td>
+                  <td>Can be strong with growth assets</td>
+                  <td>Can be strong with growth assets</td>
+                  <td>May lag inflation over long periods</td>
+                </tr>
+                <tr>
+                  <td>Best use case</td>
+                  <td>When cash is already available</td>
+                  <td>When investing from monthly income</td>
+                  <td>When capital safety is the priority</td>
+                </tr>
+                <tr>
+                  <td>Who may prefer it?</td>
+                  <td>Long-term investors ready for upfront deployment</td>
+                  <td>Investors who want discipline and smoother entry</td>
+                  <td>Savers seeking fixed and known returns</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div>
+          <h3>Nominal vs Real Return Comparison</h3>
+          <div class="formula-box"><strong>Real Return</strong> = ((1 + r) / (1 + i)) − 1</div>
+          <div class="tbl-wrap" style="margin-top:0.8rem;">
+            <table>
+              <thead>
+                <tr>
+                  <th>Scenario</th>
+                  <th>Nominal Return</th>
+                  <th>Inflation</th>
+                  <th>Real Return</th>
+                  <th>Formula</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Growth fund</td>
+                  <td>12%</td>
+                  <td>4%</td>
+                  <td>7.69%</td>
+                  <td>((1.12)/(1.04)) − 1</td>
+                </tr>
+                <tr>
+                  <td>Diversified portfolio</td>
+                  <td>10%</td>
+                  <td>6%</td>
+                  <td>3.77%</td>
+                  <td>((1.10)/(1.06)) − 1</td>
+                </tr>
+                <tr>
+                  <td>Balanced allocation</td>
+                  <td>8%</td>
+                  <td>3%</td>
+                  <td>4.85%</td>
+                  <td>((1.08)/(1.03)) − 1</td>
+                </tr>
+                <tr>
+                  <td>Income-style portfolio</td>
+                  <td>7%</td>
+                  <td>6%</td>
+                  <td>0.94%</td>
+                  <td>((1.07)/(1.06)) − 1</td>
+                </tr>
+                <tr>
+                  <td>Low-yield savings</td>
+                  <td>5%</td>
+                  <td>4%</td>
+                  <td>0.96%</td>
+                  <td>((1.05)/(1.04)) − 1</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <article class="content-section" id="guide">
+      <h2>📚 What Lumpsum Investing Means in Real Life</h2>
+
+      <h3>What is lumpsum investing? 💰</h3>
+      <p>Lumpsum investing means putting a single amount of money into an investment at one point in time instead of
+        spreading it across many small contributions. That amount could come from a bonus, business income, inheritance,
+        matured deposit, sale of an asset, or simply savings that have been waiting on the side. Once invested, the
+        money gets a chance to grow through compounding. This idea sounds simple, but it matters a lot because a
+        one-time decision can shape the entire path of your future returns. When people talk about lumpsum investing,
+        they are usually asking two questions: how much could this money become later, and is it smarter to invest all
+        of it now or gradually over time?</p>
+
+      <p>The answer depends on return expectations, time horizon, risk tolerance, and what the money is meant for. A
+        lumpsum invested into a volatile asset may rise quickly, but it can also face a drawdown soon after entry. A
+        lumpsum placed into a lower-risk product may feel more stable, but the long-term growth rate may be weaker.
+        That is why this page gives you more than a single future value number. It shows the growth path year by year,
+        allows reverse calculations, estimates required time, and compares two ideas side by side. That makes the tool
+        more useful for real planning instead of just quick curiosity.</p>
+
+      <h3>How compounding works 📈</h3>
+      <p>Compounding is the engine that makes long-term investing powerful. In plain language, it means your returns
+        start earning returns too. If you invest <span data-currency-symbol>$</span>10,000 and earn 12% in the first
+        year, the balance becomes <span data-currency-symbol>$</span>11,200. If the same return continues, the second
+        year does not grow from 10,000 again. It grows from 11,200. That means growth is happening on a larger base.
+        Over enough time, this stacking effect becomes dramatic. Small differences in rate, duration, and compounding
+        frequency can create large gaps in the ending value.</p>
+
+      <p>This is why time matters so much. In the early years, compounding can feel slow and almost boring. Later, it
+        starts looking impressive because each percentage gain applies to a much larger amount. The first few years are
+        often about building momentum. The later years are where the curve bends upward. Many investors underestimate
+        this because human intuition prefers straight lines, while compounding produces curves. The calculator’s growth
+        chart exists to make that curve visible. Seeing the progression helps explain why patience is often just as
+        important as the return rate itself.</p>
+
+      <div class="callout">
+        <strong>Simple idea:</strong> a good return matters, but a good return held for a long time matters even more.
+      </div>
+
+      <h3>Why timing matters for lumpsum investing</h3>
+      <p>Timing matters more in lumpsum investing than in systematic investing because all the money enters at once.
+        If markets are expensive and fall soon after you invest, the early experience can feel painful. If markets are
+        reasonably valued and rise after your entry, the result may look excellent. This does not mean you must predict
+        the perfect day. Perfect timing is unrealistic for most people. It simply means that a lumpsum approach carries
+        more entry-point risk than spreading money over time.</p>
+
+      <p>That said, timing is not the full story. For long-term investors, the quality of the asset and the length of
+        time invested often matter more than finding the exact lowest entry point. A lumpsum held for many years in a
+        productive asset can still perform well even if the starting month was not perfect. In practical terms, timing
+        risk is real, but it should be balanced against the opportunity cost of leaving cash idle for too long. Money
+        that stays out of the market does not compound. So the real question is often not “Can I time it perfectly?”
+        but “Am I comfortable with the risk of entering now compared with the cost of waiting?” ⚖️</p>
+
+      <h3>Lumpsum vs SIP 📊</h3>
+      <p>The most common comparison is between lumpsum investing and SIP, which means systematic investment through
+        regular contributions. SIP is often better for people who invest from monthly salary, prefer habit-based saving,
+        or want to reduce the emotional stress of choosing one big entry point. Lumpsum is often more relevant when
+        money is already available. Neither approach is always better. They solve different problems.</p>
+
+      <p>Lumpsum may lead to stronger results if markets rise after the investment because more money is working from day
+        one. SIP may feel smoother because it spreads purchases across many dates, which can reduce the regret of
+        investing at the “wrong” moment. In strong bull markets, lumpsum often has an advantage because the full amount
+        participates earlier. In choppy or falling markets, SIP can look better because later contributions may buy at
+        lower prices. Emotionally, SIP can be easier to continue. Financially, lumpsum can be more efficient when the
+        asset class and horizon are favorable. The better choice depends on your cash flow, confidence, and time frame.</p>
+
+      <h3>Risks of market volatility ⚠️</h3>
+      <p>Lumpsum investing can create great long-term outcomes, but it is not risk-free. Market volatility means prices
+        can move sharply in both directions. A stock fund, index fund, or balanced portfolio can look very attractive
+        over 10 or 20 years and still fall hard over the next 3 months. If you need the money soon, that short-term
+        volatility becomes a major problem. If your horizon is long, volatility may be easier to tolerate because time
+        gives the investment a chance to recover and compound.</p>
+
+      <p>This is why the purpose of the money matters. Money needed for near-term tuition, emergency reserves, or a
+        home purchase behaves differently from money meant for retirement 20 years away. The farther the goal, the more
+        room you have to accept short-term fluctuations in exchange for long-term growth potential. The closer the goal,
+        the more valuable certainty becomes. A professional way to think about risk is not just “Will the value fall?”
+        but “If the value falls, will I still be able to stay invested long enough for the plan to work?”</p>
+
+      <h3>Impact of inflation 🌍</h3>
+      <p>Inflation matters because a future value that looks big in nominal terms may feel less exciting in real life.
+        If prices keep rising, future money buys less than today’s money. That is why this calculator includes an
+        inflation toggle. It lets you move beyond the headline number and estimate the inflation-adjusted future value.
+        This is especially important for long-term goals such as retirement, children’s education, or wealth building.
+        Over 15, 20, or 30 years, even moderate inflation can take a noticeable bite out of purchasing power.</p>
+
+      <p>The difference between nominal and real return is the difference between money math and lifestyle math.
+        <strong>Nominal return</strong> is the stated return before inflation. <strong>Real return</strong> adjusts for
+        inflation using <strong>((1 + r) / (1 + i)) − 1</strong>. If your investment earns 12% and inflation is 4%, your
+        real return is not 8%. It is about 7.69%. That may seem close, but compounding makes the gap meaningful over
+        time. The longer the horizon, the more important it becomes to ask not just “How much will I have?” but “How
+        much will that amount really buy?”</p>
+
+      <h3>Why a 5% or 12% return is not automatically “real” growth</h3>
+      <p>People often celebrate headline returns because they are easy to understand. But a return only matters in the
+        context of inflation, fees, and taxes. A 5% return during 4% inflation creates very little real improvement. A
+        12% return during 4% inflation is much stronger, but the purchasing power gain is still lower than the headline
+        number. This is one reason disciplined investors compare products using both nominal and real thinking. Without
+        that adjustment, low-quality products can look fine on paper while quietly underperforming inflation.</p>
+
+      <p>Take the practical example requested most often: invest <span data-currency-symbol>$</span>10,000 at 12% for 20
+        years with annual compounding. The nominal future value is about <span data-currency-symbol>$</span>96,462.93.
+        That means total profit is roughly <span data-currency-symbol>$</span>86,462.93, and the investment grows by
+        about 864.63%, or 9.65× the original amount. That sounds excellent, and it is a strong compounding example. But
+        if inflation averages 4% during that period, the real return is about 7.69%, and the inflation-adjusted future
+        value is closer to <span data-currency-symbol>$</span>44,024.42. That is still meaningful growth, but it tells a
+        more honest story than the nominal number alone.</p>
+
+      <h3>When to choose lumpsum vs FD</h3>
+      <p>Many savers compare lumpsum investing with a fixed deposit because both can start from a single amount of money.
+        The key difference is uncertainty. A fixed deposit usually gives a known rate and maturity amount, which makes
+        it attractive for short-term goals or conservative savers who value predictability. Lumpsum investing in market
+        assets usually offers higher long-term upside, but the path is uncertain. Some years can be weak or negative,
+        especially early on.</p>
+
+      <p>If the goal is capital preservation, emotional comfort, or near-term certainty, FD can be the better fit. If
+        the goal is real wealth growth over a long horizon and you can tolerate market swings, lumpsum investing may be
+        the better engine. In many real-life plans, the answer is not either-or. People often keep emergency or near-term
+        money in stable products while giving long-horizon money a chance to grow through investment assets. That blended
+        thinking is usually stronger than chasing one “perfect” solution.</p>
+
+      <h3>How to think about compounding frequency</h3>
+      <p>Compounding frequency answers a smaller but still useful question: how often are returns added back into the
+        balance? Annual compounding is simple and common for planning. Monthly, quarterly, or daily compounding means
+        the balance is updated more often. At the same nominal annual rate, more frequent compounding produces a slightly
+        higher effective annual yield. The difference is usually modest, but over long periods it can still matter.</p>
+
+      <p>This is one reason professional comparisons should never stop at the headline rate. Two investments may both say
+        “10% annual return,” but if one compounds monthly and another annually, the actual end value will differ. This
+        page gives you a compounding frequency selector so you can test those small differences directly. Even when the
+        effect is not huge, understanding it helps you read investment products more carefully and compare options more
+        fairly.</p>
+
+      <h3>Practical use cases and final perspective ✨</h3>
+      <p>Lumpsum investing can be useful when you receive money in a block and want to put it to work: annual bonuses,
+        a matured deposit, sale proceeds, long-built savings, or cash waiting after debt is cleared. It becomes even more
+        useful when matched with a long horizon, realistic return expectations, and a clear role for inflation. The
+        strongest investors are not the ones who only chase the biggest possible number. They are the ones who connect
+        return, time, risk, and real purchasing power into one honest decision framework.</p>
+
+      <p>If you remember only one idea from this guide, let it be this: lumpsum investing is powerful when the money can
+        stay invested long enough for compounding to work and when the asset fits the goal. Use future value for
+        ambition, real return for honesty, and yearly projections for perspective. That combination turns a simple
+        calculator into a much better planning tool for real life. 🚀</p>
+    </article>
+
+    <section class="content-section" id="more-tools">
+      <h2>🔗 Explore More Calculators</h2>
+      <p>Lumpsum planning becomes much stronger when you can compare it with recurring investing, annualized growth,
+        yield math, inflation pressure, and deposit-style alternatives.</p>
+
+      <div class="links-grid">
+        <a class="link-card" href="https://smartcalcworld.com/finance/finance-sip-calculator.html">
+          <span class="link-icon">📊</span>
+          <strong>SIP Calculator</strong>
+          <p>Compare one-time investing with disciplined monthly investing and see how recurring contributions change the
+            path.</p>
+        </a>
+
+        <a class="link-card" href="https://smartcalcworld.com/finance/investment/cagr-calculator.html">
+          <span class="link-icon">📈</span>
+          <strong>CAGR Calculator</strong>
+          <p>Measure annualized growth and turn an overall lumpsum result into a cleaner yearly return perspective.</p>
+        </a>
+
+        <a class="link-card" href="https://smartcalcworld.com/finance/investment/apy-calculator.html">
+          <span class="link-icon">💹</span>
+          <strong>APY Calculator</strong>
+          <p>Understand compounding and effective yield when comparing deposits, savings products, or quoted rates.</p>
+        </a>
+
+        <a class="link-card" href="https://smartcalcworld.com/finance/investment/inflation-calculator.html">
+          <span class="link-icon">🌍</span>
+          <strong>Inflation Calculator</strong>
+          <p>Check how much of your future lumpsum value survives after inflation and what your real growth looks like.</p>
+        </a>
+
+        <a class="link-card" href="https://smartcalcworld.com/finance/investment/finance-fd-calculator.html">
+          <span class="link-icon">🏦</span>
+          <strong>FD Calculator</strong>
+          <p>Compare higher-growth market assumptions with fixed and predictable deposit-style returns.</p>
+        </a>
+      </div>
+    </section>
+
+    <section class="content-section" id="faq">
+      <h2>❓ Frequently Asked Questions</h2>
+
+      <div class="faq-item">
+        <div class="faq-q">What is lumpsum investing?</div>
+        <div class="faq-a">Lumpsum investing means investing one large amount at a single point in time instead of
+          spreading the money across regular installments.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">What formula does this calculator use?</div>
+        <div class="faq-a">Standard future value uses FV = P × (1 + r / n)<sup>n × t</sup>, where P is principal, r is
+          annual return, n is compounding frequency, and t is time in years.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">How does inflation adjustment work?</div>
+        <div class="faq-a">The calculator first finds real return using ((1 + r) / (1 + i)) − 1 and then estimates the
+          inflation-adjusted future value using that real rate.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Is lumpsum investing risky?</div>
+        <div class="faq-a">It can be. The main extra risk is timing because the full amount enters the market at once.
+          Risk depends on the asset, time horizon, and your ability to stay invested.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">How is lumpsum different from SIP?</div>
+        <div class="faq-a">Lumpsum deploys all available money now, while SIP spreads investing over time. SIP can lower
+          entry-point stress, while lumpsum gets more money working from day one.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Are taxes included in the results?</div>
+        <div class="faq-a">No. Results are gross estimates and do not include taxes, product charges, or exit costs.
+          Those vary by product and location.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Why does compounding frequency matter?</div>
+        <div class="faq-a">More frequent compounding means returns are added to the balance more often, which can
+          slightly increase the final value compared with annual compounding at the same nominal rate.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Is lumpsum investing better than fixed deposit?</div>
+        <div class="faq-a">Not automatically. Lumpsum investing usually offers higher growth potential with more risk,
+          while fixed deposits offer more certainty with lower upside.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Does market timing really matter?</div>
+        <div class="faq-a">Yes, especially in the short run. Because all money enters at once, early price moves affect
+          the experience more than they do in a gradual investing plan.</div>
+      </div>
+    </section>
+
+    <div class="disclaimer1">
+      <strong>⚠️ Disclaimer:</strong> This lumpsum investment calculator is for educational and planning purposes only.
+      Results are estimates based on the inputs you provide and do not include taxes, product fees, slippage, or product
+      specific rules. Market-linked investments can rise or fall in value, and inflation assumptions may not match
+      future reality. Please use this tool as a guide, not personal financial advice.
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="https://smartcalcworld.com/index.html">Home</a></li>
+          <li><a href="https://smartcalcworld.com/about.html">About</a></li>
+          <li><a href="https://smartcalcworld.com/contact.html">Contact</a></li>
+          <li><a href="https://smartcalcworld.com/privacy-policy.html">Privacy Policy</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h3>Content</h3>
+        <ul>
+          <li><a href="#calculator">Inflation Calculator</a></li>
+          <li><a href="#guide">Inflation Guide</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h3>Finance Tools</h3>
+        <ul>
+          <li><a href="https://smartcalcworld.com/finance/interest/interest-hub.html">Interest Calculators</a></li>
+          <li><a href="https://smartcalcworld.com/finance/investment/investment-hub.html">Investment Calculators</a></li>
+          <li><a href="https://smartcalcworld.com/finance/loan/loan-hub.html">Loan Calculators</a></li>
+          <li><a href="https://smartcalcworld.com/finance/tax/tax-hub.html">Tax Calculators</a></li>
+          <li><a href="https://smartcalcworld.com/finance/saving-retirement/saving-retirement-hub.html">Savings Calculators</a></li>
+          <li><a href="https://smartcalcworld.com/finance/saving-retirement/saving-retirement-hub.html">Retirement Calculators</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <div class="footer-disclaimer">
+          <strong>SmartCalc World Note:</strong> lumpsum investing looks simple, but real decision quality improves when
+          you compare return, time, compounding, inflation, and risk together instead of focusing only on the final
+          headline number.
+        </div>
+      </div>
+    </div>
+
+    <div class="copyright">
+      <p>&copy; SmartCalc World. All rights reserved.</p>
+    </div>
+  </footer>
+  <script>
+
+
+    const $ = (id) => document.getElementById(id);
+
+    const currencySymbols = {
+      USD: "$",
+      EUR: "€",
+      GBP: "£",
+      INR: "₹",
+      AUD: "$",
+      CAD: "$",
+      CUSTOM: "$"
+    };
+
+    const state = {
+      activeModule: "standard",
+      currentCurrency: "USD",
+      customSymbol: "$",
+      charts: {
+        growth: null,
+        profit: null,
+        comparison: null
+      },
+      projectionColumns: [],
+      projectionRows: [],
+      projectionFilename: "lumpsum_projection.csv",
+      copyText: "",
+      lastResultMode: "standard"
+    };
+
+    const sliderConfigs = [
+      { input: "std-principal", slider: "std-principal-sl", label: "std-principal-lbl", type: "money", digits: 2 },
+      { input: "std-return", slider: "std-return-sl", label: "std-return-lbl", type: "percent", digits: 2 },
+      { input: "std-time", slider: "std-time-sl", label: "std-time-lbl", type: "years", digits: 1 },
+      { input: "std-inflation", slider: "std-inflation-sl", label: "std-inflation-lbl", type: "percent", digits: 2 },
+      { input: "rev-principal", slider: "rev-principal-sl", label: "rev-principal-lbl", type: "money", digits: 2 },
+      { input: "rev-target", slider: "rev-target-sl", label: "rev-target-lbl", type: "money", digits: 2 },
+      { input: "rev-time", slider: "rev-time-sl", label: "rev-time-lbl", type: "years", digits: 1 },
+      { input: "tgt-principal", slider: "tgt-principal-sl", label: "tgt-principal-lbl", type: "money", digits: 2 },
+      { input: "tgt-target", slider: "tgt-target-sl", label: "tgt-target-lbl", type: "money", digits: 2 },
+      { input: "tgt-return", slider: "tgt-return-sl", label: "tgt-return-lbl", type: "percent", digits: 2 },
+      { input: "cmp-p1", slider: "cmp-p1-sl", label: "cmp-p1-lbl", type: "money", digits: 2 },
+      { input: "cmp-r1", slider: "cmp-r1-sl", label: "cmp-r1-lbl", type: "percent", digits: 2 },
+      { input: "cmp-t1", slider: "cmp-t1-sl", label: "cmp-t1-lbl", type: "years", digits: 1 },
+      { input: "cmp-p2", slider: "cmp-p2-sl", label: "cmp-p2-lbl", type: "money", digits: 2 },
+      { input: "cmp-r2", slider: "cmp-r2-sl", label: "cmp-r2-lbl", type: "percent", digits: 2 },
+      { input: "cmp-t2", slider: "cmp-t2-sl", label: "cmp-t2-lbl", type: "years", digits: 1 }
+    ];
+
+    function currentSymbol() {
+      return state.currentCurrency === "CUSTOM"
+        ? ($("custom-symbol").value.trim() || state.customSymbol || "$")
+        : currencySymbols[state.currentCurrency];
+    }
+
+    function currentNumberLocale() {
+      return state.currentCurrency === "INR" ? "en-IN" : "en-US";
+    }
+
+    function formatMoney(value, digits = 2) {
+      const number = Number(value) || 0;
+      const sign = number < 0 ? "-" : "";
+      const abs = Math.abs(number);
+      const formatted = abs.toLocaleString(currentNumberLocale(), {
+        minimumFractionDigits: digits,
+        maximumFractionDigits: digits
+      });
+      const symbol = currentSymbol();
+      const prefix = /^[A-Za-z]{2,}$/.test(symbol) ? `${symbol} ` : symbol;
+      return `${sign}${prefix}${formatted}`;
+    }
+
+    function formatPercentValue(value, digits = 2) {
+      return `${Number(value).toFixed(digits)}%`;
+    }
+
+    function formatPercentFromDecimal(value, digits = 2) {
+      return `${(Number(value) * 100).toFixed(digits)}%`;
+    }
+
+    function formatMultiple(value) {
+      return `${Number(value).toFixed(2)}x`;
+    }
+
+    function formatSliderValue(type, value, digits = 0) {
+      if (type === "money") return formatMoney(value, digits);
+      if (type === "percent") return formatPercentValue(value, digits);
+      if (type === "years") return `${Number(value).toFixed(digits)} years`;
+      return String(value);
+    }
+
+    function destroyChart(chart) {
+      if (chart) chart.destroy();
+      return null;
+    }
+
+    function setStatus(message = "", tone = "") {
+      const banner = $("status-banner");
+      banner.className = "status-banner";
+      banner.textContent = message;
+      if (!message) return;
+      banner.classList.add(tone || "info");
+    }
+
+    function setCopyNote(message) {
+      $("copy-note").textContent = message;
+    }
+
+    function updateSliderLabel(config) {
+      const input = $(config.input);
+      const label = $(config.label);
+      if (!input || !label) return;
+      label.textContent = formatSliderValue(config.type, input.value, config.digits || 0);
+    }
+
+    function clampToSlider(inputEl, sliderEl) {
+      if (!inputEl.value) return;
+      let value = Number(inputEl.value);
+      if (!Number.isFinite(value)) value = Number(sliderEl.min);
+      value = Math.max(Number(sliderEl.min), Math.min(Number(sliderEl.max), value));
+      inputEl.value = value;
+      sliderEl.value = value;
+    }
+
+    function bindSliderPair(config) {
+      const inputEl = $(config.input);
+      const sliderEl = $(config.slider);
+      if (!inputEl || !sliderEl) return;
+
+      updateSliderLabel(config);
+
+      inputEl.addEventListener("input", () => {
+        clampToSlider(inputEl, sliderEl);
+        updateSliderLabel(config);
+      });
+
+      sliderEl.addEventListener("input", () => {
+        inputEl.value = sliderEl.value;
+        updateSliderLabel(config);
+      });
+    }
+
+    function updateCurrencyIndicators() {
+      document.querySelectorAll("[data-currency-symbol]").forEach((node) => {
+        node.textContent = currentSymbol();
+      });
+      sliderConfigs.forEach(updateSliderLabel);
+      rerenderLastResult();
+    }
+
+    function effectiveAnnualRate(r, n) {
+      return Math.pow(1 + (r / n), n) - 1;
+    }
+
+    function futureValue(P, r, n, t) {
+      return P * Math.pow(1 + (r / n), n * t);
+    }
+
+    function realAnnualRate(r, inflation) {
+      return ((1 + r) / (1 + inflation)) - 1;
+    }
+
+    function ensureCompoundInputs(r, n) {
+      if (!(n > 0)) return false;
+      return (1 + (r / n)) > 0;
+    }
+
+    function timelinePoints(duration) {
+      const points = [0];
+      const wholeYears = Math.floor(duration);
+      for (let year = 1; year <= wholeYears; year += 1) {
+        points.push(year);
+      }
+      if (Math.abs(duration - wholeYears) > 1e-9) {
+        points.push(Number(duration.toFixed(2)));
+      }
+      return points;
+    }
+
+    function timelineLabel(year) {
+      return Number.isInteger(year) ? `Year ${year}` : `Year ${Number(year).toFixed(2)}`;
+    }
+
+    function buildResultCards(modeTitle, cards, formulaHtml, insightHtml, copyText) {
+      $("result-mode-pill").textContent = `Latest Result: ${modeTitle}`;
+      for (let index = 0; index < 5; index += 1) {
+        const card = cards[index];
+        const cardEl = $(`result-card-${index}`);
+        if (!card) {
+          cardEl.className = "result-card slate";
+          $(`result-lbl-${index}`).textContent = "—";
+          $(`result-val-${index}`).textContent = "—";
+          $(`result-sub-${index}`).textContent = "";
+          continue;
+        }
+        cardEl.className = `result-card ${card.tone}`;
+        $(`result-lbl-${index}`).textContent = card.label;
+        $(`result-val-${index}`).textContent = card.value;
+        $(`result-sub-${index}`).textContent = card.sub;
+      }
+
+      $("formula-box").innerHTML = formulaHtml;
+      const insightBox = $("insight-box");
+      if (insightHtml) {
+        insightBox.style.display = "block";
+        insightBox.innerHTML = insightHtml;
+      } else {
+        insightBox.style.display = "none";
+        insightBox.innerHTML = "";
+      }
+
+      state.copyText = copyText;
+      setCopyNote("Results ready to copy.");
+    }
+
+    function hideComparisonSummary() {
+      $("comparison-summary").classList.add("hidden");
+      $("comparison-summary-body").innerHTML = "";
+    }
+
+    function showComparisonSummary(rows) {
+      $("comparison-summary").classList.remove("hidden");
+      $("comparison-summary-body").innerHTML = rows.map((row) => `
+        <tr>
+          <td>${row.metric}</td>
+          <td class="compare-a-cell">${row.a}</td>
+          <td class="compare-b-cell">${row.b}</td>
+        </tr>
+      `).join("");
+    }
+
+    function updateProjection(columns, rows, filename, contextText) {
+      state.projectionColumns = columns;
+      state.projectionRows = rows;
+      state.projectionFilename = filename;
+      $("projection-context").textContent = contextText;
+      $("projection-head-row").innerHTML = columns.map((column) => `<th>${column.label}</th>`).join("");
+      $("projection-body").innerHTML = rows.map((row) => {
+        return `<tr>${columns.map((column) => `<td>${formatCell(row[column.key], column.type)}</td>`).join("")}</tr>`;
+      }).join("");
+    }
+
+    function formatCell(value, type) {
+      if (type === "money") return formatMoney(value);
+      if (type === "percentValue") return formatPercentValue(value);
+      if (type === "percentDecimal") return formatPercentFromDecimal(value);
+      if (type === "multiple") return formatMultiple(value);
+      if (type === "years") return Number(value).toLocaleString(undefined, { maximumFractionDigits: 2 });
+      if (type === "text") return String(value);
+      return Number(value).toLocaleString(undefined, { maximumFractionDigits: 2 });
+    }
+
+    function commonChartOptions() {
+      return {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: { mode: "index", intersect: false },
+        plugins: {
+          legend: {
+            position: "bottom",
+            labels: { boxWidth: 14, usePointStyle: true }
+          }
+        }
+      };
+    }
+
+    function renderCharts(config) {
+      $("charts-context").textContent = config.context;
+      $("growth-title").textContent = config.growthTitle;
+      $("growth-note").textContent = config.growthNote;
+      $("pie-title").textContent = config.pieTitle;
+      $("pie-note").textContent = config.pieNote;
+      $("comparison-title").textContent = config.comparisonTitle;
+      $("comparison-note").textContent = config.comparisonNote;
+
+      const growthCtx = $("growth-chart").getContext("2d");
+      state.charts.growth = destroyChart(state.charts.growth);
+      state.charts.growth = new Chart(growthCtx, {
+        type: "line",
+        data: {
+          labels: config.labels,
+          datasets: [
+            {
+              label: config.growthDatasetLabel,
+              data: config.growthValues,
+              borderColor: "#0d9488",
+              backgroundColor: "rgba(13, 148, 136, 0.16)",
+              fill: true,
+              tension: 0.28,
+              pointRadius: 2
+            }
+          ]
+        },
+        options: {
+          ...commonChartOptions(),
+          scales: {
+            y: {
+              ticks: {
+                callback: (value) => formatMoney(value, 0)
+              }
+            }
+          },
+          plugins: {
+            ...commonChartOptions().plugins,
+            tooltip: {
+              callbacks: {
+                label: (ctx) => `${ctx.dataset.label}: ${formatMoney(ctx.parsed.y)}`
+              }
+            }
+          }
+        }
+      });
+
+      const pieCtx = $("profit-chart").getContext("2d");
+      state.charts.profit = destroyChart(state.charts.profit);
+      state.charts.profit = new Chart(pieCtx, {
+        type: "pie",
+        data: {
+          labels: config.pieLabels,
+          datasets: [
+            {
+              data: config.pieValues,
+              backgroundColor: ["#14b8a6", "#f59e0b", "#f43f5e"],
+              borderColor: "#ffffff",
+              borderWidth: 2
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: "bottom",
+              labels: { boxWidth: 14, usePointStyle: true }
+            },
+            tooltip: {
+              callbacks: {
+                label: (ctx) => {
+                  const total = ctx.dataset.data.reduce((sum, item) => sum + item, 0);
+                  const share = total ? (ctx.parsed / total) * 100 : 0;
+                  return `${ctx.label}: ${formatMoney(ctx.parsed)} (${share.toFixed(1)}%)`;
+                }
+              }
+            }
+          }
+        }
+      });
+
+      const comparisonCtx = $("comparison-chart").getContext("2d");
+      state.charts.comparison = destroyChart(state.charts.comparison);
+      state.charts.comparison = new Chart(comparisonCtx, {
+        type: "line",
+        data: {
+          labels: config.labels,
+          datasets: config.compareDatasets.map((dataset) => ({
+            label: dataset.label,
+            data: dataset.values,
+            borderColor: dataset.color,
+            backgroundColor: dataset.background,
+            tension: 0.25,
+            pointRadius: 2,
+            fill: false
+          }))
+        },
+        options: {
+          ...commonChartOptions(),
+          scales: {
+            y: {
+              ticks: {
+                callback: (value) => formatMoney(value, 0)
+              }
+            }
+          },
+          plugins: {
+            ...commonChartOptions().plugins,
+            tooltip: {
+              callbacks: {
+                label: (ctx) => `${ctx.dataset.label}: ${formatMoney(ctx.parsed.y)}`
+              }
+            }
+          }
+        }
+      });
+    }
+
+    function switchModule(name) {
+      state.activeModule = name;
+      document.querySelectorAll(".module").forEach((module) => {
+        module.classList.toggle("active", module.id === `mod-${name}`);
+      });
+      document.querySelectorAll(".qnav-btn").forEach((button) => {
+        const active = button.dataset.module === name;
+        button.classList.toggle("active", active);
+        button.setAttribute("aria-selected", active ? "true" : "false");
+      });
+      setStatus("");
+    }
+
+    function calculateStandard() {
+      const P = Number($("std-principal").value);
+      const returnPct = Number($("std-return").value);
+      const t = Number($("std-time").value);
+      const n = Number($("std-frequency").value);
+      const inflationOn = $("std-use-inflation").checked;
+      const inflationPct = Number($("std-inflation").value);
+
+      if (!(P > 0) || !(t > 0) || !Number.isFinite(returnPct)) {
+        setStatus("Enter a positive principal, a valid annual return, and a time greater than zero.", "error");
+        return;
+      }
+      if (!ensureCompoundInputs(returnPct / 100, n)) {
+        setStatus("The selected return and compounding frequency create an invalid compounding base. Adjust the values and try again.", "error");
+        return;
+      }
+      if (inflationOn && !(inflationPct >= 0)) {
+        setStatus("Inflation rate must be zero or higher when inflation adjustment is enabled.", "error");
+        return;
+      }
+
+      const r = returnPct / 100;
+      const i = inflationPct / 100;
+      const fv = futureValue(P, r, n, t);
+      const profit = fv - P;
+      const growthPct = P ? (profit / P) : 0;
+      const multiplier = P ? (fv / P) : 0;
+      const effAnnual = effectiveAnnualRate(r, n);
+      const realRate = inflationOn ? realAnnualRate(r, i) : null;
+      const realFv = inflationOn ? P * Math.pow(1 + realRate, t) : null;
+
+      buildResultCards(
+        "Standard Mode",
+        [
+          { tone: "teal", label: "Future Value", value: formatMoney(fv), sub: "FV = P × (1 + r / n)^(n × t)" },
+          { tone: "amber", label: "Total Profit", value: formatMoney(profit), sub: "Future value minus principal" },
+          { tone: "rose", label: "Total Growth %", value: formatPercentFromDecimal(growthPct), sub: "((FV − P) / P) × 100" },
+          { tone: "slate", label: "Growth Multiplier", value: formatMultiple(multiplier), sub: "FV / P" },
+          {
+            tone: "sky",
+            label: inflationOn ? "Real Future Value" : "Effective Annual Yield",
+            value: inflationOn ? formatMoney(realFv) : formatPercentFromDecimal(effAnnual),
+            sub: inflationOn ? "FV real = P × (1 + real r)^t" : "Effective annualized rate from selected compounding"
+          }
+        ],
+        `<strong>Standard Mode</strong><br>FV = P × (1 + r / n)^(n × t)<br>Total Profit = FV − P<br>Total Growth % = ((FV − P) / P) × 100<br>Growth Multiplier = FV / P${inflationOn ? "<br>Real r = ((1 + r) / (1 + i)) − 1<br>FV real = P × (1 + real r)^t" : ""}`,
+        inflationOn
+          ? `<strong>🌍 Inflation view:</strong> At ${formatPercentValue(inflationPct)}, the nominal ending value is ${formatMoney(fv)}, but the inflation-adjusted estimate is ${formatMoney(realFv)}. Real return is ${formatPercentFromDecimal(realRate)}.`
+          : `<strong>💡 Compounding view:</strong> A nominal return of ${formatPercentValue(returnPct)} compounded ${n} time(s) per year turns into an effective annual rate of ${formatPercentFromDecimal(effAnnual)}.`,
+        `Lumpsum Standard Mode
+Principal: ${formatMoney(P)}
+Annual return: ${formatPercentValue(returnPct)}
+Time: ${t.toFixed(2)} years
+Compounding frequency: ${n} per year
+Future value: ${formatMoney(fv)}
+Total profit: ${formatMoney(profit)}
+Total growth: ${formatPercentFromDecimal(growthPct)}
+Growth multiplier: ${formatMultiple(multiplier)}${inflationOn ? `
+Inflation: ${formatPercentValue(inflationPct)}
+Real future value: ${formatMoney(realFv)}
+Real return: ${formatPercentFromDecimal(realRate)}` : ""}`
+      );
+
+      const points = timelinePoints(t);
+      const labels = points.map(timelineLabel);
+      const growthValues = points.map((year) => futureValue(P, r, n, year));
+      const baseLine = points.map(() => P);
+      const realValues = inflationOn ? points.map((year) => P * Math.pow(1 + realRate, year)) : baseLine;
+      const rows = points.map((year) => {
+        const value = futureValue(P, r, n, year);
+        const row = {
+          year,
+          value,
+          profit: value - P,
+          growth: P ? ((value - P) / P) * 100 : 0
+        };
+        if (inflationOn) row.real = P * Math.pow(1 + realRate, year);
+        return row;
+      });
+
+      renderCharts({
+        context: "Charts currently reflect Standard Mode.",
+        labels,
+        growthTitle: "Growth Line Chart",
+        growthNote: "Year-by-year value progression using the selected return and compounding frequency.",
+        growthDatasetLabel: "Investment value",
+        growthValues,
+        pieTitle: "Principal vs Total Profit",
+        pieNote: "Ending value broken into your original principal and total profit.",
+        pieLabels: ["Principal", "Total Profit"],
+        pieValues: [P, Math.max(profit, 0)],
+        comparisonTitle: inflationOn ? "Nominal vs Real View" : "Growth vs Principal",
+        comparisonNote: inflationOn
+          ? "Nominal future value versus inflation-adjusted future value."
+          : "Investment growth curve versus the starting principal baseline.",
+        compareDatasets: inflationOn
+          ? [
+            { label: "Nominal value", values: growthValues, color: "#0284c7", background: "rgba(2, 132, 199, 0.12)" },
+            { label: "Inflation-adjusted value", values: realValues, color: "#f43f5e", background: "rgba(244, 63, 94, 0.12)" }
+          ]
+          : [
+            { label: "Investment value", values: growthValues, color: "#0284c7", background: "rgba(2, 132, 199, 0.12)" },
+            { label: "Principal baseline", values: baseLine, color: "#f59e0b", background: "rgba(245, 158, 11, 0.12)" }
+          ]
+      });
+
+      const columns = [
+        { key: "year", label: "Year", type: "years" },
+        { key: "value", label: "Investment Value", type: "money" },
+        { key: "profit", label: "Profit Earned", type: "money" },
+        { key: "growth", label: "Growth %", type: "percentValue" }
+      ];
+      if (inflationOn) columns.push({ key: "real", label: "Inflation-Adjusted Value", type: "money" });
+
+      updateProjection(
+        columns,
+        rows,
+        "lumpsum_projection.csv",
+        inflationOn
+          ? "Yearly projection using the selected compounding frequency plus an inflation-adjusted value column."
+          : "Yearly projection using the selected return and compounding frequency."
+      );
+
+      hideComparisonSummary();
+      state.lastResultMode = "standard";
+      setStatus("Standard lumpsum results updated.", "success");
+    }
+
+    function calculateReverse() {
+      const P = Number($("rev-principal").value);
+      const target = Number($("rev-target").value);
+      const t = Number($("rev-time").value);
+      const n = Number($("rev-frequency").value);
+
+      if (!(P > 0) || !(target > 0) || !(t > 0)) {
+        setStatus("Enter a positive principal, positive target value, and time greater than zero.", "error");
+        return;
+      }
+
+      const requiredRate = n * (Math.pow(target / P, 1 / (n * t)) - 1);
+      if (!ensureCompoundInputs(requiredRate, n)) {
+        setStatus("The required return becomes mathematically invalid with the current numbers. Check principal, target, and time.", "error");
+        return;
+      }
+
+      const totalProfitNeeded = target - P;
+      const multiplier = target / P;
+      const effAnnual = effectiveAnnualRate(requiredRate, n);
+      const points = timelinePoints(t);
+      const labels = points.map(timelineLabel);
+      const growthValues = points.map((year) => futureValue(P, requiredRate, n, year));
+      const targetLine = points.map(() => target);
+
+      buildResultCards(
+        "Reverse Return Mode",
+        [
+          { tone: "teal", label: "Required Annual Return", value: formatPercentFromDecimal(requiredRate), sub: "r = n × ((FV / P)^(1 / (n × t)) − 1)" },
+          { tone: "amber", label: "Target Future Value", value: formatMoney(target), sub: "Chosen goal amount" },
+          { tone: "rose", label: "Profit Needed", value: formatMoney(totalProfitNeeded), sub: "Target value minus principal" },
+          { tone: "slate", label: "Growth Multiplier", value: formatMultiple(multiplier), sub: "Target FV / Principal" },
+          { tone: "sky", label: "Effective Annual Yield", value: formatPercentFromDecimal(effAnnual), sub: "Effective annual rate from required nominal return" }
+        ],
+        `<strong>Reverse Return Mode</strong><br>Required annual return = n × ((FV / P)^(1 / (n × t)) − 1)`,
+        `<strong>🎯 Planning note:</strong> To move from ${formatMoney(P)} to ${formatMoney(target)} in ${t.toFixed(2)} years, the calculator estimates a required nominal annual return of ${formatPercentFromDecimal(requiredRate)} with compounding ${n} time(s) per year.`,
+        `Lumpsum Reverse Return Mode
+Principal: ${formatMoney(P)}
+Target future value: ${formatMoney(target)}
+Time: ${t.toFixed(2)} years
+Compounding frequency: ${n} per year
+Required annual return: ${formatPercentFromDecimal(requiredRate)}
+Profit needed: ${formatMoney(totalProfitNeeded)}
+Growth multiplier: ${formatMultiple(multiplier)}`
+      );
+
+      renderCharts({
+        context: "Charts currently reflect Reverse Return Mode.",
+        labels,
+        growthTitle: "Growth Line Chart",
+        growthNote: "Value path if the required return is actually achieved.",
+        growthDatasetLabel: "Projected value",
+        growthValues,
+        pieTitle: "Principal vs Total Profit",
+        pieNote: "Target value split into principal and profit needed.",
+        pieLabels: ["Principal", "Profit needed"],
+        pieValues: [P, Math.max(totalProfitNeeded, 0)],
+        comparisonTitle: "Projected Value vs Target",
+        comparisonNote: "Projected path of the lumpsum against a flat target line.",
+        compareDatasets: [
+          { label: "Projected value", values: growthValues, color: "#0284c7", background: "rgba(2, 132, 199, 0.12)" },
+          { label: "Target value", values: targetLine, color: "#f59e0b", background: "rgba(245, 158, 11, 0.12)" }
+        ]
+      });
+
+      updateProjection(
+        [
+          { key: "year", label: "Year", type: "years" },
+          { key: "value", label: "Investment Value", type: "money" },
+          { key: "profit", label: "Profit Earned", type: "money" },
+          { key: "growth", label: "Growth %", type: "percentValue" }
+        ],
+        points.map((year) => {
+          const value = futureValue(P, requiredRate, n, year);
+          return { year, value, profit: value - P, growth: P ? ((value - P) / P) * 100 : 0 };
+        }),
+        "lumpsum_reverse_return_projection.csv",
+        "Yearly projection using the required annual return derived from your target."
+      );
+
+      hideComparisonSummary();
+      state.lastResultMode = "reverse";
+      setStatus("Required annual return calculated.", "success");
+    }
+
+    function calculateTarget() {
+      const P = Number($("tgt-principal").value);
+      const target = Number($("tgt-target").value);
+      const returnPct = Number($("tgt-return").value);
+      const n = Number($("tgt-frequency").value);
+
+      if (!(P > 0) || !(target > 0) || !Number.isFinite(returnPct)) {
+        setStatus("Enter a positive principal, positive target, and a valid annual return.", "error");
+        return;
+      }
+
+      const r = returnPct / 100;
+      if (!ensureCompoundInputs(r, n)) {
+        setStatus("The selected annual return and compounding frequency create an invalid compounding base.", "error");
+        return;
+      }
+
+      const denominator = n * Math.log(1 + (r / n));
+      if (denominator === 0) {
+        setStatus("Time cannot be calculated when the effective growth rate is zero for the chosen target.", "error");
+        return;
+      }
+
+      const t = Math.log(target / P) / denominator;
+      if (!(t > 0) || !Number.isFinite(t)) {
+        setStatus("The target time is not valid with the current principal, target, and return assumptions.", "error");
+        return;
+      }
+
+      const multiplier = target / P;
+      const effAnnual = effectiveAnnualRate(r, n);
+      const points = timelinePoints(t);
+      const labels = points.map(timelineLabel);
+      const growthValues = points.map((year) => futureValue(P, r, n, year));
+      const targetLine = points.map(() => target);
+
+      buildResultCards(
+        "Target Time Mode",
+        [
+          { tone: "teal", label: "Required Time", value: `${t.toFixed(2)} years`, sub: "t = ln(FV / P) / (n × ln(1 + r / n))" },
+          { tone: "amber", label: "Target Future Value", value: formatMoney(target), sub: "Goal amount" },
+          { tone: "rose", label: "Annual Return", value: formatPercentValue(returnPct), sub: "Input nominal return" },
+          { tone: "slate", label: "Growth Multiplier", value: formatMultiple(multiplier), sub: "Target FV / Principal" },
+          { tone: "sky", label: "Effective Annual Yield", value: formatPercentFromDecimal(effAnnual), sub: "Effective annualized yield for the selected compounding" }
+        ],
+        `<strong>Target Time Mode</strong><br>t = ln(FV / P) / (n × ln(1 + r / n))`,
+        `<strong>⏳ Time note:</strong> At ${formatPercentValue(returnPct)} with compounding ${n} time(s) per year, this lumpsum is estimated to take about ${t.toFixed(2)} years to reach ${formatMoney(target)}.`,
+        `Lumpsum Target Time Mode
+Principal: ${formatMoney(P)}
+Target future value: ${formatMoney(target)}
+Annual return: ${formatPercentValue(returnPct)}
+Compounding frequency: ${n} per year
+Required time: ${t.toFixed(2)} years
+Growth multiplier: ${formatMultiple(multiplier)}`
+      );
+
+      renderCharts({
+        context: "Charts currently reflect Target Time Mode.",
+        labels,
+        growthTitle: "Growth Line Chart",
+        growthNote: "Projected value path until the target is reached.",
+        growthDatasetLabel: "Projected value",
+        growthValues,
+        pieTitle: "Principal vs Total Profit",
+        pieNote: "Target amount split into your original principal and projected profit.",
+        pieLabels: ["Principal", "Projected profit"],
+        pieValues: [P, Math.max(target - P, 0)],
+        comparisonTitle: "Projected Value vs Target",
+        comparisonNote: "The target line stays flat while the compounded investment moves toward it.",
+        compareDatasets: [
+          { label: "Projected value", values: growthValues, color: "#0284c7", background: "rgba(2, 132, 199, 0.12)" },
+          { label: "Target value", values: targetLine, color: "#f59e0b", background: "rgba(245, 158, 11, 0.12)" }
+        ]
+      });
+
+      updateProjection(
+        [
+          { key: "year", label: "Year", type: "years" },
+          { key: "value", label: "Investment Value", type: "money" },
+          { key: "profit", label: "Profit Earned", type: "money" },
+          { key: "growth", label: "Growth %", type: "percentValue" }
+        ],
+        points.map((year) => {
+          const value = futureValue(P, r, n, year);
+          return { year, value, profit: value - P, growth: P ? ((value - P) / P) * 100 : 0 };
+        }),
+        "lumpsum_target_time_projection.csv",
+        "Yearly projection until the target value is reached using the selected return and compounding frequency."
+      );
+
+      hideComparisonSummary();
+      state.lastResultMode = "target";
+      setStatus("Target time estimated.", "success");
+    }
+
+    function calculateCompare() {
+      const P1 = Number($("cmp-p1").value);
+      const r1Pct = Number($("cmp-r1").value);
+      const t1 = Number($("cmp-t1").value);
+      const P2 = Number($("cmp-p2").value);
+      const r2Pct = Number($("cmp-r2").value);
+      const t2 = Number($("cmp-t2").value);
+      const n = Number($("cmp-frequency").value);
+
+      if (!(P1 > 0) || !(P2 > 0) || !(t1 > 0) || !(t2 > 0) || !Number.isFinite(r1Pct) || !Number.isFinite(r2Pct)) {
+        setStatus("Enter positive principals, valid annual returns, and times greater than zero for both investments.", "error");
+        return;
+      }
+
+      const r1 = r1Pct / 100;
+      const r2 = r2Pct / 100;
+      if (!ensureCompoundInputs(r1, n) || !ensureCompoundInputs(r2, n)) {
+        setStatus("One of the comparison inputs creates an invalid compounding base. Adjust the return or frequency.", "error");
+        return;
+      }
+
+      const fv1 = futureValue(P1, r1, n, t1);
+      const fv2 = futureValue(P2, r2, n, t2);
+      const profit1 = fv1 - P1;
+      const profit2 = fv2 - P2;
+      const valueDiff = fv1 - fv2;
+      const profitDiff = profit1 - profit2;
+      const winnerName = valueDiff >= 0 ? "Investment A" : "Investment B";
+      const winningValue = Math.max(fv1, fv2);
+      const losingValue = Math.min(fv1, fv2);
+      const outperformance = losingValue ? ((winningValue - losingValue) / losingValue) : 0;
+
+      buildResultCards(
+        "Comparison Mode",
+        [
+          { tone: "teal", label: "Investment A Future Value", value: formatMoney(fv1), sub: "FV for investment A" },
+          { tone: "amber", label: "Investment B Future Value", value: formatMoney(fv2), sub: "FV for investment B" },
+          { tone: "rose", label: "Final Value Difference", value: formatMoney(valueDiff), sub: `${winnerName} finishes ahead in ending value` },
+          { tone: "slate", label: "Profit Difference", value: formatMoney(profitDiff), sub: "Profit A minus Profit B" },
+          { tone: "sky", label: "Percentage Outperformance", value: formatPercentFromDecimal(outperformance), sub: `${winnerName} versus the lower final value` }
+        ],
+        `<strong>Comparison Mode</strong><br>FV1 = P1 × (1 + r1 / n)^(n × t1)<br>FV2 = P2 × (1 + r2 / n)^(n × t2)<br>Final Value Difference = FV1 − FV2<br>Profit Difference = (FV1 − P1) − (FV2 − P2)`,
+        `<strong>⚖️ Comparison note:</strong> ${winnerName} ends with the higher future value under the selected assumptions. This does not prove it is “better” in every real-world situation, but it does show which set of assumptions produces more money by the end.`,
+        `Lumpsum Comparison Mode
+Investment A principal: ${formatMoney(P1)}
+Investment A return: ${formatPercentValue(r1Pct)}
+Investment A time: ${t1.toFixed(2)} years
+Investment B principal: ${formatMoney(P2)}
+Investment B return: ${formatPercentValue(r2Pct)}
+Investment B time: ${t2.toFixed(2)} years
+Compounding frequency: ${n} per year
+Investment A future value: ${formatMoney(fv1)}
+Investment B future value: ${formatMoney(fv2)}
+Final value difference: ${formatMoney(valueDiff)}
+Profit difference: ${formatMoney(profitDiff)}
+Percentage outperformance: ${formatPercentFromDecimal(outperformance)}
+Winner: ${winnerName}`
+      );
+
+      const maxYears = Math.max(t1, t2);
+      const points = timelinePoints(maxYears);
+      const labels = points.map(timelineLabel);
+      const valuesA = points.map((year) => futureValue(P1, r1, n, Math.min(year, t1)));
+      const valuesB = points.map((year) => futureValue(P2, r2, n, Math.min(year, t2)));
+      const winnerValues = valueDiff >= 0 ? valuesA : valuesB;
+      const combinedPrincipal = P1 + P2;
+      const combinedProfit = Math.max((profit1 + profit2), 0);
+
+      renderCharts({
+        context: "Charts currently reflect Comparison Mode.",
+        labels,
+        growthTitle: "Growth Line Chart",
+        growthNote: `${winnerName} shown as the single highlighted growth path for quick reading.`,
+        growthDatasetLabel: `${winnerName} value`,
+        growthValues: winnerValues,
+        pieTitle: "Principal vs Total Profit",
+        pieNote: "Combined principal and combined profit across both comparison scenarios.",
+        pieLabels: ["Combined principal", "Combined total profit"],
+        pieValues: [combinedPrincipal, combinedProfit],
+        comparisonTitle: "Investment Comparison Line Chart",
+        comparisonNote: "Two growth curves show how the scenarios evolve over time.",
+        compareDatasets: [
+          { label: "Investment A", values: valuesA, color: "#0284c7", background: "rgba(2, 132, 199, 0.12)" },
+          { label: "Investment B", values: valuesB, color: "#f43f5e", background: "rgba(244, 63, 94, 0.12)" }
+        ]
+      });
+
+      updateProjection(
+        [
+          { key: "year", label: "Year", type: "years" },
+          { key: "a", label: "Investment A Value", type: "money" },
+          { key: "b", label: "Investment B Value", type: "money" },
+          { key: "diff", label: "Difference", type: "money" },
+          { key: "leader", label: "Leader", type: "text" }
+        ],
+        points.map((year, index) => {
+          const a = valuesA[index];
+          const b = valuesB[index];
+          return {
+            year,
+            a,
+            b,
+            diff: a - b,
+            leader: a > b ? "Investment A" : b > a ? "Investment B" : "Tie"
+          };
+        }),
+        "lumpsum_comparison_projection.csv",
+        "Yearly comparison of both lumpsum scenarios using the same compounding frequency."
+      );
+
+      showComparisonSummary([
+        { metric: "Principal", a: formatMoney(P1), b: formatMoney(P2) },
+        { metric: "Annual Return", a: formatPercentValue(r1Pct), b: formatPercentValue(r2Pct) },
+        { metric: "Time", a: `${t1.toFixed(2)} years`, b: `${t2.toFixed(2)} years` },
+        { metric: "Future Value", a: formatMoney(fv1), b: formatMoney(fv2) },
+        { metric: "Total Profit", a: formatMoney(profit1), b: formatMoney(profit2) },
+        { metric: "Winner", a: winnerName === "Investment A" ? "Ahead" : "Behind", b: winnerName === "Investment B" ? "Ahead" : "Behind" }
+      ]);
+
+      state.lastResultMode = "compare";
+      setStatus("Comparison results updated.", "success");
+    }
+
+    function copyResults() {
+      if (!state.copyText) {
+        setCopyNote("Run a calculation first.");
+        return;
+      }
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(state.copyText)
+          .then(() => setCopyNote("Results copied to clipboard."))
+          .catch(() => setCopyNote("Clipboard blocked. Please copy manually."));
+      } else {
+        setCopyNote("Clipboard API is not available in this browser.");
+      }
+    }
+
+    function downloadCsv() {
+      if (!state.projectionColumns.length || !state.projectionRows.length) {
+        setStatus("Generate a time-based result before exporting CSV.", "error");
+        return;
+      }
+
+      const lines = [];
+      lines.push(state.projectionColumns.map((column) => `"${column.label}"`).join(","));
+      state.projectionRows.forEach((row) => {
+        const line = state.projectionColumns.map((column) => {
+          const value = formatCell(row[column.key], column.type);
+          return `"${String(value).replace(/"/g, "\"\"")}"`;
+        }).join(",");
+        lines.push(line);
+      });
+
+      const blob = new Blob([lines.join("\n")], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = state.projectionFilename;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+      setStatus("CSV download started.", "info");
+    }
+
+    function rerenderLastResult() {
+      if (state.lastResultMode === "reverse") {
+        calculateReverse();
+        return;
+      }
+      if (state.lastResultMode === "target") {
+        calculateTarget();
+        return;
+      }
+      if (state.lastResultMode === "compare") {
+        calculateCompare();
+        return;
+      }
+      calculateStandard();
+    }
+
+    function toggleInflationInputs() {
+      const enabled = $("std-use-inflation").checked;
+      $("std-inflation").disabled = !enabled;
+      $("std-inflation-sl").disabled = !enabled;
+      if (state.lastResultMode === "standard") calculateStandard();
+    }
+
+    function resetModule(name) {
+      if (name === "standard") {
+        $("std-principal").value = 10000;
+        $("std-principal-sl").value = 10000;
+        $("std-return").value = 12;
+        $("std-return-sl").value = 12;
+        $("std-time").value = 20;
+        $("std-time-sl").value = 20;
+        $("std-frequency").value = 1;
+        $("std-use-inflation").checked = true;
+        $("std-inflation").value = 4;
+        $("std-inflation-sl").value = 4;
+        toggleInflationInputs();
+        sliderConfigs.filter((item) => item.input.startsWith("std-")).forEach(updateSliderLabel);
+        calculateStandard();
+        return;
+      }
+
+      if (name === "reverse") {
+        $("rev-principal").value = 10000;
+        $("rev-principal-sl").value = 10000;
+        $("rev-target").value = 50000;
+        $("rev-target-sl").value = 50000;
+        $("rev-time").value = 10;
+        $("rev-time-sl").value = 10;
+        $("rev-frequency").value = 1;
+        sliderConfigs.filter((item) => item.input.startsWith("rev-")).forEach(updateSliderLabel);
+        calculateReverse();
+        return;
+      }
+
+      if (name === "target") {
+        $("tgt-principal").value = 10000;
+        $("tgt-principal-sl").value = 10000;
+        $("tgt-target").value = 100000;
+        $("tgt-target-sl").value = 100000;
+        $("tgt-return").value = 12;
+        $("tgt-return-sl").value = 12;
+        $("tgt-frequency").value = 1;
+        sliderConfigs.filter((item) => item.input.startsWith("tgt-")).forEach(updateSliderLabel);
+        calculateTarget();
+        return;
+      }
+
+      $("cmp-p1").value = 10000;
+      $("cmp-p1-sl").value = 10000;
+      $("cmp-r1").value = 12;
+      $("cmp-r1-sl").value = 12;
+      $("cmp-t1").value = 20;
+      $("cmp-t1-sl").value = 20;
+      $("cmp-p2").value = 10000;
+      $("cmp-p2-sl").value = 10000;
+      $("cmp-r2").value = 10;
+      $("cmp-r2-sl").value = 10;
+      $("cmp-t2").value = 20;
+      $("cmp-t2-sl").value = 20;
+      $("cmp-frequency").value = 1;
+      sliderConfigs.filter((item) => item.input.startsWith("cmp-")).forEach(updateSliderLabel);
+      calculateCompare();
+    }
+
+    function bindCommonEvents() {
+      $("global-currency").addEventListener("change", (event) => {
+        state.currentCurrency = event.target.value;
+        $("custom-symbol-wrap").classList.toggle("hidden", state.currentCurrency !== "CUSTOM");
+        updateCurrencyIndicators();
+      });
+
+      $("custom-symbol").addEventListener("input", () => {
+        state.customSymbol = $("custom-symbol").value.trim() || "$";
+        if (state.currentCurrency === "CUSTOM") updateCurrencyIndicators();
+      });
+
+      $("std-use-inflation").addEventListener("change", toggleInflationInputs);
+
+      ["std-frequency", "rev-frequency", "tgt-frequency", "cmp-frequency"].forEach((id) => {
+        $(id).addEventListener("change", () => {
+          if (state.lastResultMode === "standard" && id === "std-frequency") calculateStandard();
+          if (state.lastResultMode === "reverse" && id === "rev-frequency") calculateReverse();
+          if (state.lastResultMode === "target" && id === "tgt-frequency") calculateTarget();
+          if (state.lastResultMode === "compare" && id === "cmp-frequency") calculateCompare();
+        });
+      });
+
+      ["std-principal", "std-return", "std-time", "std-inflation",
+        "rev-principal", "rev-target", "rev-time",
+        "tgt-principal", "tgt-target", "tgt-return",
+        "cmp-p1", "cmp-r1", "cmp-t1", "cmp-p2", "cmp-r2", "cmp-t2"].forEach((id) => {
+          $(id).addEventListener("change", () => {
+            const module = id.split("-")[0];
+            if (module === "std" && state.lastResultMode === "standard") calculateStandard();
+            if (module === "rev" && state.lastResultMode === "reverse") calculateReverse();
+            if (module === "tgt" && state.lastResultMode === "target") calculateTarget();
+            if (module === "cmp" && state.lastResultMode === "compare") calculateCompare();
+          });
+        });
+    }
+
+    function initMobileNav() {
+      const button = $("hamburgerBtn");
+      const menu = $("mobileNav");
+      button.addEventListener("click", () => {
+        const open = menu.classList.toggle("open");
+        button.setAttribute("aria-expanded", open ? "true" : "false");
+      });
+    }
+
+    function init() {
+      sliderConfigs.forEach(bindSliderPair);
+      bindCommonEvents();
+      initMobileNav();
+      state.currentCurrency = $("global-currency").value;
+      toggleInflationInputs();
+      updateCurrencyIndicators();
+      calculateStandard();
+    }
+
+    window.addEventListener("DOMContentLoaded", init);
+  </script>
+</body>
+
+</html>
