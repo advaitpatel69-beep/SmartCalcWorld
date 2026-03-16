@@ -1,0 +1,2851 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow">
+  <title>Investment Goal Calculator &ndash; How Much to Invest to Reach Your Target | SmartCalcWorld</title>
+  <meta name="description"
+    content="Determine how much to invest regularly, how long it may take to reach your financial goal, and how compound growth can accelerate wealth building with SmartCalcWorld's Investment Goal Calculator.">
+  <link rel="canonical" href="https://smartcalcworld.com/finance/investment/investment-goal-calculator.html">
+  <link rel="icon" type="image/png" href="https://smartcalcworld.com/favicon.png">
+  <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://smartcalcworld.com/#org",
+        "name": "SmartCalc World",
+        "url": "https://smartcalcworld.com",
+        "description": "Free finance calculators for investing, saving, inflation, returns, and long-term planning."
+      },
+      {
+        "@type": "WebApplication",
+        "@id": "https://smartcalcworld.com/finance/investment/investment-goal-calculator.html#app",
+        "name": "Investment Goal Calculator",
+        "url": "https://smartcalcworld.com/finance/investment/investment-goal-calculator.html",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Any",
+        "creator": {
+          "@id": "https://smartcalcworld.com/#org"
+        },
+        "description": "Calculate projected future value, required monthly investment, and time needed to reach a financial target using compound growth assumptions.",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Finance",
+            "item": "https://smartcalcworld.com/finance/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Investment",
+            "item": "https://smartcalcworld.com/finance/investment/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Investment Goal Calculator",
+            "item": "https://smartcalcworld.com/finance/investment/investment-goal-calculator.html"
+          }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is an investment goal calculator?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "An investment goal calculator estimates how much your money can grow, how much you may need to invest each month, or how long it may take to reach a chosen financial target."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How much should I invest monthly to reach 1 million?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The monthly amount depends on your current savings, target timeline, and expected rate of return. This calculator solves that relationship for you using compound growth and recurring contributions."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How does compounding help reach financial goals?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Compounding lets returns generate additional returns over time. The longer the money stays invested, the more powerful that snowball effect can become."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What return rate should investors assume?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "There is no universal number. Investors usually choose a reasonable long-term estimate based on asset mix, risk tolerance, and historical context instead of relying on very optimistic assumptions."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How long does it take to reach a financial goal?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The time needed depends on your starting amount, monthly investing discipline, and expected return rate. Higher contributions or better returns can shorten the path, while lower returns can lengthen it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can small investments grow large over time?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Small regular investments can become surprisingly large over long periods because each contribution gets time to compound."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What happens if returns are lower than expected?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "If returns are lower than expected, your projected future value may fall short of the goal or the time required may increase. That is why it is useful to test conservative assumptions."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How can investors reach financial independence?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Financial independence usually comes from a mix of disciplined saving, consistent investing, compounding, and keeping long-term goals realistic and inflation-aware."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is investment goal planning useful for retirement and education goals?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Goal planning is useful for retirement, education, home down payments, travel, and financial independence because it helps turn a vague target into a measurable investment path."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+  <style>
+    :root {
+      --teal: #0d9488;
+      --teal-dark: #0f766e;
+      --teal-light: #ccfbf1;
+      --amber: #f59e0b;
+      --amber-light: #fef3c7;
+      --rose: #f43f5e;
+      --rose-light: #ffe4e6;
+      --sky: #0284c7;
+      --sky-light: #dbeafe;
+      --slate-950: #020617;
+      --slate-900: #0f172a;
+      --slate-800: #1e293b;
+      --slate-700: #334155;
+      --slate-600: #475569;
+      --slate-500: #64748b;
+      --slate-400: #94a3b8;
+      --slate-300: #cbd5e1;
+      --slate-200: #e2e8f0;
+      --slate-100: #f1f5f9;
+      --slate-50: #f8fafc;
+      --white: #ffffff;
+      --radius: 14px;
+      --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.08);
+      --shadow-md: 0 10px 28px rgba(15, 23, 42, 0.12);
+      --shadow-lg: 0 20px 48px rgba(15, 23, 42, 0.16);
+      --header-h: 68px;
+    }
+
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(13, 148, 136, 0.14), transparent 32%),
+        linear-gradient(180deg, #f8fafc 0%, #eff6ff 44%, #f8fafc 100%);
+      color: var(--slate-800);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    img,
+    canvas {
+      max-width: 100%;
+    }
+
+    a {
+      color: var(--teal);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: linear-gradient(135deg, #0891b2 0%, #059669 100%);
+      color: var(--white);
+      box-shadow: 0 2px 10px rgba(15, 23, 42, 0.12);
+    }
+
+    .hdr-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .hdr-logo {
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+    }
+
+    .hdr-nav {
+      display: flex;
+      gap: 1.25rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .hdr-nav a,
+    .hdr-nav span {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      opacity: 0.96;
+      transition: opacity 0.3s ease;
+    }
+
+    .hdr-nav a:hover {
+      opacity: 0.82;
+      text-decoration: none;
+    }
+
+    .nav-disabled {
+      opacity: 0.74;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 4px;
+      background: none;
+      border: none;
+      padding: 0;
+    }
+
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background: var(--white);
+      border-radius: 999px;
+      transition: 0.3s ease;
+    }
+
+    .mobile-nav {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: #0b7694;
+      flex-direction: column;
+      padding: 1rem;
+      gap: 0.9rem;
+      box-shadow: 0 12px 28px rgba(15, 23, 42, 0.16);
+    }
+
+    .mobile-nav.open {
+      display: flex;
+    }
+
+    .mobile-nav a,
+    .mobile-nav span {
+      color: var(--white);
+      text-decoration: none;
+      padding: 0.45rem 0.5rem;
+      border-radius: 8px;
+    }
+
+    .mobile-nav a:hover {
+      background: rgba(255, 255, 255, 0.08);
+      text-decoration: none;
+    }
+
+    .page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1.5rem 1rem 4rem;
+    }
+
+    .breadcrumb {
+      font-size: 0.84rem;
+      color: var(--slate-500);
+      margin-bottom: 1.25rem;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(135deg, rgba(13, 148, 136, 0.14), rgba(2, 132, 199, 0.08)),
+        var(--white);
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      border-radius: 22px;
+      box-shadow: var(--shadow-md);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -80px -80px auto;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle, rgba(13, 148, 136, 0.14), transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      background: var(--teal-light);
+      color: var(--teal-dark);
+      font-size: 0.76rem;
+      font-weight: 800;
+      padding: 0.4rem 0.9rem;
+      border-radius: 999px;
+      margin-bottom: 0.85rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 5vw, 3.25rem);
+      line-height: 1.08;
+      color: var(--slate-900);
+      margin-bottom: 0.8rem;
+    }
+
+    .hero-sub {
+      font-size: 1rem;
+      color: var(--slate-600);
+      max-width: 760px;
+    }
+
+    .hero-highlights {
+      display: grid;
+      gap: 0.85rem;
+      margin-top: 1.25rem;
+    }
+
+    .hero-chip {
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid rgba(148, 163, 184, 0.28);
+      border-radius: 14px;
+      padding: 0.95rem 1rem;
+      box-shadow: var(--shadow-sm);
+      color: var(--slate-600);
+    }
+
+    .hero-chip strong {
+      display: block;
+      color: var(--slate-900);
+      margin-bottom: 0.2rem;
+    }
+
+    .card,
+    .content-section {
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid rgba(148, 163, 184, 0.22);
+      border-radius: 20px;
+      box-shadow: var(--shadow-md);
+      margin-top: 2rem;
+    }
+
+    .card {
+      padding: 1.5rem;
+    }
+
+    .content-section {
+      padding: 2rem;
+      scroll-margin-top: calc(var(--header-h) + 1rem);
+    }
+
+    .card-title,
+    .content-section h2 {
+      font-size: clamp(1.25rem, 3vw, 1.75rem);
+      font-weight: 800;
+      color: var(--slate-900);
+      margin-bottom: 1rem;
+    }
+
+    .content-section h2 {
+      padding-left: 1rem;
+      border-left: 4px solid var(--teal);
+    }
+
+    .content-section h3 {
+      font-size: 1.15rem;
+      color: var(--slate-900);
+      margin: 1.6rem 0 0.65rem;
+    }
+
+    .content-section p,
+    .content-section li {
+      color: var(--slate-600);
+    }
+
+    .content-section ul {
+      margin: 0.2rem 0 1rem 1.25rem;
+    }
+
+    .content-section li {
+      margin-bottom: 0.55rem;
+    }
+
+    .toolbar-grid,
+    .field-pair,
+    .result-grid,
+    .charts-grid,
+    .comparison-grid,
+    .links-grid,
+    .footer-content {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .toolbar-box {
+      background: linear-gradient(180deg, rgba(13, 148, 136, 0.08), rgba(255, 255, 255, 0.94));
+      border: 1px solid rgba(148, 163, 184, 0.24);
+      border-radius: 16px;
+      padding: 1rem;
+    }
+
+    .toolbar-box h2 {
+      font-size: 1.02rem;
+      color: var(--slate-900);
+      margin-bottom: 0.55rem;
+    }
+
+    .toolbar-help,
+    .hint,
+    .chart-note,
+    .table-context,
+    .copy-note {
+      font-size: 0.86rem;
+      color: var(--slate-500);
+    }
+
+    .info-list {
+      display: grid;
+      gap: 0.7rem;
+      margin-top: 0.7rem;
+    }
+
+    .info-pill {
+      padding: 0.8rem 0.9rem;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid rgba(148, 163, 184, 0.22);
+      color: var(--slate-700);
+      box-shadow: var(--shadow-sm);
+    }
+
+    #mode-panel {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(248, 250, 252, 0.84));
+      border: 1px solid rgba(148, 163, 184, 0.22);
+      border-radius: 18px;
+      padding: 1rem 1rem 1.1rem;
+      margin-bottom: 1rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    #mode-info-list {
+      gap: 0.85rem;
+      margin-top: 0.95rem;
+    }
+
+    #mode-info-list .info-pill {
+      position: relative;
+      overflow: hidden;
+      padding: 0.95rem 1rem 0.95rem 1.15rem;
+      font-weight: 700;
+      line-height: 1.6;
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.045);
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+
+    #mode-info-list .info-pill::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 5px;
+      border-radius: 999px;
+      background: currentColor;
+      opacity: 0.72;
+    }
+
+    #mode-info-list .info-pill:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px rgba(15, 23, 42, 0.06);
+    }
+
+    #mode-info-list[data-mode="future"] .info-pill:nth-child(1) {
+      color: var(--teal-dark);
+      background: linear-gradient(135deg, rgba(204, 251, 241, 0.68), rgba(240, 253, 250, 0.76));
+      border-color: rgba(13, 148, 136, 0.2);
+    }
+
+    #mode-info-list[data-mode="future"] .info-pill:nth-child(2) {
+      color: var(--sky);
+      background: linear-gradient(135deg, rgba(219, 234, 254, 0.68), rgba(239, 246, 255, 0.76));
+      border-color: rgba(2, 132, 199, 0.2);
+    }
+
+    #mode-info-list[data-mode="future"] .info-pill:nth-child(3) {
+      color: #b45309;
+      background: linear-gradient(135deg, rgba(254, 243, 199, 0.68), rgba(255, 251, 235, 0.76));
+      border-color: rgba(245, 158, 11, 0.2);
+    }
+
+    #mode-info-list[data-mode="monthly"] .info-pill:nth-child(1) {
+      color: #b45309;
+      background: linear-gradient(135deg, rgba(254, 243, 199, 0.68), rgba(255, 251, 235, 0.76));
+      border-color: rgba(245, 158, 11, 0.2);
+    }
+
+    #mode-info-list[data-mode="monthly"] .info-pill:nth-child(2) {
+      color: var(--rose);
+      background: linear-gradient(135deg, rgba(255, 228, 230, 0.68), rgba(255, 241, 242, 0.76));
+      border-color: rgba(244, 63, 94, 0.2);
+    }
+
+    #mode-info-list[data-mode="monthly"] .info-pill:nth-child(3) {
+      color: var(--sky);
+      background: linear-gradient(135deg, rgba(219, 234, 254, 0.68), rgba(239, 246, 255, 0.76));
+      border-color: rgba(2, 132, 199, 0.2);
+    }
+
+    #mode-info-list[data-mode="time"] .info-pill:nth-child(1) {
+      color: var(--sky);
+      background: linear-gradient(135deg, rgba(219, 234, 254, 0.68), rgba(239, 246, 255, 0.76));
+      border-color: rgba(2, 132, 199, 0.2);
+    }
+
+    #mode-info-list[data-mode="time"] .info-pill:nth-child(2) {
+      color: var(--teal-dark);
+      background: linear-gradient(135deg, rgba(204, 251, 241, 0.68), rgba(240, 253, 250, 0.76));
+      border-color: rgba(13, 148, 136, 0.2);
+    }
+
+    #mode-info-list[data-mode="time"] .info-pill:nth-child(3) {
+      color: var(--rose);
+      background: linear-gradient(135deg, rgba(255, 228, 230, 0.68), rgba(255, 241, 242, 0.76));
+      border-color: rgba(244, 63, 94, 0.2);
+    }
+
+    .qnav {
+      display: grid;
+      gap: 0.75rem;
+      margin: 1.25rem 0 1rem;
+    }
+
+    .qnav-btn {
+      width: 100%;
+      border: 2px solid var(--slate-300);
+      border-radius: 14px;
+      background: var(--white);
+      padding: 0.95rem 1rem;
+      font-size: 0.92rem;
+      font-weight: 800;
+      color: var(--slate-600);
+      cursor: pointer;
+      transition: 0.25s ease;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .qnav-btn:hover {
+      border-color: var(--teal);
+      color: var(--teal);
+      transform: translateY(-2px);
+    }
+
+    .qnav-btn.active {
+      background: linear-gradient(135deg, var(--teal-dark), var(--teal));
+      color: var(--white);
+      border-color: var(--teal);
+      box-shadow: 0 8px 24px rgba(13, 148, 136, 0.24);
+    }
+
+    .module {
+      display: none;
+    }
+
+    .module.active {
+      display: block;
+      animation: fadeUp 0.25s ease;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .module-intro {
+      margin-bottom: 1rem;
+      color: var(--slate-600);
+      font-size: 0.97rem;
+    }
+
+    .form-row {
+      display: grid;
+      gap: 0.45rem;
+      margin-bottom: 1rem;
+    }
+
+    .lbl {
+      font-weight: 700;
+      color: var(--slate-800);
+      font-size: 0.92rem;
+    }
+
+    input[type="number"],
+    input[type="text"],
+    select {
+      width: 100%;
+      border: 2px solid var(--slate-300);
+      border-radius: 12px;
+      padding: 0.78rem 0.92rem;
+      font-size: 1rem;
+      color: var(--slate-800);
+      background: var(--white);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    input[type="number"]:focus,
+    input[type="text"]:focus,
+    select:focus {
+      outline: none;
+      border-color: var(--teal);
+      box-shadow: 0 0 0 4px rgba(13, 148, 136, 0.12);
+    }
+
+    input[type="number"]:disabled,
+    input[type="text"]:disabled {
+      background: var(--slate-100);
+      color: var(--slate-400);
+      cursor: not-allowed;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--teal);
+    }
+
+    .input-slider {
+      display: grid;
+      gap: 0.8rem;
+    }
+
+    .slider-lbl {
+      font-size: 0.84rem;
+      color: var(--teal-dark);
+      font-weight: 700;
+      margin-top: 0.3rem;
+    }
+
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      flex-wrap: wrap;
+      margin-top: 0.3rem;
+    }
+
+    .toggle-row input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--teal);
+    }
+
+    .btn-row {
+      display: grid;
+      gap: 0.75rem;
+      margin-top: 0.5rem;
+    }
+
+    .btn-primary,
+    .btn-secondary,
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      border-radius: 12px;
+      padding: 0.85rem 1rem;
+      font-size: 0.96rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: 0.22s ease;
+    }
+
+    .btn-primary {
+      border: none;
+      color: var(--white);
+      background: linear-gradient(135deg, var(--teal-dark), var(--teal));
+      box-shadow: 0 10px 24px rgba(13, 148, 136, 0.2);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 28px rgba(13, 148, 136, 0.28);
+    }
+
+    .btn-secondary {
+      border: 2px solid var(--slate-300);
+      color: var(--slate-700);
+      background: var(--slate-100);
+    }
+
+    .btn-secondary:hover,
+    .btn-ghost:hover {
+      border-color: var(--teal);
+      color: var(--teal-dark);
+      transform: translateY(-1px);
+    }
+
+    .btn-ghost {
+      border: 2px solid rgba(13, 148, 136, 0.22);
+      color: var(--teal-dark);
+      background: rgba(13, 148, 136, 0.06);
+    }
+
+    .result-meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      margin-bottom: 0.9rem;
+    }
+
+    .mode-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--teal-light);
+      color: var(--teal-dark);
+      border-radius: 999px;
+      padding: 0.5rem 0.85rem;
+      font-size: 0.82rem;
+      font-weight: 800;
+    }
+
+    .result-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .status-banner {
+      display: none;
+      padding: 0.85rem 1rem;
+      border-radius: 14px;
+      margin-bottom: 1rem;
+      font-weight: 600;
+      font-size: 0.92rem;
+    }
+
+    .status-banner.info {
+      display: block;
+      background: var(--sky-light);
+      color: #0c4a6e;
+      border: 1px solid rgba(2, 132, 199, 0.2);
+    }
+
+    .status-banner.error {
+      display: block;
+      background: var(--rose-light);
+      color: #9f1239;
+      border: 1px solid rgba(244, 63, 94, 0.24);
+    }
+
+    .status-banner.success {
+      display: block;
+      background: var(--teal-light);
+      color: var(--teal-dark);
+      border: 1px solid rgba(13, 148, 136, 0.24);
+    }
+
+    .result-grid {
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      margin-top: 1rem;
+    }
+
+    .result-card {
+      color: var(--white);
+      border-radius: 18px;
+      padding: 1.2rem 1.1rem;
+      min-height: 142px;
+      min-width: 0;
+      box-shadow: var(--shadow-md);
+    }
+
+    .result-card.teal {
+      background: linear-gradient(135deg, var(--teal-dark), var(--teal));
+    }
+
+    .result-card.amber {
+      background: linear-gradient(135deg, #d97706, var(--amber));
+    }
+
+    .result-card.rose {
+      background: linear-gradient(135deg, #be123c, var(--rose));
+    }
+
+    .result-card.slate {
+      background: linear-gradient(135deg, var(--slate-800), var(--slate-600));
+    }
+
+    .result-card.sky {
+      background: linear-gradient(135deg, #0369a1, var(--sky));
+    }
+
+    .result-lbl {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      opacity: 0.92;
+      margin-bottom: 0.45rem;
+    }
+
+    .result-val {
+      font-size: clamp(0.96rem, 2.1vw, 1.55rem);
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.35rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .result-sub {
+      font-size: 0.82rem;
+      opacity: 0.86;
+    }
+
+    .insight-box,
+    .formula-box,
+    .callout {
+      margin-top: 1rem;
+      border-radius: 14px;
+      padding: 1rem 1.1rem;
+    }
+
+    .insight-box {
+      display: none;
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.12), rgba(255, 255, 255, 0.95));
+      border: 1px solid rgba(245, 158, 11, 0.24);
+      color: #78350f;
+    }
+
+    .formula-box {
+      background: linear-gradient(135deg, rgba(13, 148, 136, 0.08), rgba(255, 255, 255, 0.98));
+      border-left: 4px solid var(--teal);
+      color: var(--slate-700);
+      font-family: "Courier New", monospace;
+      font-size: 0.93rem;
+      overflow-x: auto;
+    }
+
+    .comparison-summary {
+      margin-top: 1rem;
+    }
+
+    .compare-box {
+      border-radius: 20px;
+      padding: 1.15rem;
+      border: 1px solid rgba(148, 163, 184, 0.24);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .compare-box+.compare-box,
+    .compare-box+.field-pair,
+    .field-pair+.compare-box {
+      margin-top: 1rem;
+    }
+
+    .compare-box.compare-a {
+      background: linear-gradient(180deg, rgba(219, 234, 254, 0.98), rgba(255, 255, 255, 0.96));
+      border-color: rgba(37, 99, 235, 0.22);
+    }
+
+    .compare-box.compare-b {
+      background: linear-gradient(180deg, rgba(254, 243, 199, 0.98), rgba(255, 255, 255, 0.96));
+      border-color: rgba(217, 119, 6, 0.24);
+    }
+
+    .compare-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.5rem 0.85rem;
+      border-radius: 999px;
+      font-size: 0.92rem;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+      margin-bottom: 0.95rem;
+    }
+
+    .compare-tag .compare-letter {
+      width: 1.7rem;
+      height: 1.7rem;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.86rem;
+      color: var(--white);
+    }
+
+    .compare-a .compare-tag {
+      background: rgba(37, 99, 235, 0.1);
+      color: #1d4ed8;
+    }
+
+    .compare-a .compare-letter {
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    }
+
+    .compare-b .compare-tag {
+      background: rgba(217, 119, 6, 0.12);
+      color: #b45309;
+    }
+
+    .compare-b .compare-letter {
+      background: linear-gradient(135deg, #d97706, #b45309);
+    }
+
+    .comparison-summary thead th:nth-child(2) {
+      color: #dbeafe;
+    }
+
+    .comparison-summary thead th:nth-child(3) {
+      color: #fde68a;
+    }
+
+    .comparison-summary tbody td.compare-a-cell {
+      color: #1d4ed8;
+      font-weight: 700;
+      background: rgba(219, 234, 254, 0.45);
+    }
+
+    .comparison-summary tbody td.compare-b-cell {
+      color: #b45309;
+      font-weight: 700;
+      background: rgba(254, 243, 199, 0.55);
+    }
+
+    .table-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+
+    .charts-grid {
+      margin-top: 1rem;
+    }
+
+    .chart-wrap {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), var(--slate-50));
+      border: 1px solid rgba(148, 163, 184, 0.22);
+      border-radius: 18px;
+      padding: 1rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .chart-title {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--slate-900);
+      margin-bottom: 0.35rem;
+    }
+
+    .chart-canvas {
+      position: relative;
+      height: 280px;
+      margin-top: 0.8rem;
+    }
+
+    .tbl-wrap {
+      overflow-x: auto;
+      border-radius: 16px;
+      border: 1px solid rgba(148, 163, 184, 0.24);
+      background: var(--white);
+      box-shadow: var(--shadow-sm);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 640px;
+    }
+
+    thead tr {
+      background: linear-gradient(135deg, var(--teal-dark), var(--teal));
+      color: var(--white);
+    }
+
+    th,
+    td {
+      padding: 0.75rem 0.9rem;
+      text-align: right;
+      font-size: 0.9rem;
+      border-bottom: 1px solid var(--slate-200);
+    }
+
+    th {
+      font-size: 0.8rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    th:first-child,
+    td:first-child {
+      text-align: left;
+    }
+
+    tbody tr:nth-child(even) {
+      background: var(--slate-50);
+    }
+
+    tbody tr:hover {
+      background: rgba(13, 148, 136, 0.06);
+    }
+
+    .comparison-grid {
+      margin-top: 1rem;
+    }
+
+    .comparison-grid>div {
+      min-width: 0;
+    }
+
+    .form-row.is-disabled {
+      opacity: 0.66;
+    }
+
+    .form-row.is-disabled input,
+    .form-row.is-disabled select {
+      background: var(--slate-100);
+      cursor: not-allowed;
+    }
+
+    #comparison-tables .tbl-wrap {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .callout {
+      background: linear-gradient(135deg, rgba(13, 148, 136, 0.1), rgba(224, 242, 254, 0.95));
+      border-left: 4px solid var(--teal);
+      color: var(--slate-700);
+    }
+
+    .callout strong {
+      color: var(--slate-900);
+    }
+
+    .links-grid {
+      margin-top: 1rem;
+    }
+
+    .link-card {
+      background: linear-gradient(180deg, var(--white), var(--slate-50));
+      border: 2px solid var(--slate-200);
+      border-radius: 16px;
+      padding: 1rem;
+      color: var(--slate-700);
+      transition: 0.25s ease;
+      text-decoration: none;
+    }
+
+    .link-card:hover {
+      border-color: var(--teal);
+      color: var(--teal);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-sm);
+      text-decoration: none;
+    }
+
+    .link-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 12px;
+      background: var(--teal-light);
+      margin-bottom: 0.75rem;
+      font-size: 1.15rem;
+    }
+
+    .link-card strong {
+      display: block;
+      color: var(--slate-900);
+      margin-bottom: 0.35rem;
+    }
+
+    .link-card p {
+      margin: 0;
+      color: var(--slate-500);
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .faq-item {
+      background: var(--slate-50);
+      border: 1px solid var(--slate-200);
+      border-radius: 14px;
+      padding: 1.1rem 1.15rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .faq-q {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--slate-900);
+      margin-bottom: 0.45rem;
+    }
+
+    .faq-a {
+      color: var(--slate-600);
+      font-size: 0.94rem;
+    }
+
+    .disclaimer1 {
+      background: linear-gradient(135deg, var(--amber-light), #fff7ed);
+      border: 1px solid rgba(245, 158, 11, 0.24);
+      border-radius: 16px;
+      padding: 1.2rem 1.3rem;
+      margin-top: 2rem;
+      color: #78350f;
+      font-size: 0.9rem;
+    }
+
+    .disclaimer1 strong {
+      color: #92400e;
+    }
+
+    footer {
+      background: #1f2937;
+      color: var(--white);
+      padding: 3rem 0 1rem;
+      margin-top: 4rem;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto 2rem;
+      padding: 0 1rem;
+    }
+
+    .footer-section h3 {
+      color: #5eead4;
+      margin-bottom: 0.9rem;
+      font-size: 1rem;
+    }
+
+    .footer-section ul {
+      list-style: none;
+    }
+
+    .footer-section li {
+      margin-bottom: 0.55rem;
+    }
+
+    .footer-section a,
+    .footer-section span {
+      color: #cbd5e0;
+      text-decoration: none;
+    }
+
+    .footer-section a:hover {
+      color: var(--white);
+    }
+
+    .footer-disclaimer {
+      background: rgba(255, 255, 255, 0.06);
+      padding: 1rem;
+      border-radius: 14px;
+      color: #dbeafe;
+      font-size: 0.9rem;
+    }
+
+    .copyright {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1.5rem 1rem 0;
+      text-align: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: #cbd5e0;
+    }
+
+    @media (min-width: 640px) {
+      .hero {
+        padding: 2rem;
+      }
+
+      .hero-highlights,
+      .toolbar-grid,
+      .field-pair,
+      .links-grid,
+      .footer-content {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .result-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .qnav {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .btn-row {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (min-width: 768px) {
+      .input-slider {
+        grid-template-columns: 1.1fr 1fr;
+        align-items: center;
+      }
+
+      .toolbar-grid {
+        grid-template-columns: 1.1fr 1fr;
+      }
+
+      .qnav {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .result-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .charts-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .charts-grid .chart-wrap:last-child {
+        grid-column: span 2;
+      }
+
+      .footer-content {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+    }
+
+    @media (min-width: 960px) {
+      .hero-highlights {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .result-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .comparison-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 767px) {
+      .hdr-nav {
+        display: none;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .result-actions {
+        width: 100%;
+      }
+
+      .result-actions .btn-secondary {
+        width: 100%;
+      }
+
+      .table-head {
+        flex-direction: column;
+      }
+
+      .result-val {
+        font-size: 1rem;
+      }
+    }
+
+    @media (max-width: 640px) {
+      #comparison-tables {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+
+      #comparison-tables table {
+        min-width: 620px;
+      }
+    }
+
+    @media (max-width: 479px) {
+      .page {
+        padding-inline: 0.8rem;
+      }
+
+      .card,
+      .content-section {
+        padding: 1.1rem;
+      }
+
+      .chart-canvas {
+        height: 240px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="hdr-inner">
+      <div class="hdr-logo">💰 SmartCalc World</div>
+      <nav class="hdr-nav">
+        <a href="https://smartcalcworld.com/index.html">Home</a>
+        <a href="https://smartcalcworld.com/finance/finance-hub.html">Finance Hub</a>
+        <span class="nav-disabled">Medical Hub (Coming Soon)</span>
+        <span class="nav-disabled">Student Hub (Coming Soon)</span>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <button class="hamburger" id="hamburgerBtn" type="button" aria-label="Toggle menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <nav class="mobile-nav" id="mobileNav">
+      <a href="https://smartcalcworld.com/index.html">Home</a>
+      <a href="https://smartcalcworld.com/finance/finance-hub.html">Finance Hub</a>
+      <span class="nav-disabled">Medical Hub (Coming Soon)</span>
+      <span class="nav-disabled">Student Hub (Coming Soon)</span>
+      <a href="#faq">FAQ</a>
+    </nav>
+  </header>
+
+  <main class="page">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="https://smartcalcworld.com/index.html">Home</a> &rsaquo;
+      <a href="https://smartcalcworld.com/finance/finance-hub.html">Finance</a> &rsaquo;
+      <a href="https://smartcalcworld.com/finance/investment/investment-calculators.html">Investment</a> &rsaquo;
+      Investment Goal Calculator
+    </nav>
+
+    <section class="hero">
+      <span class="hero-badge">&#127919; Premium Goal Planning Tool</span>
+      <h1>Investment Goal Calculator</h1>
+      <p class="hero-sub">Plan your target corpus with confidence. This SmartCalc World calculator helps you estimate
+        future value, required monthly investment, or time needed to reach a financial goal using compound growth and
+        disciplined contributions.</p>
+
+      <div class="hero-highlights">
+        <div class="hero-chip">
+          <strong>Turn a dream into a number</strong>
+          Whether you are planning for a home, retirement, education, or financial freedom, this tool converts a big
+          goal into a practical investing roadmap.
+        </div>
+        <div class="hero-chip">
+          <strong>Choose the question you need answered</strong>
+          Switch between future value, required monthly contribution, and time-to-goal modes without leaving the same
+          premium planning dashboard.
+        </div>
+        <div class="hero-chip">
+          <strong>See progress visually</strong>
+          Review charts, yearly projections, total contributions, and investment growth so the journey feels clear
+          instead of abstract.
+        </div>
+      </div>
+    </section>
+
+    <section class="card" id="calculator">
+      <div class="card-title">Investment Goal Planner</div>
+
+      <div class="toolbar-grid">
+        <div class="toolbar-box">
+          <h2>Display Currency</h2>
+          <div class="field-pair">
+            <div class="form-row">
+              <label class="lbl" for="global-currency">Choose currency</label>
+              <select id="global-currency">
+                <option value="USD">USD $</option>
+                <option value="EUR">EUR &euro;</option>
+                <option value="GBP">GBP &pound;</option>
+                <option value="INR">INR &#8377;</option>
+                <option value="CAD">CAD $</option>
+                <option value="AUD">AUD $</option>
+                <option value="CUSTOM">Custom symbol</option>
+              </select>
+              <span class="hint">Display only. The calculator changes formatting and symbols but does not apply
+                exchange-rate conversion.</span>
+            </div>
+
+            <div class="form-row hidden" id="custom-symbol-wrap">
+              <label class="lbl" for="custom-symbol">Custom symbol</label>
+              <input type="text" id="custom-symbol" maxlength="6" value="$" placeholder="e.g. AED or CHF">
+              <span class="hint">Use a short code or symbol if you want a custom display style.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="toolbar-box">
+          <h2>What this tool answers</h2>
+          <div class="info-list">
+            <div class="info-pill">How much could your current money and regular investing grow into with
+              <strong>compound returns</strong> over time?</div>
+            <div class="info-pill">How much do you need to invest each month if you want to hit a <strong>specific
+                target amount</strong> by a chosen deadline?</div>
+            <div class="info-pill">How long might it take to reach your goal if you stay consistent with your
+              <strong>current monthly investing plan</strong>?</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="qnav" id="qnav" role="tablist" aria-label="Investment goal calculator modes">
+        <button type="button" class="qnav-btn active" data-module="future" role="tab" aria-selected="true"
+          onclick="switchMode('future')">Calculate Future Value</button>
+        <button type="button" class="qnav-btn" data-module="monthly" role="tab" aria-selected="false"
+          onclick="switchMode('monthly')">Required Monthly Investment</button>
+        <button type="button" class="qnav-btn" data-module="time" role="tab" aria-selected="false"
+          onclick="switchMode('time')">Time Needed to Reach Goal</button>
+      </div>
+
+      <section class="module active" id="mode-panel" role="tabpanel" aria-label="Goal calculation mode">
+        <p class="module-intro" id="mode-intro">Use this mode when you already know your monthly contribution and time
+          horizon. The calculator will estimate how large your portfolio may become and how close that result comes to
+          your target.</p>
+        <div class="info-list" id="mode-info-list" data-mode="future">
+          <div class="info-pill" id="mode-pill-1">Future value mode is great when you want to test if your current
+            savings plan is strong enough.</div>
+          <div class="info-pill" id="mode-pill-2">The target amount still matters here because it lets you measure goal
+            progress, shortfall, or surplus.</div>
+          <div class="info-pill" id="mode-pill-3">If the projected amount misses the goal, switch to another tab to
+            calculate the monthly contribution or time needed.</div>
+        </div>
+      </section>
+
+      <div class="field-pair">
+        <div class="form-row" id="row-goal-target">
+          <label class="lbl" for="goal-target">Target Investment Amount (<span data-currency-symbol>$</span>)</label>
+          <div class="input-slider">
+            <div>
+              <input type="number" id="goal-target" min="1000" max="1000000000" step="1000" value="1000000">
+              <span class="hint">Your future corpus goal, such as education, retirement, a home fund, or financial
+                independence.</span>
+            </div>
+            <div>
+              <input type="range" id="goal-target-sl" min="1000" max="10000000" step="1000" value="1000000">
+              <div class="slider-lbl" id="goal-target-lbl">$1,000,000.00</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row" id="row-goal-current">
+          <label class="lbl" for="goal-current">Current Investment Amount (<span data-currency-symbol>$</span>)</label>
+          <div class="input-slider">
+            <div>
+              <input type="number" id="goal-current" min="0" max="1000000000" step="1000" value="25000">
+              <span class="hint">The amount you already have invested or ready to invest today.</span>
+            </div>
+            <div>
+              <input type="range" id="goal-current-sl" min="0" max="5000000" step="1000" value="25000">
+              <div class="slider-lbl" id="goal-current-lbl">$25,000.00</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="field-pair">
+        <div class="form-row" id="row-goal-monthly">
+          <label class="lbl" for="goal-monthly">Monthly Investment Contribution (<span
+              data-currency-symbol>$</span>)</label>
+          <div class="input-slider">
+            <div>
+              <input type="number" id="goal-monthly" min="0" max="500000" step="50" value="500">
+              <span class="hint" id="goal-monthly-hint">The amount you plan to invest every month. This is used directly
+                in future value and time-to-goal modes.</span>
+            </div>
+            <div>
+              <input type="range" id="goal-monthly-sl" min="0" max="25000" step="50" value="500">
+              <div class="slider-lbl" id="goal-monthly-lbl">$500.00</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row" id="row-goal-return">
+          <label class="lbl" for="goal-return">Expected Annual Return Rate (%)</label>
+          <div class="input-slider">
+            <div>
+              <input type="number" id="goal-return" min="0" max="30" step="0.01" value="10">
+              <span class="hint">A planning assumption for annual growth. Try conservative values if you want a safer
+                estimate.</span>
+            </div>
+            <div>
+              <input type="range" id="goal-return-sl" min="0" max="30" step="0.1" value="10">
+              <div class="slider-lbl" id="goal-return-lbl">10.00%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="field-pair">
+        <div class="form-row" id="row-goal-years">
+          <label class="lbl" for="goal-years">Investment Period (Years)</label>
+          <div class="input-slider">
+            <div>
+              <input type="number" id="goal-years" min="1" max="60" step="1" value="20">
+              <span class="hint" id="goal-years-hint">How long your money will stay invested before you expect to use
+                it.</span>
+            </div>
+            <div>
+              <input type="range" id="goal-years-sl" min="1" max="60" step="1" value="20">
+              <div class="slider-lbl" id="goal-years-lbl">20 years</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row" id="row-goal-compounding">
+          <label class="lbl" for="goal-compounding">Compounding Frequency</label>
+          <select id="goal-compounding">
+            <option value="12" selected>Monthly</option>
+            <option value="1">Yearly</option>
+          </select>
+          <span class="hint">Monthly compounding treats your contribution as a monthly cash flow. Yearly compounding
+            annualizes the contribution for a simpler long-term estimate.</span>
+        </div>
+      </div>
+
+      <div class="toolbar-box">
+        <h2>Planning note</h2>
+        <div class="info-list">
+          <div class="info-pill">The calculator separates <strong>your own contributions</strong> from
+            <strong>investment growth</strong> so you can see what compounding is really doing.</div>
+          <div class="info-pill">If your target feels far away today, do not panic. A longer timeline, a slightly higher
+            contribution, or a better return assumption can change the path meaningfully.</div>
+          <div class="info-pill">Use the three tabs as decision helpers: check the future value first, then solve for
+            the required monthly amount or the time needed.</div>
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <button type="button" class="btn-primary" onclick="calculateGoal(true, true)">Update Goal Plan</button>
+        <button type="button" class="btn-ghost" onclick="resetPlanner()">Reset Inputs</button>
+      </div>
+    </section>
+    <section class="card" id="results-section" aria-live="polite">
+      <div class="result-meta">
+        <div class="mode-pill" id="result-mode-pill">Latest Result: Goal Progress Analysis</div>
+        <div class="result-actions">
+          <button type="button" class="btn-secondary" onclick="copyResults()">Copy Results</button>
+          <div class="copy-note" id="copy-note">Nothing copied yet.</div>
+        </div>
+      </div>
+
+      <div class="status-banner" id="status-banner"></div>
+
+      <div class="result-grid">
+        <div class="result-card teal" id="result-card-0">
+          <div class="result-lbl" id="result-lbl-0">Projected Future Value</div>
+          <div class="result-val" id="result-val-0">—</div>
+          <div class="result-sub" id="result-sub-0">Estimated portfolio value at the selected goal point</div>
+        </div>
+        <div class="result-card amber" id="result-card-1">
+          <div class="result-lbl" id="result-lbl-1">Target Amount</div>
+          <div class="result-val" id="result-val-1">—</div>
+          <div class="result-sub" id="result-sub-1">Your financial goal in future money terms</div>
+        </div>
+        <div class="result-card sky" id="result-card-2">
+          <div class="result-lbl" id="result-lbl-2">Goal Progress</div>
+          <div class="result-val" id="result-val-2">—</div>
+          <div class="result-sub" id="result-sub-2">How much of the target this plan may achieve</div>
+        </div>
+        <div class="result-card rose" id="result-card-3">
+          <div class="result-lbl" id="result-lbl-3">Monthly Contribution Required</div>
+          <div class="result-val" id="result-val-3">—</div>
+          <div class="result-sub" id="result-sub-3">Shown in monthly-investment mode</div>
+        </div>
+        <div class="result-card slate" id="result-card-4">
+          <div class="result-lbl" id="result-lbl-4">Total Contributions</div>
+          <div class="result-val" id="result-val-4">—</div>
+          <div class="result-sub" id="result-sub-4">Current capital plus all planned contributions</div>
+        </div>
+        <div class="result-card teal" id="result-card-5">
+          <div class="result-lbl" id="result-lbl-5">Investment Growth</div>
+          <div class="result-val" id="result-val-5">—</div>
+          <div class="result-sub" id="result-sub-5">Gain created by return and compounding</div>
+        </div>
+      </div>
+
+      <div class="insight-box" id="insight-box"></div>
+      <div class="formula-box" id="formula-box"></div>
+
+      <div class="comparison-summary" id="snapshot-summary">
+        <div class="table-head">
+          <div>
+            <div class="card-title" style="margin-bottom:0.3rem;">Goal Planning Snapshot</div>
+            <div class="table-context">Quick highlights explaining whether you are on track, behind, or already ahead of
+              your target.</div>
+          </div>
+        </div>
+        <div class="tbl-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Metric</th>
+                <th>Value</th>
+                <th>Explanation</th>
+              </tr>
+            </thead>
+            <tbody id="snapshot-summary-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" id="charts-section">
+      <div class="card-title">Visual Goal Dashboard</div>
+      <p class="chart-note" id="charts-context">Charts show how your money grows, how close the plan gets to the target,
+        and how much of the final balance comes from contributions versus investment growth.</p>
+
+      <div class="charts-grid">
+        <div class="chart-wrap">
+          <div class="chart-title" id="growth-title">Investment Value Over Time</div>
+          <div class="chart-note" id="growth-note">Track portfolio growth alongside your own invested amount so
+            compounding becomes easy to see.</div>
+          <div class="chart-canvas">
+            <canvas id="growth-chart"></canvas>
+          </div>
+        </div>
+
+        <div class="chart-wrap">
+          <div class="chart-title" id="pie-title">Contribution vs Growth Mix</div>
+          <div class="chart-note" id="pie-note">See how much of the final number comes from current capital, future
+            contributions, and growth.</div>
+          <div class="chart-canvas">
+            <canvas id="profit-chart"></canvas>
+          </div>
+        </div>
+
+        <div class="chart-wrap">
+          <div class="chart-title" id="comparison-title">Goal Progress vs Target</div>
+          <div class="chart-note" id="comparison-note">Compare the projected investment path with your chosen target
+            amount year by year.</div>
+          <div class="chart-canvas">
+            <canvas id="comparison-chart"></canvas>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" id="projection-section">
+      <div class="table-head">
+        <div>
+          <div class="card-title" style="margin-bottom:0.3rem;">Year-by-Year Projection Table</div>
+          <div class="table-context" id="projection-context">Projection table showing total contributions, portfolio
+            value, and the percentage of your target achieved over time.</div>
+        </div>
+        <button type="button" class="btn-secondary" onclick="downloadCsv()">Download CSV</button>
+      </div>
+
+      <div class="tbl-wrap">
+        <table>
+          <thead>
+            <tr id="projection-head-row"></tr>
+          </thead>
+          <tbody id="projection-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="content-section" id="comparison-tables">
+      <h2>Comparison Tables</h2>
+      <p>These quick references make goal planning easier. They show when each mode is useful and how the chosen
+        compounding style changes the way contributions are treated in the estimate.</p>
+
+      <div class="comparison-grid">
+        <div>
+          <h3>Which Goal Mode Should You Use?</h3>
+          <div class="tbl-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Mode</th>
+                  <th>Best For</th>
+                  <th>Main Output</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Future Value</td>
+                  <td>Checking whether your current plan is enough</td>
+                  <td>Projected future portfolio value and goal progress</td>
+                </tr>
+                <tr>
+                  <td>Required Monthly Investment</td>
+                  <td>Solving how much you need to invest each month</td>
+                  <td>Monthly contribution needed to hit the target on time</td>
+                </tr>
+                <tr>
+                  <td>Time Needed</td>
+                  <td>Estimating how long your current investing pace may take</td>
+                  <td>Years required to reach the selected goal</td>
+                </tr>
+                <tr>
+                  <td>Best workflow</td>
+                  <td>Start with future value, then adjust the plan using the other two modes</td>
+                  <td>A clearer and more realistic investment roadmap</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div>
+          <h3>Monthly vs Yearly Compounding</h3>
+          <div class="formula-box"><strong>Future Value</strong> = PV × (1 + r / m)<sup>m × n</sup> + Contributions
+          </div>
+          <div class="tbl-wrap" style="margin-top:0.8rem;">
+            <table>
+              <thead>
+                <tr>
+                  <th>Compounding</th>
+                  <th>How Contributions Are Treated</th>
+                  <th>Planning Use</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Monthly</td>
+                  <td>Monthly contribution is invested every month</td>
+                  <td>Best when you want a realistic SIP-style planning view</td>
+                </tr>
+                <tr>
+                  <td>Yearly</td>
+                  <td>Monthly contribution is annualized for a simpler estimate</td>
+                  <td>Useful for broad long-term planning and rough target checks</td>
+                </tr>
+                <tr>
+                  <td>Return effect</td>
+                  <td>Monthly compounding can produce slightly higher growth</td>
+                  <td>The difference grows more visible over long horizons</td>
+                </tr>
+                <tr>
+                  <td>Practical takeaway</td>
+                  <td>Consistency matters more than tiny frequency differences</td>
+                  <td>Start with disciplined investing, then refine assumptions later</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+    <article class="content-section" id="guide">
+      <h2>How Investment Goal Planning Turns Big Dreams Into Clear Numbers</h2>
+
+      <p>An investment goal sounds exciting because it points to something meaningful in life &#127919;. It may be a
+        retirement fund, a home down payment, a child&rsquo;s education, a travel dream, or the freedom to work less and
+        live more. But a goal becomes much easier to act on when it moves from an emotional idea into a financial
+        number. That is where an investment goal calculator helps. It shows how your current money, monthly investing
+        habit, expected return, and timeline can work together so you can see whether the plan is realistic or needs
+        adjustment.</p>
+
+      <p>Many people delay investing because a goal like <span data-currency-symbol>$</span>1,000,000 feels huge
+        &#128176;. The number looks intimidating, so the first reaction is often, &ldquo;I can never reach that.&rdquo;
+        In reality, long-term goals are rarely reached in one dramatic step. They are usually built slowly through
+        patience, consistency, and compound growth &#128200;. Once you break the journey into current savings, monthly
+        contributions, and time, the path starts to feel understandable. That psychological shift is powerful because
+        clarity creates action.</p>
+
+      <h3>What Is an Investment Goal &#127919;</h3>
+      <p>An investment goal is simply a future money target connected to a real-life purpose. Maybe you want to build a
+        retirement corpus, save for a child&rsquo;s higher education, create a business fund, or achieve financial
+        independence &#128640;. The target may be large or small, short term or long term. What matters is that the goal
+        has a number, a timeline, and a plan to get there.</p>
+      <p>Without a goal, investing can feel vague. You may save a little when convenient, pause often, and never know
+        whether you are actually making progress. With a goal, every contribution carries meaning. A monthly investment
+        is no longer just a transfer out of your bank account. It becomes a direct step toward a future version of your
+        life &#129504;. That emotional connection often makes discipline easier, especially during slow or volatile
+        market periods.</p>
+      <p>This calculator supports three common planning questions because investors usually need one of them first. The
+        first is: &ldquo;If I keep investing like this, what future value might I reach?&rdquo; The second is: &ldquo;If
+        I want to hit a specific target by a deadline, how much must I invest each month?&rdquo; The third is: &ldquo;If
+        I stay with my current monthly investing plan, how long could it take to get there?&rdquo; Those three questions
+        cover a large part of real-world goal planning.</p>
+
+      <h3>How Compound Growth Helps Reach Financial Goals &#128200;</h3>
+      <p>Compound growth is one of the most important ideas in investing because it allows growth to build on earlier
+        growth. In simple terms, your money earns returns, and then those returns begin earning returns too &#128202;.
+        Over time, this can create a snowball effect that becomes stronger as the years pass. Early progress may look
+        slow, but later progress can become much faster if you stay invested.</p>
+      <p>Imagine you invest <span data-currency-symbol>$</span>10,000 and then add <span
+          data-currency-symbol>$</span>500 each month at a 10% annual return for 20 years. In the beginning, the account
+        grows mainly because of your own contributions. But after enough time, investment growth starts doing more of
+        the heavy lifting. That is why long-term investors often say time is one of the most valuable assets they have
+        &#9203;. A person who starts earlier may invest less total money yet still finish with a larger portfolio
+        because compounding had more time to work.</p>
+      <p>Compounding does not mean returns will be smooth every year. Markets rise and fall, and actual performance will
+        vary. But the core idea remains powerful: money that stays invested longer has more chances to multiply. That is
+        why goal planning is not only about how much you invest. It is also about when you start and how long you remain
+        consistent.</p>
+
+      <h3>Why Small Monthly Investments Can Build Large Wealth &#128176;</h3>
+      <p>Beginners often underestimate the value of regular investing because a small monthly amount looks ordinary. A
+        contribution such as <span data-currency-symbol>$</span>100, <span data-currency-symbol>$</span>300, or <span
+          data-currency-symbol>$</span>500 may not feel life-changing in the moment. Yet when those amounts are invested
+        repeatedly month after month, they begin stacking into a meaningful base. Then compounding starts adding
+        momentum on top of that base &#128161;.</p>
+      <p>This is why recurring investing strategies are so popular. They fit around salary income, encourage habit, and
+        reduce the temptation to wait endlessly for the perfect time to invest. If you want a tool focused entirely on
+        regular investing flows, SmartCalc World also offers a <a
+          href="https://smartcalcworld.com/finance/finance-sip-calculator.html">SIP Calculator</a> that pairs naturally
+        with this goal planner. Here, the advantage is that your contributions are connected directly to a specific
+        financial target instead of being viewed in isolation.</p>
+      <p>Regular investing also gives you flexibility. If the target looks too far away, you do not always need to give
+        up. You may extend the time horizon, increase the monthly contribution slightly, add a one-time top-up, or
+        review whether your return assumption is too conservative or too aggressive. Goal planning is not about
+        perfection on day one. It is about creating a flexible roadmap and improving it as life changes &#128260;.</p>
+
+      <h3>How Investors Plan Long-Term Wealth Targets &#128640;</h3>
+      <p>Long-term planning works best when you separate the process into a few simple questions. First, what is the
+        future amount you want? Second, how much do you already have? Third, how much can you invest regularly? Fourth,
+        what return assumption is sensible for your asset mix? Fifth, how much time do you have? When you answer those
+        five questions honestly, the goal becomes much easier to understand.</p>
+      <p>For example, someone chasing financial independence may set a target of <span
+          data-currency-symbol>$</span>1,000,000. If they already have <span data-currency-symbol>$</span>25,000, invest
+        <span data-currency-symbol>$</span>500 monthly, and expect 10% annual growth, the journey may still take many
+        years. That is normal. Large goals usually need a combination of patience and scale. The useful part is that the
+        calculator tells you whether the current plan is close, far away, or somewhere in between. That gives you a
+        basis for action instead of guesswork.</p>
+      <p>If the result shows a shortfall, you can test other paths right away. You might ask whether an extra <span
+          data-currency-symbol>$</span>200 per month would close the gap. You might ask whether five more years would
+        make the goal realistic. You might even compare a monthly investing approach with a one-time boost using the <a
+          href="https://smartcalcworld.com/finance/investment/lumpsum-calculator.html">Lumpsum Calculator</a>. Good
+        planning is not rigid. It is interactive and adaptive.</p>
+
+      <h3>Why Return Assumptions Matter So Much &#129504;</h3>
+      <p>One of the biggest mistakes in goal planning is choosing a return rate that is too optimistic. A higher assumed
+        return can make the monthly contribution look smaller and the time horizon look shorter, which feels good
+        emotionally &#128522;. But if the estimate is unrealistic, the plan may disappoint later. That is why many
+        investors prefer testing several scenarios: a conservative case, a base case, and an optimistic case.</p>
+      <p>If you want to understand how a total return translates into an annualized number, the <a
+          href="https://smartcalcworld.com/finance/investment/cagr-calculator.html">CAGR Calculator</a> can help. If you
+        want to compare nominal growth with inflation-adjusted growth, the <a
+          href="https://smartcalcworld.com/finance/investment/real-return-calculator.html">Real Return Calculator</a>
+        and the <a href="https://smartcalcworld.com/finance/investment/inflation-calculator.html">Inflation
+          Calculator</a> add useful context. Together, these tools can make your goal plan more realistic, not just more
+        hopeful.</p>
+      <p>Remember that return assumptions do not control markets. They only shape expectations. Your real edge comes
+        from consistency, costs, diversification, and staying invested through time. Those habits matter far more than
+        trying to predict exact market behavior every year.</p>
+
+      <h3>What Happens If You Start Late</h3>
+      <p>Starting late does not mean the goal is impossible, but it usually means the plan must work harder. When time
+        is shorter, compounding has less room to build momentum, so more of the burden falls on your contributions
+        &#9888;&#65039;. That is why people who begin later often need to invest larger monthly amounts to chase the
+        same target.</p>
+      <p>This is not meant to discourage you. It is meant to highlight where your leverage is. If time is limited, you
+        can still act through higher savings, smarter budgeting, better cost control, bonus investing, or a more
+        realistic target. Some investors also divide one large target into milestone goals, which makes progress easier
+        to track and psychologically easier to maintain.</p>
+
+      <h3>Example: Building Toward a 1 Million Goal</h3>
+      <p>Suppose you want to reach <span data-currency-symbol>$</span>1,000,000 over 25 years. You start with <span
+          data-currency-symbol>$</span>20,000 and invest <span data-currency-symbol>$</span>700 monthly at an expected
+        10% annual return. The future value can become surprisingly large because both your original amount and your
+        contributions keep compounding. If the final number still falls short, the gap may not be as scary as it first
+        looked. Sometimes a modest increase in monthly investing or a slightly longer timeline closes a large portion of
+        the shortfall.</p>
+      <p>This is exactly why goal calculators are useful. They help you see that huge outcomes are often created by many
+        small actions repeated over long periods &#128200;. You do not need one giant breakthrough. You need a plan that
+        survives real life.</p>
+
+      <h3>How This Tool Fits Into Broader Wealth Planning</h3>
+      <p>This goal calculator is strongest when used with a wider planning mindset. If your goal is retirement, you may
+        also want to test income sustainability in the <a
+          href="https://smartcalcworld.com/finance/investment/retirement-calculator.html">Retirement Calculator</a>. If
+        you want to understand how much effective yield a product offers, the APY tool can help. If you want to compare
+        different contribution patterns, the SIP and lumpsum tools become useful companions.</p>
+      <p>The deeper lesson is simple: investing becomes less stressful when you connect each calculator to one clear
+        decision. One tool tells you how fast a plan grows, another shows how inflation changes the picture, and another
+        tells you how much you need to invest to reach a specific future. When you combine those insights, your plan
+        becomes more thoughtful and much more practical &#127757;.</p>
+      <p>In the end, investment goal planning is not about guessing the future perfectly. It is about giving your future
+        a direction. A goal with a number, a monthly habit, and enough time can become much more achievable than it
+        first appears. Start with the numbers you have today, adjust the plan when life changes, and let consistency do
+        its work &#128640;.</p>
+    </article>
+
+    <section class="content-section" id="more-tools">
+      <h2>Explore More Calculators</h2>
+      <p>Goal planning becomes more powerful when you connect it with recurring investing, annualized return analysis,
+        one-time investing, real return planning, and retirement strategy across the SmartCalcWorld finance toolkit.</p>
+
+      <div class="links-grid">
+        <a class="link-card" href="https://smartcalcworld.com/finance/investment/cagr-calculator.html">
+          <span class="link-icon">&#128200;</span>
+          <strong>CAGR Calculator</strong>
+          <p>Convert total growth into an annualized return and check whether your assumptions feel realistic.</p>
+        </a>
+
+        <a class="link-card" href="https://smartcalcworld.com/finance/finance-sip-calculator.html">
+          <span class="link-icon">&#128202;</span>
+          <strong>SIP Calculator</strong>
+          <p>Study recurring monthly investing in more detail and compare that plan with the goal-based view shown here.
+          </p>
+        </a>
+
+        <a class="link-card" href="https://smartcalcworld.com/finance/investment/lumpsum-calculator.html">
+          <span class="link-icon">&#128176;</span>
+          <strong>Lumpsum Calculator</strong>
+          <p>Test how a one-time investment could support or accelerate your goal alongside regular contributions.</p>
+        </a>
+
+        <a class="link-card" href="https://smartcalcworld.com/finance/investment/real-return-calculator.html">
+          <span class="link-icon">&#127757;</span>
+          <strong>Real Return Calculator</strong>
+          <p>See how inflation changes the real buying power of the future value projected by your goal plan.</p>
+        </a>
+
+        <a class="link-card" href="https://smartcalcworld.com/finance/investment/retirement-calculator.html">
+          <span class="link-icon">&#127891;</span>
+          <strong>Retirement Calculator</strong>
+          <p>Turn a broad wealth target into a retirement-specific corpus and income sustainability plan.</p>
+        </a>
+      </div>
+    </section>
+
+    <section class="content-section" id="faq">
+      <h2>Frequently Asked Questions</h2>
+
+      <div class="faq-item">
+        <div class="faq-q">What is an investment goal calculator?</div>
+        <div class="faq-a">An investment goal calculator estimates how much your savings could grow, how much you may
+          need to invest every month, or how long it could take to reach a target amount.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">How much should I invest monthly to reach 1 million?</div>
+        <div class="faq-a">The answer depends on your current investment amount, time horizon, and expected return. This
+          calculator solves that relationship so you can test several realistic scenarios.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">How does compounding help reach financial goals?</div>
+        <div class="faq-a">Compounding allows returns to earn additional returns over time. The longer money stays
+          invested, the more powerful that effect can become.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What return rate should investors assume?</div>
+        <div class="faq-a">There is no universal answer. Many investors use a moderate long-term assumption rather than
+          an aggressive one, then check how the result changes under conservative and optimistic scenarios.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">How long does it take to reach a financial goal?</div>
+        <div class="faq-a">It depends on your starting amount, monthly investing pace, and expected return. Higher
+          contributions or more time can improve the outcome dramatically.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Can small investments grow large over time?</div>
+        <div class="faq-a">Yes. Small but regular investments can become meaningful wealth when they are given enough
+          time and compound growth.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What happens if returns are lower than expected?</div>
+        <div class="faq-a">A lower return can reduce the future value, increase the monthly investment required, or
+          extend the time needed to reach the goal. That is why testing conservative scenarios is wise.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">How can investors reach financial independence?</div>
+        <div class="faq-a">Financial independence usually comes from a combination of consistent saving, disciplined
+          investing, growing income, controlling costs, and staying focused on a long-term target.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Is investment goal planning useful for retirement and education goals?</div>
+        <div class="faq-a">Yes. Goal planning works well for retirement, education, a home down payment, business
+          funding, and many other milestones because it connects money decisions to a specific future use.</div>
+      </div>
+    </section>
+
+    <div class="disclaimer1">
+      <strong>Disclaimer:</strong> This investment goal calculator is for educational use only. Results are estimates
+      based on the assumptions you enter and do not include taxes, fees, inflation, changing contribution schedules, or
+      market volatility beyond the selected return assumption. Use it as a planning aid, not personal financial advice.
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="https://smartcalcworld.com/index.html">Home</a>
+          <li><a href="https://smartcalcworld.com/about.html">About</a></li>
+          <li><a href="https://smartcalcworld.com/contact.html">Contact</a></li>
+          <li><a href="https://smartcalcworld.com/privacy-policy.html">Privacy Policy</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h3>Content</h3>
+        <ul>
+          <li><a href="#calculator">Investment Goal Calculator</a></li>
+          <li><a href="#guide">Goal Planning Guide</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h3>Finance Tools</h3>
+        <ul>
+          <li><a href="https://smartcalcworld.com/finance/interest/interest-hub.html">Interest Calculators</a></li>
+          <li><a href="https://smartcalcworld.com/finance/investment/investment-calculators.html">Investment
+              Calculators</a></li>
+          <li><a href="https://smartcalcworld.com/finance/loan/loan-hub.html">Loan Calculators</a></li>
+          <li><a href="https://smartcalcworld.com/finance/tax/tax-hub.html">Tax Calculators</a></li>
+          <li><a href="https://smartcalcworld.com/finance/saving-retirement/saving-retirement-hub.html">Savings
+              Calculators</a></li>
+          <li><a href="https://smartcalcworld.com/finance/saving-retirement/saving-retirement-hub.html">Retirement
+              Calculators</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <div class="footer-disclaimer">
+          <strong>SmartCalc World Note:</strong> goal planning becomes much more practical when you compare the target,
+          the contribution habit, the expected return, and the time horizon together instead of focusing on only one
+          number.
+        </div>
+      </div>
+    </div>
+
+    <div class="copyright">
+      <p>&copy; SmartCalc World. All rights reserved.</p>
+    </div>
+
+  </footer>
+  <script>
+    const $ = (id) => document.getElementById(id);
+
+    const currencySymbols = {
+      USD: "$",
+      EUR: "\u20AC",
+      GBP: "\u00A3",
+      INR: "\u20B9",
+      AUD: "$",
+      CAD: "$",
+      CUSTOM: "$"
+    };
+
+    const modeConfigs = {
+      future: {
+        title: "Goal Progress Mode",
+        intro: "Use this mode when you already know your monthly contribution and time horizon. The calculator estimates your future value and shows whether that plan looks strong enough for the target.",
+        pills: [
+          "Future value mode is great when you want to test if your current savings plan is strong enough.",
+          "The target amount still matters here because it lets you measure goal progress, shortfall, or surplus.",
+          "If the projected amount misses the goal, switch to another tab to calculate the monthly contribution or time needed."
+        ]
+      },
+      monthly: {
+        title: "Required Monthly Investment Mode",
+        intro: "Use this mode when you know the target and deadline but need to solve the monthly investment amount required to reach that future value.",
+        pills: [
+          "This mode solves the contribution amount for you using compound growth and the target timeline.",
+          "Your current investment amount still helps because existing capital reduces the monthly burden.",
+          "The current monthly contribution field is paused here because the calculator is solving for a new required contribution."
+        ]
+      },
+      time: {
+        title: "Time Needed Mode",
+        intro: "Use this mode when you know your target and your current monthly investing pace, but want to estimate how long the journey may take.",
+        pills: [
+          "Time mode is useful when the contribution amount is fixed but the deadline is flexible.",
+          "A higher monthly contribution, more starting capital, or a better return can shorten the path meaningfully.",
+          "The investment period field is paused here because the calculator is solving for the time required."
+        ]
+      }
+    };
+
+    const state = {
+      activeMode: "future",
+      currentCurrency: "USD",
+      customSymbol: "$",
+      charts: { growth: null, profit: null, comparison: null },
+      projectionColumns: [],
+      projectionRows: [],
+      projectionFilename: "investment_goal_projection.csv",
+      copyText: ""
+    };
+
+    const sliderConfigs = [
+      { input: "goal-target", slider: "goal-target-sl", label: "goal-target-lbl", type: "money", digits: 2 },
+      { input: "goal-current", slider: "goal-current-sl", label: "goal-current-lbl", type: "money", digits: 2 },
+      { input: "goal-monthly", slider: "goal-monthly-sl", label: "goal-monthly-lbl", type: "money", digits: 2 },
+      { input: "goal-return", slider: "goal-return-sl", label: "goal-return-lbl", type: "percent", digits: 2 },
+      { input: "goal-years", slider: "goal-years-sl", label: "goal-years-lbl", type: "years", digits: 0 }
+    ];
+
+    function currentSymbol() {
+      return state.currentCurrency === "CUSTOM"
+        ? (($("custom-symbol")?.value || "").trim() || state.customSymbol || "$")
+        : currencySymbols[state.currentCurrency];
+    }
+
+    function currentNumberLocale() {
+      return state.currentCurrency === "INR" ? "en-IN" : "en-US";
+    }
+
+    function formatMoney(value, digits = 2) {
+      const number = Number(value) || 0;
+      const sign = number < 0 ? "-" : "";
+      const formatted = Math.abs(number).toLocaleString(currentNumberLocale(), {
+        minimumFractionDigits: digits,
+        maximumFractionDigits: digits
+      });
+      const symbol = currentSymbol();
+      const prefix = /^[A-Za-z]{2,}$/.test(symbol) ? `${symbol} ` : symbol;
+      return `${sign}${prefix}${formatted}`;
+    }
+
+    function formatPercentValue(value, digits = 2) {
+      return `${Number(value).toFixed(digits)}%`;
+    }
+
+    function formatPercentFromDecimal(value, digits = 2) {
+      return `${(Number(value) * 100).toFixed(digits)}%`;
+    }
+
+    function formatYears(value, digits = 2) {
+      return `${Number(value).toFixed(digits)} years`;
+    }
+
+    function formatSliderValue(type, value, digits = 0) {
+      if (type === "money") return formatMoney(value, digits);
+      if (type === "percent") return formatPercentValue(value, digits);
+      if (type === "years") return `${Number(value).toFixed(digits)} years`;
+      return String(value);
+    }
+
+    function destroyChart(chart) {
+      if (chart) chart.destroy();
+      return null;
+    }
+
+    function setStatus(message = "", tone = "") {
+      const banner = $("status-banner");
+      if (!banner) return;
+      banner.className = "status-banner";
+      banner.textContent = message;
+      if (message) banner.classList.add(tone || "info");
+    }
+
+    function setCopyNote(message) {
+      if ($("copy-note")) $("copy-note").textContent = message;
+    }
+
+    function updateSliderLabel(config) {
+      const input = $(config.input);
+      const label = $(config.label);
+      if (!input || !label) return;
+      label.textContent = formatSliderValue(config.type, input.value, config.digits || 0);
+    }
+
+    function clampToSlider(inputEl, sliderEl) {
+      if (!inputEl || !sliderEl || inputEl.value === "") return;
+      let value = Number(inputEl.value);
+      if (!Number.isFinite(value)) value = Number(sliderEl.min);
+      value = Math.max(Number(sliderEl.min), Math.min(Number(sliderEl.max), value));
+      inputEl.value = value;
+      sliderEl.value = value;
+    }
+
+    function bindSliderPair(config) {
+      const inputEl = $(config.input);
+      const sliderEl = $(config.slider);
+      if (!inputEl || !sliderEl) return;
+      updateSliderLabel(config);
+      inputEl.addEventListener("input", () => {
+        clampToSlider(inputEl, sliderEl);
+        updateSliderLabel(config);
+      });
+      inputEl.addEventListener("change", () => {
+        clampToSlider(inputEl, sliderEl);
+        updateSliderLabel(config);
+        calculateGoal(false);
+      });
+      sliderEl.addEventListener("input", () => {
+        inputEl.value = sliderEl.value;
+        updateSliderLabel(config);
+        calculateGoal(false);
+      });
+    }
+
+    function updateCurrencyIndicators() {
+      document.querySelectorAll("[data-currency-symbol]").forEach((node) => {
+        node.textContent = currentSymbol();
+      });
+      sliderConfigs.forEach(updateSliderLabel);
+      calculateGoal(false);
+    }
+
+    function periodicRate(annualRate, periodsPerYear) {
+      return periodsPerYear > 0 ? annualRate / periodsPerYear : 0;
+    }
+
+    function contributionPerPeriod(monthlyContribution, periodsPerYear) {
+      return periodsPerYear === 12 ? monthlyContribution : monthlyContribution * 12;
+    }
+
+    function futureValueCurrent(pv, annualRate, periodsPerYear, years) {
+      const periods = years * periodsPerYear;
+      if (!(periods >= 0) || !(periodsPerYear > 0)) return 0;
+      const rate = periodicRate(annualRate, periodsPerYear);
+      if (Math.abs(rate) < 1e-12) return pv;
+      return pv * Math.pow(1 + rate, periods);
+    }
+
+    function futureValueContributions(monthlyContribution, annualRate, periodsPerYear, years) {
+      const periods = years * periodsPerYear;
+      const payment = contributionPerPeriod(monthlyContribution, periodsPerYear);
+      if (!(periods > 0) || !(payment > 0)) return 0;
+      const rate = periodicRate(annualRate, periodsPerYear);
+      if (Math.abs(rate) < 1e-12) return payment * periods;
+      return payment * ((Math.pow(1 + rate, periods) - 1) / rate);
+    }
+
+    function totalFutureValue(pv, monthlyContribution, annualRate, periodsPerYear, years) {
+      return futureValueCurrent(pv, annualRate, periodsPerYear, years)
+        + futureValueContributions(monthlyContribution, annualRate, periodsPerYear, years);
+    }
+
+    function totalContributions(pv, monthlyContribution, years) {
+      return pv + (monthlyContribution * 12 * years);
+    }
+
+    function requiredMonthlyContribution(targetValue, pv, annualRate, periodsPerYear, years) {
+      const periods = years * periodsPerYear;
+      if (!(periods > 0)) return Number.POSITIVE_INFINITY;
+      const base = futureValueCurrent(pv, annualRate, periodsPerYear, years);
+      const shortfall = targetValue - base;
+      if (shortfall <= 0) return 0;
+      const rate = periodicRate(annualRate, periodsPerYear);
+      let paymentPerPeriod = 0;
+      if (Math.abs(rate) < 1e-12) {
+        paymentPerPeriod = shortfall / periods;
+      } else {
+        const factor = Math.pow(1 + rate, periods) - 1;
+        if (Math.abs(factor) < 1e-12) return Number.POSITIVE_INFINITY;
+        paymentPerPeriod = shortfall * rate / factor;
+      }
+      return paymentPerPeriod / (periodsPerYear === 12 ? 1 : 12);
+    }
+
+    function timeToGoalYears(targetValue, pv, monthlyContribution, annualRate, periodsPerYear) {
+      if (targetValue <= pv) return 0;
+      const payment = contributionPerPeriod(monthlyContribution, periodsPerYear);
+      const rate = periodicRate(annualRate, periodsPerYear);
+
+      if (Math.abs(rate) < 1e-12) {
+        if (!(payment > 0)) return Number.POSITIVE_INFINITY;
+        return ((targetValue - pv) / payment) / periodsPerYear;
+      }
+
+      if (!(payment > 0)) {
+        if (!(pv > 0)) return Number.POSITIVE_INFINITY;
+        const periods = Math.log(targetValue / pv) / Math.log(1 + rate);
+        return Number.isFinite(periods) && periods >= 0 ? periods / periodsPerYear : Number.POSITIVE_INFINITY;
+      }
+
+      const numerator = (targetValue * rate) + payment;
+      const denominator = (pv * rate) + payment;
+      if (!(numerator > 0) || !(denominator > 0)) return Number.POSITIVE_INFINITY;
+      const periods = Math.log(numerator / denominator) / Math.log(1 + rate);
+      return Number.isFinite(periods) && periods >= 0 ? periods / periodsPerYear : Number.POSITIVE_INFINITY;
+    }
+
+    function compoundingLabel(periodsPerYear) {
+      return periodsPerYear === 12 ? "Monthly" : "Yearly";
+    }
+
+    function buildResultCards(modeTitle, cards, formulaHtml, insightHtml, copyText) {
+      $("result-mode-pill").textContent = `Latest Result: ${modeTitle}`;
+      for (let index = 0; index < 6; index += 1) {
+        const card = cards[index];
+        const cardEl = $(`result-card-${index}`);
+        if (!card) {
+          cardEl.className = "result-card slate";
+          $(`result-lbl-${index}`).textContent = "-";
+          $(`result-val-${index}`).textContent = "-";
+          $(`result-sub-${index}`).textContent = "";
+          continue;
+        }
+        cardEl.className = `result-card ${card.tone}`;
+        $(`result-lbl-${index}`).textContent = card.label;
+        $(`result-val-${index}`).textContent = card.value;
+        $(`result-sub-${index}`).textContent = card.sub;
+      }
+      $("formula-box").innerHTML = formulaHtml;
+      const insightBox = $("insight-box");
+      if (insightHtml) {
+        insightBox.style.display = "block";
+        insightBox.innerHTML = insightHtml;
+      } else {
+        insightBox.style.display = "none";
+        insightBox.innerHTML = "";
+      }
+      state.copyText = copyText;
+      setCopyNote("Results ready to copy.");
+    }
+
+    function showSnapshotSummary(rows) {
+      $("snapshot-summary-body").innerHTML = rows.map((row) => `
+        <tr>
+          <td>${row.metric}</td>
+          <td class="compare-a-cell">${row.value}</td>
+          <td class="compare-b-cell">${row.note}</td>
+        </tr>
+      `).join("");
+    }
+
+    function updateProjection(columns, rows, filename, contextText) {
+      state.projectionColumns = columns;
+      state.projectionRows = rows;
+      state.projectionFilename = filename;
+      $("projection-context").textContent = contextText;
+      $("projection-head-row").innerHTML = columns.map((column) => `<th>${column.label}</th>`).join("");
+      $("projection-body").innerHTML = rows.map((row) => `<tr>${columns.map((column) => `<td>${formatCell(row[column.key], column.type)}</td>`).join("")}</tr>`).join("");
+    }
+
+    function formatCell(value, type) {
+      if (type === "money") return formatMoney(value);
+      if (type === "percentDecimal") return formatPercentFromDecimal(value);
+      if (type === "years") return Number(value).toLocaleString(currentNumberLocale(), { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+      if (type === "text") return String(value);
+      return Number(value).toLocaleString(currentNumberLocale(), { maximumFractionDigits: 2 });
+    }
+
+    function commonChartOptions() {
+      return {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: { mode: "index", intersect: false },
+        plugins: { legend: { position: "bottom", labels: { boxWidth: 14, usePointStyle: true } } }
+      };
+    }
+
+    function renderCharts(config) {
+      $("charts-context").textContent = config.context;
+      $("growth-title").textContent = config.growthTitle;
+      $("growth-note").textContent = config.growthNote;
+      $("pie-title").textContent = config.pieTitle;
+      $("pie-note").textContent = config.pieNote;
+      $("comparison-title").textContent = config.comparisonTitle;
+      $("comparison-note").textContent = config.comparisonNote;
+
+      if (typeof Chart === "undefined") return;
+
+      state.charts.growth = destroyChart(state.charts.growth);
+      state.charts.profit = destroyChart(state.charts.profit);
+      state.charts.comparison = destroyChart(state.charts.comparison);
+
+      state.charts.growth = new Chart($("growth-chart").getContext("2d"), {
+        type: "line",
+        data: {
+          labels: config.labels,
+          datasets: [
+            {
+              label: "Projected Value",
+              data: config.projectedValues,
+              borderColor: "#0d9488",
+              backgroundColor: "rgba(13, 148, 136, 0.14)",
+              tension: 0.28,
+              fill: false,
+              pointRadius: 2
+            },
+            {
+              label: "Total Contributions",
+              data: config.contributionValues,
+              borderColor: "#0284c7",
+              backgroundColor: "rgba(2, 132, 199, 0.12)",
+              tension: 0.24,
+              fill: false,
+              pointRadius: 2
+            }
+          ]
+        },
+        options: {
+          ...commonChartOptions(),
+          scales: { y: { ticks: { callback: (value) => formatMoney(value, 0) } } },
+          plugins: {
+            ...commonChartOptions().plugins,
+            tooltip: { callbacks: { label: (ctx) => `${ctx.dataset.label}: ${formatMoney(ctx.parsed.y)}` } }
+          }
+        }
+      });
+
+      state.charts.profit = new Chart($("profit-chart").getContext("2d"), {
+        type: "pie",
+        data: {
+          labels: ["Current Investment", "Added Contributions", "Investment Growth"],
+          datasets: [{
+            data: config.pieValues,
+            backgroundColor: ["#14b8a6", "#0284c7", "#f59e0b"],
+            borderColor: "#ffffff",
+            borderWidth: 2
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { position: "bottom", labels: { boxWidth: 14, usePointStyle: true } },
+            tooltip: {
+              callbacks: {
+                label: (ctx) => {
+                  const total = ctx.dataset.data.reduce((sum, item) => sum + item, 0);
+                  const share = total ? (ctx.parsed / total) * 100 : 0;
+                  return `${ctx.label}: ${formatMoney(ctx.parsed)} (${share.toFixed(1)}%)`;
+                }
+              }
+            }
+          }
+        }
+      });
+
+      state.charts.comparison = new Chart($("comparison-chart").getContext("2d"), {
+        type: "line",
+        data: {
+          labels: config.labels,
+          datasets: [
+            {
+              label: "Projected Value",
+              data: config.projectedValues,
+              borderColor: "#0d9488",
+              backgroundColor: "rgba(13, 148, 136, 0.14)",
+              tension: 0.28,
+              fill: false,
+              pointRadius: 2
+            },
+            {
+              label: "Goal Target",
+              data: config.targetValues,
+              borderColor: "#f43f5e",
+              backgroundColor: "rgba(244, 63, 94, 0.12)",
+              tension: 0,
+              fill: false,
+              pointRadius: 1,
+              borderDash: [6, 5]
+            }
+          ]
+        },
+        options: {
+          ...commonChartOptions(),
+          scales: { y: { ticks: { callback: (value) => formatMoney(value, 0) } } },
+          plugins: {
+            ...commonChartOptions().plugins,
+            tooltip: { callbacks: { label: (ctx) => `${ctx.dataset.label}: ${formatMoney(ctx.parsed.y)}` } }
+          }
+        }
+      });
+    }
+
+    function syncFieldState(baseId, disabled) {
+      const row = $(`row-${baseId}`);
+      const input = $(baseId);
+      const slider = $(`${baseId}-sl`);
+      if (row) row.classList.toggle("is-disabled", disabled);
+      if (input) input.disabled = disabled;
+      if (slider) slider.disabled = disabled;
+    }
+
+    function switchMode(name) {
+      state.activeMode = name;
+      const config = modeConfigs[name];
+      $("mode-info-list").setAttribute("data-mode", name);
+      document.querySelectorAll(".qnav-btn").forEach((button) => {
+        const isActive = button.dataset.module === name;
+        button.classList.toggle("active", isActive);
+        button.setAttribute("aria-selected", isActive ? "true" : "false");
+      });
+      $("mode-intro").textContent = config.intro;
+      config.pills.forEach((text, index) => {
+        $(`mode-pill-${index + 1}`).textContent = text;
+      });
+
+      syncFieldState("goal-monthly", name === "monthly");
+      syncFieldState("goal-years", name === "time");
+      $("goal-monthly-hint").textContent = name === "monthly"
+        ? "Paused in this mode because the calculator is solving for the required monthly contribution."
+        : "The amount you plan to invest every month. This is used directly in future value and time-to-goal modes.";
+      $("goal-years-hint").textContent = name === "time"
+        ? "Paused in this mode because the calculator is solving for the time required to reach the target."
+        : "How long your money will stay invested before you expect to use it.";
+
+      calculateGoal(false);
+    }
+
+    function buildProjectionRows(targetValue, pv, monthlyContribution, annualRate, periodsPerYear, yearsUsed) {
+      const rows = [];
+      const wholeYears = Math.floor(yearsUsed);
+      const pushRow = (yearPoint) => {
+        const investmentValue = totalFutureValue(pv, monthlyContribution, annualRate, periodsPerYear, yearPoint);
+        rows.push({
+          year: yearPoint,
+          totalContributions: totalContributions(pv, monthlyContribution, yearPoint),
+          investmentValue,
+          goalAchieved: targetValue > 0 ? investmentValue / targetValue : 0
+        });
+      };
+
+      for (let year = 1; year <= wholeYears; year += 1) pushRow(year);
+      if (yearsUsed > 0 && Math.abs(yearsUsed - wholeYears) > 1e-6) pushRow(Number(yearsUsed.toFixed(2)));
+      if (!rows.length) pushRow(0);
+      return rows;
+    }
+
+    function calculateGoal(announce = false, shouldScroll = false) {
+      const targetValue = Math.max(0, Number($("goal-target").value) || 0);
+      const currentValue = Math.max(0, Number($("goal-current").value) || 0);
+      const monthlyContribution = Math.max(0, Number($("goal-monthly").value) || 0);
+      const annualRate = Math.max(0, Number($("goal-return").value) || 0) / 100;
+      const selectedYears = Math.max(0, Number($("goal-years").value) || 0);
+      const periodsPerYear = Number($("goal-compounding").value) || 12;
+
+      if (!(targetValue > 0)) {
+        setStatus("Enter a target amount greater than zero so the goal calculation has a destination.", "warn");
+        return;
+      }
+      if (state.activeMode !== "time" && !(selectedYears > 0)) {
+        setStatus("Enter an investment period greater than zero years.", "warn");
+        return;
+      }
+
+      let planYears = selectedYears;
+      let planMonthly = monthlyContribution;
+      let projectedValue = 0;
+      let totalInvested = 0;
+      let growthValue = 0;
+      let goalProgress = 0;
+      let statusMessage = "";
+      let statusTone = "info";
+      let cards = [];
+      let formulaHtml = "";
+      let insightHtml = "";
+      let copyText = "";
+      let snapshotRows = [];
+      let resultModeTitle = modeConfigs[state.activeMode].title;
+
+      if (state.activeMode === "future") {
+        projectedValue = totalFutureValue(currentValue, monthlyContribution, annualRate, periodsPerYear, selectedYears);
+        totalInvested = totalContributions(currentValue, monthlyContribution, selectedYears);
+        growthValue = projectedValue - totalInvested;
+        goalProgress = projectedValue / targetValue;
+        const gap = targetValue - projectedValue;
+        const surplus = projectedValue - targetValue;
+
+        statusMessage = gap > 0
+          ? `Your current plan is projected to fall short by about ${formatMoney(gap)}.`
+          : `Your current plan is projected to exceed the goal by about ${formatMoney(surplus)}.`;
+        statusTone = gap > 0 ? "warn" : "success";
+
+        cards = [
+          { label: "Projected Future Value", value: formatMoney(projectedValue), sub: "Estimated value based on your current plan", tone: "teal" },
+          { label: "Target Amount", value: formatMoney(targetValue), sub: "Your selected future wealth goal", tone: "amber" },
+          { label: "Goal Progress", value: formatPercentFromDecimal(goalProgress), sub: "Projected share of the target achieved", tone: "sky" },
+          { label: gap > 0 ? "Goal Shortfall" : "Goal Surplus", value: formatMoney(Math.abs(gap > 0 ? gap : surplus)), sub: gap > 0 ? "Extra amount needed to hit the goal" : "Amount projected above the target", tone: "rose" },
+          { label: "Total Contributions", value: formatMoney(totalInvested), sub: "Current investment plus planned monthly investing", tone: "slate" },
+          { label: "Investment Growth", value: formatMoney(growthValue), sub: "Wealth created by compounding", tone: "teal" }
+        ];
+
+        formulaHtml = `<strong>Future Value</strong> = PV &times; (1 + r / m)<sup>m &times; n</sup> + PMT &times; [((1 + r / m)<sup>m &times; n</sup> - 1) / (r / m)]`;
+        insightHtml = `<strong>Planner insight:</strong> This mode answers the simple but powerful question: if you stay on your current path, how close are you likely to get to your goal?`;
+        copyText = `Investment Goal Calculator\nMode: Future Value\nProjected Future Value: ${formatMoney(projectedValue)}\nTarget Amount: ${formatMoney(targetValue)}\nGoal Progress: ${formatPercentFromDecimal(goalProgress)}\nTotal Contributions: ${formatMoney(totalInvested)}\nInvestment Growth: ${formatMoney(growthValue)}`;
+        snapshotRows = [
+          { metric: "Goal target", value: formatMoney(targetValue), note: "The future amount you want the portfolio to reach." },
+          { metric: "Projected value", value: formatMoney(projectedValue), note: "Estimated corpus using your current contribution plan and return assumption." },
+          { metric: gap > 0 ? "Shortfall" : "Surplus", value: formatMoney(Math.abs(gap > 0 ? gap : surplus)), note: gap > 0 ? "The gap between the plan and the goal." : "The amount projected above your goal." },
+          { metric: "Compounding used", value: compoundingLabel(periodsPerYear), note: "Contribution handling and growth assumptions follow this compounding selection." }
+        ];
+      } else if (state.activeMode === "monthly") {
+        const requiredMonthly = requiredMonthlyContribution(targetValue, currentValue, annualRate, periodsPerYear, selectedYears);
+        if (!Number.isFinite(requiredMonthly) || requiredMonthly < 0) {
+          setStatus("The required monthly contribution could not be estimated with the current inputs. Try increasing the time horizon or checking the values.", "warn");
+          return;
+        }
+        planMonthly = requiredMonthly;
+        projectedValue = totalFutureValue(currentValue, planMonthly, annualRate, periodsPerYear, selectedYears);
+        totalInvested = totalContributions(currentValue, planMonthly, selectedYears);
+        growthValue = projectedValue - totalInvested;
+        goalProgress = projectedValue / targetValue;
+
+        statusMessage = requiredMonthly === 0
+          ? "Your current investment amount alone may be enough to reach the goal within the selected timeline."
+          : `You may need to invest about ${formatMoney(requiredMonthly)} per month to reach the target on time.`;
+        statusTone = requiredMonthly === 0 ? "success" : "info";
+
+        cards = [
+          { label: "Projected Future Value", value: formatMoney(projectedValue), sub: "Portfolio value at the selected deadline", tone: "teal" },
+          { label: "Monthly Contribution Required", value: formatMoney(requiredMonthly), sub: "Estimated monthly amount needed", tone: "amber" },
+          { label: "Investment Period", value: formatYears(selectedYears, 0), sub: "Time available to reach the target", tone: "sky" },
+          { label: "Target Amount", value: formatMoney(targetValue), sub: "Your selected future wealth goal", tone: "rose" },
+          { label: "Total Contributions", value: formatMoney(totalInvested), sub: "Current capital plus required monthly additions", tone: "slate" },
+          { label: "Investment Growth", value: formatMoney(growthValue), sub: "Portion created by returns and compounding", tone: "teal" }
+        ];
+
+        formulaHtml = `<strong>Required PMT</strong> = (FV - PV &times; (1 + r / m)<sup>m &times; n</sup>) &times; (r / m) / ((1 + r / m)<sup>m &times; n</sup> - 1)`;
+        insightHtml = `<strong>Planner insight:</strong> This mode is helpful when the deadline is fixed and you need to know the monthly saving discipline required to make the goal realistic.`;
+        copyText = `Investment Goal Calculator\nMode: Required Monthly Investment\nTarget Amount: ${formatMoney(targetValue)}\nMonthly Contribution Required: ${formatMoney(requiredMonthly)}\nInvestment Period: ${formatYears(selectedYears, 0)}\nProjected Future Value: ${formatMoney(projectedValue)}\nTotal Contributions: ${formatMoney(totalInvested)}\nInvestment Growth: ${formatMoney(growthValue)}`;
+        snapshotRows = [
+          { metric: "Goal target", value: formatMoney(targetValue), note: "The future corpus you want by the selected deadline." },
+          { metric: "Monthly needed", value: formatMoney(requiredMonthly), note: "Estimated monthly investment required to meet the target." },
+          { metric: "Annualized investing", value: formatMoney(requiredMonthly * 12), note: "Useful for budgeting and yearly financial planning." },
+          { metric: "Compounding used", value: compoundingLabel(periodsPerYear), note: "The return assumption and contribution treatment use this frequency." }
+        ];
+      } else {
+        planYears = timeToGoalYears(targetValue, currentValue, monthlyContribution, annualRate, periodsPerYear);
+        if (!Number.isFinite(planYears)) {
+          setStatus("With the current starting amount, return, and contribution, the calculator cannot estimate a reachable time. Increase the monthly amount, starting capital, or return assumption.", "warn");
+          return;
+        }
+        projectedValue = totalFutureValue(currentValue, monthlyContribution, annualRate, periodsPerYear, planYears);
+        totalInvested = totalContributions(currentValue, monthlyContribution, planYears);
+        growthValue = projectedValue - totalInvested;
+        goalProgress = projectedValue / targetValue;
+
+        statusMessage = planYears === 0
+          ? "Your current investment amount already matches or exceeds the target."
+          : `At the current pace, the goal may be reached in about ${formatYears(planYears)}.`;
+        statusTone = planYears === 0 ? "success" : "info";
+
+        cards = [
+          { label: "Time Needed to Reach Goal", value: formatYears(planYears), sub: "Estimated time based on the current monthly plan", tone: "teal" },
+          { label: "Projected Future Value", value: formatMoney(projectedValue), sub: "Expected value at the estimated goal date", tone: "amber" },
+          { label: "Target Amount", value: formatMoney(targetValue), sub: "Your selected future wealth goal", tone: "sky" },
+          { label: "Current Monthly Contribution", value: formatMoney(monthlyContribution), sub: "The monthly amount used for this estimate", tone: "rose" },
+          { label: "Total Contributions", value: formatMoney(totalInvested), sub: "Current capital plus monthly investing over the journey", tone: "slate" },
+          { label: "Investment Growth", value: formatMoney(growthValue), sub: "Gain produced by compounding before the goal is reached", tone: "teal" }
+        ];
+
+        formulaHtml = `<strong>Time Needed</strong> = ln((FV &times; r + PMT) / (PV &times; r + PMT)) / ln(1 + r)`;
+        insightHtml = `<strong>Planner insight:</strong> This mode is especially useful when your contribution pace is fixed by salary or budget and the deadline is flexible.`;
+        copyText = `Investment Goal Calculator\nMode: Time Needed\nTarget Amount: ${formatMoney(targetValue)}\nCurrent Monthly Contribution: ${formatMoney(monthlyContribution)}\nTime Needed: ${formatYears(planYears)}\nProjected Future Value: ${formatMoney(projectedValue)}\nTotal Contributions: ${formatMoney(totalInvested)}\nInvestment Growth: ${formatMoney(growthValue)}`;
+        snapshotRows = [
+          { metric: "Goal target", value: formatMoney(targetValue), note: "The future amount you want to reach." },
+          { metric: "Time needed", value: formatYears(planYears), note: "Estimated duration using the current monthly contribution pace." },
+          { metric: "Monthly investing", value: formatMoney(monthlyContribution), note: "The fixed monthly amount driving the plan." },
+          { metric: "Compounding used", value: compoundingLabel(periodsPerYear), note: "The time estimate uses this compounding assumption." }
+        ];
+      }
+
+      setStatus(statusMessage, statusTone);
+      buildResultCards(resultModeTitle, cards, formulaHtml, insightHtml, copyText);
+      showSnapshotSummary(snapshotRows);
+
+      const projectionRows = buildProjectionRows(targetValue, currentValue, planMonthly, annualRate, periodsPerYear, planYears);
+      const columns = [
+        { key: "year", label: "Year", type: "years" },
+        { key: "totalContributions", label: "Total Contributions", type: "money" },
+        { key: "investmentValue", label: "Investment Value", type: "money" },
+        { key: "goalAchieved", label: "% of Goal Achieved", type: "percentDecimal" }
+      ];
+      updateProjection(
+        columns,
+        projectionRows,
+        "investment_goal_projection.csv",
+        `Projection table showing how the plan progresses over ${formatYears(planYears)} with ${compoundingLabel(periodsPerYear).toLowerCase()} compounding.`
+      );
+
+      const labels = ["Start", ...projectionRows.map((row) => Number(row.year).toLocaleString(currentNumberLocale(), { minimumFractionDigits: 0, maximumFractionDigits: 2 }))];
+      const projectedValues = [currentValue, ...projectionRows.map((row) => row.investmentValue)];
+      const contributionValues = [currentValue, ...projectionRows.map((row) => row.totalContributions)];
+      const targetValues = labels.map(() => targetValue);
+      const addedContributions = Math.max(totalInvested - currentValue, 0);
+      const pieGrowth = Math.max(growthValue, 0);
+
+      renderCharts({
+        context: "Charts compare your invested money, projected portfolio value, and the target line so the goal path is easier to interpret.",
+        growthTitle: "Investment Value Over Time",
+        growthNote: "Projected value rises from both your contributions and the compounding of earlier gains.",
+        pieTitle: "Current Capital vs Contributions vs Growth",
+        pieNote: "This view helps separate what came from your own money and what came from investment performance.",
+        comparisonTitle: "Projected Value vs Goal Target",
+        comparisonNote: "Use the target line to judge whether the plan appears behind, on track, or ahead.",
+        labels,
+        projectedValues,
+        contributionValues,
+        targetValues,
+        pieValues: [Math.max(currentValue, 0), addedContributions, pieGrowth]
+      });
+
+      if (announce && shouldScroll) {
+        $("results-section").scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+
+    async function copyResults() {
+      try {
+        await navigator.clipboard.writeText(state.copyText || "No results available yet.");
+        setCopyNote("Results copied to clipboard.");
+      } catch (error) {
+        setCopyNote("Copy failed. Please try again.");
+      }
+    }
+
+    function downloadCsv() {
+      if (!state.projectionRows.length || !state.projectionColumns.length) return;
+      const header = state.projectionColumns.map((column) => `"${column.label.replace(/"/g, "\"\"")}"`).join(",");
+      const body = state.projectionRows.map((row) => state.projectionColumns.map((column) => {
+        const value = formatCell(row[column.key], column.type);
+        return `"${String(value).replace(/"/g, "\"\"")}"`;
+      }).join(",")).join("\n");
+
+      const csvContent = `${header}\n${body}`;
+      const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = state.projectionFilename;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    }
+
+    function resetPlanner() {
+      $("goal-target").value = 1000000;
+      $("goal-target-sl").value = 1000000;
+      $("goal-current").value = 25000;
+      $("goal-current-sl").value = 25000;
+      $("goal-monthly").value = 500;
+      $("goal-monthly-sl").value = 500;
+      $("goal-return").value = 10;
+      $("goal-return-sl").value = 10;
+      $("goal-years").value = 20;
+      $("goal-years-sl").value = 20;
+      $("goal-compounding").value = 12;
+      $("global-currency").value = "USD";
+      $("custom-symbol").value = "$";
+      state.currentCurrency = "USD";
+      state.customSymbol = "$";
+      $("custom-symbol-wrap").classList.add("hidden");
+      sliderConfigs.forEach(updateSliderLabel);
+      switchMode("future");
+      calculateGoal(true);
+    }
+
+    function bindCommonEvents() {
+      sliderConfigs.forEach(bindSliderPair);
+      $("global-currency").addEventListener("change", (event) => {
+        state.currentCurrency = event.target.value;
+        $("custom-symbol-wrap").classList.toggle("hidden", state.currentCurrency !== "CUSTOM");
+        updateCurrencyIndicators();
+      });
+      $("custom-symbol").addEventListener("input", (event) => {
+        state.customSymbol = event.target.value.trim() || "$";
+        updateCurrencyIndicators();
+      });
+      $("goal-compounding").addEventListener("change", () => calculateGoal(false));
+    }
+
+    function initMobileNav() {
+      const btn = $("hamburgerBtn");
+      const nav = $("mobileNav");
+      if (!btn || !nav) return;
+      btn.addEventListener("click", () => {
+        const open = nav.classList.toggle("open");
+        btn.setAttribute("aria-expanded", open ? "true" : "false");
+      });
+    }
+
+    function init() {
+      bindCommonEvents();
+      initMobileNav();
+      sliderConfigs.forEach(updateSliderLabel);
+      updateCurrencyIndicators();
+      switchMode("future");
+    }
+
+    document.addEventListener("DOMContentLoaded", init);
+  </script>
+</body>
+
+</html>
