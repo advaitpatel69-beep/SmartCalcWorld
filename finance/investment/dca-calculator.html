@@ -1,0 +1,2594 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow">
+  <title>Dollar Cost Averaging Calculator &ndash; Compare DCA vs Lump Sum Investing | SmartCalcWorld</title>
+  <meta name="description"
+    content="Simulate regular investing, compare DCA vs lump sum strategies, understand average purchase price and portfolio growth, and project your investment path with SmartCalcWorld's Dollar Cost Averaging Calculator.">
+  <link rel="canonical" href="https://smartcalcworld.com/finance/investment/dca-calculator.html">
+  <link rel="icon" type="image/png" href="https://smartcalcworld.com/favicon.png">
+  <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://smartcalcworld.com/#org",
+        "name": "SmartCalc World",
+        "url": "https://smartcalcworld.com",
+        "description": "Free finance calculators for investing, saving, inflation, returns, and long-term planning."
+      },
+      {
+        "@type": "WebApplication",
+        "@id": "https://smartcalcworld.com/finance/investment/dca-calculator.html#app",
+        "name": "Dollar Cost Averaging Calculator",
+        "url": "https://smartcalcworld.com/finance/investment/dca-calculator.html",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Any",
+        "creator": {
+          "@id": "https://smartcalcworld.com/#org"
+        },
+        "description": "Calculate average purchase price, total units accumulated, portfolio value, and DCA versus lump sum outcomes for regular investing plans.",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Finance",
+            "item": "https://smartcalcworld.com/finance/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Investment",
+            "item": "https://smartcalcworld.com/finance/investment/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "DCA Calculator",
+            "item": "https://smartcalcworld.com/finance/investment/dca-calculator.html"
+          }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is dollar cost averaging?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Dollar cost averaging is a strategy where you invest a fixed amount at regular intervals instead of investing one large amount all at once. This means you buy more units when prices are low and fewer units when prices are high."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is DCA better than lump sum investing?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "It depends on the market path, risk tolerance, and investor behavior. Lump sum investing can outperform in strong rising markets, while DCA can reduce regret and timing risk by spreading purchases over time."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does DCA reduce risk?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "DCA reduces market timing risk because you do not commit all your money at a single price. It does not remove investment risk, and your portfolio can still lose value if the asset performs poorly."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is SIP the same as DCA?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A SIP is a practical form of dollar cost averaging. The core idea is the same: invest a fixed amount regularly and let market price changes affect how many units you buy."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can DCA work for cryptocurrency investing?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, many investors use DCA in crypto because prices can move sharply. Regular investing can help avoid the stress of trying to buy only at the perfect time, although risk remains high."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "When should investors avoid DCA?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Investors may think carefully about DCA if they already have full capital ready, have a very long time horizon, and can tolerate short-term volatility. In some upward-trending markets, delaying investment through DCA may reduce final returns."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How long should a DCA strategy continue?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The duration depends on your goals, cash flow, and market plan. Some investors use DCA for a few months to deploy a lump sum gradually, while others keep using it for years through salary-based investing."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does DCA guarantee profit?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. DCA can improve discipline and average cost, but it does not guarantee gains. If the asset falls heavily or performs poorly for a long time, the strategy can still lose money."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why does buying during market dips help DCA?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "When prices fall, the same fixed investment amount buys more units. That larger unit purchase can lower the average cost per unit over time and improve the outcome if prices recover later."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+  <style>
+    :root {
+      --teal: #0d9488;
+      --teal-dark: #0f766e;
+      --teal-light: #ccfbf1;
+      --amber: #f59e0b;
+      --amber-light: #fef3c7;
+      --rose: #f43f5e;
+      --rose-light: #ffe4e6;
+      --sky: #0284c7;
+      --sky-light: #dbeafe;
+      --slate-950: #020617;
+      --slate-900: #0f172a;
+      --slate-800: #1e293b;
+      --slate-700: #334155;
+      --slate-600: #475569;
+      --slate-500: #64748b;
+      --slate-400: #94a3b8;
+      --slate-300: #cbd5e1;
+      --slate-200: #e2e8f0;
+      --slate-100: #f1f5f9;
+      --slate-50: #f8fafc;
+      --white: #ffffff;
+      --radius: 14px;
+      --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.08);
+      --shadow-md: 0 10px 28px rgba(15, 23, 42, 0.12);
+      --shadow-lg: 0 20px 48px rgba(15, 23, 42, 0.16);
+      --header-h: 68px;
+    }
+
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(13, 148, 136, 0.14), transparent 32%),
+        linear-gradient(180deg, #f8fafc 0%, #eff6ff 44%, #f8fafc 100%);
+      color: var(--slate-800);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    img,
+    canvas {
+      max-width: 100%;
+    }
+
+    a {
+      color: var(--teal);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: linear-gradient(135deg, #0891b2 0%, #059669 100%);
+      color: var(--white);
+      box-shadow: 0 2px 10px rgba(15, 23, 42, 0.12);
+    }
+
+    .hdr-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .hdr-logo {
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+    }
+
+    .hdr-nav {
+      display: flex;
+      gap: 1.25rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .hdr-nav a,
+    .hdr-nav span {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      opacity: 0.96;
+      transition: opacity 0.3s ease;
+    }
+
+    .hdr-nav a:hover {
+      opacity: 0.82;
+      text-decoration: none;
+    }
+
+    .nav-disabled {
+      opacity: 0.74;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 4px;
+      background: none;
+      border: none;
+      padding: 0;
+    }
+
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background: var(--white);
+      border-radius: 999px;
+      transition: 0.3s ease;
+    }
+
+    .mobile-nav {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: #0b7694;
+      flex-direction: column;
+      padding: 1rem;
+      gap: 0.9rem;
+      box-shadow: 0 12px 28px rgba(15, 23, 42, 0.16);
+    }
+
+    .mobile-nav.open {
+      display: flex;
+    }
+
+    .mobile-nav a,
+    .mobile-nav span {
+      color: var(--white);
+      text-decoration: none;
+      padding: 0.45rem 0.5rem;
+      border-radius: 8px;
+    }
+
+    .mobile-nav a:hover {
+      background: rgba(255, 255, 255, 0.08);
+      text-decoration: none;
+    }
+
+    .page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1.5rem 1rem 4rem;
+    }
+
+    .breadcrumb {
+      font-size: 0.84rem;
+      color: var(--slate-500);
+      margin-bottom: 1.25rem;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(135deg, rgba(13, 148, 136, 0.14), rgba(2, 132, 199, 0.08)),
+        var(--white);
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      border-radius: 22px;
+      box-shadow: var(--shadow-md);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -80px -80px auto;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle, rgba(13, 148, 136, 0.14), transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      background: var(--teal-light);
+      color: var(--teal-dark);
+      font-size: 0.76rem;
+      font-weight: 800;
+      padding: 0.4rem 0.9rem;
+      border-radius: 999px;
+      margin-bottom: 0.85rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 5vw, 3.25rem);
+      line-height: 1.08;
+      color: var(--slate-900);
+      margin-bottom: 0.8rem;
+    }
+
+    .hero-sub {
+      font-size: 1rem;
+      color: var(--slate-600);
+      max-width: 760px;
+    }
+
+    .hero-highlights {
+      display: grid;
+      gap: 0.85rem;
+      margin-top: 1.25rem;
+    }
+
+    .hero-chip {
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid rgba(148, 163, 184, 0.28);
+      border-radius: 14px;
+      padding: 0.95rem 1rem;
+      box-shadow: var(--shadow-sm);
+      color: var(--slate-600);
+    }
+
+    .hero-chip strong {
+      display: block;
+      color: var(--slate-900);
+      margin-bottom: 0.2rem;
+    }
+
+    .card,
+    .content-section {
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid rgba(148, 163, 184, 0.22);
+      border-radius: 20px;
+      box-shadow: var(--shadow-md);
+      margin-top: 2rem;
+    }
+
+    .card {
+      padding: 1.5rem;
+    }
+
+    .content-section {
+      padding: 2rem;
+      scroll-margin-top: calc(var(--header-h) + 1rem);
+    }
+
+    .card-title,
+    .content-section h2 {
+      font-size: clamp(1.25rem, 3vw, 1.75rem);
+      font-weight: 800;
+      color: var(--slate-900);
+      margin-bottom: 1rem;
+    }
+
+    .content-section h2 {
+      padding-left: 1rem;
+      border-left: 4px solid var(--teal);
+    }
+
+    .content-section h3 {
+      font-size: 1.15rem;
+      color: var(--slate-900);
+      margin: 1.6rem 0 0.65rem;
+    }
+
+    .content-section p,
+    .content-section li {
+      color: var(--slate-600);
+    }
+
+    .content-section ul {
+      margin: 0.2rem 0 1rem 1.25rem;
+    }
+
+    .content-section li {
+      margin-bottom: 0.55rem;
+    }
+
+    .toolbar-grid,
+    .field-pair,
+    .result-grid,
+    .charts-grid,
+    .comparison-grid,
+    .links-grid,
+    .footer-content {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .toolbar-box {
+      background: linear-gradient(180deg, rgba(13, 148, 136, 0.08), rgba(255, 255, 255, 0.94));
+      border: 1px solid rgba(148, 163, 184, 0.24);
+      border-radius: 16px;
+      padding: 1rem;
+    }
+
+    .toolbar-box h2 {
+      font-size: 1.02rem;
+      color: var(--slate-900);
+      margin-bottom: 0.55rem;
+    }
+
+    .toolbar-help,
+    .hint,
+    .chart-note,
+    .table-context,
+    .copy-note {
+      font-size: 0.86rem;
+      color: var(--slate-500);
+    }
+
+    .info-list {
+      display: grid;
+      gap: 0.7rem;
+      margin-top: 0.7rem;
+    }
+
+    .info-pill {
+      padding: 0.8rem 0.9rem;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid rgba(148, 163, 184, 0.22);
+      color: var(--slate-700);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .qnav {
+      display: grid;
+      gap: 0.75rem;
+      margin: 1.25rem 0 1rem;
+    }
+
+    .qnav-btn {
+      width: 100%;
+      border: 2px solid var(--slate-300);
+      border-radius: 14px;
+      background: var(--white);
+      padding: 0.95rem 1rem;
+      font-size: 0.92rem;
+      font-weight: 800;
+      color: var(--slate-600);
+      cursor: pointer;
+      transition: 0.25s ease;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .qnav-btn:hover {
+      border-color: var(--teal);
+      color: var(--teal);
+      transform: translateY(-2px);
+    }
+
+    .qnav-btn.active {
+      background: linear-gradient(135deg, var(--teal-dark), var(--teal));
+      color: var(--white);
+      border-color: var(--teal);
+      box-shadow: 0 8px 24px rgba(13, 148, 136, 0.24);
+    }
+
+    .module {
+      display: none;
+    }
+
+    .module.active {
+      display: block;
+      animation: fadeUp 0.25s ease;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .module-intro {
+      margin-bottom: 1rem;
+      color: var(--slate-600);
+      font-size: 0.97rem;
+    }
+
+    .form-row {
+      display: grid;
+      gap: 0.45rem;
+      margin-bottom: 1rem;
+    }
+
+    .lbl {
+      font-weight: 700;
+      color: var(--slate-800);
+      font-size: 0.92rem;
+    }
+
+    input[type="number"],
+    input[type="text"],
+    select {
+      width: 100%;
+      border: 2px solid var(--slate-300);
+      border-radius: 12px;
+      padding: 0.78rem 0.92rem;
+      font-size: 1rem;
+      color: var(--slate-800);
+      background: var(--white);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    input[type="number"]:focus,
+    input[type="text"]:focus,
+    select:focus {
+      outline: none;
+      border-color: var(--teal);
+      box-shadow: 0 0 0 4px rgba(13, 148, 136, 0.12);
+    }
+
+    input[type="number"]:disabled,
+    input[type="text"]:disabled {
+      background: var(--slate-100);
+      color: var(--slate-400);
+      cursor: not-allowed;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--teal);
+    }
+
+    .input-slider {
+      display: grid;
+      gap: 0.8rem;
+    }
+
+    .slider-lbl {
+      font-size: 0.84rem;
+      color: var(--teal-dark);
+      font-weight: 700;
+      margin-top: 0.3rem;
+    }
+
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      flex-wrap: wrap;
+      margin-top: 0.3rem;
+    }
+
+    .toggle-row input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--teal);
+    }
+
+    .btn-row {
+      display: grid;
+      gap: 0.75rem;
+      margin-top: 0.5rem;
+    }
+
+    .btn-primary,
+    .btn-secondary,
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      border-radius: 12px;
+      padding: 0.85rem 1rem;
+      font-size: 0.96rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: 0.22s ease;
+    }
+
+    .btn-primary {
+      border: none;
+      color: var(--white);
+      background: linear-gradient(135deg, var(--teal-dark), var(--teal));
+      box-shadow: 0 10px 24px rgba(13, 148, 136, 0.2);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 28px rgba(13, 148, 136, 0.28);
+    }
+
+    .btn-secondary {
+      border: 2px solid var(--slate-300);
+      color: var(--slate-700);
+      background: var(--slate-100);
+    }
+
+    .btn-secondary:hover,
+    .btn-ghost:hover {
+      border-color: var(--teal);
+      color: var(--teal-dark);
+      transform: translateY(-1px);
+    }
+
+    .btn-ghost {
+      border: 2px solid rgba(13, 148, 136, 0.22);
+      color: var(--teal-dark);
+      background: rgba(13, 148, 136, 0.06);
+    }
+
+    .result-meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      margin-bottom: 0.9rem;
+    }
+
+    .mode-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--teal-light);
+      color: var(--teal-dark);
+      border-radius: 999px;
+      padding: 0.5rem 0.85rem;
+      font-size: 0.82rem;
+      font-weight: 800;
+    }
+
+    .result-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .status-banner {
+      display: none;
+      padding: 0.85rem 1rem;
+      border-radius: 14px;
+      margin-bottom: 1rem;
+      font-weight: 600;
+      font-size: 0.92rem;
+    }
+
+    .status-banner.info {
+      display: block;
+      background: var(--sky-light);
+      color: #0c4a6e;
+      border: 1px solid rgba(2, 132, 199, 0.2);
+    }
+
+    .status-banner.error {
+      display: block;
+      background: var(--rose-light);
+      color: #9f1239;
+      border: 1px solid rgba(244, 63, 94, 0.24);
+    }
+
+    .status-banner.success {
+      display: block;
+      background: var(--teal-light);
+      color: var(--teal-dark);
+      border: 1px solid rgba(13, 148, 136, 0.24);
+    }
+
+    .result-grid {
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      margin-top: 1rem;
+    }
+
+    .result-card {
+      color: var(--white);
+      border-radius: 18px;
+      padding: 1.2rem 1.1rem;
+      min-height: 142px;
+      min-width: 0;
+      box-shadow: var(--shadow-md);
+    }
+
+    .result-card.teal {
+      background: linear-gradient(135deg, var(--teal-dark), var(--teal));
+    }
+
+    .result-card.amber {
+      background: linear-gradient(135deg, #d97706, var(--amber));
+    }
+
+    .result-card.rose {
+      background: linear-gradient(135deg, #be123c, var(--rose));
+    }
+
+    .result-card.slate {
+      background: linear-gradient(135deg, var(--slate-800), var(--slate-600));
+    }
+
+    .result-card.sky {
+      background: linear-gradient(135deg, #0369a1, var(--sky));
+    }
+
+    .result-lbl {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      opacity: 0.92;
+      margin-bottom: 0.45rem;
+    }
+
+    .result-val {
+      font-size: clamp(0.96rem, 2.1vw, 1.55rem);
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.35rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .result-sub {
+      font-size: 0.82rem;
+      opacity: 0.86;
+    }
+
+    .insight-box,
+    .formula-box,
+    .callout {
+      margin-top: 1rem;
+      border-radius: 14px;
+      padding: 1rem 1.1rem;
+    }
+
+    .insight-box {
+      display: none;
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.12), rgba(255, 255, 255, 0.95));
+      border: 1px solid rgba(245, 158, 11, 0.24);
+      color: #78350f;
+    }
+
+    .formula-box {
+      background: linear-gradient(135deg, rgba(13, 148, 136, 0.08), rgba(255, 255, 255, 0.98));
+      border-left: 4px solid var(--teal);
+      color: var(--slate-700);
+      font-family: "Courier New", monospace;
+      font-size: 0.93rem;
+      overflow-x: auto;
+    }
+
+    .comparison-summary {
+      margin-top: 1rem;
+    }
+
+    .compare-box {
+      border-radius: 20px;
+      padding: 1.15rem;
+      border: 1px solid rgba(148, 163, 184, 0.24);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .compare-box+.compare-box,
+    .compare-box+.field-pair,
+    .field-pair+.compare-box {
+      margin-top: 1rem;
+    }
+
+    .compare-box.compare-a {
+      background: linear-gradient(180deg, rgba(219, 234, 254, 0.98), rgba(255, 255, 255, 0.96));
+      border-color: rgba(37, 99, 235, 0.22);
+    }
+
+    .compare-box.compare-b {
+      background: linear-gradient(180deg, rgba(254, 243, 199, 0.98), rgba(255, 255, 255, 0.96));
+      border-color: rgba(217, 119, 6, 0.24);
+    }
+
+    .compare-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.5rem 0.85rem;
+      border-radius: 999px;
+      font-size: 0.92rem;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+      margin-bottom: 0.95rem;
+    }
+
+    .compare-tag .compare-letter {
+      width: 1.7rem;
+      height: 1.7rem;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.86rem;
+      color: var(--white);
+    }
+
+    .compare-a .compare-tag {
+      background: rgba(37, 99, 235, 0.1);
+      color: #1d4ed8;
+    }
+
+    .compare-a .compare-letter {
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    }
+
+    .compare-b .compare-tag {
+      background: rgba(217, 119, 6, 0.12);
+      color: #b45309;
+    }
+
+    .compare-b .compare-letter {
+      background: linear-gradient(135deg, #d97706, #b45309);
+    }
+
+    .comparison-summary thead th:nth-child(2) {
+      color: #dbeafe;
+    }
+
+    .comparison-summary thead th:nth-child(3) {
+      color: #fde68a;
+    }
+
+    .comparison-summary tbody td.compare-a-cell {
+      color: #1d4ed8;
+      font-weight: 700;
+      background: rgba(219, 234, 254, 0.45);
+    }
+
+    .comparison-summary tbody td.compare-b-cell {
+      color: #b45309;
+      font-weight: 700;
+      background: rgba(254, 243, 199, 0.55);
+    }
+
+    #snapshot-summary table {
+      table-layout: fixed;
+    }
+
+    #snapshot-summary th:nth-child(1),
+    #snapshot-summary td:nth-child(1) {
+      width: 24%;
+    }
+
+    #snapshot-summary th:nth-child(2),
+    #snapshot-summary td:nth-child(2) {
+      width: 22%;
+    }
+
+    #snapshot-summary th:nth-child(3),
+    #snapshot-summary td:nth-child(3) {
+      width: 54%;
+      white-space: normal;
+      line-height: 1.55;
+    }
+
+    .table-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+
+    .charts-grid {
+      margin-top: 1rem;
+    }
+
+    .chart-wrap {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), var(--slate-50));
+      border: 1px solid rgba(148, 163, 184, 0.22);
+      border-radius: 18px;
+      padding: 1rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .chart-title {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--slate-900);
+      margin-bottom: 0.35rem;
+    }
+
+    .chart-canvas {
+      position: relative;
+      height: 280px;
+      margin-top: 0.8rem;
+    }
+
+    .tbl-wrap {
+      overflow-x: auto;
+      border-radius: 16px;
+      border: 1px solid rgba(148, 163, 184, 0.24);
+      background: var(--white);
+      box-shadow: var(--shadow-sm);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 640px;
+    }
+
+    thead tr {
+      background: linear-gradient(135deg, var(--teal-dark), var(--teal));
+      color: var(--white);
+    }
+
+    th,
+    td {
+      padding: 0.75rem 0.9rem;
+      text-align: right;
+      font-size: 0.9rem;
+      border-bottom: 1px solid var(--slate-200);
+    }
+
+    th {
+      font-size: 0.8rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    th:first-child,
+    td:first-child {
+      text-align: left;
+    }
+
+    tbody tr:nth-child(even) {
+      background: var(--slate-50);
+    }
+
+    tbody tr:hover {
+      background: rgba(13, 148, 136, 0.06);
+    }
+
+    .mini-input {
+      min-width: 140px;
+    }
+
+    .manual-editor-note {
+      margin-top: 0.8rem;
+      color: var(--slate-500);
+      font-size: 0.86rem;
+    }
+
+    .comparison-grid {
+      margin-top: 1rem;
+    }
+
+    .comparison-grid>div {
+      min-width: 0;
+    }
+
+    #comparison-tables .tbl-wrap {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .callout {
+      background: linear-gradient(135deg, rgba(13, 148, 136, 0.1), rgba(224, 242, 254, 0.95));
+      border-left: 4px solid var(--teal);
+      color: var(--slate-700);
+    }
+
+    .callout strong {
+      color: var(--slate-900);
+    }
+
+    .links-grid {
+      margin-top: 1rem;
+    }
+
+    .link-card {
+      background: linear-gradient(180deg, var(--white), var(--slate-50));
+      border: 2px solid var(--slate-200);
+      border-radius: 16px;
+      padding: 1rem;
+      color: var(--slate-700);
+      transition: 0.25s ease;
+      text-decoration: none;
+    }
+
+    .link-card:hover {
+      border-color: var(--teal);
+      color: var(--teal);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-sm);
+      text-decoration: none;
+    }
+
+    .link-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 12px;
+      background: var(--teal-light);
+      margin-bottom: 0.75rem;
+      font-size: 1.15rem;
+    }
+
+    .link-card strong {
+      display: block;
+      color: var(--slate-900);
+      margin-bottom: 0.35rem;
+    }
+
+    .link-card p {
+      margin: 0;
+      color: var(--slate-500);
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .faq-item {
+      background: var(--slate-50);
+      border: 1px solid var(--slate-200);
+      border-radius: 14px;
+      padding: 1.1rem 1.15rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .faq-q {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--slate-900);
+      margin-bottom: 0.45rem;
+    }
+
+    .faq-a {
+      color: var(--slate-600);
+      font-size: 0.94rem;
+    }
+
+    .disclaimer1 {
+      background: linear-gradient(135deg, var(--amber-light), #fff7ed);
+      border: 1px solid rgba(245, 158, 11, 0.24);
+      border-radius: 16px;
+      padding: 1.2rem 1.3rem;
+      margin-top: 2rem;
+      color: #78350f;
+      font-size: 0.9rem;
+    }
+
+    .disclaimer1 strong {
+      color: #92400e;
+    }
+
+    footer {
+      background: #1f2937;
+      color: var(--white);
+      padding: 3rem 0 1rem;
+      margin-top: 4rem;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto 2rem;
+      padding: 0 1rem;
+    }
+
+    .footer-section h3 {
+      color: #5eead4;
+      margin-bottom: 0.9rem;
+      font-size: 1rem;
+    }
+
+    .footer-section ul {
+      list-style: none;
+    }
+
+    .footer-section li {
+      margin-bottom: 0.55rem;
+    }
+
+    .footer-section a,
+    .footer-section span {
+      color: #cbd5e0;
+      text-decoration: none;
+    }
+
+    .footer-section a:hover {
+      color: var(--white);
+    }
+
+    .footer-disclaimer {
+      background: rgba(255, 255, 255, 0.06);
+      padding: 1rem;
+      border-radius: 14px;
+      color: #dbeafe;
+      font-size: 0.9rem;
+    }
+
+    .copyright {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1.5rem 1rem 0;
+      text-align: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: #cbd5e0;
+    }
+
+    @media (min-width: 640px) {
+      .hero {
+        padding: 2rem;
+      }
+
+      .hero-highlights,
+      .toolbar-grid,
+      .field-pair,
+      .links-grid,
+      .footer-content {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .result-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .qnav {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .btn-row {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (min-width: 768px) {
+      .input-slider {
+        grid-template-columns: 1.1fr 1fr;
+        align-items: center;
+      }
+
+      .toolbar-grid {
+        grid-template-columns: 1.1fr 1fr;
+      }
+
+      .qnav {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .result-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .charts-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .charts-grid .chart-wrap:last-child {
+        grid-column: span 2;
+      }
+
+      .footer-content {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+    }
+
+    @media (min-width: 960px) {
+      .hero-highlights {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .result-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .comparison-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 767px) {
+      .hdr-nav {
+        display: none;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .result-actions {
+        width: 100%;
+      }
+
+      .result-actions .btn-secondary {
+        width: 100%;
+      }
+
+      .table-head {
+        flex-direction: column;
+      }
+
+      .result-val {
+        font-size: 1rem;
+      }
+    }
+
+    @media (max-width: 640px) {
+      #comparison-tables {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+
+      #comparison-tables table {
+        min-width: 620px;
+      }
+    }
+
+    @media (max-width: 479px) {
+      .page {
+        padding-inline: 0.8rem;
+      }
+
+      .card,
+      .content-section {
+        padding: 1.1rem;
+      }
+
+      .chart-canvas {
+        height: 240px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="hdr-inner">
+      <div class="hdr-logo">💰 SmartCalc World</div>
+      <nav class="hdr-nav">
+        <a href="https://smartcalcworld.com/index.html">Home</a>
+        <a href="https://smartcalcworld.com/finance/finance-hub.html">Finance Hub</a>
+        <span class="nav-disabled">Medical Hub (Coming Soon)</span>
+        <span class="nav-disabled">Student Hub (Coming Soon)</span>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <button class="hamburger" id="hamburgerBtn" type="button" aria-label="Toggle menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <nav class="mobile-nav" id="mobileNav">
+      <a href="https://smartcalcworld.com/index.html">Home</a>
+      <a href="https://smartcalcworld.com/finance/finance-hub.html">Finance Hub</a>
+      <span class="nav-disabled">Medical Hub (Coming Soon)</span>
+      <span class="nav-disabled">Student Hub (Coming Soon)</span>
+      <a href="#faq">FAQ</a>
+    </nav>
+  </header>
+
+  <main class="page">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="https://smartcalcworld.com/index.html">Home</a> &rsaquo;
+      <a href="https://smartcalcworld.com/finance/finance-hub.html">Finance</a> &rsaquo;
+      <a href="https://smartcalcworld.com/finance/investment/investment-hub.html">Investment</a> &rsaquo;
+      Dollar Cost Averaging Calculator
+    </nav>
+
+    <section class="hero">
+      <span class="hero-badge">&#128202; Premium DCA Tool</span>
+      <h1>Dollar Cost Averaging Calculator</h1>
+      <p class="hero-sub">Understand how regular investing can lower average purchase price, reduce market timing stress, and build units over time. This calculator compares DCA with lump sum investing and shows how your portfolio value evolves across each investing period.</p>
+
+      <div class="hero-highlights">
+        <div class="hero-chip">
+          <strong>Track every regular purchase clearly</strong>
+          Enter a fixed investing amount, choose weekly, monthly, or quarterly frequency, and see how many units you buy in each period.
+        </div>
+        <div class="hero-chip">
+          <strong>Compare DCA with lump sum behavior</strong>
+          Measure whether spreading purchases helped or hurt versus investing the full planned amount at the starting price.
+        </div>
+        <div class="hero-chip">
+          <strong>Use manual prices or a simulation path</strong>
+          Build a custom period-by-period price table or let the calculator simulate growth from an initial asset price.
+        </div>
+      </div>
+    </section>
+
+    <section class="card" id="calculator">
+      <div class="card-title">Dollar Cost Averaging Dashboard</div>
+
+      <div class="toolbar-grid">
+        <div class="toolbar-box">
+          <h2>Display Currency</h2>
+          <div class="field-pair">
+            <div class="form-row">
+              <label class="lbl" for="global-currency">Choose currency</label>
+              <select id="global-currency">
+                <option value="USD">USD $</option>
+                <option value="EUR">EUR &euro;</option>
+                <option value="GBP">GBP &pound;</option>
+                <option value="INR">INR &#8377;</option>
+                <option value="CAD">CAD $</option>
+                <option value="AUD">AUD $</option>
+                <option value="CUSTOM">Custom symbol</option>
+              </select>
+              <span class="hint">Display only. This calculator does not apply exchange-rate conversion.</span>
+            </div>
+
+            <div class="form-row hidden" id="custom-symbol-wrap">
+              <label class="lbl" for="custom-symbol">Custom symbol</label>
+              <input type="text" id="custom-symbol" maxlength="6" value="$" placeholder="e.g. CHF or AED">
+              <span class="hint">Use any short code or symbol if you want a custom display style.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="toolbar-box">
+          <h2>What this tool answers</h2>
+          <div class="info-list">
+            <div class="info-pill">How much did you invest, how many <strong>units did you accumulate</strong>, and what <strong>average price</strong> did you pay?</div>
+            <div class="info-pill">How does regular investing compare with putting the <strong>full planned capital in at the start</strong>?</div>
+            <div class="info-pill">How does your <strong>current market price</strong> change portfolio value, profit or loss, and long-term investing discipline?</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="qnav" id="qnav" role="tablist" aria-label="DCA calculator sections">
+        <button type="button" class="qnav-btn active" data-module="setup" role="tab" aria-selected="true" onclick="switchModule('setup')">Plan Setup</button>
+        <button type="button" class="qnav-btn" data-module="manual" role="tab" aria-selected="false" onclick="switchModule('manual')">Manual Price Mode</button>
+        <button type="button" class="qnav-btn" data-module="simulation" role="tab" aria-selected="false" onclick="switchModule('simulation')">Simulation Mode</button>
+      </div>
+
+      <section class="module active" id="mod-setup" role="tabpanel" aria-label="DCA setup">
+        <p class="module-intro">Start with the amount you invest each period, the investing frequency, the number of contributions, and the current market price used for today's portfolio valuation.</p>
+
+        <div class="field-pair">
+          <div class="form-row">
+            <label class="lbl" for="dca-amount">Investment Amount Per Period (<span data-currency-symbol>$</span>)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="dca-amount" min="1" max="10000000" step="10" value="500">
+                <span class="hint">This is the fixed amount invested every week, month, or quarter.</span>
+              </div>
+              <div>
+                <input type="range" id="dca-amount-sl" min="1" max="100000" step="10" value="500">
+                <div class="slider-lbl" id="dca-amount-lbl">$500.00</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label class="lbl" for="dca-frequency">Investment Frequency</label>
+            <select id="dca-frequency">
+              <option value="weekly">Weekly</option>
+              <option value="monthly" selected>Monthly</option>
+              <option value="quarterly">Quarterly</option>
+            </select>
+            <span class="hint">Frequency changes the meaning of each period and the simulation price path.</span>
+          </div>
+        </div>
+
+        <div class="field-pair">
+          <div class="form-row">
+            <label class="lbl" for="dca-periods">Number of Periods</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="dca-periods" min="1" max="120" step="1" value="24">
+                <span class="hint">Example: 24 monthly periods means 24 separate monthly investments.</span>
+              </div>
+              <div>
+                <input type="range" id="dca-periods-sl" min="1" max="120" step="1" value="24">
+                <div class="slider-lbl" id="dca-periods-lbl">24 periods</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label class="lbl" for="dca-current-price">Current Asset Price (<span data-currency-symbol>$</span>)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="dca-current-price" min="0.01" max="1000000" step="0.01" value="130">
+                <span class="hint">This price is used to value all accumulated units today.</span>
+              </div>
+              <div>
+                <input type="range" id="dca-current-price-sl" min="0.01" max="10000" step="0.01" value="130">
+                <div class="slider-lbl" id="dca-current-price-lbl">$130.00</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="toolbar-box">
+          <h2>DCA reminder</h2>
+          <div class="info-list">
+            <div class="info-pill">With DCA, the same money buys <strong>more units at low prices</strong> and fewer units at high prices.</div>
+            <div class="info-pill">That can lower your <strong>average purchase price</strong>, but it does not guarantee a profit.</div>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <button type="button" class="btn-primary" onclick="calculateDca(true, true)">Calculate DCA Outcome</button>
+          <button type="button" class="btn-ghost" onclick="resetPlanner()">Reset Inputs</button>
+        </div>
+      </section>
+
+      <section class="module" id="mod-manual" role="tabpanel" aria-label="Manual price mode">
+        <p class="module-intro">Use Manual Price Mode when you want to enter the asset price for each investing period yourself. This is useful for backtesting a real price path, mutual fund NAV history, stock closing prices, or a custom scenario.</p>
+
+        <div class="toolbar-box">
+          <h2>Manual Price Entry Table</h2>
+          <div class="tbl-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Period</th>
+                  <th>Asset Price (<span data-currency-symbol>$</span>)</th>
+                </tr>
+              </thead>
+              <tbody id="manual-price-body"></tbody>
+            </table>
+          </div>
+          <p class="manual-editor-note">Enter one positive price for every selected period. The calculator will automatically compute units purchased from the fixed investing amount each time.</p>
+        </div>
+
+        <div class="callout">
+          <strong>Tip:</strong> Manual mode is great for showing how buying more units during dips can lower your average cost over time &#128200;
+        </div>
+
+        <div class="btn-row">
+          <button type="button" class="btn-primary" onclick="calculateDca(true, true)">Calculate DCA Outcome</button>
+          <button type="button" class="btn-ghost" onclick="resetPlanner()">Reset Inputs</button>
+        </div>
+      </section>
+
+      <section class="module" id="mod-simulation" role="tabpanel" aria-label="Simulation mode">
+        <p class="module-intro">Use Simulation Mode when you want the asset price to grow or decline automatically from a starting price. This is useful for testing simple scenarios without manually entering each price.</p>
+
+        <div class="field-pair">
+          <div class="form-row">
+            <label class="lbl" for="sim-initial-price">Initial Asset Price (<span data-currency-symbol>$</span>)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="sim-initial-price" min="0.01" max="1000000" step="0.01" value="100">
+                <span class="hint">The starting price used to generate the simulated price path.</span>
+              </div>
+              <div>
+                <input type="range" id="sim-initial-price-sl" min="0.01" max="10000" step="0.01" value="100">
+                <div class="slider-lbl" id="sim-initial-price-lbl">$100.00</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label class="lbl" for="sim-growth-rate">Expected Price Growth Rate (%) Optional</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="sim-growth-rate" min="-90" max="60" step="0.01" value="8">
+                <span class="hint">This annual growth rate can be positive or negative. It is applied across the selected frequency.</span>
+              </div>
+              <div>
+                <input type="range" id="sim-growth-rate-sl" min="-20" max="30" step="0.1" value="8">
+                <div class="slider-lbl" id="sim-growth-rate-lbl">8.00%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="toolbar-box">
+          <h2>How simulation works</h2>
+          <div class="info-list">
+            <div class="info-pill">Each period price is generated as <strong>Initial Price x (1 + growth / periods per year)^period</strong>.</div>
+            <div class="info-pill">The current asset price from setup still values your final holdings, so you can compare the simulated purchase path with today's market price.</div>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <button type="button" class="btn-primary" onclick="calculateDca(true, true)">Calculate DCA Outcome</button>
+          <button type="button" class="btn-ghost" onclick="resetPlanner()">Reset Inputs</button>
+        </div>
+      </section>
+    </section>
+
+    <section class="card" id="results-section" aria-live="polite">
+      <div class="result-meta">
+        <div class="mode-pill" id="result-mode-pill">Latest Result: DCA Analysis</div>
+        <div class="result-actions">
+          <button type="button" class="btn-secondary" onclick="copyResults()">Copy Results</button>
+          <div class="copy-note" id="copy-note">Nothing copied yet.</div>
+        </div>
+      </div>
+
+      <div class="status-banner" id="status-banner"></div>
+
+      <div class="result-grid">
+        <div class="result-card teal" id="result-card-0">
+          <div class="result-lbl" id="result-lbl-0">Total Investment</div>
+          <div class="result-val" id="result-val-0">-</div>
+          <div class="result-sub" id="result-sub-0">Fixed amount invested across all periods</div>
+        </div>
+        <div class="result-card amber" id="result-card-1">
+          <div class="result-lbl" id="result-lbl-1">Total Units Purchased</div>
+          <div class="result-val" id="result-val-1">-</div>
+          <div class="result-sub" id="result-sub-1">All units accumulated from each contribution</div>
+        </div>
+        <div class="result-card sky" id="result-card-2">
+          <div class="result-lbl" id="result-lbl-2">Average Purchase Price</div>
+          <div class="result-val" id="result-val-2">-</div>
+          <div class="result-sub" id="result-sub-2">Average cost paid per unit across the full plan</div>
+        </div>
+        <div class="result-card teal" id="result-card-3">
+          <div class="result-lbl" id="result-lbl-3">Portfolio Value</div>
+          <div class="result-val" id="result-val-3">-</div>
+          <div class="result-sub" id="result-sub-3">Current asset price multiplied by total units held</div>
+        </div>
+        <div class="result-card rose" id="result-card-4">
+          <div class="result-lbl" id="result-lbl-4">Total Profit or Loss</div>
+          <div class="result-val" id="result-val-4">-</div>
+          <div class="result-sub" id="result-sub-4">Difference between current portfolio value and total investment</div>
+        </div>
+        <div class="result-card slate" id="result-card-5">
+          <div class="result-lbl" id="result-lbl-5">Percentage Return</div>
+          <div class="result-val" id="result-val-5">-</div>
+          <div class="result-sub" id="result-sub-5">Profit or loss relative to total money invested</div>
+        </div>
+      </div>
+
+      <div class="insight-box" id="insight-box"></div>
+      <div class="formula-box" id="formula-box"></div>
+
+      <div class="comparison-summary" id="snapshot-summary">
+        <div class="table-head">
+          <div>
+            <div class="card-title" style="margin-bottom:0.3rem;">DCA Snapshot</div>
+            <div class="table-context">Quick highlights behind your latest dollar cost averaging analysis.</div>
+          </div>
+        </div>
+        <div class="tbl-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Metric</th>
+                <th>Value</th>
+                <th>Explanation</th>
+              </tr>
+            </thead>
+            <tbody id="snapshot-summary-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" id="charts-section">
+      <div class="card-title">Visual DCA Dashboard</div>
+      <p class="chart-note" id="charts-context">Charts compare invested capital, portfolio value, units accumulation, and DCA versus lump sum behavior.</p>
+
+      <div class="charts-grid">
+        <div class="chart-wrap">
+          <div class="chart-title" id="growth-title">Total Invested vs Portfolio Value</div>
+          <div class="chart-note" id="growth-note">See how cumulative investment compares with the portfolio value at each period price.</div>
+          <div class="chart-canvas">
+            <canvas id="growth-chart"></canvas>
+          </div>
+        </div>
+
+        <div class="chart-wrap">
+          <div class="chart-title" id="units-title">Units Purchased and Total Units</div>
+          <div class="chart-note" id="units-note">Track how many units each contribution buys and how total units build over time.</div>
+          <div class="chart-canvas">
+            <canvas id="units-chart"></canvas>
+          </div>
+        </div>
+
+        <div class="chart-wrap">
+          <div class="chart-title" id="comparison-title">DCA vs Lump Sum Comparison</div>
+          <div class="chart-note" id="comparison-note">Compare the DCA portfolio path with investing the full planned capital at the starting price.</div>
+          <div class="chart-canvas">
+            <canvas id="comparison-chart"></canvas>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" id="projection-section">
+      <div class="table-head">
+        <div>
+          <div class="card-title" style="margin-bottom:0.3rem;">Detailed Investment Table</div>
+          <div class="table-context" id="projection-context">Period-by-period table showing asset price, fixed investment amount, units purchased, total units held, and portfolio value using each period's price.</div>
+        </div>
+        <button type="button" class="btn-secondary" onclick="downloadCsv()">Download CSV</button>
+      </div>
+
+      <div class="tbl-wrap">
+        <table>
+          <thead>
+            <tr id="projection-head-row"></tr>
+          </thead>
+          <tbody id="projection-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="content-section" id="comparison-tables">
+      <h2>Comparison Tables</h2>
+      <p>These quick references show how DCA differs from other common investing approaches and why many investors use it for discipline, consistency, and emotional comfort.</p>
+
+      <div class="comparison-grid">
+        <div>
+          <h3>DCA vs Lump Sum vs SIP</h3>
+          <div class="tbl-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Factor</th>
+                  <th>DCA</th>
+                  <th>Lump Sum</th>
+                  <th>SIP</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>How money is invested</td><td>Fixed amount over regular periods</td><td>All capital invested at once</td><td>Fixed amount on a recurring schedule</td></tr>
+                <tr><td>Main goal</td><td>Reduce timing risk and average cost</td><td>Put money to work immediately</td><td>Automate disciplined long-term investing</td></tr>
+                <tr><td>Works well when</td><td>Markets are volatile or investor is cautious</td><td>Investor has capital ready and long horizon</td><td>Salary-based saving happens every month</td></tr>
+                <tr><td>Emotional benefit</td><td>Often lowers regret from one bad entry point</td><td>Can be stressful if market drops soon after investing</td><td>Creates routine and habit</td></tr>
+                <tr><td>Potential drawback</td><td>May trail lump sum in strong rising markets</td><td>Higher entry timing risk</td><td>May be less flexible if income changes</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div>
+          <h3>Benefits and Limitations of DCA</h3>
+          <div class="formula-box"><strong>Average Purchase Price</strong> = Total Investment / Total Units</div>
+          <div class="tbl-wrap" style="margin-top:0.8rem;">
+            <table>
+              <thead>
+                <tr>
+                  <th>Aspect</th>
+                  <th>Benefit</th>
+                  <th>Limitation</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Timing</td><td>Spreads risk across multiple entry points</td><td>Does not guarantee a better final return</td></tr>
+                <tr><td>Behavior</td><td>Encourages discipline and routine</td><td>Investors may stop when markets feel scary</td></tr>
+                <tr><td>Volatility</td><td>Can buy more units when price falls</td><td>Still exposed to market losses</td></tr>
+                <tr><td>Cash deployment</td><td>Useful when money arrives gradually</td><td>Slow deployment can lag in strongly rising markets</td></tr>
+                <tr><td>Best mindset</td><td>Long-term, process-focused, patient investing</td><td>Not a substitute for asset quality or diversification</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+    <article class="content-section" id="guide">
+      <h2>Understanding Dollar Cost Averaging in Simple Language</h2>
+
+      <p>Dollar cost averaging, often called DCA, is one of the easiest investing ideas to understand and one of the hardest to follow consistently in real life. The idea is simple: instead of trying to invest one large amount at the perfect moment, you invest a fixed amount again and again over regular periods. That could be every week, every month, or every quarter. The benefit is not magic. The benefit is process. DCA gives you a routine &#128197;, reduces the pressure of trying to guess the best market entry, and helps you keep moving even when prices feel uncertain.</p>
+
+      <p>Many beginners believe successful investing starts with buying at exactly the right time. In reality, most people cannot consistently predict short-term market moves &#129504;. Prices rise, fall, bounce, and surprise investors all the time. That is why DCA is so useful. It does not try to predict every move. Instead, it accepts uncertainty and works through it. When the asset price is high, your fixed amount buys fewer units. When the asset price is low, the same amount buys more units. Over time, that creates an average purchase price that can feel more balanced than one single entry point.</p>
+
+      <h3>What is Dollar Cost Averaging &#128202;</h3>
+      <p>DCA means investing the same money on a regular schedule no matter what the price is doing. If you invest <span data-currency-symbol>$</span>500 every month, then every month you put in exactly <span data-currency-symbol>$</span>500 whether the asset price is expensive, cheap, rising, or falling. This is very different from waiting for the perfect dip or trying to guess the next rally. It is a rules-based investing approach, and that makes it powerful for normal investors &#128200; who want structure instead of stress.</p>
+      <p>The formula is also beginner-friendly. Your total investment equals the amount per period multiplied by the number of periods. The units purchased each time equal the investment amount divided by the asset price. Then total units are added together. Finally, average purchase price equals total investment divided by total units. That last number is important because it shows the average cost of everything you accumulated over time &#128161; rather than just one lucky or unlucky entry.</p>
+      <p>For example, imagine you invest <span data-currency-symbol>$</span>1,000 for four periods. If the asset prices are 100, 80, 125, and 90, you will buy 10 units, 12.5 units, 8 units, and 11.11 units. Your total units become about 41.61. Since you invested <span data-currency-symbol>$</span>4,000 in total, your average purchase price becomes roughly <span data-currency-symbol>$</span>96.13 per unit. That is lower than some of the individual prices because your money bought more units during the lower-price periods, which is exactly the emotional advantage many investors want &#128176;</p>
+
+      <h3>How DCA Reduces Market Timing Risk &#128201;</h3>
+      <p>One of the biggest emotional risks in investing is timing risk. That means the fear of investing a large amount right before the market falls. This fear is real &#128561;. Many investors delay action because they worry the market is too high. The problem is that waiting creates its own risk. While you wait, the market may keep rising and your money sits idle.</p>
+      <p>DCA helps by splitting one emotional decision into many smaller practical decisions. You are no longer trying to win on one perfect day. You are building exposure over time. If the market falls after a few contributions, your later contributions may buy more units at cheaper prices. If the market rises, your earlier contributions already got started. In this way, DCA can reduce regret and make investors feel steadier &#128170; even if it does not always produce the absolute highest return.</p>
+      <p>This is especially useful for people who are new to investing, investors who feel nervous about volatility, and anyone deploying cash gradually from salary, business income, or bonus payments. DCA creates a smoother behavioral experience, and behavior matters more than many people realize. A perfect strategy that you quit is worse than a good strategy you can follow consistently &#129309;</p>
+
+      <h3>DCA vs Lump Sum Investing &#128176;</h3>
+      <p>A common question is whether DCA is better than lump sum investing. The honest answer is: it depends. If markets rise strongly after you invest, lump sum often wins because more money was invested earlier and had more time to grow. If markets fall or move sideways after your first entry point, DCA may look better because later purchases happened at lower prices &#128065; and bought more units.</p>
+      <p>So the comparison is not only about returns. It is also about comfort, discipline, and personal decision-making. Some investors know they will panic if they invest everything at once and the market drops the next week. For them, DCA can be the better practical choice because it helps them stay invested. Other investors with long horizons, strong risk tolerance, and fully available capital may prefer lump sum because markets often trend upward over long periods &#128200; and earlier exposure can matter.</p>
+      <p>That is why this calculator includes a DCA versus lump sum comparison chart. It lets you see what would have happened if you had invested the full planned amount at the starting price instead of spreading it across multiple periods. This side-by-side view helps move the discussion from theory to actual numbers, which is where decisions usually become clearer &#129300;</p>
+
+      <h3>When Investors Use DCA Strategy &#128640;</h3>
+      <p>DCA is commonly used when income arrives regularly. That is why salary earners often invest monthly into mutual funds, ETFs, retirement accounts, and other long-term vehicles. In many regions, this regular investing style is called SIP. The language may change, but the principle is the same: fixed recurring contributions over time &#128197; that build habit as well as wealth.</p>
+      <p>Investors also use DCA when they receive a large amount but do not want to invest it all on one date. Maybe someone sold a property, received a bonus, or moved cash from a bank deposit. Instead of putting everything into the market at once, they may choose a 6-month or 12-month DCA plan. That does not remove market risk, but it can make the transition into investing feel more manageable &#128524;</p>
+      <p>Another common use case is volatile assets such as growth stocks or cryptocurrency. In those markets, prices can swing sharply. DCA can be emotionally useful because it avoids the all-in pressure of trying to buy only at a perfect bottom. It can also help investors keep adding through fear &#128200; which is often when prices are lower.</p>
+
+      <h3>Benefits and Limitations of Dollar Cost Averaging &#129504;</h3>
+      <p>DCA has many strengths. It supports discipline, reduces the emotional importance of one single entry point, and can lower average cost when prices fluctuate. It works naturally with salary-based investing and helps investors build a long-term habit. For many beginners, that habit is more valuable than chasing perfect timing &#127919; because consistency often wins.</p>
+      <p>But DCA also has limits. It does not guarantee better returns. It does not protect you from buying a bad asset. It does not remove market risk. And in a strong upward-trending market, slowly deploying capital can leave part of your money on the sidelines while prices keep climbing. That means DCA may underperform lump sum in some scenarios &#9888;&#65039; even though it feels safer.</p>
+      <p>The key lesson is that DCA is a tool, not a promise. It helps solve a behavioral and timing problem. It does not eliminate the need for asset quality, diversification, patience, or realistic expectations. Good investing still depends on what you buy, how long you hold it, and whether your strategy matches your goals &#129504;</p>
+
+      <h3>How Buying More Units at Lower Prices Helps &#128184;</h3>
+      <p>This is the heart of DCA. When prices fall, your fixed investing amount buys more units. That extra unit accumulation is what can lower your average cost over time. Suppose you invest <span data-currency-symbol>$</span>500 per month. If the asset costs <span data-currency-symbol>$</span>50, you buy 10 units. If it falls to <span data-currency-symbol>$</span>25, the same <span data-currency-symbol>$</span>500 buys 20 units. You do not need to predict the bottom for this to help. You simply need to keep investing through the lower-price period &#128202; instead of freezing.</p>
+      <p>That is why DCA often feels most useful during volatile markets. Falling prices do not feel good emotionally, but they can improve unit accumulation for long-term investors. If the asset later recovers, the units purchased during the dip can significantly improve the final result. This is one reason experienced investors say that volatility can be uncomfortable &#128565; but not always harmful for disciplined accumulators.</p>
+
+      <h3>A Practical Example of DCA in Action &#128176;</h3>
+      <p>Imagine you invest <span data-currency-symbol>$</span>400 every month for 12 months into an asset whose prices move like this: 100, 92, 88, 95, 90, 84, 86, 93, 98, 102, 108, 110. Your total investment is <span data-currency-symbol>$</span>4,800. During the cheaper months, especially around 84 to 90, you buy more units. By the end of the year, your average purchase price may sit meaningfully below the highest market prices in the series &#128176;</p>
+      <p>If the current market price ends near 110, your final portfolio value can look healthy because the lower-price purchases contributed a larger number of units. That is the DCA story in one sentence: steady investing can use volatility to build position size more efficiently than many investors expect. Not always, but often enough to matter in real portfolios where patience really matters &#128200;</p>
+
+      <h3>How DCA Connects With Real Return and Inflation &#127757;</h3>
+      <p>DCA is about how you enter the market, but long-term wealth still depends on what happens after that. If your asset grows faster than inflation over time, your purchasing power can improve. If it grows too slowly, you may still struggle to build real wealth even with perfect investing discipline. That is why DCA works best when paired with smart asset selection, broad diversification, and periodic review &#127760; so the process and the outcome both make sense.</p>
+      <p>Investors often use DCA together with tools like a <a href="https://smartcalcworld.com/finance/investment/real-return-calculator.html">Real Return Calculator</a> or an <a href="https://smartcalcworld.com/finance/investment/inflation-calculator.html">Inflation Calculator</a> to move beyond entry strategy and focus on real purchasing power. DCA helps with how you buy &#128161;. Real return analysis helps with what your money is actually worth later.</p>
+
+      <h3>How to Use This Calculator Well &#128161;</h3>
+      <p>Use Manual Price Mode when you want to test a known price history or create your own scenario. Use Simulation Mode when you want a simple growth path from a starting price and assumed annual price change. Then compare the average purchase price, total units, current portfolio value, and lump sum alternative. The charts help you see not only the final number, but the path that created it &#128161; which is often where the real lesson lives.</p>
+      <p>This matters because investors often make decisions based only on final outcomes. But the path matters too. A strategy that helps you stay consistent during stressful markets may be more valuable than one that looks slightly better on paper but is harder for you to follow. DCA is not just a formula. It is a behavior framework &#128640;. And for many people, that is exactly what makes it so powerful.</p>
+    </article>
+
+    <section class="content-section" id="more-tools">
+      <h2>Explore More Calculators</h2>
+      <p>DCA analysis becomes even more useful when you connect it with recurring investment planning, one-time investing, annualized return measurement, inflation awareness, and retirement planning across the SmartCalcWorld finance toolkit.</p>
+
+      <div class="links-grid">
+        <a class="link-card" href="https://smartcalcworld.com/finance/finance-sip-calculator.html">
+          <span class="link-icon">&#128202;</span>
+          <strong>SIP Calculator</strong>
+          <p>Turn regular monthly investing into long-term corpus projections and compare the routine investing style with DCA.</p>
+        </a>
+
+        <a class="link-card" href="https://smartcalcworld.com/finance/investment/lumpsum-calculator.html">
+          <span class="link-icon">&#128176;</span>
+          <strong>Lumpsum Calculator</strong>
+          <p>Estimate how a one-time investment grows and compare that route with spreading money across many DCA periods.</p>
+        </a>
+
+        <a class="link-card" href="https://smartcalcworld.com/finance/investment/cagr-calculator.html">
+          <span class="link-icon">&#128200;</span>
+          <strong>CAGR Calculator</strong>
+          <p>Translate total growth into an annualized return figure so you can judge long-term investment performance more clearly.</p>
+        </a>
+
+        <a class="link-card" href="https://smartcalcworld.com/finance/investment/real-return-calculator.html">
+          <span class="link-icon">&#127757;</span>
+          <strong>Real Return Calculator</strong>
+          <p>Measure how inflation changes the real purchasing power of the portfolio you are building through DCA.</p>
+        </a>
+
+        <a class="link-card" href="https://smartcalcworld.com/finance/investment/retirement-calculator.html">
+          <span class="link-icon">&#127891;</span>
+          <strong>Retirement Calculator</strong>
+          <p>See how disciplined recurring investing can support long-term retirement corpus planning and future income goals.</p>
+        </a>
+      </div>
+    </section>
+
+    <section class="content-section" id="faq">
+      <h2>Frequently Asked Questions</h2>
+
+      <div class="faq-item"><div class="faq-q">What is dollar cost averaging?</div><div class="faq-a">Dollar cost averaging is a strategy where you invest the same amount of money at regular intervals instead of investing one large amount at one time. This means you automatically buy more units when prices are low and fewer when prices are high.</div></div>
+      <div class="faq-item"><div class="faq-q">Is DCA better than lump sum investing?</div><div class="faq-a">Not always. Lump sum can outperform in strongly rising markets because more money is invested earlier. DCA can feel safer and may help in volatile markets because purchases are spread over time.</div></div>
+      <div class="faq-item"><div class="faq-q">Does DCA reduce risk?</div><div class="faq-a">DCA reduces timing risk, but it does not remove market risk. Your investment can still lose value if the asset performs poorly or falls for a long time.</div></div>
+      <div class="faq-item"><div class="faq-q">Is SIP the same as DCA?</div><div class="faq-a">A SIP is one form of DCA. Both involve fixed recurring investing. SIP is simply a common product name or plan structure used in mutual fund investing.</div></div>
+      <div class="faq-item"><div class="faq-q">Can DCA work for cryptocurrency investing?</div><div class="faq-a">Yes. Many investors use DCA in crypto because prices can be very volatile. Regular purchases can reduce the pressure of trying to buy at the perfect bottom, although the asset can still be very risky.</div></div>
+      <div class="faq-item"><div class="faq-q">When should investors avoid DCA?</div><div class="faq-a">Investors may think carefully before using DCA if they already have a large amount ready, can tolerate volatility, and are investing for the very long term. In many rising markets, slower deployment can trail lump sum.</div></div>
+      <div class="faq-item"><div class="faq-q">How long should a DCA strategy continue?</div><div class="faq-a">That depends on your goal. Some investors use DCA for a few months to deploy a lump sum gradually, while others use it for years as part of an ongoing monthly investing habit.</div></div>
+      <div class="faq-item"><div class="faq-q">Does DCA guarantee profit?</div><div class="faq-a">No. DCA improves process and average-cost behavior, but it does not guarantee positive returns. Asset quality, time horizon, and market conditions still matter.</div></div>
+      <div class="faq-item"><div class="faq-q">Why does DCA buy more units when prices fall?</div><div class="faq-a">Because the investing amount stays fixed. If you always invest the same money, that money buys more units when the asset price is lower. That can reduce your average purchase price over time.</div></div>
+    </section>
+
+    <div class="disclaimer1">
+      <strong>Disclaimer:</strong> This DCA calculator is for educational use only. Results are estimates based on the prices and assumptions you enter and do not include taxes, brokerage, slippage, spread, dividends, rebalancing, changing contribution amounts, or product-specific risks. Please use it as a planning tool, not personal financial advice.
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="https://smartcalcworld.com/index.html">Home</a></li>
+          <li><a href="https://smartcalcworld.com/about.html">About</a></li>
+          <li><a href="https://smartcalcworld.com/contact.html">Contact</a></li>
+          <li><a href="https://smartcalcworld.com/privacy-policy.html">Privacy Policy</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h3>Content</h3>
+        <ul>
+          <li><a href="#calculator">DCA Calculator</a></li>
+          <li><a href="#guide">DCA Guide</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h3>Finance Tools</h3>
+        <ul>
+          <li><a href="https://smartcalcworld.com/finance/interest/interest-hub.html">Interest Calculators</a></li>
+          <li><a href="https://smartcalcworld.com/finance/investment/investment-hub.html">Investment Calculators</a></li>
+          <li><a href="https://smartcalcworld.com/finance/loan/loan-hub.html">Loan Calculators</a></li>
+          <li><a href="https://smartcalcworld.com/finance/tax/tax-hub.html">Tax Calculators</a></li>
+          <li><a href="https://smartcalcworld.com/finance/saving-retirement/saving-retirement-hub.html">Savings Calculators</a></li>
+          <li><a href="https://smartcalcworld.com/finance/saving-retirement/saving-retirement-hub.html">Retirement Calculators</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <div class="footer-disclaimer">
+          <strong>SmartCalc World Note:</strong> dollar cost averaging becomes easier to understand when you compare average purchase price, total units, current value, and lump sum alternatives together instead of looking only at one final number.
+        </div>
+      </div>
+    </div>
+
+    <div class="copyright">
+      <p>&copy; SmartCalc World. All rights reserved.</p>
+    </div>
+
+  </footer>
+
+  <script>
+
+    const $ = (id) => document.getElementById(id);
+
+    const currencySymbols = {
+      USD: "$",
+      EUR: "\u20AC",
+      GBP: "\u00A3",
+      INR: "\u20B9",
+      AUD: "$",
+      CAD: "$",
+      CUSTOM: "$"
+    };
+
+    const state = {
+      activeModule: "setup",
+      mode: "manual",
+      currentCurrency: "USD",
+      customSymbol: "$",
+      charts: { growth: null, units: null, comparison: null },
+      projectionColumns: [],
+      projectionRows: [],
+      projectionFilename: "dca_projection.csv",
+      copyText: "",
+      manualPrices: []
+    };
+
+    const sliderConfigs = [
+      { input: "dca-amount", slider: "dca-amount-sl", label: "dca-amount-lbl", type: "money", digits: 2 },
+      { input: "dca-periods", slider: "dca-periods-sl", label: "dca-periods-lbl", type: "periods", digits: 0 },
+      { input: "dca-current-price", slider: "dca-current-price-sl", label: "dca-current-price-lbl", type: "money", digits: 2 },
+      { input: "sim-initial-price", slider: "sim-initial-price-sl", label: "sim-initial-price-lbl", type: "money", digits: 2 },
+      { input: "sim-growth-rate", slider: "sim-growth-rate-sl", label: "sim-growth-rate-lbl", type: "percent", digits: 2 }
+    ];
+
+    function currentSymbol() {
+      return state.currentCurrency === "CUSTOM"
+        ? ($("custom-symbol").value.trim() || state.customSymbol || "$")
+        : currencySymbols[state.currentCurrency];
+    }
+
+    function currentNumberLocale() {
+      return state.currentCurrency === "INR" ? "en-IN" : "en-US";
+    }
+
+    function formatMoney(value, digits = 2) {
+      const number = Number(value) || 0;
+      const sign = number < 0 ? "-" : "";
+      const formatted = Math.abs(number).toLocaleString(currentNumberLocale(), {
+        minimumFractionDigits: digits,
+        maximumFractionDigits: digits
+      });
+      const symbol = currentSymbol();
+      const prefix = /^[A-Za-z]{2,}$/.test(symbol) ? `${symbol} ` : symbol;
+      return `${sign}${prefix}${formatted}`;
+    }
+
+    function formatPercentValue(value, digits = 2) {
+      return `${Number(value).toFixed(digits)}%`;
+    }
+
+    function formatPercentFromDecimal(value, digits = 2) {
+      return `${(Number(value) * 100).toFixed(digits)}%`;
+    }
+
+    function formatUnits(value, digits = 6) {
+      return Number(value || 0).toLocaleString(currentNumberLocale(), {
+        minimumFractionDigits: 0,
+        maximumFractionDigits: digits
+      });
+    }
+
+    function formatSliderValue(type, value, digits = 0) {
+      if (type === "money") return formatMoney(value, digits);
+      if (type === "percent") return formatPercentValue(value, digits);
+      if (type === "periods") return `${Number(value).toFixed(digits)} periods`;
+      return String(value);
+    }
+
+    function destroyChart(chart) {
+      if (chart) chart.destroy();
+      return null;
+    }
+
+    function setStatus(message = "", tone = "") {
+      const banner = $("status-banner");
+      banner.className = "status-banner";
+      banner.textContent = message;
+      if (!message) return;
+      banner.classList.add(tone || "info");
+    }
+
+    function setCopyNote(message) {
+      $("copy-note").textContent = message;
+    }
+
+    function updateSliderLabel(config) {
+      const input = $(config.input);
+      const label = $(config.label);
+      if (!input || !label) return;
+      label.textContent = formatSliderValue(config.type, input.value, config.digits || 0);
+    }
+
+    function clampToSlider(inputEl, sliderEl) {
+      if (inputEl.value === "") return;
+      let value = Number(inputEl.value);
+      if (!Number.isFinite(value)) value = Number(sliderEl.min);
+      value = Math.max(Number(sliderEl.min), Math.min(Number(sliderEl.max), value));
+      inputEl.value = value;
+      sliderEl.value = value;
+    }
+
+    function bindSliderPair(config) {
+      const inputEl = $(config.input);
+      const sliderEl = $(config.slider);
+      if (!inputEl || !sliderEl) return;
+      updateSliderLabel(config);
+      inputEl.addEventListener("input", () => {
+        clampToSlider(inputEl, sliderEl);
+        updateSliderLabel(config);
+      });
+      inputEl.addEventListener("change", () => {
+        clampToSlider(inputEl, sliderEl);
+        updateSliderLabel(config);
+        if (config.input === "dca-periods") renderManualPriceTable();
+        calculateDca(false);
+      });
+      sliderEl.addEventListener("input", () => {
+        inputEl.value = sliderEl.value;
+        updateSliderLabel(config);
+        if (config.input === "dca-periods") renderManualPriceTable();
+        calculateDca(false);
+      });
+    }
+
+    function frequencyPeriodsPerYear(frequency) {
+      const map = { weekly: 52, monthly: 12, quarterly: 4 };
+      return map[frequency] || 12;
+    }
+
+    function frequencyLabel(frequency) {
+      const map = { weekly: "Weekly", monthly: "Monthly", quarterly: "Quarterly" };
+      return map[frequency] || "Monthly";
+    }
+
+    function periodLabel(periodNumber, frequency) {
+      const map = { weekly: "Week", monthly: "Month", quarterly: "Quarter" };
+      const prefix = map[frequency] || "Period";
+      return `${prefix} ${periodNumber}`;
+    }
+
+    function defaultManualPrices(periods, basePrice) {
+      const swingPattern = [0, -0.06, 0.03, -0.08, 0.05, -0.02, 0.04, -0.05, 0.02, 0.06, -0.03, 0.01];
+      return Array.from({ length: periods }, (_, index) => {
+        const trend = Math.floor(index / swingPattern.length) * 0.01;
+        const multiplier = Math.max(0.15, 1 + swingPattern[index % swingPattern.length] + trend);
+        return Number((basePrice * multiplier).toFixed(2));
+      });
+    }
+
+    function ensureManualPricesLength() {
+      const periods = Math.max(1, Math.floor(Number($("dca-periods").value) || 1));
+      const fallback = Number($("sim-initial-price").value) > 0
+        ? Number($("sim-initial-price").value)
+        : (Number($("dca-current-price").value) > 0 ? Number($("dca-current-price").value) : 100);
+
+      if (!state.manualPrices.length) {
+        state.manualPrices = defaultManualPrices(periods, fallback);
+        return;
+      }
+
+      if (state.manualPrices.length < periods) {
+        const extra = defaultManualPrices(periods - state.manualPrices.length, fallback);
+        state.manualPrices = state.manualPrices.concat(extra);
+      } else if (state.manualPrices.length > periods) {
+        state.manualPrices = state.manualPrices.slice(0, periods);
+      }
+
+      state.manualPrices = state.manualPrices.map((value) => {
+        const numericValue = Number(value);
+        return numericValue > 0 ? Number(numericValue.toFixed(2)) : fallback;
+      });
+    }
+
+    function renderManualPriceTable() {
+      ensureManualPricesLength();
+      const tbody = $("manual-price-body");
+      const periods = Math.max(1, Math.floor(Number($("dca-periods").value) || 1));
+      const frequency = $("dca-frequency").value;
+      tbody.innerHTML = Array.from({ length: periods }, (_, index) => `
+        <tr>
+          <td>${periodLabel(index + 1, frequency)}</td>
+          <td>
+            <input
+              class="mini-input"
+              type="number"
+              min="0.01"
+              step="0.01"
+              data-price-index="${index}"
+              value="${Number(state.manualPrices[index]).toFixed(2)}"
+            >
+          </td>
+        </tr>
+      `).join("");
+
+      tbody.querySelectorAll("input[data-price-index]").forEach((inputEl) => {
+        inputEl.addEventListener("input", () => {
+          const index = Number(inputEl.dataset.priceIndex);
+          state.manualPrices[index] = Number(inputEl.value);
+          calculateDca(false);
+        });
+        inputEl.addEventListener("change", () => {
+          const index = Number(inputEl.dataset.priceIndex);
+          const value = Number(inputEl.value);
+          state.manualPrices[index] = value > 0 ? value : 0.01;
+          inputEl.value = Number(state.manualPrices[index]).toFixed(2);
+          calculateDca(false);
+        });
+      });
+    }
+
+    function updateCurrencyIndicators() {
+      document.querySelectorAll("[data-currency-symbol]").forEach((node) => {
+        node.textContent = currentSymbol();
+      });
+      sliderConfigs.forEach(updateSliderLabel);
+      calculateDca(false);
+    }
+
+    function buildResultCards(modeTitle, cards, formulaHtml, insightHtml, copyText) {
+      $("result-mode-pill").textContent = `Latest Result: ${modeTitle}`;
+      for (let index = 0; index < 6; index += 1) {
+        const card = cards[index];
+        const cardEl = $(`result-card-${index}`);
+        if (!card) {
+          cardEl.className = "result-card slate";
+          $(`result-lbl-${index}`).textContent = "-";
+          $(`result-val-${index}`).textContent = "-";
+          $(`result-sub-${index}`).textContent = "";
+          continue;
+        }
+        cardEl.className = `result-card ${card.tone}`;
+        $(`result-lbl-${index}`).textContent = card.label;
+        $(`result-val-${index}`).textContent = card.value;
+        $(`result-sub-${index}`).textContent = card.sub;
+      }
+      $("formula-box").innerHTML = formulaHtml;
+      const insightBox = $("insight-box");
+      if (insightHtml) {
+        insightBox.style.display = "block";
+        insightBox.innerHTML = insightHtml;
+      } else {
+        insightBox.style.display = "none";
+        insightBox.innerHTML = "";
+      }
+      state.copyText = copyText;
+      setCopyNote("Results ready to copy.");
+    }
+
+    function showSnapshotSummary(rows) {
+      $("snapshot-summary-body").innerHTML = rows.map((row) => `
+        <tr>
+          <td>${row.metric}</td>
+          <td class="compare-a-cell">${row.value}</td>
+          <td class="compare-b-cell">${row.note}</td>
+        </tr>
+      `).join("");
+    }
+
+    function updateProjection(columns, rows, filename, contextText) {
+      state.projectionColumns = columns;
+      state.projectionRows = rows;
+      state.projectionFilename = filename;
+      $("projection-context").textContent = contextText;
+      $("projection-head-row").innerHTML = columns.map((column) => `<th>${column.label}</th>`).join("");
+      $("projection-body").innerHTML = rows.map((row) => `<tr>${columns.map((column) => `<td>${formatCell(row[column.key], column.type)}</td>`).join("")}</tr>`).join("");
+    }
+
+    function formatCell(value, type) {
+      if (type === "money") return formatMoney(value);
+      if (type === "percentValue") return formatPercentValue(value);
+      if (type === "percentDecimal") return formatPercentFromDecimal(value);
+      if (type === "units") return formatUnits(value);
+      if (type === "text") return String(value);
+      return Number(value).toLocaleString(currentNumberLocale(), { maximumFractionDigits: 2 });
+    }
+
+    function commonChartOptions() {
+      return {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: { mode: "index", intersect: false },
+        plugins: {
+          legend: { position: "bottom", labels: { boxWidth: 14, usePointStyle: true } }
+        }
+      };
+    }
+
+    function renderCharts(config) {
+      $("charts-context").textContent = config.context;
+      $("growth-title").textContent = config.growthTitle;
+      $("growth-note").textContent = config.growthNote;
+      $("units-title").textContent = config.unitsTitle;
+      $("units-note").textContent = config.unitsNote;
+      $("comparison-title").textContent = config.comparisonTitle;
+      $("comparison-note").textContent = config.comparisonNote;
+
+      if (typeof Chart === "undefined") return;
+
+      state.charts.growth = destroyChart(state.charts.growth);
+      state.charts.units = destroyChart(state.charts.units);
+      state.charts.comparison = destroyChart(state.charts.comparison);
+
+      state.charts.growth = new Chart($("growth-chart").getContext("2d"), {
+        type: "line",
+        data: {
+          labels: config.labels,
+          datasets: [
+            {
+              label: "Total invested",
+              data: config.totalInvestedSeries,
+              borderColor: "#0284c7",
+              backgroundColor: "rgba(2, 132, 199, 0.12)",
+              fill: false,
+              tension: 0.28,
+              pointRadius: 2
+            },
+            {
+              label: "Portfolio value",
+              data: config.portfolioValueSeries,
+              borderColor: "#0d9488",
+              backgroundColor: "rgba(13, 148, 136, 0.12)",
+              fill: false,
+              tension: 0.28,
+              pointRadius: 2
+            }
+          ]
+        },
+        options: {
+          ...commonChartOptions(),
+          scales: { y: { ticks: { callback: (value) => formatMoney(value, 0) } } },
+          plugins: { ...commonChartOptions().plugins, tooltip: { callbacks: { label: (ctx) => `${ctx.dataset.label}: ${formatMoney(ctx.parsed.y)}` } } }
+        }
+      });
+
+      state.charts.units = new Chart($("units-chart").getContext("2d"), {
+        data: {
+          labels: config.labels,
+          datasets: [
+            {
+              type: "bar",
+              label: "Units purchased this period",
+              data: config.unitsPurchasedSeries,
+              backgroundColor: "rgba(245, 158, 11, 0.55)",
+              borderColor: "#d97706",
+              borderWidth: 1
+            },
+            {
+              type: "line",
+              label: "Total units held",
+              data: config.totalUnitsSeries,
+              borderColor: "#0d9488",
+              backgroundColor: "rgba(13, 148, 136, 0.14)",
+              fill: false,
+              tension: 0.24,
+              pointRadius: 2,
+              yAxisID: "y1"
+            }
+          ]
+        },
+        options: {
+          ...commonChartOptions(),
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: { callback: (value) => formatUnits(value, 2) }
+            },
+            y1: {
+              beginAtZero: true,
+              position: "right",
+              grid: { drawOnChartArea: false },
+              ticks: { callback: (value) => formatUnits(value, 2) }
+            }
+          },
+          plugins: {
+            ...commonChartOptions().plugins,
+            tooltip: { callbacks: { label: (ctx) => `${ctx.dataset.label}: ${formatUnits(ctx.parsed.y || ctx.raw, 4)}` } }
+          }
+        }
+      });
+
+      state.charts.comparison = new Chart($("comparison-chart").getContext("2d"), {
+        type: "line",
+        data: {
+          labels: config.labels,
+          datasets: [
+            {
+              label: "DCA portfolio value",
+              data: config.portfolioValueSeries,
+              borderColor: "#0d9488",
+              backgroundColor: "rgba(13, 148, 136, 0.14)",
+              fill: false,
+              tension: 0.25,
+              pointRadius: 2
+            },
+            {
+              label: "Lump sum value",
+              data: config.lumpSumSeries,
+              borderColor: "#f43f5e",
+              backgroundColor: "rgba(244, 63, 94, 0.12)",
+              fill: false,
+              tension: 0.25,
+              pointRadius: 2
+            }
+          ]
+        },
+        options: {
+          ...commonChartOptions(),
+          scales: { y: { ticks: { callback: (value) => formatMoney(value, 0) } } },
+          plugins: { ...commonChartOptions().plugins, tooltip: { callbacks: { label: (ctx) => `${ctx.dataset.label}: ${formatMoney(ctx.parsed.y)}` } } }
+        }
+      });
+    }
+
+    function switchModule(name) {
+      state.activeModule = name;
+      if (name === "manual" || name === "simulation") state.mode = name;
+      document.querySelectorAll(".module").forEach((module) => module.classList.toggle("active", module.id === `mod-${name}`));
+      document.querySelectorAll(".qnav-btn").forEach((button) => {
+        const active = button.dataset.module === name;
+        button.classList.toggle("active", active);
+        button.setAttribute("aria-selected", active ? "true" : "false");
+      });
+      if ($("global-currency")) {
+        $("global-currency").value = state.currentCurrency;
+      }
+      $("custom-symbol-wrap")?.classList.toggle("hidden", state.currentCurrency !== "CUSTOM");
+      document.querySelectorAll("[data-currency-symbol]").forEach((node) => {
+        node.textContent = currentSymbol();
+      });
+      sliderConfigs.forEach(updateSliderLabel);
+      if (name === "manual") renderManualPriceTable();
+      setStatus("");
+      calculateDca(false);
+    }
+
+    function generateSimulationPrices(periods, initialPrice, growthRatePct, frequency) {
+      const periodsPerYear = frequencyPeriodsPerYear(frequency);
+      const growthRate = growthRatePct / 100;
+      return Array.from({ length: periods }, (_, index) => {
+        return initialPrice * Math.pow(1 + (growthRate / periodsPerYear), index);
+      });
+    }
+
+    function calculateDca(announce = false, shouldScroll = false) {
+      const amount = Number($("dca-amount").value);
+      const periods = Math.max(1, Math.floor(Number($("dca-periods").value) || 0));
+      const currentPrice = Number($("dca-current-price").value);
+      const frequency = $("dca-frequency").value;
+      const initialPrice = Number($("sim-initial-price").value);
+      const growthRatePct = Number($("sim-growth-rate").value);
+      const periodsPerYear = frequencyPeriodsPerYear(frequency);
+
+      if (!(amount > 0)) {
+        setStatus("Investment amount per period must be greater than zero.", "error");
+        return;
+      }
+      if (!(periods > 0)) {
+        setStatus("Number of periods must be greater than zero.", "error");
+        return;
+      }
+      if (!(currentPrice > 0)) {
+        setStatus("Current asset price must be greater than zero.", "error");
+        return;
+      }
+      if (state.mode === "simulation" && !(initialPrice > 0)) {
+        setStatus("Initial asset price must be greater than zero in simulation mode.", "error");
+        return;
+      }
+      if (state.mode === "simulation" && (1 + ((growthRatePct / 100) / periodsPerYear)) <= 0) {
+        setStatus("Growth rate is too negative for the selected frequency. Please use a higher value.", "error");
+        return;
+      }
+
+      ensureManualPricesLength();
+
+      const priceSeries = state.mode === "manual"
+        ? state.manualPrices.slice(0, periods).map(Number)
+        : generateSimulationPrices(periods, initialPrice, growthRatePct, frequency);
+
+      if (priceSeries.some((price) => !(price > 0))) {
+        setStatus("Every period price must be greater than zero.", "error");
+        return;
+      }
+
+      let totalUnits = 0;
+      const rows = priceSeries.map((price, index) => {
+        const unitsPurchased = amount / price;
+        totalUnits += unitsPurchased;
+        return {
+          period: periodLabel(index + 1, frequency),
+          assetPrice: price,
+          investmentAmount: amount,
+          unitsPurchased,
+          totalUnitsHeld: totalUnits,
+          portfolioValue: totalUnits * price
+        };
+      });
+
+      const totalInvestment = amount * periods;
+      const averagePurchasePrice = totalUnits > 0 ? totalInvestment / totalUnits : 0;
+      const currentPortfolioValue = totalUnits * currentPrice;
+      const profitLoss = currentPortfolioValue - totalInvestment;
+      const percentageReturn = totalInvestment > 0 ? profitLoss / totalInvestment : 0;
+      const totalYears = periods / periodsPerYear;
+      const firstPrice = priceSeries[0];
+      const lumpSumUnits = totalInvestment / firstPrice;
+      const lumpSumSeries = priceSeries.map((price) => lumpSumUnits * price);
+      const lumpSumCurrentValue = lumpSumUnits * currentPrice;
+      const dcaVsLumpSumGap = currentPortfolioValue - lumpSumCurrentValue;
+      const bestBuyRow = rows.reduce((best, row) => row.unitsPurchased > best.unitsPurchased ? row : best, rows[0]);
+      const lowestPrice = Math.min(...priceSeries);
+
+      buildResultCards(
+        state.mode === "manual" ? "DCA Analysis - Manual Price Mode" : "DCA Analysis - Simulation Mode",
+        [
+          { tone: "teal", label: "Total Investment", value: formatMoney(totalInvestment), sub: `Fixed ${frequencyLabel(frequency).toLowerCase()} investing amount across ${periods} periods` },
+          { tone: "amber", label: "Total Units Purchased", value: formatUnits(totalUnits, 6), sub: "All units accumulated from your recurring investments" },
+          { tone: "sky", label: "Average Purchase Price", value: formatMoney(averagePurchasePrice), sub: "Total money invested divided by total units acquired" },
+          { tone: "teal", label: "Portfolio Value", value: formatMoney(currentPortfolioValue), sub: `Valued using current price of ${formatMoney(currentPrice)}` },
+          { tone: profitLoss >= 0 ? "teal" : "rose", label: "Total Profit or Loss", value: formatMoney(profitLoss), sub: profitLoss >= 0 ? "Current value is above total invested capital" : "Current value is below total invested capital" },
+          { tone: percentageReturn >= 0 ? "sky" : "rose", label: "Percentage Return", value: formatPercentFromDecimal(percentageReturn), sub: "Profit or loss divided by total investment" }
+        ],
+        `<strong>DCA Formulas</strong><br>Total Investment = Investment Amount &times; Number of Periods<br>Units Purchased Each Period = Investment Amount / Asset Price<br>Total Units Accumulated = Sum of all units purchased<br>Average Purchase Price = Total Investment / Total Units<br>Portfolio Value = Current Asset Price &times; Total Units<br>Profit or Loss = Portfolio Value - Total Investment<br>Percentage Return = (Profit or Loss / Total Investment) &times; 100<br>Lump Sum Comparison = (Total Planned Investment / Starting Price) &times; Period Price`,
+        `${profitLoss >= 0 ? `<strong>Your DCA plan is currently in profit.</strong> The current price of ${formatMoney(currentPrice)} is ${currentPrice >= averagePurchasePrice ? "above" : "below"} your average purchase price of ${formatMoney(averagePurchasePrice)}, and your position is worth ${formatMoney(currentPortfolioValue)}.` : `<strong>Your DCA plan is currently at a paper loss.</strong> The current price of ${formatMoney(currentPrice)} is below your average purchase price of ${formatMoney(averagePurchasePrice)}, so the current portfolio value is ${formatMoney(currentPortfolioValue)}.`}<br><br><strong>Best accumulation point:</strong> You bought the most units in ${bestBuyRow.period} when the asset price was ${formatMoney(bestBuyRow.assetPrice)} and that single contribution purchased ${formatUnits(bestBuyRow.unitsPurchased, 6)} units.<br><br><strong>DCA vs Lump Sum:</strong> ${dcaVsLumpSumGap >= 0 ? `DCA is ahead of the lump sum path by ${formatMoney(dcaVsLumpSumGap)} based on the current price.` : `DCA is behind the lump sum path by ${formatMoney(Math.abs(dcaVsLumpSumGap))} based on the current price.`}`,
+        `Dollar Cost Averaging Calculator Summary\nMode: ${state.mode === "manual" ? "Manual Price Mode" : "Simulation Mode"}\nInvestment frequency: ${frequencyLabel(frequency)}\nNumber of periods: ${periods}\nEstimated years: ${totalYears.toFixed(2)}\nInvestment amount per period: ${formatMoney(amount)}\nCurrent asset price: ${formatMoney(currentPrice)}\nTotal investment: ${formatMoney(totalInvestment)}\nTotal units purchased: ${formatUnits(totalUnits, 6)}\nAverage purchase price: ${formatMoney(averagePurchasePrice)}\nPortfolio value: ${formatMoney(currentPortfolioValue)}\nProfit or loss: ${formatMoney(profitLoss)}\nPercentage return: ${formatPercentFromDecimal(percentageReturn)}\nLump sum current value: ${formatMoney(lumpSumCurrentValue)}\nDCA vs lump sum gap: ${formatMoney(dcaVsLumpSumGap)}`
+      );
+
+      showSnapshotSummary([
+        { metric: "Operating Mode", value: state.mode === "manual" ? "Manual Price Mode" : "Simulation Mode", note: "Manual mode uses your entered prices. Simulation mode generates prices from the starting price and growth rate." },
+        { metric: "Investment Frequency", value: frequencyLabel(frequency), note: `The plan covers ${periods} periods, or about ${totalYears.toFixed(2)} years.` },
+        { metric: "Average Purchase Price", value: formatMoney(averagePurchasePrice), note: "This is the average cost per unit across all contributions." },
+        { metric: "Current Market Price", value: formatMoney(currentPrice), note: currentPrice >= averagePurchasePrice ? "Current price is above your average cost." : "Current price is below your average cost." },
+        { metric: "Lowest Purchase Price", value: formatMoney(lowestPrice), note: `The most units were bought in ${bestBuyRow.period} because the price was relatively low.` },
+        { metric: "DCA vs Lump Sum Today", value: formatMoney(dcaVsLumpSumGap), note: dcaVsLumpSumGap >= 0 ? "Positive means the DCA path is ahead right now." : "Negative means the lump sum path is ahead right now." }
+      ]);
+
+      renderCharts({
+        context: `Charts currently reflect ${state.mode === "manual" ? "your manual price path" : "your simulated price path"} with ${frequencyLabel(frequency).toLowerCase()} investing.`,
+        growthTitle: "Total Invested vs Portfolio Value",
+        growthNote: "Compare cumulative money invested with the portfolio value at each period's market price.",
+        unitsTitle: "Units Purchased and Total Units",
+        unitsNote: "Lower prices usually buy more units for the same fixed investing amount.",
+        comparisonTitle: "DCA vs Lump Sum Comparison",
+        comparisonNote: `Lump sum assumes the full planned amount of ${formatMoney(totalInvestment)} was invested at the starting price of ${formatMoney(firstPrice)}.`,
+        labels: rows.map((row) => row.period),
+        totalInvestedSeries: rows.map((_, index) => amount * (index + 1)),
+        portfolioValueSeries: rows.map((row) => row.portfolioValue),
+        unitsPurchasedSeries: rows.map((row) => row.unitsPurchased),
+        totalUnitsSeries: rows.map((row) => row.totalUnitsHeld),
+        lumpSumSeries
+      });
+
+      updateProjection(
+        [
+          { key: "period", label: "Period", type: "text" },
+          { key: "assetPrice", label: "Asset Price", type: "money" },
+          { key: "investmentAmount", label: "Investment Amount", type: "money" },
+          { key: "unitsPurchased", label: "Units Purchased", type: "units" },
+          { key: "totalUnitsHeld", label: "Total Units Held", type: "units" },
+          { key: "portfolioValue", label: "Portfolio Value", type: "money" }
+        ],
+        rows,
+        "dca_projection.csv",
+        "Detailed investment table showing each period's asset price, units purchased, and portfolio value using the market price from that period. The result cards above use the current asset price for today's valuation."
+      );
+
+      setStatus(announce ? "DCA analysis updated." : "", announce ? "success" : "");
+
+      if (shouldScroll) {
+        requestAnimationFrame(() => {
+          $("results-section")?.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+      }
+
+      if (state.activeModule === "manual") {
+        $("manual-price-body").querySelectorAll("input[data-price-index]").forEach((inputEl, index) => {
+          if (document.activeElement !== inputEl) {
+            inputEl.value = Number(state.manualPrices[index]).toFixed(2);
+          }
+        });
+      }
+    }
+
+    function copyResults() {
+      if (!state.copyText) {
+        setCopyNote("Run a calculation first.");
+        return;
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(state.copyText)
+          .then(() => setCopyNote("Results copied to clipboard."))
+          .catch(() => setCopyNote("Clipboard blocked. Please copy manually."));
+      } else {
+        setCopyNote("Clipboard API is not available in this browser.");
+      }
+    }
+
+    function downloadCsv() {
+      if (!state.projectionColumns.length || !state.projectionRows.length) {
+        setStatus("Generate a projection before exporting CSV.", "error");
+        return;
+      }
+      const lines = [state.projectionColumns.map((column) => `"${column.label}"`).join(",")];
+      state.projectionRows.forEach((row) => {
+        lines.push(state.projectionColumns.map((column) => `"${String(formatCell(row[column.key], column.type)).replace(/"/g, '""')}"`).join(","));
+      });
+      const blob = new Blob([lines.join("\n")], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = state.projectionFilename;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+      setStatus("CSV download started.", "info");
+    }
+
+    function resetPlanner() {
+      $("dca-amount").value = 500;
+      $("dca-amount-sl").value = 500;
+      $("dca-periods").value = 24;
+      $("dca-periods-sl").value = 24;
+      $("dca-current-price").value = 130;
+      $("dca-current-price-sl").value = 130;
+      $("dca-frequency").value = "monthly";
+      $("sim-initial-price").value = 100;
+      $("sim-initial-price-sl").value = 100;
+      $("sim-growth-rate").value = 8;
+      $("sim-growth-rate-sl").value = 8;
+      state.mode = "manual";
+      state.activeModule = "setup";
+      state.manualPrices = defaultManualPrices(24, 100);
+      sliderConfigs.forEach(updateSliderLabel);
+      renderManualPriceTable();
+      document.querySelectorAll(".module").forEach((module) => module.classList.toggle("active", module.id === "mod-setup"));
+      document.querySelectorAll(".qnav-btn").forEach((button) => {
+        const active = button.dataset.module === "setup";
+        button.classList.toggle("active", active);
+        button.setAttribute("aria-selected", active ? "true" : "false");
+      });
+      calculateDca(true);
+    }
+
+    function bindCommonEvents() {
+      $("global-currency").addEventListener("change", (event) => {
+        state.currentCurrency = event.target.value;
+        $("custom-symbol-wrap").classList.toggle("hidden", state.currentCurrency !== "CUSTOM");
+        updateCurrencyIndicators();
+      });
+      $("custom-symbol").addEventListener("input", () => {
+        state.customSymbol = $("custom-symbol").value.trim() || "$";
+        if (state.currentCurrency === "CUSTOM") updateCurrencyIndicators();
+      });
+      $("dca-frequency").addEventListener("change", () => {
+        renderManualPriceTable();
+        calculateDca(false);
+      });
+      $("dca-periods").addEventListener("input", renderManualPriceTable);
+      $("dca-periods-sl").addEventListener("input", renderManualPriceTable);
+      $("sim-initial-price").addEventListener("change", () => {
+        if (!state.manualPrices.length) renderManualPriceTable();
+        calculateDca(false);
+      });
+      $("sim-growth-rate").addEventListener("change", () => calculateDca(false));
+    }
+
+    function initMobileNav() {
+      const button = $("hamburgerBtn");
+      const menu = $("mobileNav");
+      button.addEventListener("click", () => {
+        const open = menu.classList.toggle("open");
+        button.setAttribute("aria-expanded", open ? "true" : "false");
+      });
+    }
+
+    function init() {
+      sliderConfigs.forEach(bindSliderPair);
+      bindCommonEvents();
+      initMobileNav();
+      state.currentCurrency = $("global-currency").value;
+      state.manualPrices = defaultManualPrices(24, 100);
+      renderManualPriceTable();
+      updateCurrencyIndicators();
+      calculateDca(false);
+    }
+
+    window.addEventListener("DOMContentLoaded", init);
+  </script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
