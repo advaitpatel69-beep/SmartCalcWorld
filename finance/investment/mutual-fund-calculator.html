@@ -1,0 +1,2485 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow">
+  <title>Mutual Fund Calculator – SIP & Lump Sum Returns Calculator Online | SmartCalcWorld</title>
+  <meta name="description"
+    content="Calculate mutual fund returns using SIP and lump sum with advanced features like step-up investment, inflation adjustment, and growth charts on SmartCalcWorld.">
+  <link rel="canonical" href="https://smartcalcworld.com/finance/investment/mutual-fund-calculator.html">
+  <link rel="icon" type="image/png" href="https://smartcalcworld.com/favicon.png">
+  <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://smartcalcworld.com/#org",
+        "name": "SmartCalc World",
+        "url": "https://smartcalcworld.com",
+        "description": "Free finance calculators for investing, saving, inflation, returns, and long-term planning."
+      },
+      {
+        "@type": "WebApplication",
+        "@id": "https://smartcalcworld.com/finance/investment/mutual-fund-calculator.html#app",
+        "name": "Mutual Fund Calculator",
+        "url": "https://smartcalcworld.com/finance/investment/mutual-fund-calculator.html",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Any",
+        "creator": {
+          "@id": "https://smartcalcworld.com/#org"
+        },
+        "description": "Calculate mutual fund returns using SIP, lump sum, or a combined plan with step-up investing, inflation adjustment, yearly projections, and growth charts.",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Finance",
+            "item": "https://smartcalcworld.com/finance/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Investment",
+            "item": "https://smartcalcworld.com/finance/investment/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Mutual Fund Calculator",
+            "item": "https://smartcalcworld.com/finance/investment/mutual-fund-calculator.html"
+          }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is a mutual fund calculator?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A mutual fund calculator estimates how a SIP, a lump sum investment, or both may grow over time using return, duration, inflation, and step-up assumptions."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is SIP better than lump sum?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Neither is universally better. SIP suits regular investing and helps average purchase cost over time, while lump sum may work well when a larger amount is available and the investor can stay invested for the long term."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What return rate should I expect from mutual funds?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "There is no guaranteed return. Investors usually model multiple scenarios such as 8%, 10%, and 12% to understand a realistic range rather than depend on one optimistic number."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How much can I earn from mutual funds?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "That depends on how much you invest, whether you use SIP or lump sum, your investment duration, and the actual return your fund delivers over time."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is step-up SIP?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Step-up SIP means increasing your monthly SIP amount every year, often as income grows. Even a small yearly increase can materially improve the final corpus."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I lose money in mutual funds?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Mutual funds linked to markets can go up and down. Short-term losses are possible, which is why time horizon, diversification, and realistic expectations matter."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How does inflation affect mutual fund returns?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Inflation reduces purchasing power. Even if your fund value grows, the real value of that money may be lower after adjusting for rising prices."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is CAGR in mutual funds?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "CAGR is the annualized growth rate that represents how an investment grows each year on average over a period. In this calculator, an equivalent annual growth rate is shown from the chosen compounding assumption."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I combine SIP and lump sum in one plan?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Many investors start with a lump sum and continue with SIP contributions, and this calculator supports that combined approach."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+  <style>
+    :root {
+      --teal: #0d9488;
+      --teal-dark: #0f766e;
+      --teal-light: #ccfbf1;
+      --amber: #f59e0b;
+      --amber-light: #fef3c7;
+      --rose: #f43f5e;
+      --rose-light: #ffe4e6;
+      --sky: #0284c7;
+      --sky-light: #dbeafe;
+      --slate-950: #020617;
+      --slate-900: #0f172a;
+      --slate-800: #1e293b;
+      --slate-700: #334155;
+      --slate-600: #475569;
+      --slate-500: #64748b;
+      --slate-400: #94a3b8;
+      --slate-300: #cbd5e1;
+      --slate-200: #e2e8f0;
+      --slate-100: #f1f5f9;
+      --slate-50: #f8fafc;
+      --white: #ffffff;
+      --radius: 14px;
+      --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.08);
+      --shadow-md: 0 10px 28px rgba(15, 23, 42, 0.12);
+      --shadow-lg: 0 20px 48px rgba(15, 23, 42, 0.16);
+      --header-h: 68px;
+    }
+
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(13, 148, 136, 0.14), transparent 32%),
+        linear-gradient(180deg, #f8fafc 0%, #eff6ff 44%, #f8fafc 100%);
+      color: var(--slate-800);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    img,
+    canvas {
+      max-width: 100%;
+    }
+
+    a {
+      color: var(--teal);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: linear-gradient(135deg, #0891b2 0%, #059669 100%);
+      color: var(--white);
+      box-shadow: 0 2px 10px rgba(15, 23, 42, 0.12);
+    }
+
+    .hdr-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .hdr-logo {
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+    }
+
+    .hdr-nav {
+      display: flex;
+      gap: 1.2rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .hdr-nav a,
+    .hdr-nav span {
+      color: var(--white);
+      font-weight: 600;
+      font-size: 0.95rem;
+      opacity: 0.96;
+    }
+
+    .hdr-nav a:hover {
+      opacity: 0.82;
+      text-decoration: none;
+    }
+
+    .nav-disabled {
+      opacity: 0.74;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 4px;
+      background: none;
+      border: none;
+      padding: 0;
+    }
+
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background: var(--white);
+      border-radius: 999px;
+      transition: 0.3s ease;
+    }
+
+    .mobile-nav {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: #0b7694;
+      flex-direction: column;
+      padding: 1rem;
+      gap: 0.9rem;
+      box-shadow: 0 12px 28px rgba(15, 23, 42, 0.16);
+    }
+
+    .mobile-nav.open {
+      display: flex;
+    }
+
+    .mobile-nav a,
+    .mobile-nav span {
+      color: var(--white);
+      text-decoration: none;
+      padding: 0.45rem 0.5rem;
+      border-radius: 8px;
+    }
+
+    .mobile-nav a:hover {
+      background: rgba(255, 255, 255, 0.08);
+      text-decoration: none;
+    }
+
+    .page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1.5rem 1rem 4rem;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(135deg, rgba(13, 148, 136, 0.14), rgba(2, 132, 199, 0.08)),
+        var(--white);
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      border-radius: 22px;
+      box-shadow: var(--shadow-md);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -80px -80px auto;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle, rgba(13, 148, 136, 0.14), transparent 70%);
+      pointer-events: none;
+    }
+
+    .card,
+    .content-section {
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid rgba(148, 163, 184, 0.22);
+      border-radius: 20px;
+      box-shadow: var(--shadow-md);
+      margin-top: 2rem;
+    }
+
+    .card {
+      padding: 1.5rem;
+    }
+
+    .content-section {
+      padding: 2rem;
+      scroll-margin-top: calc(var(--header-h) + 1rem);
+    }
+
+    .eyebrow,
+    .hero-badge,
+    .mode-pill,
+    .copy-note {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      border-radius: 999px;
+      padding: 0.45rem 0.82rem;
+      font-weight: 800;
+      font-size: 0.82rem;
+    }
+
+    .eyebrow,
+    .hero-badge {
+      background: var(--teal-light);
+      color: var(--teal-dark);
+      margin-bottom: 0.85rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .hero-badge {
+      gap: 0.45rem;
+      padding: 0.4rem 0.9rem;
+      font-size: 0.76rem;
+    }
+
+    .mode-pill,
+    .copy-note {
+      background: rgba(2, 132, 199, 0.1);
+      color: var(--sky);
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.25rem);
+      line-height: 1.08;
+      color: var(--slate-900);
+      margin-bottom: 0.8rem;
+    }
+
+    .hero-sub,
+    .hero p {
+      max-width: 760px;
+      font-size: 1rem;
+      color: var(--slate-600);
+    }
+
+    .card-title,
+    .content-section h2 {
+      font-size: clamp(1.25rem, 3vw, 1.75rem);
+      font-weight: 800;
+      color: var(--slate-900);
+      margin-bottom: 1rem;
+    }
+
+    .content-section h2 {
+      padding-left: 1rem;
+      border-left: 4px solid var(--teal);
+    }
+
+    .content-section h3 {
+      font-size: 1.15rem;
+      color: var(--slate-900);
+      margin: 1.6rem 0 0.65rem;
+    }
+
+    .toolbar-grid,
+    .field-pair,
+    .hero-highlights,
+    .charts-grid,
+    .comparison-grid,
+    .links-grid,
+    .footer-content,
+    .result-grid,
+    .mode-switch,
+    .qnav,
+    .info-list {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .toolbar-grid>*,
+    .field-pair>*,
+    .hero-highlights>*,
+    .charts-grid>*,
+    .comparison-grid>*,
+    .links-grid>*,
+    .footer-content>*,
+    .result-grid>*,
+    .mode-switch>*,
+    .qnav>* {
+      min-width: 0;
+    }
+
+    .hero p,
+    .module-intro,
+    .content-section p,
+    .content-section li,
+    .chart-note,
+    .table-context {
+      color: var(--slate-600);
+      font-size: 0.97rem;
+    }
+
+    .content-section ul {
+      margin: 0.2rem 0 1rem 1.25rem;
+    }
+
+    .content-section li {
+      margin-bottom: 0.55rem;
+    }
+
+    .hero-highlights {
+      gap: 0.75rem;
+      margin-top: 1.15rem;
+      align-items: start;
+    }
+
+    .hero-chip,
+    .hero-highlights .chip {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(248, 250, 252, 0.84));
+      border: 1px solid rgba(148, 163, 184, 0.22);
+      border-radius: 14px;
+      padding: 0.85rem 0.95rem;
+      box-shadow: var(--shadow-sm);
+      color: var(--slate-600);
+      line-height: 1.55;
+    }
+
+    .hero-chip strong,
+    .hero-highlights .chip strong {
+      display: block;
+      color: var(--slate-900);
+      margin-bottom: 0.18rem;
+      font-size: 0.98rem;
+    }
+
+    .toolbar-box {
+      background: linear-gradient(180deg, rgba(13, 148, 136, 0.08), rgba(255, 255, 255, 0.94));
+      border: 1px solid rgba(148, 163, 184, 0.24);
+      border-radius: 16px;
+      padding: 1rem;
+      height: 100%;
+    }
+
+    .toolbar-box h2,
+    .toolbar-box h3 {
+      font-size: 1.02rem;
+      color: var(--slate-900);
+      margin-bottom: 0.55rem;
+    }
+
+    .field-shell {
+      background: none;
+      border: none;
+      border-radius: 0;
+      padding: 0;
+      box-shadow: none;
+    }
+
+    .field-shell>.form-row {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), var(--slate-50));
+      border: 1px solid rgba(148, 163, 184, 0.22);
+      border-radius: 16px;
+      padding: 1rem;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 0;
+      height: 100%;
+      align-content: start;
+    }
+
+    .chart-wrap,
+    .comparison-summary,
+    .insight-box,
+    .formula-box {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), var(--slate-50));
+      border: 1px solid rgba(148, 163, 184, 0.22);
+      border-radius: 18px;
+      padding: 1rem;
+      box-shadow: var(--shadow-sm);
+      min-width: 0;
+    }
+
+    .info-pill {
+      padding: 0.8rem 0.9rem;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid rgba(148, 163, 184, 0.22);
+      color: var(--slate-700);
+      font-weight: 700;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .qnav-btn,
+    .mode-chip,
+    .btn-primary,
+    .btn-ghost,
+    .btn-secondary {
+      border-radius: 14px;
+      padding: 0.9rem 1rem;
+      font-size: 0.92rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      line-height: 1.35;
+    }
+
+    .qnav-btn,
+    .mode-chip {
+      width: 100%;
+      min-height: 58px;
+      border: 2px solid var(--slate-300);
+      background: var(--white);
+      color: var(--slate-600);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn-ghost,
+    .btn-secondary {
+      border: 2px solid var(--slate-300);
+      background: var(--white);
+      color: var(--slate-600);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .qnav-btn.active,
+    .mode-chip.active,
+    .btn-primary {
+      background: linear-gradient(135deg, var(--teal-dark), var(--teal));
+      color: var(--white);
+      border-color: var(--teal);
+      box-shadow: 0 8px 24px rgba(13, 148, 136, 0.24);
+    }
+
+    .qnav-btn:hover,
+    .mode-chip:hover,
+    .btn-primary:hover,
+    .btn-ghost:hover,
+    .btn-secondary:hover,
+    .link-card:hover {
+      transform: translateY(-2px);
+      text-decoration: none;
+    }
+
+    .module {
+      display: none;
+    }
+
+    .module.active {
+      display: block;
+      animation: fadeUp 0.25s ease;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .form-row {
+      display: grid;
+      gap: 0.45rem;
+      margin-bottom: 1rem;
+    }
+
+    .lbl {
+      font-weight: 700;
+      color: var(--slate-800);
+      font-size: 0.92rem;
+    }
+
+    input[type="number"],
+    select {
+      width: 100%;
+      border: 2px solid var(--slate-300);
+      border-radius: 12px;
+      padding: 0.78rem 0.92rem;
+      font-size: 1rem;
+      color: var(--slate-800);
+      background: var(--white);
+    }
+
+    input[type="number"]:focus,
+    select:focus {
+      outline: none;
+      border-color: var(--teal);
+      box-shadow: 0 0 0 4px rgba(13, 148, 136, 0.12);
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--teal);
+      cursor: pointer;
+    }
+
+    .field-shell.is-disabled {
+      opacity: 0.66;
+    }
+
+    .field-shell.is-disabled>.form-row {
+      background: var(--slate-50);
+    }
+
+    .field-shell.is-disabled input,
+    .field-shell.is-disabled select {
+      background: var(--slate-100);
+      cursor: not-allowed;
+    }
+
+    .input-slider {
+      display: grid;
+      gap: 0.7rem;
+    }
+
+    .slider-lbl,
+    .hint {
+      color: var(--slate-500);
+      font-size: 0.82rem;
+    }
+
+    .slider-lbl {
+      font-weight: 700;
+      text-align: right;
+    }
+
+    .btn-row,
+    .result-meta,
+    .result-actions,
+    .table-head {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .btn-row {
+      align-items: stretch;
+    }
+
+    .btn-row>* {
+      flex: 1 1 220px;
+      min-width: 0;
+    }
+
+    .result-meta {
+      align-items: flex-start;
+    }
+
+    .result-actions {
+      align-items: stretch;
+    }
+
+    .status-banner {
+      display: none;
+      margin: 0.85rem 0 1rem;
+      border-radius: 16px;
+      padding: 0.9rem 1rem;
+      font-weight: 700;
+    }
+
+    .status-banner.success {
+      display: block;
+      background: rgba(204, 251, 241, 0.88);
+      color: var(--teal-dark);
+      border: 1px solid rgba(13, 148, 136, 0.14);
+    }
+
+    .status-banner.error {
+      display: block;
+      background: rgba(255, 228, 230, 0.88);
+      color: #be123c;
+      border: 1px solid rgba(244, 63, 94, 0.16);
+    }
+
+    .result-grid {
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      margin-top: 1rem;
+    }
+
+    .result-card {
+      color: var(--white);
+      border-radius: 18px;
+      padding: 1.2rem 1.1rem;
+      min-height: 142px;
+      min-width: 0;
+      box-shadow: var(--shadow-md);
+    }
+
+    .result-card.teal {
+      background: linear-gradient(135deg, var(--teal-dark), var(--teal));
+    }
+
+    .result-card.amber {
+      background: linear-gradient(135deg, #d97706, var(--amber));
+    }
+
+    .result-card.rose {
+      background: linear-gradient(135deg, #be123c, var(--rose));
+    }
+
+    .result-card.slate {
+      background: linear-gradient(135deg, var(--slate-800), var(--slate-600));
+    }
+
+    .result-card.sky {
+      background: linear-gradient(135deg, #0369a1, var(--sky));
+    }
+
+    .result-lbl {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      opacity: 0.92;
+      margin-bottom: 0.45rem;
+    }
+
+    .result-val {
+      font-size: clamp(0.96rem, 2.1vw, 1.55rem);
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.35rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .result-sub {
+      font-size: 0.82rem;
+      opacity: 0.86;
+    }
+
+    .insight-box {
+      display: none;
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.12), rgba(255, 255, 255, 0.95));
+      border: 1px solid rgba(245, 158, 11, 0.24);
+      color: #78350f;
+    }
+
+    .formula-box {
+      background: linear-gradient(135deg, rgba(13, 148, 136, 0.08), rgba(255, 255, 255, 0.98));
+      border-left: 4px solid var(--teal);
+      color: var(--slate-700);
+      font-family: "Courier New", monospace;
+      font-size: 0.93rem;
+      overflow-x: auto;
+    }
+
+    .comparison-summary {
+      margin-top: 1rem;
+    }
+
+    .tbl-wrap {
+      overflow-x: auto;
+      border-radius: 16px;
+      border: 1px solid rgba(148, 163, 184, 0.24);
+      background: var(--white);
+      box-shadow: var(--shadow-sm);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 640px;
+    }
+
+    thead tr {
+      background: linear-gradient(135deg, var(--teal-dark), var(--teal));
+      color: var(--white);
+    }
+
+    th,
+    td {
+      padding: 0.75rem 0.9rem;
+      text-align: right;
+      font-size: 0.9rem;
+      border-bottom: 1px solid var(--slate-200);
+    }
+
+    th {
+      font-size: 0.84rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    th:first-child,
+    td:first-child {
+      text-align: left;
+    }
+
+    tbody tr:nth-child(even) {
+      background: var(--slate-50);
+    }
+
+    tbody tr:hover {
+      background: rgba(13, 148, 136, 0.06);
+    }
+
+    .compare-a-cell {
+      color: #1d4ed8;
+      font-weight: 700;
+      background: rgba(219, 234, 254, 0.45);
+    }
+
+    .compare-b-cell {
+      font-weight: 700;
+      color: #92400e;
+      background: rgba(254, 243, 199, 0.55);
+    }
+
+    .chart-title {
+      color: var(--slate-900);
+      font-weight: 800;
+      margin-bottom: 0.35rem;
+      font-size: 1.02rem;
+    }
+
+    .chart-canvas {
+      position: relative;
+      height: 280px;
+      margin-top: 0.8rem;
+    }
+
+    .chart-wrap,
+    .link-card,
+    .faq-item {
+      height: 100%;
+    }
+
+    .comparison-grid {
+      margin-top: 1rem;
+    }
+
+    .comparison-grid>div {
+      min-width: 0;
+    }
+
+    #comparison-tables .tbl-wrap {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .link-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 12px;
+      background: var(--teal-light);
+      margin-bottom: 0.7rem;
+      font-size: 1.15rem;
+    }
+
+    .links-grid {
+      margin-top: 1rem;
+    }
+
+    .link-card {
+      background: linear-gradient(180deg, var(--white), var(--slate-50));
+      border: 2px solid var(--slate-200);
+      border-radius: 16px;
+      padding: 1rem;
+      color: var(--slate-700);
+      transition: 0.25s ease;
+      text-decoration: none;
+    }
+
+    .link-card strong {
+      display: block;
+      color: var(--slate-900);
+      margin-bottom: 0.35rem;
+    }
+
+    .link-card p {
+      margin: 0;
+      color: var(--slate-500);
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .faq-item {
+      background: var(--slate-50);
+      border: 1px solid var(--slate-200);
+      border-radius: 14px;
+      padding: 1.1rem 1.15rem;
+      margin-bottom: 0.85rem;
+      min-width: 0;
+    }
+
+    .faq-q {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--slate-900);
+      margin-bottom: 0.35rem;
+    }
+
+    .faq-a {
+      color: var(--slate-600);
+      font-size: 0.94rem;
+    }
+
+    .disclaimer1 {
+      background: linear-gradient(135deg, var(--amber-light), #fff7ed);
+      border: 1px solid rgba(245, 158, 11, 0.24);
+      border-radius: 16px;
+      padding: 1.2rem 1.3rem;
+      margin-top: 2rem;
+      color: #78350f;
+      font-size: 0.9rem;
+    }
+
+    .disclaimer1 strong {
+      color: #92400e;
+    }
+
+    footer {
+      background: #1f2937;
+      color: var(--white);
+      margin-top: 2.5rem;
+      padding: 2.4rem 1rem 1.3rem;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-section h3 {
+      font-size: 1rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .footer-section ul {
+      list-style: none;
+      display: grid;
+      gap: 0.55rem;
+    }
+
+    .footer-section a {
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .footer-disclaimer {
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 1rem;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .copyright {
+      text-align: center;
+      margin-top: 1.2rem;
+      color: rgba(255, 255, 255, 0.75);
+      font-size: 0.92rem;
+    }
+
+    @media (min-width: 640px) {
+      .toolbar-grid,
+      .field-pair,
+      .hero-highlights,
+      .comparison-grid,
+      .links-grid,
+      .result-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .mode-switch {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @media (min-width: 768px) {
+      .charts-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .charts-grid .chart-wrap:last-child {
+        grid-column: 1 / -1;
+      }
+
+      .footer-content {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .result-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @media (min-width: 960px) {
+      .hero-highlights {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .toolbar-grid {
+        grid-template-columns: 0.95fr 1.05fr;
+      }
+
+      .footer-content {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .comparison-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .result-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 767px) {
+      .hdr-nav {
+        display: none;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .table-head,
+      .result-meta,
+      .result-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .btn-row>* {
+        flex-basis: 100%;
+      }
+
+      .result-val {
+        font-size: 1rem;
+      }
+    }
+
+    @media (max-width: 640px) {
+      #comparison-tables table {
+        min-width: 620px;
+      }
+    }
+
+    @media (max-width: 479px) {
+      .page {
+        padding-inline: 0.8rem;
+      }
+
+      .card,
+      .content-section,
+      .hero {
+        padding: 1.05rem;
+      }
+
+      .chart-canvas {
+        height: 240px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="hdr-inner">
+      <div class="hdr-logo">💰 SmartCalc World</div>
+      <nav class="hdr-nav" aria-label="Finance navigation">
+        <a href="https://smartcalcworld.com/index.html">Home</a>
+        <a href="https://smartcalcworld.com/finance/finance-hub.html">Finance Calculators</a>
+
+        <span class="nav-disabled">Medical Calculators (Coming Soon)</span>
+				<span class="nav-disabled">Student Calculators (Coming Soon)</span>
+
+      </nav>
+      <button type="button" class="hamburger" id="hamburgerBtn" aria-label="Open navigation" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div class="mobile-nav" id="mobileNav">
+        <a href="https://smartcalcworld.com/index.html">Home</a>
+        <a href="https://smartcalcworld.com/finance/finance-hub.html">Finance Calculators</a>
+
+        <span class="nav-disabled">Medical Calculators (Coming Soon)</span>
+				<span class="nav-disabled">Student Calculators (Coming Soon)</span>
+
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="hero">
+      <span class="hero-badge">📊 Premium Mutual Fund Planning</span>
+      <h1>Mutual Fund Calculator</h1>
+      <p class="hero-sub">Estimate how your SIP, your lump sum, or a combined mutual fund strategy may grow over time. This calculator follows the same premium SmartCalc World layout and experience style as our Portfolio Growth Calculator and Investment Goal Calculator, while focusing specifically on SIP returns, lump sum growth, step-up investing, inflation-adjusted value, and scenario comparison.</p>
+
+      <div class="hero-highlights">
+        <div class="hero-chip">
+          <strong>Compare SIP, lump sum, or both</strong>
+          Model regular investing, one-time capital, or a combined mutual fund plan in one place.
+        </div>
+        <div class="hero-chip">
+          <strong>Review value, profit, and real purchasing power</strong>
+          Track invested amount, total growth, inflation-adjusted value, and annualized equivalent return together.
+        </div>
+        <div class="hero-chip">
+          <strong>Test step-up SIP and scenario ranges</strong>
+          Compare different return assumptions and yearly SIP increases so expectations stay practical.
+        </div>
+      </div>
+    </section>
+
+    <section class="card" id="calculator">
+      <div class="card-title">Mutual Fund Return Planner</div>
+
+      <div class="toolbar-grid">
+        <div class="toolbar-box">
+          <h2>Display Currency</h2>
+          <div class="form-row">
+            <label class="lbl" for="mf-currency">Choose currency</label>
+            <select id="mf-currency">
+              <option value="USD">USD $</option>
+              <option value="INR">INR &#8377;</option>
+              <option value="EUR">EUR &euro;</option>
+              <option value="GBP">GBP &pound;</option>
+              <option value="CAD">CAD $</option>
+              <option value="AUD">AUD $</option>
+            </select>
+            <span class="hint">Display formatting only. Symbols and grouping update without exchange-rate conversion.</span>
+          </div>
+        </div>
+
+        <div class="toolbar-box">
+          <h2>What this tool helps you see</h2>
+          <div class="info-list">
+            <div class="info-pill">How a steady <strong>SIP</strong> can build wealth step by step 💸 and how a yearly step-up can amplify the ending corpus.</div>
+            <div class="info-pill">How a <strong>lump sum</strong> grows when it gets more time to compound 📈, either by itself or alongside SIP contributions.</div>
+            <div class="info-pill">How <strong>inflation</strong>, <strong>compounding frequency</strong>, and different return assumptions shape the real outcome 🌍.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="qnav" role="tablist" aria-label="Mutual fund calculator sections">
+        <button type="button" class="qnav-btn active" data-module="core" role="tab" aria-selected="true"
+          onclick="switchModule('core')">Core Inputs</button>
+        <button type="button" class="qnav-btn" data-module="strategy" role="tab" aria-selected="false"
+          onclick="switchModule('strategy')">Strategy &amp; Inflation</button>
+        <button type="button" class="qnav-btn" data-module="scenarios" role="tab" aria-selected="false"
+          onclick="switchModule('scenarios')">Scenario Comparison</button>
+      </div>
+
+      <section class="module active" id="mod-core" role="tabpanel" aria-label="Core mutual fund inputs">
+        <p class="module-intro">Start by choosing how you invest. You can project a SIP plan, a lump sum plan, or a combined mutual fund strategy using both together.</p>
+
+        <div class="toolbar-box" id="mode-panel">
+          <h2>Investment Mode</h2>
+          <div class="mode-switch" role="tablist" aria-label="Investment mode toggle">
+            <button type="button" class="mode-chip" id="mode-sip" onclick="setInvestmentMode('sip')">SIP Only</button>
+            <button type="button" class="mode-chip" id="mode-lumpsum" onclick="setInvestmentMode('lumpsum')">Lump Sum Only</button>
+            <button type="button" class="mode-chip active" id="mode-combo" onclick="setInvestmentMode('combo')">SIP + Lump Sum</button>
+          </div>
+          <div class="table-context" id="mf-mode-note">Both SIP and lump sum are active, so the projection combines one-time capital with recurring monthly investments.</div>
+        </div>
+
+        <div class="field-pair">
+          <div class="field-shell" id="mf-monthly-shell">
+            <div class="form-row">
+              <label class="lbl" for="mf-monthly">Monthly Investment SIP (<span data-currency-symbol>$</span>)</label>
+              <div class="input-slider">
+                <div>
+                  <input type="number" id="mf-monthly" min="0" max="500000" step="50" value="500">
+                  <span class="hint">Your regular SIP contribution invested every month.</span>
+                </div>
+                <div>
+                  <input type="range" id="mf-monthly-sl" min="0" max="50000" step="50" value="500">
+                  <div class="slider-lbl" id="mf-monthly-lbl">$500.00</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="field-shell" id="mf-lumpsum-shell">
+            <div class="form-row">
+              <label class="lbl" for="mf-lumpsum">Lump Sum Investment (<span data-currency-symbol>$</span>)</label>
+              <div class="input-slider">
+                <div>
+                  <input type="number" id="mf-lumpsum" min="0" max="1000000000" step="1000" value="10000">
+                  <span class="hint">A one-time amount invested at the beginning of the plan.</span>
+                </div>
+                <div>
+                  <input type="range" id="mf-lumpsum-sl" min="0" max="5000000" step="1000" value="10000">
+                  <div class="slider-lbl" id="mf-lumpsum-lbl">$10,000.00</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="field-pair">
+          <div class="field-shell">
+            <div class="form-row">
+              <label class="lbl" for="mf-return">Expected Annual Return Rate (%)</label>
+              <div class="input-slider">
+                <div>
+                  <input type="number" id="mf-return" min="0" max="30" step="0.01" value="12">
+                  <span class="hint">Your expected nominal return assumption before inflation.</span>
+                </div>
+                <div>
+                  <input type="range" id="mf-return-sl" min="0" max="30" step="0.1" value="12">
+                  <div class="slider-lbl" id="mf-return-lbl">12.00%</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="field-shell">
+            <div class="form-row">
+              <label class="lbl" for="mf-years">Investment Duration (Years)</label>
+              <div class="input-slider">
+                <div>
+                  <input type="number" id="mf-years" min="1" max="50" step="1" value="10">
+                  <span class="hint">The number of years the mutual fund plan stays invested.</span>
+                </div>
+                <div>
+                  <input type="range" id="mf-years-sl" min="1" max="50" step="1" value="10">
+                  <div class="slider-lbl" id="mf-years-lbl">10 years</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <button type="button" class="btn-primary" onclick="calculateMutualFund(true, true)">Update Mutual Fund Result</button>
+          <button type="button" class="btn-ghost" onclick="resetPlanner()">Reset Inputs</button>
+        </div>
+      </section>
+
+      <section class="module" id="mod-strategy" role="tabpanel" aria-label="Mutual fund strategy inputs">
+        <p class="module-intro">Add step-up SIP, inflation, and compounding assumptions so the projection feels closer to real investing decisions.</p>
+
+        <div class="field-pair">
+          <div class="field-shell" id="mf-stepup-shell">
+            <div class="form-row">
+              <label class="lbl" for="mf-stepup">Step-Up Rate (%)</label>
+              <div class="input-slider">
+                <div>
+                  <input type="number" id="mf-stepup" min="0" max="25" step="0.01" value="5">
+                  <span class="hint">Optional yearly increase in the SIP amount as income grows.</span>
+                </div>
+                <div>
+                  <input type="range" id="mf-stepup-sl" min="0" max="25" step="0.1" value="5">
+                  <div class="slider-lbl" id="mf-stepup-lbl">5.00%</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="field-shell">
+            <div class="form-row">
+              <label class="lbl" for="mf-inflation">Inflation Rate (%)</label>
+              <div class="input-slider">
+                <div>
+                  <input type="number" id="mf-inflation" min="0" max="20" step="0.01" value="4">
+                  <span class="hint">Optional. Used to convert future wealth into today's purchasing power.</span>
+                </div>
+                <div>
+                  <input type="range" id="mf-inflation-sl" min="0" max="20" step="0.1" value="4">
+                  <div class="slider-lbl" id="mf-inflation-lbl">4.00%</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="field-pair">
+          <div class="field-shell">
+            <div class="form-row">
+              <label class="lbl" for="mf-compounding">Compounding Frequency</label>
+              <select id="mf-compounding">
+                <option value="12" selected>Monthly</option>
+                <option value="4">Quarterly</option>
+                <option value="1">Yearly</option>
+              </select>
+              <span class="hint">The lump sum formula uses the selected compounding frequency. SIP growth is simulated monthly using an equivalent monthly rate derived from this annual compounding assumption.</span>
+            </div>
+          </div>
+
+          <div class="toolbar-box">
+            <h2>Planning note</h2>
+            <div class="info-list">
+              <div class="info-pill">A step-up SIP may look small at first, but even a 5% yearly increase can change the ending value dramatically over long periods 🚀.</div>
+              <div class="info-pill">Inflation can quietly reduce real wealth 💸, which is why the inflation-adjusted value matters just as much as the nominal fund value.</div>
+              <div class="info-pill">Compounding frequency changes the effective annual growth rate, especially when nominal returns are higher 📊.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <button type="button" class="btn-primary" onclick="calculateMutualFund(true, true)">Update Mutual Fund Result</button>
+          <button type="button" class="btn-ghost" onclick="resetPlanner()">Reset Inputs</button>
+        </div>
+      </section>
+
+      <section class="module" id="mod-scenarios" role="tabpanel" aria-label="Mutual fund scenario comparison">
+        <p class="module-intro">Compare different annual return assumptions side by side so you do not rely on one optimistic forecast for your mutual fund plan.</p>
+
+        <div class="field-pair">
+          <div class="field-shell">
+            <div class="form-row">
+              <label class="lbl" for="scenario-low">Scenario A Return (%)</label>
+              <div class="input-slider">
+                <div>
+                  <input type="number" id="scenario-low" min="0" max="25" step="0.01" value="8">
+                  <span class="hint">A conservative return path for cautious planning.</span>
+                </div>
+                <div>
+                  <input type="range" id="scenario-low-sl" min="0" max="25" step="0.1" value="8">
+                  <div class="slider-lbl" id="scenario-low-lbl">8.00%</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="field-shell">
+            <div class="form-row">
+              <label class="lbl" for="scenario-mid">Scenario B Return (%)</label>
+              <div class="input-slider">
+                <div>
+                  <input type="number" id="scenario-mid" min="0" max="25" step="0.01" value="10">
+                  <span class="hint">A balanced planning case for long-term mutual fund investing.</span>
+                </div>
+                <div>
+                  <input type="range" id="scenario-mid-sl" min="0" max="25" step="0.1" value="10">
+                  <div class="slider-lbl" id="scenario-mid-lbl">10.00%</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="field-pair">
+          <div class="field-shell">
+            <div class="form-row">
+              <label class="lbl" for="scenario-high">Scenario C Return (%)</label>
+              <div class="input-slider">
+                <div>
+                  <input type="number" id="scenario-high" min="0" max="25" step="0.01" value="12">
+                  <span class="hint">An optimistic case to test upside without treating it as a promise.</span>
+                </div>
+                <div>
+                  <input type="range" id="scenario-high-sl" min="0" max="25" step="0.1" value="12">
+                  <div class="slider-lbl" id="scenario-high-lbl">12.00%</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="toolbar-box">
+            <h2>How to use scenarios</h2>
+            <div class="info-list">
+              <div class="info-pill">If your target works only at the highest return, the plan may be too optimistic ⚠️.</div>
+              <div class="info-pill">If a lower return still gives you a strong result, your mutual fund plan is usually more resilient 🧠.</div>
+              <div class="info-pill">Scenario planning turns a single guess into a realistic range, and realistic ranges build better financial decisions 🤝.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <button type="button" class="btn-primary" onclick="calculateMutualFund(true, true)">Update Mutual Fund Result</button>
+          <button type="button" class="btn-ghost" onclick="resetPlanner()">Reset Inputs</button>
+        </div>
+      </section>
+    </section>
+
+    <section class="card" id="results-section" aria-live="polite">
+      <div class="result-meta">
+        <div class="mode-pill" id="result-mode-pill">Latest Result: Mutual Fund Projection</div>
+        <div class="result-actions">
+          <button type="button" class="btn-secondary" onclick="copyResults()">Copy Results</button>
+          <div class="copy-note" id="copy-note">Nothing copied yet.</div>
+        </div>
+      </div>
+
+      <div class="status-banner" id="status-banner"></div>
+
+      <div class="result-grid">
+        <div class="result-card teal" id="result-card-0">
+          <div class="result-lbl" id="result-lbl-0">Total Investment Value</div>
+          <div class="result-val" id="result-val-0">—</div>
+          <div class="result-sub" id="result-sub-0">Projected mutual fund value at the end</div>
+        </div>
+        <div class="result-card slate" id="result-card-1">
+          <div class="result-lbl" id="result-lbl-1">Total Invested Amount</div>
+          <div class="result-val" id="result-val-1">—</div>
+          <div class="result-sub" id="result-sub-1">Your own capital added over time</div>
+        </div>
+        <div class="result-card sky" id="result-card-2">
+          <div class="result-lbl" id="result-lbl-2">Total Profit</div>
+          <div class="result-val" id="result-val-2">—</div>
+          <div class="result-sub" id="result-sub-2">Growth created by returns and compounding</div>
+        </div>
+        <div class="result-card amber" id="result-card-3">
+          <div class="result-lbl" id="result-lbl-3">Inflation Adjusted Value</div>
+          <div class="result-val" id="result-val-3">—</div>
+          <div class="result-sub" id="result-sub-3">Value expressed in today's money</div>
+        </div>
+        <div class="result-card teal" id="result-card-4">
+          <div class="result-lbl" id="result-lbl-4">CAGR Equivalent Return</div>
+          <div class="result-val" id="result-val-4">—</div>
+          <div class="result-sub" id="result-sub-4">Annualized rate implied by the selected compounding frequency</div>
+        </div>
+        <div class="result-card rose" id="result-card-5">
+          <div class="result-lbl" id="result-lbl-5">Growth Multiplier</div>
+          <div class="result-val" id="result-val-5">—</div>
+          <div class="result-sub" id="result-sub-5">How many times your invested money grows</div>
+        </div>
+      </div>
+
+      <div class="insight-box" id="insight-box"></div>
+      <div class="formula-box" id="formula-box"></div>
+
+      <div class="comparison-summary" id="snapshot-summary">
+        <div class="table-head">
+          <div>
+            <div class="card-title" style="margin-bottom:0.3rem;">Mutual Fund Snapshot</div>
+            <div class="table-context">Quick highlights showing how mode, step-up SIP, inflation, compounding, and scenario assumptions shape the result.</div>
+          </div>
+        </div>
+        <div class="tbl-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Metric</th>
+                <th>Value</th>
+                <th>Explanation</th>
+              </tr>
+            </thead>
+            <tbody id="snapshot-summary-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" id="charts-section">
+      <div class="card-title">Visual Mutual Fund Dashboard</div>
+      <p class="chart-note" id="charts-context">Charts compare invested money, total wealth, real value after inflation, and side-by-side return scenarios so long-term mutual fund planning becomes easier to understand.</p>
+
+      <div class="charts-grid">
+        <div class="chart-wrap">
+          <div class="chart-title" id="growth-title">Investment Value vs Total Invested</div>
+          <div class="chart-note" id="growth-note">Follow how your mutual fund value grows compared with the money you personally invest.</div>
+          <div class="chart-canvas">
+            <canvas id="growth-chart"></canvas>
+          </div>
+        </div>
+
+        <div class="chart-wrap">
+          <div class="chart-title" id="pie-title">Investment vs Returns</div>
+          <div class="chart-note" id="pie-note">See how much of the ending value comes from SIP, lump sum, and market growth.</div>
+          <div class="chart-canvas">
+            <canvas id="profit-chart"></canvas>
+          </div>
+        </div>
+
+        <div class="chart-wrap">
+          <div class="chart-title" id="comparison-title">Scenario Comparison</div>
+          <div class="chart-note" id="comparison-note">Compare multiple return assumptions to avoid depending on one forecast.</div>
+          <div class="chart-canvas">
+            <canvas id="comparison-chart"></canvas>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" id="projection-section">
+      <div class="table-head">
+        <div>
+          <div class="card-title" style="margin-bottom:0.3rem;">Year-by-Year Projection Table</div>
+          <div class="table-context" id="projection-context">Projection table showing invested amount, fund value, profit, and return percentage at the end of each year.</div>
+        </div>
+        <button type="button" class="btn-secondary" onclick="downloadCsv()">Download CSV</button>
+      </div>
+
+      <div class="tbl-wrap">
+        <table>
+          <thead>
+            <tr id="projection-head-row"></tr>
+          </thead>
+          <tbody id="projection-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="content-section" id="comparison-tables">
+      <h2>Comparison Tables</h2>
+      <p>These tables help explain when SIP, lump sum, and step-up strategies may feel more useful in mutual fund planning.</p>
+
+      <div class="comparison-grid">
+        <div>
+          <h3>SIP vs Lump Sum vs Combo</h3>
+          <div class="tbl-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Approach</th>
+                  <th>How It Works</th>
+                  <th>Best For</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>SIP</td>
+                  <td>Invest a fixed amount regularly every month</td>
+                  <td>People building wealth slowly with monthly cash flow discipline</td>
+                </tr>
+                <tr>
+                  <td>Lump Sum</td>
+                  <td>Invest one large amount at the start</td>
+                  <td>Investors who already have capital available and can stay invested</td>
+                </tr>
+                <tr>
+                  <td>SIP + Lump Sum</td>
+                  <td>Start with capital and keep adding monthly contributions</td>
+                  <td>Investors who want both immediate exposure and steady investing</td>
+                </tr>
+                <tr>
+                  <td>Step-Up SIP</td>
+                  <td>Increase SIP each year with income growth</td>
+                  <td>Investors planning to improve savings as earnings rise</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div>
+          <h3>Key Mutual Fund Growth Drivers</h3>
+          <div class="formula-box"><strong>Real Value</strong> = Total Value / (1 + inflation)<sup>n</sup></div>
+          <div class="tbl-wrap" style="margin-top:0.8rem;">
+            <table>
+              <thead>
+                <tr>
+                  <th>Driver</th>
+                  <th>Why It Matters</th>
+                  <th>Effect Over Time</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Return rate</td>
+                  <td>Controls how fast the fund compounds</td>
+                  <td>Small differences can create very large gaps over long periods</td>
+                </tr>
+                <tr>
+                  <td>Investment duration</td>
+                  <td>Gives compounding more years to work</td>
+                  <td>Usually the strongest long-term lever</td>
+                </tr>
+                <tr>
+                  <td>Monthly SIP amount</td>
+                  <td>Adds fresh money again and again</td>
+                  <td>Builds wealth even when the starting amount is small</td>
+                </tr>
+                <tr>
+                  <td>Step-up SIP</td>
+                  <td>Raises contributions each year</td>
+                  <td>Can sharply lift the final corpus</td>
+                </tr>
+                <tr>
+                  <td>Inflation</td>
+                  <td>Reduces purchasing power</td>
+                  <td>Nominal wealth may look strong while real wealth grows more slowly</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+    <article class="content-section" id="guide">
+      <h2>How Mutual Fund Investing Works in Real Life</h2>
+
+      <p>A mutual fund calculator helps turn a fuzzy goal into a visible path. Instead of guessing whether your monthly SIP is enough or whether a one-time investment may grow meaningfully, you can see the numbers clearly 📊. That is important because mutual fund investing looks simple on the surface, but the real result depends on several moving parts: how much you invest, how often you invest, how long you stay invested, what return you assume, and how inflation changes the real value of the final corpus.</p>
+
+      <p>Many investors start with one simple question: “If I invest this amount, where could it grow?” The answer becomes more useful when it is broken into parts 💰. How much of the final value comes from your own contributions? How much comes from compounding? How much purchasing power survives after inflation? Those questions matter because a big future number can feel exciting, but what matters in real life is whether that number truly supports your goals.</p>
+
+      <h3>What Is a Mutual Fund 📊</h3>
+      <p>A mutual fund pools money from many investors and puts that capital into assets such as stocks, bonds, or a mix of both. Instead of buying many securities yourself one by one, you buy units of a fund and let professional management handle the allocation. That structure makes mutual funds popular for long-term wealth creation because they are easy to access, flexible, and suited to both small regular investments and larger lump sum amounts.</p>
+
+      <p>For beginners, one of the biggest strengths of mutual funds is that they make investing feel reachable. You do not always need a huge amount to begin. A SIP lets you invest a smaller amount month after month 💸, while a lump sum lets you deploy available capital immediately. Both methods can work. The better choice usually depends on your cash flow, your comfort level, and how disciplined you can stay through market ups and downs.</p>
+
+      <h3>How SIP Works 💰</h3>
+      <p>SIP stands for Systematic Investment Plan. It means you invest a fixed amount regularly, usually each month. This approach is useful because it turns investing into a habit. Instead of waiting for the “perfect” market moment, you keep investing steadily. That can reduce the emotional pressure of timing the market and help you stay consistent even when prices move around 📉.</p>
+
+      <p>When prices are lower, the same SIP amount buys more units. When prices are higher, it buys fewer units. Over time, that can help average your purchase cost. This is one reason SIP is often described as a discipline-first investing approach 🧠. It does not remove risk, and it does not guarantee profit, but it can make long-term participation easier because you are following a process instead of reacting to every short-term market move.</p>
+
+      <p>Step-up SIP takes that idea further. Suppose you start with <span data-currency-symbol>$</span>500 per month. If your salary grows each year and you increase your SIP by 5%, your investing effort rises with your income. That one change can make a major difference over 10, 15, or 20 years 🚀. Many people underestimate step-up SIP because the yearly increase looks modest, but compounding turns those later higher contributions into meaningful long-term wealth.</p>
+
+      <h3>Difference Between SIP and Lump Sum 📈</h3>
+      <p>SIP and lump sum are not enemies. They are simply two different ways to enter the same investing world. A lump sum invests a larger amount immediately. That means more money starts compounding from day one. If markets perform well after you invest, a lump sum can look very powerful. But it also asks for stronger emotional comfort because the full amount is exposed right away.</p>
+
+      <p>SIP spreads investing over time. That makes it naturally suited to people who receive monthly income and want a repeatable process. SIP may feel calmer because it breaks the investment journey into smaller decisions. A combined plan can be especially powerful: invest a lump sum when capital is available, then continue with SIP contributions so your wealth keeps building month after month 🤝.</p>
+
+      <p>This is why a calculator that supports all three modes matters. Real life is not always “only SIP” or “only lump sum.” Many investors start with one method and later add the other. A combined calculator lets you see the full picture instead of forcing your plan into one simplified box.</p>
+
+      <h3>Power of Compounding in Mutual Funds 🚀</h3>
+      <p>Compounding means your gains begin generating gains of their own. If your fund earns returns this year, that larger balance can grow again next year. Over long periods, compounding becomes the engine behind serious wealth creation 📈. It is not always dramatic at the start. In the early years, your progress may seem driven mostly by the money you personally put in. But over time, the growth part usually starts to do more and more of the heavy lifting.</p>
+
+      <p>That is why time matters so much. A person who starts investing earlier often ends with a much larger corpus, even if someone else starts later with a slightly bigger amount. Compounding rewards patience. It rewards consistency. It rewards staying invested through normal market noise instead of chasing perfect timing ⏳.</p>
+
+      <p>Imagine a person investing ₹5,000 per month for 10 years at 12% expected annual return. The invested amount is roughly ₹6,00,000 over the full period. But the ending value can grow far beyond the contributions alone because every monthly deposit gets time to compound. Add a small yearly step-up and the result can become even stronger. That is the real lesson here: steady investing plus time can turn ordinary amounts into meaningful financial progress.</p>
+
+      <h3>Why Inflation Still Matters 🌍</h3>
+      <p>Investors often celebrate the final number but forget to ask what that number will actually buy. Inflation matters because it quietly reduces purchasing power 💸. If your mutual fund grows to <span data-currency-symbol>$</span>100,000 in the future, that amount may not buy what <span data-currency-symbol>$</span>100,000 buys today. This is why the inflation-adjusted value on the calculator is so useful. It reminds you that nominal growth and real financial comfort are not always the same thing.</p>
+
+      <p>That also means a return that looks good on paper may feel less impressive in real life. If a fund grows at 10% but inflation is 5%, the real improvement in purchasing power is far smaller. Investors who ignore inflation sometimes believe they are building more future security than they really are. A smarter approach is to look at both numbers: headline fund value and real value after inflation 🔍.</p>
+
+      <h3>Practical Example: ₹5,000 Per Month for 10 Years 💡</h3>
+      <p>Let us use a simple mutual fund example. Suppose you invest ₹5,000 every month for 10 years with a 12% expected annual return. Even without a lump sum, the result can become substantial because each monthly contribution starts working for future growth. If you also begin with a ₹1,00,000 lump sum, the final value climbs faster because a larger amount is compounding from the start. If you then step up your SIP by 10% each year, the gap becomes even wider.</p>
+
+      <p>This kind of example is powerful because it shows why mutual fund planning is not only about chasing return. It is about contribution discipline, time horizon, and realistic assumptions. A calculator lets you test whether a small increase in SIP, a longer holding period, or a better disciplined contribution plan makes the biggest difference 🧮.</p>
+
+      <h3>What Return Rate Should Investors Assume 🧠</h3>
+      <p>No calculator can promise what a mutual fund will deliver. Markets do not move in straight lines, and real returns can differ from expectations. That is why scenario comparison is valuable. Instead of trusting one forecast, you can compare outcomes at 8%, 10%, and 12%. A lower-return case helps you stress-test the plan. A middle case gives you a working estimate. A higher-return case shows upside, but it should not be treated like a guarantee ⚖️.</p>
+
+      <p>Using a return range can change behavior in a healthy way. It may push you to invest slightly more, keep expectations realistic, and avoid building a goal that works only in the best-case scenario. That is far better than discovering years later that the plan depended on too much optimism.</p>
+
+      <p>If you want to go deeper, the <a href="https://smartcalcworld.com/finance/finance-sip-calculator.html">SIP Calculator</a> helps you focus only on monthly investing, while the <a href="https://smartcalcworld.com/finance/investment/lumpsum-calculator.html">Lumpsum Calculator</a> is useful when your main question is one-time capital growth. The <a href="https://smartcalcworld.com/finance/investment/cagr-calculator.html">CAGR Calculator</a> helps translate total growth into an annualized rate, the <a href="https://smartcalcworld.com/finance/investment/portfolio-growth-calculator.html">Portfolio Growth Calculator</a> gives a broader long-term investing view, and the <a href="https://smartcalcworld.com/finance/investment/investment-goal-calculator.html">Investment Goal Calculator</a> helps you work backward from a target amount.</p>
+
+      <h3>How Investors Build Better Mutual Fund Plans 🚀</h3>
+      <p>The strongest mutual fund plans are usually not the flashiest ones. They are the ones investors can actually stick with. That means choosing a contribution amount that fits real life, adding step-up increases when income improves, staying invested long enough for compounding to matter, and paying attention to inflation instead of only chasing a big headline number 📚.</p>
+
+      <p>A good plan also respects emotion. Market volatility can create anxiety. SIP helps many investors because it creates a routine. Lump sum works well when the investor has patience and a long enough timeline. The best plan is often the one that matches both your finances and your behavior. A mathematically perfect plan that you cannot follow is less useful than a realistic plan you can maintain year after year.</p>
+
+      <p>Mutual fund investing becomes much less mysterious when you can see the numbers clearly. That is the real purpose of this calculator. It is not to promise a future. It is to help you think more clearly about the future you want to build 🤝.</p>
+    </article>
+
+    <section class="content-section" id="more-tools">
+      <h2>Explore More Investment Tools</h2>
+      <p>Mutual fund planning becomes stronger when you connect regular investing, annualized returns, long-term growth, and goal tracking across the SmartCalc World investment toolset.</p>
+
+      <div class="links-grid">
+        <a class="link-card" href="https://smartcalcworld.com/finance/finance-sip-calculator.html">
+          <span class="link-icon">💸</span>
+          <strong>SIP Calculator</strong>
+          <p>Focus only on recurring monthly investing and test SIP projections in more detail.</p>
+        </a>
+
+        <a class="link-card" href="https://smartcalcworld.com/finance/investment/lumpsum-calculator.html">
+          <span class="link-icon">💰</span>
+          <strong>Lumpsum Calculator</strong>
+          <p>Estimate how a one-time investment may grow when no recurring SIP is added.</p>
+        </a>
+
+        <a class="link-card" href="https://smartcalcworld.com/finance/investment/cagr-calculator.html">
+          <span class="link-icon">📈</span>
+          <strong>CAGR Calculator</strong>
+          <p>Convert overall investment growth into an annualized rate that is easier to compare.</p>
+        </a>
+
+        <a class="link-card" href="https://smartcalcworld.com/finance/investment/portfolio-growth-calculator.html">
+          <span class="link-icon">🧠</span>
+          <strong>Portfolio Growth Calculator</strong>
+          <p>Expand beyond mutual funds and see a broader long-term investing dashboard with scenario planning.</p>
+        </a>
+
+        <a class="link-card" href="https://smartcalcworld.com/finance/investment/investment-goal-calculator.html">
+          <span class="link-icon">🎯</span>
+          <strong>Investment Goal Calculator</strong>
+          <p>Work backward from a future target if your next question is how much you need to invest to get there.</p>
+        </a>
+      </div>
+    </section>
+
+    <section class="content-section" id="faq">
+      <h2>Frequently Asked Questions</h2>
+
+      <div class="faq-item">
+        <div class="faq-q">What is a mutual fund calculator?</div>
+        <div class="faq-a">A mutual fund calculator estimates how SIP, lump sum, or a combined investment plan may grow over time using return, duration, inflation, and step-up assumptions.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Is SIP better than lump sum?</div>
+        <div class="faq-a">It depends on your situation. SIP suits people investing from monthly income, while lump sum suits people who already have capital available and can stay invested for the long term.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">What return rate should I expect?</div>
+        <div class="faq-a">There is no guaranteed return. It is usually smarter to test multiple return scenarios such as 8%, 10%, and 12% rather than depend on one single forecast.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">How much can I earn from mutual funds?</div>
+        <div class="faq-a">That depends on how much you invest, how often you invest, how long you stay invested, and what return the fund actually delivers over time.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">What is step-up SIP?</div>
+        <div class="faq-a">Step-up SIP means increasing the monthly SIP amount every year. It is a simple way to align investing with income growth and can materially raise the final corpus.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Can I lose money in mutual funds?</div>
+        <div class="faq-a">Yes. Market-linked mutual funds can go through negative phases, especially over shorter periods. Long-term discipline and realistic expectations remain important.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">How does inflation affect returns?</div>
+        <div class="faq-a">Inflation reduces purchasing power, so the real value of your money may be lower than the nominal fund value suggests.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">What is CAGR in mutual funds?</div>
+        <div class="faq-a">CAGR is an annualized way of expressing growth over time. This calculator shows an equivalent annual growth rate based on the selected compounding assumption.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Can I combine SIP and lump sum in one plan?</div>
+        <div class="faq-a">Yes. Many investors invest a lump sum first and then continue with SIP, and this calculator is designed to project that combined path.</div>
+      </div>
+    </section>
+
+    <div class="disclaimer1">
+      <strong>Disclaimer:</strong> This mutual fund calculator is for educational use only. Results are estimates based on the assumptions you enter and do not include taxes, fund expense ratios, entry or exit loads, or changing market conditions. Use it as a planning tool, not as personal investment advice.
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="https://smartcalcworld.com/index.html">Home</a></li>
+          <li><a href="https://smartcalcworld.com/about.html">About</a></li>
+          <li><a href="https://smartcalcworld.com/contact.html">Contact</a></li>
+          <li><a href="https://smartcalcworld.com/privacy-policy.html">Privacy Policy</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h3>Content</h3>
+        <ul>
+          <li><a href="#calculator">Mutual Fund Calculator</a></li>
+          <li><a href="#guide">Mutual Fund Guide</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h3>Finance Tools</h3>
+                <ul>
+		                <li><a href="https://smartcalcworld.com/finance/interest/interest-hub.html">Interest Calculators</a></li>
+		                <li><a href="https://smartcalcworld.com/finance/investment/investment-hub.html">Investment Calculators</a></li>
+                    <li><a href="https://smartcalcworld.com/finance/loan/loan-hub.html">Loan Calculators</a></li>
+                    <li><a href="https://smartcalcworld.com/finance/tax/tax-hub.html">Tax Calculators</a></li>
+                    <li><a href="https://smartcalcworld.com/finance/saving-retirement/saving-retirement-hub.html">Savings Calculators</a></li>
+                    <li><a href="https://smartcalcworld.com/finance/saving-retirement/saving-retirement-hub.html">Retirement Calculators</a></li>
+                </ul>
+      </div>
+
+      <div class="footer-section">
+        <div class="footer-disclaimer">
+          <strong>SmartCalc World Note:</strong> mutual fund planning becomes clearer when you separate invested money, compounding profit, inflation-adjusted value, and scenario range instead of focusing on one headline number.
+        </div>
+      </div>
+    </div>
+
+    <div class="copyright">
+      <p>&copy; SmartCalc World. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    const $ = (id) => document.getElementById(id);
+
+    const currencySymbols = {
+      USD: "$",
+      INR: "\u20B9",
+      EUR: "\u20AC",
+      GBP: "\u00A3",
+      CAD: "$",
+      AUD: "$"
+    };
+
+    const state = {
+      activeModule: "core",
+      currentCurrency: "USD",
+      planMode: "combo",
+      charts: { growth: null, profit: null, comparison: null },
+      projectionColumns: [],
+      projectionRows: [],
+      projectionFilename: "mutual_fund_projection.csv",
+      copyText: ""
+    };
+
+    const sliderConfigs = [
+      { input: "mf-monthly", slider: "mf-monthly-sl", label: "mf-monthly-lbl", type: "money", digits: 2 },
+      { input: "mf-lumpsum", slider: "mf-lumpsum-sl", label: "mf-lumpsum-lbl", type: "money", digits: 2 },
+      { input: "mf-return", slider: "mf-return-sl", label: "mf-return-lbl", type: "percent", digits: 2 },
+      { input: "mf-years", slider: "mf-years-sl", label: "mf-years-lbl", type: "years", digits: 0 },
+      { input: "mf-stepup", slider: "mf-stepup-sl", label: "mf-stepup-lbl", type: "percent", digits: 2 },
+      { input: "mf-inflation", slider: "mf-inflation-sl", label: "mf-inflation-lbl", type: "percent", digits: 2 },
+      { input: "scenario-low", slider: "scenario-low-sl", label: "scenario-low-lbl", type: "percent", digits: 2 },
+      { input: "scenario-mid", slider: "scenario-mid-sl", label: "scenario-mid-lbl", type: "percent", digits: 2 },
+      { input: "scenario-high", slider: "scenario-high-sl", label: "scenario-high-lbl", type: "percent", digits: 2 }
+    ];
+
+    function currentSymbol() {
+      return currencySymbols[state.currentCurrency] || "$";
+    }
+
+    function currentNumberLocale() {
+      return state.currentCurrency === "INR" ? "en-IN" : "en-US";
+    }
+
+    function formatMoney(value, digits = 2) {
+      const number = Number(value) || 0;
+      const sign = number < 0 ? "-" : "";
+      const formatted = Math.abs(number).toLocaleString(currentNumberLocale(), {
+        minimumFractionDigits: digits,
+        maximumFractionDigits: digits
+      });
+      return `${sign}${currentSymbol()}${formatted}`;
+    }
+
+    function formatPercentValue(value, digits = 2) {
+      return `${Number(value).toFixed(digits)}%`;
+    }
+
+    function formatPercentFromDecimal(value, digits = 2) {
+      return `${(Number(value) * 100).toFixed(digits)}%`;
+    }
+
+    function formatSliderValue(type, value, digits = 0) {
+      if (type === "money") return formatMoney(value, digits);
+      if (type === "percent") return formatPercentValue(value, digits);
+      if (type === "years") return `${Number(value).toFixed(digits)} years`;
+      return String(value);
+    }
+
+    function destroyChart(chart) {
+      if (chart) chart.destroy();
+      return null;
+    }
+
+    function setStatus(message = "", tone = "") {
+      const banner = $("status-banner");
+      if (!banner) return;
+      banner.className = "status-banner";
+      banner.textContent = message;
+      if (message) banner.classList.add(tone || "success");
+    }
+
+    function setCopyNote(message) {
+      $("copy-note").textContent = message;
+    }
+
+    function updateSliderLabel(config) {
+      const input = $(config.input);
+      const label = $(config.label);
+      if (!input || !label) return;
+      label.textContent = formatSliderValue(config.type, input.value, config.digits || 0);
+    }
+
+    function clampToSlider(inputEl, sliderEl) {
+      if (!inputEl || !sliderEl || inputEl.value === "") return;
+      let value = Number(inputEl.value);
+      if (!Number.isFinite(value)) value = Number(sliderEl.min);
+      value = Math.max(Number(sliderEl.min), Math.min(Number(sliderEl.max), value));
+      inputEl.value = value;
+      sliderEl.value = value;
+    }
+
+    function bindSliderPair(config) {
+      const inputEl = $(config.input);
+      const sliderEl = $(config.slider);
+      if (!inputEl || !sliderEl) return;
+      updateSliderLabel(config);
+      inputEl.addEventListener("input", () => {
+        clampToSlider(inputEl, sliderEl);
+        updateSliderLabel(config);
+      });
+      inputEl.addEventListener("change", () => {
+        clampToSlider(inputEl, sliderEl);
+        updateSliderLabel(config);
+        calculateMutualFund(false);
+      });
+      sliderEl.addEventListener("input", () => {
+        inputEl.value = sliderEl.value;
+        updateSliderLabel(config);
+        calculateMutualFund(false);
+      });
+    }
+
+    function updateCurrencyIndicators() {
+      document.querySelectorAll("[data-currency-symbol]").forEach((node) => {
+        node.textContent = currentSymbol();
+      });
+      sliderConfigs.forEach(updateSliderLabel);
+      calculateMutualFund(false);
+    }
+
+    function compoundingLabel(periodsPerYear) {
+      if (periodsPerYear === 12) return "Monthly";
+      if (periodsPerYear === 4) return "Quarterly";
+      return "Yearly";
+    }
+
+    function annualEffectiveRate(nominalAnnualRate, periodsPerYear) {
+      if (!(periodsPerYear > 0) || Math.abs(nominalAnnualRate) < 1e-12) return 0;
+      return Math.pow(1 + (nominalAnnualRate / periodsPerYear), periodsPerYear) - 1;
+    }
+
+    function monthlyEquivalentRate(nominalAnnualRate, periodsPerYear) {
+      const effectiveAnnual = annualEffectiveRate(nominalAnnualRate, periodsPerYear);
+      if (Math.abs(effectiveAnnual) < 1e-12) return 0;
+      return Math.pow(1 + effectiveAnnual, 1 / 12) - 1;
+    }
+
+    function futureValueLumpSum(pv, annualRate, periodsPerYear, years) {
+      if (!(years >= 0) || !(periodsPerYear > 0)) return 0;
+      const periodic = annualRate / periodsPerYear;
+      if (Math.abs(periodic) < 1e-12) return pv;
+      return pv * Math.pow(1 + periodic, periodsPerYear * years);
+    }
+
+    function setFieldDisabled(shellId, disabled, relatedIds) {
+      const shell = $(shellId);
+      if (!shell) return;
+      shell.classList.toggle("is-disabled", disabled);
+      relatedIds.forEach((id) => {
+        const node = $(id);
+        if (node) node.disabled = disabled;
+      });
+    }
+
+    function updateModeAvailability() {
+      const sipActive = state.planMode !== "lumpsum";
+      const lumpActive = state.planMode !== "sip";
+
+      setFieldDisabled("mf-monthly-shell", !sipActive, ["mf-monthly", "mf-monthly-sl"]);
+      setFieldDisabled("mf-stepup-shell", !sipActive, ["mf-stepup", "mf-stepup-sl"]);
+      setFieldDisabled("mf-lumpsum-shell", !lumpActive, ["mf-lumpsum", "mf-lumpsum-sl"]);
+
+      $("mode-sip").classList.toggle("active", state.planMode === "sip");
+      $("mode-lumpsum").classList.toggle("active", state.planMode === "lumpsum");
+      $("mode-combo").classList.toggle("active", state.planMode === "combo");
+
+      $("mf-mode-note").textContent = state.planMode === "sip"
+        ? "SIP mode is active, so the calculator uses only recurring monthly investments and ignores lump sum value."
+        : state.planMode === "lumpsum"
+          ? "Lump sum mode is active, so the calculator uses only the one-time starting amount and ignores SIP plus step-up."
+          : "Both SIP and lump sum are active, so the projection combines one-time capital with recurring monthly investments.";
+    }
+
+    function setInvestmentMode(mode) {
+      state.planMode = mode;
+      updateModeAvailability();
+      calculateMutualFund(false);
+    }
+
+    function simulateMutualFundPlan(config) {
+      const {
+        monthlySip,
+        lumpSum,
+        annualRate,
+        years,
+        stepUpRate,
+        inflationRate,
+        periodsPerYear,
+        mode
+      } = config;
+
+      const useSip = mode !== "lumpsum";
+      const useLump = mode !== "sip";
+      const startLump = useLump ? lumpSum : 0;
+      const monthRate = monthlyEquivalentRate(annualRate, periodsPerYear);
+      let value = startLump;
+      let lumpOnlyValue = startLump;
+      let sipOnlyValue = 0;
+      let totalInvested = startLump;
+      let totalSipContribution = 0;
+
+      const rows = [{
+        year: 0,
+        investedAmount: totalInvested,
+        fundValue: startLump,
+        profit: 0,
+        returnPct: 0,
+        realValue: startLump
+      }];
+
+      for (let year = 1; year <= years; year += 1) {
+        const monthlyContribution = useSip ? monthlySip * Math.pow(1 + stepUpRate, year - 1) : 0;
+
+        for (let month = 0; month < 12; month += 1) {
+          value = (value + monthlyContribution) * (1 + monthRate);
+          if (useLump) lumpOnlyValue *= (1 + monthRate);
+          if (useSip) {
+            sipOnlyValue = (sipOnlyValue + monthlyContribution) * (1 + monthRate);
+            totalInvested += monthlyContribution;
+            totalSipContribution += monthlyContribution;
+          }
+        }
+
+        const realValue = inflationRate > 0 ? value / Math.pow(1 + inflationRate, year) : value;
+        rows.push({
+          year,
+          investedAmount: totalInvested,
+          fundValue: value,
+          profit: value - totalInvested,
+          returnPct: totalInvested > 0 ? (value - totalInvested) / totalInvested : 0,
+          realValue
+        });
+      }
+
+      return {
+        rows,
+        finalValue: rows[rows.length - 1].fundValue,
+        totalInvested: rows[rows.length - 1].investedAmount,
+        totalProfit: rows[rows.length - 1].profit,
+        realValue: rows[rows.length - 1].realValue,
+        totalSipContribution,
+        lumpOnlyValue,
+        sipOnlyValue,
+        effectiveAnnualRate: annualEffectiveRate(annualRate, periodsPerYear)
+      };
+    }
+
+    function buildResultCards(modeTitle, cards, formulaHtml, insightHtml, copyText) {
+      $("result-mode-pill").textContent = `Latest Result: ${modeTitle}`;
+      for (let index = 0; index < 6; index += 1) {
+        const card = cards[index];
+        const cardEl = $(`result-card-${index}`);
+        if (!card) {
+          cardEl.className = "result-card slate";
+          $(`result-lbl-${index}`).textContent = "-";
+          $(`result-val-${index}`).textContent = "-";
+          $(`result-sub-${index}`).textContent = "";
+          continue;
+        }
+        cardEl.className = `result-card ${card.tone}`;
+        $(`result-lbl-${index}`).textContent = card.label;
+        $(`result-val-${index}`).textContent = card.value;
+        $(`result-sub-${index}`).textContent = card.sub;
+      }
+      $("formula-box").innerHTML = formulaHtml;
+      $("insight-box").innerHTML = insightHtml;
+      state.copyText = copyText;
+      setCopyNote("Results ready to copy.");
+    }
+
+    function showSnapshotSummary(rows) {
+      $("snapshot-summary-body").innerHTML = rows.map((row) => `
+        <tr>
+          <td>${row.metric}</td>
+          <td class="compare-a-cell">${row.value}</td>
+          <td class="compare-b-cell">${row.note}</td>
+        </tr>
+      `).join("");
+    }
+
+    function formatCell(value, type) {
+      if (type === "money") return formatMoney(value);
+      if (type === "percentDecimal") return formatPercentFromDecimal(value);
+      if (type === "years") return Number(value).toLocaleString(currentNumberLocale(), { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+      return String(value);
+    }
+
+    function updateProjection(columns, rows, filename, contextText) {
+      state.projectionColumns = columns;
+      state.projectionRows = rows;
+      state.projectionFilename = filename;
+      $("projection-context").textContent = contextText;
+      $("projection-head-row").innerHTML = columns.map((column) => `<th>${column.label}</th>`).join("");
+      $("projection-body").innerHTML = rows.map((row) => `<tr>${columns.map((column) => `<td>${formatCell(row[column.key], column.type)}</td>`).join("")}</tr>`).join("");
+    }
+
+    function commonChartOptions() {
+      return {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: { mode: "index", intersect: false },
+        plugins: { legend: { position: "bottom", labels: { boxWidth: 14, usePointStyle: true } } }
+      };
+    }
+
+    function renderCharts(config) {
+      $("charts-context").textContent = config.context;
+      $("growth-title").textContent = config.growthTitle;
+      $("growth-note").textContent = config.growthNote;
+      $("pie-title").textContent = config.pieTitle;
+      $("pie-note").textContent = config.pieNote;
+      $("comparison-title").textContent = config.comparisonTitle;
+      $("comparison-note").textContent = config.comparisonNote;
+
+      if (typeof Chart === "undefined") return;
+
+      state.charts.growth = destroyChart(state.charts.growth);
+      state.charts.profit = destroyChart(state.charts.profit);
+      state.charts.comparison = destroyChart(state.charts.comparison);
+
+      state.charts.growth = new Chart($("growth-chart").getContext("2d"), {
+        type: "line",
+        data: {
+          labels: config.growthLabels,
+          datasets: config.growthDatasets.map((dataset) => ({
+            label: dataset.label,
+            data: dataset.values,
+            borderColor: dataset.color,
+            backgroundColor: dataset.background,
+            tension: 0.28,
+            fill: false,
+            pointRadius: 2,
+            borderDash: dataset.borderDash || []
+          }))
+        },
+        options: {
+          ...commonChartOptions(),
+          scales: { y: { ticks: { callback: (value) => formatMoney(value, 0) } } },
+          plugins: {
+            ...commonChartOptions().plugins,
+            tooltip: { callbacks: { label: (ctx) => `${ctx.dataset.label}: ${formatMoney(ctx.parsed.y)}` } }
+          }
+        }
+      });
+
+      state.charts.profit = new Chart($("profit-chart").getContext("2d"), {
+        type: "pie",
+        data: {
+          labels: config.pieLabels,
+          datasets: [{
+            data: config.pieValues,
+            backgroundColor: ["#14b8a6", "#0284c7", "#f59e0b"],
+            borderColor: "#ffffff",
+            borderWidth: 2
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { position: "bottom", labels: { boxWidth: 14, usePointStyle: true } },
+            tooltip: {
+              callbacks: {
+                label: (ctx) => {
+                  const total = ctx.dataset.data.reduce((sum, item) => sum + item, 0);
+                  const share = total ? (ctx.parsed / total) * 100 : 0;
+                  return `${ctx.label}: ${formatMoney(ctx.parsed)} (${share.toFixed(1)}%)`;
+                }
+              }
+            }
+          }
+        }
+      });
+
+      state.charts.comparison = new Chart($("comparison-chart").getContext("2d"), {
+        type: "line",
+        data: {
+          labels: config.comparisonLabels,
+          datasets: config.comparisonDatasets.map((dataset) => ({
+            label: dataset.label,
+            data: dataset.values,
+            borderColor: dataset.color,
+            backgroundColor: dataset.background,
+            tension: 0.24,
+            fill: false,
+            pointRadius: 2,
+            borderDash: dataset.borderDash || []
+          }))
+        },
+        options: {
+          ...commonChartOptions(),
+          scales: { y: { ticks: { callback: (value) => formatMoney(value, 0) } } },
+          plugins: {
+            ...commonChartOptions().plugins,
+            tooltip: { callbacks: { label: (ctx) => `${ctx.dataset.label}: ${formatMoney(ctx.parsed.y)}` } }
+          }
+        }
+      });
+    }
+
+    function switchModule(name) {
+      state.activeModule = name;
+      document.querySelectorAll(".module").forEach((section) => {
+        section.classList.toggle("active", section.id === `mod-${name}`);
+      });
+      document.querySelectorAll(".qnav-btn").forEach((button) => {
+        const active = button.dataset.module === name;
+        button.classList.toggle("active", active);
+        button.setAttribute("aria-selected", active ? "true" : "false");
+      });
+      setStatus("");
+    }
+
+    function calculateMutualFund(announce = false, shouldScroll = false) {
+      const monthlySipRaw = Math.max(0, Number($("mf-monthly").value) || 0);
+      const lumpSumRaw = Math.max(0, Number($("mf-lumpsum").value) || 0);
+      const annualRatePct = Math.max(0, Number($("mf-return").value) || 0);
+      const years = Math.max(0, Number($("mf-years").value) || 0);
+      const stepUpPct = Math.max(0, Number($("mf-stepup").value) || 0);
+      const inflationPct = Math.max(0, Number($("mf-inflation").value) || 0);
+      const periodsPerYear = Number($("mf-compounding").value) || 12;
+      const scenarioLowPct = Math.max(0, Number($("scenario-low").value) || 0);
+      const scenarioMidPct = Math.max(0, Number($("scenario-mid").value) || 0);
+      const scenarioHighPct = Math.max(0, Number($("scenario-high").value) || 0);
+
+      if (!(years > 0)) {
+        setStatus("Investment duration must be greater than zero years.", "error");
+        return;
+      }
+
+      const annualRate = annualRatePct / 100;
+      const stepUpRate = stepUpPct / 100;
+      const inflationRate = inflationPct / 100;
+      const monthlySip = state.planMode === "lumpsum" ? 0 : monthlySipRaw;
+      const lumpSum = state.planMode === "sip" ? 0 : lumpSumRaw;
+
+      const baseSimulation = simulateMutualFundPlan({
+        monthlySip,
+        lumpSum,
+        annualRate,
+        years,
+        stepUpRate,
+        inflationRate,
+        periodsPerYear,
+        mode: state.planMode
+      });
+
+      const scenarioLow = simulateMutualFundPlan({ monthlySip, lumpSum, annualRate: scenarioLowPct / 100, years, stepUpRate, inflationRate, periodsPerYear, mode: state.planMode });
+      const scenarioMid = simulateMutualFundPlan({ monthlySip, lumpSum, annualRate: scenarioMidPct / 100, years, stepUpRate, inflationRate, periodsPerYear, mode: state.planMode });
+      const scenarioHigh = simulateMutualFundPlan({ monthlySip, lumpSum, annualRate: scenarioHighPct / 100, years, stepUpRate, inflationRate, periodsPerYear, mode: state.planMode });
+
+      const totalValue = baseSimulation.finalValue;
+      const totalInvested = baseSimulation.totalInvested;
+      const totalProfit = baseSimulation.totalProfit;
+      const realValue = baseSimulation.realValue;
+      const inflationDrag = totalValue - realValue;
+      const fvLump = futureValueLumpSum(lumpSum, annualRate, periodsPerYear, years);
+      const fvSip = baseSimulation.sipOnlyValue;
+      const effectiveAnnualRate = baseSimulation.effectiveAnnualRate;
+      const growthMultiplier = totalInvested > 0 ? totalValue / totalInvested : 0;
+      const planLabel = state.planMode === "sip" ? "SIP Only" : state.planMode === "lumpsum" ? "Lump Sum Only" : "SIP + Lump Sum";
+
+      buildResultCards(
+        "Mutual Fund Projection",
+        [
+          { tone: "teal", label: "Total Investment Value", value: formatMoney(totalValue), sub: `Projected fund value after ${years} years at ${formatPercentValue(annualRatePct)}` },
+          { tone: "slate", label: "Total Invested Amount", value: formatMoney(totalInvested), sub: "Total capital you personally contributed to the plan" },
+          { tone: totalProfit >= 0 ? "sky" : "rose", label: "Total Profit", value: formatMoney(totalProfit), sub: "Wealth created by return and compounding" },
+          { tone: inflationPct > 0 ? "amber" : "slate", label: "Inflation Adjusted Value", value: formatMoney(realValue), sub: inflationPct > 0 ? `Real value after ${formatPercentValue(inflationPct)} inflation` : "Same as nominal because inflation is set to 0%" },
+          { tone: "teal", label: "CAGR Equivalent Return", value: formatPercentFromDecimal(effectiveAnnualRate), sub: `Effective annual growth rate from ${compoundingLabel(periodsPerYear)} compounding` },
+          { tone: "rose", label: "Growth Multiplier", value: `${growthMultiplier.toFixed(2)}x`, sub: "Final mutual fund value divided by total invested capital" }
+        ],
+        `<strong>Mutual Fund Formulas</strong><br>FV Lump = PV × (1 + r / m)^(m × n)<br>FV SIP = PMT × [((1 + r / m)^(m × n) − 1) / (r / m)] × (1 + r / m)<br>Total Invested = Lump Sum + All SIP Contributions<br>Total Returns = Total Value − Total Invested<br>Real Value = Total Value / (1 + inflation)^n<br>When step-up SIP is enabled or compounding is not monthly, the calculator simulates monthly contributions using an equivalent monthly growth rate for a smoother real-world estimate.`,
+        `<strong>Mutual fund insight:</strong> In <strong>${planLabel}</strong> mode, your plan grows to about ${formatMoney(totalValue)} over ${years} years. You personally invest around ${formatMoney(totalInvested)}, while about ${formatMoney(totalProfit)} comes from compounding. The lump sum part grows to roughly ${formatMoney(fvLump)}, and the SIP path contributes around ${formatMoney(fvSip)} to the ending value. ${inflationPct > 0 ? `After inflation, the real value is closer to ${formatMoney(realValue)}, so inflation removes about ${formatMoney(inflationDrag)} of purchasing power.` : `Because inflation is set to 0%, nominal and real value are the same in this view.`} Scenario planning shows a range from ${formatMoney(scenarioLow.finalValue)} to ${formatMoney(scenarioHigh.finalValue)}, which is why long-term mutual fund planning should rely on ranges instead of a single guess.`,
+        `Mutual Fund Calculator\nPlan mode: ${planLabel}\nMonthly SIP: ${formatMoney(monthlySip)}\nLump sum investment: ${formatMoney(lumpSum)}\nExpected annual return: ${formatPercentValue(annualRatePct)}\nInvestment duration: ${years} years\nStep-up rate: ${formatPercentValue(stepUpPct)}\nInflation rate: ${formatPercentValue(inflationPct)}\nCompounding frequency: ${compoundingLabel(periodsPerYear)}\nTotal investment value: ${formatMoney(totalValue)}\nTotal invested amount: ${formatMoney(totalInvested)}\nTotal profit: ${formatMoney(totalProfit)}\nInflation adjusted value: ${formatMoney(realValue)}\nCAGR equivalent return: ${formatPercentFromDecimal(effectiveAnnualRate)}\nGrowth multiplier: ${growthMultiplier.toFixed(2)}x\nScenario A: ${formatMoney(scenarioLow.finalValue)}\nScenario B: ${formatMoney(scenarioMid.finalValue)}\nScenario C: ${formatMoney(scenarioHigh.finalValue)}`
+      );
+
+      showSnapshotSummary([
+        { metric: "Active Investment Mode", value: planLabel, note: "Choose SIP only, lump sum only, or a combined plan depending on how you invest in real life." },
+        { metric: "Compounding Frequency", value: compoundingLabel(periodsPerYear), note: "This controls the effective annual growth rate behind the mutual fund projection." },
+        { metric: "Step-Up SIP", value: formatPercentValue(stepUpPct), note: monthlySip > 0 ? "The monthly SIP increases by this percentage every year." : "Step-up is inactive because SIP is not part of the selected plan mode." },
+        { metric: "SIP Contribution Total", value: formatMoney(baseSimulation.totalSipContribution), note: "This is the total amount added through SIP across the full investment period." },
+        { metric: "Scenario Range", value: `${formatMoney(scenarioLow.finalValue)} to ${formatMoney(scenarioHigh.finalValue)}`, note: "This shows how sensitive the final outcome is to lower versus higher return assumptions." },
+        { metric: "Real Value Gap", value: inflationPct > 0 ? formatMoney(inflationDrag) : formatMoney(0), note: inflationPct > 0 ? "This is the purchasing power lost to inflation over the selected period." : "Inflation is turned off, so there is no difference between nominal and real value." }
+      ]);
+
+      updateProjection(
+        [
+          { key: "year", label: "Year", type: "years" },
+          { key: "investedAmount", label: "Invested Amount", type: "money" },
+          { key: "fundValue", label: "Fund Value", type: "money" },
+          { key: "profit", label: "Profit", type: "money" },
+          { key: "returnPct", label: "Return %", type: "percentDecimal" }
+        ],
+        baseSimulation.rows.slice(1),
+        "mutual_fund_projection.csv",
+        "Year-by-year projection showing invested amount, mutual fund value, profit, and return percentage at the end of each year."
+      );
+
+      const growthLabels = baseSimulation.rows.map((row) => `Year ${row.year}`);
+
+      renderCharts({
+        context: "Charts reflect your base mutual fund assumptions, your selected investment mode, and the scenario return rates you entered.",
+        growthTitle: "Investment Value vs Total Invested",
+        growthNote: inflationPct > 0 ? "The chart compares fund value, invested amount, and inflation-adjusted real value." : "The chart compares total mutual fund value with the amount you personally invested.",
+        growthLabels,
+        growthDatasets: [
+          { label: "Fund value", values: baseSimulation.rows.map((row) => row.fundValue), color: "#0d9488", background: "rgba(13, 148, 136, 0.14)" },
+          { label: "Invested amount", values: baseSimulation.rows.map((row) => row.investedAmount), color: "#0284c7", background: "rgba(2, 132, 199, 0.12)" },
+          ...(inflationPct > 0 ? [{ label: "Real value", values: baseSimulation.rows.map((row) => row.realValue), color: "#f59e0b", background: "rgba(245, 158, 11, 0.12)" }] : [])
+        ],
+        pieTitle: "Investment vs Returns",
+        pieNote: "See how the final value splits between lump sum capital, SIP contributions, and growth.",
+        pieLabels: ["Lump sum", "SIP contributions", "Investment profit"],
+        pieValues: [Math.max(lumpSum, 0), Math.max(baseSimulation.totalSipContribution, 0), Math.max(totalProfit, 0)],
+        comparisonTitle: "Scenario Comparison",
+        comparisonNote: "Use these lines to compare how the same mutual fund plan behaves at different return assumptions.",
+        comparisonLabels: growthLabels,
+        comparisonDatasets: [
+          { label: "Base plan", values: baseSimulation.rows.map((row) => row.fundValue), color: "#0d9488", background: "rgba(13, 148, 136, 0.12)" },
+          { label: "Scenario A", values: scenarioLow.rows.map((row) => row.fundValue), color: "#0369a1", background: "rgba(3, 105, 161, 0.10)" },
+          { label: "Scenario B", values: scenarioMid.rows.map((row) => row.fundValue), color: "#f59e0b", background: "rgba(245, 158, 11, 0.10)" },
+          { label: "Scenario C", values: scenarioHigh.rows.map((row) => row.fundValue), color: "#f43f5e", background: "rgba(244, 63, 94, 0.10)" }
+        ]
+      });
+
+      setStatus(announce ? "Mutual fund projection updated." : "", announce ? "success" : "");
+
+      if (shouldScroll) {
+        requestAnimationFrame(() => {
+          $("results-section")?.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+      }
+    }
+
+    async function copyResults() {
+      try {
+        await navigator.clipboard.writeText(state.copyText || "No results available yet.");
+        setCopyNote("Results copied to clipboard.");
+      } catch (error) {
+        setCopyNote("Copy failed. Please try again.");
+      }
+    }
+
+    function downloadCsv() {
+      if (!state.projectionRows.length || !state.projectionColumns.length) return;
+      const header = state.projectionColumns.map((column) => `"${column.label.replace(/"/g, "\"\"")}"`).join(",");
+      const body = state.projectionRows.map((row) => state.projectionColumns.map((column) => {
+        const value = formatCell(row[column.key], column.type);
+        return `"${String(value).replace(/"/g, "\"\"")}"`;
+      }).join(",")).join("\n");
+
+      const csvContent = `${header}\n${body}`;
+      const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = state.projectionFilename;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    }
+
+    function resetPlanner() {
+      $("mf-monthly").value = 500;
+      $("mf-monthly-sl").value = 500;
+      $("mf-lumpsum").value = 10000;
+      $("mf-lumpsum-sl").value = 10000;
+      $("mf-return").value = 12;
+      $("mf-return-sl").value = 12;
+      $("mf-years").value = 10;
+      $("mf-years-sl").value = 10;
+      $("mf-stepup").value = 5;
+      $("mf-stepup-sl").value = 5;
+      $("mf-inflation").value = 4;
+      $("mf-inflation-sl").value = 4;
+      $("scenario-low").value = 8;
+      $("scenario-low-sl").value = 8;
+      $("scenario-mid").value = 10;
+      $("scenario-mid-sl").value = 10;
+      $("scenario-high").value = 12;
+      $("scenario-high-sl").value = 12;
+      $("mf-compounding").value = 12;
+      $("mf-currency").value = "USD";
+      state.currentCurrency = "USD";
+      state.planMode = "combo";
+      sliderConfigs.forEach(updateSliderLabel);
+      updateModeAvailability();
+      switchModule("core");
+      calculateMutualFund(true);
+    }
+
+    function bindCommonEvents() {
+      sliderConfigs.forEach(bindSliderPair);
+      $("mf-currency").addEventListener("change", (event) => {
+        state.currentCurrency = event.target.value;
+        updateCurrencyIndicators();
+      });
+      $("mf-compounding").addEventListener("change", () => calculateMutualFund(false));
+    }
+
+    function initMobileNav() {
+      const btn = $("hamburgerBtn");
+      const nav = $("mobileNav");
+      if (!btn || !nav) return;
+      btn.addEventListener("click", () => {
+        const open = nav.classList.toggle("open");
+        btn.setAttribute("aria-expanded", open ? "true" : "false");
+      });
+    }
+
+    function init() {
+      bindCommonEvents();
+      initMobileNav();
+      sliderConfigs.forEach(updateSliderLabel);
+      updateModeAvailability();
+      updateCurrencyIndicators();
+      switchModule("core");
+    }
+
+    document.addEventListener("DOMContentLoaded", init);
+  </script>
+</body>
+
+</html>
