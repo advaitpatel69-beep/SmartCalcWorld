@@ -3,7 +3,7 @@
 
   <url>
     <loc>https://smartcalcworld.com/index.html</loc>
-    <lastmod>2026-03-16</lastmod>
+    <lastmod>2026-03-19</lastmod>
     <priority>1.0</priority>
   </url>
 
@@ -65,7 +65,7 @@
   <!-- Finance Sub-Hubs -->
   <url>
     <loc>https://smartcalcworld.com/finance/investment/investment-hub.html</loc>
-    <lastmod>2026-02-10</lastmod>
+    <lastmod>2026-03-19</lastmod>
     <priority>0.8</priority>
   </url>
 
@@ -93,7 +93,7 @@
     <priority>0.7</priority>
   </url>
 
-  <!-- Finance calculators -->
+  <!-- Finance Investment calculators -->
   <url>
     <loc>https://smartcalcworld.com/finance/investment/finance-fd-calculator.html</loc>
     <lastmod>2026-02-10</lastmod>
@@ -175,6 +175,24 @@
   <url>
     <loc>https://smartcalcworld.com/finance/investment/mutual-fund-calculator.html</loc>
     <lastmod>2026-03-18</lastmod>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://smartcalcworld.com/finance/investment/unified-trading-dashboard.html</loc>
+    <lastmod>2026-03-19</lastmod>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://smartcalcworld.com/finance/investment/swp-calculator.html</loc>
+    <lastmod>2026-03-19</lastmod>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://smartcalcworld.com/finance/investment/stock-profit-calculator.html</loc>
+    <lastmod>2026-03-19</lastmod>
     <priority>0.7</priority>
   </url>
 
