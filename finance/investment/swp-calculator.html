@@ -1,0 +1,2595 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow">
+  <title>SWP Calculator &ndash; Systematic Withdrawal Plan Calculator Online | SmartCalcWorld</title>
+  <meta name="description"
+    content="Calculate how long your investment may last with regular withdrawals, compare SWP scenarios, and plan sustainable income with SmartCalcWorld's advanced SWP Calculator.">
+  <link rel="canonical" href="https://smartcalcworld.com/finance/investment/swp-calculator.html">
+  <link rel="icon" type="image/png" href="https://smartcalcworld.com/favicon.png">
+  <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://smartcalcworld.com/#org",
+        "name": "SmartCalc World",
+        "url": "https://smartcalcworld.com",
+        "description": "Free finance calculators for investing, saving, withdrawal planning, inflation, returns, and long-term goals."
+      },
+      {
+        "@type": "WebApplication",
+        "@id": "https://smartcalcworld.com/finance/investment/swp-calculator.html#app",
+        "name": "SWP Calculator",
+        "url": "https://smartcalcworld.com/finance/investment/swp-calculator.html",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Any",
+        "creator": {
+          "@id": "https://smartcalcworld.com/#org"
+        },
+        "description": "Calculate how long your investment corpus may last with regular withdrawals, compare return scenarios, and understand sustainable income planning with an advanced SWP calculator.",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Finance",
+            "item": "https://smartcalcworld.com/finance/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Investment",
+            "item": "https://smartcalcworld.com/finance/investment/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "SWP Calculator",
+            "item": "https://smartcalcworld.com/finance/investment/swp-calculator.html"
+          }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is SWP?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "SWP stands for Systematic Withdrawal Plan. It is a method where an investor withdraws a fixed amount from an investment at regular intervals such as every month."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How long will my investment last with withdrawals?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "That depends on your starting corpus, withdrawal amount, return rate, inflation, withdrawal growth, and compounding frequency. A higher withdrawal relative to growth usually shortens how long the corpus lasts."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is a safe withdrawal rate?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A safe withdrawal rate is a planning rule used to estimate how much can be withdrawn from a portfolio without running out too quickly. It is not a guarantee, but it helps frame sustainable income decisions."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I withdraw without losing money?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "You may be able to withdraw without reducing the corpus for some time if investment returns match or exceed withdrawals, but that depends on markets, fees, taxes, and inflation."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What happens if returns are lower than expected?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Lower returns usually mean the corpus grows more slowly or declines faster, which can shorten portfolio life and reduce the amount left in later years."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How does inflation affect withdrawals?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Inflation reduces purchasing power. Even if the withdrawal amount stays the same, its real value may buy less over time. Many investors increase withdrawals over time to protect lifestyle."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is SWP better than fixed deposits?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "They serve different goals. SWP is linked to investment performance and can offer growth potential, while fixed deposits focus on stability. Which is better depends on risk tolerance and income needs."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I increase withdrawal over time?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Many investors raise withdrawals gradually to reflect inflation or changing living costs. That makes planning more realistic but can also shorten portfolio life if growth does not keep up."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the difference between SWP and SIP?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "SIP focuses on adding money regularly into an investment, while SWP focuses on taking money out regularly. SIP builds the corpus and SWP helps convert that corpus into income."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+  <style>
+    :root {
+      --teal: #0d9488;
+      --teal-dark: #0f766e;
+      --teal-light: #ccfbf1;
+      --amber: #f59e0b;
+      --amber-light: #fef3c7;
+      --rose: #f43f5e;
+      --rose-light: #ffe4e6;
+      --sky: #0284c7;
+      --sky-light: #dbeafe;
+      --slate-950: #020617;
+      --slate-900: #0f172a;
+      --slate-800: #1e293b;
+      --slate-700: #334155;
+      --slate-600: #475569;
+      --slate-500: #64748b;
+      --slate-400: #94a3b8;
+      --slate-300: #cbd5e1;
+      --slate-200: #e2e8f0;
+      --slate-100: #f1f5f9;
+      --slate-50: #f8fafc;
+      --white: #ffffff;
+      --radius: 14px;
+      --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.08);
+      --shadow-md: 0 10px 28px rgba(15, 23, 42, 0.12);
+      --shadow-lg: 0 20px 48px rgba(15, 23, 42, 0.16);
+      --header-h: 68px;
+    }
+
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(13, 148, 136, 0.14), transparent 32%),
+        linear-gradient(180deg, #f8fafc 0%, #eff6ff 44%, #f8fafc 100%);
+      color: var(--slate-800);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    img,
+    canvas {
+      max-width: 100%;
+    }
+
+    a {
+      color: var(--teal);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: linear-gradient(135deg, #0891b2 0%, #059669 100%);
+      color: var(--white);
+      box-shadow: 0 2px 10px rgba(15, 23, 42, 0.12);
+    }
+
+    .hdr-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .hdr-logo {
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+    }
+
+    .hdr-nav {
+      display: flex;
+      gap: 1.25rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .hdr-nav a,
+    .hdr-nav span,
+    .mobile-nav a,
+    .mobile-nav span {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      opacity: 0.96;
+      transition: opacity 0.3s ease;
+    }
+
+    .hdr-nav a:hover,
+    .mobile-nav a:hover {
+      opacity: 0.82;
+      text-decoration: none;
+    }
+
+    .nav-disabled {
+      opacity: 0.7;
+      cursor: default;
+    }
+
+    .hamburger {
+      display: none;
+      background: transparent;
+      border: none;
+      padding: 0.25rem;
+      cursor: pointer;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--white);
+      margin: 5px 0;
+      border-radius: 999px;
+    }
+
+    .mobile-nav {
+      display: none;
+      flex-direction: column;
+      gap: 0.85rem;
+      padding: 0 1rem 1rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1.2rem;
+    }
+
+    .breadcrumb {
+      font-size: 0.84rem;
+      color: var(--slate-500);
+      margin-bottom: 1.25rem;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(135deg, rgba(13, 148, 136, 0.14), rgba(2, 132, 199, 0.08)),
+        var(--white);
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      border-radius: 22px;
+      box-shadow: var(--shadow-md);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -80px -80px auto;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle, rgba(13, 148, 136, 0.14), transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      background: var(--teal-light);
+      color: var(--teal-dark);
+      font-size: 0.76rem;
+      font-weight: 800;
+      padding: 0.4rem 0.9rem;
+      border-radius: 999px;
+      margin-bottom: 0.85rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 5vw, 3.25rem);
+      line-height: 1.08;
+      color: var(--slate-900);
+      margin-bottom: 0.8rem;
+    }
+
+    .hero-sub {
+      font-size: 1rem;
+      color: var(--slate-600);
+      max-width: 760px;
+    }
+
+    .hero-highlights {
+      display: grid;
+      gap: 0.85rem;
+      margin-top: 1.25rem;
+      align-items: start;
+    }
+
+    .hero-chip {
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid rgba(148, 163, 184, 0.28);
+      border-radius: 14px;
+      padding: 0.95rem 1rem;
+      box-shadow: var(--shadow-sm);
+      color: var(--slate-600);
+    }
+
+    .hero-chip strong {
+      display: block;
+      color: var(--slate-900);
+      margin-bottom: 0.2rem;
+    }
+
+    .card,
+    .content-section {
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid rgba(148, 163, 184, 0.22);
+      border-radius: 20px;
+      box-shadow: var(--shadow-md);
+      margin-top: 2rem;
+    }
+
+    .card {
+      padding: 1.5rem;
+    }
+
+    .content-section {
+      padding: 2rem;
+      scroll-margin-top: calc(var(--header-h) + 1rem);
+    }
+
+    .card-title,
+    .content-section h2 {
+      font-size: clamp(1.25rem, 3vw, 1.75rem);
+      font-weight: 800;
+      color: var(--slate-900);
+      margin-bottom: 1rem;
+    }
+
+    .content-section h2 {
+      padding-left: 1rem;
+      border-left: 4px solid var(--teal);
+    }
+
+    .content-section h3 {
+      font-size: 1.15rem;
+      color: var(--slate-900);
+      margin: 1.6rem 0 0.65rem;
+    }
+
+    .toolbar-grid,
+    .field-pair,
+    .charts-grid,
+    .comparison-grid,
+    .links-grid,
+    .footer-content,
+    .result-grid,
+    .qnav,
+    .info-list,
+    .faq-list {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .toolbar-grid>*,
+    .field-pair>*,
+    .charts-grid>*,
+    .comparison-grid>*,
+    .links-grid>*,
+    .footer-content>*,
+    .result-grid>*,
+    .qnav>* {
+      min-width: 0;
+    }
+
+    .content-section p,
+    .content-section li,
+    .module-intro,
+    .chart-note,
+    .table-context,
+    .hero p {
+      color: var(--slate-600);
+      font-size: 0.97rem;
+    }
+
+    .content-section ul {
+      margin: 0.2rem 0 1rem 1.25rem;
+    }
+
+    .content-section li {
+      margin-bottom: 0.55rem;
+    }
+
+    .toolbar-box {
+      background: linear-gradient(180deg, rgba(13, 148, 136, 0.08), rgba(255, 255, 255, 0.94));
+      border: 1px solid rgba(148, 163, 184, 0.24);
+      border-radius: 16px;
+      padding: 1rem;
+      height: 100%;
+    }
+
+    .toolbar-box h2,
+    .toolbar-box h3 {
+      font-size: 1.02rem;
+      font-weight: 800;
+      color: var(--slate-900);
+      margin-bottom: 0.65rem;
+    }
+
+    .info-pill,
+    .callout,
+    .status-banner,
+    .insight-box,
+    .formula-box {
+      border-radius: 16px;
+      padding: 0.95rem 1rem;
+      border: 1px solid rgba(148, 163, 184, 0.24);
+    }
+
+    .info-pill {
+      background: rgba(255, 255, 255, 0.85);
+      color: var(--slate-700);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .callout,
+    .insight-box {
+      background: linear-gradient(135deg, rgba(13, 148, 136, 0.1), rgba(255, 255, 255, 0.95));
+      color: var(--slate-700);
+      margin-top: 1rem;
+    }
+
+    .formula-box {
+      background: linear-gradient(180deg, rgba(2, 132, 199, 0.08), rgba(255, 255, 255, 0.95));
+      color: var(--slate-700);
+      margin-top: 1rem;
+    }
+
+    .status-banner {
+      margin-top: 1rem;
+      background: rgba(15, 23, 42, 0.04);
+      color: var(--slate-700);
+    }
+
+    .status-banner.success {
+      background: rgba(13, 148, 136, 0.1);
+      color: var(--teal-dark);
+    }
+
+    .status-banner.warning {
+      background: rgba(245, 158, 11, 0.14);
+      color: #92400e;
+    }
+
+    .status-banner.error {
+      background: rgba(244, 63, 94, 0.12);
+      color: #9f1239;
+    }
+
+    .form-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      padding: 1rem;
+      border: 1px solid rgba(148, 163, 184, 0.22);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.86);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .lbl {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--slate-900);
+    }
+
+    .hint {
+      font-size: 0.86rem;
+      color: var(--slate-500);
+    }
+
+    input,
+    select,
+    button,
+    textarea {
+      font: inherit;
+    }
+
+    input[type="number"],
+    select {
+      width: 100%;
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      border-radius: 14px;
+      padding: 0.85rem 0.95rem;
+      background: var(--white);
+      color: var(--slate-900);
+      outline: none;
+      box-shadow: inset 0 0 0 1px transparent;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    input[type="number"]:focus,
+    select:focus {
+      border-color: rgba(2, 132, 199, 0.55);
+      box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.1);
+    }
+
+    .input-slider {
+      display: grid;
+      gap: 0.9rem;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--teal);
+      cursor: pointer;
+    }
+
+    .slider-lbl {
+      text-align: right;
+      font-weight: 700;
+      color: var(--slate-600);
+      font-size: 0.92rem;
+      word-break: break-word;
+    }
+
+    .qnav {
+      margin-top: 1.25rem;
+    }
+
+    .qnav-btn {
+      border: 1px solid rgba(148, 163, 184, 0.28);
+      background: rgba(255, 255, 255, 0.88);
+      color: var(--slate-700);
+      padding: 0.95rem 1rem;
+      border-radius: 14px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .qnav-btn.active,
+    .qnav-btn:hover {
+      background: linear-gradient(135deg, #0d9488, #0f766e);
+      color: var(--white);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-1px);
+    }
+
+    .module {
+      display: none;
+      margin-top: 1.2rem;
+    }
+
+    .module.active {
+      display: block;
+    }
+
+    .module-intro {
+      margin-bottom: 1rem;
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      margin-top: 1rem;
+    }
+
+    .btn-primary,
+    .btn-secondary,
+    .btn-ghost {
+      border-radius: 14px;
+      padding: 0.9rem 1.15rem;
+      font-weight: 800;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+      min-height: 52px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #0d9488, #0f766e);
+      color: var(--white);
+      box-shadow: var(--shadow-md);
+    }
+
+    .btn-secondary {
+      background: rgba(2, 132, 199, 0.12);
+      color: var(--sky);
+      border-color: rgba(2, 132, 199, 0.2);
+    }
+
+    .btn-ghost {
+      background: rgba(255, 255, 255, 0.92);
+      color: var(--slate-700);
+      border-color: rgba(148, 163, 184, 0.28);
+    }
+
+    .btn-primary:hover,
+    .btn-secondary:hover,
+    .btn-ghost:hover {
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .result-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+
+    .mode-pill,
+    .copy-note {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      border-radius: 999px;
+      padding: 0.5rem 0.85rem;
+      font-weight: 800;
+      font-size: 0.82rem;
+    }
+
+    .mode-pill {
+      background: rgba(13, 148, 136, 0.1);
+      color: var(--teal-dark);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .result-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+    }
+
+    .copy-note {
+      background: rgba(2, 132, 199, 0.1);
+      color: var(--sky);
+    }
+
+    .result-grid {
+      margin-top: 1rem;
+    }
+
+    .result-card {
+      min-width: 0;
+      border-radius: 18px;
+      padding: 1rem;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      background: rgba(255, 255, 255, 0.95);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+
+    .result-card.teal {
+      background: linear-gradient(180deg, rgba(13, 148, 136, 0.14), rgba(255, 255, 255, 0.98));
+    }
+
+    .result-card.amber {
+      background: linear-gradient(180deg, rgba(245, 158, 11, 0.16), rgba(255, 255, 255, 0.98));
+    }
+
+    .result-card.rose {
+      background: linear-gradient(180deg, rgba(244, 63, 94, 0.14), rgba(255, 255, 255, 0.98));
+    }
+
+    .result-card.sky {
+      background: linear-gradient(180deg, rgba(2, 132, 199, 0.14), rgba(255, 255, 255, 0.98));
+    }
+
+    .result-card.slate {
+      background: linear-gradient(180deg, rgba(71, 85, 105, 0.12), rgba(255, 255, 255, 0.98));
+    }
+
+    .result-lbl {
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: var(--slate-700);
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+
+    .result-val {
+      font-size: clamp(1.18rem, 3.1vw, 1.82rem);
+      line-height: 1.15;
+      font-weight: 900;
+      color: var(--slate-900);
+      margin: 0.55rem 0 0.35rem;
+      white-space: normal;
+      overflow: visible;
+      text-overflow: clip;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+      max-width: 100%;
+    }
+
+    .result-sub {
+      font-size: 0.9rem;
+      color: var(--slate-600);
+    }
+
+    .comparison-summary {
+      margin-top: 1.25rem;
+      background: rgba(255, 255, 255, 0.88);
+      border-radius: 18px;
+      border: 1px solid rgba(148, 163, 184, 0.24);
+      padding: 1rem;
+    }
+
+    .table-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .tbl-wrap {
+      width: 100%;
+      overflow-x: auto;
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.94);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 720px;
+    }
+
+    th,
+    td {
+      padding: 0.85rem 0.95rem;
+      border-bottom: 1px solid rgba(226, 232, 240, 0.9);
+      text-align: left;
+      vertical-align: top;
+      color: var(--slate-700);
+      font-size: 0.93rem;
+    }
+
+    th {
+      background: linear-gradient(180deg, rgba(241, 245, 249, 0.98), rgba(226, 232, 240, 0.96));
+      color: var(--slate-900);
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .compare-a-cell {
+      background: rgba(2, 132, 199, 0.08);
+    }
+
+    .compare-b-cell {
+      background: rgba(245, 158, 11, 0.1);
+    }
+
+    .charts-grid {
+      margin-top: 1rem;
+    }
+
+    .chart-wrap {
+      border-radius: 18px;
+      border: 1px solid rgba(148, 163, 184, 0.22);
+      background: rgba(255, 255, 255, 0.92);
+      padding: 1rem;
+      box-shadow: var(--shadow-sm);
+      min-width: 0;
+    }
+
+    .chart-title {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--slate-900);
+      margin-bottom: 0.2rem;
+    }
+
+    .chart-canvas {
+      height: 320px;
+      margin-top: 0.9rem;
+      min-width: 0;
+    }
+
+    .link-card {
+      display: block;
+      position: relative;
+      border-radius: 16px;
+      border: 1px solid rgba(148, 163, 184, 0.22);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(248, 250, 252, 0.92));
+      box-shadow: var(--shadow-sm);
+      padding: 1.05rem 1rem 1rem;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .link-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--teal), var(--sky));
+    }
+
+    .link-card:hover {
+      text-decoration: none;
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .link-card strong {
+      display: block;
+      color: var(--slate-900);
+      margin-bottom: 0.25rem;
+    }
+
+    #related-tools .link-card:nth-child(2n)::before {
+      background: linear-gradient(90deg, var(--amber), #f97316);
+    }
+
+    #related-tools .link-card:nth-child(3n)::before {
+      background: linear-gradient(90deg, var(--sky), #2563eb);
+    }
+
+    #related-tools .link-card:nth-child(4n)::before {
+      background: linear-gradient(90deg, var(--rose), #ec4899);
+    }
+
+    .faq-item {
+      border-radius: 16px;
+      border: 1px solid rgba(13, 148, 136, 0.16);
+      background: linear-gradient(180deg, rgba(13, 148, 136, 0.06), rgba(255, 255, 255, 0.96));
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+    }
+
+    .faq-item summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 1rem 1.1rem;
+      font-weight: 800;
+      color: var(--slate-900);
+      background: linear-gradient(90deg, rgba(13, 148, 136, 0.08), rgba(2, 132, 199, 0.04));
+    }
+
+    .faq-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-item p {
+      padding: 0 1.1rem 1rem;
+    }
+
+    .faq-item[open] {
+      border-color: rgba(13, 148, 136, 0.28);
+      box-shadow: var(--shadow-md);
+    }
+
+    #projection-section {
+      background: linear-gradient(180deg, rgba(2, 132, 199, 0.05), rgba(255, 255, 255, 0.96));
+    }
+
+    #projection-section .tbl-wrap {
+      border-color: rgba(2, 132, 199, 0.18);
+      background: linear-gradient(180deg, rgba(239, 246, 255, 0.9), rgba(255, 255, 255, 0.96));
+    }
+
+    #projection-section th {
+      background: linear-gradient(180deg, rgba(2, 132, 199, 0.16), rgba(13, 148, 136, 0.08));
+    }
+
+    #projection-section tbody tr:nth-child(odd) td {
+      background: rgba(239, 246, 255, 0.48);
+    }
+
+    #comparison-tables {
+      background: linear-gradient(180deg, rgba(245, 158, 11, 0.06), rgba(255, 255, 255, 0.96));
+    }
+
+    #comparison-tables .comparison-grid > div {
+      background: rgba(255, 255, 255, 0.74);
+      border: 1px solid rgba(245, 158, 11, 0.14);
+      border-radius: 18px;
+      padding: 1rem;
+      box-shadow: var(--shadow-sm);
+      min-width: 0;
+    }
+
+    #comparison-tables h3 {
+      color: var(--slate-900);
+      padding-left: 0.9rem;
+      border-left: 4px solid rgba(245, 158, 11, 0.75);
+    }
+
+    #comparison-tables .tbl-wrap {
+      border-color: rgba(245, 158, 11, 0.18);
+      background: linear-gradient(180deg, rgba(255, 251, 235, 0.86), rgba(255, 255, 255, 0.96));
+    }
+
+    #comparison-tables th {
+      background: linear-gradient(180deg, rgba(245, 158, 11, 0.16), rgba(254, 243, 199, 0.8));
+    }
+
+    #comparison-tables tbody tr:nth-child(odd) td {
+      background: rgba(255, 251, 235, 0.4);
+    }
+
+    #faq {
+      background: linear-gradient(180deg, rgba(13, 148, 136, 0.06), rgba(255, 255, 255, 0.98));
+    }
+
+    #related-tools {
+      background: linear-gradient(180deg, rgba(2, 132, 199, 0.05), rgba(255, 255, 255, 0.98));
+    }
+
+    .disclaimer {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.12), rgba(255, 255, 255, 0.96));
+    }
+
+    footer {
+      margin-top: 2rem;
+      background: linear-gradient(135deg, #0f172a, #0f766e);
+      color: var(--white);
+      border-radius: 24px 24px 0 0;
+      padding: 2rem 1.2rem 1.4rem;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-section h3 {
+      font-size: 1rem;
+      margin-bottom: 0.7rem;
+    }
+
+    .footer-section ul {
+      list-style: none;
+      display: grid;
+      gap: 0.55rem;
+    }
+
+    .footer-section a {
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .footer-disclaimer {
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 1rem;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .copyright {
+      max-width: 1200px;
+      margin: 1.2rem auto 0;
+      text-align: center;
+      color: rgba(255, 255, 255, 0.75);
+      font-size: 0.92rem;
+    }
+
+    @media (min-width: 640px) {
+      .toolbar-grid,
+      .field-pair,
+      .comparison-grid,
+      .links-grid,
+      .result-grid,
+      .hero-highlights,
+      .faq-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .qnav {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @media (min-width: 768px) {
+      .charts-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .charts-grid .chart-wrap:last-child {
+        grid-column: 1 / -1;
+      }
+
+      .footer-content {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .result-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @media (min-width: 960px) {
+      .hero-highlights {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .toolbar-grid {
+        grid-template-columns: 0.95fr 1.05fr;
+      }
+
+      .footer-content {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .comparison-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .result-grid {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 767px) {
+      .hdr-nav {
+        display: none;
+      }
+
+      .hamburger {
+        display: inline-block;
+      }
+
+      .mobile-nav.open {
+        display: flex;
+      }
+
+      .page {
+        padding: 1rem;
+      }
+
+      .card,
+      .content-section {
+        padding: 1rem;
+      }
+
+      .chart-canvas {
+        height: 280px;
+      }
+
+      .result-val {
+        white-space: normal;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="hdr-inner">
+      <div class="hdr-logo">💰 SmartCalc World</div>
+      <nav class="hdr-nav">
+        <a href="https://smartcalcworld.com/index.html">Home</a>
+        <a href="https://smartcalcworld.com/finance/finance-hub.html">Finance Hub</a>
+        <span class="nav-disabled">Medical Hub (Coming Soon)</span>
+        <span class="nav-disabled">Student Hub (Coming Soon)</span>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <button class="hamburger" id="hamburgerBtn" type="button" aria-label="Toggle menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <nav class="mobile-nav" id="mobileNav">
+      <a href="https://smartcalcworld.com/index.html">Home</a>
+      <a href="https://smartcalcworld.com/finance/finance-hub.html">Finance Hub</a>
+      <span class="nav-disabled">Medical Hub (Coming Soon)</span>
+      <span class="nav-disabled">Student Hub (Coming Soon)</span>
+      <a href="#faq">FAQ</a>
+    </nav>
+  </header>
+
+  <main class="page">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="https://smartcalcworld.com/index.html">Home</a> &rsaquo;
+      <a href="https://smartcalcworld.com/finance/finance-hub.html">Finance</a> &rsaquo;
+      <a href="https://smartcalcworld.com/finance/investment/investment-hub.html">Investment</a> &rsaquo;
+      SWP Calculator
+    </nav>
+
+    <section class="hero">
+      <span class="hero-badge">📉 Premium SWP Income Planner</span>
+      <h1>SWP Calculator</h1>
+      <p class="hero-sub">Plan how a Systematic Withdrawal Plan may behave over time with the same premium SmartCalc
+        World layout used in our Portfolio Growth Calculator and Retirement Calculator. Model regular withdrawals,
+        inflation, withdrawal increases, scenario comparison, and corpus sustainability in one clear dashboard.</p>
+
+      <div class="hero-highlights">
+        <div class="hero-chip">
+          <strong>See how long your corpus may last</strong>
+          Project the balance year by year to understand when growth supports income and when depletion risk starts to
+          appear.
+        </div>
+        <div class="hero-chip">
+          <strong>Track withdrawals, returns, and real value</strong>
+          View total withdrawn amount, returns earned during the withdrawal phase, and the real buying power of future
+          withdrawals.
+        </div>
+        <div class="hero-chip">
+          <strong>Compare realistic return scenarios</strong>
+          Test conservative, moderate, and stronger return paths so income planning stays practical instead of
+          optimistic.
+        </div>
+      </div>
+    </section>
+
+    <section class="card" id="calculator">
+      <div class="card-title">SWP Sustainability Planner</div>
+
+      <div class="toolbar-grid">
+        <div class="toolbar-box">
+          <h2>Display Currency</h2>
+          <div class="form-row">
+            <label class="lbl" for="swp-currency">Choose currency</label>
+            <select id="swp-currency">
+              <option value="USD">USD $</option>
+              <option value="EUR">EUR &euro;</option>
+              <option value="GBP">GBP &pound;</option>
+              <option value="INR">INR &#8377;</option>
+              <option value="CAD">CAD $</option>
+              <option value="AUD">AUD $</option>
+            </select>
+            <span class="hint">Display formatting only. Symbols and digit grouping update without exchange-rate
+              conversion.</span>
+          </div>
+        </div>
+
+        <div class="toolbar-box">
+          <h2>What this tool helps you see</h2>
+          <div class="info-list">
+            <div class="info-pill">How a starting corpus and a fixed monthly withdrawal interact with compounding over
+              time.</div>
+            <div class="info-pill">How inflation and withdrawal growth can change the real lifestyle value of the plan
+              🧓.</div>
+            <div class="info-pill">How different return assumptions change sustainability, final balance, and depletion
+              risk 📈.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="qnav" role="tablist" aria-label="SWP calculator sections">
+        <button type="button" class="qnav-btn active" data-module="core" role="tab" aria-selected="true"
+          onclick="switchModule('core')">Core Inputs</button>
+        <button type="button" class="qnav-btn" data-module="strategy" role="tab" aria-selected="false"
+          onclick="switchModule('strategy')">Inflation &amp; Strategy</button>
+        <button type="button" class="qnav-btn" data-module="scenarios" role="tab" aria-selected="false"
+          onclick="switchModule('scenarios')">Scenario Comparison</button>
+      </div>
+
+      <section class="module active" id="mod-core" role="tabpanel" aria-label="Core SWP inputs">
+        <p class="module-intro">Start with the size of your invested corpus, how much you plan to withdraw each month,
+          your expected return, and the withdrawal period you want to inspect. These inputs shape the core income
+          sustainability picture.</p>
+
+        <div class="field-pair">
+          <div class="form-row">
+            <label class="lbl" for="swp-initial">Initial Investment (<span data-currency-symbol>$</span>)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="swp-initial" min="0" max="1000000000" step="1000" value="200000">
+                <span class="hint">The investment corpus available at the start of the withdrawal plan.</span>
+              </div>
+              <div>
+                <input type="range" id="swp-initial-sl" min="0" max="5000000" step="1000" value="200000">
+                <div class="slider-lbl" id="swp-initial-lbl">$200,000.00</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label class="lbl" for="swp-withdrawal">Monthly Withdrawal Amount (<span
+                data-currency-symbol>$</span>)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="swp-withdrawal" min="0" max="1000000" step="50" value="1200">
+                <span class="hint">The amount you want to withdraw every month before any optional yearly increase.</span>
+              </div>
+              <div>
+                <input type="range" id="swp-withdrawal-sl" min="0" max="50000" step="50" value="1200">
+                <div class="slider-lbl" id="swp-withdrawal-lbl">$1,200.00</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="field-pair">
+          <div class="form-row">
+            <label class="lbl" for="swp-return">Expected Annual Return Rate (%)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="swp-return" min="0" max="30" step="0.01" value="8">
+                <span class="hint">The nominal annual return rate expected during the withdrawal phase.</span>
+              </div>
+              <div>
+                <input type="range" id="swp-return-sl" min="0" max="30" step="0.1" value="8">
+                <div class="slider-lbl" id="swp-return-lbl">8.00%</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label class="lbl" for="swp-years">Withdrawal Duration (Years, optional)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="swp-years" min="0" max="60" step="1" value="25">
+                <span class="hint">Use 0 to run an open-ended sustainability view until depletion or the simulation
+                  cap.</span>
+              </div>
+              <div>
+                <input type="range" id="swp-years-sl" min="0" max="60" step="1" value="25">
+                <div class="slider-lbl" id="swp-years-lbl">25 years</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <button type="button" class="btn-primary" onclick="calculateSwp(true, true)">Update SWP Plan</button>
+          <button type="button" class="btn-ghost" onclick="resetPlanner()">Reset Inputs</button>
+        </div>
+      </section>
+
+      <section class="module" id="mod-strategy" role="tabpanel" aria-label="Inflation and SWP strategy inputs">
+        <p class="module-intro">Add the planning assumptions that make a withdrawal plan feel more realistic. Inflation
+          shows buying-power pressure, withdrawal growth simulates rising spending, and compounding frequency controls
+          how often returns are applied during the drawdown path.</p>
+
+        <div class="field-pair">
+          <div class="form-row">
+            <label class="lbl" for="swp-inflation">Inflation Rate (%)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="swp-inflation" min="0" max="20" step="0.01" value="4">
+                <span class="hint">Optional. Used to estimate the real value of future withdrawals and ending balance.</span>
+              </div>
+              <div>
+                <input type="range" id="swp-inflation-sl" min="0" max="20" step="0.1" value="4">
+                <div class="slider-lbl" id="swp-inflation-lbl">4.00%</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label class="lbl" for="swp-growth">Withdrawal Growth Rate (%)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="swp-growth" min="0" max="20" step="0.01" value="3">
+                <span class="hint">Optional yearly increase in withdrawals to model inflation-linked or lifestyle-linked
+                  spending growth.</span>
+              </div>
+              <div>
+                <input type="range" id="swp-growth-sl" min="0" max="20" step="0.1" value="3">
+                <div class="slider-lbl" id="swp-growth-lbl">3.00%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="field-pair">
+          <div class="form-row">
+            <label class="lbl" for="swp-compounding">Compounding Frequency</label>
+            <select id="swp-compounding">
+              <option value="12" selected>Monthly</option>
+              <option value="4">Quarterly</option>
+              <option value="1">Yearly</option>
+            </select>
+            <span class="hint">The monthly withdrawal is converted into a per-period withdrawal based on the selected
+              compounding frequency.</span>
+          </div>
+
+          <div class="toolbar-box">
+            <h2>Planning note</h2>
+            <div class="info-list">
+              <div class="info-pill">If withdrawals rise faster than the portfolio grows, depletion usually arrives
+                sooner 📉.</div>
+              <div class="info-pill">If inflation is high, a flat withdrawal may feel less useful each year even if the
+                corpus does not run out.</div>
+              <div class="info-pill">A longer duration does not automatically mean a bad plan, but it does put more
+                pressure on the return-versus-withdrawal balance.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <button type="button" class="btn-primary" onclick="calculateSwp(true, true)">Update SWP Plan</button>
+          <button type="button" class="btn-ghost" onclick="resetPlanner()">Reset Inputs</button>
+        </div>
+      </section>
+
+      <section class="module" id="mod-scenarios" role="tabpanel" aria-label="SWP scenario comparison">
+        <p class="module-intro">Scenario comparison helps you judge whether the plan is resilient or fragile. Use lower
+          and higher return assumptions to see how much portfolio life and ending balance may shift.</p>
+
+        <div class="field-pair">
+          <div class="form-row">
+            <label class="lbl" for="scenario-cons">Conservative Return (%)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="scenario-cons" min="0" max="20" step="0.01" value="6">
+                <span class="hint">A lower-growth case for more cautious SWP planning.</span>
+              </div>
+              <div>
+                <input type="range" id="scenario-cons-sl" min="0" max="20" step="0.1" value="6">
+                <div class="slider-lbl" id="scenario-cons-lbl">6.00%</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label class="lbl" for="scenario-mod">Moderate Return (%)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="scenario-mod" min="0" max="25" step="0.01" value="8">
+                <span class="hint">A balanced middle case many investors use as a starting assumption.</span>
+              </div>
+              <div>
+                <input type="range" id="scenario-mod-sl" min="0" max="25" step="0.1" value="8">
+                <div class="slider-lbl" id="scenario-mod-lbl">8.00%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="field-pair">
+          <div class="form-row">
+            <label class="lbl" for="scenario-agg">Optimistic Return (%)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="scenario-agg" min="0" max="30" step="0.01" value="10">
+                <span class="hint">A stronger case that helps you see upside, not certainty.</span>
+              </div>
+              <div>
+                <input type="range" id="scenario-agg-sl" min="0" max="30" step="0.1" value="10">
+                <div class="slider-lbl" id="scenario-agg-lbl">10.00%</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="toolbar-box">
+            <h2>How to use scenarios</h2>
+            <div class="info-list">
+              <div class="info-pill">If the plan works only in the optimistic case, income expectations may be too
+                aggressive.</div>
+              <div class="info-pill">If the conservative case still looks stable, the withdrawal plan is usually more
+                resilient.</div>
+              <div class="info-pill">Scenario thinking is useful because real markets rarely follow one clean forecast
+                year after year 🚀.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <button type="button" class="btn-primary" onclick="calculateSwp(true, true)">Update SWP Plan</button>
+          <button type="button" class="btn-ghost" onclick="resetPlanner()">Reset Inputs</button>
+        </div>
+      </section>
+    </section>
+
+    <section class="card" id="results-section" aria-live="polite">
+      <div class="result-meta">
+        <div class="mode-pill" id="result-mode-pill">Latest Result: SWP Sustainability</div>
+        <div class="result-actions">
+          <button type="button" class="btn-secondary" onclick="copyResults()">Copy Results</button>
+          <div class="copy-note" id="copy-note">Nothing copied yet.</div>
+        </div>
+      </div>
+
+      <div class="status-banner" id="status-banner"></div>
+
+      <div class="result-grid">
+        <div class="result-card teal">
+          <div class="result-lbl" id="result-lbl-0">Projected Final Portfolio Value</div>
+          <div class="result-val" id="result-val-0">—</div>
+          <div class="result-sub" id="result-sub-0">Run the calculator</div>
+        </div>
+        <div class="result-card amber">
+          <div class="result-lbl" id="result-lbl-1">Total Withdrawn Amount</div>
+          <div class="result-val" id="result-val-1">—</div>
+          <div class="result-sub" id="result-sub-1">Withdrawals during the displayed horizon</div>
+        </div>
+        <div class="result-card rose">
+          <div class="result-lbl" id="result-lbl-2">Total Returns Generated</div>
+          <div class="result-val" id="result-val-2">—</div>
+          <div class="result-sub" id="result-sub-2">Growth earned during withdrawals</div>
+        </div>
+        <div class="result-card sky">
+          <div class="result-lbl" id="result-lbl-3">Duration Portfolio Lasts</div>
+          <div class="result-val" id="result-val-3">—</div>
+          <div class="result-sub" id="result-sub-3">Estimated sustainability</div>
+        </div>
+        <div class="result-card slate">
+          <div class="result-lbl" id="result-lbl-4">Real Value of Withdrawal</div>
+          <div class="result-val" id="result-val-4">—</div>
+          <div class="result-sub" id="result-sub-4">Final monthly withdrawal in today's money</div>
+        </div>
+      </div>
+
+      <div class="insight-box" id="insight-box"></div>
+      <div class="formula-box" id="formula-box"></div>
+
+      <div class="comparison-summary">
+        <div class="table-head">
+          <div>
+            <div class="card-title" style="margin-bottom:0.3rem;">SWP Snapshot</div>
+            <div class="table-context">Quick planning metrics that explain the withdrawal path behind the headline
+              result.</div>
+          </div>
+        </div>
+        <div class="tbl-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Metric</th>
+                <th class="compare-a-cell">Value</th>
+                <th class="compare-b-cell">Planner Note</th>
+              </tr>
+            </thead>
+            <tbody id="summary-body"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="comparison-summary">
+        <div class="table-head">
+          <div>
+            <div class="card-title" style="margin-bottom:0.3rem;">Scenario Sustainability</div>
+            <div class="table-context">See how the same SWP behaves when the return assumption changes.</div>
+          </div>
+        </div>
+        <div class="tbl-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Scenario</th>
+                <th class="compare-a-cell">Return Rate</th>
+                <th>Ending Balance</th>
+                <th>Total Withdrawn</th>
+                <th class="compare-b-cell">Portfolio Life</th>
+              </tr>
+            </thead>
+            <tbody id="scenario-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" id="charts-section">
+      <div class="card-title">Visual SWP Dashboard</div>
+      <p class="chart-note" id="charts-context">Charts show how the portfolio balance, withdrawals, and remaining
+        corpus evolve over time.</p>
+
+      <div class="charts-grid">
+        <div class="chart-wrap">
+          <div class="chart-title" id="growth-title">Portfolio Balance Over Time</div>
+          <div class="chart-note" id="growth-note">The main line chart shows the base SWP path and the scenario
+            comparison lines.</div>
+          <div class="chart-canvas">
+            <canvas id="growth-chart"></canvas>
+          </div>
+        </div>
+
+        <div class="chart-wrap">
+          <div class="chart-title" id="withdrawal-title">Withdrawal vs Balance</div>
+          <div class="chart-note" id="withdrawal-note">Annual withdrawals are shown against the closing portfolio
+            balance.</div>
+          <div class="chart-canvas">
+            <canvas id="withdrawal-chart"></canvas>
+          </div>
+        </div>
+
+        <div class="chart-wrap">
+          <div class="chart-title" id="pie-title">Withdrawn vs Remaining Corpus</div>
+          <div class="chart-note" id="pie-note">A quick split between the money already withdrawn and the corpus still
+            left.</div>
+          <div class="chart-canvas">
+            <canvas id="pie-chart"></canvas>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" id="projection-section">
+      <div class="table-head">
+        <div>
+          <div class="card-title" style="margin-bottom:0.3rem;">Projection Table</div>
+          <div class="table-context" id="projection-context">Year-by-year SWP projection showing opening balance,
+            withdrawals, returns, and closing balance.</div>
+        </div>
+        <button type="button" class="btn-secondary" onclick="downloadCsv()">Download CSV</button>
+      </div>
+
+      <div class="tbl-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Year</th>
+              <th>Opening Balance</th>
+              <th>Withdrawal Amount</th>
+              <th>Interest Earned</th>
+              <th>Closing Balance</th>
+            </tr>
+          </thead>
+          <tbody id="projection-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="content-section" id="comparison-tables">
+      <h2>Comparison Tables</h2>
+      <p>These tables make withdrawal planning easier to interpret. The first table compares SWP with a few related
+        approaches, and the second shows how changing return assumptions can meaningfully affect income sustainability.
+      </p>
+
+      <div class="comparison-grid">
+        <div>
+          <h3>SWP vs SIP vs Fixed Deposit</h3>
+          <div class="tbl-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Feature</th>
+                  <th>SWP</th>
+                  <th>SIP</th>
+                  <th>Fixed Deposit</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Main purpose</td>
+                  <td>Regular withdrawal income</td>
+                  <td>Regular investing</td>
+                  <td>Stable fixed return saving</td>
+                </tr>
+                <tr>
+                  <td>Cash flow direction</td>
+                  <td>Money comes out</td>
+                  <td>Money goes in</td>
+                  <td>Money is locked in for a term</td>
+                </tr>
+                <tr>
+                  <td>Growth potential</td>
+                  <td>Linked to investment performance</td>
+                  <td>High over long periods if invested well</td>
+                  <td>Usually lower but more predictable</td>
+                </tr>
+                <tr>
+                  <td>Inflation handling</td>
+                  <td>Needs monitoring if withdrawals rise</td>
+                  <td>Can build inflation-beating corpus</td>
+                  <td>Often vulnerable to inflation over time</td>
+                </tr>
+                <tr>
+                  <td>Best use case</td>
+                  <td>Income from an existing corpus</td>
+                  <td>Building the corpus first</td>
+                  <td>Capital protection focused savers</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div>
+          <h3>Return Assumption vs Withdrawal Sustainability</h3>
+          <div class="tbl-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Return Rate</th>
+                  <th>Impact on SWP</th>
+                  <th>Typical Outcome</th>
+                  <th>Planning Insight</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>4%</td>
+                  <td>Low growth buffer</td>
+                  <td>Corpus declines faster</td>
+                  <td>Suitable only if withdrawal rate is modest</td>
+                </tr>
+                <tr>
+                  <td>6%</td>
+                  <td>Moderate support</td>
+                  <td>Longer sustainability</td>
+                  <td>Useful for cautious planning scenarios</td>
+                </tr>
+                <tr>
+                  <td>8%</td>
+                  <td>Stronger growth support</td>
+                  <td>Better chance of corpus survival</td>
+                  <td>Often used as a middle-case illustration</td>
+                </tr>
+                <tr>
+                  <td>10%</td>
+                  <td>Higher growth assumption</td>
+                  <td>May preserve or grow corpus longer</td>
+                  <td>Good for comparison, not a guarantee</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <article class="content-section" id="guide">
+      <h2>How SWP Planning Works in Real Life</h2>
+
+      <h3>What is SWP 💰</h3>
+      <p>A Systematic Withdrawal Plan, or SWP, is a simple idea with a very practical purpose. Instead of adding money
+        into an investment every month, you take money out at regular intervals. That makes SWP useful for people who
+        already have a corpus and now want that corpus to support living expenses, retirement income, or a steady cash
+        flow goal. It is often used after the accumulation stage is over. In other words, SIP is usually for building
+        wealth, while SWP is for using that wealth in a structured way 🧠.</p>
+      <p>Many investors like SWP because it creates discipline. Rather than making random withdrawals whenever money is
+        needed, the investor follows a regular schedule. That brings clarity. You can estimate how much may be taken
+        out every month, how much may remain after several years, and whether the plan looks sustainable if returns are
+        weaker than expected. This is especially important for retirement, semi-retirement, or any life stage where
+        portfolio income starts to replace salary.</p>
+      <p>SWP planning becomes more useful when it is not treated as a single number problem. A good plan looks at the
+        starting corpus, the monthly withdrawal, the expected return, the possible rise in withdrawals over time, and
+        the effect of inflation. When those pieces are considered together, the plan becomes much closer to real life
+        💡.</p>
+
+      <h3>How Withdrawal Planning Works 📉</h3>
+      <p>During an SWP, the portfolio usually keeps earning returns, but withdrawals reduce the balance at the same
+        time. That means the future path depends on the fight between growth and cash outflow. If returns are strong
+        and withdrawals are modest, the corpus may last a long time and may even continue growing for a while. If
+        withdrawals are high relative to returns, the balance may shrink quickly and eventually run out. That is why
+        the same starting corpus can produce very different outcomes under different assumptions.</p>
+      <p>This calculator uses iterative compounding because SWP is a path problem, not just a one-line formula. The
+        balance grows each period, then a withdrawal is taken out. The process repeats again and again. If the annual
+        return is 8% and compounding is monthly, the balance gets a small growth step each month before the withdrawal
+        is applied. This makes the output more realistic than a rough shortcut because it mirrors the way money
+        actually moves inside the plan 📈.</p>
+      <p>Withdrawal planning also becomes more realistic when the withdrawal amount is allowed to rise over time. Many
+        people do not spend the same amount every year. Costs rise, needs change, and inflation slowly pushes monthly
+        expenses higher. That is why this page includes a withdrawal growth rate. A flat withdrawal can look safe on
+        paper, but a rising withdrawal may tell a more truthful story.</p>
+
+      <div class="callout">
+        <strong>Simple mindset:</strong> SWP is not only about how much you can withdraw today. It is also about how
+        long that income can remain useful without damaging the future too quickly.
+      </div>
+
+      <h3>How to Avoid Running Out of Money 📈</h3>
+      <p>The first way to reduce depletion risk is to keep withdrawals realistic relative to the corpus size. If the
+        withdrawal amount is too high, even a decent return may not be enough to protect the balance. The second way is
+        to stay realistic about returns. Many plans fail not because the person withdraws recklessly, but because the
+        plan assumes a return that does not actually happen. That is why scenario comparison matters so much. If a plan
+        survives only in the optimistic case, it is fragile. If it still works in a conservative case, it is usually
+        stronger.</p>
+      <p>The third way to avoid running out of money is to review inflation and spending growth honestly. If you think
+        today&apos;s monthly withdrawal of 2,000 in your chosen currency will feel the same after 15 or 20 years, you
+        may be underestimating inflation. In the real world, food, housing, healthcare, utilities, and travel often
+        become more expensive over time 🌍. That means the nominal withdrawal may need to rise just to preserve the
+        same lifestyle. Rising withdrawals make the SWP more demanding, which is why the growth rate input matters.</p>
+      <p>A fourth method is flexibility. A rigid plan can break under market stress, but a flexible plan can adapt.
+        For example, in weaker market years an investor might reduce discretionary spending, skip an optional
+        withdrawal increase, or adjust asset allocation. That kind of flexibility can materially improve how long the
+        corpus lasts. A calculator cannot predict all real-life behavior, but it can show where the pressure points are
+        likely to appear 🚀.</p>
+
+      <h3>Inflation and Purchasing Power 🔥</h3>
+      <p>Inflation matters because money has two values: the number printed on it and what it can actually buy. A
+        monthly withdrawal of 3,000 may sound the same after 20 years, but if prices rise steadily, that same amount
+        may buy much less. This is why a retirement income plan that looks comfortable in nominal terms can feel
+        tighter in real life. The portfolio may still be alive, but the lifestyle may feel smaller.</p>
+      <p>This calculator estimates the real value of future withdrawals by adjusting for inflation. That does not mean
+        inflation changes the actual cash you receive. It means inflation changes what that cash is worth in today&apos;s
+        money. That adjustment helps investors avoid a false sense of comfort. If the real value falls too much, the
+        plan may need either a larger corpus, a lower starting withdrawal, or a more growth-oriented strategy.</p>
+      <p>Inflation also interacts with withdrawal growth. If your monthly withdrawal rises by 3% each year but
+        inflation is 6%, your spending power is still falling. If withdrawal growth matches or exceeds inflation, your
+        lifestyle is more protected, but the plan puts more pressure on the portfolio. That trade-off is one of the
+        most important things to understand in SWP planning 💰.</p>
+
+      <h3>SWP vs SIP Difference 🧠</h3>
+      <p>SIP and SWP are like two opposite phases of the same journey. SIP is for contribution. SWP is for
+        withdrawal. During the accumulation phase, an investor might regularly add money using a
+        <a href="https://smartcalcworld.com/finance/finance-sip-calculator.html">SIP Calculator</a> to build a corpus
+        over many years. Once that corpus becomes large enough, the investor may move into the income phase and start a
+        Systematic Withdrawal Plan. That is one reason these two tools belong in the same planning cluster: one helps
+        build the corpus, and the other helps use it wisely.</p>
+      <p>There is also an emotional difference. SIP feels optimistic because the balance is growing and new money keeps
+        coming in. SWP feels more delicate because money is leaving the portfolio. That does not mean SWP is bad. It
+        simply means the purpose changes. A healthy SWP is a sign that the wealth-building stage has created a usable
+        asset. In that sense, SWP is not the opposite of investing. It is the reason many people invest in the first
+        place.</p>
+      <p>If you want to connect both stages of the journey, the
+        <a href="https://smartcalcworld.com/finance/investment/mutual-fund-calculator.html">Mutual Fund Calculator</a>
+        can help compare SIP and lump sum investing, the
+        <a href="https://smartcalcworld.com/finance/investment/portfolio-growth-calculator.html">Portfolio Growth
+          Calculator</a> can show how the corpus may build over time, and the
+        <a href="https://smartcalcworld.com/finance/investment/retirement-calculator.html">Retirement Calculator</a>
+        can connect future spending needs to the required corpus.</p>
+
+      <h3>A Practical Example: Regular Monthly Income from an Existing Corpus</h3>
+      <p>Imagine an investor starts with an investment corpus of 200,000 and wants to withdraw 2,000 per month. That
+        is 24,000 per year before any future increases. If the portfolio earns around 8% annually and withdrawals stay
+        flat, the corpus may last for a meaningful period and may still retain value after many years. But if
+        withdrawals rise by 5% each year while returns stay the same, the pressure increases sharply. The early years
+        may still look safe, but the later years can become more fragile 📊.</p>
+      <p>Now imagine inflation is 6%. Even if the investor keeps withdrawing 2,000 per month, the real value of that
+        money falls steadily. So the plan may appear stable in nominal terms but weaker in lifestyle terms. To protect
+        spending power, the investor may need to raise withdrawals. But doing that shortens sustainability unless the
+        corpus is larger or the return is stronger. This is exactly why SWP planning should not be reduced to a single
+        “safe” number. The balance between return, withdrawal, inflation, and time matters every year.</p>
+      <p>That same logic works globally, regardless of the currency or number format used. The underlying question is
+        always the same: can the corpus generate enough growth to support withdrawals without being exhausted too
+        quickly?</p>
+
+      <h3>How Investors Improve an SWP Plan</h3>
+      <p>Investors usually improve an SWP plan through a few practical levers. One lever is increasing the starting
+        corpus before withdrawals begin. Another is lowering the withdrawal amount, at least in the early years. A
+        third is keeping enough growth exposure so the portfolio can still compound while withdrawals happen. A fourth
+        is using a dynamic spending rule instead of insisting on the same increase every year no matter what markets do.
+        None of these levers is magic, but together they can make a big difference.</p>
+      <p>Some people also build a cash bucket so a portion of near-term withdrawals is already set aside. That can
+        reduce the need to sell investments after a market fall. Others combine SWP with a lower-risk income source so
+        the portfolio is not carrying the full lifestyle burden alone. In retirement, these combinations can make the
+        plan feel more stable and emotionally easier to follow 🧓.</p>
+      <p>Another smart step is to compare the SWP plan with other tools. The
+        <a href="https://smartcalcworld.com/finance/investment/investment-goal-calculator.html">Investment Goal
+          Calculator</a> helps you work backward from a target corpus, and the
+        <a href="https://smartcalcworld.com/finance/investment/portfolio-growth-calculator.html">Portfolio Growth
+          Calculator</a> can help you understand how much time and contribution may be needed to build that corpus in
+        the first place. SWP works best when it is seen as the final stage of a full investment lifecycle, not an
+        isolated decision.</p>
+    </article>
+
+    <section class="content-section" id="related-tools">
+      <h2>Explore Related Investment Tools</h2>
+      <p>SWP planning becomes much more useful when you connect it to the tools used before and after the income stage.
+        These internal links help you move through the full investment journey more clearly.</p>
+
+      <div class="links-grid">
+        <a class="link-card" href="https://smartcalcworld.com/finance/finance-sip-calculator.html">
+          <strong>SIP Calculator</strong>
+          Explore how regular investing may build the corpus that later supports an SWP.
+        </a>
+        <a class="link-card" href="https://smartcalcworld.com/finance/investment/mutual-fund-calculator.html">
+          <strong>Mutual Fund Calculator</strong>
+          Compare SIP, lump sum, and blended mutual fund strategies before the withdrawal phase begins.
+        </a>
+        <a class="link-card" href="https://smartcalcworld.com/finance/investment/retirement-calculator.html">
+          <strong>Retirement Calculator</strong>
+          Estimate the retirement corpus needed before converting savings into systematic withdrawals.
+        </a>
+        <a class="link-card" href="https://smartcalcworld.com/finance/investment/portfolio-growth-calculator.html">
+          <strong>Portfolio Growth Calculator</strong>
+          Project long-term accumulation before switching from contribution mode to withdrawal mode.
+        </a>
+        <a class="link-card" href="https://smartcalcworld.com/finance/investment/investment-goal-calculator.html">
+          <strong>Investment Goal Calculator</strong>
+          Work backward from a target corpus so your future SWP starts from a stronger base.
+        </a>
+      </div>
+    </section>
+
+    <section class="content-section" id="faq">
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-list">
+        <details class="faq-item" open>
+          <summary>What is SWP?</summary>
+          <p>SWP stands for Systematic Withdrawal Plan. It allows an investor to withdraw a fixed amount from an
+            existing investment corpus at regular intervals such as monthly, quarterly, or yearly.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How long will my investment last with withdrawals?</summary>
+          <p>That depends on the initial corpus, the withdrawal size, the return rate, inflation, any yearly increase in
+            withdrawals, and the compounding frequency. Small changes in any of these can materially change the
+            outcome.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What is a safe withdrawal rate?</summary>
+          <p>A safe withdrawal rate is a planning guide used to estimate how much income may be taken from a portfolio
+            without exhausting it too quickly. It is a useful starting framework, not a guarantee.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I withdraw without losing money?</summary>
+          <p>Sometimes, at least for a period, yes. If portfolio returns are strong enough to cover withdrawals, the
+            balance may stay stable or even rise. But markets, fees, taxes, and inflation all matter.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What happens if returns are lower than expected?</summary>
+          <p>Lower returns usually shorten portfolio life because the corpus has less growth to offset withdrawals. That
+            is why scenario comparison is important.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How does inflation affect withdrawals?</summary>
+          <p>Inflation reduces the buying power of money. A flat monthly withdrawal may buy less over time, so some
+            investors raise withdrawals annually to maintain lifestyle.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is SWP better than fixed deposits?</summary>
+          <p>Not always. SWP offers market-linked growth potential but also uncertainty. Fixed deposits offer more
+            predictable returns but usually lower growth potential over long periods.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I increase withdrawal over time?</summary>
+          <p>Yes. Many plans use a yearly withdrawal increase to keep up with rising living costs. The trade-off is that
+            a faster increase can shorten sustainability.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What is the difference between SWP and SIP?</summary>
+          <p>SIP is for adding money regularly into investments. SWP is for taking money out regularly from an existing
+            corpus. One builds wealth and the other converts wealth into income.</p>
+        </details>
+      </div>
+    </section>
+
+    <section class="content-section disclaimer" id="disclaimer">
+      <h2>Disclaimer</h2>
+      <p>This SWP Calculator is for education and planning support only. It does not provide investment advice,
+        guaranteed returns, or tax guidance. Actual portfolio outcomes can differ because of market performance, fund
+        choice, fees, taxes, withdrawal timing, and behavior during market stress. Please use it as a decision-support
+        tool, not as a promise of future results.</p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="https://smartcalcworld.com/index.html">Home</a></li>
+          <li><a href="https://smartcalcworld.com/about.html">About</a></li>
+          <li><a href="https://smartcalcworld.com/contact.html">Contact</a></li>
+          <li><a href="https://smartcalcworld.com/privacy-policy.html">Privacy Policy</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h3>Content</h3>
+        <ul>
+          <li><a href="#calculator">SWP Calculator</a></li>
+          <li><a href="#guide">SWP Guide</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h3>Finance Tools</h3>
+        <ul>
+          <li><a href="https://smartcalcworld.com/finance/interest/interest-hub.html">Interest Calculators</a></li>
+          <li><a href="https://smartcalcworld.com/finance/investment/investment-hub.html">Investment Calculators</a>
+          </li>
+          <li><a href="https://smartcalcworld.com/finance/loan/loan-hub.html">Loan Calculators</a></li>
+          <li><a href="https://smartcalcworld.com/finance/tax/tax-hub.html">Tax Calculators</a></li>
+          <li><a href="https://smartcalcworld.com/finance/saving-retirement/saving-retirement-hub.html">Savings
+              Calculators</a></li>
+          <li><a href="https://smartcalcworld.com/finance/saving-retirement/saving-retirement-hub.html">Retirement
+              Calculators</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <div class="footer-disclaimer">
+          <strong>SmartCalc World Note:</strong> a strong withdrawal plan separates total cash taken, investment growth,
+          real buying power, and depletion risk instead of focusing only on the starting withdrawal number.
+        </div>
+      </div>
+    </div>
+
+    <div class="copyright">
+      &copy; 2026 SmartCalc World. All rights reserved.
+    </div>
+  </footer>
+
+  <script>
+    const state = {
+      currentCurrency: "USD",
+      charts: {
+        growth: null,
+        withdrawal: null,
+        pie: null
+      },
+      projectionRows: [],
+      projectionFilename: "swp_projection.csv",
+      copyText: ""
+    };
+
+    const currencyConfig = {
+      USD: { symbol: "$", locale: "en-US" },
+      EUR: { symbol: "€", locale: "de-DE" },
+      GBP: { symbol: "£", locale: "en-GB" },
+      INR: { symbol: "₹", locale: "en-IN" },
+      CAD: { symbol: "$", locale: "en-CA" },
+      AUD: { symbol: "$", locale: "en-AU" }
+    };
+
+    const sliderConfigs = [
+      { input: "swp-initial", slider: "swp-initial-sl", label: "swp-initial-lbl", type: "money" },
+      { input: "swp-withdrawal", slider: "swp-withdrawal-sl", label: "swp-withdrawal-lbl", type: "money" },
+      { input: "swp-return", slider: "swp-return-sl", label: "swp-return-lbl", type: "percent" },
+      { input: "swp-years", slider: "swp-years-sl", label: "swp-years-lbl", type: "years" },
+      { input: "swp-inflation", slider: "swp-inflation-sl", label: "swp-inflation-lbl", type: "percent" },
+      { input: "swp-growth", slider: "swp-growth-sl", label: "swp-growth-lbl", type: "percent" },
+      { input: "scenario-cons", slider: "scenario-cons-sl", label: "scenario-cons-lbl", type: "percent" },
+      { input: "scenario-mod", slider: "scenario-mod-sl", label: "scenario-mod-lbl", type: "percent" },
+      { input: "scenario-agg", slider: "scenario-agg-sl", label: "scenario-agg-lbl", type: "percent" }
+    ];
+
+    function $(id) {
+      return document.getElementById(id);
+    }
+
+    function safeNumber(value, fallback = 0) {
+      const num = Number(value);
+      return Number.isFinite(num) ? num : fallback;
+    }
+
+    function formatMoney(value, digits = 2) {
+      const config = currencyConfig[state.currentCurrency] || currencyConfig.USD;
+      const amount = safeNumber(value);
+      const prefix = amount < 0 ? "-" : "";
+      return `${prefix}${config.symbol}${Math.abs(amount).toLocaleString(config.locale, {
+        minimumFractionDigits: digits,
+        maximumFractionDigits: digits
+      })}`;
+    }
+
+    function formatShortMoney(value) {
+      const abs = Math.abs(safeNumber(value));
+      const config = currencyConfig[state.currentCurrency] || currencyConfig.USD;
+      const prefix = safeNumber(value) < 0 ? "-" : "";
+      if (abs >= 1e9) return `${prefix}${config.symbol}${(abs / 1e9).toFixed(1)}B`;
+      if (abs >= 1e6) return `${prefix}${config.symbol}${(abs / 1e6).toFixed(1)}M`;
+      if (abs >= 1e3) return `${prefix}${config.symbol}${(abs / 1e3).toFixed(1)}K`;
+      return formatMoney(value, 0);
+    }
+
+    function formatPercentValue(value) {
+      return `${safeNumber(value).toFixed(2)}%`;
+    }
+
+    function compoundingLabel(periodsPerYear) {
+      if (periodsPerYear === 12) return "Monthly";
+      if (periodsPerYear === 4) return "Quarterly";
+      return "Yearly";
+    }
+
+    function durationLabel(years) {
+      if (years <= 0) return "Open-ended";
+      return years === 1 ? "1 year" : `${years} years`;
+    }
+
+    function lastsLabel(years, capped = false) {
+      if (capped) return `${years}+ years`;
+      return `${(Math.round(years * 10) / 10).toFixed(years % 1 === 0 ? 0 : 1)} years`;
+    }
+
+    function updateSliderLabel(config) {
+      const input = $(config.input);
+      const label = $(config.label);
+      if (!input || !label) return;
+      const value = safeNumber(input.value);
+      if (config.type === "money") {
+        label.textContent = formatMoney(value);
+      } else if (config.type === "percent") {
+        label.textContent = formatPercentValue(value);
+      } else if (config.type === "years") {
+        label.textContent = durationLabel(value);
+      }
+    }
+
+    function bindSliderPair(config) {
+      const input = $(config.input);
+      const slider = $(config.slider);
+      if (!input || !slider) return;
+
+      const syncFromInput = () => {
+        slider.value = input.value;
+        updateSliderLabel(config);
+        calculateSwp(false);
+      };
+
+      const syncFromSlider = () => {
+        input.value = slider.value;
+        updateSliderLabel(config);
+        calculateSwp(false);
+      };
+
+      input.addEventListener("input", syncFromInput);
+      input.addEventListener("change", syncFromInput);
+      slider.addEventListener("input", syncFromSlider);
+      slider.addEventListener("change", syncFromSlider);
+    }
+
+    function switchModule(module) {
+      document.querySelectorAll(".module").forEach((panel) => {
+        panel.classList.toggle("active", panel.id === `mod-${module}`);
+      });
+      document.querySelectorAll(".qnav-btn").forEach((btn) => {
+        const active = btn.dataset.module === module;
+        btn.classList.toggle("active", active);
+        btn.setAttribute("aria-selected", active ? "true" : "false");
+      });
+    }
+
+    function updateCurrencyIndicators() {
+      const config = currencyConfig[state.currentCurrency] || currencyConfig.USD;
+      document.querySelectorAll("[data-currency-symbol]").forEach((node) => {
+        node.textContent = config.symbol;
+      });
+      sliderConfigs.forEach(updateSliderLabel);
+    }
+
+    function setStatus(message, tone = "") {
+      const el = $("status-banner");
+      el.textContent = message;
+      el.className = "status-banner" + (tone ? ` ${tone}` : "");
+    }
+
+    function setCopyNote(text) {
+      $("copy-note").textContent = text;
+    }
+
+    function setResultCard(index, label, value, sub) {
+      $(`result-lbl-${index}`).textContent = label;
+      $(`result-val-${index}`).textContent = value;
+      $(`result-sub-${index}`).textContent = sub;
+    }
+
+    function showSnapshotSummary(rows) {
+      $("summary-body").innerHTML = rows.map((row) => `
+        <tr>
+          <td>${row.metric}</td>
+          <td class="compare-a-cell">${row.value}</td>
+          <td class="compare-b-cell">${row.note}</td>
+        </tr>
+      `).join("");
+    }
+
+    function showScenarioSummary(rows) {
+      $("scenario-body").innerHTML = rows.map((row) => `
+        <tr>
+          <td>${row.scenario}</td>
+          <td class="compare-a-cell">${row.rate}</td>
+          <td>${row.balance}</td>
+          <td>${row.withdrawn}</td>
+          <td class="compare-b-cell">${row.lasts}</td>
+        </tr>
+      `).join("");
+    }
+
+    function updateProjection(rows, filename, contextText) {
+      state.projectionRows = rows;
+      state.projectionFilename = filename;
+      $("projection-context").textContent = contextText;
+      $("projection-body").innerHTML = rows.map((row) => `
+        <tr>
+          <td>${row.year}</td>
+          <td>${formatMoney(row.openingBalance)}</td>
+          <td>${formatMoney(row.withdrawalAmount)}</td>
+          <td>${formatMoney(row.interestEarned)}</td>
+          <td>${formatMoney(row.closingBalance)}</td>
+        </tr>
+      `).join("");
+    }
+
+    function destroyChart(name) {
+      if (state.charts[name]) {
+        state.charts[name].destroy();
+        state.charts[name] = null;
+      }
+    }
+
+    function commonLineOptions() {
+      return {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: { mode: "index", intersect: false },
+        plugins: {
+          legend: {
+            position: "bottom",
+            labels: {
+              usePointStyle: true,
+              padding: 16
+            }
+          }
+        },
+        scales: {
+          y: {
+            ticks: {
+              callback: (value) => formatShortMoney(value)
+            },
+            grid: {
+              color: "rgba(148, 163, 184, 0.18)"
+            }
+          },
+          x: {
+            grid: {
+              color: "rgba(148, 163, 184, 0.12)"
+            }
+          }
+        }
+      };
+    }
+
+    function renderCharts(config) {
+      $("charts-context").textContent = config.context;
+      $("growth-title").textContent = config.growthTitle;
+      $("growth-note").textContent = config.growthNote;
+      $("withdrawal-title").textContent = config.withdrawalTitle;
+      $("withdrawal-note").textContent = config.withdrawalNote;
+      $("pie-title").textContent = config.pieTitle;
+      $("pie-note").textContent = config.pieNote;
+
+      destroyChart("growth");
+      destroyChart("withdrawal");
+      destroyChart("pie");
+
+      state.charts.growth = new Chart($("growth-chart"), {
+        type: "line",
+        data: {
+          labels: config.labels,
+          datasets: config.growthDatasets.map((dataset) => ({
+            label: dataset.label,
+            data: dataset.values,
+            borderColor: dataset.color,
+            backgroundColor: dataset.background,
+            borderWidth: dataset.borderWidth || 3,
+            fill: dataset.fill || false,
+            tension: 0.28,
+            pointRadius: 0,
+            borderDash: dataset.borderDash || []
+          }))
+        },
+        options: commonLineOptions()
+      });
+
+      state.charts.withdrawal = new Chart($("withdrawal-chart"), {
+        data: {
+          labels: config.labels,
+          datasets: [
+            {
+              type: "bar",
+              label: "Annual withdrawals",
+              data: config.withdrawalValues,
+              backgroundColor: "rgba(245, 158, 11, 0.55)",
+              borderColor: "#f59e0b",
+              borderWidth: 1,
+              yAxisID: "y"
+            },
+            {
+              type: "line",
+              label: "Closing balance",
+              data: config.balanceValues,
+              borderColor: "#0d9488",
+              backgroundColor: "rgba(13, 148, 136, 0.1)",
+              borderWidth: 3,
+              tension: 0.28,
+              pointRadius: 0,
+              yAxisID: "y"
+            }
+          ]
+        },
+        options: commonLineOptions()
+      });
+
+      state.charts.pie = new Chart($("pie-chart"), {
+        type: "doughnut",
+        data: {
+          labels: config.pieLabels,
+          datasets: [{
+            data: config.pieValues,
+            backgroundColor: ["#0d9488", "#f59e0b", "#0284c7"],
+            borderColor: "#ffffff",
+            borderWidth: 2
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: "bottom",
+              labels: {
+                usePointStyle: true,
+                padding: 16
+              }
+            }
+          }
+        }
+      });
+    }
+
+    function annualRowForYear(simulation, year) {
+      return simulation.yearlyRows.find((row) => row.year === year) || null;
+    }
+
+    function simulateSwpPlan({
+      initial,
+      monthlyWithdrawal,
+      annualReturnPct,
+      durationYears,
+      inflationPct,
+      withdrawalGrowthPct,
+      periodsPerYear,
+      maxYears = 100
+    }) {
+      const annualRate = annualReturnPct / 100;
+      const inflationRate = inflationPct / 100;
+      const growthRate = withdrawalGrowthPct / 100;
+      const periodicRate = periodsPerYear > 0 ? annualRate / periodsPerYear : 0;
+
+      let balance = initial;
+      let totalWithdrawn = 0;
+      let depletionPeriod = null;
+      const yearlyRows = [];
+
+      for (let year = 1; year <= maxYears; year++) {
+        const openingBalance = balance;
+        const yearlyGrowthFactor = Math.pow(1 + growthRate, year - 1);
+        const monthlyWithdrawalThisYear = monthlyWithdrawal * yearlyGrowthFactor;
+        const periodWithdrawal = monthlyWithdrawalThisYear * (12 / periodsPerYear);
+        let annualWithdrawal = 0;
+        let annualInterest = 0;
+
+        for (let period = 1; period <= periodsPerYear; period++) {
+          if (balance <= 0) break;
+          const interest = balance * periodicRate;
+          balance += interest;
+          annualInterest += interest;
+
+          const withdrawal = Math.min(balance, periodWithdrawal);
+          balance -= withdrawal;
+          annualWithdrawal += withdrawal;
+          totalWithdrawn += withdrawal;
+
+          if (balance <= 0.000001) {
+            balance = 0;
+            depletionPeriod = depletionPeriod ?? ((year - 1) * periodsPerYear + period);
+            break;
+          }
+        }
+
+        yearlyRows.push({
+          year,
+          openingBalance,
+          withdrawalAmount: annualWithdrawal,
+          interestEarned: annualInterest,
+          closingBalance: balance,
+          totalWithdrawn,
+          totalReturnsGenerated: balance + totalWithdrawn - initial,
+          nominalMonthlyWithdrawal: monthlyWithdrawalThisYear,
+          realMonthlyWithdrawal: inflationRate > 0
+            ? monthlyWithdrawalThisYear / Math.pow(1 + inflationRate, year)
+            : monthlyWithdrawalThisYear,
+          realClosingBalance: inflationRate > 0
+            ? balance / Math.pow(1 + inflationRate, year)
+            : balance
+        });
+
+        if (depletionPeriod !== null && year >= Math.ceil(depletionPeriod / periodsPerYear)) {
+          break;
+        }
+      }
+
+      const durationLastsYears = depletionPeriod ? depletionPeriod / periodsPerYear : maxYears;
+      const chosenYearsRaw = durationYears > 0
+        ? Math.min(Math.round(durationYears), yearlyRows.length)
+        : (depletionPeriod ? Math.ceil(durationLastsYears) : Math.min(40, yearlyRows.length));
+      const chosenYears = Math.max(1, chosenYearsRaw || 1);
+
+      return {
+        yearlyRows,
+        displayRows: yearlyRows.slice(0, chosenYears),
+        chosenRow: yearlyRows[Math.max(0, chosenYears - 1)],
+        chosenYears,
+        depleted: depletionPeriod !== null,
+        durationLastsYears,
+        cappedDuration: depletionPeriod === null
+      };
+    }
+    function getInputs() {
+      return {
+        initial: Math.max(0, safeNumber($("swp-initial").value)),
+        monthlyWithdrawal: Math.max(0, safeNumber($("swp-withdrawal").value)),
+        annualReturnPct: Math.max(0, safeNumber($("swp-return").value)),
+        durationYears: Math.max(0, safeNumber($("swp-years").value)),
+        inflationPct: Math.max(0, safeNumber($("swp-inflation").value)),
+        withdrawalGrowthPct: Math.max(0, safeNumber($("swp-growth").value)),
+        periodsPerYear: safeNumber($("swp-compounding").value, 12),
+        conservativePct: Math.max(0, safeNumber($("scenario-cons").value)),
+        moderatePct: Math.max(0, safeNumber($("scenario-mod").value)),
+        aggressivePct: Math.max(0, safeNumber($("scenario-agg").value))
+      };
+    }
+
+    function calculateSwp(announce = false, shouldScroll = false) {
+      const inputs = getInputs();
+
+      if (inputs.initial <= 0) {
+        setStatus("Enter an initial investment amount greater than zero to calculate an SWP plan.", "error");
+        return;
+      }
+
+      if (inputs.monthlyWithdrawal <= 0) {
+        setStatus("Enter a monthly withdrawal amount greater than zero to simulate a withdrawal plan.", "error");
+        return;
+      }
+
+      const base = simulateSwpPlan(inputs);
+      const conservative = simulateSwpPlan({ ...inputs, annualReturnPct: inputs.conservativePct });
+      const moderate = simulateSwpPlan({ ...inputs, annualReturnPct: inputs.moderatePct });
+      const aggressive = simulateSwpPlan({ ...inputs, annualReturnPct: inputs.aggressivePct });
+
+      const finalBalance = base.chosenRow.closingBalance;
+      const totalWithdrawn = base.chosenRow.totalWithdrawn;
+      const totalReturns = base.chosenRow.totalReturnsGenerated;
+      const realWithdrawal = base.chosenRow.realMonthlyWithdrawal;
+      const durationText = lastsLabel(base.durationLastsYears, base.cappedDuration);
+      const depletedInsideView = base.depleted && base.durationLastsYears <= base.chosenYears;
+      const horizonLabel = inputs.durationYears > 0 ? durationLabel(base.chosenYears) : `${durationLabel(base.chosenYears)} preview`;
+      const scenarioMin = Math.min(conservative.chosenRow.closingBalance, moderate.chosenRow.closingBalance, aggressive.chosenRow.closingBalance);
+      const scenarioMax = Math.max(conservative.chosenRow.closingBalance, moderate.chosenRow.closingBalance, aggressive.chosenRow.closingBalance);
+
+      setResultCard(
+        0,
+        depletedInsideView ? "Depletion Outcome" : "Projected Final Portfolio Value",
+        depletedInsideView ? `Depleted by year ${base.durationLastsYears.toFixed(1)}` : formatMoney(finalBalance),
+        depletedInsideView ? "The current plan runs out before or within the displayed horizon" : `Balance after ${durationLabel(base.chosenYears)}`
+      );
+      setResultCard(1, "Total Withdrawn Amount", formatMoney(totalWithdrawn), "Cash withdrawn during the displayed horizon");
+      setResultCard(2, "Total Returns Generated", formatMoney(totalReturns), "Growth earned while supporting withdrawals");
+      setResultCard(3, "Duration Portfolio Lasts", durationText, base.cappedDuration ? "No depletion reached inside the simulation cap" : "Estimated time until the corpus is exhausted");
+      setResultCard(4, "Real Value of Withdrawal", formatMoney(realWithdrawal), "Final monthly withdrawal expressed in today's money");
+
+      $("insight-box").innerHTML = `<strong>SWP insight:</strong> Over ${horizonLabel}, the plan withdraws about ${formatMoney(totalWithdrawn)} and leaves ${depletedInsideView ? "no remaining balance" : `${formatMoney(finalBalance)} in the portfolio`}. During that same period, the investment generates about ${formatMoney(totalReturns)} of returns. ${inputs.inflationPct > 0 ? `After adjusting for ${formatPercentValue(inputs.inflationPct)} inflation, the final monthly withdrawal feels closer to ${formatMoney(realWithdrawal)} in today's money.` : "Because inflation is set to 0%, nominal and real withdrawal value are the same in this view."} Scenario testing shows ending balances ranging from ${formatMoney(scenarioMin)} to ${formatMoney(scenarioMax)}, which helps show how sensitive the plan is to returns.`;
+
+      $("formula-box").innerHTML = `<strong>SWP formulas used</strong><br>Balance next = (Balance current × (1 + r / m)) − Withdrawal per period<br>Total Withdrawn = sum of all withdrawals across periods<br>Total Returns Generated = Final Balance + Total Withdrawn − Initial Investment<br>Real Withdrawal = Future Withdrawal / (1 + inflation)^n<br>If withdrawal growth is enabled, the monthly withdrawal rises once each year before the next year's withdrawals are simulated.`;
+
+      setStatus(
+        base.depleted
+          ? `At the current settings, the portfolio is estimated to deplete in about ${base.durationLastsYears.toFixed(1)} years. Lower withdrawals, slower withdrawal growth, or stronger returns may improve sustainability.`
+          : `At the current settings, the portfolio does not deplete within the ${base.durationLastsYears}+ year simulation cap and remains sustainable in this modeled range.`,
+        base.depleted ? "warning" : "success"
+      );
+
+      showSnapshotSummary([
+        { metric: "Initial Corpus", value: formatMoney(inputs.initial), note: "The starting investment balance before the first withdrawal is made." },
+        { metric: "Monthly Withdrawal Today", value: formatMoney(inputs.monthlyWithdrawal), note: "This is the starting monthly withdrawal before any annual increase is applied." },
+        { metric: "Withdrawal Growth Rate", value: formatPercentValue(inputs.withdrawalGrowthPct), note: inputs.withdrawalGrowthPct > 0 ? "The withdrawal amount increases by this rate each year." : "Withdrawals stay flat over time in this scenario." },
+        { metric: "Expected Annual Return", value: formatPercentValue(inputs.annualReturnPct), note: `Growth is applied with ${compoundingLabel(inputs.periodsPerYear).toLowerCase()} compounding during the drawdown phase.` },
+        { metric: "Inflation Assumption", value: formatPercentValue(inputs.inflationPct), note: inputs.inflationPct > 0 ? "Used to estimate today's buying power of future withdrawals." : "Inflation adjustment is turned off in this calculation." },
+        { metric: "Portfolio Life", value: durationText, note: base.cappedDuration ? "The plan did not hit zero inside the simulation cap." : `The balance is projected to run out around year ${base.durationLastsYears.toFixed(1)}.` },
+        { metric: "Scenario Range", value: `${formatMoney(scenarioMin)} to ${formatMoney(scenarioMax)}`, note: "This range compares the ending balance under conservative, moderate, and optimistic return assumptions." }
+      ]);
+
+      showScenarioSummary([
+        { scenario: "Conservative", rate: formatPercentValue(inputs.conservativePct), balance: formatMoney(conservative.chosenRow.closingBalance), withdrawn: formatMoney(conservative.chosenRow.totalWithdrawn), lasts: lastsLabel(conservative.durationLastsYears, conservative.cappedDuration) },
+        { scenario: "Moderate", rate: formatPercentValue(inputs.moderatePct), balance: formatMoney(moderate.chosenRow.closingBalance), withdrawn: formatMoney(moderate.chosenRow.totalWithdrawn), lasts: lastsLabel(moderate.durationLastsYears, moderate.cappedDuration) },
+        { scenario: "Optimistic", rate: formatPercentValue(inputs.aggressivePct), balance: formatMoney(aggressive.chosenRow.closingBalance), withdrawn: formatMoney(aggressive.chosenRow.totalWithdrawn), lasts: lastsLabel(aggressive.durationLastsYears, aggressive.cappedDuration) }
+      ]);
+
+      updateProjection(
+        base.displayRows,
+        "swp_projection.csv",
+        `Year-by-year SWP projection for ${horizonLabel.toLowerCase()} showing opening balance, withdrawals, returns earned, and the closing balance after each year.`
+      );
+
+      const yearNumbers = base.displayRows.map((row) => row.year);
+      renderCharts({
+        context: "The charts compare your main SWP path with scenario assumptions, annual withdrawals, and the split between money taken out and capital still left.",
+        growthTitle: "Portfolio Balance Over Time",
+        growthNote: "The main balance path is shown alongside conservative, moderate, and optimistic return scenarios.",
+        withdrawalTitle: "Withdrawal vs Balance",
+        withdrawalNote: "Annual withdrawals are shown as bars while the remaining balance is shown as the line.",
+        pieTitle: "Withdrawn vs Remaining Corpus",
+        pieNote: "This donut chart summarizes how much of the initial wealth path has been withdrawn and how much remains.",
+        labels: yearNumbers.map((year) => `Year ${year}`),
+        growthDatasets: [
+          { label: "Base balance", values: yearNumbers.map((year) => annualRowForYear(base, year)?.closingBalance ?? 0), color: "#0d9488", background: "rgba(13, 148, 136, 0.12)" },
+          ...(inputs.inflationPct > 0 ? [{ label: "Real balance", values: yearNumbers.map((year) => annualRowForYear(base, year)?.realClosingBalance ?? 0), color: "#f59e0b", background: "rgba(245, 158, 11, 0.10)", borderDash: [6, 5] }] : []),
+          { label: "Conservative", values: yearNumbers.map((year) => annualRowForYear(conservative, year)?.closingBalance ?? 0), color: "#0284c7", background: "rgba(2, 132, 199, 0.08)", borderDash: [5, 4], borderWidth: 2 },
+          { label: "Moderate", values: yearNumbers.map((year) => annualRowForYear(moderate, year)?.closingBalance ?? 0), color: "#a16207", background: "rgba(245, 158, 11, 0.08)", borderDash: [4, 4], borderWidth: 2 },
+          { label: "Optimistic", values: yearNumbers.map((year) => annualRowForYear(aggressive, year)?.closingBalance ?? 0), color: "#f43f5e", background: "rgba(244, 63, 94, 0.08)", borderDash: [3, 5], borderWidth: 2 }
+        ],
+        withdrawalValues: base.displayRows.map((row) => row.withdrawalAmount),
+        balanceValues: base.displayRows.map((row) => row.closingBalance),
+        pieLabels: ["Withdrawn amount", "Remaining corpus"],
+        pieValues: [Math.max(totalWithdrawn, 0), Math.max(finalBalance, 0)]
+      });
+
+      state.copyText = [
+        "SWP Calculator",
+        `Initial investment: ${formatMoney(inputs.initial)}`,
+        `Monthly withdrawal: ${formatMoney(inputs.monthlyWithdrawal)}`,
+        `Expected annual return: ${formatPercentValue(inputs.annualReturnPct)}`,
+        `Withdrawal duration input: ${durationLabel(inputs.durationYears)}`,
+        `Inflation rate: ${formatPercentValue(inputs.inflationPct)}`,
+        `Withdrawal growth rate: ${formatPercentValue(inputs.withdrawalGrowthPct)}`,
+        `Compounding frequency: ${compoundingLabel(inputs.periodsPerYear)}`,
+        `Projected final portfolio value: ${depletedInsideView ? `Depleted by year ${base.durationLastsYears.toFixed(1)}` : formatMoney(finalBalance)}`,
+        `Total withdrawn amount: ${formatMoney(totalWithdrawn)}`,
+        `Total returns generated: ${formatMoney(totalReturns)}`,
+        `Duration portfolio lasts: ${durationText}`,
+        `Real value of final monthly withdrawal: ${formatMoney(realWithdrawal)}`
+      ].join("\n");
+
+      if (announce) {
+        setCopyNote("Results updated.");
+      }
+
+      if (shouldScroll) {
+        requestAnimationFrame(() => {
+          $("results-section")?.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+      }
+    }
+
+    async function copyResults() {
+      try {
+        await navigator.clipboard.writeText(state.copyText || "No results available yet.");
+        setCopyNote("Results copied to clipboard.");
+      } catch (error) {
+        setCopyNote("Copy failed. Please try again.");
+      }
+    }
+
+    function downloadCsv() {
+      if (!state.projectionRows.length) return;
+      const header = ["Year", "Opening Balance", "Withdrawal Amount", "Interest Earned", "Closing Balance"];
+      const body = state.projectionRows.map((row) => ([
+        row.year,
+        formatMoney(row.openingBalance),
+        formatMoney(row.withdrawalAmount),
+        formatMoney(row.interestEarned),
+        formatMoney(row.closingBalance)
+      ].map((value) => `"${String(value).replace(/"/g, "\"\"")}"`).join(","))).join("\n");
+
+      const csvContent = `${header.join(",")}\n${body}`;
+      const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = state.projectionFilename;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    }
+
+    function resetPlanner() {
+      $("swp-initial").value = 200000;
+      $("swp-initial-sl").value = 200000;
+      $("swp-withdrawal").value = 1200;
+      $("swp-withdrawal-sl").value = 1200;
+      $("swp-return").value = 8;
+      $("swp-return-sl").value = 8;
+      $("swp-years").value = 25;
+      $("swp-years-sl").value = 25;
+      $("swp-inflation").value = 4;
+      $("swp-inflation-sl").value = 4;
+      $("swp-growth").value = 3;
+      $("swp-growth-sl").value = 3;
+      $("scenario-cons").value = 6;
+      $("scenario-cons-sl").value = 6;
+      $("scenario-mod").value = 8;
+      $("scenario-mod-sl").value = 8;
+      $("scenario-agg").value = 10;
+      $("scenario-agg-sl").value = 10;
+      $("swp-compounding").value = 12;
+      $("swp-currency").value = "USD";
+      state.currentCurrency = "USD";
+      updateCurrencyIndicators();
+      switchModule("core");
+      calculateSwp(true);
+    }
+
+    function bindCommonEvents() {
+      sliderConfigs.forEach((config) => {
+        bindSliderPair(config);
+        updateSliderLabel(config);
+      });
+
+      $("swp-currency").addEventListener("change", (event) => {
+        state.currentCurrency = event.target.value;
+        updateCurrencyIndicators();
+        calculateSwp(false);
+      });
+
+      $("swp-compounding").addEventListener("change", () => calculateSwp(false));
+    }
+
+    function initMobileNav() {
+      const btn = $("hamburgerBtn");
+      const nav = $("mobileNav");
+      if (!btn || !nav) return;
+      btn.addEventListener("click", () => {
+        const open = nav.classList.toggle("open");
+        btn.setAttribute("aria-expanded", open ? "true" : "false");
+      });
+    }
+
+    function init() {
+      bindCommonEvents();
+      initMobileNav();
+      state.currentCurrency = $("swp-currency").value;
+      updateCurrencyIndicators();
+      switchModule("core");
+      calculateSwp(false);
+    }
+
+    document.addEventListener("DOMContentLoaded", init);
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,2109 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow">
+  <title>Stock Profit Calculator &ndash; Calculate Profit, Loss, Brokerage &amp; Returns | SmartCalcWorld</title>
+  <meta name="description" content="Calculate stock profit or loss with fees, taxes, break-even price, and advanced trade analysis using SmartCalcWorld's Stock Profit Calculator.">
+  <link rel="canonical" href="https://smartcalcworld.com/finance/investment/stock-profit-calculator.html">
+  <link rel="icon" type="image/png" href="https://smartcalcworld.com/favicon.png">
+  <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://smartcalcworld.com/#org",
+        "name": "SmartCalc World",
+        "url": "https://smartcalcworld.com",
+        "description": "Free finance calculators for investing, trading, saving, inflation, returns, and long-term planning."
+      },
+      {
+        "@type": "WebApplication",
+        "@id": "https://smartcalcworld.com/finance/investment/stock-profit-calculator.html#app",
+        "name": "Stock Profit Calculator",
+        "url": "https://smartcalcworld.com/finance/investment/stock-profit-calculator.html",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Any",
+        "creator": {
+          "@id": "https://smartcalcworld.com/#org"
+        },
+        "description": "Calculate stock trade profit or loss with brokerage, taxes, break-even price, dividend income, average buy price, and scenario analysis.",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Finance",
+            "item": "https://smartcalcworld.com/finance/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Investment",
+            "item": "https://smartcalcworld.com/finance/investment/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Stock Profit Calculator",
+            "item": "https://smartcalcworld.com/finance/investment/stock-profit-calculator.html"
+          }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How is stock profit calculated?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Stock profit is calculated by comparing net selling value with total investment cost after brokerage, charges, and taxes. Dividend income can also improve the final result."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is a good return in the stock market?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "There is no universal number because stock returns vary by time horizon, risk, fees, and market conditions. Many investors compare different outcome scenarios instead of assuming one perfect return."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do brokerage fees affect profit?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Brokerage fees reduce both buying efficiency and selling proceeds. Even small charges can materially lower net profit, especially for frequent traders or smaller trades."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is break-even price?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Break-even price is the selling price where your trade neither makes money nor loses money after considering the cost of buying and the impact of selling costs."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I calculate profit percentage on a stock trade?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Profit percentage is calculated by dividing profit by total investment cost and then multiplying by 100. A positive percentage means a gain and a negative percentage means a loss."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What taxes apply to stock trading?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Taxes depend on your country, holding period, and local rules. This calculator uses a user-entered tax rate to estimate the impact of capital gains tax on final profit."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is risk-reward ratio?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Risk-reward ratio compares the potential gain to the potential loss on a trade using a target price and a stop-loss price. It helps traders judge whether a setup looks attractive."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I calculate multiple buy trades?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Advanced mode lets you add multiple buy transactions so the calculator can estimate an average buy price before measuring profit on the sale."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can dividends improve total stock profit?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Dividend income adds to total cash return and can improve the overall outcome even if price appreciation is modest."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+  <style>
+    :root {
+      --teal: #0d9488;
+      --teal-dark: #0f766e;
+      --teal-light: #ccfbf1;
+      --amber: #f59e0b;
+      --amber-light: #fef3c7;
+      --rose: #f43f5e;
+      --rose-light: #ffe4e6;
+      --sky: #0284c7;
+      --sky-light: #dbeafe;
+      --slate-950: #020617;
+      --slate-900: #0f172a;
+      --slate-800: #1e293b;
+      --slate-700: #334155;
+      --slate-600: #475569;
+      --slate-500: #64748b;
+      --slate-400: #94a3b8;
+      --slate-300: #cbd5e1;
+      --slate-200: #e2e8f0;
+      --slate-100: #f1f5f9;
+      --slate-50: #f8fafc;
+      --white: #ffffff;
+      --radius: 16px;
+      --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.08);
+      --shadow-md: 0 10px 28px rgba(15, 23, 42, 0.12);
+      --header-h: 68px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
+    body {
+      font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(13, 148, 136, 0.14), transparent 34%),
+        linear-gradient(180deg, #f8fafc 0%, #eff6ff 46%, #f8fafc 100%);
+      color: var(--slate-800);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+    img, canvas { max-width: 100%; display: block; }
+    a { color: var(--teal); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .hidden { display: none !important; }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: linear-gradient(135deg, #0891b2 0%, #059669 100%);
+      color: var(--white);
+      box-shadow: 0 2px 10px rgba(15, 23, 42, 0.12);
+    }
+
+    .hdr-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .hdr-logo { font-size: 1.15rem; font-weight: 800; letter-spacing: 0.02em; }
+    .hdr-nav { display: flex; gap: 1.25rem; align-items: center; flex-wrap: wrap; }
+    .hdr-nav a, .hdr-nav span, .mobile-nav a, .mobile-nav span { color: var(--white); font-weight: 600; font-size: 0.95rem; opacity: 0.96; }
+    .nav-disabled { opacity: 0.72; cursor: default; }
+    .hamburger { display: none; border: 0; background: transparent; cursor: pointer; padding: 0.25rem; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--white); margin: 5px 0; border-radius: 999px; }
+    .mobile-nav { display: none; flex-direction: column; gap: 0.75rem; padding: 0 1rem 1rem; max-width: 1200px; margin: 0 auto; }
+
+    .page { max-width: 1200px; margin: 0 auto; padding: 1.25rem; }
+    .breadcrumb { font-size: 0.84rem; color: var(--slate-500); margin-bottom: 1.25rem; }
+
+    .hero, .card, .content-section {
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid rgba(148, 163, 184, 0.22);
+      border-radius: 20px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(13, 148, 136, 0.14), rgba(2, 132, 199, 0.08)), var(--white);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -80px -80px auto;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle, rgba(13, 148, 136, 0.14), transparent 70%);
+      pointer-events: none;
+    }
+
+    .card { padding: 1.5rem; margin-top: 2rem; }
+    .content-section { padding: 2rem; margin-top: 2rem; scroll-margin-top: calc(var(--header-h) + 1rem); }
+    .card-title, .content-section h2 { font-size: clamp(1.25rem, 3vw, 1.75rem); font-weight: 800; color: var(--slate-900); margin-bottom: 1rem; }
+    .content-section h2 { border-left: 4px solid var(--teal); padding-left: 1rem; }
+    .content-section h3 { font-size: 1.15rem; color: var(--slate-900); margin: 1.6rem 0 0.65rem; }
+    .content-section p, .content-section li, .module-intro, .chart-note, .table-context, .hero p, .hint { color: var(--slate-600); font-size: 0.97rem; }
+    .content-section ul { margin: 0.2rem 0 1rem 1.25rem; }
+    .content-section li { margin-bottom: 0.55rem; }
+
+    .hero-badge, .mode-pill, .copy-note {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      border-radius: 999px;
+      padding: 0.48rem 0.9rem;
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .hero-badge { background: var(--teal-light); color: var(--teal-dark); margin-bottom: 0.9rem; }
+    h1 { font-size: clamp(2rem, 5vw, 3.25rem); line-height: 1.08; color: var(--slate-900); margin-bottom: 0.8rem; }
+    .hero-sub { max-width: 760px; color: var(--slate-600); font-size: 1rem; }
+
+    .hero-highlights, .toolbar-grid, .field-pair, .qnav, .result-grid, .charts-grid, .comparison-grid, .links-grid, .footer-content, .faq-list, .info-list, .scenario-stack, .tx-list {
+      display: grid;
+      gap: 1rem;
+    }
+    .hero-highlights { margin-top: 1.25rem; }
+    .hero-chip, .toolbar-box, .form-row, .info-pill, .callout, .status-banner, .insight-box, .formula-box, .comparison-summary, .link-card, .faq-item {
+      border: 1px solid rgba(148, 163, 184, 0.24);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+    }
+    .hero-chip { background: rgba(255, 255, 255, 0.82); padding: 0.95rem 1rem; color: var(--slate-600); }
+    .hero-chip strong { display: block; color: var(--slate-900); margin-bottom: 0.2rem; }
+    .toolbar-box { background: linear-gradient(180deg, rgba(13, 148, 136, 0.08), rgba(255, 255, 255, 0.94)); padding: 1rem; height: 100%; }
+    .toolbar-box h2 { font-size: 1.02rem; font-weight: 800; color: var(--slate-900); margin-bottom: 0.65rem; }
+    .info-pill, .callout, .status-banner, .insight-box, .formula-box { padding: 0.95rem 1rem; }
+    .info-pill { background: rgba(255, 255, 255, 0.86); color: var(--slate-700); }
+    .callout, .insight-box { background: linear-gradient(135deg, rgba(13, 148, 136, 0.1), rgba(255, 255, 255, 0.96)); color: var(--slate-700); margin-top: 1rem; }
+    .formula-box { background: linear-gradient(180deg, rgba(2, 132, 199, 0.08), rgba(255, 255, 255, 0.96)); color: var(--slate-700); margin-top: 1rem; }
+    .status-banner { margin-top: 1rem; background: rgba(15, 23, 42, 0.04); color: var(--slate-700); }
+    .status-banner.success { background: rgba(13, 148, 136, 0.1); color: var(--teal-dark); }
+    .status-banner.warning { background: rgba(245, 158, 11, 0.14); color: #92400e; }
+    .status-banner.error { background: rgba(244, 63, 94, 0.12); color: #9f1239; }
+
+    .form-row { display: flex; flex-direction: column; gap: 0.65rem; background: rgba(255, 255, 255, 0.88); padding: 1rem; min-width: 0; }
+    .lbl { font-size: 0.95rem; font-weight: 700; color: var(--slate-900); }
+    input, select, button { font: inherit; }
+    input[type="number"], select {
+      width: 100%;
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      border-radius: 14px;
+      padding: 0.85rem 0.95rem;
+      background: var(--white);
+      color: var(--slate-900);
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    input[type="number"]:focus, select:focus { border-color: rgba(2, 132, 199, 0.55); box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.1); }
+    .input-slider { display: grid; gap: 0.9rem; }
+    input[type="range"] { width: 100%; accent-color: var(--teal); cursor: pointer; }
+    .slider-lbl { text-align: right; font-weight: 700; color: var(--slate-600); font-size: 0.92rem; word-break: break-word; }
+
+    .qnav { margin-top: 1.25rem; }
+    .qnav-btn, .btn-primary, .btn-secondary, .btn-ghost, .micro-btn {
+      border-radius: 14px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+    .qnav-btn { border: 1px solid rgba(148, 163, 184, 0.28); background: rgba(255, 255, 255, 0.9); color: var(--slate-700); padding: 0.95rem 1rem; box-shadow: var(--shadow-sm); }
+    .qnav-btn.active, .qnav-btn:hover, .btn-primary { background: linear-gradient(135deg, #0d9488, #0f766e); color: var(--white); box-shadow: var(--shadow-md); }
+    .module { display: none; margin-top: 1.2rem; }
+    .module.active { display: block; }
+    .module-intro { margin-bottom: 1rem; }
+    .btn-row { display: flex; gap: 0.9rem; flex-wrap: wrap; margin-top: 1rem; }
+    .btn-primary, .btn-secondary, .btn-ghost { border: 1px solid transparent; min-height: 52px; padding: 0.9rem 1.15rem; }
+    .btn-secondary { background: rgba(2, 132, 199, 0.12); color: var(--sky); border-color: rgba(2, 132, 199, 0.2); }
+    .btn-ghost { background: rgba(255, 255, 255, 0.94); color: var(--slate-700); border-color: rgba(148, 163, 184, 0.28); }
+    .btn-primary:hover, .btn-secondary:hover, .btn-ghost:hover, .micro-btn:hover { transform: translateY(-1px); box-shadow: var(--shadow-md); }
+
+    .tx-actions { display: flex; gap: 0.7rem; flex-wrap: wrap; margin-bottom: 0.8rem; }
+    .micro-btn { border: 1px solid rgba(148, 163, 184, 0.28); background: rgba(255, 255, 255, 0.96); color: var(--slate-700); padding: 0.65rem 0.85rem; min-height: 42px; }
+    .micro-btn.danger { color: #b91c1c; border-color: rgba(244, 63, 94, 0.24); background: rgba(255, 241, 242, 0.9); }
+    .tx-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto; gap: 0.8rem; align-items: end; padding: 0.85rem; border-radius: 14px; background: rgba(255, 255, 255, 0.9); border: 1px solid rgba(148, 163, 184, 0.2); }
+    .mode-note { margin-top: 0.9rem; border-radius: 14px; padding: 0.9rem 1rem; background: rgba(2, 132, 199, 0.08); color: var(--slate-700); border: 1px solid rgba(2, 132, 199, 0.12); }
+
+    .result-meta { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem; }
+    .mode-pill { background: rgba(13, 148, 136, 0.1); color: var(--teal-dark); }
+    .result-actions { display: flex; align-items: center; gap: 0.8rem; flex-wrap: wrap; }
+    .copy-note { background: rgba(2, 132, 199, 0.1); color: var(--sky); }
+    .result-card { min-width: 0; border-radius: 18px; padding: 1rem; border: 1px solid rgba(148, 163, 184, 0.2); overflow: hidden; display: flex; flex-direction: column; background: rgba(255, 255, 255, 0.95); box-shadow: var(--shadow-sm); }
+    .result-card.teal { background: linear-gradient(180deg, rgba(13, 148, 136, 0.14), rgba(255, 255, 255, 0.98)); }
+    .result-card.sky { background: linear-gradient(180deg, rgba(2, 132, 199, 0.14), rgba(255, 255, 255, 0.98)); }
+    .result-card.amber { background: linear-gradient(180deg, rgba(245, 158, 11, 0.16), rgba(255, 255, 255, 0.98)); }
+    .result-card.rose { background: linear-gradient(180deg, rgba(244, 63, 94, 0.14), rgba(255, 255, 255, 0.98)); }
+    .result-card.slate { background: linear-gradient(180deg, rgba(71, 85, 105, 0.12), rgba(255, 255, 255, 0.98)); }
+    .result-lbl { font-size: 0.88rem; font-weight: 800; color: var(--slate-700); letter-spacing: 0.02em; text-transform: uppercase; }
+    .result-val { font-size: clamp(1.14rem, 3vw, 1.72rem); line-height: 1.15; font-weight: 900; color: var(--slate-900); margin: 0.55rem 0 0.35rem; white-space: normal; overflow-wrap: anywhere; word-break: break-word; }
+    .result-sub { font-size: 0.9rem; color: var(--slate-600); }
+    .quality-shell {
+      margin-top: 1.15rem;
+      display: grid;
+      gap: 1rem;
+      padding: 1rem;
+      background: linear-gradient(135deg, rgba(15, 118, 110, 0.08), rgba(255, 255, 255, 0.97));
+      border: 1px solid rgba(13, 148, 136, 0.18);
+      border-radius: 18px;
+      box-shadow: var(--shadow-sm);
+    }
+    .quality-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .quality-score {
+      font-size: clamp(1.6rem, 4vw, 2.35rem);
+      font-weight: 900;
+      color: var(--slate-900);
+      line-height: 1;
+    }
+    .quality-score small {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--slate-600);
+      margin-left: 0.25rem;
+    }
+    .quality-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.55rem 0.95rem;
+      border-radius: 999px;
+      font-size: 0.84rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      border: 1px solid transparent;
+    }
+    .quality-badge.poor { background: rgba(244, 63, 94, 0.14); color: #be123c; border-color: rgba(244, 63, 94, 0.22); }
+    .quality-badge.average { background: rgba(245, 158, 11, 0.16); color: #92400e; border-color: rgba(245, 158, 11, 0.24); }
+    .quality-badge.good { background: rgba(2, 132, 199, 0.14); color: #0c4a6e; border-color: rgba(2, 132, 199, 0.22); }
+    .quality-badge.excellent { background: rgba(13, 148, 136, 0.16); color: #115e59; border-color: rgba(13, 148, 136, 0.24); }
+    .quality-track {
+      position: relative;
+      overflow: hidden;
+      height: 14px;
+      border-radius: 999px;
+      background: rgba(148, 163, 184, 0.18);
+    }
+    .quality-fill {
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 0%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #f43f5e, #f59e0b 46%, #0284c7 72%, #0d9488);
+      transition: width 0.35s ease;
+    }
+    .quality-caption {
+      color: var(--slate-600);
+      font-size: 0.94rem;
+    }
+    .quality-metrics {
+      display: grid;
+      gap: 0.85rem;
+    }
+    .quality-metric {
+      display: grid;
+      gap: 0.28rem;
+      padding: 0.85rem 0.95rem;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 14px;
+      border: 1px solid rgba(148, 163, 184, 0.18);
+    }
+    .quality-metric strong {
+      color: var(--slate-900);
+      font-size: 0.96rem;
+    }
+    .quality-metric span {
+      color: var(--slate-600);
+      font-size: 0.9rem;
+    }
+    .comparison-summary { margin-top: 1.25rem; background: rgba(255, 255, 255, 0.88); padding: 1rem; }
+    .table-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem; }
+    .tbl-wrap { width: 100%; overflow-x: auto; border: 1px solid rgba(148, 163, 184, 0.18); border-radius: 16px; background: rgba(255, 255, 255, 0.96); }
+    table { width: 100%; min-width: 720px; border-collapse: collapse; }
+    th, td { padding: 0.85rem 0.95rem; border-bottom: 1px solid rgba(226, 232, 240, 0.9); text-align: left; vertical-align: top; color: var(--slate-700); font-size: 0.93rem; }
+    th { background: linear-gradient(180deg, rgba(13, 148, 136, 0.12), rgba(236, 253, 245, 0.8)); color: var(--slate-900); font-weight: 800; }
+    tbody tr:nth-child(odd) td { background: rgba(248, 250, 252, 0.85); }
+    .compare-a-cell { background: rgba(219, 234, 254, 0.8) !important; }
+    .compare-b-cell { background: rgba(254, 243, 199, 0.8) !important; }
+    .charts-grid .chart-wrap { background: rgba(255, 255, 255, 0.92); border: 1px solid rgba(148, 163, 184, 0.22); border-radius: 18px; padding: 1rem; box-shadow: var(--shadow-sm); min-width: 0; }
+    .chart-title { font-size: 1rem; font-weight: 800; color: var(--slate-900); margin-bottom: 0.25rem; }
+    .chart-canvas { position: relative; height: 320px; margin-top: 0.9rem; }
+    #comparison-tables { background: linear-gradient(180deg, rgba(245, 158, 11, 0.06), rgba(255, 255, 255, 0.98)); }
+    #comparison-tables th { background: linear-gradient(180deg, rgba(245, 158, 11, 0.16), rgba(254, 243, 199, 0.8)); }
+    #faq { background: linear-gradient(180deg, rgba(13, 148, 136, 0.06), rgba(255, 255, 255, 0.98)); }
+    #related-tools { background: linear-gradient(180deg, rgba(2, 132, 199, 0.05), rgba(255, 255, 255, 0.98)); }
+    .link-card { display: block; position: relative; overflow: hidden; padding: 1rem 1rem 1rem 1.1rem; color: var(--slate-700); background: rgba(255, 255, 255, 0.9); }
+    .link-card::before { content: ""; position: absolute; inset: 0 auto 0 0; width: 5px; background: linear-gradient(180deg, var(--teal), var(--sky)); }
+    .link-card strong { display: block; color: var(--slate-900); margin-bottom: 0.25rem; }
+    .faq-item { background: rgba(255, 255, 255, 0.94); overflow: hidden; }
+    .faq-item summary { cursor: pointer; list-style: none; font-weight: 800; color: var(--slate-900); padding: 1rem 1.1rem; background: rgba(13, 148, 136, 0.06); }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item p { padding: 0 1.1rem 1rem; }
+    .faq-item[open] { box-shadow: var(--shadow-md); }
+    .disclaimer { background: linear-gradient(135deg, rgba(245, 158, 11, 0.12), rgba(255, 255, 255, 0.96)); }
+    footer { margin-top: 2rem; background: linear-gradient(135deg, #0f172a, #0f766e); color: var(--white); border-radius: 24px 24px 0 0; padding: 2rem 1.2rem 1.4rem; }
+    .footer-content { max-width: 1200px; margin: 0 auto; }
+    .footer-section h3 { font-size: 1rem; margin-bottom: 0.7rem; }
+    .footer-section ul { list-style: none; display: grid; gap: 0.55rem; }
+    .footer-section a { color: rgba(255, 255, 255, 0.9); }
+    .footer-disclaimer { background: rgba(255, 255, 255, 0.08); border-radius: 16px; padding: 1rem; color: rgba(255, 255, 255, 0.9); }
+    .copyright { max-width: 1200px; margin: 1.2rem auto 0; text-align: center; color: rgba(255, 255, 255, 0.75); font-size: 0.92rem; }
+    @media (min-width: 640px) { .toolbar-grid, .field-pair, .comparison-grid, .links-grid, .faq-list, .hero-highlights, .quality-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); } .qnav { grid-template-columns: repeat(3, minmax(0, 1fr)); } .result-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (min-width: 768px) { .charts-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .charts-grid .chart-wrap:last-child { grid-column: 1 / -1; } .result-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } .footer-content { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (min-width: 960px) { .hero-highlights { grid-template-columns: repeat(3, minmax(0, 1fr)); } .toolbar-grid { grid-template-columns: 0.95fr 1.05fr; } .result-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } .comparison-grid, .footer-content, .quality-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 767px) { .hdr-nav { display: none; } .hamburger { display: inline-block; } .mobile-nav.open { display: flex; } .page { padding: 1rem; } .card, .content-section { padding: 1rem; } .chart-canvas { height: 280px; } .tx-row { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="hdr-inner">
+      <div class="hdr-logo">💰 SmartCalc World</div>
+      <nav class="hdr-nav">
+        <a href="https://smartcalcworld.com/index.html">Home</a>
+        <a href="https://smartcalcworld.com/finance/finance-hub.html">Finance Hub</a>
+        <span class="nav-disabled">Medical Hub (Coming Soon)</span>
+        <span class="nav-disabled">Student Hub (Coming Soon)</span>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <button class="hamburger" id="hamburgerBtn" type="button" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <nav class="mobile-nav" id="mobileNav">
+      <a href="https://smartcalcworld.com/index.html">Home</a>
+      <a href="https://smartcalcworld.com/finance/finance-hub.html">Finance Hub</a>
+      <span class="nav-disabled">Medical Hub (Coming Soon)</span>
+      <span class="nav-disabled">Student Hub (Coming Soon)</span>
+      <a href="#faq">FAQ</a>
+    </nav>
+  </header>
+
+  <main class="page">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="https://smartcalcworld.com/index.html">Home</a> &rsaquo;
+      <a href="https://smartcalcworld.com/finance/finance-hub.html">Finance</a> &rsaquo;
+      <a href="https://smartcalcworld.com/finance/investment/investment-hub.html">Investment</a> &rsaquo;
+      Stock Profit Calculator
+    </nav>
+
+    <section class="hero">
+      <span class="hero-badge">📈 Premium Stock Trade Analyzer</span>
+      <h1>Stock Profit Calculator</h1>
+      <p class="hero-sub">Calculate stock trade profit or loss with the same premium SmartCalc World design language used in our Mutual Fund Calculator, Portfolio Growth Calculator, and SWP Calculator. Measure gross outcome, brokerage, taxes, dividend income, break-even price, average buy cost, and scenario exits in one professional dashboard.</p>
+      <div class="hero-highlights">
+        <div class="hero-chip">
+          <strong>Measure the real outcome after costs</strong>
+          See how brokerage, transaction charges, slippage, taxes, and dividend cash change the final result instead of looking only at the raw price move.
+        </div>
+        <div class="hero-chip">
+          <strong>Average multiple buy trades accurately</strong>
+          Use advanced mode to combine several buy entries, estimate the weighted average buy price, and judge the trade from a more realistic cost basis.
+        </div>
+        <div class="hero-chip">
+          <strong>Plan better exits with scenario scoring</strong>
+          Compare multiple sell prices, watch break-even levels, and test target versus stop-loss logic before you act.
+        </div>
+      </div>
+    </section>
+
+    <section class="card" id="calculator">
+      <div class="card-title">Stock Trade Profit Planner</div>
+      <div class="toolbar-grid">
+        <div class="toolbar-box">
+          <h2>Display Currency</h2>
+          <div class="form-row">
+            <label class="lbl" for="sp-currency">Choose currency</label>
+            <select id="sp-currency">
+              <option value="USD">USD $</option>
+              <option value="INR">INR &#8377;</option>
+              <option value="EUR">EUR &euro;</option>
+              <option value="GBP">GBP &pound;</option>
+              <option value="CAD">CAD $</option>
+              <option value="AUD">AUD $</option>
+            </select>
+            <span class="hint">Display formatting only. Symbols and grouping update instantly without any exchange-rate conversion.</span>
+          </div>
+        </div>
+        <div class="toolbar-box">
+          <h2>What this tool helps you see</h2>
+          <div class="info-list">
+            <div class="info-pill">How your <strong>buy price</strong>, <strong>sell price</strong>, and <strong>share quantity</strong> create the core trade outcome 📊.</div>
+            <div class="info-pill">How <strong>brokerage</strong>, <strong>charges</strong>, <strong>tax</strong>, <strong>slippage</strong>, and <strong>dividend income</strong> can move a trade from attractive to disappointing 💰.</div>
+            <div class="info-pill">How <strong>multiple entries</strong>, <strong>break-even price</strong>, <strong>risk-reward</strong>, and the <strong>trade quality score</strong> give traders a clearer decision framework 🧠.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="qnav" role="tablist" aria-label="Stock calculator sections">
+        <button type="button" class="qnav-btn active" data-module="core" role="tab" aria-selected="true" onclick="switchModule('core')">Trade Basics</button>
+        <button type="button" class="qnav-btn" data-module="costs" role="tab" aria-selected="false" onclick="switchModule('costs')">Fees, Tax &amp; Risk</button>
+        <button type="button" class="qnav-btn" data-module="advanced" role="tab" aria-selected="false" onclick="switchModule('advanced')">Advanced Entries</button>
+      </div>
+
+      <section class="module active" id="mod-core" role="tabpanel" aria-label="Core stock trade inputs">
+        <p class="module-intro">Start with the prices and the share quantity. These four inputs define the basic stock trade before costs and tax are layered in.</p>
+        <div class="field-pair">
+          <div class="form-row">
+            <label class="lbl" for="sp-buy">Buy Price per Share (<span data-currency-symbol>$</span>)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="sp-buy" min="0" max="100000" step="0.01" value="100">
+                <span class="hint">The average entry price in single-trade mode. In multiple-entry mode this becomes a reference input only.</span>
+              </div>
+              <div>
+                <input type="range" id="sp-buy-sl" min="0" max="1000" step="0.5" value="100">
+                <div class="slider-lbl" id="sp-buy-lbl">$100.00</div>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <label class="lbl" for="sp-sell">Sell Price per Share (<span data-currency-symbol>$</span>)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="sp-sell" min="0" max="100000" step="0.01" value="120">
+                <span class="hint">The base exit price used for the main trade result and the comparison charts.</span>
+              </div>
+              <div>
+                <input type="range" id="sp-sell-sl" min="0" max="1000" step="0.5" value="120">
+                <div class="slider-lbl" id="sp-sell-lbl">$120.00</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="field-pair">
+          <div class="form-row">
+            <label class="lbl" for="sp-quantity">Number of Shares Sold</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="sp-quantity" min="1" max="1000000" step="1" value="100">
+                <span class="hint">Use whole shares for a standard stock trade. In multiple-entry mode, the sold quantity cannot exceed the total bought shares.</span>
+              </div>
+              <div>
+                <input type="range" id="sp-quantity-sl" min="1" max="5000" step="1" value="100">
+                <div class="slider-lbl" id="sp-quantity-lbl">100 shares</div>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <label class="lbl" for="sp-dividend">Optional Dividend Income (<span data-currency-symbol>$</span>)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="sp-dividend" min="0" max="1000000" step="0.01" value="0">
+                <span class="hint">Add any dividend cash earned during the holding period so total return looks more complete.</span>
+              </div>
+              <div>
+                <input type="range" id="sp-dividend-sl" min="0" max="10000" step="1" value="0">
+                <div class="slider-lbl" id="sp-dividend-lbl">$0.00</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="btn-row">
+          <button type="button" class="btn-primary" onclick="calculateStockProfit(true, true)">Calculate Stock Profit</button>
+          <button type="button" class="btn-ghost" onclick="resetPlanner()">Reset Inputs</button>
+        </div>
+      </section>
+
+      <section class="module" id="mod-costs" role="tabpanel" aria-label="Cost, tax, and risk settings">
+        <p class="module-intro">Fees and taxes often decide whether a trade feels efficient. This section also adds a simple risk-reward view using your target price and stop-loss.</p>
+        <div class="field-pair">
+          <div class="form-row">
+            <label class="lbl" for="sp-brokerage-mode">Brokerage Fee Type</label>
+            <select id="sp-brokerage-mode">
+              <option value="percent" selected>Percentage of trade value</option>
+              <option value="fixed">Fixed amount per transaction</option>
+            </select>
+            <span class="hint" id="sp-brokerage-hint">Use a percentage when your broker charges a rate on each buy and sell order.</span>
+          </div>
+          <div class="form-row">
+            <label class="lbl" for="sp-brokerage" id="sp-brokerage-label">Brokerage Fee (%)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="sp-brokerage" min="0" max="5" step="0.01" value="0.5">
+                <span class="hint">This input applies to both the buy side and the sell side of the trade.</span>
+              </div>
+              <div>
+                <input type="range" id="sp-brokerage-sl" min="0" max="5" step="0.01" value="0.5">
+                <div class="slider-lbl" id="sp-brokerage-lbl">0.50%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="field-pair">
+          <div class="form-row">
+            <label class="lbl" for="sp-charges">Transaction Charges (%)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="sp-charges" min="0" max="5" step="0.01" value="0.1">
+                <span class="hint">Use this for exchange charges, platform costs, or other percentage-based trade friction.</span>
+              </div>
+              <div>
+                <input type="range" id="sp-charges-sl" min="0" max="5" step="0.01" value="0.1">
+                <div class="slider-lbl" id="sp-charges-lbl">0.10%</div>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <label class="lbl" for="sp-tax">Tax Rate on Profit (%)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="sp-tax" min="0" max="50" step="0.01" value="15">
+                <span class="hint">Tax is applied only on positive profit so the calculator does not artificially shrink a losing trade.</span>
+              </div>
+              <div>
+                <input type="range" id="sp-tax-sl" min="0" max="50" step="0.1" value="15">
+                <div class="slider-lbl" id="sp-tax-lbl">15.00%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="field-pair">
+          <div class="form-row">
+            <label class="lbl" for="sp-target">Target Price (<span data-currency-symbol>$</span>)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="sp-target" min="0" max="100000" step="0.01" value="130">
+                <span class="hint">Your planned profit-taking level for the risk-reward calculation.</span>
+              </div>
+              <div>
+                <input type="range" id="sp-target-sl" min="0" max="1500" step="0.5" value="130">
+                <div class="slider-lbl" id="sp-target-lbl">$130.00</div>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <label class="lbl" for="sp-buy-slippage">Buy Slippage (%)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="sp-buy-slippage" min="0" max="10" step="0.01" value="0.1">
+                <span class="hint">Slippage lifts your executed buy price above the quoted price when liquidity is thin or orders move quickly.</span>
+              </div>
+              <div>
+                <input type="range" id="sp-buy-slippage-sl" min="0" max="10" step="0.01" value="0.1">
+                <div class="slider-lbl" id="sp-buy-slippage-lbl">0.10%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="field-pair">
+          <div class="form-row">
+            <label class="lbl" for="sp-stop">Stop-Loss Price (<span data-currency-symbol>$</span>)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="sp-stop" min="0" max="100000" step="0.01" value="92">
+                <span class="hint">Your planned risk limit. If stop-loss is not below the buy price, the ratio becomes invalid.</span>
+              </div>
+              <div>
+                <input type="range" id="sp-stop-sl" min="0" max="1500" step="0.5" value="92">
+                <div class="slider-lbl" id="sp-stop-lbl">$92.00</div>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <label class="lbl" for="sp-sell-slippage">Sell Slippage (%)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="sp-sell-slippage" min="0" max="10" step="0.01" value="0.1">
+                <span class="hint">Sell slippage lowers the actual exit price so the calculator reflects more realistic execution.</span>
+              </div>
+              <div>
+                <input type="range" id="sp-sell-slippage-sl" min="0" max="10" step="0.01" value="0.1">
+                <div class="slider-lbl" id="sp-sell-slippage-lbl">0.10%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="btn-row">
+          <button type="button" class="btn-primary" onclick="calculateStockProfit(true, true)">Calculate Stock Profit</button>
+          <button type="button" class="btn-ghost" onclick="resetPlanner()">Reset Inputs</button>
+        </div>
+      </section>
+
+      <section class="module" id="mod-advanced" role="tabpanel" aria-label="Advanced multiple transaction inputs">
+        <p class="module-intro">Use this section when the trade was built through several buy entries or when you want to compare different exit prices side by side. It is especially useful for averaging into a position.</p>
+        <div class="field-pair">
+          <div class="toolbar-box">
+            <h2>Entry Mode</h2>
+            <div class="form-row">
+              <label class="lbl" for="sp-entry-mode">Choose trade basis</label>
+              <select id="sp-entry-mode">
+                <option value="single" selected>Single Buy Price</option>
+                <option value="multi">Multiple Buy Transactions</option>
+              </select>
+              <span class="hint">Multiple buy mode calculates average buy price using total share cost divided by total shares bought.</span>
+            </div>
+            <div class="mode-note" id="entry-mode-note">Single buy mode uses the buy price from Trade Basics. Switch to multiple transactions when you entered the position in several steps.</div>
+          </div>
+          <div class="toolbar-box" id="multi-buy-panel">
+            <h2>Multiple Buy Transactions</h2>
+            <div class="tx-actions">
+              <button type="button" class="micro-btn" onclick="addTransactionRow()">Add Buy Row</button>
+              <button type="button" class="micro-btn danger" onclick="clearTransactions()">Clear Rows</button>
+            </div>
+            <div class="tx-list" id="tx-list"></div>
+            <span class="hint">Each row is treated as a separate buy order, which matters if brokerage is fixed per trade.</span>
+          </div>
+        </div>
+        <div class="field-pair">
+          <div class="scenario-stack">
+            <div class="form-row">
+              <label class="lbl" for="scenario-a">Scenario A Sell Price (<span data-currency-symbol>$</span>)</label>
+              <div class="input-slider">
+                <div>
+                  <input type="number" id="scenario-a" min="0" max="100000" step="0.01" value="110">
+                  <span class="hint">A cautious exit price for downside-aware planning.</span>
+                </div>
+                <div>
+                  <input type="range" id="scenario-a-sl" min="0" max="1500" step="0.5" value="110">
+                  <div class="slider-lbl" id="scenario-a-lbl">$110.00</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <label class="lbl" for="scenario-b">Scenario B Sell Price (<span data-currency-symbol>$</span>)</label>
+              <div class="input-slider">
+                <div>
+                  <input type="number" id="scenario-b" min="0" max="100000" step="0.01" value="125">
+                  <span class="hint">A middle-case exit for balanced planning.</span>
+                </div>
+                <div>
+                  <input type="range" id="scenario-b-sl" min="0" max="1500" step="0.5" value="125">
+                  <div class="slider-lbl" id="scenario-b-lbl">$125.00</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <label class="lbl" for="scenario-c">Scenario C Sell Price (<span data-currency-symbol>$</span>)</label>
+              <div class="input-slider">
+                <div>
+                  <input type="number" id="scenario-c" min="0" max="100000" step="0.01" value="130">
+                  <span class="hint">A base-to-bullish case for stronger price follow-through.</span>
+                </div>
+                <div>
+                  <input type="range" id="scenario-c-sl" min="0" max="1500" step="0.5" value="130">
+                  <div class="slider-lbl" id="scenario-c-lbl">$130.00</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="scenario-stack">
+            <div class="form-row">
+              <label class="lbl" for="scenario-d">Scenario D Sell Price (<span data-currency-symbol>$</span>)</label>
+              <div class="input-slider">
+                <div>
+                  <input type="number" id="scenario-d" min="0" max="100000" step="0.01" value="140">
+                  <span class="hint">A stronger upside case. It is useful for planning, not a promise.</span>
+                </div>
+                <div>
+                  <input type="range" id="scenario-d-sl" min="0" max="1500" step="0.5" value="140">
+                  <div class="slider-lbl" id="scenario-d-lbl">$140.00</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <label class="lbl" for="scenario-e">Scenario E Sell Price (<span data-currency-symbol>$</span>)</label>
+              <div class="input-slider">
+                <div>
+                  <input type="number" id="scenario-e" min="0" max="100000" step="0.01" value="150">
+                  <span class="hint">A stretch case to show how much of the thesis depends on an especially strong exit.</span>
+                </div>
+                <div>
+                  <input type="range" id="scenario-e-sl" min="0" max="1500" step="0.5" value="150">
+                  <div class="slider-lbl" id="scenario-e-lbl">$150.00</div>
+                </div>
+              </div>
+            </div>
+            <div class="toolbar-box">
+              <h2>How to use scenarios</h2>
+              <div class="info-list">
+                <div class="info-pill">If profit appears attractive only at the highest sell price, your trade thesis may be leaning too heavily on hope.</div>
+                <div class="info-pill">If a cautious exit still gives a healthy result, the setup may be more resilient even after fees, tax, and slippage 📉.</div>
+                <div class="info-pill">Five scenarios create a more realistic decision range so traders can compare fragile setups with efficient ones 🚀.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="btn-row">
+          <button type="button" class="btn-primary" onclick="calculateStockProfit(true, true)">Calculate Stock Profit</button>
+          <button type="button" class="btn-ghost" onclick="resetPlanner()">Reset Inputs</button>
+        </div>
+      </section>
+    </section>
+
+    <section class="card" id="results-section" aria-live="polite">
+      <div class="result-meta">
+        <div class="mode-pill" id="result-mode-pill">Latest Result: Stock Trade Summary</div>
+        <div class="result-actions">
+          <button type="button" class="btn-secondary" onclick="copyResults()">Copy Results</button>
+          <div class="copy-note" id="copy-note">Nothing copied yet.</div>
+        </div>
+      </div>
+      <div class="status-banner" id="status-banner"></div>
+      <div class="result-grid">
+        <div class="result-card teal"><div class="result-lbl" id="result-lbl-0">Total Investment</div><div class="result-val" id="result-val-0">—</div><div class="result-sub" id="result-sub-0">Buy-side capital including estimated fees</div></div>
+        <div class="result-card sky"><div class="result-lbl" id="result-lbl-1">Total Sell Value</div><div class="result-val" id="result-val-1">—</div><div class="result-sub" id="result-sub-1">Net sale proceeds after sell-side costs</div></div>
+        <div class="result-card amber"><div class="result-lbl" id="result-lbl-2">Gross Profit / Loss</div><div class="result-val" id="result-val-2">—</div><div class="result-sub" id="result-sub-2">Before tax, after fees, with dividends included</div></div>
+        <div class="result-card rose"><div class="result-lbl" id="result-lbl-3">Net Profit After Fees &amp; Taxes</div><div class="result-val" id="result-val-3">—</div><div class="result-sub" id="result-sub-3">The cleaner bottom-line trade result</div></div>
+        <div class="result-card slate"><div class="result-lbl" id="result-lbl-4">Gross Return %</div><div class="result-val" id="result-val-4">—</div><div class="result-sub" id="result-sub-4">Gross profit divided by total investment cost</div></div>
+        <div class="result-card teal"><div class="result-lbl" id="result-lbl-5">Net Return %</div><div class="result-val" id="result-val-5">—</div><div class="result-sub" id="result-sub-5">What remains after fees, tax, and dividend cash</div></div>
+        <div class="result-card sky"><div class="result-lbl" id="result-lbl-6">Break-even Price</div><div class="result-val" id="result-val-6">—</div><div class="result-sub" id="result-sub-6">Quoted sell price needed to fully recover costs after sell-side friction</div></div>
+        <div class="result-card amber"><div class="result-lbl" id="result-lbl-7">Risk-Reward Ratio</div><div class="result-val" id="result-val-7">—</div><div class="result-sub" id="result-sub-7">Potential reward compared with planned downside</div></div>
+        <div class="result-card slate"><div class="result-lbl" id="result-lbl-8">Effective Cost / Share</div><div class="result-val" id="result-val-8">—</div><div class="result-sub" id="result-sub-8">Entry-side cost basis per share before sell-side friction</div></div>
+        <div class="result-card teal"><div class="result-lbl" id="result-lbl-9">Profit / Share</div><div class="result-val" id="result-val-9">—</div><div class="result-sub" id="result-sub-9">Net result spread across the sold shares</div></div>
+        <div class="result-card rose"><div class="result-lbl" id="result-lbl-10">Fee Impact %</div><div class="result-val" id="result-val-10">—</div><div class="result-sub" id="result-sub-10">How much capital is lost to brokerage and charges</div></div>
+        <div class="result-card sky"><div class="result-lbl" id="result-lbl-11">Trade Quality Score</div><div class="result-val" id="result-val-11">—</div><div class="result-sub" id="result-sub-11">Weighted read on return, risk-reward, and cost drag</div></div>
+      </div>
+      <div class="quality-shell">
+        <div class="quality-top">
+          <div>
+            <div class="result-lbl">Trade Quality Dashboard</div>
+            <div class="quality-score" id="quality-score">0<small>/ 100</small></div>
+          </div>
+          <div class="quality-badge average" id="quality-badge">Average</div>
+        </div>
+        <div class="quality-track" aria-hidden="true">
+          <div class="quality-fill" id="quality-fill"></div>
+        </div>
+        <div class="quality-caption" id="quality-caption">The score blends net return, risk-reward balance, and fee drag into one quick quality read.</div>
+        <div class="quality-metrics">
+          <div class="quality-metric"><strong id="quality-metric-0">Net return is modest</strong><span id="quality-metric-sub-0">Return quality updates after every trade recalculation.</span></div>
+          <div class="quality-metric"><strong id="quality-metric-1">Risk-reward is pending</strong><span id="quality-metric-sub-1">Add a valid target and stop-loss to score setup efficiency properly.</span></div>
+          <div class="quality-metric"><strong id="quality-metric-2">Fees are manageable</strong><span id="quality-metric-sub-2">Fee drag shows how much friction is quietly eating the trade.</span></div>
+          <div class="quality-metric"><strong id="quality-metric-3">Scenario resilience is neutral</strong><span id="quality-metric-sub-3">Scenario spread highlights whether the trade depends on an optimistic exit.</span></div>
+        </div>
+      </div>
+      <div class="insight-box" id="insight-box"></div>
+      <div class="formula-box" id="formula-box"></div>
+      <div class="comparison-summary">
+        <div class="table-head">
+          <div><div class="card-title" style="margin-bottom:0.3rem;">Trade Snapshot</div><div class="table-context">Quick metrics showing how weighted cost basis, slippage, fees, taxes, and execution quality shape the trade.</div></div>
+        </div>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>Metric</th><th class="compare-a-cell">Value</th><th class="compare-b-cell">Explanation</th></tr></thead>
+            <tbody id="summary-body"></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="comparison-summary">
+        <div class="table-head">
+          <div><div class="card-title" style="margin-bottom:0.3rem;">Sell Price Scenario Comparison</div><div class="table-context">Compare multiple exit prices with slippage, fees, and taxes already applied so scenario planning stays realistic.</div></div>
+        </div>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>Scenario</th><th class="compare-a-cell">Quoted Sell Price</th><th>Actual Sell Price</th><th>Net Profit / Loss</th><th>Net Return %</th><th class="compare-b-cell">Outcome</th></tr></thead>
+            <tbody id="scenario-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+    <section class="card" id="charts-section">
+      <div class="card-title">Visual Stock Trade Dashboard</div>
+      <p class="chart-note" id="charts-context">Charts compare investment cost, sale proceeds, fees, taxes, and scenario exits so the trade becomes easier to read at a glance.</p>
+      <div class="charts-grid">
+        <div class="chart-wrap">
+          <div class="chart-title">Trade Economics Overview</div>
+          <div class="chart-note">This bar chart compares invested capital, sell proceeds, gross outcome, and net outcome after tax and slippage.</div>
+          <div class="chart-canvas"><canvas id="bar-chart"></canvas></div>
+        </div>
+        <div class="chart-wrap">
+          <div class="chart-title">Fees, Tax &amp; Profit Breakdown</div>
+          <div class="chart-note">See how much of the trade goes to buy fees, sell fees, tax, dividends, and the remaining net profit or loss.</div>
+          <div class="chart-canvas"><canvas id="breakdown-chart"></canvas></div>
+        </div>
+        <div class="chart-wrap">
+          <div class="chart-title">Scenario Outcome Curve</div>
+          <div class="chart-note">Different exit prices create very different gross and net outcomes even when the entry cost stays the same.</div>
+          <div class="chart-canvas"><canvas id="comparison-chart"></canvas></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" id="projection-section">
+      <div class="table-head">
+        <div>
+          <div class="card-title" style="margin-bottom:0.3rem;">Transaction Summary Table</div>
+          <div class="table-context" id="projection-context">Review the base trade and the scenario exits with quoted prices, actual execution prices, fees, tax, and net return shown side by side.</div>
+        </div>
+        <button type="button" class="btn-secondary" onclick="downloadCsv()">Download CSV</button>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Scenario</th>
+              <th>Average Buy Price</th>
+              <th>Quoted Sell Price</th>
+              <th>Actual Sell Price</th>
+              <th>Quantity</th>
+              <th>Total Fees</th>
+              <th>Tax</th>
+              <th>Gross P/L</th>
+              <th>Net Profit</th>
+              <th>Net Return %</th>
+            </tr>
+          </thead>
+          <tbody id="projection-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="content-section" id="comparison-tables">
+      <h2>Comparison Tables</h2>
+      <p>These quick reference tables help translate stock trade numbers into decision-making language.</p>
+      <div class="comparison-grid">
+        <div>
+          <h3>What Usually Changes Final Trade Outcome</h3>
+          <div class="tbl-wrap">
+            <table>
+              <thead>
+                <tr><th>Driver</th><th>Why It Matters</th><th>Typical Effect</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Buy price</td><td>Lower entry cost gives more room for profit</td><td>Directly improves break-even and return percentage</td></tr>
+                <tr><td>Sell price</td><td>Exit discipline often decides whether profit is realized</td><td>Small changes can sharply move net result</td></tr>
+                <tr><td>Brokerage and charges</td><td>Costs reduce efficiency on both the buy and sell side</td><td>Frequent trades feel the impact more strongly</td></tr>
+                <tr><td>Tax rate</td><td>Profit kept after tax can be very different from gross profit</td><td>High tax can materially lower realized return</td></tr>
+                <tr><td>Average buy price</td><td>Multiple entries change the true cost basis</td><td>Better averaging can lower the break-even level</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div>
+          <h3>Risk-Reward Ratio Guide</h3>
+          <div class="formula-box"><strong>Risk-Reward Ratio</strong> = (Target Price − Buy Price) / (Buy Price − Stop-Loss Price)</div>
+          <div class="tbl-wrap" style="margin-top:0.8rem;">
+            <table>
+              <thead>
+                <tr><th>Ratio Range</th><th>General Reading</th><th>What It Often Means</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Below 1:1</td><td>Reward is smaller than risk</td><td>The setup may need a better entry, a tighter stop, or a higher target</td></tr>
+                <tr><td>About 1:1 to 2:1</td><td>Balanced but not generous</td><td>Can work if win rate is solid and costs stay low</td></tr>
+                <tr><td>Above 2:1</td><td>Reward is meaningfully larger than risk</td><td>Often considered more attractive when the trade setup is strong</td></tr>
+                <tr><td>Invalid ratio</td><td>Stop-loss is not below buy price or target is not above buy price</td><td>The setup needs cleaner trade planning before the ratio is useful</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <article class="content-section" id="guide">
+      <h2>How Stock Trade Profit Works in Real Life</h2>
+      <h3>What is Stock Profit 📈</h3>
+      <p>Stock profit sounds simple at first: buy lower, sell higher, and keep the difference. In real trading, though, the outcome is a little more layered. A trader may buy at one price, add more shares later at another price, pay brokerage on both sides, pay transaction charges, collect a dividend, and finally owe tax on a gain. That means the headline move in the stock price is only the starting point. The true result is the money left after the full trade is complete 💰.</p>
+      <p>This is why a stock profit calculator is useful. It turns a rough idea into a structured answer. Instead of asking “Did the price go up?” you can ask better questions. How much money was actually invested? What did the trade cost in fees? How much tax may reduce the gain? What price is needed just to break even? Those questions lead to calmer decisions, and calmer decisions usually lead to better trading behavior 🧠.</p>
+      <p>Many beginners focus only on the price chart and forget the money-flow side of the trade. But price is not the whole story. If you buy a stock at 100 and sell at 120, that sounds like a clean 20-point win. Yet if fees, taxes, and a poor average entry are ignored, the real return may look much smaller than expected. A calculator helps remove that blind spot early.</p>
+
+      <h3>How to Calculate Profit and Loss 💰</h3>
+      <p>The basic trade math starts with two building blocks: total investment and total selling value. Total investment means the cost of buying the shares plus buying fees. Total selling value means the money received from selling the shares after selling fees are deducted. Gross profit is the difference between those two values, plus any dividend income. After that, taxes can reduce the gain further. So a trade can have a healthy gross profit but still feel much smaller once tax is considered 📉.</p>
+      <p>Return percentage is another helpful view because it shows efficiency, not just money. A gain of 500 may sound good in isolation, but it means something very different on a 2,000 trade than on a 50,000 trade. Looking at both money profit and percentage return gives a more complete picture. Traders who focus on only one of those views can misread how effective a setup really was.</p>
+      <p>Break-even price is also important because it answers a very practical question: at what selling price does the trade stop losing money? That level gives the trader a reference point. If the market is still below break-even, the trade has not yet recovered total cost. If the market moves above it, the position is finally covering the capital used to open it 🔍.</p>
+
+      <h3>What are Brokerage and Fees 📉</h3>
+      <p>Brokerage is the fee charged by a platform or broker to execute a trade. Sometimes it is charged as a percentage of trade value, and sometimes it is a fixed amount for each order. Transaction charges can include exchange fees, platform costs, or other trading friction. These may look small, but when a trader buys and sells frequently, they add up fast. Even a good stock call can become less impressive if costs keep eating into the result.</p>
+      <p>The effect is even stronger in short-term trading because the raw price move may be smaller. A long-term investor may have a wider price move to absorb fees, but a shorter-term trader often works with tighter price targets. That means cost awareness is not optional. It is part of the trade idea itself. Ignoring costs can make a strategy look better on paper than it feels in a real account.</p>
+      <p>This is one reason SmartCalc World calculators show both gross and net results. Gross outcome tells you what the stock move did. Net outcome tells you what you actually keep. That difference may feel boring compared with chart candles and headlines, but it is exactly where disciplined trading becomes more professional 🚀.</p>
+
+      <h3>How Taxes Affect Stock Returns 🧾</h3>
+      <p>Taxes matter because they influence what stays in your pocket after the trade is finished. In some places tax depends on the holding period. In others it may depend on the type of gain, the type of account, or local capital gains rules. This calculator uses a user-entered tax rate so you can stress-test the trade with your own assumption. That keeps the model flexible for global users without pretending one tax rule fits everyone.</p>
+      <p>A trade that looks strong before tax may become average after tax. That does not mean the trade was bad. It simply means the decision should be judged by net outcome, not only by the raw chart move. Professional thinking often comes from accepting that friction exists. Markets take their share through volatility, costs, and taxes. The job is not to eliminate those forces. The job is to plan around them with open eyes.</p>
+      <p>It is also useful to separate tax from brokerage in your mind. Brokerage is a cost of participating. Tax is a cost of success. One reduces efficiency at entry and exit. The other reduces what remains after a profit is made. Looking at both together gives a more honest answer about whether the trade is worth the effort 📊.</p>
+
+      <h3>Why Average Buy Price Matters 🔁</h3>
+      <p>Many traders do not buy an entire position at one exact price. They may start with a small entry, add more on confirmation, and add again on a pullback. In that case, the true cost basis is not the first buy price or the last buy price. It is the weighted average price across all purchased shares. That is why multiple-entry support matters so much. Without it, a trader can easily underestimate the real cost basis and overestimate profit.</p>
+      <p>Suppose you bought 40 shares at 95 and later bought 60 shares at 105. The average buy price is not 100 by luck. It is the weighted cost of the full position divided by total shares. If fixed brokerage is used, each separate buy order can also create extra cost. So multiple transactions are not just a convenience feature. They are part of full trade accuracy.</p>
+      <p>Average price also changes how you think emotionally about the position. A trader may feel “I first entered at 95,” but the portfolio cares about the actual weighted cost. When the average price is clear, break-even becomes clearer, position management becomes calmer, and selling decisions become more rational 🤝.</p>
+
+      <h3>Break-even Price and Risk-Reward Ratio 🧠</h3>
+      <p>Break-even price answers the survival question. Risk-reward ratio answers the opportunity question. Together, they help traders move from reaction to planning. Break-even shows the price that covers the cost basis per sold share. Risk-reward compares potential upside with planned downside. If target price is only slightly above your average cost but the stop-loss is far away, the trade may not offer a healthy balance.</p>
+      <p>Risk-reward does not guarantee profit. A beautiful ratio can still fail if the market moves the wrong way. But it gives structure. When traders keep repeating low-quality ratios, they often need an unrealistically high win rate to make the strategy work. When the reward is meaningfully larger than the risk, the math becomes more forgiving over many trades. That is why the ratio belongs next to profit and fees instead of being treated as a separate topic.</p>
+      <p>Stop-loss and target price also help remove emotional drift. Without a plan, traders often move targets higher out of greed and move stops lower out of hope. That is where a trade can quietly turn from disciplined to dangerous. A calculator cannot enforce behavior, but it can make the original plan visible before emotions take over ⚖️.</p>
+
+      <div class="callout"><strong>Simple trading mindset:</strong> a strong stock trade is not only about a good entry. It is about cost control, realistic exits, clean risk management, and knowing what net profit looks like after the market takes its share.</div>
+
+      <h3>A Practical Example: Buying at 100 and Selling at 120 📊</h3>
+      <p>Imagine a trader buys 100 shares at 100 in the chosen currency. The share cost is 10,000. If brokerage and other charges apply on the buy side, the total investment cost becomes slightly higher than 10,000. Now imagine the trader sells those 100 shares at 120. Gross sale value becomes 12,000 before sell-side costs. After deducting selling fees, the amount actually received is a bit lower. The difference between that net sale value and the total investment cost is the gross profit.</p>
+      <p>If the trader also received a small dividend, the result improves. If a tax rate is applied to the gain, the final net profit becomes smaller again. This example shows why simple chart math is not enough. The stock may have moved 20%, but the actual kept return can be lower once full trade friction is included. That does not make stock investing unattractive. It simply makes the analysis more realistic.</p>
+      <p>Now change one variable and watch the result move. If the sell price becomes 110 instead of 120, profit may shrink sharply. If fees are high, some low-margin trades may not be worth taking at all. If the trader had averaged into the position at a lower cost, the same 110 exit might still look reasonable. That is exactly why scenario planning and multiple-entry modeling belong together 🌍.</p>
+
+      <h3>How Traders Use Scenario Planning 🚀</h3>
+      <p>Scenario planning is a practical way to reduce overconfidence. Instead of assuming one perfect sell price, traders can compare several outcomes. A cautious case may assume a quicker exit. A base case may use the current target. A stronger case may model a breakout continuation. When those outcomes are shown together, the trade becomes easier to judge. Is the downside acceptable? Is the upside strong enough? Is the middle case still worth the effort?</p>
+      <p>Scenario thinking also improves timing discipline. If you know what the trade looks like at three exit prices, you are less likely to panic on a small pullback or fantasize about unrealistic gains. You already know how the profit profile changes across different prices. That kind of preparation is simple, but it can be powerful because it reduces emotional surprise.</p>
+      <p>This mindset connects stock trading to broader investing tools too. The <a href="https://smartcalcworld.com/finance/investment/cagr-calculator.html">CAGR Calculator</a> helps frame longer-term return thinking, the <a href="https://smartcalcworld.com/finance/investment/portfolio-growth-calculator.html">Portfolio Growth Calculator</a> shows how repeated gains can build wealth over time, and the <a href="https://smartcalcworld.com/finance/investment/investment-goal-calculator.html">Investment Goal Calculator</a> helps translate trade profits into larger financial targets.</p>
+
+      <h3>Trading Results and the Bigger Investment Picture 💼</h3>
+      <p>Good traders usually think beyond one isolated position. They ask what the trade does for the wider portfolio. Does it help build capital? Does it fit the risk budget? Does the after-tax result actually move long-term wealth forward? A stock profit calculator is useful because it turns one trade into a measurable building block. Once the block is measured clearly, it is easier to connect it to other planning tools.</p>
+      <p>For example, a trader who wants steadier wealth creation may compare shorter-term stock trades with the disciplined investing path shown by the <a href="https://smartcalcworld.com/finance/investment/mutual-fund-calculator.html">Mutual Fund Calculator</a>. Someone who wants to understand cash yield thinking may explore the <a href="https://smartcalcworld.com/finance/investment/finance-apy-calculator.html">APY Calculator</a>. The point is not that every investor must choose one style forever. The point is that every trade should be judged with the same honest question: what does this actually add after costs, risk, and time?</p>
+      <p>That is where a professional calculator becomes useful. It does not predict markets. It does not replace research. But it helps you respect the arithmetic behind the trade. And when arithmetic becomes clearer, the quality of decisions often improves too 📈.</p>
+    </article>
+
+    <section class="content-section" id="related-tools">
+      <h2>Explore Related Investment Tools</h2>
+      <p>Stock trade analysis becomes more useful when you connect it to the broader investing ecosystem on SmartCalc World.</p>
+      <div class="links-grid">
+        <a class="link-card" href="https://smartcalcworld.com/finance/investment/cagr-calculator.html"><strong>CAGR Calculator</strong>Compare single-trade outcomes with long-term annualized growth thinking.</a>
+        <a class="link-card" href="https://smartcalcworld.com/finance/investment/portfolio-growth-calculator.html"><strong>Portfolio Growth Calculator</strong>See how many disciplined gains can compound into a much larger investment base.</a>
+        <a class="link-card" href="https://smartcalcworld.com/finance/investment/investment-goal-calculator.html"><strong>Investment Goal Calculator</strong>Work backward from a target so trading profits fit a larger wealth-building plan.</a>
+        <a class="link-card" href="https://smartcalcworld.com/finance/investment/mutual-fund-calculator.html"><strong>Mutual Fund Calculator</strong>Contrast active stock trades with steady SIP or lump sum investing paths.</a>
+        <a class="link-card" href="https://smartcalcworld.com/finance/investment/finance-apy-calculator.html"><strong>APY Calculator</strong>Compare market trade outcomes with interest and yield-based return thinking.</a>
+      </div>
+    </section>
+
+    <section class="content-section" id="faq">
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-list">
+        <details class="faq-item" open><summary>How is stock profit calculated?</summary><p>Stock profit is calculated by comparing net selling value with total investment cost after brokerage, charges, and taxes. Dividend income can also improve the final result.</p></details>
+        <details class="faq-item"><summary>What is a good return in the stock market?</summary><p>There is no universal number because stock returns vary by time horizon, risk, fees, and market conditions. Many investors compare different outcome scenarios instead of assuming one perfect return.</p></details>
+        <details class="faq-item"><summary>How do brokerage fees affect profit?</summary><p>Brokerage fees reduce both buying efficiency and selling proceeds. Even small charges can materially lower net profit, especially for frequent traders or smaller trades.</p></details>
+        <details class="faq-item"><summary>What is break-even price?</summary><p>Break-even price is the selling price where your trade neither makes money nor loses money after considering the cost of buying and the impact of selling costs.</p></details>
+        <details class="faq-item"><summary>How do I calculate profit percentage on a stock trade?</summary><p>Profit percentage is calculated by dividing profit by total investment cost and then multiplying by 100. A positive percentage means a gain and a negative percentage means a loss.</p></details>
+        <details class="faq-item"><summary>What taxes apply to stock trading?</summary><p>Taxes depend on your country, holding period, and local rules. This calculator uses a user-entered tax rate to estimate the impact of capital gains tax on final profit.</p></details>
+        <details class="faq-item"><summary>What is risk-reward ratio?</summary><p>Risk-reward ratio compares the potential gain to the potential loss on a trade using a target price and a stop-loss price. It helps traders judge whether a setup looks attractive.</p></details>
+        <details class="faq-item"><summary>Can I calculate multiple buy trades?</summary><p>Yes. Advanced mode lets you add multiple buy transactions so the calculator can estimate an average buy price before measuring profit on the sale.</p></details>
+        <details class="faq-item"><summary>Can dividends improve total stock profit?</summary><p>Yes. Dividend income adds to total cash return and can improve the overall outcome even if price appreciation is modest.</p></details>
+      </div>
+    </section>
+
+    <section class="content-section disclaimer" id="disclaimer">
+      <h2>Disclaimer</h2>
+      <p>This Stock Profit Calculator is for education and planning support only. It does not provide investment, trading, tax, or legal advice. Real trade outcomes can differ because of slippage, exact broker pricing, market gaps, liquidity, tax rules, dividend timing, and execution behavior. Use it as a decision-support tool, not as a guarantee of future performance.</p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="https://smartcalcworld.com/index.html">Home</a></li>
+          <li><a href="https://smartcalcworld.com/about.html">About</a></li>
+          <li><a href="https://smartcalcworld.com/contact.html">Contact</a></li>
+          <li><a href="https://smartcalcworld.com/privacy-policy.html">Privacy Policy</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Content</h3>
+        <ul>
+          <li><a href="#calculator">Stock Profit Calculator</a></li>
+          <li><a href="#guide">Stock Profit Guide</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Finance Tools</h3>
+        <ul>
+          <li><a href="https://smartcalcworld.com/finance/interest/interest-hub.html">Interest Calculators</a></li>
+          <li><a href="https://smartcalcworld.com/finance/investment/investment-calculators.html">Investment Calculators</a></li>
+          <li><a href="https://smartcalcworld.com/finance/loan/loan-hub.html">Loan Calculators</a></li>
+          <li><a href="https://smartcalcworld.com/finance/tax/tax-hub.html">Tax Calculators</a></li>
+          <li><a href="https://smartcalcworld.com/finance/saving-retirement/saving-retirement-hub.html">Savings Calculators</a></li>
+          <li><a href="https://smartcalcworld.com/finance/saving-retirement/saving-retirement-hub.html">Retirement Calculators</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <div class="footer-disclaimer"><strong>SmartCalc World Note:</strong> a strong stock trading plan separates price movement, fees, taxes, break-even levels, and risk-reward instead of focusing only on the headline gain.</div>
+      </div>
+    </div>
+    <div class="copyright">&copy; 2026 SmartCalc World. All rights reserved.</div>
+  </footer>
+  <script>
+    const state = {
+      currentCurrency: "USD",
+      charts: { bar: null, pie: null, comparison: null },
+      csvRows: [],
+      csvFilename: "stock_profit_scenarios.csv",
+      copyText: "",
+      lastResult: null
+    };
+
+    const currencyConfig = {
+      USD: { symbol: "$", locale: "en-US" },
+      EUR: { symbol: "\u20AC", locale: "de-DE" },
+      GBP: { symbol: "\u00A3", locale: "en-GB" },
+      INR: { symbol: "\u20B9", locale: "en-IN" },
+      CAD: { symbol: "$", locale: "en-CA" },
+      AUD: { symbol: "$", locale: "en-AU" }
+    };
+
+    const sliderConfigs = [
+      { input: "sp-buy", slider: "sp-buy-sl", label: "sp-buy-lbl", type: "money" },
+      { input: "sp-sell", slider: "sp-sell-sl", label: "sp-sell-lbl", type: "money" },
+      { input: "sp-quantity", slider: "sp-quantity-sl", label: "sp-quantity-lbl", type: "shares" },
+      { input: "sp-dividend", slider: "sp-dividend-sl", label: "sp-dividend-lbl", type: "money" },
+      { input: "sp-brokerage", slider: "sp-brokerage-sl", label: "sp-brokerage-lbl", type: "brokerage" },
+      { input: "sp-charges", slider: "sp-charges-sl", label: "sp-charges-lbl", type: "percent" },
+      { input: "sp-tax", slider: "sp-tax-sl", label: "sp-tax-lbl", type: "percent" },
+      { input: "sp-target", slider: "sp-target-sl", label: "sp-target-lbl", type: "money" },
+      { input: "sp-stop", slider: "sp-stop-sl", label: "sp-stop-lbl", type: "money" },
+      { input: "sp-buy-slippage", slider: "sp-buy-slippage-sl", label: "sp-buy-slippage-lbl", type: "percent" },
+      { input: "sp-sell-slippage", slider: "sp-sell-slippage-sl", label: "sp-sell-slippage-lbl", type: "percent" },
+      { input: "scenario-a", slider: "scenario-a-sl", label: "scenario-a-lbl", type: "money" },
+      { input: "scenario-b", slider: "scenario-b-sl", label: "scenario-b-lbl", type: "money" },
+      { input: "scenario-c", slider: "scenario-c-sl", label: "scenario-c-lbl", type: "money" },
+      { input: "scenario-d", slider: "scenario-d-sl", label: "scenario-d-lbl", type: "money" },
+      { input: "scenario-e", slider: "scenario-e-sl", label: "scenario-e-lbl", type: "money" }
+    ];
+
+    function $(id) {
+      return document.getElementById(id);
+    }
+
+    function safeNumber(value, fallback = 0) {
+      const num = Number(value);
+      return Number.isFinite(num) ? num : fallback;
+    }
+
+    function clamp(value, min, max) {
+      return Math.min(Math.max(value, min), max);
+    }
+
+    function normalize(value, min, max) {
+      if (!Number.isFinite(value) || max <= min) return 0;
+      return clamp((value - min) / (max - min), 0, 1);
+    }
+
+    function getCurrencyMeta() {
+      return currencyConfig[state.currentCurrency] || currencyConfig.USD;
+    }
+
+    function formatMoney(value) {
+      if (!Number.isFinite(value)) return "N/A";
+      const meta = getCurrencyMeta();
+      const amount = Math.abs(value);
+      const formatted = new Intl.NumberFormat(meta.locale, {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      }).format(amount);
+      return `${value < 0 ? "-" : ""}${meta.symbol}${formatted}`;
+    }
+
+    function formatPercent(value) {
+      return Number.isFinite(value) ? `${value.toFixed(2)}%` : "N/A";
+    }
+
+    function formatShares(value) {
+      if (!Number.isFinite(value)) return "N/A";
+      const formatted = new Intl.NumberFormat("en-US", {
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 2
+      }).format(value);
+      return `${formatted} shares`;
+    }
+
+    function formatRatio(value) {
+      return Number.isFinite(value) && value > 0 ? `${value.toFixed(2)} : 1` : "N/A";
+    }
+
+    function describeOutcome(value) {
+      if (value > 0) return "Profitable";
+      if (value < 0) return "Losing";
+      return "Break-even";
+    }
+
+    function setStatus(text, tone = "") {
+      const banner = $("status-banner");
+      banner.textContent = text;
+      banner.className = `status-banner${tone ? ` ${tone}` : ""}`;
+    }
+
+    function setCopyNote(text) {
+      $("copy-note").textContent = text;
+    }
+
+    function setResultCard(index, label, value, subtext) {
+      $(`result-lbl-${index}`).textContent = label;
+      $(`result-val-${index}`).textContent = value;
+      $(`result-sub-${index}`).textContent = subtext;
+    }
+
+    function updateCurrencyIndicators() {
+      const symbol = getCurrencyMeta().symbol;
+      document.querySelectorAll("[data-currency-symbol]").forEach((node) => {
+        node.textContent = symbol;
+      });
+    }
+
+    function updateSliderLabel(config) {
+      const input = $(config.input);
+      const label = $(config.label);
+      if (!input || !label) return;
+      const value = safeNumber(input.value);
+      let text = "";
+      if (config.type === "money") {
+        text = formatMoney(value);
+      } else if (config.type === "shares") {
+        text = formatShares(value);
+      } else if (config.type === "brokerage") {
+        text = $("sp-brokerage-mode").value === "fixed" ? formatMoney(value) : formatPercent(value);
+      } else {
+        text = formatPercent(value);
+      }
+      label.textContent = text;
+    }
+
+    function bindSliderPair(config) {
+      const input = $(config.input);
+      const slider = $(config.slider);
+      input.addEventListener("input", () => {
+        const raw = safeNumber(input.value);
+        const clampedValue = clamp(raw, safeNumber(slider.min, raw), safeNumber(slider.max, raw));
+        slider.value = clampedValue;
+        if (raw !== clampedValue) input.value = clampedValue;
+        updateSliderLabel(config);
+        calculateStockProfit(false);
+      });
+      slider.addEventListener("input", () => {
+        input.value = slider.value;
+        updateSliderLabel(config);
+        calculateStockProfit(false);
+      });
+    }
+
+    function syncBrokerageMode() {
+      const fixed = $("sp-brokerage-mode").value === "fixed";
+      const input = $("sp-brokerage");
+      const slider = $("sp-brokerage-sl");
+      const current = safeNumber(input.value);
+
+      if (fixed) {
+        $("sp-brokerage-label").innerHTML = `Brokerage Fee (<span data-currency-symbol>${getCurrencyMeta().symbol}</span>)`;
+        $("sp-brokerage-hint").textContent = "Use a fixed amount when your broker charges the same fee per order.";
+        input.min = "0";
+        input.max = "10000";
+        input.step = "1";
+        slider.min = "0";
+        slider.max = "10000";
+        slider.step = "1";
+        if (current < 1) {
+          input.value = "5";
+          slider.value = "5";
+        }
+      } else {
+        $("sp-brokerage-label").textContent = "Brokerage Fee (%)";
+        $("sp-brokerage-hint").textContent = "Use a percentage when your broker charges a rate on each buy and sell order.";
+        input.min = "0";
+        input.max = "5";
+        input.step = "0.01";
+        slider.min = "0";
+        slider.max = "5";
+        slider.step = "0.01";
+        if (current > 5) {
+          input.value = "0.5";
+          slider.value = "0.5";
+        }
+      }
+
+      updateCurrencyIndicators();
+      updateSliderLabel({ input: "sp-brokerage", label: "sp-brokerage-lbl", type: "brokerage" });
+    }
+
+    function switchModule(module) {
+      document.querySelectorAll(".module").forEach((panel) => {
+        panel.classList.toggle("active", panel.id === `mod-${module}`);
+      });
+      document.querySelectorAll(".qnav-btn").forEach((btn) => {
+        const active = btn.dataset.module === module;
+        btn.classList.toggle("active", active);
+        btn.setAttribute("aria-selected", active ? "true" : "false");
+      });
+    }
+
+    function setEntryMode(mode) {
+      const multi = mode === "multi";
+      $("multi-buy-panel").classList.toggle("hidden", !multi);
+      $("entry-mode-note").textContent = multi
+        ? "Multiple buy mode calculates a weighted average entry, applies buy slippage to every fill, and allocates buy-side fees proportionally to the sold shares."
+        : "Single buy mode uses the buy price from Trade Basics, then applies slippage and costs to estimate a more realistic executed entry.";
+    }
+
+    function addTransactionRow(price = "", quantity = "") {
+      const row = document.createElement("div");
+      row.className = "tx-row";
+      row.innerHTML = `
+        <div>
+          <label class="hint">Buy Price</label>
+          <input type="number" class="tx-price" min="0" max="100000" step="0.01" value="${price}">
+        </div>
+        <div>
+          <label class="hint">Shares</label>
+          <input type="number" class="tx-qty" min="0" max="1000000" step="1" value="${quantity}">
+        </div>
+        <button type="button" class="micro-btn danger">Remove</button>
+      `;
+      row.querySelectorAll("input").forEach((node) => {
+        node.addEventListener("input", () => calculateStockProfit(false));
+      });
+      row.querySelector("button").addEventListener("click", () => {
+        row.remove();
+        if (!$("tx-list").children.length) addTransactionRow(95, 40);
+        calculateStockProfit(false);
+      });
+      $("tx-list").appendChild(row);
+    }
+
+    function clearTransactions(seed = true) {
+      $("tx-list").innerHTML = "";
+      if (seed) {
+        addTransactionRow(95, 40);
+        addTransactionRow(105, 60);
+      }
+      calculateStockProfit(false);
+    }
+
+    function getTransactions() {
+      return Array.from(document.querySelectorAll(".tx-row")).map((row) => ({
+        price: Math.max(0, safeNumber(row.querySelector(".tx-price").value)),
+        quantity: Math.max(0, safeNumber(row.querySelector(".tx-qty").value))
+      })).filter((tx) => tx.price > 0 && tx.quantity > 0);
+    }
+
+    function calcTradeFees(tradeValue, brokerageMode, brokerageValue, chargeRate) {
+      const safeTradeValue = Math.max(0, tradeValue);
+      const brokerage = brokerageMode === "fixed" ? brokerageValue : safeTradeValue * (brokerageValue / 100);
+      const transactionCharges = safeTradeValue * (chargeRate / 100);
+      return { brokerage, transactionCharges, total: brokerage + transactionCharges };
+    }
+
+    function applyBuySlippage(price, slippageRate) {
+      return price * (1 + slippageRate / 100);
+    }
+
+    function applySellSlippage(price, slippageRate) {
+      return price * (1 - slippageRate / 100);
+    }
+
+    function computeBreakEvenPrice(totalInvestment, quantity, inputs) {
+      if (quantity <= 0 || totalInvestment < 0) return NaN;
+
+      const sellSlipFactor = 1 - (inputs.sellSlippageRate / 100);
+      if (sellSlipFactor <= 0) return NaN;
+
+      const requiredNetSell = Math.max(totalInvestment - inputs.dividendIncome, 0);
+      if (requiredNetSell === 0) return 0;
+
+      if (inputs.brokerageMode === "fixed") {
+        const chargeFactor = 1 - (inputs.transactionRate / 100);
+        const denominator = quantity * sellSlipFactor * chargeFactor;
+        if (denominator <= 0) return NaN;
+        return (requiredNetSell + inputs.brokerageValue) / denominator;
+      }
+
+      const sellFeeFactor = 1 - ((inputs.brokerageValue + inputs.transactionRate) / 100);
+      const denominator = quantity * sellSlipFactor * sellFeeFactor;
+      if (denominator <= 0) return NaN;
+      return requiredNetSell / denominator;
+    }
+
+    function deriveEntryData(inputs) {
+      const requestedQuantity = Math.floor(inputs.quantity);
+      if (requestedQuantity <= 0) {
+        return { valid: false, message: "Enter a sold quantity greater than zero before calculating the trade." };
+      }
+
+      if (inputs.entryMode === "multi") {
+        const transactions = getTransactions();
+        if (!transactions.length) return { valid: false, message: "Add at least one valid buy transaction in advanced mode." };
+        const totalBoughtShares = transactions.reduce((sum, tx) => sum + tx.quantity, 0);
+        const totalQuotedShareCost = transactions.reduce((sum, tx) => sum + (tx.price * tx.quantity), 0);
+        const totalExecutedShareCost = transactions.reduce((sum, tx) => sum + (applyBuySlippage(tx.price, inputs.buySlippageRate) * tx.quantity), 0);
+        const totalBuyFees = transactions.reduce((sum, tx) => {
+          const executedValue = applyBuySlippage(tx.price, inputs.buySlippageRate) * tx.quantity;
+          return sum + calcTradeFees(executedValue, inputs.brokerageMode, inputs.brokerageValue, inputs.transactionRate).total;
+        }, 0);
+        if (totalBoughtShares <= 0 || totalExecutedShareCost <= 0) return { valid: false, message: "The multiple buy rows need positive prices and positive share counts." };
+
+        let soldQuantity = requestedQuantity;
+        let warning = "";
+        if (soldQuantity > totalBoughtShares) {
+          soldQuantity = Math.floor(totalBoughtShares);
+          warning = `Sold quantity was capped at ${soldQuantity} shares because multi-entry mode cannot sell more shares than were bought.`;
+        }
+
+        const averageBuyPrice = totalExecutedShareCost / totalBoughtShares;
+        const quotedAverageBuyPrice = totalQuotedShareCost / totalBoughtShares;
+        const ratio = soldQuantity / totalBoughtShares;
+        return {
+          valid: true,
+          modeLabel: "Multiple buy transactions",
+          warning,
+          totalBoughtShares,
+          soldQuantity,
+          quotedAverageBuyPrice,
+          averageBuyPrice,
+          totalQuotedShareCost,
+          totalExecutedShareCost,
+          totalBuyFees,
+          allocatedShareCost: totalExecutedShareCost * ratio,
+          allocatedQuotedShareCost: totalQuotedShareCost * ratio,
+          allocatedBuyFees: totalBuyFees * ratio
+        };
+      }
+
+      if (inputs.buyPrice <= 0) {
+        return { valid: false, message: "Enter a buy price greater than zero before calculating the trade." };
+      }
+
+      const soldQuantity = requestedQuantity;
+      const quotedAverageBuyPrice = inputs.buyPrice;
+      const averageBuyPrice = applyBuySlippage(inputs.buyPrice, inputs.buySlippageRate);
+      const totalQuotedShareCost = quotedAverageBuyPrice * soldQuantity;
+      const totalExecutedShareCost = averageBuyPrice * soldQuantity;
+      const totalBuyFees = calcTradeFees(totalExecutedShareCost, inputs.brokerageMode, inputs.brokerageValue, inputs.transactionRate).total;
+      return {
+        valid: true,
+        modeLabel: "Single buy price",
+        warning: "",
+        totalBoughtShares: soldQuantity,
+        soldQuantity,
+        quotedAverageBuyPrice,
+        averageBuyPrice,
+        totalQuotedShareCost,
+        totalExecutedShareCost,
+        totalBuyFees,
+        allocatedShareCost: totalExecutedShareCost,
+        allocatedQuotedShareCost: totalQuotedShareCost,
+        allocatedBuyFees: totalBuyFees
+      };
+    }
+
+    function computeOutcome(entry, inputs, sellPrice, label) {
+      const actualSellPrice = applySellSlippage(sellPrice, inputs.sellSlippageRate);
+      const sellGross = actualSellPrice * entry.soldQuantity;
+      const sellFees = calcTradeFees(sellGross, inputs.brokerageMode, inputs.brokerageValue, inputs.transactionRate);
+      const totalInvestment = entry.allocatedShareCost + entry.allocatedBuyFees;
+      const totalSellValue = sellGross - sellFees.total;
+      const grossProfit = totalSellValue + inputs.dividendIncome - totalInvestment;
+      const taxAmount = grossProfit > 0 ? grossProfit * (inputs.taxRate / 100) : 0;
+      const netProfit = grossProfit - taxAmount;
+      const grossReturnPct = totalInvestment > 0 ? (grossProfit / totalInvestment) * 100 : 0;
+      const netReturnPct = totalInvestment > 0 ? (netProfit / totalInvestment) * 100 : 0;
+      const breakEven = computeBreakEvenPrice(totalInvestment, entry.soldQuantity, inputs);
+      const riskReward = computeRiskReward(entry.averageBuyPrice, inputs.targetPrice, inputs.stopPrice);
+      const totalFees = entry.allocatedBuyFees + sellFees.total;
+      const effectiveCostPerShare = entry.soldQuantity > 0 ? totalInvestment / entry.soldQuantity : NaN;
+      const profitPerShare = entry.soldQuantity > 0 ? netProfit / entry.soldQuantity : NaN;
+      const feeImpactPct = totalInvestment > 0 ? (totalFees / totalInvestment) * 100 : 0;
+      const taxImpactPct = grossProfit > 0 ? (taxAmount / grossProfit) * 100 : NaN;
+      const quality = evaluateTradeQuality(netReturnPct, riskReward, feeImpactPct);
+      return {
+        label,
+        quotedSellPrice: sellPrice,
+        actualSellPrice,
+        quotedAverageBuyPrice: entry.quotedAverageBuyPrice,
+        buyPrice: entry.averageBuyPrice,
+        quantity: entry.soldQuantity,
+        totalInvestment,
+        totalSellValue,
+        grossProfit,
+        taxAmount,
+        netProfit,
+        grossReturnPct,
+        netReturnPct,
+        breakEven,
+        buyFees: entry.allocatedBuyFees,
+        sellFees: sellFees.total,
+        totalFees,
+        riskReward,
+        effectiveCostPerShare,
+        profitPerShare,
+        feeImpactPct,
+        taxImpactPct,
+        dividendIncome: inputs.dividendIncome,
+        quality,
+        outcomeLabel: describeOutcome(netProfit)
+      };
+    }
+
+    function computeRiskReward(avgBuy, target, stop) {
+      if (!Number.isFinite(avgBuy) || avgBuy <= 0 || !Number.isFinite(target) || !Number.isFinite(stop)) return NaN;
+      const reward = target - avgBuy;
+      const risk = avgBuy - stop;
+      if (reward <= 0 || risk <= 0) return NaN;
+      return reward / risk;
+    }
+
+    function evaluateTradeQuality(netReturnPct, riskReward, feeImpactPct) {
+      const netReturnNorm = normalize(netReturnPct, -10, 20);
+      const rrNorm = Number.isFinite(riskReward) ? normalize(riskReward, 0.75, 3) : 0;
+      const feeNorm = normalize(feeImpactPct, 0, 5);
+      const score = clamp(((netReturnNorm * 0.4) + (rrNorm * 0.4) + ((1 - feeNorm) * 0.2)) * 100, 0, 100);
+
+      let label = "Poor";
+      let tone = "poor";
+      let explanation = "The trade quality is weak because return, reward-to-risk, or cost efficiency is not strong enough yet.";
+
+      if (score >= 80) {
+        label = "Excellent";
+        tone = "excellent";
+        explanation = "The trade combines healthy net return, strong reward-to-risk balance, and low fee drag.";
+      } else if (score >= 60) {
+        label = "Good";
+        tone = "good";
+        explanation = "The setup looks efficient overall, although one or two areas could still improve.";
+      } else if (score >= 35) {
+        label = "Average";
+        tone = "average";
+        explanation = "The trade is workable, but costs, modest return, or average risk-reward are holding quality back.";
+      }
+
+      return { score, label, tone, explanation };
+    }
+
+    function buildScenarioDefinitions(inputs) {
+      return [
+        { label: "Scenario A", sellPrice: inputs.scenarioA },
+        { label: "Base Exit", sellPrice: inputs.sellPrice, isBase: true },
+        { label: "Scenario B", sellPrice: inputs.scenarioB },
+        { label: "Scenario C", sellPrice: inputs.scenarioC },
+        { label: "Scenario D", sellPrice: inputs.scenarioD },
+        { label: "Scenario E", sellPrice: inputs.scenarioE }
+      ].filter((scenario) => scenario.sellPrice > 0);
+    }
+
+    function getInputs() {
+      return {
+        buyPrice: Math.max(0, safeNumber($("sp-buy").value)),
+        sellPrice: Math.max(0, safeNumber($("sp-sell").value)),
+        quantity: Math.max(0, safeNumber($("sp-quantity").value)),
+        dividendIncome: Math.max(0, safeNumber($("sp-dividend").value)),
+        brokerageMode: $("sp-brokerage-mode").value,
+        brokerageValue: Math.max(0, safeNumber($("sp-brokerage").value)),
+        transactionRate: clamp(Math.max(0, safeNumber($("sp-charges").value)), 0, 50),
+        taxRate: clamp(Math.max(0, safeNumber($("sp-tax").value)), 0, 100),
+        buySlippageRate: clamp(Math.max(0, safeNumber($("sp-buy-slippage").value)), 0, 95),
+        sellSlippageRate: clamp(Math.max(0, safeNumber($("sp-sell-slippage").value)), 0, 95),
+        targetPrice: Math.max(0, safeNumber($("sp-target").value)),
+        stopPrice: Math.max(0, safeNumber($("sp-stop").value)),
+        scenarioA: Math.max(0, safeNumber($("scenario-a").value)),
+        scenarioB: Math.max(0, safeNumber($("scenario-b").value)),
+        scenarioC: Math.max(0, safeNumber($("scenario-c").value)),
+        scenarioD: Math.max(0, safeNumber($("scenario-d").value)),
+        scenarioE: Math.max(0, safeNumber($("scenario-e").value)),
+        entryMode: $("sp-entry-mode").value
+      };
+    }
+
+    function updateQualityPanel(base, scenarios) {
+      const quality = base.quality;
+      const score = Math.round(quality.score);
+      const profitableCount = scenarios.filter((scenario) => scenario.netProfit > 0).length;
+      const best = Math.max(...scenarios.map((scenario) => scenario.netProfit));
+      const worst = Math.min(...scenarios.map((scenario) => scenario.netProfit));
+
+      $("quality-score").innerHTML = `${score}<small>/ 100</small>`;
+      $("quality-badge").className = `quality-badge ${quality.tone}`;
+      $("quality-badge").textContent = quality.label;
+      $("quality-fill").style.width = `${score}%`;
+      $("quality-caption").textContent = quality.explanation;
+
+      let returnHeading = "Net return is under pressure";
+      if (base.netReturnPct >= 15) {
+        returnHeading = "Net return looks strong";
+      } else if (base.netReturnPct >= 5) {
+        returnHeading = "Net return looks healthy";
+      } else if (base.netReturnPct >= 0) {
+        returnHeading = "Net return is positive but thin";
+      }
+      $("quality-metric-0").textContent = returnHeading;
+      $("quality-metric-sub-0").textContent = `Current net return is ${formatPercent(base.netReturnPct)} after fees, taxes, and dividend cash.`;
+
+      let rrHeading = "Risk-reward is not usable yet";
+      let rrSub = "Add a target above the average buy price and a stop-loss below it to calculate a valid setup ratio.";
+      if (Number.isFinite(base.riskReward)) {
+        if (base.riskReward >= 2) {
+          rrHeading = "Risk-reward looks attractive";
+        } else if (base.riskReward >= 1) {
+          rrHeading = "Risk-reward is balanced";
+        } else {
+          rrHeading = "Risk-reward is weak";
+        }
+        rrSub = `The current setup shows ${formatRatio(base.riskReward)} using the executed average entry, target, and stop-loss.`;
+      }
+      $("quality-metric-1").textContent = rrHeading;
+      $("quality-metric-sub-1").textContent = rrSub;
+
+      let feeHeading = "Fee drag is manageable";
+      if (base.feeImpactPct >= 4) {
+        feeHeading = "Fee drag is heavy";
+      } else if (base.feeImpactPct >= 2) {
+        feeHeading = "Fee drag is noticeable";
+      } else if (base.feeImpactPct < 1) {
+        feeHeading = "Fee drag is lean";
+      }
+      $("quality-metric-2").textContent = feeHeading;
+      $("quality-metric-sub-2").textContent = `${formatPercent(base.feeImpactPct)} of the invested capital is lost to buy-side and sell-side execution costs.`;
+
+      let scenarioHeading = "Scenario resilience is limited";
+      if (profitableCount === scenarios.length) {
+        scenarioHeading = "Scenario range stays profitable";
+      } else if (profitableCount >= Math.ceil(scenarios.length / 2)) {
+        scenarioHeading = "Trade survives mid-range exits";
+      } else if (profitableCount === 0) {
+        scenarioHeading = "Every scenario still loses money";
+      }
+      $("quality-metric-3").textContent = scenarioHeading;
+      $("quality-metric-sub-3").textContent = `Across ${scenarios.length} scenario paths, net outcomes range from ${formatMoney(worst)} to ${formatMoney(best)}.`;
+    }
+
+    function renderSnapshot(base, entry, inputs) {
+      const rows = [
+        ["Entry mode", entry.modeLabel, "Shows whether the trade uses one buy price or a weighted average from multiple buy transactions."],
+        ["Quoted average buy price", formatMoney(entry.quotedAverageBuyPrice), "This is the market price basis before slippage lifts the executed buy cost."],
+        ["Executed average buy price", formatMoney(entry.averageBuyPrice), `Buy slippage of ${formatPercent(inputs.buySlippageRate)} is applied before fees are added.`],
+        ["Sold quantity", formatShares(base.quantity), entry.totalBoughtShares > base.quantity ? "This is a partial exit, so buy-side fees are allocated proportionally to the sold shares." : "All bought shares are being evaluated in the result."],
+        ["Actual sell price", formatMoney(base.actualSellPrice), `Sell slippage of ${formatPercent(inputs.sellSlippageRate)} is applied to the quoted exit price.`],
+        ["Total fees", formatMoney(base.totalFees), "This combines allocated buy-side costs with sell-side brokerage and transaction charges."],
+        ["Fee impact %", formatPercent(base.feeImpactPct), "This shows how much of the invested capital is lost to execution friction."],
+        ["Tax estimate", formatMoney(base.taxAmount), "Tax is applied only when the trade shows a positive gross profit."],
+        ["Tax impact %", base.grossProfit > 0 ? formatPercent(base.taxImpactPct) : "N/A", "This shows how much of the gross profit is consumed by the chosen tax assumption."],
+        ["Dividend income", formatMoney(inputs.dividendIncome), "Dividend cash is added to the trade outcome because it is part of total return."],
+        ["Effective cost per share", formatMoney(base.effectiveCostPerShare), "This is the entry-side cost basis per sold share before any sell-side friction is applied."],
+        ["Profit per share", formatMoney(base.profitPerShare), "This spreads the final net result across the sold shares to show per-share efficiency."],
+        ["Break-even price", formatMoney(base.breakEven), "This is the quoted sell price needed to recover the full investment after sell slippage, sell-side fees, and dividend offset."],
+        ["Risk-reward ratio", formatRatio(base.riskReward), "The ratio compares target upside with downside to the stop-loss using the executed average buy price."],
+        ["Trade quality score", `${Math.round(base.quality.score)} / 100 (${base.quality.label})`, "The score blends net return, reward-to-risk balance, and fee drag into one quality signal."]
+      ];
+
+      $("summary-body").innerHTML = rows.map((row) => `
+        <tr>
+          <td>${row[0]}</td>
+          <td class="compare-a-cell">${row[1]}</td>
+          <td class="compare-b-cell">${row[2]}</td>
+        </tr>
+      `).join("");
+    }
+
+    function renderScenarios(scenarios) {
+      $("scenario-body").innerHTML = scenarios.map((scenario) => {
+        return `
+          <tr>
+            <td>${scenario.label}</td>
+            <td class="compare-a-cell">${formatMoney(scenario.quotedSellPrice)}</td>
+            <td>${formatMoney(scenario.actualSellPrice)}</td>
+            <td>${formatMoney(scenario.netProfit)}</td>
+            <td>${formatPercent(scenario.netReturnPct)}</td>
+            <td class="compare-b-cell">${scenario.outcomeLabel}</td>
+          </tr>
+        `;
+      }).join("");
+    }
+
+    function renderTransactionTable(scenarios) {
+      state.csvRows = scenarios.map((scenario) => ({
+        Scenario: scenario.label,
+        AverageBuyPrice: formatMoney(scenario.buyPrice),
+        QuotedSellPrice: formatMoney(scenario.quotedSellPrice),
+        ActualSellPrice: formatMoney(scenario.actualSellPrice),
+        Quantity: scenario.quantity,
+        TotalFees: formatMoney(scenario.totalFees),
+        Tax: formatMoney(scenario.taxAmount),
+        GrossProfitLoss: formatMoney(scenario.grossProfit),
+        NetProfitLoss: formatMoney(scenario.netProfit),
+        NetReturnPercent: formatPercent(scenario.netReturnPct)
+      }));
+
+      $("projection-body").innerHTML = scenarios.map((scenario) => `
+        <tr>
+          <td>${scenario.label}</td>
+          <td>${formatMoney(scenario.buyPrice)}</td>
+          <td>${formatMoney(scenario.quotedSellPrice)}</td>
+          <td>${formatMoney(scenario.actualSellPrice)}</td>
+          <td>${formatShares(scenario.quantity)}</td>
+          <td>${formatMoney(scenario.totalFees)}</td>
+          <td>${formatMoney(scenario.taxAmount)}</td>
+          <td>${formatMoney(scenario.grossProfit)}</td>
+          <td>${formatMoney(scenario.netProfit)}</td>
+          <td>${formatPercent(scenario.netReturnPct)}</td>
+        </tr>
+      `).join("");
+    }
+    function destroyChart(key) {
+      if (state.charts[key]) {
+        state.charts[key].destroy();
+        state.charts[key] = null;
+      }
+    }
+
+    function buildAxisBounds(values) {
+      const finite = values.filter((value) => Number.isFinite(value));
+      if (!finite.length) return { suggestedMin: -1, suggestedMax: 1 };
+      let min = Math.min(...finite, 0);
+      let max = Math.max(...finite, 0);
+      if (min === max) {
+        const pad = Math.abs(min || 1) * 0.25 + 1;
+        min -= pad;
+        max += pad;
+      }
+      const span = max - min;
+      const pad = span * 0.12;
+      return { suggestedMin: min - pad, suggestedMax: max + pad };
+    }
+
+    function renderCharts(base, scenarios) {
+      if (!window.Chart) return;
+      destroyChart("bar");
+      destroyChart("pie");
+      destroyChart("comparison");
+
+      const barValues = [base.totalInvestment, base.totalSellValue, base.grossProfit, base.netProfit];
+      const barAxis = buildAxisBounds(barValues);
+      state.charts.bar = new Chart($("bar-chart"), {
+        type: "bar",
+        data: {
+          labels: ["Investment", "Sell Value", "Gross P/L", "Net P/L"],
+          datasets: [{
+            data: barValues,
+            backgroundColor: ["#0d9488", "#0284c7", base.grossProfit >= 0 ? "#f59e0b" : "#fb7185", base.netProfit >= 0 ? "#10b981" : "#f43f5e"],
+            borderRadius: 10
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: {
+            y: {
+              suggestedMin: barAxis.suggestedMin,
+              suggestedMax: barAxis.suggestedMax,
+              ticks: {
+                callback(value) {
+                  return formatMoney(value);
+                }
+              }
+            }
+          }
+        }
+      });
+
+      const pieLabels = [];
+      const pieValues = [];
+      const pieColors = [];
+      const pushPie = (label, value, color) => {
+        if (value > 0) {
+          pieLabels.push(label);
+          pieValues.push(value);
+          pieColors.push(color);
+        }
+      };
+
+      pushPie("Buy Fees", Math.max(base.buyFees, 0), "#0d9488");
+      pushPie("Sell Fees", Math.max(base.sellFees, 0), "#0284c7");
+      pushPie("Tax", Math.max(base.taxAmount, 0), "#f59e0b");
+      pushPie("Dividend", Math.max(base.dividendIncome, 0), "#a855f7");
+      pushPie(base.netProfit >= 0 ? "Net Profit" : "Net Loss", Math.max(Math.abs(base.netProfit), 0), base.netProfit >= 0 ? "#10b981" : "#f43f5e");
+
+      if (!pieValues.length) {
+        pieLabels.push("No measurable impact");
+        pieValues.push(1);
+        pieColors.push("#94a3b8");
+      }
+
+      state.charts.pie = new Chart($("breakdown-chart"), {
+        type: "doughnut",
+        data: {
+          labels: pieLabels,
+          datasets: [{
+            data: pieValues,
+            backgroundColor: pieColors
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { position: "bottom" } }
+        }
+      });
+
+      const comparisonValues = [
+        ...scenarios.map((scenario) => scenario.grossProfit),
+        ...scenarios.map((scenario) => scenario.netProfit)
+      ];
+      const lineAxis = buildAxisBounds(comparisonValues);
+      state.charts.comparison = new Chart($("comparison-chart"), {
+        type: "line",
+        data: {
+          labels: scenarios.map((scenario) => `${scenario.label} · ${formatMoney(scenario.quotedSellPrice)}`),
+          datasets: [
+            {
+              label: "Gross Profit / Loss",
+              data: scenarios.map((scenario) => scenario.grossProfit),
+              borderColor: "#f59e0b",
+              backgroundColor: "rgba(245, 158, 11, 0.14)",
+              fill: false,
+              tension: 0.22,
+              pointRadius: 4,
+              pointHoverRadius: 5
+            },
+            {
+              label: "Net Profit / Loss",
+              data: scenarios.map((scenario) => scenario.netProfit),
+              borderColor: "#0d9488",
+              backgroundColor: "rgba(13, 148, 136, 0.12)",
+              fill: true,
+              tension: 0.26,
+              pointRadius: 4,
+              pointHoverRadius: 5
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { position: "bottom" } },
+          scales: {
+            y: {
+              suggestedMin: lineAxis.suggestedMin,
+              suggestedMax: lineAxis.suggestedMax,
+              ticks: {
+                callback(value) {
+                  return formatMoney(value);
+                }
+              }
+            }
+          }
+        }
+      });
+    }
+
+    function scrollToResults() {
+      $("results-section").scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    function calculateStockProfit(announce = false, shouldScroll = false) {
+      state.currentCurrency = $("sp-currency").value;
+      updateCurrencyIndicators();
+      sliderConfigs.forEach(updateSliderLabel);
+
+      const inputs = getInputs();
+      if (inputs.sellPrice <= 0) {
+        setStatus("Enter a sell price greater than zero to calculate the trade outcome.", "error");
+        state.copyText = "";
+        return;
+      }
+
+      const entry = deriveEntryData(inputs);
+      if (!entry.valid) {
+        setStatus(entry.message, "error");
+        state.copyText = "";
+        return;
+      }
+
+      const base = computeOutcome(entry, inputs, inputs.sellPrice, "Base Exit");
+      const scenarios = buildScenarioDefinitions(inputs)
+        .map((definition) => computeOutcome(entry, inputs, definition.sellPrice, definition.label))
+        .sort((a, b) => a.quotedSellPrice - b.quotedSellPrice);
+
+      const bestScenario = scenarios.reduce((best, current) => current.netProfit > best.netProfit ? current : best, scenarios[0]);
+      const worstScenario = scenarios.reduce((worst, current) => current.netProfit < worst.netProfit ? current : worst, scenarios[0]);
+      const invalidRiskPlan = !Number.isFinite(base.riskReward);
+
+      $("result-mode-pill").textContent = `Latest Result: ${entry.modeLabel} · Buy slip ${formatPercent(inputs.buySlippageRate)} · Sell slip ${formatPercent(inputs.sellSlippageRate)}`;
+
+      setResultCard(0, "Total Investment", formatMoney(base.totalInvestment), "Buy-side capital including executed price slippage and estimated fees");
+      setResultCard(1, "Total Sell Value", formatMoney(base.totalSellValue), "Net sale proceeds after sell-side slippage and costs");
+      setResultCard(2, base.grossProfit >= 0 ? "Gross Profit" : "Gross Loss", formatMoney(base.grossProfit), "Before tax, after fees, with dividends included");
+      setResultCard(3, base.netProfit >= 0 ? "Net Profit After Fees & Taxes" : "Net Loss After Fees & Taxes", formatMoney(base.netProfit), "The cleaner bottom-line trade result after friction");
+      setResultCard(4, "Gross Return %", formatPercent(base.grossReturnPct), "Gross profit divided by total investment cost");
+      setResultCard(5, "Net Return %", formatPercent(base.netReturnPct), "Net profit divided by total investment cost");
+      setResultCard(6, "Break-even Price", formatMoney(base.breakEven), "Quoted sell price needed to fully recover costs after sell-side friction");
+      setResultCard(7, "Risk-Reward Ratio", formatRatio(base.riskReward), "Target upside compared with stop-loss downside");
+      setResultCard(8, "Effective Cost / Share", formatMoney(base.effectiveCostPerShare), "Entry-side cost basis per share before sell-side friction");
+      setResultCard(9, base.netProfit >= 0 ? "Profit / Share" : "Loss / Share", formatMoney(base.profitPerShare), "Net trade result spread across the sold shares");
+      setResultCard(10, "Fee Impact %", formatPercent(base.feeImpactPct), "The share of invested capital consumed by fees and charges");
+      setResultCard(11, "Trade Quality Score", `${Math.round(base.quality.score)} / 100`, `${base.quality.label} rating based on return, reward-to-risk, and cost drag`);
+
+      updateQualityPanel(base, scenarios);
+
+      $("insight-box").innerHTML = `
+        <strong>Dynamic trade insight:</strong>
+        The current setup uses an executed average buy price of ${formatMoney(entry.averageBuyPrice)} for ${formatShares(base.quantity)} and an executed sell price of ${formatMoney(base.actualSellPrice)} after slippage. Gross outcome comes to ${formatMoney(base.grossProfit)}, while net outcome settles at ${formatMoney(base.netProfit)} after estimated tax. The best scenario in the current range reaches ${formatMoney(bestScenario.netProfit)}, and the weakest falls to ${formatMoney(worstScenario.netProfit)}, which helps reveal whether the trade is efficient or costly.
+      `;
+      $("formula-box").innerHTML = `
+        <strong>Core formulas used</strong><br>
+        Total Investment = (Buy Price × Quantity) + Buy Fees<br>
+        Total Sell Value = (Sell Price × Quantity) − Sell Fees<br>
+        Gross Profit = Total Sell Value + Dividend − Total Investment<br>
+        Tax = (Gross Profit &gt; 0 ? Gross Profit × Tax Rate : 0)<br>
+        Net Profit = Gross Profit − Tax<br>
+        Gross Return % = (Gross Profit ÷ Total Investment) × 100<br>
+        Net Return % = (Net Profit ÷ Total Investment) × 100<br>
+        Break-even Price = Required Net Recovery ÷ (Quantity × Sell Slippage Factor × Sell Fee Factor), with fixed sell brokerage added back into the numerator when fixed-fee mode is used<br>
+        Risk-Reward Ratio = (Target Price − Average Buy Price) ÷ (Average Buy Price − Stop-Loss Price)<br>
+        Weighted Average Buy Price = Total Executed Cost ÷ Total Shares<br>
+        Allocated Buy Fees = Total Buy Fees × (Sold Quantity ÷ Total Bought Quantity)<br>
+        Actual Buy Price = Buy Price × (1 + Buy Slippage %)<br>
+        Actual Sell Price = Sell Price × (1 − Sell Slippage %)
+      `;
+
+      renderSnapshot(base, entry, inputs);
+      renderScenarios(scenarios);
+      renderTransactionTable(scenarios);
+      renderCharts(base, scenarios);
+
+      if (base.netProfit > 0) {
+        setStatus(entry.warning || (invalidRiskPlan
+          ? "The trade is profitable under the current assumptions, but the target and stop-loss do not yet form a valid risk-reward plan."
+          : "The trade is profitable under the current assumptions after estimated fees, slippage, and taxes."), entry.warning || invalidRiskPlan ? "warning" : "success");
+      } else if (base.netProfit === 0) {
+        setStatus(entry.warning || "The current trade is close to break-even after estimated execution costs and tax.", "warning");
+      } else {
+        setStatus(entry.warning || "The current trade shows a net loss after estimated fees, slippage, and taxes.", entry.warning ? "warning" : "error");
+      }
+
+      state.copyText = [
+        "Stock Profit Calculator",
+        `Entry mode: ${entry.modeLabel}`,
+        `Buy slippage: ${formatPercent(inputs.buySlippageRate)}`,
+        `Sell slippage: ${formatPercent(inputs.sellSlippageRate)}`,
+        `Quoted average buy price: ${formatMoney(entry.quotedAverageBuyPrice)}`,
+        `Executed average buy price: ${formatMoney(entry.averageBuyPrice)}`,
+        `Sold quantity: ${formatShares(base.quantity)}`,
+        `Total investment: ${formatMoney(base.totalInvestment)}`,
+        `Total sell value: ${formatMoney(base.totalSellValue)}`,
+        `Gross profit/loss: ${formatMoney(base.grossProfit)}`,
+        `Net profit/loss: ${formatMoney(base.netProfit)}`,
+        `Gross return %: ${formatPercent(base.grossReturnPct)}`,
+        `Net return %: ${formatPercent(base.netReturnPct)}`,
+        `Break-even price: ${formatMoney(base.breakEven)}`,
+        `Risk-reward ratio: ${formatRatio(base.riskReward)}`,
+        `Effective cost/share: ${formatMoney(base.effectiveCostPerShare)}`,
+        `${base.netProfit >= 0 ? "Profit" : "Loss"} per share: ${formatMoney(base.profitPerShare)}`,
+        `Fee impact %: ${formatPercent(base.feeImpactPct)}`,
+        `Tax impact %: ${base.grossProfit > 0 ? formatPercent(base.taxImpactPct) : "N/A"}`,
+        `Trade quality score: ${Math.round(base.quality.score)} / 100 (${base.quality.label})`
+      ].join("\n");
+
+      state.lastResult = { base, entry, inputs, scenarios };
+
+      if (announce) setCopyNote("Results refreshed.");
+      if (shouldScroll) scrollToResults();
+    }
+
+    function copyResults() {
+      if (!state.copyText) {
+        setCopyNote("Calculate the trade first.");
+        return;
+      }
+      if (!navigator.clipboard || !navigator.clipboard.writeText) {
+        setCopyNote("Copy is not available in this browser.");
+        return;
+      }
+      navigator.clipboard.writeText(state.copyText).then(() => {
+        setCopyNote("Results copied.");
+      }).catch(() => {
+        setCopyNote("Copy failed in this browser.");
+      });
+    }
+
+    function downloadCsv() {
+      if (!state.csvRows.length) return;
+      const headers = Object.keys(state.csvRows[0]);
+      const lines = [headers.join(",")];
+      state.csvRows.forEach((row) => {
+        lines.push(headers.map((header) => `"${String(row[header]).replace(/"/g, '""')}"`).join(","));
+      });
+      const blob = new Blob([lines.join("\n")], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = state.csvFilename;
+      link.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function resetPlanner() {
+      $("sp-buy").value = 100;
+      $("sp-buy-sl").value = 100;
+      $("sp-sell").value = 120;
+      $("sp-sell-sl").value = 120;
+      $("sp-quantity").value = 100;
+      $("sp-quantity-sl").value = 100;
+      $("sp-dividend").value = 0;
+      $("sp-dividend-sl").value = 0;
+      $("sp-brokerage-mode").value = "percent";
+      $("sp-brokerage").value = 0.5;
+      $("sp-brokerage-sl").value = 0.5;
+      $("sp-charges").value = 0.1;
+      $("sp-charges-sl").value = 0.1;
+      $("sp-tax").value = 15;
+      $("sp-tax-sl").value = 15;
+      $("sp-target").value = 130;
+      $("sp-target-sl").value = 130;
+      $("sp-stop").value = 92;
+      $("sp-stop-sl").value = 92;
+      $("sp-buy-slippage").value = 0.1;
+      $("sp-buy-slippage-sl").value = 0.1;
+      $("sp-sell-slippage").value = 0.1;
+      $("sp-sell-slippage-sl").value = 0.1;
+      $("scenario-a").value = 110;
+      $("scenario-a-sl").value = 110;
+      $("scenario-b").value = 125;
+      $("scenario-b-sl").value = 125;
+      $("scenario-c").value = 130;
+      $("scenario-c-sl").value = 130;
+      $("scenario-d").value = 140;
+      $("scenario-d-sl").value = 140;
+      $("scenario-e").value = 150;
+      $("scenario-e-sl").value = 150;
+      $("sp-entry-mode").value = "single";
+      $("sp-currency").value = "USD";
+      clearTransactions(true);
+      setEntryMode("single");
+      syncBrokerageMode();
+      state.currentCurrency = "USD";
+      updateCurrencyIndicators();
+      sliderConfigs.forEach(updateSliderLabel);
+      calculateStockProfit(true);
+    }
+
+    function initMobileNav() {
+      const btn = $("hamburgerBtn");
+      const nav = $("mobileNav");
+      btn.addEventListener("click", () => {
+        const open = nav.classList.toggle("open");
+        btn.setAttribute("aria-expanded", open ? "true" : "false");
+      });
+    }
+
+    function init() {
+      initMobileNav();
+      sliderConfigs.forEach(bindSliderPair);
+      $("sp-currency").addEventListener("change", () => {
+        state.currentCurrency = $("sp-currency").value;
+        updateCurrencyIndicators();
+        sliderConfigs.forEach(updateSliderLabel);
+        calculateStockProfit(false);
+      });
+      $("sp-brokerage-mode").addEventListener("change", () => {
+        syncBrokerageMode();
+        calculateStockProfit(false);
+      });
+      $("sp-entry-mode").addEventListener("change", (event) => {
+        setEntryMode(event.target.value);
+        calculateStockProfit(false);
+      });
+      clearTransactions(true);
+      setEntryMode("single");
+      syncBrokerageMode();
+      state.currentCurrency = $("sp-currency").value;
+      updateCurrencyIndicators();
+      sliderConfigs.forEach(updateSliderLabel);
+      calculateStockProfit(false);
+    }
+
+    window.addEventListener("DOMContentLoaded", init);
+  </script>
+</body>
+</html>
