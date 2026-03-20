@@ -1,0 +1,3168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow">
+  <title>Crypto Profit Calculator &ndash; Calculate Bitcoin &amp; Crypto Returns | SmartCalcWorld</title>
+  <meta name="description"
+    content="Calculate crypto profit or loss with fees, taxes, break-even price, and target price analysis. Compare scenarios, multiple buys, and real trade outcomes with SmartCalcWorld's Crypto Profit Calculator.">
+  <link rel="canonical" href="https://smartcalcworld.com/finance/investment/crypto-profit-calculator.html">
+  <link rel="icon" type="image/png" href="https://smartcalcworld.com/favicon.png">
+  <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://smartcalcworld.com/#org",
+        "name": "SmartCalc World",
+        "url": "https://smartcalcworld.com",
+        "description": "Free finance calculators for investing, trading, saving, inflation, returns, and long-term planning."
+      },
+      {
+        "@type": "WebApplication",
+        "@id": "https://smartcalcworld.com/finance/investment/crypto-profit-calculator.html#app",
+        "name": "Crypto Profit Calculator",
+        "url": "https://smartcalcworld.com/finance/investment/crypto-profit-calculator.html",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Any",
+        "creator": {
+          "@id": "https://smartcalcworld.com/#org"
+        },
+        "description": "Calculate crypto profit or loss with trading fees, exchange fees, taxes, break-even price, target price analysis, and scenario comparison.",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Finance",
+            "item": "https://smartcalcworld.com/finance/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Investment",
+            "item": "https://smartcalcworld.com/finance/investment/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Crypto Profit Calculator",
+            "item": "https://smartcalcworld.com/finance/investment/crypto-profit-calculator.html"
+          }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How is crypto profit calculated?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Crypto profit is calculated by comparing the total selling value with the total investment cost after fees. Tax can then reduce the final net profit if the trade is profitable."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What fees apply in crypto trading?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Crypto traders may face trading fees, exchange fees, spread costs, and slippage. Even small percentages can materially reduce net profit on active trades."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do taxes affect crypto profits?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Taxes are usually applied only when the trade has a positive gain. A higher tax rate lowers the money you keep after the trade is closed."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is break-even price?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Break-even price is the price per coin or token that recovers your total investment cost before the trade starts creating profit."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I calculate return percentage on a crypto trade?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Return percentage is calculated by dividing profit by total investment and then multiplying by 100. A positive percentage means a gain and a negative percentage means a loss."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I calculate multiple buys?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Advanced mode lets you add multiple buy transactions so the calculator can estimate the weighted average purchase price before measuring final profit."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is target price?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Target price is the sell price needed to reach a chosen desired return percentage. It gives traders a simple planning level before placing or closing a trade."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can fees turn a winning crypto trade into a poor result?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. A trade can look attractive on price movement alone but deliver a much weaker net result once fees, slippage, and tax are included."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is crypto trading risky?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Crypto markets can move very quickly and volatility can be high, so traders should compare multiple scenarios instead of depending on one optimistic price path."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+  <style>
+    :root {
+      --teal: #0d9488;
+      --teal-dark: #0f766e;
+      --teal-light: #ccfbf1;
+      --amber: #f59e0b;
+      --amber-light: #fef3c7;
+      --rose: #f43f5e;
+      --rose-light: #ffe4e6;
+      --sky: #0284c7;
+      --sky-light: #dbeafe;
+      --slate-950: #020617;
+      --slate-900: #0f172a;
+      --slate-800: #1e293b;
+      --slate-700: #334155;
+      --slate-600: #475569;
+      --slate-500: #64748b;
+      --slate-400: #94a3b8;
+      --slate-300: #cbd5e1;
+      --slate-200: #e2e8f0;
+      --slate-100: #f1f5f9;
+      --slate-50: #f8fafc;
+      --white: #ffffff;
+      --radius: 16px;
+      --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.08);
+      --shadow-md: 0 10px 28px rgba(15, 23, 42, 0.12);
+      --header-h: 68px;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(13, 148, 136, 0.14), transparent 34%),
+        linear-gradient(180deg, #f8fafc 0%, #eff6ff 46%, #f8fafc 100%);
+      color: var(--slate-800);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    img,
+    canvas {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      color: var(--teal);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: linear-gradient(135deg, #0891b2 0%, #059669 100%);
+      color: var(--white);
+      box-shadow: 0 2px 10px rgba(15, 23, 42, 0.12);
+    }
+
+    .hdr-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .hdr-logo {
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+    }
+
+    .hdr-nav {
+      display: flex;
+      gap: 1.25rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .hdr-nav a,
+    .hdr-nav span,
+    .mobile-nav a,
+    .mobile-nav span {
+      color: var(--white);
+      font-weight: 600;
+      font-size: 0.95rem;
+      opacity: 0.96;
+    }
+
+    .nav-disabled {
+      opacity: 0.72;
+      cursor: default;
+    }
+
+    .hamburger {
+      display: none;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+      padding: 0.25rem;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--white);
+      margin: 5px 0;
+      border-radius: 999px;
+    }
+
+    .mobile-nav {
+      display: none;
+      flex-direction: column;
+      gap: 0.75rem;
+      padding: 0 1rem 1rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1.25rem;
+    }
+
+    .breadcrumb {
+      font-size: 0.84rem;
+      color: var(--slate-500);
+      margin-bottom: 1.25rem;
+    }
+
+    .hero,
+    .card,
+    .content-section {
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid rgba(148, 163, 184, 0.22);
+      border-radius: 20px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(13, 148, 136, 0.14), rgba(2, 132, 199, 0.08)), var(--white);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -80px -80px auto;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle, rgba(13, 148, 136, 0.14), transparent 70%);
+      pointer-events: none;
+    }
+
+    .card {
+      padding: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .content-section {
+      padding: 2rem;
+      margin-top: 2rem;
+      scroll-margin-top: calc(var(--header-h) + 1rem);
+    }
+
+    .card-title,
+    .content-section h2 {
+      font-size: clamp(1.25rem, 3vw, 1.75rem);
+      font-weight: 800;
+      color: var(--slate-900);
+      margin-bottom: 1rem;
+    }
+
+    .content-section h2 {
+      border-left: 4px solid var(--teal);
+      padding-left: 1rem;
+    }
+
+    .content-section h3 {
+      font-size: 1.15rem;
+      color: var(--slate-900);
+      margin: 1.6rem 0 0.65rem;
+    }
+
+    .content-section p,
+    .content-section li,
+    .module-intro,
+    .chart-note,
+    .table-context,
+    .hero p,
+    .hint {
+      color: var(--slate-600);
+      font-size: 0.97rem;
+    }
+
+    .content-section ul {
+      margin: 0.2rem 0 1rem 1.25rem;
+    }
+
+    .content-section li {
+      margin-bottom: 0.55rem;
+    }
+
+    .hero-badge,
+    .mode-pill,
+    .copy-note {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      border-radius: 999px;
+      padding: 0.48rem 0.9rem;
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .hero-badge {
+      background: var(--teal-light);
+      color: var(--teal-dark);
+      margin-bottom: 0.9rem;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 5vw, 3.25rem);
+      line-height: 1.08;
+      color: var(--slate-900);
+      margin-bottom: 0.8rem;
+    }
+
+    .hero-sub {
+      max-width: 760px;
+      color: var(--slate-600);
+      font-size: 1rem;
+    }
+
+    .hero-highlights,
+    .toolbar-grid,
+    .field-pair,
+    .qnav,
+    .result-grid,
+    .charts-grid,
+    .comparison-grid,
+    .links-grid,
+    .footer-content,
+    .faq-list,
+    .info-list,
+    .scenario-stack,
+    .tx-list {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .hero-highlights {
+      margin-top: 1.25rem;
+    }
+
+    .hero-chip,
+    .toolbar-box,
+    .form-row,
+    .info-pill,
+    .callout,
+    .status-banner,
+    .insight-box,
+    .formula-box,
+    .comparison-summary,
+    .link-card,
+    .faq-item {
+      border: 1px solid rgba(148, 163, 184, 0.24);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .hero-chip {
+      background: rgba(255, 255, 255, 0.82);
+      padding: 0.95rem 1rem;
+      color: var(--slate-600);
+    }
+
+    .hero-chip strong {
+      display: block;
+      color: var(--slate-900);
+      margin-bottom: 0.2rem;
+    }
+
+    .toolbar-box {
+      background: linear-gradient(180deg, rgba(13, 148, 136, 0.08), rgba(255, 255, 255, 0.94));
+      padding: 1rem;
+      height: 100%;
+    }
+
+    .toolbar-box h2 {
+      font-size: 1.02rem;
+      font-weight: 800;
+      color: var(--slate-900);
+      margin-bottom: 0.65rem;
+    }
+
+    .info-pill,
+    .callout,
+    .status-banner,
+    .insight-box,
+    .formula-box {
+      padding: 0.95rem 1rem;
+    }
+
+    .info-pill {
+      background: rgba(255, 255, 255, 0.86);
+      color: var(--slate-700);
+    }
+
+    .callout,
+    .insight-box {
+      background: linear-gradient(135deg, rgba(13, 148, 136, 0.1), rgba(255, 255, 255, 0.96));
+      color: var(--slate-700);
+      margin-top: 1rem;
+    }
+
+    .formula-box {
+      background: linear-gradient(180deg, rgba(2, 132, 199, 0.08), rgba(255, 255, 255, 0.96));
+      color: var(--slate-700);
+      margin-top: 1rem;
+    }
+
+    .status-banner {
+      margin-top: 1rem;
+      background: rgba(15, 23, 42, 0.04);
+      color: var(--slate-700);
+    }
+
+    .status-banner.success {
+      background: rgba(13, 148, 136, 0.1);
+      color: var(--teal-dark);
+    }
+
+    .status-banner.warning {
+      background: rgba(245, 158, 11, 0.14);
+      color: #92400e;
+    }
+
+    .status-banner.error {
+      background: rgba(244, 63, 94, 0.12);
+      color: #9f1239;
+    }
+
+    .form-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      background: rgba(255, 255, 255, 0.88);
+      padding: 1rem;
+      min-width: 0;
+    }
+
+    .lbl {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--slate-900);
+    }
+
+    input,
+    select,
+    button {
+      font: inherit;
+    }
+
+    input[type="number"],
+    select {
+      width: 100%;
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      border-radius: 14px;
+      padding: 0.85rem 0.95rem;
+      background: var(--white);
+      color: var(--slate-900);
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    input[type="number"]:focus,
+    select:focus {
+      border-color: rgba(2, 132, 199, 0.55);
+      box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.1);
+    }
+
+    .input-slider {
+      display: grid;
+      gap: 0.9rem;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--teal);
+      cursor: pointer;
+    }
+
+    .slider-lbl {
+      text-align: right;
+      font-weight: 700;
+      color: var(--slate-600);
+      font-size: 0.92rem;
+      word-break: break-word;
+    }
+
+    .qnav {
+      margin-top: 1.25rem;
+    }
+
+    .qnav-btn,
+    .btn-primary,
+    .btn-secondary,
+    .btn-ghost,
+    .micro-btn {
+      border-radius: 14px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .qnav-btn {
+      border: 1px solid rgba(148, 163, 184, 0.28);
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--slate-700);
+      padding: 0.95rem 1rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .qnav-btn.active,
+    .qnav-btn:hover,
+    .btn-primary {
+      background: linear-gradient(135deg, #0d9488, #0f766e);
+      color: var(--white);
+      box-shadow: var(--shadow-md);
+    }
+
+    .module {
+      display: none;
+      margin-top: 1.2rem;
+    }
+
+    .module.active {
+      display: block;
+    }
+
+    .module-intro {
+      margin-bottom: 1rem;
+    }
+
+    .btn-row {
+      display: flex;
+      gap: 0.9rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+
+    .btn-primary,
+    .btn-secondary,
+    .btn-ghost {
+      border: 1px solid transparent;
+      min-height: 52px;
+      padding: 0.9rem 1.15rem;
+    }
+
+    .btn-secondary {
+      background: rgba(2, 132, 199, 0.12);
+      color: var(--sky);
+      border-color: rgba(2, 132, 199, 0.2);
+    }
+
+    .btn-ghost {
+      background: rgba(255, 255, 255, 0.94);
+      color: var(--slate-700);
+      border-color: rgba(148, 163, 184, 0.28);
+    }
+
+    .btn-primary:hover,
+    .btn-secondary:hover,
+    .btn-ghost:hover,
+    .micro-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .tx-actions {
+      display: flex;
+      gap: 0.7rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.8rem;
+    }
+
+    .micro-btn {
+      border: 1px solid rgba(148, 163, 184, 0.28);
+      background: rgba(255, 255, 255, 0.96);
+      color: var(--slate-700);
+      padding: 0.65rem 0.85rem;
+      min-height: 42px;
+    }
+
+    .micro-btn.danger {
+      color: #b91c1c;
+      border-color: rgba(244, 63, 94, 0.24);
+      background: rgba(255, 241, 242, 0.9);
+    }
+
+    .tx-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto;
+      gap: 0.8rem;
+      align-items: end;
+      padding: 0.85rem;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.2);
+    }
+
+    .mode-note {
+      margin-top: 0.9rem;
+      border-radius: 14px;
+      padding: 0.9rem 1rem;
+      background: rgba(2, 132, 199, 0.08);
+      color: var(--slate-700);
+      border: 1px solid rgba(2, 132, 199, 0.12);
+    }
+
+    .result-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+
+    .mode-pill {
+      background: rgba(13, 148, 136, 0.1);
+      color: var(--teal-dark);
+    }
+
+    .result-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+    }
+
+    .copy-note {
+      background: rgba(2, 132, 199, 0.1);
+      color: var(--sky);
+    }
+
+    .result-card {
+      min-width: 0;
+      border-radius: 18px;
+      padding: 1rem;
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .result-card.teal {
+      background: linear-gradient(180deg, rgba(13, 148, 136, 0.14), rgba(255, 255, 255, 0.98));
+    }
+
+    .result-card.sky {
+      background: linear-gradient(180deg, rgba(2, 132, 199, 0.14), rgba(255, 255, 255, 0.98));
+    }
+
+    .result-card.amber {
+      background: linear-gradient(180deg, rgba(245, 158, 11, 0.16), rgba(255, 255, 255, 0.98));
+    }
+
+    .result-card.rose {
+      background: linear-gradient(180deg, rgba(244, 63, 94, 0.14), rgba(255, 255, 255, 0.98));
+    }
+
+    .result-card.slate {
+      background: linear-gradient(180deg, rgba(71, 85, 105, 0.12), rgba(255, 255, 255, 0.98));
+    }
+
+    .result-lbl {
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: var(--slate-700);
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+
+    .result-val {
+      font-size: clamp(1.14rem, 3vw, 1.72rem);
+      line-height: 1.15;
+      font-weight: 900;
+      color: var(--slate-900);
+      margin: 0.55rem 0 0.35rem;
+      white-space: normal;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    .result-sub {
+      font-size: 0.9rem;
+      color: var(--slate-600);
+    }
+
+    .quality-shell {
+      margin-top: 1.15rem;
+      display: grid;
+      gap: 1rem;
+      padding: 1rem;
+      background: linear-gradient(135deg, rgba(15, 118, 110, 0.08), rgba(255, 255, 255, 0.97));
+      border: 1px solid rgba(13, 148, 136, 0.18);
+      border-radius: 18px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .quality-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .quality-score {
+      font-size: clamp(1.6rem, 4vw, 2.35rem);
+      font-weight: 900;
+      color: var(--slate-900);
+      line-height: 1;
+    }
+
+    .quality-score small {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--slate-600);
+      margin-left: 0.25rem;
+    }
+
+    .quality-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.55rem 0.95rem;
+      border-radius: 999px;
+      font-size: 0.84rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      border: 1px solid transparent;
+    }
+
+    .quality-badge.poor {
+      background: rgba(244, 63, 94, 0.14);
+      color: #be123c;
+      border-color: rgba(244, 63, 94, 0.22);
+    }
+
+    .quality-badge.average {
+      background: rgba(245, 158, 11, 0.16);
+      color: #92400e;
+      border-color: rgba(245, 158, 11, 0.24);
+    }
+
+    .quality-badge.good {
+      background: rgba(2, 132, 199, 0.14);
+      color: #0c4a6e;
+      border-color: rgba(2, 132, 199, 0.22);
+    }
+
+    .quality-badge.excellent {
+      background: rgba(13, 148, 136, 0.16);
+      color: #115e59;
+      border-color: rgba(13, 148, 136, 0.24);
+    }
+
+    .quality-track {
+      position: relative;
+      overflow: hidden;
+      height: 14px;
+      border-radius: 999px;
+      background: rgba(148, 163, 184, 0.18);
+    }
+
+    .quality-fill {
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 0%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #f43f5e, #f59e0b 46%, #0284c7 72%, #0d9488);
+      transition: width 0.35s ease;
+    }
+
+    .quality-caption {
+      color: var(--slate-600);
+      font-size: 0.94rem;
+    }
+
+    .quality-metrics {
+      display: grid;
+      gap: 0.85rem;
+    }
+
+    .quality-metric {
+      display: grid;
+      gap: 0.28rem;
+      padding: 0.85rem 0.95rem;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 14px;
+      border: 1px solid rgba(148, 163, 184, 0.18);
+    }
+
+    .quality-metric strong {
+      color: var(--slate-900);
+      font-size: 0.96rem;
+    }
+
+    .quality-metric span {
+      color: var(--slate-600);
+      font-size: 0.9rem;
+    }
+
+    .comparison-summary {
+      margin-top: 1.25rem;
+      background: rgba(255, 255, 255, 0.88);
+      padding: 1rem;
+    }
+
+    .table-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+
+    .tbl-wrap {
+      width: 100%;
+      overflow-x: auto;
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.96);
+    }
+
+    table {
+      width: 100%;
+      min-width: 720px;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      padding: 0.85rem 0.95rem;
+      border-bottom: 1px solid rgba(226, 232, 240, 0.9);
+      text-align: left;
+      vertical-align: top;
+      color: var(--slate-700);
+      font-size: 0.93rem;
+    }
+
+    th {
+      background: linear-gradient(180deg, rgba(13, 148, 136, 0.12), rgba(236, 253, 245, 0.8));
+      color: var(--slate-900);
+      font-weight: 800;
+    }
+
+    tbody tr:nth-child(odd) td {
+      background: rgba(248, 250, 252, 0.85);
+    }
+
+    .compare-a-cell {
+      background: rgba(219, 234, 254, 0.8) !important;
+    }
+
+    .compare-b-cell {
+      background: rgba(254, 243, 199, 0.8) !important;
+    }
+
+    .charts-grid .chart-wrap {
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid rgba(148, 163, 184, 0.22);
+      border-radius: 18px;
+      padding: 1rem;
+      box-shadow: var(--shadow-sm);
+      min-width: 0;
+    }
+
+    .chart-title {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--slate-900);
+      margin-bottom: 0.25rem;
+    }
+
+    .chart-canvas {
+      position: relative;
+      height: 320px;
+      margin-top: 0.9rem;
+    }
+
+    #comparison-tables {
+      background: linear-gradient(180deg, rgba(245, 158, 11, 0.06), rgba(255, 255, 255, 0.98));
+    }
+
+    #comparison-tables th {
+      background: linear-gradient(180deg, rgba(245, 158, 11, 0.16), rgba(254, 243, 199, 0.8));
+    }
+
+    #faq {
+      background: linear-gradient(180deg, rgba(13, 148, 136, 0.06), rgba(255, 255, 255, 0.98));
+    }
+
+    #related-tools {
+      background: linear-gradient(180deg, rgba(2, 132, 199, 0.05), rgba(255, 255, 255, 0.98));
+    }
+
+    .link-card {
+      display: block;
+      position: relative;
+      overflow: hidden;
+      padding: 1rem 1rem 1rem 1.1rem;
+      color: var(--slate-700);
+      background: rgba(255, 255, 255, 0.9);
+    }
+
+    .link-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 5px;
+      background: linear-gradient(180deg, var(--teal), var(--sky));
+    }
+
+    .link-card strong {
+      display: block;
+      color: var(--slate-900);
+      margin-bottom: 0.25rem;
+    }
+
+    .faq-item {
+      background: rgba(255, 255, 255, 0.94);
+      overflow: hidden;
+    }
+
+    .faq-item summary {
+      cursor: pointer;
+      list-style: none;
+      font-weight: 800;
+      color: var(--slate-900);
+      padding: 1rem 1.1rem;
+      background: rgba(13, 148, 136, 0.06);
+    }
+
+    .faq-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-item p {
+      padding: 0 1.1rem 1rem;
+    }
+
+    .faq-item[open] {
+      box-shadow: var(--shadow-md);
+    }
+
+    .disclaimer {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.12), rgba(255, 255, 255, 0.96));
+    }
+
+    footer {
+      margin-top: 2rem;
+      background: linear-gradient(135deg, #0f172a, #0f766e);
+      color: var(--white);
+      border-radius: 24px 24px 0 0;
+      padding: 2rem 1.2rem 1.4rem;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-section h3 {
+      font-size: 1rem;
+      margin-bottom: 0.7rem;
+    }
+
+    .footer-section ul {
+      list-style: none;
+      display: grid;
+      gap: 0.55rem;
+    }
+
+    .footer-section a {
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .footer-disclaimer {
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 1rem;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .copyright {
+      max-width: 1200px;
+      margin: 1.2rem auto 0;
+      text-align: center;
+      color: rgba(255, 255, 255, 0.75);
+      font-size: 0.92rem;
+    }
+
+    @media (min-width: 640px) {
+
+      .toolbar-grid,
+      .field-pair,
+      .comparison-grid,
+      .links-grid,
+      .faq-list,
+      .hero-highlights,
+      .quality-metrics {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .qnav {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .result-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (min-width: 768px) {
+      .charts-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .charts-grid .chart-wrap:last-child {
+        grid-column: 1 / -1;
+      }
+
+      .result-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .footer-content {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (min-width: 960px) {
+      .hero-highlights {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .toolbar-grid {
+        grid-template-columns: 0.95fr 1.05fr;
+      }
+
+      .result-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .comparison-grid,
+      .footer-content,
+      .quality-metrics {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 767px) {
+      .hdr-nav {
+        display: none;
+      }
+
+      .hamburger {
+        display: inline-block;
+      }
+
+      .mobile-nav.open {
+        display: flex;
+      }
+
+      .page {
+        padding: 1rem;
+      }
+
+      .card,
+      .content-section {
+        padding: 1rem;
+      }
+
+      .chart-canvas {
+        height: 280px;
+      }
+
+      .tx-row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="hdr-inner">
+      <div class="hdr-logo">&#129518; SmartCalc World</div>
+      <nav class="hdr-nav">
+        <a href="https://smartcalcworld.com/index.html">Home</a>
+        <a href="https://smartcalcworld.com/finance/finance-hub.html">Finance Hub</a>
+        <span class="nav-disabled">Medical Hub (Coming Soon)</span>
+        <span class="nav-disabled">Student Hub (Coming Soon)</span>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <button class="hamburger" id="hamburgerBtn" type="button" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <nav class="mobile-nav" id="mobileNav">
+      <a href="https://smartcalcworld.com/index.html">Home</a>
+      <a href="https://smartcalcworld.com/finance/finance-hub.html">Finance Hub</a>
+      <span class="nav-disabled">Medical Hub (Coming Soon)</span>
+      <span class="nav-disabled">Student Hub (Coming Soon)</span>
+      <a href="#faq">FAQ</a>
+    </nav>
+  </header>
+
+  <main class="page">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="https://smartcalcworld.com/index.html">Home</a> &rsaquo;
+      <a href="https://smartcalcworld.com/finance/finance-hub.html">Finance</a> &rsaquo;
+      <a href="https://smartcalcworld.com/finance/investment/investment-hub.html">Investment</a> &rsaquo;
+      Crypto Profit Calculator
+    </nav>
+
+    <section class="hero">
+      <span class="hero-badge">&#128640; Premium Crypto Trade Analyzer</span>
+      <h1>Crypto Profit Calculator</h1>
+      <p class="hero-sub">Calculate crypto profit or loss with the same premium SmartCalc World design language used in
+        our Stock Profit Calculator, SIP Calculator, Portfolio Growth Calculator, and Mutual Fund Calculator. Measure
+        total investment, total value, tax drag, fee drag, break-even price, target sell price, and multiple-buy
+        averaging in one professional dashboard.</p>
+      <div class="hero-highlights">
+        <div class="hero-chip">
+          <strong>Measure the real outcome after friction</strong>
+          See how trading fees, exchange costs, slippage, and tax change the final result instead of looking only at the
+          raw crypto price move.
+        </div>
+        <div class="hero-chip">
+          <strong>Average multiple buys accurately</strong>
+          Use advanced mode to combine several BTC, ETH, or custom coin entries and judge the position from a more
+          realistic weighted cost basis.
+        </div>
+        <div class="hero-chip">
+          <strong>Plan better exits with scenario testing</strong>
+          Compare multiple sell prices, watch break-even levels, and test target exits before you act in a volatile
+          market.
+        </div>
+      </div>
+    </section>
+
+    <section class="card" id="calculator">
+      <div class="card-title">Crypto Trade Profit Planner</div>
+      <div class="toolbar-grid">
+        <div class="toolbar-box">
+          <h2>Display Setup</h2>
+          <div class="form-row">
+            <label class="lbl" for="sp-currency">Choose currency</label>
+            <select id="sp-currency">
+              <option value="USD">USD $</option>
+              <option value="INR">INR &#8377;</option>
+              <option value="EUR">EUR &euro;</option>
+              <option value="GBP">GBP &pound;</option>
+              <option value="CAD">CAD $</option>
+              <option value="AUD">AUD $</option>
+            </select>
+            <span class="hint">Display formatting only. Symbols and grouping update instantly without exchange-rate
+              conversion.</span>
+          </div>
+          <div class="form-row">
+            <label class="lbl" for="crypto-select">Choose crypto</label>
+            <select id="crypto-select">
+              <option value="BTC" selected>BTC</option>
+              <option value="ETH">ETH</option>
+              <option value="CUSTOM">Custom Asset</option>
+            </select>
+            <span class="hint">Use a preset asset label or switch to a custom coin or token.</span>
+          </div>
+          <div class="form-row hidden" id="crypto-custom-wrap">
+            <label class="lbl" for="crypto-custom">Custom asset symbol</label>
+            <input type="text" id="crypto-custom" maxlength="16" placeholder="SOL, XRP, AVAX">
+            <span class="hint">Short labels keep cards, tables, and charts easier to read.</span>
+          </div>
+        </div>
+        <div class="toolbar-box">
+          <h2>What this tool helps you see</h2>
+          <div class="info-list">
+            <div class="info-pill">How your <strong>buy price</strong>, <strong>sell price</strong>, and <strong>crypto
+                quantity</strong> create the core trade outcome &#128202;.</div>
+            <div class="info-pill">How <strong>trading fees</strong>, <strong>exchange fees</strong>,
+              <strong>tax</strong>, and <strong>slippage</strong> can move a crypto trade from exciting to disappointing
+              &#128176;.</div>
+            <div class="info-pill">How <strong>multiple buys</strong>, <strong>break-even price</strong>, <strong>target
+                sell price</strong>, and <strong>scenario testing</strong> give traders a clearer decision framework
+              &#129504;.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="qnav" role="tablist" aria-label="Crypto calculator sections">
+        <button type="button" class="qnav-btn active" data-module="core" role="tab" aria-selected="true"
+          onclick="switchModule('core')">Trade Basics</button>
+        <button type="button" class="qnav-btn" data-module="costs" role="tab" aria-selected="false"
+          onclick="switchModule('costs')">Fees, Tax &amp; Targets</button>
+        <button type="button" class="qnav-btn" data-module="advanced" role="tab" aria-selected="false"
+          onclick="switchModule('advanced')">Advanced Buys</button>
+      </div>
+
+      <section class="module active" id="mod-core" role="tabpanel" aria-label="Core crypto trade inputs">
+        <p class="module-intro">Start with the buy price, sell price, and either crypto quantity or investment amount.
+          These inputs define the basic crypto trade before fee and tax assumptions are layered in.</p>
+        <div class="field-pair">
+          <div class="form-row">
+            <label class="lbl" for="sp-buy">Buy Price (<span data-currency-symbol>$</span>)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="sp-buy" min="0" max="1000000" step="0.01" value="20000">
+                <span class="hint">In single-buy mode this is the quoted entry price before slippage is applied.</span>
+              </div>
+              <div>
+                <input type="range" id="sp-buy-sl" min="0" max="100000" step="10" value="20000">
+                <div class="slider-lbl" id="sp-buy-lbl">$20,000.00</div>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <label class="lbl" for="sp-sell">Sell Price (<span data-currency-symbol>$</span>)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="sp-sell" min="0" max="1000000" step="0.01" value="30000">
+                <span class="hint">The quoted exit price used for the main trade result before sell slippage is
+                  applied.</span>
+              </div>
+              <div>
+                <input type="range" id="sp-sell-sl" min="0" max="100000" step="10" value="30000">
+                <div class="slider-lbl" id="sp-sell-lbl">$30,000.00</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="field-pair">
+          <div class="form-row">
+            <label class="lbl" for="sp-quantity">Quantity of Crypto</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="sp-quantity" min="0.000001" max="1000000" step="0.000001" value="0.5">
+                <span class="hint">Use this when you already know the coin or token quantity. In multiple-buy mode, sold
+                  quantity cannot exceed total bought quantity.</span>
+              </div>
+              <div>
+                <input type="range" id="sp-quantity-sl" min="0.001" max="20" step="0.001" value="0.5">
+                <div class="slider-lbl" id="sp-quantity-lbl">0.500000 BTC</div>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <label class="lbl" for="sp-dividend">Investment Amount Override (<span
+                data-currency-symbol>$</span>)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="sp-dividend" min="0" max="10000000" step="0.01" value="10000">
+                <span class="hint">Optional. Leave at 0 to use quantity directly. If entered, quantity is derived from
+                  the executed buy price in single-buy mode.</span>
+              </div>
+              <div>
+                <input type="range" id="sp-dividend-sl" min="0" max="500000" step="50" value="10000">
+                <div class="slider-lbl" id="sp-dividend-lbl">$10,000.00</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="btn-row">
+          <button type="button" class="btn-primary" onclick="calculateCryptoProfit(true, true)">Calculate Crypto
+            Profit</button>
+          <button type="button" class="btn-ghost" onclick="resetPlanner()">Reset Inputs</button>
+        </div>
+      </section>
+
+      <section class="module" id="mod-costs" role="tabpanel" aria-label="Fee, tax, and target settings">
+        <p class="module-intro">Crypto markets can be volatile, so execution details matter. This section shows how
+          trading fees, exchange costs, tax, slippage, and target planning change the real outcome.</p>
+        <div class="field-pair">
+          <div class="form-row">
+            <label class="lbl" for="sp-brokerage-mode">Trading Fee Type</label>
+            <select id="sp-brokerage-mode">
+              <option value="percent" selected>Percentage of trade value</option>
+              <option value="fixed">Fixed amount per transaction</option>
+            </select>
+            <span class="hint" id="sp-brokerage-hint">Use percentage mode for common exchange trading fees on both the
+              buy and sell side.</span>
+          </div>
+          <div class="form-row">
+            <label class="lbl" for="sp-brokerage" id="sp-brokerage-label">Trading Fees (%)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="sp-brokerage" min="0" max="5" step="0.01" value="0.4">
+                <span class="hint">This input applies to both the buy side and the sell side unless fixed-fee mode is
+                  selected.</span>
+              </div>
+              <div>
+                <input type="range" id="sp-brokerage-sl" min="0" max="5" step="0.01" value="0.4">
+                <div class="slider-lbl" id="sp-brokerage-lbl">0.40%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="field-pair">
+          <div class="form-row">
+            <label class="lbl" for="sp-charges">Exchange Fees (%)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="sp-charges" min="0" max="5" step="0.01" value="0.15">
+                <span class="hint">Use this for exchange charges, platform costs, or other percentage-based
+                  friction.</span>
+              </div>
+              <div>
+                <input type="range" id="sp-charges-sl" min="0" max="5" step="0.01" value="0.15">
+                <div class="slider-lbl" id="sp-charges-lbl">0.15%</div>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <label class="lbl" for="sp-tax">Tax Rate on Profit (%)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="sp-tax" min="0" max="60" step="0.01" value="20">
+                <span class="hint">Tax is applied only on positive profit so the calculator does not artificially shrink
+                  a losing trade.</span>
+              </div>
+              <div>
+                <input type="range" id="sp-tax-sl" min="0" max="60" step="0.1" value="20">
+                <div class="slider-lbl" id="sp-tax-lbl">20.00%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="field-pair">
+          <div class="form-row">
+            <label class="lbl" for="sp-target">Desired Profit Target (%)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="sp-target" min="0" max="500" step="0.1" value="25">
+                <span class="hint">The calculator converts this target into a required sell price using your average buy
+                  price.</span>
+              </div>
+              <div>
+                <input type="range" id="sp-target-sl" min="0" max="300" step="0.5" value="25">
+                <div class="slider-lbl" id="sp-target-lbl">25.00%</div>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <label class="lbl" for="sp-buy-slippage">Buy Slippage (%)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="sp-buy-slippage" min="0" max="10" step="0.01" value="0.2">
+                <span class="hint">Slippage lifts your executed buy price above the quoted price when liquidity is thin
+                  or orders move quickly.</span>
+              </div>
+              <div>
+                <input type="range" id="sp-buy-slippage-sl" min="0" max="10" step="0.01" value="0.2">
+                <div class="slider-lbl" id="sp-buy-slippage-lbl">0.20%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="field-pair">
+          <div class="form-row">
+            <label class="lbl" for="sp-stop">Volatility Reference (%)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="sp-stop" min="0" max="100" step="0.1" value="12">
+                <span class="hint">This does not predict the market. It helps the tool label how fragile or stable the
+                  trade looks under crypto-style price swings.</span>
+              </div>
+              <div>
+                <input type="range" id="sp-stop-sl" min="0" max="100" step="0.1" value="12">
+                <div class="slider-lbl" id="sp-stop-lbl">12.00%</div>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <label class="lbl" for="sp-sell-slippage">Sell Slippage (%)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="sp-sell-slippage" min="0" max="10" step="0.01" value="0.2">
+                <span class="hint">Sell slippage lowers the actual exit price so the calculator reflects more realistic
+                  execution.</span>
+              </div>
+              <div>
+                <input type="range" id="sp-sell-slippage-sl" min="0" max="10" step="0.01" value="0.2">
+                <div class="slider-lbl" id="sp-sell-slippage-lbl">0.20%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="btn-row">
+          <button type="button" class="btn-primary" onclick="calculateCryptoProfit(true, true)">Calculate Crypto
+            Profit</button>
+          <button type="button" class="btn-ghost" onclick="resetPlanner()">Reset Inputs</button>
+        </div>
+      </section>
+
+      <section class="module" id="mod-advanced" role="tabpanel" aria-label="Advanced multiple transaction inputs">
+        <p class="module-intro">Use this section when the trade was built through several buy entries or when you want
+          to compare different exit prices side by side. It is especially useful for averaging into a crypto position.
+        </p>
+        <div class="field-pair">
+          <div class="toolbar-box">
+            <h2>Entry Mode</h2>
+            <div class="form-row">
+              <label class="lbl" for="sp-entry-mode">Choose trade basis</label>
+              <select id="sp-entry-mode">
+                <option value="single" selected>Single Buy Price</option>
+                <option value="multi">Multiple Buy Transactions</option>
+              </select>
+              <span class="hint">Multiple buy mode calculates weighted average purchase price using total executed
+                investment divided by total crypto quantity.</span>
+            </div>
+            <div class="mode-note" id="entry-mode-note">Single buy mode uses the buy price from Trade Basics. Switch to
+              multiple transactions when you accumulated the position in several steps.</div>
+          </div>
+          <div class="toolbar-box hidden" id="multi-buy-panel">
+            <h2>Multiple Buy Transactions</h2>
+            <div class="tx-actions">
+              <button type="button" class="micro-btn" onclick="addTransactionRow()">Add Buy Row</button>
+              <button type="button" class="micro-btn danger" onclick="clearTransactions()">Clear Rows</button>
+            </div>
+            <div class="tx-list" id="tx-list"></div>
+            <span class="hint">Each row is treated as a separate buy order, which matters even more when fees or
+              slippage are meaningful.</span>
+          </div>
+        </div>
+        <div class="field-pair">
+          <div class="scenario-stack">
+            <div class="form-row">
+              <label class="lbl" for="scenario-a">Scenario A Sell Price (<span data-currency-symbol>$</span>)</label>
+              <div class="input-slider">
+                <div>
+                  <input type="number" id="scenario-a" min="0" max="1000000" step="0.01" value="22000">
+                  <span class="hint">A defensive outcome for downside-aware planning.</span>
+                </div>
+                <div>
+                  <input type="range" id="scenario-a-sl" min="0" max="100000" step="10" value="22000">
+                  <div class="slider-lbl" id="scenario-a-lbl">$22,000.00</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <label class="lbl" for="scenario-b">Scenario B Sell Price (<span data-currency-symbol>$</span>)</label>
+              <div class="input-slider">
+                <div>
+                  <input type="number" id="scenario-b" min="0" max="1000000" step="0.01" value="26000">
+                  <span class="hint">A middle-case exit for balanced planning.</span>
+                </div>
+                <div>
+                  <input type="range" id="scenario-b-sl" min="0" max="100000" step="10" value="26000">
+                  <div class="slider-lbl" id="scenario-b-lbl">$26,000.00</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <label class="lbl" for="scenario-c">Scenario C Sell Price (<span data-currency-symbol>$</span>)</label>
+              <div class="input-slider">
+                <div>
+                  <input type="number" id="scenario-c" min="0" max="1000000" step="0.01" value="30000">
+                  <span class="hint">A strong base case that reflects healthy upside follow-through.</span>
+                </div>
+                <div>
+                  <input type="range" id="scenario-c-sl" min="0" max="100000" step="10" value="30000">
+                  <div class="slider-lbl" id="scenario-c-lbl">$30,000.00</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="scenario-stack">
+            <div class="form-row">
+              <label class="lbl" for="scenario-d">Scenario D Sell Price (<span data-currency-symbol>$</span>)</label>
+              <div class="input-slider">
+                <div>
+                  <input type="number" id="scenario-d" min="0" max="1000000" step="0.01" value="34000">
+                  <span class="hint">A bullish case for stronger trend continuation.</span>
+                </div>
+                <div>
+                  <input type="range" id="scenario-d-sl" min="0" max="100000" step="10" value="34000">
+                  <div class="slider-lbl" id="scenario-d-lbl">$34,000.00</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <label class="lbl" for="scenario-e">Scenario E Sell Price (<span data-currency-symbol>$</span>)</label>
+              <div class="input-slider">
+                <div>
+                  <input type="number" id="scenario-e" min="0" max="1000000" step="0.01" value="38000">
+                  <span class="hint">A stretch case to show how much of the thesis depends on a very strong exit.</span>
+                </div>
+                <div>
+                  <input type="range" id="scenario-e-sl" min="0" max="100000" step="10" value="38000">
+                  <div class="slider-lbl" id="scenario-e-lbl">$38,000.00</div>
+                </div>
+              </div>
+            </div>
+            <div class="toolbar-box">
+              <h2>How to use scenarios</h2>
+              <div class="info-list">
+                <div class="info-pill">If profit appears attractive only at the highest sell price, your crypto thesis
+                  may be leaning too heavily on hope.</div>
+                <div class="info-pill">If a cautious exit still gives a healthy result, the setup may be more resilient
+                  even after fees, tax, and slippage &#128201;.</div>
+                <div class="info-pill">Five scenarios create a more realistic decision range so traders can compare
+                  fragile setups with efficient ones &#128640;.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="btn-row">
+          <button type="button" class="btn-primary" onclick="calculateCryptoProfit(true, true)">Calculate Crypto
+            Profit</button>
+          <button type="button" class="btn-ghost" onclick="resetPlanner()">Reset Inputs</button>
+        </div>
+      </section>
+    </section>
+
+    <section class="card" id="results-section" aria-live="polite">
+      <div class="result-meta">
+        <div class="mode-pill" id="result-mode-pill">Latest Result: Crypto Trade Summary</div>
+        <div class="result-actions">
+          <button type="button" class="btn-secondary" onclick="copyResults()">Copy Results</button>
+          <div class="copy-note" id="copy-note">Nothing copied yet.</div>
+        </div>
+      </div>
+      <div class="status-banner" id="status-banner"></div>
+      <div class="result-grid">
+        <div class="result-card teal">
+          <div class="result-lbl" id="result-lbl-0">Total Investment</div>
+          <div class="result-val" id="result-val-0">—</div>
+          <div class="result-sub" id="result-sub-0">Capital committed on the buy side including estimated fees</div>
+        </div>
+        <div class="result-card sky">
+          <div class="result-lbl" id="result-lbl-1">Total Value</div>
+          <div class="result-val" id="result-val-1">—</div>
+          <div class="result-sub" id="result-sub-1">Net cash received after selling fees and execution friction</div>
+        </div>
+        <div class="result-card amber">
+          <div class="result-lbl" id="result-lbl-2">Gross Profit / Loss</div>
+          <div class="result-val" id="result-val-2">—</div>
+          <div class="result-sub" id="result-sub-2">Result before tax after buy and sell fees</div>
+        </div>
+        <div class="result-card rose">
+          <div class="result-lbl" id="result-lbl-3">Net Profit After Tax</div>
+          <div class="result-val" id="result-val-3">—</div>
+          <div class="result-sub" id="result-sub-3">The final bottom-line result after tax is applied on gains</div>
+        </div>
+        <div class="result-card slate">
+          <div class="result-lbl" id="result-lbl-4">Gross Return %</div>
+          <div class="result-val" id="result-val-4">—</div>
+          <div class="result-sub" id="result-sub-4">Gross profit divided by total investment cost</div>
+        </div>
+        <div class="result-card teal">
+          <div class="result-lbl" id="result-lbl-5">Net Return %</div>
+          <div class="result-val" id="result-val-5">—</div>
+          <div class="result-sub" id="result-sub-5">What remains after fees, tax, and execution friction</div>
+        </div>
+        <div class="result-card sky">
+          <div class="result-lbl" id="result-lbl-6">Break-even Price</div>
+          <div class="result-val" id="result-val-6">—</div>
+          <div class="result-sub" id="result-sub-6">Average price per unit needed to recover invested capital</div>
+        </div>
+        <div class="result-card amber">
+          <div class="result-lbl" id="result-lbl-7">Target Sell Price</div>
+          <div class="result-val" id="result-val-7">—</div>
+          <div class="result-sub" id="result-sub-7">Sell level required to reach the desired profit target</div>
+        </div>
+        <div class="result-card slate">
+          <div class="result-lbl" id="result-lbl-8">Average Buy Price</div>
+          <div class="result-val" id="result-val-8">—</div>
+          <div class="result-sub" id="result-sub-8">Weighted executed cost basis per unit in the current setup</div>
+        </div>
+        <div class="result-card teal">
+          <div class="result-lbl" id="result-lbl-9">Profit / Unit</div>
+          <div class="result-val" id="result-val-9">—</div>
+          <div class="result-sub" id="result-sub-9">Net result spread across the sold crypto quantity</div>
+        </div>
+        <div class="result-card rose">
+          <div class="result-lbl" id="result-lbl-10">Fee Impact %</div>
+          <div class="result-val" id="result-val-10">—</div>
+          <div class="result-sub" id="result-sub-10">How much of invested capital is consumed by fees</div>
+        </div>
+        <div class="result-card sky">
+          <div class="result-lbl" id="result-lbl-11">Trade Quality Score</div>
+          <div class="result-val" id="result-val-11">—</div>
+          <div class="result-sub" id="result-sub-11">Quick read on return strength, fee drag, and volatility pressure
+          </div>
+        </div>
+      </div>
+      <div class="quality-shell">
+        <div class="quality-top">
+          <div>
+            <div class="result-lbl">Crypto Trade Quality Dashboard</div>
+            <div class="quality-score" id="quality-score">0<small>/ 100</small></div>
+          </div>
+          <div class="quality-badge average" id="quality-badge">Average</div>
+        </div>
+        <div class="quality-track" aria-hidden="true">
+          <div class="quality-fill" id="quality-fill"></div>
+        </div>
+        <div class="quality-caption" id="quality-caption">The score blends net return, fee drag, volatility reference,
+          and scenario resilience into one quick quality read.</div>
+        <div class="quality-metrics">
+          <div class="quality-metric"><strong id="quality-metric-0">Net return is waiting for an update</strong><span
+              id="quality-metric-sub-0">Return quality updates after every recalculation.</span></div>
+          <div class="quality-metric"><strong id="quality-metric-1">Target planning is pending</strong><span
+              id="quality-metric-sub-1">The target sell price updates from your desired profit percentage and average
+              buy price.</span></div>
+          <div class="quality-metric"><strong id="quality-metric-2">Fee drag is neutral</strong><span
+              id="quality-metric-sub-2">Fee impact shows how much friction is quietly eating the trade.</span></div>
+          <div class="quality-metric"><strong id="quality-metric-3">Scenario resilience is neutral</strong><span
+              id="quality-metric-sub-3">Scenario spread highlights whether the trade depends on an optimistic
+              exit.</span></div>
+        </div>
+      </div>
+      <div class="insight-box" id="insight-box"></div>
+      <div class="formula-box" id="formula-box"></div>
+      <div class="comparison-summary">
+        <div class="table-head">
+          <div>
+            <div class="card-title" style="margin-bottom:0.3rem;">Crypto Trade Snapshot</div>
+            <div class="table-context">Quick metrics showing how weighted cost basis, slippage, fees, taxes, and
+              volatility assumptions shape the trade.</div>
+          </div>
+        </div>
+        <div class="tbl-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Metric</th>
+                <th class="compare-a-cell">Value</th>
+                <th class="compare-b-cell">Explanation</th>
+              </tr>
+            </thead>
+            <tbody id="summary-body"></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="comparison-summary">
+        <div class="table-head">
+          <div>
+            <div class="card-title" style="margin-bottom:0.3rem;">Crypto Scenario Comparison</div>
+            <div class="table-context">Compare multiple exit prices with slippage, fees, and taxes already applied so
+              scenario planning stays realistic.</div>
+          </div>
+        </div>
+        <div class="tbl-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Scenario</th>
+                <th class="compare-a-cell">Quoted Sell Price</th>
+                <th>Actual Sell Price</th>
+                <th>Net Profit / Loss</th>
+                <th>Net Return %</th>
+                <th class="compare-b-cell">Outcome</th>
+              </tr>
+            </thead>
+            <tbody id="scenario-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+    <section class="card" id="charts-section">
+      <div class="card-title">Visual Crypto Trade Dashboard</div>
+      <p class="chart-note" id="charts-context">Charts compare invested capital, selling value, fees, tax, and scenario
+        exits so the trade becomes easier to read at a glance.</p>
+      <div class="charts-grid">
+        <div class="chart-wrap">
+          <div class="chart-title">Profit / Loss Overview</div>
+          <div class="chart-note">This bar chart compares total investment, total value, gross outcome, and net outcome
+            after tax and slippage.</div>
+          <div class="chart-canvas"><canvas id="bar-chart"></canvas></div>
+        </div>
+        <div class="chart-wrap">
+          <div class="chart-title">Investment vs Fees vs Profit</div>
+          <div class="chart-note">See how invested capital, fees, tax, and the remaining profit or loss split the final
+            trade outcome.</div>
+          <div class="chart-canvas"><canvas id="breakdown-chart"></canvas></div>
+        </div>
+        <div class="chart-wrap">
+          <div class="chart-title">Scenario Comparison Curve</div>
+          <div class="chart-note">Different exit prices create sharply different net outcomes even when the crypto
+            quantity stays the same.</div>
+          <div class="chart-canvas"><canvas id="comparison-chart"></canvas></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" id="projection-section">
+      <div class="table-head">
+        <div>
+          <div class="card-title" style="margin-bottom:0.3rem;">Transaction Summary Table</div>
+          <div class="table-context" id="projection-context">Review the base trade and the scenario exits with average
+            buy price, sell price, fees, tax, and net return shown side by side.</div>
+        </div>
+        <button type="button" class="btn-secondary" onclick="downloadCsv()">Download CSV</button>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Scenario</th>
+              <th>Average Buy Price</th>
+              <th>Quoted Sell Price</th>
+              <th>Actual Sell Price</th>
+              <th>Quantity</th>
+              <th>Total Fees</th>
+              <th>Gross P/L</th>
+              <th>Tax</th>
+              <th>Net Profit</th>
+              <th>Net Return %</th>
+            </tr>
+          </thead>
+          <tbody id="projection-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="content-section" id="comparison-tables">
+      <h2>Comparison Tables</h2>
+      <p>These quick reference tables help translate crypto trade numbers into decision-making language.</p>
+      <div class="comparison-grid">
+        <div>
+          <h3>What Usually Changes Final Crypto Trade Outcome</h3>
+          <div class="tbl-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Driver</th>
+                  <th>Why It Matters</th>
+                  <th>Typical Effect</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Buy price</td>
+                  <td>Lower entry cost gives more room for profit</td>
+                  <td>Directly improves average cost basis and return percentage</td>
+                </tr>
+                <tr>
+                  <td>Sell price</td>
+                  <td>Exit discipline often decides whether profit is realized</td>
+                  <td>Small changes can sharply move net result</td>
+                </tr>
+                <tr>
+                  <td>Trading and exchange fees</td>
+                  <td>Costs reduce efficiency on both the buy and sell side</td>
+                  <td>Frequent trades feel the impact more strongly</td>
+                </tr>
+                <tr>
+                  <td>Tax rate</td>
+                  <td>Profit kept after tax can be very different from gross profit</td>
+                  <td>High tax can materially lower realized return</td>
+                </tr>
+                <tr>
+                  <td>Average buy price</td>
+                  <td>Multiple entries change the true cost basis</td>
+                  <td>Better averaging can lower the break-even level</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div>
+          <h3>Target Price and Break-even Guide</h3>
+          <div class="formula-box"><strong>Target Sell Price</strong> = Average Buy Price × (1 + Desired Return
+            %)<br><strong>Break-even Price</strong> = Total Investment ÷ Quantity</div>
+          <div class="tbl-wrap" style="margin-top:0.8rem;">
+            <table>
+              <thead>
+                <tr>
+                  <th>Metric</th>
+                  <th>What It Tells You</th>
+                  <th>Why It Helps</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Break-even price</td>
+                  <td>The price level that recovers invested capital</td>
+                  <td>Useful for judging whether a position has truly recovered</td>
+                </tr>
+                <tr>
+                  <td>Target sell price</td>
+                  <td>The exit needed to reach your desired profit percentage</td>
+                  <td>Helps you plan before emotions shape the trade</td>
+                </tr>
+                <tr>
+                  <td>Average buy price</td>
+                  <td>The weighted entry cost across all buys</td>
+                  <td>Important for multiple-entry accumulation strategies</td>
+                </tr>
+                <tr>
+                  <td>Net return %</td>
+                  <td>What remains after fees and tax</td>
+                  <td>Shows the cleaner trade efficiency instead of raw price movement</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <article class="content-section" id="guide">
+      <h2>How Crypto Profit Works in Real Life</h2>
+      <h3>What is Crypto Profit &#128640;</h3>
+      <p>Crypto profit sounds simple at first. You buy Bitcoin, Ethereum, or another coin at one price, you sell at a
+        higher price, and the difference looks like your gain. In real life, though, crypto profit is a little more
+        layered. You may buy in several steps, pay trading fees on every order, face small execution slippage when the
+        market moves quickly, and then lose part of the gain to tax. That means the chart is only the starting point.
+        The real result is the money left after all the friction is included &#128176;.</p>
+      <p>This is why a crypto profit calculator is useful. It takes a rough idea like “I bought at 20,000 and sold at
+        30,000” and turns it into a more honest answer. How much was actually invested? What was the weighted average
+        buy price after multiple entries? How much did fees take away? How much profit is left after tax? When traders
+        ask these better questions, they usually make calmer and more professional decisions &#129504;.</p>
+      <p>Many beginners focus only on price movement because crypto markets are exciting. A sharp breakout can feel like
+        instant profit. But a trade can look strong on the chart and still feel weaker in the wallet after fees and tax
+        are counted. That does not mean crypto trading is bad. It simply means realistic math matters more than
+        excitement.</p>
+
+      <h3>How Crypto Trading Works &#128176;</h3>
+      <p>At the core, every crypto trade begins with entry price, exit price, and quantity. If you buy a small amount of
+        BTC at one level and later sell it higher, the raw profit comes from that price difference. But most traders do
+        not live in a friction-free world. Exchanges charge a trading fee. Some also add extra platform or exchange
+        charges. If the market is moving fast, the actual fill price may be slightly worse than the quoted price. That
+        is why professional calculators model actual trading conditions instead of relying only on headline prices
+        &#128202;.</p>
+      <p>The basic flow is easy to understand. First, calculate total investment. That is the money used to buy the
+        crypto plus buy-side fees. Next, calculate total selling value. That is the money you receive from selling the
+        crypto after sell-side fees are removed. Gross profit is the difference between the two. If gross profit is
+        positive, tax can reduce the result further. Net profit is what remains after all those layers.</p>
+      <p>Return percentage is also important because it shows efficiency, not just size. A profit of 1,000 may feel
+        impressive, but it means something very different on an investment of 2,000 compared with an investment of
+        50,000. Looking at money profit and percentage return together gives a clearer picture of whether the trade
+        really worked.</p>
+
+      <h3>Understanding Volatility &#128201;</h3>
+      <p>Volatility is one of the biggest differences between crypto trading and many other investment styles. Crypto
+        prices can move sharply in a short time because liquidity, sentiment, and news flow can change quickly. A move
+        that looks small in percentage terms may still feel emotionally intense when it happens within hours. That is
+        why volatility belongs in a crypto profit tool. It reminds traders that fast markets can change both opportunity
+        and risk.</p>
+      <p>High volatility can help profits when the market moves in your favor, but it can also make execution harder.
+        You may plan a buy at one level and get filled slightly higher. You may plan a sell and get filled slightly
+        lower. That gap is slippage. In a calm market it may be small. In a very active market it can matter much more.
+        Even a good idea can lose efficiency if execution is poor.</p>
+      <p>Volatility is also why scenario planning matters so much in crypto. Instead of assuming one perfect exit, it is
+        better to compare several sell prices. A defensive case, a base case, and a stronger upside case can show
+        whether the trade is robust or fragile. When the result only looks good in the most optimistic scenario, that is
+        useful information. It can stop a trader from confusing hope with planning.</p>
+
+      <h3>Fees and Taxes in Crypto Trading &#129534;</h3>
+      <p>Fees often look small, but over time they can quietly do real damage. A trading fee of a fraction of a percent
+        may seem harmless on one transaction, yet it applies when you buy and when you sell. Add exchange costs, spread
+        costs, and slippage, and the total drag becomes more noticeable. If you trade frequently, that drag compounds
+        because it keeps repeating. This is why low-margin trades can disappoint even when the asset price moved in the
+        right direction.</p>
+      <p>Tax adds another layer. In many places crypto gains are taxable, but rules can vary by country, holding period,
+        and transaction type. That is why a flexible calculator lets the user enter a tax rate instead of pretending one
+        rule fits everyone. A trade that looks exciting before tax may feel average after tax. That does not make the
+        trade useless. It simply makes net thinking more important than raw thinking.</p>
+      <p>Smart traders separate these costs in their mind. Fees are the cost of participating. Tax is the cost of a
+        profitable result. One reduces execution efficiency. The other reduces what remains after success. Looking at
+        both together gives a cleaner answer about whether the trade is worth the effort &#128201;.</p>
+
+      <h3>Multiple Buys and Average Price &#128257;</h3>
+      <p>Crypto traders often accumulate a position in stages. You might buy a little on a dip, add more on
+        confirmation, and add again if the trend improves. In that case, the true entry is not the first price and not
+        the last price. It is the weighted average purchase price across all buys. That is why multiple-buy support
+        matters. Without it, profit estimates can become too optimistic because the real cost basis is hidden.</p>
+      <p>Imagine buying 0.20 BTC at 18,000 and another 0.30 BTC at 22,000. The average buy price is not simply one of
+        those numbers. It comes from total invested amount divided by total quantity. Once you know that number, your
+        break-even level becomes clearer and your target planning becomes more grounded. This is especially helpful when
+        the market has been volatile and your entries happened across several weeks or months.</p>
+      <p>Average price also helps emotionally. Traders often remember their best entry and unconsciously judge the whole
+        position from that memory. The portfolio, however, only cares about the weighted cost basis. When that number is
+        visible, it becomes easier to manage the position with realism instead of emotion &#129309;.</p>
+
+      <h3>Break-even Price and Target Sell Price &#127919;</h3>
+      <p>Break-even price answers a simple but powerful question: at what average sale value does this trade stop losing
+        money? That level matters because it tells you when the position has finally recovered the capital used to build
+        it. If market price is still below break-even, the position may look better emotionally than it really is. If
+        price moves above break-even, the trade is finally working for the trader instead of just repairing the earlier
+        outlay.</p>
+      <p>Target sell price answers a different question. It asks what exit is needed to reach a desired profit
+        percentage. This is useful because traders often think in goals such as 10%, 20%, or 30% profit. When the
+        calculator translates that goal into a required price, the plan becomes easier to evaluate. Is that target
+        realistic in the current market? Does it depend on a very optimistic breakout? Is it close enough to justify the
+        risk? Those are better questions than simply hoping the chart keeps rising.</p>
+      <p>Used together, break-even price and target sell price create a healthier planning mindset. One shows the
+        survival line. The other shows the ambition line. The distance between them reveals how much room the trade may
+        have to work with.</p>
+
+      <div class="callout"><strong>Simple crypto trading mindset:</strong> a strong crypto trade is not only about
+        catching a fast move. It is about cost control, realistic exits, honest average price tracking, and knowing what
+        net profit still looks like after the market takes its share.</div>
+
+      <h3>A Practical Example: Buying Bitcoin at 20,000 and Selling at 30,000 &#128200;</h3>
+      <p>Suppose a trader buys Bitcoin at 20,000 in the chosen currency and commits 10,000 before fees. That means the
+        bought quantity is roughly 0.5 BTC before friction is considered. If buy-side slippage and exchange fees are
+        small, the effective quantity or cost basis changes slightly. Now imagine the trader later sells near 30,000. On
+        the chart this looks like a very strong move. But the final result still depends on buy-side fees, sell-side
+        fees, execution quality, and tax.</p>
+      <p>The sale value may look large because the market price rose sharply, yet the net amount received is lower after
+        fees. Gross profit is the difference between the final sell value and the original invested amount. If a tax
+        rate is applied, the final keepable profit becomes smaller again. This example shows why headline gains and real
+        gains are not always the same thing.</p>
+      <p>Now adjust the example slightly. If the sell price is only 24,000 instead of 30,000, profit may still exist,
+        but it may feel much thinner after friction. If fees rise or slippage worsens, the trade becomes less efficient.
+        If the trader accumulated the BTC at a better average price through staged buys, the exact same 24,000 exit may
+        look much healthier. That is the power of structured trade math &#127757;.</p>
+
+      <h3>Why Scenario Planning Matters &#129504;</h3>
+      <p>Crypto markets are famous for fast mood changes. A chart can look powerful in the morning and much weaker later
+        in the day. Scenario planning reduces the chance of depending on a single emotional outcome. Instead of assuming
+        one perfect sell level, compare several possible exits. A cautious price, a balanced base case, and a stronger
+        upside case can show whether the trade is solid or whether it needs everything to go right.</p>
+      <p>This kind of planning also improves discipline. If you already know what the trade looks like at several
+        prices, you are less likely to panic on a small pullback or fantasize about unrealistic upside. The plan becomes
+        visible before the market tests your emotions. That is a quiet advantage, but it matters a lot in fast-moving
+        assets.</p>
+      <p>This mindset connects naturally to other SmartCalc World tools. The <a
+          href="https://smartcalcworld.com/finance/investment/stock-profit-calculator.html">Stock Profit Calculator</a>
+        helps compare crypto trade logic with equity trades, the <a
+          href="https://smartcalcworld.com/finance/investment/cagr-calculator.html">CAGR Calculator</a> helps frame
+        longer-term annualized growth, and the <a
+          href="https://smartcalcworld.com/finance/investment/portfolio-growth-calculator.html">Portfolio Growth
+          Calculator</a> shows how many disciplined wins can build a larger investment base over time.</p>
+
+      <h3>Crypto Trading and the Bigger Investment Picture &#127760;</h3>
+      <p>Good traders do not look at one position in isolation forever. They ask how that trade fits into a larger
+        wealth plan. Does it help build capital? Does it support a long-term goal? Does the after-tax result justify the
+        risk taken? A crypto profit calculator is valuable because it turns one trade into a measurable building block.
+        Once that block is clear, it becomes easier to connect it to other financial plans.</p>
+      <p>For example, someone building long-term wealth may use the <a
+          href="https://smartcalcworld.com/finance/investment/investment-goal-calculator.html">Investment Goal
+          Calculator</a> to see how trading profits support a future target. Someone comparing crypto gains with
+        cash-yield ideas may use the <a
+          href="https://smartcalcworld.com/finance/investment/finance-apy-calculator.html">APY Calculator</a>. The goal
+        is not to force one style on every investor. The goal is to understand what each decision actually contributes
+        after costs, time, and risk.</p>
+      <p>That is what a professional calculator does well. It does not promise market direction. It does not replace
+        research. But it helps you respect the arithmetic behind the trade. When the arithmetic becomes clearer,
+        decisions usually become calmer too &#128640;.</p>
+    </article>
+
+    <section class="content-section" id="related-tools">
+      <h2>Explore Related Investment Tools</h2>
+      <p>Crypto trade analysis becomes more useful when you connect it to the broader SmartCalc World investment
+        ecosystem.</p>
+      <div class="links-grid">
+        <a class="link-card"
+          href="https://smartcalcworld.com/finance/investment/stock-profit-calculator.html"><strong>Stock Profit
+            Calculator</strong>Compare crypto trade math with equity trade outcomes, fees, and scenarios.</a>
+        <a class="link-card" href="https://smartcalcworld.com/finance/investment/cagr-calculator.html"><strong>CAGR
+            Calculator</strong>Translate shorter-term crypto gains into longer-term annualized growth thinking.</a>
+        <a class="link-card"
+          href="https://smartcalcworld.com/finance/investment/portfolio-growth-calculator.html"><strong>Portfolio Growth
+            Calculator</strong>See how repeated gains and steady investing can build a larger investment base.</a>
+        <a class="link-card"
+          href="https://smartcalcworld.com/finance/investment/investment-goal-calculator.html"><strong>Investment Goal
+            Calculator</strong>Work backward from a target so crypto profits fit a broader wealth plan.</a>
+        <a class="link-card" href="https://smartcalcworld.com/finance/investment/apy-calculator.html"><strong>APY
+            Calculator</strong>Compare crypto trade outcomes with yield-focused return thinking.</a>
+      </div>
+    </section>
+
+    <section class="content-section" id="faq">
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-list">
+        <details class="faq-item" open>
+          <summary>How is crypto profit calculated?</summary>
+          <p>Crypto profit is calculated by comparing total selling value with total investment cost after fees. If
+            profit is positive, tax can reduce the final net amount.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What fees apply in crypto trading?</summary>
+          <p>Many traders face trading fees, exchange fees, spread costs, and slippage. Even small percentages can
+            materially reduce net profit over time.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How do taxes affect crypto profits?</summary>
+          <p>Taxes usually reduce positive gains, which means net profit can be noticeably lower than gross profit. This
+            calculator lets you test your own tax-rate assumption.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What is break-even price?</summary>
+          <p>Break-even price is the price per unit that recovers the invested capital so the trade stops losing money.
+          </p>
+        </details>
+        <details class="faq-item">
+          <summary>How do I calculate return percentage on a crypto trade?</summary>
+          <p>Return percentage is calculated by dividing profit by total investment and multiplying by 100. It shows
+            efficiency, not just absolute money gain.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I calculate multiple buys?</summary>
+          <p>Yes. Advanced mode supports multiple buy transactions and calculates a weighted average purchase price for
+            a more realistic cost basis.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What is target sell price?</summary>
+          <p>Target sell price is the exit needed to reach your chosen desired profit percentage based on the average
+            buy price.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can fees turn a winning crypto trade into a poor result?</summary>
+          <p>Yes. A trade can look attractive on price movement alone but become much weaker after fees, slippage, and
+            tax are included.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is crypto trading risky?</summary>
+          <p>Yes. Crypto markets can be highly volatile, so scenario planning and realistic fee assumptions matter even
+            more than in many slower-moving assets.</p>
+        </details>
+      </div>
+    </section>
+
+    <section class="content-section disclaimer" id="disclaimer">
+      <h2>Disclaimer</h2>
+      <p>This Crypto Profit Calculator is for education and planning support only. It does not provide investment,
+        trading, tax, or legal advice. Real crypto trade outcomes can differ because of exchange pricing, liquidity,
+        slippage, tax rules, and fast market movement. Use it as a decision-support tool, not as a guarantee of future
+        performance.</p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="https://smartcalcworld.com/index.html">Home</a></li>
+          <li><a href="https://smartcalcworld.com/about.html">About</a></li>
+          <li><a href="https://smartcalcworld.com/contact.html">Contact</a></li>
+          <li><a href="https://smartcalcworld.com/privacy-policy.html">Privacy Policy</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Content</h3>
+        <ul>
+          <li><a href="#calculator">Crypto Profit Calculator</a></li>
+          <li><a href="#guide">Crypto Profit Guide</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Finance Tools</h3>
+        <ul>
+          <li><a href="https://smartcalcworld.com/finance/interest/interest-hub.html">Interest Calculators</a></li>
+          <li><a href="https://smartcalcworld.com/finance/investment/investment-hub.html">Investment Calculators</a>
+          </li>
+          <li><a href="https://smartcalcworld.com/finance/loan/loan-hub.html">Loan Calculators</a></li>
+          <li><a href="https://smartcalcworld.com/finance/tax/tax-hub.html">Tax Calculators</a></li>
+          <li><a href="https://smartcalcworld.com/finance/saving-retirement/saving-retirement-hub.html">Savings
+              Calculators</a></li>
+          <li><a href="https://smartcalcworld.com/finance/saving-retirement/saving-retirement-hub.html">Retirement
+              Calculators</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <div class="footer-disclaimer"><strong>SmartCalc World Note:</strong> a strong crypto trading plan separates
+          price movement, fees, taxes, break-even levels, and scenario quality instead of focusing only on the headline
+          gain.</div>
+      </div>
+    </div>
+    <div class="copyright">&copy; 2026 SmartCalc World. All rights reserved.</div>
+  </footer>
+  <script>
+
+    const state = {
+      currentCurrency: "USD",
+      currentCrypto: "BTC",
+      charts: { bar: null, pie: null, comparison: null },
+      csvRows: [],
+      csvFilename: "crypto_profit_scenarios.csv",
+      copyText: "",
+      lastResult: null
+    };
+
+    const currencyConfig = {
+      USD: { symbol: "$", locale: "en-US" },
+      EUR: { symbol: "\u20AC", locale: "de-DE" },
+      GBP: { symbol: "\u00A3", locale: "en-GB" },
+      INR: { symbol: "\u20B9", locale: "en-IN" },
+      CAD: { symbol: "$", locale: "en-CA" },
+      AUD: { symbol: "$", locale: "en-AU" }
+    };
+
+    const sliderConfigs = [
+      { input: "sp-buy", slider: "sp-buy-sl", label: "sp-buy-lbl", type: "money" },
+      { input: "sp-sell", slider: "sp-sell-sl", label: "sp-sell-lbl", type: "money" },
+      { input: "sp-quantity", slider: "sp-quantity-sl", label: "sp-quantity-lbl", type: "crypto" },
+      { input: "sp-dividend", slider: "sp-dividend-sl", label: "sp-dividend-lbl", type: "money" },
+      { input: "sp-brokerage", slider: "sp-brokerage-sl", label: "sp-brokerage-lbl", type: "brokerage" },
+      { input: "sp-charges", slider: "sp-charges-sl", label: "sp-charges-lbl", type: "percent" },
+      { input: "sp-tax", slider: "sp-tax-sl", label: "sp-tax-lbl", type: "percent" },
+      { input: "sp-target", slider: "sp-target-sl", label: "sp-target-lbl", type: "percent" },
+      { input: "sp-stop", slider: "sp-stop-sl", label: "sp-stop-lbl", type: "percent" },
+      { input: "sp-buy-slippage", slider: "sp-buy-slippage-sl", label: "sp-buy-slippage-lbl", type: "percent" },
+      { input: "sp-sell-slippage", slider: "sp-sell-slippage-sl", label: "sp-sell-slippage-lbl", type: "percent" },
+      { input: "scenario-a", slider: "scenario-a-sl", label: "scenario-a-lbl", type: "money" },
+      { input: "scenario-b", slider: "scenario-b-sl", label: "scenario-b-lbl", type: "money" },
+      { input: "scenario-c", slider: "scenario-c-sl", label: "scenario-c-lbl", type: "money" },
+      { input: "scenario-d", slider: "scenario-d-sl", label: "scenario-d-lbl", type: "money" },
+      { input: "scenario-e", slider: "scenario-e-sl", label: "scenario-e-lbl", type: "money" }
+    ];
+
+    function $(id) {
+      return document.getElementById(id);
+    }
+
+    function safeNumber(value, fallback = 0) {
+      const num = Number(value);
+      return Number.isFinite(num) ? num : fallback;
+    }
+
+    function clamp(value, min, max) {
+      return Math.min(Math.max(value, min), max);
+    }
+
+    function normalize(value, min, max) {
+      if (!Number.isFinite(value) || max <= min) return 0;
+      return clamp((value - min) / (max - min), 0, 1);
+    }
+
+    function getCurrencyMeta() {
+      return currencyConfig[state.currentCurrency] || currencyConfig.USD;
+    }
+
+    function getSelectedCrypto() {
+      const selectValue = $("crypto-select") ? $("crypto-select").value : state.currentCrypto;
+      if (selectValue === "CUSTOM") {
+        const custom = $("crypto-custom") ? $("crypto-custom").value.trim().toUpperCase() : "";
+        return custom || "CUSTOM";
+      }
+      return selectValue || "BTC";
+    }
+
+    function formatMoney(value) {
+      if (!Number.isFinite(value)) return "N/A";
+      const meta = getCurrencyMeta();
+      const amount = Math.abs(value);
+      const formatted = new Intl.NumberFormat(meta.locale, {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      }).format(amount);
+      return `${value < 0 ? "-" : ""}${meta.symbol}${formatted}`;
+    }
+
+    function formatPercent(value) {
+      return Number.isFinite(value) ? `${value.toFixed(2)}%` : "N/A";
+    }
+
+    function formatUnits(value) {
+      if (!Number.isFinite(value)) return "N/A";
+      const decimals = value >= 100 ? 2 : value >= 1 ? 4 : 6;
+      const formatted = new Intl.NumberFormat("en-US", {
+        minimumFractionDigits: decimals,
+        maximumFractionDigits: decimals
+      }).format(value);
+      return `${formatted} ${getSelectedCrypto()}`;
+    }
+
+    function describeOutcome(value) {
+      if (value > 0) return "Profitable";
+      if (value < 0) return "Losing";
+      return "Break-even";
+    }
+
+    function setStatus(text, tone = "") {
+      const banner = $("status-banner");
+      banner.textContent = text;
+      banner.className = `status-banner${tone ? ` ${tone}` : ""}`;
+    }
+
+    function setCopyNote(text) {
+      $("copy-note").textContent = text;
+    }
+
+    function setResultCard(index, label, value, subtext) {
+      $(`result-lbl-${index}`).textContent = label;
+      $(`result-val-${index}`).textContent = value;
+      $(`result-sub-${index}`).textContent = subtext;
+    }
+
+    function updateCurrencyIndicators() {
+      const symbol = getCurrencyMeta().symbol;
+      document.querySelectorAll("[data-currency-symbol]").forEach((node) => {
+        node.textContent = symbol;
+      });
+    }
+
+    function updateSliderLabel(config) {
+      const input = $(config.input);
+      const label = $(config.label);
+      if (!input || !label) return;
+      const value = safeNumber(input.value);
+      let text = "";
+      if (config.type === "money") {
+        text = formatMoney(value);
+      } else if (config.type === "crypto") {
+        text = formatUnits(value);
+      } else if (config.type === "brokerage") {
+        text = $("sp-brokerage-mode").value === "fixed" ? formatMoney(value) : formatPercent(value);
+      } else {
+        text = formatPercent(value);
+      }
+      label.textContent = text;
+    }
+
+    function bindSliderPair(config) {
+      const input = $(config.input);
+      const slider = $(config.slider);
+      if (!input || !slider) return;
+
+      input.addEventListener("input", () => {
+        const raw = safeNumber(input.value);
+        const min = safeNumber(slider.min, raw);
+        const max = safeNumber(slider.max, raw);
+        const clampedValue = clamp(raw, min, max);
+        slider.value = clampedValue;
+        if (raw !== clampedValue) input.value = clampedValue;
+        updateSliderLabel(config);
+        calculateCryptoProfit(false);
+      });
+
+      slider.addEventListener("input", () => {
+        input.value = slider.value;
+        updateSliderLabel(config);
+        calculateCryptoProfit(false);
+      });
+    }
+
+    function syncBrokerageMode() {
+      const fixed = $("sp-brokerage-mode").value === "fixed";
+      const input = $("sp-brokerage");
+      const slider = $("sp-brokerage-sl");
+      const current = safeNumber(input.value);
+
+      if (fixed) {
+        $("sp-brokerage-label").innerHTML = `Trading Fee (<span data-currency-symbol>${getCurrencyMeta().symbol}</span>)`;
+        $("sp-brokerage-hint").textContent = "Use a fixed amount when the exchange charges the same fee per buy and sell order.";
+        input.min = "0";
+        input.max = "10000";
+        input.step = "1";
+        slider.min = "0";
+        slider.max = "10000";
+        slider.step = "1";
+        if (current < 1) {
+          input.value = "10";
+          slider.value = "10";
+        }
+      } else {
+        $("sp-brokerage-label").textContent = "Trading Fees (%)";
+        $("sp-brokerage-hint").textContent = "Use percentage mode for common exchange trading fees on both the buy and sell side.";
+        input.min = "0";
+        input.max = "5";
+        input.step = "0.01";
+        slider.min = "0";
+        slider.max = "5";
+        slider.step = "0.01";
+        if (current > 5) {
+          input.value = "0.4";
+          slider.value = "0.4";
+        }
+      }
+
+      updateCurrencyIndicators();
+      updateSliderLabel({ input: "sp-brokerage", slider: "sp-brokerage-sl", label: "sp-brokerage-lbl", type: "brokerage" });
+    }
+
+    function updateCryptoSelection(shouldRecalculate = true) {
+      $("crypto-custom-wrap").classList.toggle("hidden", $("crypto-select").value !== "CUSTOM");
+      state.currentCrypto = getSelectedCrypto();
+      sliderConfigs.forEach(updateSliderLabel);
+      if (shouldRecalculate) calculateCryptoProfit(false);
+    }
+
+    function switchModule(module) {
+      document.querySelectorAll(".module").forEach((panel) => {
+        panel.classList.toggle("active", panel.id === `mod-${module}`);
+      });
+      document.querySelectorAll(".qnav-btn").forEach((btn) => {
+        const active = btn.dataset.module === module;
+        btn.classList.toggle("active", active);
+        btn.setAttribute("aria-selected", active ? "true" : "false");
+      });
+    }
+
+    function setEntryMode(mode) {
+      const multi = mode === "multi";
+      $("multi-buy-panel").classList.toggle("hidden", !multi);
+      $("entry-mode-note").textContent = multi
+        ? "Multiple buy mode calculates a weighted average crypto entry, applies buy slippage to every fill, and allocates buy-side fees proportionally to the sold quantity."
+        : "Single buy mode uses the buy price from Trade Basics. You can enter quantity directly or let the investment amount derive quantity automatically.";
+    }
+
+    function addTransactionRow(price = "", quantity = "") {
+      const row = document.createElement("div");
+      row.className = "tx-row";
+      row.innerHTML = `
+    <div>
+      <label class="hint">Buy Price</label>
+      <input type="number" class="tx-price" min="0" max="1000000" step="0.01" value="${price}">
+    </div>
+    <div>
+      <label class="hint">Quantity</label>
+      <input type="number" class="tx-qty" min="0" max="1000000" step="0.000001" value="${quantity}">
+    </div>
+    <button type="button" class="micro-btn danger">Remove</button>
+  `;
+      row.querySelectorAll("input").forEach((node) => {
+        node.addEventListener("input", () => calculateCryptoProfit(false));
+      });
+      row.querySelector("button").addEventListener("click", () => {
+        row.remove();
+        if (!$("tx-list").children.length) addTransactionRow(18000, 0.2);
+        calculateCryptoProfit(false);
+      });
+      $("tx-list").appendChild(row);
+    }
+
+    function clearTransactions(seed = true) {
+      $("tx-list").innerHTML = "";
+      if (seed) {
+        addTransactionRow(18000, 0.2);
+        addTransactionRow(22000, 0.3);
+      }
+      calculateCryptoProfit(false);
+    }
+
+    function getTransactions() {
+      return Array.from(document.querySelectorAll(".tx-row")).map((row) => ({
+        price: Math.max(0, safeNumber(row.querySelector(".tx-price").value)),
+        quantity: Math.max(0, safeNumber(row.querySelector(".tx-qty").value))
+      })).filter((tx) => tx.price > 0 && tx.quantity > 0);
+    }
+
+    function calcTradeFees(tradeValue, brokerageMode, brokerageValue, chargeRate) {
+      const safeTradeValue = Math.max(0, tradeValue);
+      const brokerage = brokerageMode === "fixed" ? brokerageValue : safeTradeValue * (brokerageValue / 100);
+      const exchangeFees = safeTradeValue * (chargeRate / 100);
+      return { brokerage, exchangeFees, total: brokerage + exchangeFees };
+    }
+
+    function applyBuySlippage(price, slippageRate) {
+      return price * (1 + slippageRate / 100);
+    }
+
+    function applySellSlippage(price, slippageRate) {
+      return price * (1 - slippageRate / 100);
+    }
+
+    function computeBreakEvenPrice(totalInvestment, quantity) {
+      if (!Number.isFinite(totalInvestment) || !Number.isFinite(quantity) || quantity <= 0) return NaN;
+      return totalInvestment / quantity;
+    }
+
+    function computeTargetSellPrice(avgBuy, desiredReturnRate) {
+      if (!Number.isFinite(avgBuy) || avgBuy <= 0) return NaN;
+      return avgBuy * (1 + (desiredReturnRate / 100));
+    }
+
+    function deriveEntryData(inputs) {
+      const requestedQuantity = Math.max(0, inputs.quantity);
+
+      if (inputs.entryMode === "multi") {
+        const transactions = getTransactions();
+        if (!transactions.length) return { valid: false, message: "Add at least one valid buy transaction in advanced mode." };
+
+        const totalBoughtQuantity = transactions.reduce((sum, tx) => sum + tx.quantity, 0);
+        const totalQuotedCost = transactions.reduce((sum, tx) => sum + (tx.price * tx.quantity), 0);
+        const totalExecutedCost = transactions.reduce((sum, tx) => sum + (applyBuySlippage(tx.price, inputs.buySlippageRate) * tx.quantity), 0);
+        const totalBuyFees = transactions.reduce((sum, tx) => {
+          const executedValue = applyBuySlippage(tx.price, inputs.buySlippageRate) * tx.quantity;
+          return sum + calcTradeFees(executedValue, inputs.brokerageMode, inputs.brokerageValue, inputs.transactionRate).total;
+        }, 0);
+
+        if (totalBoughtQuantity <= 0 || totalExecutedCost <= 0) {
+          return { valid: false, message: "The multiple buy rows need positive prices and positive crypto quantities." };
+        }
+
+        let soldQuantity = requestedQuantity > 0 ? requestedQuantity : totalBoughtQuantity;
+        let warning = "";
+        if (soldQuantity > totalBoughtQuantity) {
+          soldQuantity = totalBoughtQuantity;
+          warning = `Sell quantity was capped at ${formatUnits(soldQuantity)} because multi-buy mode cannot sell more crypto than was accumulated.`;
+        }
+
+        const averageBuyPrice = totalExecutedCost / totalBoughtQuantity;
+        const quotedAverageBuyPrice = totalQuotedCost / totalBoughtQuantity;
+        const ratio = soldQuantity / totalBoughtQuantity;
+
+        return {
+          valid: true,
+          modeLabel: "Multiple buy transactions",
+          warning,
+          totalBoughtQuantity,
+          soldQuantity,
+          quotedAverageBuyPrice,
+          averageBuyPrice,
+          totalQuotedCost,
+          totalExecutedCost,
+          totalBuyFees,
+          allocatedShareCost: totalExecutedCost * ratio,
+          allocatedQuotedCost: totalQuotedCost * ratio,
+          allocatedBuyFees: totalBuyFees * ratio
+        };
+      }
+
+      if (inputs.buyPrice <= 0) {
+        return { valid: false, message: "Enter a buy price greater than zero before calculating the trade." };
+      }
+
+      const executedBuyPrice = applyBuySlippage(inputs.buyPrice, inputs.buySlippageRate);
+      let soldQuantity = requestedQuantity;
+      let warning = "";
+
+      if (inputs.investmentAmount > 0) {
+        soldQuantity = inputs.investmentAmount / executedBuyPrice;
+        warning = "Investment amount override was used to derive quantity from the executed buy price.";
+      }
+
+      if (soldQuantity <= 0) {
+        return { valid: false, message: "Enter a positive crypto quantity or a positive investment amount before calculating the trade." };
+      }
+
+      const quotedAverageBuyPrice = inputs.buyPrice;
+      const averageBuyPrice = executedBuyPrice;
+      const totalQuotedCost = quotedAverageBuyPrice * soldQuantity;
+      const totalExecutedCost = averageBuyPrice * soldQuantity;
+      const totalBuyFees = calcTradeFees(totalExecutedCost, inputs.brokerageMode, inputs.brokerageValue, inputs.transactionRate).total;
+
+      return {
+        valid: true,
+        modeLabel: inputs.investmentAmount > 0 ? "Single buy price with investment amount override" : "Single buy price",
+        warning,
+        totalBoughtQuantity: soldQuantity,
+        soldQuantity,
+        quotedAverageBuyPrice,
+        averageBuyPrice,
+        totalQuotedCost,
+        totalExecutedCost,
+        totalBuyFees,
+        allocatedShareCost: totalExecutedCost,
+        allocatedQuotedCost: totalQuotedCost,
+        allocatedBuyFees: totalBuyFees
+      };
+    }
+
+    function evaluateTradeQuality(netReturnPct, feeImpactPct, volatilityRate, taxImpactPct) {
+      const netReturnNorm = normalize(netReturnPct, -20, 40);
+      const feeNorm = normalize(feeImpactPct, 0, 6);
+      const volatilityNorm = normalize(volatilityRate, 0, 25);
+      const taxNorm = Number.isFinite(taxImpactPct) ? normalize(taxImpactPct, 0, 40) : 0;
+      const score = clamp(((netReturnNorm * 0.55) + ((1 - feeNorm) * 0.2) + ((1 - volatilityNorm) * 0.15) + ((1 - taxNorm) * 0.1)) * 100, 0, 100);
+
+      let label = "Poor";
+      let tone = "poor";
+      let explanation = "The setup is weak because return quality, cost efficiency, or volatility resilience is not strong enough yet.";
+
+      if (score >= 80) {
+        label = "Excellent";
+        tone = "excellent";
+        explanation = "The trade combines healthy net return, lean fee drag, and a volatility profile that still looks manageable.";
+      } else if (score >= 60) {
+        label = "Good";
+        tone = "good";
+        explanation = "The setup looks efficient overall, although one or two areas could still improve.";
+      } else if (score >= 35) {
+        label = "Average";
+        tone = "average";
+        explanation = "The trade is workable, but costs, modest return, or volatility pressure are holding quality back.";
+      }
+
+      return { score, label, tone, explanation };
+    }
+
+    function computeOutcome(entry, inputs, sellPrice, label) {
+      const actualSellPrice = applySellSlippage(sellPrice, inputs.sellSlippageRate);
+      const sellGross = actualSellPrice * entry.soldQuantity;
+      const sellFees = calcTradeFees(sellGross, inputs.brokerageMode, inputs.brokerageValue, inputs.transactionRate);
+      const totalInvestment = entry.allocatedShareCost + entry.allocatedBuyFees;
+      const totalSellValue = sellGross - sellFees.total;
+      const grossProfit = totalSellValue - totalInvestment;
+      const taxAmount = grossProfit > 0 ? grossProfit * (inputs.taxRate / 100) : 0;
+      const netProfit = grossProfit - taxAmount;
+      const grossReturnPct = totalInvestment > 0 ? (grossProfit / totalInvestment) * 100 : 0;
+      const netReturnPct = totalInvestment > 0 ? (netProfit / totalInvestment) * 100 : 0;
+      const breakEven = computeBreakEvenPrice(totalInvestment, entry.soldQuantity);
+      const targetSellPrice = computeTargetSellPrice(entry.averageBuyPrice, inputs.targetReturnRate);
+      const totalFees = entry.allocatedBuyFees + sellFees.total;
+      const effectiveCostPerUnit = entry.soldQuantity > 0 ? totalInvestment / entry.soldQuantity : NaN;
+      const profitPerUnit = entry.soldQuantity > 0 ? netProfit / entry.soldQuantity : NaN;
+      const feeImpactPct = totalInvestment > 0 ? (totalFees / totalInvestment) * 100 : 0;
+      const taxImpactPct = grossProfit > 0 ? (taxAmount / grossProfit) * 100 : NaN;
+      const quality = evaluateTradeQuality(netReturnPct, feeImpactPct, inputs.volatilityRate, taxImpactPct);
+
+      return {
+        label,
+        quotedSellPrice: sellPrice,
+        actualSellPrice,
+        quotedAverageBuyPrice: entry.quotedAverageBuyPrice,
+        buyPrice: entry.averageBuyPrice,
+        quantity: entry.soldQuantity,
+        totalInvestment,
+        totalSellValue,
+        grossProfit,
+        taxAmount,
+        netProfit,
+        grossReturnPct,
+        netReturnPct,
+        breakEven,
+        targetSellPrice,
+        buyFees: entry.allocatedBuyFees,
+        sellFees: sellFees.total,
+        totalFees,
+        effectiveCostPerUnit,
+        profitPerUnit,
+        feeImpactPct,
+        taxImpactPct,
+        quality,
+        outcomeLabel: describeOutcome(netProfit)
+      };
+    }
+
+    function buildScenarioDefinitions(inputs) {
+      return [
+        { label: "Scenario A", sellPrice: inputs.scenarioA },
+        { label: "Base Exit", sellPrice: inputs.sellPrice },
+        { label: "Scenario B", sellPrice: inputs.scenarioB },
+        { label: "Scenario C", sellPrice: inputs.scenarioC },
+        { label: "Scenario D", sellPrice: inputs.scenarioD },
+        { label: "Scenario E", sellPrice: inputs.scenarioE }
+      ].filter((scenario) => scenario.sellPrice > 0);
+    }
+
+    function getInputs() {
+      return {
+        crypto: getSelectedCrypto(),
+        buyPrice: Math.max(0, safeNumber($("sp-buy").value)),
+        sellPrice: Math.max(0, safeNumber($("sp-sell").value)),
+        quantity: Math.max(0, safeNumber($("sp-quantity").value)),
+        investmentAmount: Math.max(0, safeNumber($("sp-dividend").value)),
+        brokerageMode: $("sp-brokerage-mode").value,
+        brokerageValue: Math.max(0, safeNumber($("sp-brokerage").value)),
+        transactionRate: clamp(Math.max(0, safeNumber($("sp-charges").value)), 0, 50),
+        taxRate: clamp(Math.max(0, safeNumber($("sp-tax").value)), 0, 100),
+        buySlippageRate: clamp(Math.max(0, safeNumber($("sp-buy-slippage").value)), 0, 95),
+        sellSlippageRate: clamp(Math.max(0, safeNumber($("sp-sell-slippage").value)), 0, 95),
+        targetReturnRate: Math.max(0, safeNumber($("sp-target").value)),
+        volatilityRate: clamp(Math.max(0, safeNumber($("sp-stop").value)), 0, 100),
+        scenarioA: Math.max(0, safeNumber($("scenario-a").value)),
+        scenarioB: Math.max(0, safeNumber($("scenario-b").value)),
+        scenarioC: Math.max(0, safeNumber($("scenario-c").value)),
+        scenarioD: Math.max(0, safeNumber($("scenario-d").value)),
+        scenarioE: Math.max(0, safeNumber($("scenario-e").value)),
+        entryMode: $("sp-entry-mode").value
+      };
+    }
+
+    function updateQualityPanel(base, scenarios, inputs) {
+      const quality = base.quality;
+      const score = Math.round(quality.score);
+      const profitableCount = scenarios.filter((scenario) => scenario.netProfit > 0).length;
+      const best = Math.max(...scenarios.map((scenario) => scenario.netProfit));
+      const worst = Math.min(...scenarios.map((scenario) => scenario.netProfit));
+
+      $("quality-score").innerHTML = `${score}<small>/ 100</small>`;
+      $("quality-badge").className = `quality-badge ${quality.tone}`;
+      $("quality-badge").textContent = quality.label;
+      $("quality-fill").style.width = `${score}%`;
+      $("quality-caption").textContent = quality.explanation;
+
+      let returnHeading = "Net return is under pressure";
+      if (base.netReturnPct >= 20) returnHeading = "Net return looks strong";
+      else if (base.netReturnPct >= 8) returnHeading = "Net return looks healthy";
+      else if (base.netReturnPct >= 0) returnHeading = "Net return is positive but thin";
+      $("quality-metric-0").textContent = returnHeading;
+      $("quality-metric-sub-0").textContent = `Current net return is ${formatPercent(base.netReturnPct)} after fees, slippage, and tax.`;
+
+      let targetHeading = "Target price is moderate";
+      if (inputs.targetReturnRate >= 50) targetHeading = "Target price is aggressive";
+      else if (inputs.targetReturnRate >= 25) targetHeading = "Target price is ambitious";
+      else if (inputs.targetReturnRate <= 10) targetHeading = "Target price is conservative";
+      $("quality-metric-1").textContent = targetHeading;
+      $("quality-metric-sub-1").textContent = `A ${formatPercent(inputs.targetReturnRate)} desired return implies a target sell price of ${formatMoney(base.targetSellPrice)}.`;
+
+      let feeHeading = "Fee drag is manageable";
+      if (base.feeImpactPct >= 4) feeHeading = "Fee drag is heavy";
+      else if (base.feeImpactPct >= 2) feeHeading = "Fee drag is noticeable";
+      else if (base.feeImpactPct < 1) feeHeading = "Fee drag is lean";
+      if (inputs.volatilityRate >= 20) feeHeading += " and volatility is high";
+      $("quality-metric-2").textContent = feeHeading;
+      $("quality-metric-sub-2").textContent = `${formatPercent(base.feeImpactPct)} of invested capital is lost to fees, while the trade uses a volatility reference of ${formatPercent(inputs.volatilityRate)}.`;
+
+      let scenarioHeading = "Scenario resilience is limited";
+      if (profitableCount === scenarios.length) scenarioHeading = "Scenario range stays profitable";
+      else if (profitableCount >= Math.ceil(scenarios.length / 2)) scenarioHeading = "Trade survives mid-range exits";
+      else if (profitableCount === 0) scenarioHeading = "Every scenario still loses money";
+      $("quality-metric-3").textContent = scenarioHeading;
+      $("quality-metric-sub-3").textContent = `Across ${scenarios.length} scenario paths, net outcomes range from ${formatMoney(worst)} to ${formatMoney(best)}.`;
+    }
+
+    function renderSnapshot(base, entry, inputs) {
+      const rows = [
+        ["Selected asset", inputs.crypto, "BTC and ETH are preset, and custom labels are supported for other coins or tokens."],
+        ["Entry mode", entry.modeLabel, "Shows whether the trade uses one buy price or a weighted average from multiple buy transactions."],
+        ["Quoted average buy price", formatMoney(entry.quotedAverageBuyPrice), "This is the market price basis before slippage lifts the executed buy cost."],
+        ["Executed average buy price", formatMoney(entry.averageBuyPrice), `Buy slippage of ${formatPercent(inputs.buySlippageRate)} is applied before fees are added.`],
+        ["Sell quantity", formatUnits(base.quantity), entry.totalBoughtQuantity > base.quantity ? "This is a partial exit, so buy-side fees are allocated proportionally to the sold quantity." : "All accumulated crypto is being evaluated in the result."],
+        ["Actual sell price", formatMoney(base.actualSellPrice), `Sell slippage of ${formatPercent(inputs.sellSlippageRate)} is applied to the quoted exit price.`],
+        ["Total fees", formatMoney(base.totalFees), "This combines allocated buy-side costs with sell-side trading and exchange fees."],
+        ["Fee impact %", formatPercent(base.feeImpactPct), "This shows how much of the invested capital is lost to execution friction."],
+        ["Tax estimate", formatMoney(base.taxAmount), "Tax is applied only when the trade shows a positive gross profit."],
+        ["Break-even price", formatMoney(base.breakEven), "This is the price per unit needed to recover the full investment cost."],
+        ["Target sell price", formatMoney(base.targetSellPrice), `Based on a desired return target of ${formatPercent(inputs.targetReturnRate)} from the average buy price.`],
+        ["Volatility reference", formatPercent(inputs.volatilityRate), "Used to judge whether the trade looks stable, stretched, or fragile under crypto-style price swings."],
+        ["Average buy price", formatMoney(base.buyPrice), "This is the executed weighted cost basis per unit in the current setup."],
+        ["Net profit per unit", formatMoney(base.profitPerUnit), "This spreads the final net result across the sold quantity to show per-unit efficiency."],
+        ["Trade quality score", `${Math.round(base.quality.score)} / 100 (${base.quality.label})`, "The score blends net return, fee drag, volatility pressure, and scenario resilience into one quality signal."]
+      ];
+
+      $("summary-body").innerHTML = rows.map((row) => `
+    <tr>
+      <td>${row[0]}</td>
+      <td class="compare-a-cell">${row[1]}</td>
+      <td class="compare-b-cell">${row[2]}</td>
+    </tr>
+  `).join("");
+    }
+
+    function renderScenarios(scenarios) {
+      $("scenario-body").innerHTML = scenarios.map((scenario) => `
+    <tr>
+      <td>${scenario.label}</td>
+      <td class="compare-a-cell">${formatMoney(scenario.quotedSellPrice)}</td>
+      <td>${formatMoney(scenario.actualSellPrice)}</td>
+      <td>${formatMoney(scenario.netProfit)}</td>
+      <td>${formatPercent(scenario.netReturnPct)}</td>
+      <td class="compare-b-cell">${scenario.outcomeLabel}</td>
+    </tr>
+  `).join("");
+    }
+
+    function renderTransactionTable(scenarios) {
+      state.csvRows = scenarios.map((scenario) => ({
+        Scenario: scenario.label,
+        Asset: state.currentCrypto,
+        AverageBuyPrice: formatMoney(scenario.buyPrice),
+        QuotedSellPrice: formatMoney(scenario.quotedSellPrice),
+        ActualSellPrice: formatMoney(scenario.actualSellPrice),
+        Quantity: scenario.quantity.toFixed(6),
+        TotalFees: formatMoney(scenario.totalFees),
+        GrossProfitLoss: formatMoney(scenario.grossProfit),
+        Tax: formatMoney(scenario.taxAmount),
+        NetProfitLoss: formatMoney(scenario.netProfit),
+        NetReturnPercent: formatPercent(scenario.netReturnPct)
+      }));
+
+      $("projection-body").innerHTML = scenarios.map((scenario) => `
+    <tr>
+      <td>${scenario.label}</td>
+      <td>${formatMoney(scenario.buyPrice)}</td>
+      <td>${formatMoney(scenario.quotedSellPrice)}</td>
+      <td>${formatMoney(scenario.actualSellPrice)}</td>
+      <td>${formatUnits(scenario.quantity)}</td>
+      <td>${formatMoney(scenario.totalFees)}</td>
+      <td>${formatMoney(scenario.grossProfit)}</td>
+      <td>${formatMoney(scenario.taxAmount)}</td>
+      <td>${formatMoney(scenario.netProfit)}</td>
+      <td>${formatPercent(scenario.netReturnPct)}</td>
+    </tr>
+  `).join("");
+    }
+
+    function destroyChart(key) {
+      if (state.charts[key]) {
+        state.charts[key].destroy();
+        state.charts[key] = null;
+      }
+    }
+
+    function buildAxisBounds(values) {
+      const finite = values.filter((value) => Number.isFinite(value));
+      if (!finite.length) return { suggestedMin: -1, suggestedMax: 1 };
+      let min = Math.min(...finite, 0);
+      let max = Math.max(...finite, 0);
+      if (min === max) {
+        const pad = Math.abs(min || 1) * 0.25 + 1;
+        min -= pad;
+        max += pad;
+      }
+      const span = max - min;
+      const pad = span * 0.12;
+      return { suggestedMin: min - pad, suggestedMax: max + pad };
+    }
+
+    function renderCharts(base, scenarios) {
+      if (!window.Chart) return;
+      destroyChart("bar");
+      destroyChart("pie");
+      destroyChart("comparison");
+
+      const barValues = [base.totalInvestment, base.totalSellValue, base.grossProfit, base.netProfit];
+      const barAxis = buildAxisBounds(barValues);
+      state.charts.bar = new Chart($("bar-chart"), {
+        type: "bar",
+        data: {
+          labels: ["Investment", "Total Value", "Gross P/L", "Net P/L"],
+          datasets: [{
+            data: barValues,
+            backgroundColor: ["#0d9488", "#0284c7", base.grossProfit >= 0 ? "#f59e0b" : "#fb7185", base.netProfit >= 0 ? "#10b981" : "#f43f5e"],
+            borderRadius: 10
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: {
+            y: {
+              suggestedMin: barAxis.suggestedMin,
+              suggestedMax: barAxis.suggestedMax,
+              ticks: {
+                callback(value) {
+                  return formatMoney(value);
+                }
+              }
+            }
+          }
+        }
+      });
+
+      const pieLabels = [];
+      const pieValues = [];
+      const pieColors = [];
+      const pushPie = (label, value, color) => {
+        if (value > 0) {
+          pieLabels.push(label);
+          pieValues.push(value);
+          pieColors.push(color);
+        }
+      };
+
+      pushPie("Invested Capital", Math.max(base.totalInvestment, 0), "#0d9488");
+      pushPie("Total Fees", Math.max(base.totalFees, 0), "#0284c7");
+      pushPie("Tax", Math.max(base.taxAmount, 0), "#f59e0b");
+      pushPie(base.netProfit >= 0 ? "Net Profit" : "Net Loss", Math.max(Math.abs(base.netProfit), 0), base.netProfit >= 0 ? "#10b981" : "#f43f5e");
+
+      if (!pieValues.length) {
+        pieLabels.push("No measurable impact");
+        pieValues.push(1);
+        pieColors.push("#94a3b8");
+      }
+
+      state.charts.pie = new Chart($("breakdown-chart"), {
+        type: "doughnut",
+        data: {
+          labels: pieLabels,
+          datasets: [{
+            data: pieValues,
+            backgroundColor: pieColors
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { position: "bottom" } }
+        }
+      });
+
+      const comparisonValues = [
+        ...scenarios.map((scenario) => scenario.grossProfit),
+        ...scenarios.map((scenario) => scenario.netProfit)
+      ];
+      const lineAxis = buildAxisBounds(comparisonValues);
+      state.charts.comparison = new Chart($("comparison-chart"), {
+        type: "line",
+        data: {
+          labels: scenarios.map((scenario) => `${scenario.label} · ${formatMoney(scenario.quotedSellPrice)}`),
+          datasets: [
+            {
+              label: "Gross Profit / Loss",
+              data: scenarios.map((scenario) => scenario.grossProfit),
+              borderColor: "#f59e0b",
+              backgroundColor: "rgba(245, 158, 11, 0.14)",
+              fill: false,
+              tension: 0.22,
+              pointRadius: 4,
+              pointHoverRadius: 5
+            },
+            {
+              label: "Net Profit / Loss",
+              data: scenarios.map((scenario) => scenario.netProfit),
+              borderColor: "#0d9488",
+              backgroundColor: "rgba(13, 148, 136, 0.12)",
+              fill: true,
+              tension: 0.26,
+              pointRadius: 4,
+              pointHoverRadius: 5
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { position: "bottom" } },
+          scales: {
+            y: {
+              suggestedMin: lineAxis.suggestedMin,
+              suggestedMax: lineAxis.suggestedMax,
+              ticks: {
+                callback(value) {
+                  return formatMoney(value);
+                }
+              }
+            }
+          }
+        }
+      });
+    }
+
+    function scrollToResults() {
+      $("results-section").scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    function calculateCryptoProfit(announce = false, shouldScroll = false) {
+      state.currentCurrency = $("sp-currency").value;
+      state.currentCrypto = getSelectedCrypto();
+      updateCurrencyIndicators();
+      sliderConfigs.forEach(updateSliderLabel);
+
+      const inputs = getInputs();
+      if (inputs.sellPrice <= 0) {
+        setStatus("Enter a sell price greater than zero to calculate the crypto trade outcome.", "error");
+        state.copyText = "";
+        return;
+      }
+
+      const entry = deriveEntryData(inputs);
+      if (!entry.valid) {
+        setStatus(entry.message, "error");
+        state.copyText = "";
+        return;
+      }
+
+      const base = computeOutcome(entry, inputs, inputs.sellPrice, "Base Exit");
+      const scenarios = buildScenarioDefinitions(inputs)
+        .map((definition) => computeOutcome(entry, inputs, definition.sellPrice, definition.label))
+        .sort((a, b) => a.quotedSellPrice - b.quotedSellPrice);
+
+      const bestScenario = scenarios.reduce((best, current) => current.netProfit > best.netProfit ? current : best, scenarios[0]);
+      const worstScenario = scenarios.reduce((worst, current) => current.netProfit < worst.netProfit ? current : worst, scenarios[0]);
+
+      state.csvFilename = `${inputs.crypto.toLowerCase()}_profit_scenarios.csv`;
+      $("result-mode-pill").textContent = `Latest Result: ${inputs.crypto} · ${entry.modeLabel} · Buy slip ${formatPercent(inputs.buySlippageRate)} · Sell slip ${formatPercent(inputs.sellSlippageRate)}`;
+
+      setResultCard(0, "Total Investment", formatMoney(base.totalInvestment), "Capital committed on the buy side including executed slippage and estimated fees");
+      setResultCard(1, "Total Value", formatMoney(base.totalSellValue), "Net cash received after selling fees and execution friction");
+      setResultCard(2, base.grossProfit >= 0 ? "Gross Profit" : "Gross Loss", formatMoney(base.grossProfit), "Before tax, after buy and sell fees");
+      setResultCard(3, base.netProfit >= 0 ? "Net Profit After Tax" : "Net Loss After Tax", formatMoney(base.netProfit), "The cleaner bottom-line result after tax is applied on gains");
+      setResultCard(4, "Gross Return %", formatPercent(base.grossReturnPct), "Gross profit divided by total investment cost");
+      setResultCard(5, "Net Return %", formatPercent(base.netReturnPct), "Net profit divided by total investment cost");
+      setResultCard(6, "Break-even Price", formatMoney(base.breakEven), "Average price per unit needed to recover invested capital");
+      setResultCard(7, "Target Sell Price", formatMoney(base.targetSellPrice), `Derived from a desired return target of ${formatPercent(inputs.targetReturnRate)}`);
+      setResultCard(8, "Average Buy Price", formatMoney(base.buyPrice), "Weighted executed cost basis per unit in the current setup");
+      setResultCard(9, base.netProfit >= 0 ? `Profit / ${inputs.crypto}` : `Loss / ${inputs.crypto}`, formatMoney(base.profitPerUnit), "Net result spread across the sold crypto quantity");
+      setResultCard(10, "Fee Impact %", formatPercent(base.feeImpactPct), "The share of invested capital consumed by trading and exchange fees");
+      setResultCard(11, "Trade Quality Score", `${Math.round(base.quality.score)} / 100`, `${base.quality.label} rating based on return quality, fee drag, and volatility pressure`);
+
+      updateQualityPanel(base, scenarios, inputs);
+
+      $("insight-box").innerHTML = `
+    <strong>Dynamic crypto insight:</strong>
+    The current setup uses an executed average buy price of ${formatMoney(entry.averageBuyPrice)} for ${formatUnits(base.quantity)} and an executed sell price of ${formatMoney(base.actualSellPrice)} after slippage. Gross outcome comes to ${formatMoney(base.grossProfit)}, while net outcome settles at ${formatMoney(base.netProfit)} after estimated tax. The best scenario in the current range reaches ${formatMoney(bestScenario.netProfit)}, and the weakest falls to ${formatMoney(worstScenario.netProfit)}, which helps show whether the trade is efficient or too optimistic.
+  `;
+
+      $("formula-box").innerHTML = `
+    <strong>Core formulas used</strong><br>
+    Total Investment = (Buy Price × Quantity) + Buy Fees<br>
+    Total Sell Value = (Sell Price × Quantity) − Sell Fees<br>
+    Gross Profit = Total Sell Value − Total Investment<br>
+    Tax = (Gross Profit &gt; 0 ? Gross Profit × Tax Rate : 0)<br>
+    Net Profit = Gross Profit − Tax<br>
+    Gross Return % = (Gross Profit ÷ Total Investment) × 100<br>
+    Net Return % = (Net Profit ÷ Total Investment) × 100<br>
+    Break-even Price = Total Investment ÷ Quantity<br>
+    Target Sell Price = Average Buy Price × (1 + Desired Return %)<br>
+    Weighted Average Buy Price = Total Executed Cost ÷ Total Quantity<br>
+    Allocated Buy Fees = Total Buy Fees × (Sold Quantity ÷ Total Bought Quantity)<br>
+    Actual Buy Price = Buy Price × (1 + Buy Slippage %)<br>
+    Actual Sell Price = Sell Price × (1 − Sell Slippage %)
+  `;
+
+      renderSnapshot(base, entry, inputs);
+      renderScenarios(scenarios);
+      renderTransactionTable(scenarios);
+      renderCharts(base, scenarios);
+
+      if (base.netProfit > 0) {
+        setStatus(entry.warning || "The current crypto trade is profitable under the chosen assumptions after estimated fees, slippage, and tax.", entry.warning ? "warning" : "success");
+      } else if (base.netProfit === 0) {
+        setStatus(entry.warning || "The current crypto trade is close to break-even after estimated execution costs and tax.", "warning");
+      } else {
+        setStatus(entry.warning || "The current crypto trade shows a net loss after estimated fees, slippage, and tax.", entry.warning ? "warning" : "error");
+      }
+
+      state.copyText = [
+        "Crypto Profit Calculator",
+        `Asset: ${inputs.crypto}`,
+        `Entry mode: ${entry.modeLabel}`,
+        `Buy slippage: ${formatPercent(inputs.buySlippageRate)}`,
+        `Sell slippage: ${formatPercent(inputs.sellSlippageRate)}`,
+        `Quoted average buy price: ${formatMoney(entry.quotedAverageBuyPrice)}`,
+        `Executed average buy price: ${formatMoney(entry.averageBuyPrice)}`,
+        `Quantity sold: ${formatUnits(base.quantity)}`,
+        `Total investment: ${formatMoney(base.totalInvestment)}`,
+        `Total value: ${formatMoney(base.totalSellValue)}`,
+        `Gross profit/loss: ${formatMoney(base.grossProfit)}`,
+        `Net profit/loss: ${formatMoney(base.netProfit)}`,
+        `Gross return %: ${formatPercent(base.grossReturnPct)}`,
+        `Net return %: ${formatPercent(base.netReturnPct)}`,
+        `Break-even price: ${formatMoney(base.breakEven)}`,
+        `Target sell price: ${formatMoney(base.targetSellPrice)}`,
+        `Fee impact %: ${formatPercent(base.feeImpactPct)}`,
+        `Volatility reference: ${formatPercent(inputs.volatilityRate)}`,
+        `Trade quality score: ${Math.round(base.quality.score)} / 100 (${base.quality.label})`
+      ].join("\n");
+
+      state.lastResult = { base, entry, inputs, scenarios };
+
+      if (announce) setCopyNote("Results refreshed.");
+      if (shouldScroll) scrollToResults();
+    }
+
+    function copyResults() {
+      if (!state.copyText) {
+        setCopyNote("Calculate the trade first.");
+        return;
+      }
+      if (!navigator.clipboard || !navigator.clipboard.writeText) {
+        setCopyNote("Copy is not available in this browser.");
+        return;
+      }
+      navigator.clipboard.writeText(state.copyText).then(() => {
+        setCopyNote("Results copied.");
+      }).catch(() => {
+        setCopyNote("Copy failed in this browser.");
+      });
+    }
+
+    function downloadCsv() {
+      if (!state.csvRows.length) return;
+      const headers = Object.keys(state.csvRows[0]);
+      const lines = [headers.join(",")];
+      state.csvRows.forEach((row) => {
+        lines.push(headers.map((header) => `"${String(row[header]).replace(/"/g, '""')}"`).join(","));
+      });
+      const blob = new Blob([lines.join("\n")], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = state.csvFilename;
+      link.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function resetPlanner() {
+      $("sp-buy").value = 20000;
+      $("sp-buy-sl").value = 20000;
+      $("sp-sell").value = 30000;
+      $("sp-sell-sl").value = 30000;
+      $("sp-quantity").value = 0.5;
+      $("sp-quantity-sl").value = 0.5;
+      $("sp-dividend").value = 10000;
+      $("sp-dividend-sl").value = 10000;
+      $("sp-brokerage-mode").value = "percent";
+      $("sp-brokerage").value = 0.4;
+      $("sp-brokerage-sl").value = 0.4;
+      $("sp-charges").value = 0.15;
+      $("sp-charges-sl").value = 0.15;
+      $("sp-tax").value = 20;
+      $("sp-tax-sl").value = 20;
+      $("sp-target").value = 25;
+      $("sp-target-sl").value = 25;
+      $("sp-stop").value = 12;
+      $("sp-stop-sl").value = 12;
+      $("sp-buy-slippage").value = 0.2;
+      $("sp-buy-slippage-sl").value = 0.2;
+      $("sp-sell-slippage").value = 0.2;
+      $("sp-sell-slippage-sl").value = 0.2;
+      $("scenario-a").value = 22000;
+      $("scenario-a-sl").value = 22000;
+      $("scenario-b").value = 26000;
+      $("scenario-b-sl").value = 26000;
+      $("scenario-c").value = 30000;
+      $("scenario-c-sl").value = 30000;
+      $("scenario-d").value = 34000;
+      $("scenario-d-sl").value = 34000;
+      $("scenario-e").value = 38000;
+      $("scenario-e-sl").value = 38000;
+      $("sp-entry-mode").value = "single";
+      $("sp-currency").value = "USD";
+      $("crypto-select").value = "BTC";
+      $("crypto-custom").value = "";
+      clearTransactions(true);
+      setEntryMode("single");
+      syncBrokerageMode();
+      state.currentCurrency = "USD";
+      updateCurrencyIndicators();
+      updateCryptoSelection(false);
+      sliderConfigs.forEach(updateSliderLabel);
+      calculateCryptoProfit(true);
+    }
+
+    function initMobileNav() {
+      const btn = $("hamburgerBtn");
+      const nav = $("mobileNav");
+      btn.addEventListener("click", () => {
+        const open = nav.classList.toggle("open");
+        btn.setAttribute("aria-expanded", open ? "true" : "false");
+      });
+    }
+
+    function init() {
+      initMobileNav();
+      sliderConfigs.forEach(bindSliderPair);
+
+      $("sp-currency").addEventListener("change", () => {
+        state.currentCurrency = $("sp-currency").value;
+        updateCurrencyIndicators();
+        sliderConfigs.forEach(updateSliderLabel);
+        calculateCryptoProfit(false);
+      });
+
+      $("sp-brokerage-mode").addEventListener("change", () => {
+        syncBrokerageMode();
+        calculateCryptoProfit(false);
+      });
+
+      $("sp-entry-mode").addEventListener("change", (event) => {
+        setEntryMode(event.target.value);
+        calculateCryptoProfit(false);
+      });
+
+      $("crypto-select").addEventListener("change", () => updateCryptoSelection(true));
+      $("crypto-custom").addEventListener("input", () => updateCryptoSelection(true));
+
+      clearTransactions(true);
+      setEntryMode("single");
+      syncBrokerageMode();
+      state.currentCurrency = $("sp-currency").value;
+      updateCurrencyIndicators();
+      updateCryptoSelection(false);
+      sliderConfigs.forEach(updateSliderLabel);
+      calculateCryptoProfit(false);
+    }
+
+    window.switchModule = switchModule;
+    window.addTransactionRow = addTransactionRow;
+    window.clearTransactions = clearTransactions;
+    window.calculateCryptoProfit = calculateCryptoProfit;
+    window.calculateStockProfit = calculateCryptoProfit;
+    window.copyResults = copyResults;
+    window.downloadCsv = downloadCsv;
+    window.resetPlanner = resetPlanner;
+
+    window.addEventListener("DOMContentLoaded", init);
+
+
+  </script>
+</body>
+
+</html>
