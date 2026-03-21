@@ -1,0 +1,2078 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow">
+  <title>Bitcoin Growth Calculator &ndash; See How Your Bitcoin Investment Grew | SmartCalcWorld</title>
+  <meta name="description"
+    content="Calculate Bitcoin investment growth, compare returns, and simulate future projections with SmartCalcWorld's Bitcoin Growth Calculator. Explore charts, tables, CAGR, and strategy comparisons in one place.">
+  <link rel="canonical" href="https://smartcalcworld.com/finance/investment/bitcoin-growth-calculator.html">
+  <link rel="icon" type="image/png" href="https://smartcalcworld.com/favicon.png">
+  <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://smartcalcworld.com/#org",
+        "name": "SmartCalc World",
+        "url": "https://smartcalcworld.com",
+        "description": "Free finance calculators for investing, saving, inflation, returns, trading, and long-term planning."
+      },
+      {
+        "@type": "WebApplication",
+        "@id": "https://smartcalcworld.com/finance/investment/bitcoin-growth-calculator.html#app",
+        "name": "Bitcoin Growth Calculator",
+        "url": "https://smartcalcworld.com/finance/investment/bitcoin-growth-calculator.html",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Any",
+        "creator": {
+          "@id": "https://smartcalcworld.com/#org"
+        },
+        "description": "Calculate Bitcoin investment growth, compare historical and future projections, review CAGR, and visualize how Bitcoin compares with fixed-return investing and SIP-style saving.",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Finance",
+            "item": "https://smartcalcworld.com/finance/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Investment",
+            "item": "https://smartcalcworld.com/finance/investment/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Bitcoin Growth Calculator",
+            "item": "https://smartcalcworld.com/finance/investment/bitcoin-growth-calculator.html"
+          }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How much would my Bitcoin investment be worth today?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "That depends on when you bought Bitcoin, how much you invested, and the Bitcoin price at the end date. This calculator estimates the value by using a built-in historical reference dataset or a future growth assumption."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is Bitcoin CAGR?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Bitcoin CAGR is the compound annual growth rate. It shows the annualized growth rate that would turn your starting investment into the ending value over the chosen period."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is Bitcoin a good long-term investment?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Bitcoin has delivered very strong gains in some periods, but it has also gone through large drawdowns. Whether it is suitable depends on risk tolerance, time horizon, and diversification needs."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can Bitcoin returns be predicted?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No return can be predicted with certainty. Future projection mode is only a planning tool that applies a chosen annual growth assumption and should not be treated as a guarantee."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why is Bitcoin so volatile?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Bitcoin can be volatile because market sentiment, liquidity, regulation, macro conditions, and adoption expectations can shift quickly. That creates large price swings compared with more mature asset classes."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I calculate Bitcoin profit?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Bitcoin profit is the final investment value minus the original investment amount. Return percentage divides that profit by the original investment and multiplies by 100."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is growth multiple?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Growth multiple shows how many times the ending value is compared with the starting investment. For example, 5x means the investment became five times larger."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is crypto riskier than stocks?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "In many cases yes. Bitcoin and other crypto assets often show much larger swings than diversified stock portfolios, which is why comparison and scenario planning are important."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does this calculator use exact live Bitcoin prices?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. Historical mode uses an embedded reference dataset with interpolation for educational planning. It is designed to show approximate growth patterns, not live market pricing."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+  <style>
+    :root {
+      --teal: #0d9488;
+      --teal-dark: #0f766e;
+      --teal-light: #ccfbf1;
+      --amber: #f59e0b;
+      --amber-light: #fef3c7;
+      --rose: #f43f5e;
+      --rose-light: #ffe4e6;
+      --sky: #0284c7;
+      --sky-light: #dbeafe;
+      --slate-950: #020617;
+      --slate-900: #0f172a;
+      --slate-800: #1e293b;
+      --slate-700: #334155;
+      --slate-600: #475569;
+      --slate-500: #64748b;
+      --slate-400: #94a3b8;
+      --slate-300: #cbd5e1;
+      --slate-200: #e2e8f0;
+      --slate-100: #f1f5f9;
+      --slate-50: #f8fafc;
+      --white: #ffffff;
+      --radius: 16px;
+      --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.08);
+      --shadow-md: 0 10px 28px rgba(15, 23, 42, 0.12);
+      --header-h: 68px;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: radial-gradient(circle at top left, rgba(13, 148, 136, 0.14), transparent 34%), linear-gradient(180deg, #f8fafc 0%, #eff6ff 46%, #f8fafc 100%);
+      color: var(--slate-800);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    img,
+    canvas {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      color: var(--teal);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: linear-gradient(135deg, #0891b2 0%, #059669 100%);
+      color: var(--white);
+      box-shadow: 0 2px 10px rgba(15, 23, 42, 0.12);
+    }
+
+    .hdr-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .hdr-logo {
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+    }
+
+    .hdr-nav {
+      display: flex;
+      gap: 1.25rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .hdr-nav a,
+    .hdr-nav span,
+    .mobile-nav a,
+    .mobile-nav span {
+      color: var(--white);
+      font-weight: 600;
+      font-size: 0.95rem;
+      opacity: 0.96;
+    }
+
+    .nav-disabled {
+      opacity: 0.72;
+      cursor: default;
+    }
+
+    .hamburger {
+      display: none;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+      padding: 0.25rem;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--white);
+      margin: 5px 0;
+      border-radius: 999px;
+    }
+
+    .mobile-nav {
+      display: none;
+      flex-direction: column;
+      gap: 0.75rem;
+      padding: 0 1rem 1rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1.25rem;
+    }
+
+    .breadcrumb {
+      font-size: 0.84rem;
+      color: var(--slate-500);
+      margin-bottom: 1.25rem;
+    }
+
+    .hero,
+    .card,
+    .content-section {
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid rgba(148, 163, 184, 0.22);
+      border-radius: 20px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(13, 148, 136, 0.14), rgba(2, 132, 199, 0.08)), var(--white);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -80px -80px auto;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle, rgba(13, 148, 136, 0.14), transparent 70%);
+      pointer-events: none;
+    }
+
+    .card {
+      padding: 1.5rem;
+      margin-top: 2rem;
+      scroll-margin-top: calc(var(--header-h) + 1rem);
+    }
+
+    .content-section {
+      padding: 2rem;
+      margin-top: 2rem;
+      scroll-margin-top: calc(var(--header-h) + 1rem);
+    }
+
+    .card-title,
+    .content-section h2 {
+      font-size: clamp(1.25rem, 3vw, 1.75rem);
+      font-weight: 800;
+      color: var(--slate-900);
+      margin-bottom: 1rem;
+    }
+
+    .content-section h2 {
+      border-left: 4px solid var(--teal);
+      padding-left: 1rem;
+    }
+
+    .content-section h3 {
+      font-size: 1.15rem;
+      color: var(--slate-900);
+      margin: 1.6rem 0 0.65rem;
+    }
+
+    .content-section p,
+    .content-section li,
+    .module-intro,
+    .chart-note,
+    .table-context,
+    .hero p,
+    .hint {
+      color: var(--slate-600);
+      font-size: 0.97rem;
+    }
+
+    .content-section ul {
+      margin: 0.2rem 0 1rem 1.25rem;
+    }
+
+    .content-section li {
+      margin-bottom: 0.55rem;
+    }
+
+    .hero-badge,
+    .mode-pill,
+    .copy-note {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      border-radius: 999px;
+      padding: 0.48rem 0.9rem;
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .hero-badge {
+      background: var(--teal-light);
+      color: var(--teal-dark);
+      margin-bottom: 0.9rem;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 5vw, 3.25rem);
+      line-height: 1.08;
+      color: var(--slate-900);
+      margin-bottom: 0.8rem;
+    }
+
+    .hero-sub {
+      max-width: 760px;
+      color: var(--slate-600);
+      font-size: 1rem;
+    }
+
+    .hero-highlights,
+    .toolbar-grid,
+    .field-pair,
+    .qnav,
+    .result-grid,
+    .charts-grid,
+    .comparison-grid,
+    .links-grid,
+    .footer-content,
+    .faq-list,
+    .info-list {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .hero-highlights {
+      margin-top: 1.25rem;
+    }
+
+    .hero-chip,
+    .toolbar-box,
+    .form-row,
+    .info-pill,
+    .callout,
+    .status-banner,
+    .insight-box,
+    .formula-box,
+    .comparison-summary,
+    .link-card,
+    .faq-item {
+      border: 1px solid rgba(148, 163, 184, 0.24);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .hero-chip {
+      background: rgba(255, 255, 255, 0.82);
+      padding: 0.95rem 1rem;
+      color: var(--slate-600);
+    }
+
+    .hero-chip strong {
+      display: block;
+      color: var(--slate-900);
+      margin-bottom: 0.2rem;
+    }
+
+    .toolbar-box {
+      background: linear-gradient(180deg, rgba(13, 148, 136, 0.08), rgba(255, 255, 255, 0.94));
+      padding: 1rem;
+      height: 100%;
+    }
+
+    .toolbar-box h2 {
+      font-size: 1.02rem;
+      font-weight: 800;
+      color: var(--slate-900);
+      margin-bottom: 0.65rem;
+    }
+
+    .info-pill,
+    .callout,
+    .status-banner,
+    .insight-box,
+    .formula-box {
+      padding: 0.95rem 1rem;
+    }
+
+    .info-pill {
+      background: rgba(255, 255, 255, 0.86);
+      color: var(--slate-700);
+    }
+
+    .callout,
+    .insight-box {
+      background: linear-gradient(135deg, rgba(13, 148, 136, 0.1), rgba(255, 255, 255, 0.96));
+      color: var(--slate-700);
+      margin-top: 1rem;
+    }
+
+    .formula-box {
+      background: linear-gradient(180deg, rgba(2, 132, 199, 0.08), rgba(255, 255, 255, 0.96));
+      color: var(--slate-700);
+      margin-top: 1rem;
+    }
+
+    .status-banner {
+      margin-top: 1rem;
+      background: rgba(15, 23, 42, 0.04);
+      color: var(--slate-700);
+    }
+
+    .status-banner.success {
+      background: rgba(13, 148, 136, 0.1);
+      color: var(--teal-dark);
+    }
+
+    .status-banner.warning {
+      background: rgba(245, 158, 11, 0.14);
+      color: #92400e;
+    }
+
+    .status-banner.error {
+      background: rgba(244, 63, 94, 0.12);
+      color: #9f1239;
+    }
+
+    .warning-box {
+      display: grid;
+      gap: 0.7rem;
+      margin-top: 1rem;
+      padding: 1rem;
+      border-radius: 16px;
+      border: 1px solid rgba(245, 158, 11, 0.24);
+      background: linear-gradient(180deg, rgba(245, 158, 11, 0.12), rgba(255, 255, 255, 0.96));
+      color: #92400e;
+    }
+
+    .warning-box.hidden {
+      display: none !important;
+    }
+
+    .warning-box strong {
+      color: var(--slate-900);
+    }
+
+    .warning-list {
+      display: grid;
+      gap: 0.45rem;
+    }
+
+    .warning-item {
+      padding-left: 1rem;
+      position: relative;
+    }
+
+    .warning-item::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--amber);
+      font-weight: 900;
+    }
+
+    .form-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      background: rgba(255, 255, 255, 0.88);
+      padding: 1rem;
+      min-width: 0;
+    }
+
+    .lbl {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--slate-900);
+    }
+
+    input,
+    select,
+    button {
+      font: inherit;
+    }
+
+    input[type="number"],
+    input[type="date"],
+    input[type="text"],
+    select {
+      width: 100%;
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      border-radius: 14px;
+      padding: 0.85rem 0.95rem;
+      background: var(--white);
+      color: var(--slate-900);
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    input[type="number"]:focus,
+    input[type="date"]:focus,
+    input[type="text"]:focus,
+    select:focus {
+      border-color: rgba(2, 132, 199, 0.55);
+      box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.1);
+    }
+
+    .input-slider {
+      display: grid;
+      gap: 0.9rem;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--teal);
+      cursor: pointer;
+    }
+
+    .slider-lbl {
+      text-align: right;
+      font-weight: 700;
+      color: var(--slate-600);
+      font-size: 0.92rem;
+      word-break: break-word;
+    }
+
+    .qnav {
+      margin-top: 1.25rem;
+    }
+
+    .qnav-btn,
+    .btn-primary,
+    .btn-secondary,
+    .btn-ghost {
+      border-radius: 14px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .qnav-btn {
+      border: 1px solid rgba(148, 163, 184, 0.28);
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--slate-700);
+      padding: 0.95rem 1rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .qnav-btn.active,
+    .qnav-btn:hover,
+    .btn-primary {
+      background: linear-gradient(135deg, #0d9488, #0f766e);
+      color: var(--white);
+      box-shadow: var(--shadow-md);
+    }
+
+    .module {
+      display: none;
+      margin-top: 1.2rem;
+    }
+
+    .module.active {
+      display: block;
+    }
+
+    .module-intro {
+      margin-bottom: 1rem;
+    }
+
+    .btn-row {
+      display: flex;
+      gap: 0.9rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+
+    .btn-primary,
+    .btn-secondary,
+    .btn-ghost {
+      border: 1px solid transparent;
+      min-height: 52px;
+      padding: 0.9rem 1.15rem;
+    }
+
+    .btn-secondary {
+      background: rgba(2, 132, 199, 0.12);
+      color: var(--sky);
+      border-color: rgba(2, 132, 199, 0.2);
+    }
+
+    .btn-ghost {
+      background: rgba(255, 255, 255, 0.94);
+      color: var(--slate-700);
+      border-color: rgba(148, 163, 184, 0.28);
+    }
+
+    .btn-primary:hover,
+    .btn-secondary:hover,
+    .btn-ghost:hover {
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .mode-note {
+      margin-top: 0.9rem;
+      border-radius: 14px;
+      padding: 0.9rem 1rem;
+      background: rgba(2, 132, 199, 0.08);
+      color: var(--slate-700);
+      border: 1px solid rgba(2, 132, 199, 0.12);
+    }
+
+    .result-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+
+    .mode-pill {
+      background: rgba(13, 148, 136, 0.1);
+      color: var(--teal-dark);
+    }
+
+    .result-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+    }
+
+    .copy-note {
+      background: rgba(2, 132, 199, 0.1);
+      color: var(--sky);
+    }
+
+    .result-card {
+      min-width: 0;
+      border-radius: 18px;
+      padding: 1rem;
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .result-card.featured .result-val {
+      font-size: clamp(1.4rem, 4vw, 2.18rem);
+    }
+
+    .result-card.teal {
+      background: linear-gradient(180deg, rgba(13, 148, 136, 0.14), rgba(255, 255, 255, 0.98));
+    }
+
+    .result-card.sky {
+      background: linear-gradient(180deg, rgba(2, 132, 199, 0.14), rgba(255, 255, 255, 0.98));
+    }
+
+    .result-card.amber {
+      background: linear-gradient(180deg, rgba(245, 158, 11, 0.16), rgba(255, 255, 255, 0.98));
+    }
+
+    .result-card.rose {
+      background: linear-gradient(180deg, rgba(244, 63, 94, 0.14), rgba(255, 255, 255, 0.98));
+    }
+
+    .result-card.slate {
+      background: linear-gradient(180deg, rgba(71, 85, 105, 0.12), rgba(255, 255, 255, 0.98));
+    }
+
+    .result-card.positive .result-val {
+      color: #047857;
+    }
+
+    .result-card.negative .result-val {
+      color: #be123c;
+    }
+
+    .result-card.positive {
+      border-color: rgba(5, 150, 105, 0.22);
+    }
+
+    .result-card.negative {
+      border-color: rgba(244, 63, 94, 0.24);
+    }
+
+    .result-lbl {
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: var(--slate-700);
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+
+    .result-val {
+      font-size: clamp(1.14rem, 3vw, 1.72rem);
+      line-height: 1.15;
+      font-weight: 900;
+      color: var(--slate-900);
+      margin: 0.55rem 0 0.35rem;
+      white-space: normal;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    .result-sub {
+      font-size: 0.9rem;
+      color: var(--slate-600);
+    }
+
+    .comparison-summary {
+      margin-top: 1.25rem;
+      background: rgba(255, 255, 255, 0.88);
+      padding: 1rem;
+    }
+
+    .comparison-summary h3 {
+      margin-top: 0;
+    }
+
+    .metric-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.38rem;
+      padding: 0.38rem 0.72rem;
+      border-radius: 999px;
+      background: rgba(13, 148, 136, 0.12);
+      color: var(--teal-dark);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    .metric-badge.warning {
+      background: rgba(245, 158, 11, 0.16);
+      color: #92400e;
+    }
+
+    .metric-badge.rose {
+      background: rgba(244, 63, 94, 0.12);
+      color: #9f1239;
+    }
+
+    .metric-badge.sky {
+      background: rgba(2, 132, 199, 0.12);
+      color: var(--sky);
+    }
+
+    .timeline-wrap {
+      margin-top: 0.25rem;
+    }
+
+    .timeline-note {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.75rem;
+      align-items: center;
+      flex-wrap: wrap;
+      font-size: 0.88rem;
+      color: var(--slate-600);
+    }
+
+    .timeline-note strong {
+      color: var(--slate-900);
+    }
+
+    .table-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+
+    .tbl-wrap {
+      width: 100%;
+      overflow-x: auto;
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.96);
+    }
+
+    table {
+      width: 100%;
+      min-width: 720px;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      padding: 0.85rem 0.95rem;
+      border-bottom: 1px solid rgba(226, 232, 240, 0.9);
+      text-align: left;
+      vertical-align: top;
+      color: var(--slate-700);
+      font-size: 0.93rem;
+    }
+
+    th {
+      background: linear-gradient(180deg, rgba(13, 148, 136, 0.12), rgba(236, 253, 245, 0.8));
+      color: var(--slate-900);
+      font-weight: 800;
+    }
+
+    tbody tr:nth-child(odd) td {
+      background: rgba(248, 250, 252, 0.85);
+    }
+
+    .compare-a-cell {
+      background: rgba(219, 234, 254, 0.8) !important;
+    }
+
+    .compare-b-cell {
+      background: rgba(254, 243, 199, 0.8) !important;
+    }
+
+    .charts-grid .chart-wrap {
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid rgba(148, 163, 184, 0.22);
+      border-radius: 18px;
+      padding: 1rem;
+      box-shadow: var(--shadow-sm);
+      min-width: 0;
+    }
+
+    .chart-title {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--slate-900);
+      margin-bottom: 0.25rem;
+    }
+
+    .chart-canvas {
+      position: relative;
+      height: 320px;
+      margin-top: 0.9rem;
+    }
+
+    #comparison-tables {
+      background: linear-gradient(180deg, rgba(245, 158, 11, 0.06), rgba(255, 255, 255, 0.98));
+    }
+
+    #comparison-tables th {
+      background: linear-gradient(180deg, rgba(245, 158, 11, 0.16), rgba(254, 243, 199, 0.8));
+    }
+
+    #faq {
+      background: linear-gradient(180deg, rgba(13, 148, 136, 0.06), rgba(255, 255, 255, 0.98));
+    }
+
+    #related-tools {
+      background: linear-gradient(180deg, rgba(2, 132, 199, 0.05), rgba(255, 255, 255, 0.98));
+    }
+
+    .link-card {
+      display: block;
+      position: relative;
+      overflow: hidden;
+      padding: 1rem 1rem 1rem 1.1rem;
+      color: var(--slate-700);
+      background: rgba(255, 255, 255, 0.9);
+    }
+
+    .link-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 5px;
+      background: linear-gradient(180deg, var(--teal), var(--sky));
+    }
+
+    .link-card strong {
+      display: block;
+      color: var(--slate-900);
+      margin-bottom: 0.25rem;
+    }
+
+    .faq-item {
+      background: rgba(255, 255, 255, 0.94);
+      overflow: hidden;
+    }
+
+    .faq-item summary {
+      cursor: pointer;
+      list-style: none;
+      font-weight: 800;
+      color: var(--slate-900);
+      padding: 1rem 1.1rem;
+      background: rgba(13, 148, 136, 0.06);
+    }
+
+    .faq-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-item p {
+      padding: 0 1.1rem 1rem;
+    }
+
+    .faq-item[open] {
+      box-shadow: var(--shadow-md);
+    }
+
+    .disclaimer {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.12), rgba(255, 255, 255, 0.96));
+    }
+
+    footer {
+      margin-top: 2rem;
+      background: linear-gradient(135deg, #0f172a, #0f766e);
+      color: var(--white);
+      border-radius: 24px 24px 0 0;
+      padding: 2rem 1.2rem 1.4rem;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-section h3 {
+      font-size: 1rem;
+      margin-bottom: 0.7rem;
+    }
+
+    .footer-section ul {
+      list-style: none;
+      display: grid;
+      gap: 0.55rem;
+    }
+
+    .footer-section a {
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .footer-disclaimer {
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 1rem;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .copyright {
+      max-width: 1200px;
+      margin: 1.2rem auto 0;
+      text-align: center;
+      color: rgba(255, 255, 255, 0.75);
+      font-size: 0.92rem;
+    }
+
+    @media (min-width: 640px) {
+
+      .toolbar-grid,
+      .field-pair,
+      .comparison-grid,
+      .links-grid,
+      .faq-list,
+      .hero-highlights {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .qnav {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .result-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (min-width: 768px) {
+      .charts-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .result-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .footer-content {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (min-width: 960px) {
+      .hero-highlights {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .toolbar-grid {
+        grid-template-columns: 0.95fr 1.05fr;
+      }
+
+      .result-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .comparison-grid,
+      .footer-content {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 767px) {
+      .hdr-nav {
+        display: none;
+      }
+
+      .hamburger {
+        display: inline-block;
+      }
+
+      .mobile-nav.open {
+        display: flex;
+      }
+
+      .page {
+        padding: 1rem;
+      }
+
+      .card,
+      .content-section {
+        padding: 1rem;
+      }
+
+      .field-pair,
+      .qnav,
+      .result-grid,
+      .comparison-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .chart-canvas {
+        height: 280px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="hdr-inner">
+      <div class="hdr-logo">&#129518; SmartCalc World</div>
+      <nav class="hdr-nav">
+        <a href="https://smartcalcworld.com/index.html">Home</a>
+        <a href="https://smartcalcworld.com/finance/finance-hub.html">Finance Hub</a>
+        <span class="nav-disabled">Medical Hub (Coming Soon)</span>
+        <span class="nav-disabled">Student Hub (Coming Soon)</span>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <button class="hamburger" id="hamburgerBtn" type="button" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <nav class="mobile-nav" id="mobileNav">
+      <a href="https://smartcalcworld.com/index.html">Home</a>
+      <a href="https://smartcalcworld.com/finance/finance-hub.html">Finance Hub</a>
+      <span class="nav-disabled">Medical Hub (Coming Soon)</span>
+      <span class="nav-disabled">Student Hub (Coming Soon)</span>
+      <a href="#faq">FAQ</a>
+    </nav>
+  </header>
+
+  <main class="page">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="https://smartcalcworld.com/index.html">Home</a> &rsaquo;
+      <a href="https://smartcalcworld.com/finance/finance-hub.html">Finance</a> &rsaquo;
+      <a href="https://smartcalcworld.com/finance/investment/investment-hub.html">Investment</a> &rsaquo;
+      Bitcoin Growth Calculator
+    </nav>
+
+    <section class="hero">
+      <span class="hero-badge">&#128640; Premium Bitcoin Growth Simulator</span>
+      <h1>Bitcoin Growth Calculator</h1>
+      <p class="hero-sub">Simulate how a Bitcoin investment may have grown over time or could grow in the future using
+        the same premium SmartCalc World design language used across our Crypto Profit Calculator, Portfolio Growth
+        Calculator, and Investment Goal Calculator. Review lump sum vs Bitcoin DCA, inflation-adjusted value,
+        volatility, drawdown, CAGR, growth multiple, and side-by-side comparisons with steadier investment approaches in
+        one clean dashboard.</p>
+      <div class="hero-highlights">
+        <div class="hero-chip"><strong>Replay lump sum and monthly BTC buying</strong>Historical mode now estimates both
+          one-time Bitcoin investing and recurring monthly Bitcoin accumulation using a denser built-in reference path
+          &#128200;.</div>
+        <div class="hero-chip"><strong>Project with smoother, cycle-aware, or volatile paths</strong>Future mode can use
+          straight compounding or more realistic cycle-style paths so projections feel less artificial &#128176;.</div>
+        <div class="hero-chip"><strong>See return and risk together</strong>Volatility, max drawdown, best year, worst
+          year, inflation-adjusted value, and quality scores make the result more realistic &#129504;.</div>
+      </div>
+    </section>
+
+    <section class="card" id="calculator">
+      <div class="card-title">Bitcoin Growth Planner</div>
+      <div class="toolbar-grid">
+        <div class="toolbar-box">
+          <h2>Display Setup</h2>
+          <div class="form-row">
+            <label class="lbl" for="btc-currency">Choose currency</label>
+            <select id="btc-currency">
+              <option value="USD">USD $</option>
+              <option value="INR">INR &#8377;</option>
+              <option value="EUR">EUR &euro;</option>
+              <option value="GBP">GBP &pound;</option>
+              <option value="CAD">CAD $</option>
+              <option value="AUD">AUD $</option>
+            </select>
+            <span class="hint">Formatting only. Currency labels update instantly, but the calculator does not convert
+              values with live exchange rates.</span>
+          </div>
+          <div class="mode-note">Historical mode uses a richer built-in Bitcoin reference dataset for education and
+            planning. Future mode supports smoother, cycle-aware, and more volatile projection styles, but every
+            projection is still hypothetical.</div>
+        </div>
+        <div class="toolbar-box">
+          <h2>What this tool helps you see</h2>
+          <div class="info-list">
+            <div class="info-pill">How a single Bitcoin investment or a monthly Bitcoin DCA plan can grow when the price
+              path is strong over long periods &#128200;.</div>
+            <div class="info-pill">How final value, profit, return %, CAGR, real value, volatility, and drawdown
+              describe both reward and risk &#128176;.</div>
+            <div class="info-pill">How Bitcoin compares with fixed-return lump sum and SIP-style compounding so
+              expectations stay grounded &#129504;.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="qnav" role="tablist" aria-label="Bitcoin calculator modes">
+        <button type="button" class="qnav-btn active" data-module="historical" role="tab" aria-selected="true"
+          onclick="switchModule('historical')">Historical Mode</button>
+        <button type="button" class="qnav-btn" data-module="future" role="tab" aria-selected="false"
+          onclick="switchModule('future')">Future Projection</button>
+        <button type="button" class="qnav-btn" data-module="comparison" role="tab" aria-selected="false"
+          onclick="switchModule('comparison')">Comparison Mode</button>
+      </div>
+
+      <section class="module active" id="mod-historical" role="tabpanel" aria-label="Historical Bitcoin growth mode">
+        <p class="module-intro">Historical mode estimates how your Bitcoin investment would have evolved between two
+          dates using a denser embedded Bitcoin reference path. It supports both a one-time lump sum and optional
+          monthly BTC buying so you can study timing, DCA behavior, real value, and risk over the same period.</p>
+        <div class="field-pair">
+          <div class="form-row">
+            <label class="lbl" for="hist-investment">Initial Investment Amount (<span
+                data-currency-symbol>$</span>)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="hist-investment" min="1" max="10000000" step="1" value="1000">
+                <span class="hint">This amount is converted into estimated Bitcoin units at the starting reference
+                  price.</span>
+              </div>
+              <div>
+                <input type="range" id="hist-investment-sl" min="100" max="1000000" step="100" value="1000">
+                <div class="slider-lbl" id="hist-investment-lbl">$1,000.00</div>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <label class="lbl" for="hist-start">Investment Start Date</label>
+            <input type="date" id="hist-start">
+            <span class="hint">Choose a date inside the supported historical reference range.</span>
+          </div>
+        </div>
+        <div class="field-pair">
+          <div class="form-row">
+            <label class="lbl" for="hist-dca">Monthly Bitcoin DCA Amount (<span data-currency-symbol>$</span>)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="hist-dca" min="0" max="1000000" step="1" value="0">
+                <span class="hint">Optional monthly amount used to buy more Bitcoin over time. Set to 0 to analyze only
+                  the lump sum.</span>
+              </div>
+              <div>
+                <input type="range" id="hist-dca-sl" min="0" max="50000" step="25" value="0">
+                <div class="slider-lbl" id="hist-dca-lbl">$0.00</div>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <label class="lbl" for="hist-end">End Date</label>
+            <input type="date" id="hist-end">
+            <span class="hint">The calculator values your estimated Bitcoin holdings at this date.</span>
+          </div>
+        </div>
+        <div class="field-pair">
+          <div class="form-row">
+            <label class="lbl" for="hist-inflation">Inflation Rate (%)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="hist-inflation" min="0" max="20" step="0.1" value="3">
+                <span class="hint">Used to estimate the inflation-adjusted real value of your Bitcoin position.</span>
+              </div>
+              <div>
+                <input type="range" id="hist-inflation-sl" min="0" max="20" step="0.1" value="3">
+                <div class="slider-lbl" id="hist-inflation-lbl">3.00%</div>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <label class="lbl" for="hist-stock-rate">Traditional Investment Benchmark (%)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="hist-stock-rate" min="0" max="25" step="0.1" value="8">
+                <span class="hint">Use this to compare Bitcoin with a smoother stock or fixed-return assumption.</span>
+              </div>
+              <div>
+                <input type="range" id="hist-stock-rate-sl" min="0" max="25" step="0.1" value="8">
+                <div class="slider-lbl" id="hist-stock-rate-lbl">8.00%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-row timeline-wrap">
+          <label class="lbl" for="hist-timeline-sl">Historical Timeline Slider</label>
+          <div class="input-slider">
+            <div class="timeline-note">
+              <span>Drag to move the end date closer or further from the start date for a faster replay.</span>
+              <strong id="hist-timeline-lbl">Full range</strong>
+            </div>
+            <div>
+              <input type="range" id="hist-timeline-sl" min="0" max="100" step="1" value="100">
+            </div>
+          </div>
+        </div>
+        <div class="btn-row">
+          <button type="button" class="btn-primary" onclick="calculateBitcoin(true, true)">Calculate Historical
+            Growth</button>
+          <button type="button" class="btn-ghost" onclick="resetPlanner()">Reset Inputs</button>
+        </div>
+      </section>
+      <section class="module" id="mod-future" role="tabpanel" aria-label="Future Bitcoin growth mode">
+        <p class="module-intro">Future projection mode uses compound growth as the base, but it can also apply
+          cycle-aware or more volatile paths so Bitcoin projections feel more realistic. You can test a lump sum,
+          optional monthly BTC buying, inflation adjustment, and how Bitcoin compares with a steadier benchmark.</p>
+        <div class="field-pair">
+          <div class="form-row">
+            <label class="lbl" for="fut-investment">Initial Investment Amount (<span
+                data-currency-symbol>$</span>)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="fut-investment" min="1" max="10000000" step="1" value="5000">
+                <span class="hint">Use the amount you plan to commit to Bitcoin at the start date.</span>
+              </div>
+              <div>
+                <input type="range" id="fut-investment-sl" min="100" max="1000000" step="100" value="5000">
+                <div class="slider-lbl" id="fut-investment-lbl">$5,000.00</div>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <label class="lbl" for="fut-start">Projection Start Date</label>
+            <input type="date" id="fut-start">
+            <span class="hint">This is the date used to anchor the projected Bitcoin path.</span>
+          </div>
+        </div>
+        <div class="field-pair">
+          <div class="form-row">
+            <label class="lbl" for="fut-dca">Monthly Bitcoin DCA Amount (<span data-currency-symbol>$</span>)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="fut-dca" min="0" max="1000000" step="1" value="250">
+                <span class="hint">Optional monthly BTC purchase amount. It helps compare a single entry with steady
+                  accumulation.</span>
+              </div>
+              <div>
+                <input type="range" id="fut-dca-sl" min="0" max="50000" step="25" value="250">
+                <div class="slider-lbl" id="fut-dca-lbl">$250.00</div>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <label class="lbl" for="fut-end">Projection End Date</label>
+            <input type="date" id="fut-end">
+            <span class="hint">The time between start and end dates becomes the compounding period.</span>
+          </div>
+        </div>
+        <div class="field-pair">
+          <div class="form-row">
+            <label class="lbl" for="fut-growth-rate">Expected Annual Growth Rate (%)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="fut-growth-rate" min="-100" max="250" step="0.1" value="18">
+                <span class="hint">This assumption powers the compound growth estimate for future Bitcoin value.</span>
+              </div>
+              <div>
+                <input type="range" id="fut-growth-rate-sl" min="-50" max="150" step="0.1" value="18">
+                <div class="slider-lbl" id="fut-growth-rate-lbl">18.00%</div>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <label class="lbl" for="fut-stock-rate">Traditional Investment Benchmark (%)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="fut-stock-rate" min="0" max="25" step="0.1" value="8">
+                <span class="hint">Use this for comparison against a steadier long-term compounding path.</span>
+              </div>
+              <div>
+                <input type="range" id="fut-stock-rate-sl" min="0" max="25" step="0.1" value="8">
+                <div class="slider-lbl" id="fut-stock-rate-lbl">8.00%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="field-pair">
+          <div class="form-row">
+            <label class="lbl" for="fut-inflation">Inflation Rate (%)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="fut-inflation" min="0" max="20" step="0.1" value="3">
+                <span class="hint">Use inflation to estimate how much purchasing power may remain at the end of the
+                  projection.</span>
+              </div>
+              <div>
+                <input type="range" id="fut-inflation-sl" min="0" max="20" step="0.1" value="3">
+                <div class="slider-lbl" id="fut-inflation-lbl">3.00%</div>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <label class="lbl" for="fut-model-style">Projection Style</label>
+            <select id="fut-model-style">
+              <option value="smooth">Smooth compounding</option>
+              <option value="cycle">Cycle-aware growth</option>
+              <option value="volatile">Volatile path simulation</option>
+            </select>
+            <span class="hint">Smooth uses straight compounding. Cycle-aware adds bull and bear phases. Volatile mode
+              adds more randomness around the same long-term assumption.</span>
+          </div>
+        </div>
+        <div class="field-pair">
+          <div class="form-row">
+            <label class="lbl" for="fut-note">Projection Reminder</label>
+            <input type="text" id="fut-note" value="Projection only - not financial advice" readonly>
+            <span class="hint">Future projections are planning tools. They are not predictions or promises.</span>
+          </div>
+        </div>
+        <div class="btn-row">
+          <button type="button" class="btn-primary" onclick="calculateBitcoin(true, true)">Calculate Future
+            Projection</button>
+          <button type="button" class="btn-ghost" onclick="resetPlanner()">Reset Inputs</button>
+        </div>
+      </section>
+
+      <section class="module" id="mod-comparison" role="tabpanel" aria-label="Bitcoin comparison mode">
+        <p class="module-intro">Comparison mode places Bitcoin lump sum, monthly Bitcoin DCA, a fixed-return lump sum,
+          and a steady fixed-return SIP path on the same timeline so you can compare timing, discipline, risk, and
+          opportunity cost in one view.</p>
+        <div class="field-pair">
+          <div class="form-row">
+            <label class="lbl" for="cmp-investment">Initial Investment Amount (<span
+                data-currency-symbol>$</span>)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="cmp-investment" min="1" max="10000000" step="1" value="5000">
+                <span class="hint">This amount is used for the Bitcoin and fixed-return comparison paths.</span>
+              </div>
+              <div>
+                <input type="range" id="cmp-investment-sl" min="100" max="1000000" step="100" value="5000">
+                <div class="slider-lbl" id="cmp-investment-lbl">$5,000.00</div>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <label class="lbl" for="cmp-sip">Monthly Bitcoin DCA / SIP Amount (<span
+                data-currency-symbol>$</span>)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="cmp-sip" min="0" max="1000000" step="1" value="250">
+                <span class="hint">This amount buys Bitcoin monthly and is also used for the fixed-return SIP comparison
+                  path.</span>
+              </div>
+              <div>
+                <input type="range" id="cmp-sip-sl" min="0" max="10000" step="10" value="250">
+                <div class="slider-lbl" id="cmp-sip-lbl">$250.00</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="field-pair">
+          <div class="form-row">
+            <label class="lbl" for="cmp-start">Comparison Start Date</label>
+            <input type="date" id="cmp-start">
+            <span class="hint">Use a past date to replay history or a recent date for forward-looking planning.</span>
+          </div>
+          <div class="form-row">
+            <label class="lbl" for="cmp-end">Comparison End Date</label>
+            <input type="date" id="cmp-end">
+            <span class="hint">All three strategies are compared across the same time window.</span>
+          </div>
+        </div>
+        <div class="field-pair">
+          <div class="form-row">
+            <label class="lbl" for="cmp-fixed-rate">Fixed / Stock Return Assumption (%)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="cmp-fixed-rate" min="0" max="25" step="0.1" value="8">
+                <span class="hint">This rate powers the traditional lump-sum and monthly SIP comparison lines.</span>
+              </div>
+              <div>
+                <input type="range" id="cmp-fixed-rate-sl" min="0" max="25" step="0.1" value="8">
+                <div class="slider-lbl" id="cmp-fixed-rate-lbl">8.00%</div>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <label class="lbl" for="cmp-bitcoin-rate">Bitcoin Growth Rate for Future Comparison (%)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="cmp-bitcoin-rate" min="-100" max="250" step="0.1" value="20">
+                <span class="hint">Used when comparison mode projects Bitcoin rather than replaying historical reference
+                  prices.</span>
+              </div>
+              <div>
+                <input type="range" id="cmp-bitcoin-rate-sl" min="-50" max="150" step="0.1" value="20">
+                <div class="slider-lbl" id="cmp-bitcoin-rate-lbl">20.00%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="field-pair">
+          <div class="form-row">
+            <label class="lbl" for="cmp-inflation">Inflation Rate (%)</label>
+            <div class="input-slider">
+              <div>
+                <input type="number" id="cmp-inflation" min="0" max="20" step="0.1" value="3">
+                <span class="hint">Used to translate ending wealth into a more realistic inflation-adjusted
+                  figure.</span>
+              </div>
+              <div>
+                <input type="range" id="cmp-inflation-sl" min="0" max="20" step="0.1" value="3">
+                <div class="slider-lbl" id="cmp-inflation-lbl">3.00%</div>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <label class="lbl" for="cmp-source">Bitcoin Comparison Basis</label>
+            <select id="cmp-source">
+              <option value="auto" selected>Auto: use history for past dates, projection for future dates</option>
+              <option value="historical">Historical Bitcoin path only</option>
+              <option value="projected">Projected Bitcoin growth only</option>
+            </select>
+            <span class="hint">Auto mode keeps the workflow simple while still letting you override the Bitcoin
+              comparison source.</span>
+          </div>
+        </div>
+        <div class="field-pair">
+          <div class="form-row">
+            <label class="lbl" for="cmp-model-style">Projected Bitcoin Path Style</label>
+            <select id="cmp-model-style">
+              <option value="smooth">Smooth compounding</option>
+              <option value="cycle">Cycle-aware growth</option>
+              <option value="volatile">Volatile path simulation</option>
+            </select>
+            <span class="hint">Used when the Bitcoin line is projected rather than taken from the built-in historical
+              path.</span>
+          </div>
+          <div class="form-row">
+            <label class="lbl" for="cmp-note">Comparison Focus</label>
+            <input type="text" id="cmp-note" value="BTC lump sum vs BTC DCA vs fixed return paths" readonly>
+            <span class="hint">This mode highlights the opportunity cost and discipline trade-off between
+              strategies.</span>
+          </div>
+        </div>
+        <div class="btn-row">
+          <button type="button" class="btn-primary" onclick="calculateBitcoin(true, true)">Compare Strategies</button>
+          <button type="button" class="btn-ghost" onclick="resetPlanner()">Reset Inputs</button>
+        </div>
+      </section>
+
+      <div class="formula-box" id="mode-formula">Historical mode converts the starting investment into estimated Bitcoin
+        units and values those units at the end date. Future mode uses FV = PV &times; (1 + r)^n. Comparison mode adds
+        fixed-return and monthly SIP paths over the same time period.</div>
+    </section>
+
+    <section class="card" id="results">
+      <div class="card-title">Results Dashboard</div>
+      <div class="result-meta">
+        <span class="mode-pill" id="current-mode-pill">Historical Mode</span>
+        <div class="result-actions">
+          <button type="button" class="btn-secondary" onclick="copyResults()">Copy Results</button>
+          <span class="copy-note hidden" id="copy-note">Copied to clipboard</span>
+        </div>
+      </div>
+      <div class="status-banner" id="status-banner">Choose a mode and enter your assumptions to estimate Bitcoin growth,
+        CAGR, profit, and strategy comparisons.</div>
+      <div class="insight-box" id="insight-box">This dashboard turns Bitcoin price stories into structured numbers so
+        you can compare ending value, annualized growth, and benchmark gaps more calmly.</div>
+      <div class="warning-box hidden" id="warning-box">
+        <strong>Planning alerts</strong>
+        <div class="warning-list" id="warning-list"></div>
+      </div>
+      <div class="result-grid">
+        <div class="result-card teal featured" id="card-1">
+          <div class="result-lbl" id="out-label-1">Final Investment Value</div>
+          <div class="result-val" id="out-value-1">$0.00</div>
+          <div class="result-sub" id="out-note-1">Ending value of the Bitcoin investment.</div>
+        </div>
+        <div class="result-card sky featured" id="card-2">
+          <div class="result-lbl" id="out-label-2">Total Profit</div>
+          <div class="result-val" id="out-value-2">$0.00</div>
+          <div class="result-sub" id="out-note-2">Absolute change between start and finish.</div>
+        </div>
+        <div class="result-card amber" id="card-3">
+          <div class="result-lbl" id="out-label-3">Return %</div>
+          <div class="result-val" id="out-value-3">0.00%</div>
+          <div class="result-sub" id="out-note-3">Total percentage gain or loss.</div>
+        </div>
+        <div class="result-card rose featured" id="card-4">
+          <div class="result-lbl" id="out-label-4">CAGR</div>
+          <div class="result-val" id="out-value-4">0.00%</div>
+          <div class="result-sub" id="out-note-4">Annualized growth across the selected period.</div>
+        </div>
+        <div class="result-card slate" id="card-5">
+          <div class="result-lbl" id="out-label-5">Growth Multiple</div>
+          <div class="result-val" id="out-value-5">1.00x</div>
+          <div class="result-sub" id="out-note-5">How many times larger the investment became.</div>
+        </div>
+        <div class="result-card teal" id="card-6">
+          <div class="result-lbl" id="out-label-6">Inflation-Adjusted Value</div>
+          <div class="result-val" id="out-value-6">$0.00</div>
+          <div class="result-sub" id="out-note-6">Estimated purchasing power after inflation.</div>
+        </div>
+        <div class="result-card sky" id="card-7">
+          <div class="result-lbl" id="out-label-7">Risk Score</div>
+          <div class="result-val" id="out-value-7">0 / 100</div>
+          <div class="result-sub" id="out-note-7">Higher scores mean higher path risk.</div>
+        </div>
+        <div class="result-card amber" id="card-8">
+          <div class="result-lbl" id="out-label-8">Investment Quality Score</div>
+          <div class="result-val" id="out-value-8">0 / 100</div>
+          <div class="result-sub" id="out-note-8">Blends return, benchmark gap, and risk efficiency.</div>
+        </div>
+      </div>
+      <div class="comparison-grid" id="results-tables">
+        <div class="comparison-summary">
+          <div class="table-head">
+            <div>
+              <h3>Advanced Bitcoin Analytics</h3>
+              <div class="table-context">Review deeper metrics such as total invested capital, Bitcoin units,
+                volatility, drawdown, real CAGR, and capital efficiency.</div>
+            </div>
+            <span class="metric-badge sky" id="analytics-badge">Risk &amp; return snapshot</span>
+          </div>
+          <div class="tbl-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Metric</th>
+                  <th>Value</th>
+                  <th>Why it matters</th>
+                </tr>
+              </thead>
+              <tbody id="analytics-body"></tbody>
+            </table>
+          </div>
+        </div>
+        <div class="comparison-summary">
+          <div class="table-head">
+            <div>
+              <h3 id="strategy-title">Strategy Snapshot</h3>
+              <div class="table-context" id="strategy-context">Compare ending value, return efficiency, and opportunity
+                cost across the active strategies.</div>
+            </div>
+            <span class="metric-badge" id="strategy-badge">Best strategy highlight</span>
+          </div>
+          <div class="tbl-wrap">
+            <table>
+              <thead>
+                <tr id="strategy-head-row">
+                  <th>Strategy</th>
+                  <th>Final Value</th>
+                  <th>Total Invested</th>
+                  <th>Return %</th>
+                  <th>Key Insight</th>
+                </tr>
+              </thead>
+              <tbody id="strategy-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" id="charts">
+      <div class="card-title">Interactive Charts</div>
+      <div class="charts-grid">
+        <div class="chart-wrap">
+          <div class="chart-title">Bitcoin Price vs Investment Value</div>
+          <div class="chart-note">See how the Bitcoin reference price and your investment value moved together over
+            time.</div>
+          <div class="chart-canvas"><canvas id="growth-chart"></canvas></div>
+        </div>
+        <div class="chart-wrap">
+          <div class="chart-title">Profit Growth Over Time</div>
+          <div class="chart-note">Track cumulative profit or loss instead of looking only at the ending value.</div>
+          <div class="chart-canvas"><canvas id="profit-chart"></canvas></div>
+        </div>
+        <div class="chart-wrap">
+          <div class="chart-title">Strategy & Scenario Comparison</div>
+          <div class="chart-note">Compare Bitcoin with benchmark paths, monthly DCA accumulation, and scenario
+            assumptions from the active mode.</div>
+          <div class="chart-canvas"><canvas id="comparison-chart"></canvas></div>
+        </div>
+        <div class="chart-wrap">
+          <div class="chart-title">Drawdown & Risk View</div>
+          <div class="chart-note">Visualize peak-to-trough declines so upside is balanced with a clearer picture of
+            downside risk.</div>
+          <div class="chart-canvas"><canvas id="drawdown-chart"></canvas></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" id="projection-table">
+      <div class="table-head">
+        <div>
+          <div class="chart-title">Year-by-Year Projection Table</div>
+          <div class="table-context" id="projection-context">Review annual snapshots to see Bitcoin value, growth %, and
+            profit evolve from the start date to the end date.</div>
+        </div>
+        <button type="button" class="btn-secondary" onclick="downloadCsv()">Download CSV</button>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <thead>
+            <tr id="projection-head-row">
+              <th>Year</th>
+              <th>Snapshot Date</th>
+              <th>Bitcoin Price</th>
+              <th>Investment Value</th>
+              <th>Growth %</th>
+              <th>Profit</th>
+            </tr>
+          </thead>
+          <tbody id="projection-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="content-section" id="comparison-tables">
+      <h2>Bitcoin Comparison Tables</h2>
+      <p>These reference tables translate Bitcoin growth into broader investment language so the numbers are easier to
+        compare with traditional plans and with steadier monthly investing behavior.</p>
+      <div class="comparison-grid">
+        <div class="comparison-summary">
+          <h3>Bitcoin vs Traditional Investing</h3>
+          <div class="tbl-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Factor</th>
+                  <th class="compare-a-cell">Bitcoin</th>
+                  <th class="compare-b-cell">Stocks / Fixed Return</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Return pattern</td>
+                  <td class="compare-a-cell">Can be explosive in strong cycles but is highly uneven.</td>
+                  <td class="compare-b-cell">Usually steadier, slower, and easier to model.</td>
+                </tr>
+                <tr>
+                  <td>Volatility</td>
+                  <td class="compare-a-cell">Very high. Deep drawdowns can happen quickly &#128201;.</td>
+                  <td class="compare-b-cell">Usually lower than Bitcoin, especially in diversified portfolios.</td>
+                </tr>
+                <tr>
+                  <td>Monthly investing effect</td>
+                  <td class="compare-a-cell">DCA can lower average entry price in weak periods but still leaves you
+                    exposed to Bitcoin cycles.</td>
+                  <td class="compare-b-cell">Monthly investing often creates a smoother compounding experience and lower
+                    emotional pressure.</td>
+                </tr>
+                <tr>
+                  <td>Investor mindset</td>
+                  <td class="compare-a-cell">Needs patience, conviction, and risk tolerance.</td>
+                  <td class="compare-b-cell">Often suits disciplined long-term planning better.</td>
+                </tr>
+                <tr>
+                  <td>Best use</td>
+                  <td class="compare-a-cell">High-upside growth exposure inside a balanced plan.</td>
+                  <td class="compare-b-cell">Core compounding for wealth building and future income goals.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="comparison-summary">
+          <h3>Risk &amp; Reward Metric Guide</h3>
+          <div class="tbl-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Metric</th>
+                  <th>What It Means</th>
+                  <th>Interpretation</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>CAGR</td>
+                  <td>Annualized growth rate</td>
+                  <td>Useful for comparing Bitcoin with stock-style or fixed-return alternatives.</td>
+                </tr>
+                <tr>
+                  <td>Volatility</td>
+                  <td>How uneven the return path is</td>
+                  <td>Higher volatility means a rougher ride, even if the ending value is strong.</td>
+                </tr>
+                <tr>
+                  <td>Max drawdown</td>
+                  <td>Largest peak-to-trough drop</td>
+                  <td>This highlights the worst decline an investor would have needed to tolerate.</td>
+                </tr>
+                <tr>
+                  <td>Growth multiple</td>
+                  <td>How many times the capital grew</td>
+                  <td>Easy to understand, but it should be read alongside drawdown and inflation.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+    <article class="content-section" id="guide">
+      <h2>Bitcoin Growth Guide</h2>
+      <p>Bitcoin growth attracts attention because it combines a simple idea with very dramatic outcomes. The idea is
+        simple: buy Bitcoin at one price, hold it, and if the price rises your investment becomes more valuable. The
+        outcome can feel dramatic because Bitcoin has delivered some very large gains in certain periods. That is why
+        many people ask questions like "What if I had invested 100 in Bitcoin years ago?" or "What if Bitcoin grows at
+        15% or 20% per year from here?" This calculator is built for exactly those questions. It turns a market story
+        into numbers you can read: final value, total profit, return %, CAGR, and growth multiple &#128176;.</p>
+
+      <h3>What Is Bitcoin Growth &#128640;</h3>
+      <p>Bitcoin growth means the change in value of a Bitcoin investment over time. If you invest at one price and the
+        Bitcoin price later rises, your investment value goes up. If the price falls, your value goes down. That sounds
+        easy, but the path matters. Bitcoin does not usually grow in a smooth straight line. It can rise fast, fall
+        hard, recover, and then surprise investors again. Because of that, one ending value is not enough. A useful
+        calculator also needs to show the annualized growth rate, the total return, and the size of the move compared
+        with more traditional investments &#128200;.</p>
+      <p>Historical mode is powerful because it lets you replay earlier periods using an embedded reference dataset.
+        Future projection mode is different. It does not predict the market. It simply applies a chosen annual growth
+        rate so you can stress-test possibilities. When you use both modes together, you get a better balance between
+        history and planning &#129504;.</p>
+
+      <h3>How Early Bitcoin Investors Made Huge Returns &#128176;</h3>
+      <p>One reason Bitcoin remains fascinating is that early returns were unusually large. Small amounts invested in
+        the early years sometimes turned into surprisingly meaningful sums later. That does not mean the same scale of
+        growth must repeat, but it explains why Bitcoin growth calculators are so popular. When people hear that an
+        early investor multiplied money many times over, they want to translate that headline into actual numbers.</p>
+      <p>A calculator helps because it shows the mechanics clearly. If an asset rises from a small price base to a much
+        larger one, the growth multiple can become enormous &#128640;. A 2x return is strong. A 5x return is very
+        strong. A 10x return feels extraordinary. But even those exciting numbers need context. How long did the growth
+        take? How volatile was the ride? How does the annualized rate compare with a more traditional 8% return? Those
+        are better questions than simply asking whether Bitcoin once went up a lot.</p>
+
+      <h3>Volatility in Crypto Markets &#128201;</h3>
+      <p>Volatility is one of the most important ideas in crypto. Bitcoin can produce large gains, but it can also
+        deliver large drawdowns. That means two people can experience the same asset very differently depending on when
+        they entered and how long they stayed invested. Volatility is also why comparison matters. A traditional
+        investment growing at a steady 8% may look boring next to a huge Bitcoin rally, but a smoother path has real
+        value. It can be easier to hold, easier to plan around, and easier to trust during difficult markets.</p>
+      <p>This calculator tries to make that trade-off visible instead of hiding it behind one exciting number. Bitcoin
+        may finish far ahead in one period and far behind in another. A smooth benchmark may grow more slowly, but it
+        often looks more predictable. A monthly SIP adds another layer of discipline because it spreads investing across
+        time instead of depending on a single entry point &#128202;.</p>
+
+      <h3>Bitcoin DCA vs Lump Sum &#128197;</h3>
+      <p>Many real investors do not buy Bitcoin only once. They buy a little every month. That is why this upgraded
+        calculator now supports a monthly Bitcoin DCA amount in both historical and future modes. DCA, or dollar-cost
+        averaging, changes the experience in a meaningful way. When Bitcoin falls, the same monthly amount buys more
+        units. When Bitcoin rises, the same amount buys fewer units. Over time that can reduce timing pressure, even
+        though it does not remove risk &#129504;.</p>
+      <p>Lump sum and DCA solve different problems. A lump sum gives full exposure right away, which can be powerful if
+        the market rises soon after you invest. DCA is slower, but it can feel more comfortable because it turns one
+        stressful decision into a repeatable habit. Neither is automatically better in every period. That is why
+        comparing both paths side by side is so useful &#128200;.</p>
+
+      <h3>Inflation and Real Bitcoin Wealth &#127760;</h3>
+      <p>Nominal growth and real growth are not the same. If a Bitcoin investment grows from 1,000 to 3,000, the
+        headline result looks excellent. But inflation matters because the spending power of money changes over time. A
+        strong nominal result can still be less impressive after you adjust for inflation. That is why the calculator
+        now shows inflation-adjusted value and real CAGR instead of only nominal return &#128161;.</p>
+      <p>This does not mean inflation makes Bitcoin unhelpful. In some periods, Bitcoin may outrun inflation very
+        strongly. In other periods, the real result may look much weaker than the nominal number suggests. Looking at
+        both is healthier because it connects market performance with real-world purchasing power &#128176;.</p>
+
+      <h3>Why Max Drawdown Matters &#128201;</h3>
+      <p>One of the most emotional questions in investing is not \"How high did it go?\" but \"How far did it fall
+        before it recovered?\" Max drawdown answers that question by measuring the largest drop from a peak to a later
+        low. This matters because many investors can tolerate volatility in theory, but struggle with deep temporary
+        losses in practice. A 70% drawdown is not just a number. It is a test of patience, conviction, and position
+        sizing.</p>
+      <p>That is why this calculator now includes max drawdown, annualized volatility, best year, worst year, and a risk
+        score. Those metrics help users see Bitcoin more honestly. A huge final multiple may still come with a very
+        difficult journey &#9888;&#65039;.</p>
+
+      <h3>Is Bitcoin a Good Long-Term Investment &#129300;</h3>
+      <p>There is no universal answer. Bitcoin may be attractive for investors who want high upside potential and who
+        can tolerate significant swings in value. It may be less suitable for investors who need stable short-term
+        outcomes or who struggle with high volatility. The healthiest way to think about Bitcoin is not as a magic
+        shortcut, and not as something that must be ignored. It is a growth asset with unusual behavior, and it should
+        be judged by return potential, drawdown risk, time horizon, and its role inside a wider financial plan.</p>
+      <p>That is where internal comparison becomes useful. You might use the <a
+          href="https://smartcalcworld.com/finance/investment/portfolio-growth-calculator.html">Portfolio Growth
+          Calculator</a> to see how Bitcoin fits into a broader plan, or the <a
+          href="https://smartcalcworld.com/finance/investment/investment-goal-calculator.html">Investment Goal
+          Calculator</a> to connect possible crypto upside with a future target. Those connections matter because a big
+        return is only meaningful when it supports a real goal &#127919;.</p>
+
+      <h3>Return %, CAGR, and Growth Multiple &#128161;</h3>
+      <p>Return percentage shows the total gain or loss relative to your starting investment. CAGR goes one step further
+        and turns that full-period result into an annualized rate. Growth multiple answers the same story in a more
+        intuitive way by showing how many times larger the ending value is compared with the starting amount. For
+        example, if 1,000 becomes 6,000, the profit is 5,000, the total return is 500%, and the growth multiple is 6x.
+        Each measure is useful, and together they make the journey easier to understand &#128176;.</p>
+      <p>Beginners often focus only on the multiple because it sounds dramatic. More experienced investors usually
+        compare all three. A high multiple achieved over two years is very different from the same multiple achieved
+        over ten years. That is why CAGR is especially helpful when Bitcoin is being compared with stocks, fixed-return
+        plans, or yield-based tools like the <a
+          href="https://smartcalcworld.com/finance/investment/apy-calculator.html">APY Calculator</a>.</p>
+
+      <h3>Bitcoin vs SIP vs Fixed Return Investing &#127760;</h3>
+      <p>Comparison mode answers a practical question: what else could the same investor have done? A Bitcoin lump sum
+        can produce exceptional upside when timing is favorable, but a monthly SIP strategy offers a different kind of
+        strength. It builds discipline, smooths entry prices over time, and avoids the pressure of one perfect moment. A
+        fixed-return investment offers even more stability. The ending number may be smaller, but the path is usually
+        easier to model and emotionally easier to handle.</p>
+      <p>That does not mean one strategy is always better. It means each strategy solves a different problem. Bitcoin
+        can be a high-growth satellite holding. A fixed-return or stock-style compounding path can be the calmer core. A
+        SIP can help investors build wealth regularly without depending on market timing &#128640;. Seeing all three on
+        one chart often makes the trade-offs much clearer than reading them in isolation.</p>
+
+      <h3>A Practical Example with 100 Invested in Bitcoin &#128181;</h3>
+      <p>Imagine someone invested 100 in Bitcoin in an early period and held it across a large growth cycle. The final
+        result could become many times larger than the original amount, which is why so many people remain curious about
+        Bitcoin's long-term upside. Now compare that same thought experiment with a steady 8% traditional return. The
+        traditional path may look much calmer, but the ending number will usually be smaller if Bitcoin goes through a
+        strong cycle. On the other hand, if Bitcoin spends years moving sideways or falling, the smoother path may look
+        much stronger relative to the risk taken.</p>
+      <p>This is exactly why a calculator is better than a headline. It lets you choose real dates, test different
+        growth assumptions, and compare outcomes in a structured way. That reduces guesswork and makes the lesson more
+        honest &#129504;.</p>
+
+      <h3>How to Use This Calculator Wisely &#9989;</h3>
+      <p>A good habit is to test more than one scenario. In historical mode, try different start dates and notice how
+        much timing changes the result. In future mode, compare a conservative assumption with a more optimistic one. In
+        comparison mode, look at whether the extra upside from Bitcoin is worth the extra uncertainty relative to a
+        steady benchmark or a monthly SIP plan. This process will not predict the market, but it will give you a clearer
+        picture of risk, reward, and opportunity cost.</p>
+      <p>Used well, a Bitcoin Growth Calculator becomes more than a curiosity tool. It becomes a planning tool. It can
+        help you decide how much of your portfolio belongs in Bitcoin, how to compare Bitcoin with steady compounding,
+        and how to think about return numbers with more precision and less excitement. In investing, clearer arithmetic
+        often leads to calmer decisions &#128640;.</p>
+    </article>
+
+    <section class="content-section" id="related-tools">
+      <h2>Explore Related Investment Tools</h2>
+      <p>Bitcoin growth becomes easier to understand when you connect it with the rest of the SmartCalc World investment
+        ecosystem.</p>
+      <div class="links-grid">
+        <a class="link-card"
+          href="https://smartcalcworld.com/finance/investment/crypto-profit-calculator.html"><strong>Crypto Profit
+            Calculator</strong>Move from long-term Bitcoin growth to trade-level crypto profit, fee, and scenario
+          analysis.</a>
+        <a class="link-card" href="https://smartcalcworld.com/finance/investment/cagr-calculator.html"><strong>CAGR
+            Calculator</strong>Translate strong Bitcoin results into annualized growth language for cleaner
+          comparisons.</a>
+        <a class="link-card"
+          href="https://smartcalcworld.com/finance/investment/portfolio-growth-calculator.html"><strong>Portfolio Growth
+            Calculator</strong>See how Bitcoin exposure may fit inside a broader long-term investment plan.</a>
+        <a class="link-card"
+          href="https://smartcalcworld.com/finance/investment/investment-goal-calculator.html"><strong>Investment Goal
+            Calculator</strong>Connect possible Bitcoin upside with real savings targets and timelines.</a>
+        <a class="link-card" href="https://smartcalcworld.com/finance/investment/apy-calculator.html"><strong>APY
+            Calculator</strong>Compare Bitcoin-style growth assumptions with yield-focused annual compounding.</a>
+      </div>
+    </section>
+
+    <section class="content-section" id="faq">
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-list">
+        <details class="faq-item" open>
+          <summary>How much would my Bitcoin investment be worth today?</summary>
+          <p>That depends on the starting date, the starting amount, and the Bitcoin reference price at the ending date.
+            This calculator estimates the value using an embedded historical dataset or a future growth assumption.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What is Bitcoin CAGR?</summary>
+          <p>Bitcoin CAGR is the compound annual growth rate. It annualizes the total return so you can compare Bitcoin
+            with other investments over the same time period.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is Bitcoin a good long-term investment?</summary>
+          <p>It can be attractive for investors who want high growth potential and can tolerate large volatility. It is
+            usually most useful when viewed as part of a wider investment plan.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can Bitcoin returns be predicted?</summary>
+          <p>No. Future projection mode uses your chosen growth assumption to illustrate possibilities, but it is not a
+            prediction or guarantee.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Why is Bitcoin so volatile?</summary>
+          <p>Bitcoin can react quickly to regulation, liquidity, adoption trends, macro news, and investor sentiment.
+            That mix often creates larger price swings than more mature asset classes.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How do I calculate Bitcoin profit?</summary>
+          <p>Profit equals final investment value minus initial investment. Return percentage divides profit by the
+            starting amount and multiplies by 100.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What is growth multiple?</summary>
+          <p>Growth multiple shows how many times your money became compared with the original amount. A 5x result means
+            the ending value is five times the starting capital.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is crypto riskier than stocks?</summary>
+          <p>In many cases yes. Bitcoin often shows larger and faster swings than diversified stock portfolios, which is
+            why comparison and scenario planning are important.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Does this calculator use exact live Bitcoin prices?</summary>
+          <p>No. Historical mode uses an embedded reference dataset with interpolation for planning and education, not
+            live exchange pricing.</p>
+        </details>
+      </div>
+    </section>
+
+    <section class="content-section disclaimer" id="disclaimer">
+      <h2>Disclaimer</h2>
+      <p>This Bitcoin Growth Calculator is for education and planning only. Historical mode uses an embedded Bitcoin
+        reference dataset, so values are approximate. Future projection mode is hypothetical and does not provide
+        investment advice or guarantee returns. Real outcomes can differ because of live market pricing, taxes, fees,
+        timing, and volatility.</p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="https://smartcalcworld.com/index.html">Home</a></li>
+          <li><a href="https://smartcalcworld.com/about.html">About</a></li>
+          <li><a href="https://smartcalcworld.com/contact.html">Contact</a></li>
+          <li><a href="https://smartcalcworld.com/privacy-policy.html">Privacy Policy</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Content</h3>
+        <ul>
+          <li><a href="#calculator">Bitcoin Growth Calculator</a></li>
+          <li><a href="#guide">Bitcoin Growth Guide</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Finance Tools</h3>
+        <ul>
+          <li><a href="https://smartcalcworld.com/finance/interest/interest-hub.html">Interest Calculators</a></li>
+          <li><a href="https://smartcalcworld.com/finance/investment/investment-hub.html">Investment Calculators</a>
+          </li>
+          <li><a href="https://smartcalcworld.com/finance/loan/loan-hub.html">Loan Calculators</a></li>
+          <li><a href="https://smartcalcworld.com/finance/tax/tax-hub.html">Tax Calculators</a></li>
+          <li><a href="https://smartcalcworld.com/finance/saving-retirement/saving-retirement-hub.html">Savings
+              Calculators</a></li>
+          <li><a href="https://smartcalcworld.com/finance/saving-retirement/saving-retirement-hub.html">Retirement
+              Calculators</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <div class="footer-disclaimer"><strong>SmartCalc World Note:</strong> Bitcoin growth can look extraordinary on a
+          chart, but disciplined comparison with CAGR, steady investing, and fixed-return alternatives helps keep
+          expectations grounded.</div>
+      </div>
+    </div>
+    <div class="copyright">&copy; 2026 SmartCalc World. All rights reserved.</div>
+  </footer>
+
+  <script defer src="bitcoin-growth-calculator.js"></script>
+</body>
+
+</html>
