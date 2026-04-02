@@ -1,0 +1,2945 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow">
+  <title>Asset Allocation Calculator &ndash; Optimize Your Investment Portfolio | SmartCalcWorld</title>
+  <meta name="description"
+    content="Calculate optimal portfolio allocation, expected returns, future portfolio value, and risk levels with SmartCalcWorld's advanced Asset Allocation Calculator.">
+  <link rel="canonical" href="https://smartcalcworld.com/finance/investment/asset-allocation-calculator.html">
+  <link rel="icon" type="image/png" href="https://smartcalcworld.com/favicon.png">
+  <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <!-- Premium UI directive for future AI updates: use SmartCalcWorld's premium calculators as the full design, layout, UI structure, responsiveness, spacing, chart, slider, result-card, and UX reference for this page. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://smartcalcworld.com/#org",
+        "name": "SmartCalcWorld",
+        "alternateName": "SmartCalc World",
+        "url": "https://smartcalcworld.com",
+        "logo": "https://smartcalcworld.com/favicon.png",
+        "description": "SmartCalcWorld creates premium calculators for investment planning, saving, compounding, portfolio analysis, and personal finance decisions."
+      },
+      {
+        "@type": "WebApplication",
+        "@id": "https://smartcalcworld.com/finance/investment/asset-allocation-calculator.html#app",
+        "name": "Asset Allocation Calculator",
+        "url": "https://smartcalcworld.com/finance/investment/asset-allocation-calculator.html",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Any",
+        "creator": { "@id": "https://smartcalcworld.com/#org" },
+        "description": "Optimize portfolio allocation across stocks, bonds, gold, real estate, and crypto using risk profile, investment horizon, expected return assumptions, and scenario comparison.",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+      }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "What is asset allocation?", "acceptedAnswer": { "@type": "Answer", "text": "Asset allocation is the process of dividing your investment money across different asset classes such as stocks, bonds, gold, real estate, and cash-like or speculative assets based on your goals and risk comfort." } },
+      { "@type": "Question", "name": "How much should I invest in stocks vs bonds?", "acceptedAnswer": { "@type": "Answer", "text": "There is no single perfect answer. Conservative investors often keep more money in bonds, while aggressive investors usually hold more stocks. The right mix depends on your time horizon, income stability, and risk tolerance." } },
+      { "@type": "Question", "name": "What is a balanced portfolio?", "acceptedAnswer": { "@type": "Answer", "text": "A balanced portfolio usually mixes growth assets like stocks with stabilizing assets like bonds, gold, and real estate. A common example is a 60/40 mix of stocks and bonds, but the right definition of balance depends on the investor." } },
+      { "@type": "Question", "name": "How does risk tolerance affect allocation?", "acceptedAnswer": { "@type": "Answer", "text": "Risk tolerance influences how much volatility you can accept. Higher risk tolerance usually leads to more allocation in stocks and sometimes crypto, while lower risk tolerance pushes a portfolio toward bonds and defensive assets." } },
+      { "@type": "Question", "name": "What is diversification?", "acceptedAnswer": { "@type": "Answer", "text": "Diversification means spreading investments across multiple assets so one weak area does not dominate the entire portfolio. It can reduce concentration risk and create a smoother long-term investing experience." } },
+      { "@type": "Question", "name": "Is crypto part of asset allocation?", "acceptedAnswer": { "@type": "Answer", "text": "Crypto can be included in asset allocation if it fits your risk profile, but many investors keep it as a small portion because it can be very volatile. It should usually be treated as a higher-risk component." } },
+      { "@type": "Question", "name": "How often should I change allocation?", "acceptedAnswer": { "@type": "Answer", "text": "Many investors review allocation periodically, such as once or twice a year, or when goals, income, or risk tolerance change. Frequent emotional changes are usually less helpful than disciplined rebalancing." } },
+      { "@type": "Question", "name": "Why compare conservative, moderate, and aggressive portfolios?", "acceptedAnswer": { "@type": "Answer", "text": "Scenario comparison helps investors see how return assumptions, risk levels, and asset mixes affect future value. It gives a more realistic view than relying on one single portfolio idea." } },
+      { "@type": "Question", "name": "What does this asset allocation calculator estimate?", "acceptedAnswer": { "@type": "Answer", "text": "This calculator estimates a recommended allocation breakdown, weighted expected return, approximate risk score, projected future portfolio value, and comparative scenarios based on the data you enter." } }
+    ]
+  }
+  </script>
+  <style>
+    :root {
+      --teal: #0d9488;
+      --teal-dark: #0f766e;
+      --teal-light: #ccfbf1;
+      --amber: #f59e0b;
+      --amber-light: #fef3c7;
+      --rose: #f43f5e;
+      --rose-light: #ffe4e6;
+      --sky: #0284c7;
+      --sky-light: #dbeafe;
+      --slate-900: #0f172a;
+      --slate-800: #1e293b;
+      --slate-700: #334155;
+      --slate-600: #475569;
+      --slate-500: #64748b;
+      --slate-400: #94a3b8;
+      --slate-300: #cbd5e1;
+      --slate-200: #e2e8f0;
+      --slate-100: #f1f5f9;
+      --slate-50: #f8fafc;
+      --white: #fff;
+      --shadow-sm: 0 1px 3px rgba(15, 23, 42, .08);
+      --shadow-md: 0 10px 28px rgba(15, 23, 42, .12);
+      --header-h: 68px
+    }
+
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden
+    }
+
+    body {
+      font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: radial-gradient(circle at top left, rgba(13, 148, 136, .14), transparent 32%), linear-gradient(180deg, #f8fafc 0%, #eff6ff 44%, #f8fafc 100%);
+      color: var(--slate-800);
+      line-height: 1.7;
+      overflow-x: hidden
+    }
+
+    img,
+    canvas {
+      max-width: 100%
+    }
+
+    a {
+      color: var(--teal);
+      text-decoration: none
+    }
+
+    a:hover {
+      text-decoration: underline
+    }
+
+    .hidden {
+      display: none !important
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: linear-gradient(135deg, #0891b2 0%, #059669 100%);
+      color: var(--white);
+      box-shadow: 0 2px 10px rgba(15, 23, 42, .12)
+    }
+
+    .hdr-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem
+    }
+
+    .hdr-logo {
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: .02em
+    }
+
+    .hdr-nav {
+      display: flex;
+      gap: 1.25rem;
+      align-items: center;
+      flex-wrap: wrap
+    }
+
+    .hdr-nav a,
+    .hdr-nav span,
+    .mobile-nav a,
+    .mobile-nav span {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: .95rem;
+      opacity: .96
+    }
+
+    .nav-disabled {
+      opacity: .74
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 4px;
+      background: none;
+      border: none;
+      padding: 0
+    }
+
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background: var(--white);
+      border-radius: 999px
+    }
+
+    .mobile-nav {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: #0b7694;
+      flex-direction: column;
+      padding: 1rem;
+      gap: .9rem;
+      box-shadow: 0 12px 28px rgba(15, 23, 42, .16)
+    }
+
+    .mobile-nav.open {
+      display: flex
+    }
+
+    .page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1.5rem 1rem 4rem
+    }
+
+    .breadcrumb {
+      font-size: .84rem;
+      color: var(--slate-500);
+      margin-bottom: 1.25rem
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(13, 148, 136, .14), rgba(2, 132, 199, .08)), var(--white);
+      border: 1px solid rgba(148, 163, 184, .25);
+      border-radius: 22px;
+      box-shadow: var(--shadow-md);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -80px -80px auto;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle, rgba(13, 148, 136, .14), transparent 70%);
+      pointer-events: none
+    }
+
+    .hero-badge,
+    .mode-pill,
+    .mini-status,
+    .compare-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      border-radius: 999px;
+      font-weight: 800
+    }
+
+    .hero-badge {
+      background: var(--teal-light);
+      color: var(--teal-dark);
+      font-size: .76rem;
+      padding: .4rem .9rem;
+      margin-bottom: .85rem;
+      letter-spacing: .06em;
+      text-transform: uppercase
+    }
+
+    h1 {
+      font-size: clamp(2rem, 5vw, 3.25rem);
+      line-height: 1.08;
+      color: var(--slate-900);
+      margin-bottom: .8rem
+    }
+
+    .hero-sub {
+      font-size: 1rem;
+      color: var(--slate-600);
+      max-width: 820px
+    }
+
+    .hero-highlights,
+    .toolbar-grid,
+    .field-pair,
+    .result-grid,
+    .charts-grid,
+    .comparison-grid,
+    .links-grid,
+    .footer-content,
+    .extension-grid,
+    .info-list,
+    .qnav,
+    .btn-row {
+      display: grid;
+      gap: 1rem
+    }
+
+    .hero-highlights {
+      margin-top: 1.25rem
+    }
+
+    .hero-chip,
+    .toolbar-box,
+    .chart-wrap,
+    .milestone-card,
+    .faq-item,
+    .toggle-chip,
+    .info-pill {
+      background: linear-gradient(180deg, rgba(236, 253, 245, .82), rgba(239, 246, 255, .78));
+      border: 1px solid rgba(13, 148, 136, .14);
+      box-shadow: var(--shadow-sm)
+    }
+
+    .hero-chip {
+      border-radius: 14px;
+      padding: .95rem 1rem;
+      color: var(--slate-600)
+    }
+
+    .hero-chip strong,
+    .info-pill strong,
+    .callout strong,
+    .link-card strong {
+      display: block;
+      color: var(--slate-900)
+    }
+
+    .card,
+    .content-section {
+      background: linear-gradient(180deg, rgba(239, 246, 255, .9), rgba(236, 253, 245, .84));
+      border: 1px solid rgba(13, 148, 136, .16);
+      border-radius: 20px;
+      box-shadow: var(--shadow-md);
+      margin-top: 2rem
+    }
+
+    .card {
+      padding: 1.5rem
+    }
+
+    .content-section {
+      padding: 2rem;
+      scroll-margin-top: calc(var(--header-h) + 1rem)
+    }
+
+    .card-title,
+    .content-section h2 {
+      font-size: clamp(1.25rem, 3vw, 1.75rem);
+      font-weight: 800;
+      color: var(--slate-900);
+      margin-bottom: 1rem
+    }
+
+    .content-section h2 {
+      padding-left: 1rem;
+      border-left: 4px solid var(--teal)
+    }
+
+    .content-section h3 {
+      font-size: 1.15rem;
+      color: var(--slate-900);
+      margin: 1.6rem 0 .65rem
+    }
+
+    .content-section p,
+    .content-section li,
+    .module-intro,
+    .faq-a,
+    .hero-chip,
+    .info-pill,
+    .callout,
+    .toolbar-help,
+    .hint,
+    .chart-note,
+    .table-context,
+    .copy-note,
+    .tiny-note {
+      color: var(--slate-600)
+    }
+
+    .content-section ul {
+      margin: .2rem 0 1rem 1.25rem
+    }
+
+    .content-section li {
+      margin-bottom: .55rem
+    }
+
+    .toolbar-box {
+      border-radius: 16px;
+      padding: 1rem;
+      background: linear-gradient(180deg, rgba(13, 148, 136, .16), rgba(224, 242, 254, .8))
+    }
+
+    .toolbar-box h2 {
+      font-size: 1.02rem;
+      color: var(--slate-900);
+      margin-bottom: .55rem
+    }
+
+    .info-list {
+      margin-top: .7rem
+    }
+
+    .info-pill {
+      padding: .8rem .9rem;
+      border-radius: 14px;
+      color: var(--slate-700)
+    }
+
+    .qnav {
+      margin: 1.25rem 0 1rem
+    }
+
+    .qnav-btn,
+    .btn-primary,
+    .btn-secondary,
+    .btn-ghost {
+      width: 100%;
+      border-radius: 12px;
+      padding: .85rem 1rem;
+      font-size: .96rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: .22s ease
+    }
+
+    .qnav-btn {
+      border: 2px solid var(--slate-300);
+      background: linear-gradient(180deg, rgba(226, 232, 240, .85), rgba(241, 245, 249, .82));
+      font-size: .92rem;
+      color: var(--slate-600);
+      box-shadow: var(--shadow-sm)
+    }
+
+    .qnav-btn.active {
+      background: linear-gradient(135deg, var(--teal-dark), var(--teal));
+      color: var(--white);
+      border-color: var(--teal)
+    }
+
+    .module {
+      display: none
+    }
+
+    .module.active {
+      display: block;
+      animation: fadeUp .25s ease
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(10px)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0)
+      }
+    }
+
+    .form-row {
+      display: grid;
+      gap: .45rem;
+      margin-bottom: 1rem
+    }
+
+    .lbl {
+      font-weight: 700;
+      color: var(--slate-800);
+      font-size: .92rem
+    }
+
+    input[type="number"],
+    input[type="text"],
+    select {
+      width: 100%;
+      border: 2px solid var(--slate-300);
+      border-radius: 12px;
+      padding: .78rem .92rem;
+      font-size: 1rem;
+      color: var(--slate-800);
+      background: rgba(248, 250, 252, .88)
+    }
+
+    input[type="number"]:focus,
+    input[type="text"]:focus,
+    select:focus {
+      outline: none;
+      border-color: var(--teal);
+      box-shadow: 0 0 0 4px rgba(13, 148, 136, .12)
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--teal)
+    }
+
+    input[type="number"]:disabled {
+      background: rgba(226, 232, 240, .75);
+      color: var(--slate-500);
+      cursor: not-allowed
+    }
+
+    .input-slider {
+      display: grid;
+      gap: .8rem
+    }
+
+    .slider-lbl {
+      font-size: .84rem;
+      color: var(--teal-dark);
+      font-weight: 700;
+      margin-top: .3rem
+    }
+
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      flex-wrap: wrap;
+      margin-top: .3rem
+    }
+
+    .toggle-chip {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: center;
+      border-radius: 16px;
+      padding: .9rem 1rem
+    }
+
+    .toggle-label {
+      display: grid;
+      gap: .2rem;
+      color: var(--slate-700);
+      font-weight: 700;
+      font-size: .93rem
+    }
+
+    .toggle-label small {
+      color: var(--slate-500);
+      font-weight: 500;
+      font-size: .82rem;
+      line-height: 1.5
+    }
+
+    .switch {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      flex-shrink: 0
+    }
+
+    .switch input {
+      position: absolute;
+      opacity: 0;
+      inset: 0;
+      cursor: pointer
+    }
+
+    .switch-ui {
+      width: 52px;
+      height: 30px;
+      border-radius: 999px;
+      background: var(--slate-300);
+      position: relative;
+      transition: background .2s ease
+    }
+
+    .switch-ui::after {
+      content: "";
+      position: absolute;
+      top: 4px;
+      left: 4px;
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      background: var(--white);
+      box-shadow: var(--shadow-sm);
+      transition: transform .2s ease
+    }
+
+    .switch input:checked+.switch-ui {
+      background: var(--teal)
+    }
+
+    .switch input:checked+.switch-ui::after {
+      transform: translateX(22px)
+    }
+
+    .mini-status {
+      background: var(--sky-light);
+      border: 1px solid rgba(2, 132, 199, .18);
+      color: #0c4a6e;
+      padding: .5rem .85rem;
+      font-size: .83rem
+    }
+
+    .mini-edit-panel {
+      background: linear-gradient(180deg, rgba(13,148,136,.08), rgba(224,242,254,.55));
+      border: 1.5px solid rgba(13,148,136,.22);
+      border-radius: 18px;
+      padding: 1.1rem 1.2rem 1rem;
+      margin-bottom: 1.25rem
+    }
+
+    .mini-edit-title {
+      font-size: .88rem;
+      font-weight: 800;
+      color: var(--teal-dark);
+      letter-spacing: .03em;
+      text-transform: uppercase;
+      margin-bottom: .9rem
+    }
+
+    .mini-edit-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem
+    }
+
+    .mini-field {
+      display: grid;
+      gap: .35rem
+    }
+
+    .mini-field input[type="number"] {
+      padding: .6rem .8rem;
+      font-size: .95rem
+    }
+
+    .mini-field input[type="range"] {
+      margin-top: .1rem
+    }
+
+    .mini-field .slider-lbl {
+      margin-top: 0
+    }
+
+    .btn-primary {
+      border: none;
+      color: var(--white);
+      background: linear-gradient(135deg, var(--teal-dark), var(--teal));
+      box-shadow: 0 10px 24px rgba(13, 148, 136, .2)
+    }
+
+    .btn-secondary {
+      border: 2px solid var(--slate-300);
+      color: var(--slate-700);
+      background: var(--slate-100)
+    }
+
+    .btn-ghost {
+      border: 2px solid rgba(13, 148, 136, .22);
+      color: var(--teal-dark);
+      background: rgba(13, 148, 136, .06)
+    }
+
+    .result-meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      margin-bottom: .9rem
+    }
+
+    .mode-pill {
+      background: var(--teal-light);
+      color: var(--teal-dark);
+      padding: .5rem .85rem;
+      font-size: .82rem
+    }
+
+    .result-actions {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      flex-wrap: wrap
+    }
+
+    .status-banner {
+      display: none;
+      padding: .85rem 1rem;
+      border-radius: 14px;
+      margin-bottom: 1rem;
+      font-weight: 600;
+      font-size: .92rem
+    }
+
+    .status-banner.info {
+      display: block;
+      background: var(--sky-light);
+      color: #0c4a6e
+    }
+
+    .status-banner.error {
+      display: block;
+      background: var(--rose-light);
+      color: #9f1239
+    }
+
+    .status-banner.success {
+      display: block;
+      background: var(--teal-light);
+      color: var(--teal-dark)
+    }
+
+    .result-grid {
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      margin-top: 1rem
+    }
+
+    .result-card {
+      color: var(--white);
+      border-radius: 18px;
+      padding: 1.2rem 1.1rem;
+      min-height: 142px;
+      box-shadow: var(--shadow-md)
+    }
+
+    .result-card.teal {
+      background: linear-gradient(135deg, var(--teal-dark), var(--teal))
+    }
+
+    .result-card.amber {
+      background: linear-gradient(135deg, #d97706, var(--amber))
+    }
+
+    .result-card.rose {
+      background: linear-gradient(135deg, #be123c, var(--rose))
+    }
+
+    .result-card.slate {
+      background: linear-gradient(135deg, var(--slate-800), var(--slate-600))
+    }
+
+    .result-card.sky {
+      background: linear-gradient(135deg, #0369a1, var(--sky))
+    }
+
+    .result-lbl {
+      font-size: .8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      opacity: .92;
+      margin-bottom: .45rem
+    }
+
+    .result-val {
+      font-size: clamp(.96rem, 2.1vw, 1.55rem);
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -.02em;
+      margin-bottom: .35rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis
+    }
+
+    .result-sub {
+      font-size: .82rem;
+      opacity: .86
+    }
+
+    .insight-box,
+    .formula-box,
+    .callout {
+      margin-top: 1rem;
+      border-radius: 14px;
+      padding: 1rem 1.1rem
+    }
+
+    .insight-box {
+      display: none;
+      background: linear-gradient(135deg, rgba(245, 158, 11, .16), rgba(255, 247, 237, .86));
+      border: 1px solid rgba(245, 158, 11, .24);
+      color: #78350f
+    }
+
+    .formula-box {
+      background: linear-gradient(135deg, rgba(13, 148, 136, .14), rgba(224, 242, 254, .84));
+      border-left: 4px solid var(--teal);
+      color: var(--slate-700);
+      font-family: "Courier New", monospace;
+      font-size: .93rem;
+      overflow-x: auto
+    }
+
+    .comparison-summary {
+      margin-top: 1rem
+    }
+
+    .compare-box {
+      border-radius: 20px;
+      padding: 1.15rem;
+      border: 1px solid rgba(148, 163, 184, .24);
+      box-shadow: var(--shadow-sm)
+    }
+
+    .compare-box.compare-a {
+      background: linear-gradient(180deg, rgba(219, 234, 254, .88), rgba(224, 242, 254, .78));
+      border-color: rgba(37, 99, 235, .22)
+    }
+
+    .compare-box.compare-b {
+      background: linear-gradient(180deg, rgba(209, 250, 229, .88), rgba(236, 253, 245, .78));
+      border-color: rgba(13, 148, 136, .22)
+    }
+
+    .compare-tag {
+      padding: .5rem .85rem;
+      font-size: .92rem;
+      letter-spacing: .01em;
+      margin-bottom: .95rem
+    }
+
+    .compare-tag .compare-letter {
+      width: 1.7rem;
+      height: 1.7rem;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .86rem;
+      color: var(--white)
+    }
+
+    .compare-a .compare-tag {
+      background: rgba(37, 99, 235, .1);
+      color: #1d4ed8
+    }
+
+    .compare-a .compare-letter {
+      background: linear-gradient(135deg, #2563eb, #1d4ed8)
+    }
+
+    .compare-b .compare-tag {
+      background: rgba(13, 148, 136, .12);
+      color: #0f766e
+    }
+
+    .compare-b .compare-letter {
+      background: linear-gradient(135deg, #0d9488, #0f766e)
+    }
+
+    .comparison-summary tbody td.compare-a-cell {
+      color: #1d4ed8;
+      font-weight: 700;
+      background: rgba(219, 234, 254, .45)
+    }
+
+    .comparison-summary tbody td.compare-b-cell {
+      color: #0f766e;
+      font-weight: 700;
+      background: rgba(209, 250, 229, .45)
+    }
+
+    .table-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      margin-bottom: 1rem
+    }
+
+    .chart-wrap,
+    .milestone-card,
+    .faq-item {
+      border-radius: 18px;
+      padding: 1rem
+    }
+
+    .chart-title {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--slate-900);
+      margin-bottom: .35rem
+    }
+
+    .chart-canvas {
+      position: relative;
+      height: 280px;
+      margin-top: .8rem
+    }
+
+    .tbl-wrap {
+      overflow-x: auto;
+      border-radius: 16px;
+      border: 1px solid rgba(13, 148, 136, .14);
+      background: rgba(241, 245, 249, .84);
+      box-shadow: var(--shadow-sm)
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 640px
+    }
+
+    thead tr {
+      background: linear-gradient(135deg, var(--teal-dark), var(--teal));
+      color: var(--white)
+    }
+
+    th,
+    td {
+      padding: .75rem .9rem;
+      text-align: right;
+      font-size: .9rem;
+      border-bottom: 1px solid var(--slate-200)
+    }
+
+    th {
+      font-size: .8rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .04em
+    }
+
+    th:first-child,
+    td:first-child {
+      text-align: left
+    }
+
+    tbody tr:nth-child(even) {
+      background: var(--slate-50)
+    }
+
+    tbody tr:hover {
+      background: rgba(13, 148, 136, .06)
+    }
+
+    .callout {
+      background: linear-gradient(135deg, rgba(13, 148, 136, .1), rgba(224, 242, 254, .95));
+      border-left: 4px solid var(--teal);
+      color: var(--slate-700)
+    }
+
+    .milestone-card .eyebrow {
+      font-size: .78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      color: var(--teal-dark);
+      margin-bottom: .35rem
+    }
+
+    .milestone-card .value {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--slate-900);
+      line-height: 1.2
+    }
+
+    .milestone-card .meta {
+      margin-top: .35rem;
+      font-size: .88rem;
+      color: var(--slate-600)
+    }
+
+    .link-card {
+      background: linear-gradient(180deg, rgba(224, 242, 254, .82), rgba(236, 253, 245, .8));
+      border: 2px solid rgba(13, 148, 136, .14);
+      border-radius: 16px;
+      padding: 1rem;
+      color: var(--slate-700);
+      transition: .25s ease;
+      text-decoration: none
+    }
+
+    .link-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 12px;
+      background: var(--teal-light);
+      margin-bottom: .75rem;
+      font-size: 1.15rem
+    }
+
+    .link-card p {
+      margin: 0;
+      color: var(--slate-500);
+      font-size: .9rem;
+      font-weight: 500
+    }
+
+    .faq-item {
+      background: var(--slate-50);
+      border: 1px solid var(--slate-200);
+      margin-bottom: .85rem
+    }
+
+    .faq-q {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--slate-900);
+      margin-bottom: .45rem
+    }
+
+    .disclaimer1 {
+      background: linear-gradient(135deg, var(--amber-light), #fff7ed);
+      border: 1px solid rgba(245, 158, 11, .24);
+      border-radius: 16px;
+      padding: 1.2rem 1.3rem;
+      margin-top: 2rem;
+      color: #78350f;
+      font-size: .9rem
+    }
+
+    footer {
+      background: #1f2937;
+      color: var(--white);
+      padding: 3rem 0 1rem;
+      margin-top: 4rem
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto 2rem;
+      padding: 0 1rem
+    }
+
+    .footer-section h3 {
+      color: #5eead4;
+      margin-bottom: .9rem;
+      font-size: 1rem
+    }
+
+    .footer-section ul {
+      list-style: none
+    }
+
+    .footer-section li {
+      margin-bottom: .55rem
+    }
+
+    .footer-section a,
+    .footer-section span {
+      color: #cbd5e0;
+      text-decoration: none
+    }
+
+    .footer-disclaimer {
+      background: rgba(255, 255, 255, .06);
+      padding: 1rem;
+      border-radius: 14px;
+      color: #dbeafe;
+      font-size: .9rem
+    }
+
+    .copyright {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1.5rem 1rem 0;
+      text-align: center;
+      border-top: 1px solid rgba(255, 255, 255, .1);
+      color: #cbd5e0
+    }
+
+    @media (min-width:640px) {
+      .hero {
+        padding: 2rem
+      }
+
+      .hero-highlights,
+      .toolbar-grid,
+      .field-pair,
+      .links-grid,
+      .footer-content,
+      .extension-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr))
+      }
+
+      .result-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr))
+      }
+
+      .qnav {
+        grid-template-columns: repeat(3, minmax(0, 1fr))
+      }
+
+      .btn-row {
+        grid-template-columns: repeat(2, minmax(0, 1fr))
+      }
+    }
+
+    @media (min-width:768px) {
+      .input-slider {
+        grid-template-columns: 1.1fr 1fr;
+        align-items: center
+      }
+
+      .toolbar-grid {
+        grid-template-columns: 1.1fr 1fr
+      }
+
+      .charts-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr))
+      }
+
+      .charts-grid .chart-wrap:last-child {
+        grid-column: span 2
+      }
+
+      .footer-content {
+        grid-template-columns: repeat(4, minmax(0, 1fr))
+      }
+    }
+
+    @media (min-width:960px) {
+      .hero-highlights {
+        grid-template-columns: repeat(3, minmax(0, 1fr))
+      }
+
+      .result-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr))
+      }
+
+      .comparison-grid,
+      .links-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr))
+      }
+
+      .extension-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr))
+      }
+    }
+
+    @media (max-width:767px) {
+      .hdr-nav {
+        display: none
+      }
+
+      .hamburger {
+        display: flex
+      }
+
+      .result-actions {
+        width: 100%
+      }
+
+      .result-actions .btn-secondary {
+        width: 100%
+      }
+
+      .table-head,
+      .toggle-chip {
+        flex-direction: column;
+        align-items: flex-start
+      }
+
+      .result-val {
+        font-size: 1rem
+      }
+    }
+
+    @media (max-width:479px) {
+      .page {
+        padding-inline: .8rem
+      }
+
+      .card,
+      .content-section {
+        padding: 1.1rem
+      }
+
+      .chart-canvas {
+        height: 240px
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="hdr-inner">
+      <div class="hdr-logo">💰 SmartCalc World</div>
+      <nav class="hdr-nav">
+        <a href="https://smartcalcworld.com/index.html">Home</a>
+        <a href="https://smartcalcworld.com/finance/finance-hub.html">Finance Hub</a>
+        <span class="nav-disabled">Medical Hub (Coming Soon)</span>
+        <span class="nav-disabled">Student Hub (Coming Soon)</span>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <button class="hamburger" id="hamburgerBtn" type="button" aria-label="Toggle menu"
+        aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+    <nav class="mobile-nav" id="mobileNav">
+      <a href="https://smartcalcworld.com/index.html">Home</a>
+      <a href="https://smartcalcworld.com/finance/finance-hub.html">Finance Hub</a>
+      <span class="nav-disabled">Medical Hub (Coming Soon)</span>
+      <span class="nav-disabled">Student Hub (Coming Soon)</span>
+      <a href="#faq">FAQ</a>
+    </nav>
+  </header>
+
+  <main class="page">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="https://smartcalcworld.com/index.html">Home</a> &rsaquo;
+      <a href="https://smartcalcworld.com/finance/finance-hub.html">Finance</a> &rsaquo;
+      <a href="https://smartcalcworld.com/finance/investment/investment-hub.html">Investment</a> &rsaquo;
+      Asset Allocation Calculator
+    </nav>
+
+    <section class="hero">
+      <span class="hero-badge">📊 Premium Allocation Planner</span>
+      <h1>Asset Allocation Calculator</h1>
+      <p class="hero-sub">Build a smarter portfolio across stocks, bonds, gold, real estate, and crypto with
+        SmartCalcWorld’s premium asset allocation planner. This page helps you balance growth, diversification, and risk
+        using either manual allocation percentages or an automatic profile-driven mix.</p>
+      <div class="hero-highlights">
+        <div class="hero-chip"><strong>Turn risk tolerance into a workable portfolio mix</strong>Choose conservative,
+          moderate, or aggressive positioning and see how the asset split changes expected return and projected future
+          value.</div>
+        <div class="hero-chip"><strong>Compare custom allocation with profile-based scenarios</strong>Instantly contrast
+          conservative, moderate, and aggressive portfolios to understand the trade-off between risk score and long-term
+          growth.</div>
+        <div class="hero-chip"><strong>See the portfolio visually before you commit</strong>Use pie, growth, and
+          risk-return charts to understand where your money sits and how that mix may behave over time.</div>
+      </div>
+    </section>
+
+    <section class="card" id="calculator">
+      <div class="card-title">Asset Allocation Dashboard</div>
+      <div class="toolbar-grid">
+        <div class="toolbar-box">
+          <h2>Display Currency</h2>
+          <div class="form-row">
+            <label class="lbl" for="global-currency">Choose currency with country flag</label>
+            <select id="global-currency">
+              <option value="USD" selected>🇺🇸 USD $</option>
+              <option value="INR">🇮🇳 INR ₹</option>
+              <option value="EUR">🇪🇺 EUR €</option>
+              <option value="GBP">🇬🇧 GBP £</option>
+              <option value="AUD">🇦🇺 AUD $</option>
+              <option value="CAD">🇨🇦 CAD $</option>
+            </select>
+            <span class="hint">Display only. The currency selector changes labels and formatting across the
+              calculator.</span>
+          </div>
+        </div>
+        <div class="toolbar-box">
+          <h2>What this tool answers</h2>
+          <div class="info-list">
+            <div class="info-pill">What your portfolio’s <strong>weighted expected return</strong> may look like based
+              on the asset-class returns you assume.</div>
+            <div class="info-pill">How different mixes affect your <strong>risk score</strong>, projected future value,
+              and asset concentration.</div>
+            <div class="info-pill">Whether a <strong>conservative, moderate, or aggressive</strong> profile fits your
+              timeline better than a fully manual allocation.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="qnav" id="qnav" role="tablist" aria-label="Asset allocation calculator sections">
+        <button type="button" class="qnav-btn active" data-module="setup" role="tab" aria-selected="true"
+          onclick="switchModule('setup')">Portfolio Setup</button>
+        <button type="button" class="qnav-btn" data-module="allocation" role="tab" aria-selected="false"
+          onclick="switchModule('allocation')">Allocation Mix</button>
+        <button type="button" class="qnav-btn" data-module="comparison" role="tab" aria-selected="false"
+          onclick="switchModule('comparison')">Scenario Comparison</button>
+      </div>
+
+      <section class="module active" id="mod-setup" role="tabpanel" aria-label="Portfolio setup">
+        <p class="module-intro">Start with the total amount you plan to invest, your investment horizon, and the level
+          of risk you are comfortable taking. You can use auto-allocation mode for a ready-made portfolio mix or switch
+          to manual mode for full control.</p>
+        <div class="field-pair">
+          <div class="form-row">
+            <label class="lbl" for="portfolio-amount">Total Investment Amount (<span
+                data-currency-symbol>₹</span>)</label>
+            <div class="input-slider">
+              <div><input type="number" id="portfolio-amount" min="1000" max="50000000" step="1000"
+                  value="1000000"><span class="hint">This is the lump sum portfolio value you want to allocate across
+                  the selected asset classes.</span></div>
+              <div><input type="range" id="portfolio-amount-sl" min="1000" max="10000000" step="1000" value="1000000">
+                <div class="slider-lbl" id="portfolio-amount-lbl">₹10,00,000</div>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <label class="lbl" for="portfolio-horizon">Investment Horizon (Years)</label>
+            <div class="input-slider">
+              <div><input type="number" id="portfolio-horizon" min="1" max="40" step="1" value="15"><span class="hint">A
+                  longer horizon can usually support a higher-growth allocation because there is more time to recover
+                  from volatility.</span></div>
+              <div><input type="range" id="portfolio-horizon-sl" min="1" max="40" step="1" value="15">
+                <div class="slider-lbl" id="portfolio-horizon-lbl">15 years</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="field-pair">
+          <div class="form-row">
+            <label class="lbl" for="risk-profile">Risk Tolerance Level</label>
+            <div class="input-slider">
+              <div><input type="number" id="risk-profile" min="1" max="3" step="1" value="2"><span class="hint">1 =
+                  Conservative, 2 = Moderate, 3 = Aggressive. Auto-allocation mode uses this setting to build the
+                  suggested mix.</span></div>
+              <div><input type="range" id="risk-profile-sl" min="1" max="3" step="1" value="2">
+                <div class="slider-lbl" id="risk-profile-lbl">Moderate</div>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <label class="lbl" for="auto-allocation">Allocation Mode</label>
+            <label class="toggle-chip">
+              <span class="toggle-label"><span>Use auto-allocation mode</span><small>Auto mode fills the allocation
+                  percentages from your selected risk profile. Turn it off to set every allocation
+                  manually.</small></span>
+              <span class="switch"><input type="checkbox" id="auto-allocation" checked><span
+                  class="switch-ui"></span></span>
+            </label>
+            <div class="mini-status" id="allocation-status">Auto-allocation active</div>
+          </div>
+        </div>
+
+        <div class="toolbar-box">
+          <h2>Auto profile ideas</h2>
+          <div class="info-list">
+            <div class="info-pill"><strong>Conservative:</strong> More bonds and gold, less crypto, slower but steadier
+              expected growth.</div>
+            <div class="info-pill"><strong>Moderate:</strong> A balanced mix across growth and stabilizing assets, often
+              suitable for medium to long horizons.</div>
+            <div class="info-pill"><strong>Aggressive:</strong> More stocks and crypto, higher expected growth, but more
+              portfolio volatility.</div>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <button type="button" class="btn-primary" onclick="calculateAllocation(true, true)">Calculate
+            Allocation</button>
+          <button type="button" class="btn-ghost" onclick="resetPlanner()">Reset Inputs</button>
+        </div>
+      </section>
+
+      <section class="module" id="mod-allocation" role="tabpanel" aria-label="Allocation mix">
+        <p class="module-intro">Set the expected return assumptions and portfolio weights for each asset class. Manual
+          mode requires the allocations to add up to exactly 100% so the portfolio return and risk estimates stay
+          meaningful.</p>
+        <div class="callout"><strong>How calculations work:</strong> Portfolio Expected Return = Σ (Asset Allocation ×
+          Asset Return). Portfolio Risk Score = weighted risk score using each asset class’s relative volatility weight.
+          Future Value = Total Investment × (1 + portfolio return)^n.</div>
+        <div class="field-pair">
+          <div class="form-row"><label class="lbl" for="stocks-return">Stocks Expected Return (%)</label>
+            <div class="input-slider">
+              <div><input type="number" id="stocks-return" min="0" max="30" step="0.1" value="12"><span
+                  class="hint">Higher expected growth with higher volatility.</span></div>
+              <div><input type="range" id="stocks-return-sl" min="0" max="30" step="0.1" value="12">
+                <div class="slider-lbl" id="stocks-return-lbl">12.00%</div>
+              </div>
+            </div>
+          </div>
+          <div class="form-row"><label class="lbl" for="stocks-alloc">Stocks Allocation (%)</label>
+            <div class="input-slider">
+              <div><input type="number" id="stocks-alloc" min="0" max="100" step="1" value="45"><span
+                  class="hint">Large-cap, broad-market equity, or diversified stock allocation.</span></div>
+              <div><input type="range" id="stocks-alloc-sl" min="0" max="100" step="1" value="45">
+                <div class="slider-lbl" id="stocks-alloc-lbl">45%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="field-pair">
+          <div class="form-row"><label class="lbl" for="bonds-return">Bonds Expected Return (%)</label>
+            <div class="input-slider">
+              <div><input type="number" id="bonds-return" min="0" max="20" step="0.1" value="7"><span
+                  class="hint">Usually lower return than stocks, but often a stabilizing portfolio asset.</span></div>
+              <div><input type="range" id="bonds-return-sl" min="0" max="20" step="0.1" value="7">
+                <div class="slider-lbl" id="bonds-return-lbl">7.00%</div>
+              </div>
+            </div>
+          </div>
+          <div class="form-row"><label class="lbl" for="bonds-alloc">Bonds Allocation (%)</label>
+            <div class="input-slider">
+              <div><input type="number" id="bonds-alloc" min="0" max="100" step="1" value="25"><span
+                  class="hint">Government or high-quality debt exposure that usually reduces portfolio
+                  volatility.</span></div>
+              <div><input type="range" id="bonds-alloc-sl" min="0" max="100" step="1" value="25">
+                <div class="slider-lbl" id="bonds-alloc-lbl">25%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="field-pair">
+          <div class="form-row"><label class="lbl" for="gold-return">Gold Expected Return (%)</label>
+            <div class="input-slider">
+              <div><input type="number" id="gold-return" min="0" max="20" step="0.1" value="8"><span class="hint">Gold
+                  may act as a diversifier, especially during stress or inflation-heavy periods.</span></div>
+              <div><input type="range" id="gold-return-sl" min="0" max="20" step="0.1" value="8">
+                <div class="slider-lbl" id="gold-return-lbl">8.00%</div>
+              </div>
+            </div>
+          </div>
+          <div class="form-row"><label class="lbl" for="gold-alloc">Gold Allocation (%)</label>
+            <div class="input-slider">
+              <div><input type="number" id="gold-alloc" min="0" max="100" step="1" value="10"><span class="hint">Gold
+                  can help diversify beyond traditional stock and bond exposure.</span></div>
+              <div><input type="range" id="gold-alloc-sl" min="0" max="100" step="1" value="10">
+                <div class="slider-lbl" id="gold-alloc-lbl">10%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="field-pair">
+          <div class="form-row"><label class="lbl" for="realestate-return">Real Estate Expected Return (%)</label>
+            <div class="input-slider">
+              <div><input type="number" id="realestate-return" min="0" max="20" step="0.1" value="9"><span
+                  class="hint">Represents property or REIT-style long-term growth expectations.</span></div>
+              <div><input type="range" id="realestate-return-sl" min="0" max="20" step="0.1" value="9">
+                <div class="slider-lbl" id="realestate-return-lbl">9.00%</div>
+              </div>
+            </div>
+          </div>
+          <div class="form-row"><label class="lbl" for="realestate-alloc">Real Estate Allocation (%)</label>
+            <div class="input-slider">
+              <div><input type="number" id="realestate-alloc" min="0" max="100" step="1" value="15"><span
+                  class="hint">Adds another source of diversification for investors who want broader asset
+                  exposure.</span></div>
+              <div><input type="range" id="realestate-alloc-sl" min="0" max="100" step="1" value="15">
+                <div class="slider-lbl" id="realestate-alloc-lbl">15%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="field-pair">
+          <div class="form-row"><label class="lbl" for="crypto-return">Crypto Expected Return (%)</label>
+            <div class="input-slider">
+              <div><input type="number" id="crypto-return" min="0" max="40" step="0.1" value="18"><span
+                  class="hint">High-risk, high-volatility asset class. Many investors keep this as a smaller satellite
+                  position.</span></div>
+              <div><input type="range" id="crypto-return-sl" min="0" max="40" step="0.1" value="18">
+                <div class="slider-lbl" id="crypto-return-lbl">18.00%</div>
+              </div>
+            </div>
+          </div>
+          <div class="form-row"><label class="lbl" for="crypto-alloc">Crypto Allocation (%)</label>
+            <div class="input-slider">
+              <div><input type="number" id="crypto-alloc" min="0" max="100" step="1" value="5"><span
+                  class="hint">Usually best kept smaller unless you have very high risk tolerance.</span></div>
+              <div><input type="range" id="crypto-alloc-sl" min="0" max="100" step="1" value="5">
+                <div class="slider-lbl" id="crypto-alloc-lbl">5%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="toolbar-box">
+          <h2>Allocation checks</h2>
+          <div class="info-list">
+            <div class="info-pill" id="allocation-total-pill">Allocation total: 100%</div>
+            <div class="info-pill">Manual mode requires the five allocation percentages to sum to <strong>exactly
+                100%</strong>.</div>
+            <div class="info-pill">Auto mode overwrites the percentage fields using your risk-profile preset so you can
+              compare faster.</div>
+          </div>
+        </div>
+        <div class="btn-row">
+          <button type="button" class="btn-primary" onclick="calculateAllocation(true, true)">Update Portfolio
+            Mix</button>
+          <button type="button" class="btn-ghost" onclick="resetPlanner()">Reset Inputs</button>
+        </div>
+      </section>
+
+      <section class="module" id="mod-comparison" role="tabpanel" aria-label="Scenario comparison">
+        <p class="module-intro">Scenario comparison shows how the classic conservative, moderate, and aggressive
+          portfolio styles can differ in return, risk, and future value. This helps you compare your current mix with
+          standard profile-driven alternatives.</p>
+
+        <div class="mini-edit-panel">
+          <div class="mini-edit-title">⚙️ Adjust Inputs</div>
+          <div class="mini-edit-grid">
+            <div class="mini-field">
+              <label class="lbl" for="cmp-amount">Investment Amount (<span data-currency-symbol>₹</span>)</label>
+              <input type="number" id="cmp-amount" min="1000" max="50000000" step="1000" value="1000000">
+              <input type="range" id="cmp-amount-sl" min="1000" max="10000000" step="1000" value="1000000">
+              <div class="slider-lbl" id="cmp-amount-lbl">₹10,00,000</div>
+            </div>
+            <div class="mini-field">
+              <label class="lbl" for="cmp-horizon">Horizon (Years)</label>
+              <input type="number" id="cmp-horizon" min="1" max="40" step="1" value="15">
+              <input type="range" id="cmp-horizon-sl" min="1" max="40" step="1" value="15">
+              <div class="slider-lbl" id="cmp-horizon-lbl">15 years</div>
+            </div>
+            <div class="mini-field">
+              <label class="lbl" for="cmp-risk">Risk Profile</label>
+              <input type="number" id="cmp-risk" min="1" max="3" step="1" value="2">
+              <input type="range" id="cmp-risk-sl" min="1" max="3" step="1" value="2">
+              <div class="slider-lbl" id="cmp-risk-lbl">Moderate</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="comparison-grid">
+          <div class="compare-box compare-a">
+            <div class="compare-tag"><span class="compare-letter">A</span> Current Portfolio</div>
+            <div class="info-list" id="compare-current-list"></div>
+          </div>
+          <div class="compare-box compare-b">
+            <div class="compare-tag"><span class="compare-letter">B</span> Profile Scenarios</div>
+            <div class="info-list" id="compare-profile-list"></div>
+          </div>
+        </div>
+        <div class="callout"><strong>Why this matters:</strong> A scenario view makes it easier to decide whether your
+          portfolio is too cautious, too aggressive, or reasonably aligned with your time horizon and comfort with
+          volatility.</div>
+        <div class="btn-row">
+          <button type="button" class="btn-primary" onclick="calculateAllocation(true, true)">Refresh
+            Comparison</button>
+          <button type="button" class="btn-ghost" onclick="switchModule('setup')">Back to Setup</button>
+        </div>
+      </section>
+    </section>
+
+    <section class="card" id="results-section" aria-live="polite">
+      <div class="result-meta">
+        <div class="mode-pill" id="result-mode-pill">Latest Result: Asset Allocation Analysis</div>
+        <div class="result-actions"><button type="button" class="btn-secondary" onclick="copyResults()">Copy
+            Results</button>
+          <div class="copy-note" id="copy-note">Nothing copied yet.</div>
+        </div>
+      </div>
+      <div class="status-banner" id="status-banner"></div>
+      <div class="result-grid">
+        <div class="result-card teal" id="result-card-0">
+          <div class="result-lbl" id="result-lbl-0">Recommended Allocation Breakdown</div>
+          <div class="result-val" id="result-val-0">-</div>
+          <div class="result-sub" id="result-sub-0">Stocks / Bonds / Gold / Real Estate / Crypto</div>
+        </div>
+        <div class="result-card amber" id="result-card-1">
+          <div class="result-lbl" id="result-lbl-1">Expected Annual Return</div>
+          <div class="result-val" id="result-val-1">-</div>
+          <div class="result-sub" id="result-sub-1">Weighted average return from the allocation mix</div>
+        </div>
+        <div class="result-card sky" id="result-card-2">
+          <div class="result-lbl" id="result-lbl-2">Estimated Portfolio Value</div>
+          <div class="result-val" id="result-val-2">-</div>
+          <div class="result-sub" id="result-sub-2">Projected future value after the selected horizon</div>
+        </div>
+        <div class="result-card slate" id="result-card-3">
+          <div class="result-lbl" id="result-lbl-3">Risk Score</div>
+          <div class="result-val" id="result-val-3">-</div>
+          <div class="result-sub" id="result-sub-3">Approximate portfolio risk score out of 100</div>
+        </div>
+      </div>
+      <div class="insight-box" id="insight-box"></div>
+      <div class="formula-box" id="formula-box"></div>
+      <div class="comparison-summary" id="snapshot-summary">
+        <div class="table-head">
+          <div>
+            <div class="card-title" style="margin-bottom:.3rem;">Portfolio Snapshot</div>
+            <div class="table-context">Quick summary of the current allocation, return profile, and diversification
+              picture.</div>
+          </div>
+        </div>
+        <div class="tbl-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Metric</th>
+                <th>Value</th>
+                <th>Explanation</th>
+              </tr>
+            </thead>
+            <tbody id="snapshot-summary-body"></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="comparison-summary" id="scenario-summary-wrap">
+        <div class="table-head">
+          <div>
+            <div class="card-title" style="margin-bottom:.3rem;">Conservative vs Moderate vs Aggressive</div>
+            <div class="table-context">Scenario comparison helps you see how common portfolio styles change growth
+              expectations and risk.</div>
+          </div>
+        </div>
+        <div class="tbl-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Scenario</th>
+                <th>Allocation</th>
+                <th>Expected Return</th>
+                <th>Risk Score</th>
+                <th>Future Value</th>
+              </tr>
+            </thead>
+            <tbody id="scenario-summary-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" id="charts-section">
+      <div class="card-title">Visual Allocation Dashboard</div>
+      <p class="chart-note" id="charts-context">Charts show the current asset mix, projected portfolio growth, and the
+        relationship between risk and return across assets and scenarios.</p>
+      <div class="charts-grid">
+        <div class="chart-wrap">
+          <div class="chart-title" id="allocation-title">Asset Allocation Distribution</div>
+          <div class="chart-note" id="allocation-note">See how the portfolio is split across the five asset classes.
+          </div>
+          <div class="chart-canvas"><canvas id="allocation-chart"></canvas></div>
+        </div>
+        <div class="chart-wrap">
+          <div class="chart-title" id="growth-title">Projected Portfolio Value Over Time</div>
+          <div class="chart-note" id="growth-note">Compare the current portfolio path with the conservative, moderate,
+            and aggressive scenario curves.</div>
+          <div class="chart-canvas"><canvas id="growth-chart"></canvas></div>
+        </div>
+        <div class="chart-wrap">
+          <div class="chart-title" id="risk-return-title">Risk-Return Comparison</div>
+          <div class="chart-note" id="risk-return-note">Plot asset classes, your portfolio, and profile scenarios
+            together to visualize trade-offs more clearly.</div>
+          <div class="chart-canvas"><canvas id="risk-return-chart"></canvas></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" id="projection-section">
+      <div class="table-head">
+        <div>
+          <div class="card-title" style="margin-bottom:.3rem;">Detailed Allocation Breakdown</div>
+          <div class="table-context" id="projection-context">Each row shows the allocation share, invested amount,
+            expected return, and contribution to total portfolio growth for the current mix.</div>
+        </div>
+        <button type="button" class="btn-secondary" onclick="downloadCsv()">Download CSV</button>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <thead>
+            <tr id="projection-head-row"></tr>
+          </thead>
+          <tbody id="projection-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════
+         CONTENT SECTIONS — REDESIGNED
+    ═══════════════════════════════════════════════════════ -->
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,700;1,500&family=Inter:wght@400;500;600;700&display=swap');
+
+      /* ── Reveal animation ── */
+      .reveal { opacity: 0; transform: translateY(28px); transition: opacity .6s ease, transform .6s ease; }
+      .reveal.visible { opacity: 1; transform: none; }
+
+      /* ══════════════════════════════════
+         GUIDE SECTION
+      ══════════════════════════════════ */
+      #guide {
+        padding: 0;
+        background: none;
+        border: none;
+        box-shadow: none;
+        margin-top: 2.5rem;
+      }
+      .guide-header {
+        background: linear-gradient(135deg, #0f172a 0%, #0f766e 100%);
+        border-radius: 24px;
+        padding: 3rem 2.5rem 2.5rem;
+        margin-bottom: 2rem;
+        position: relative;
+        overflow: hidden;
+      }
+      .guide-header::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        pointer-events: none;
+      }
+      .guide-eyebrow {
+        font-family: 'Inter', sans-serif;
+        font-size: .72rem;
+        font-weight: 700;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+        color: #5eead4;
+        margin-bottom: .75rem;
+      }
+      .guide-header h2 {
+        font-family: 'Lora', Georgia, serif;
+        font-size: clamp(1.7rem, 4vw, 2.6rem);
+        font-weight: 700;
+        color: #fff;
+        line-height: 1.15;
+        margin: 0 0 1rem;
+        border: none;
+        padding: 0;
+      }
+      .guide-lead {
+        font-family: 'Inter', sans-serif;
+        font-size: 1.05rem;
+        color: rgba(255,255,255,.78);
+        line-height: 1.75;
+        max-width: 700px;
+        margin: 0;
+      }
+      .guide-lead strong { color: #99f6e4; font-weight: 600; }
+
+      /* ── Asset class cards ── */
+      .asset-showcase {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(155px, 1fr));
+        gap: .85rem;
+        margin: 2rem 0;
+      }
+      .asset-card {
+        border-radius: 18px;
+        padding: 1.15rem 1rem 1rem;
+        position: relative;
+        overflow: hidden;
+        transition: transform .22s ease, box-shadow .22s ease;
+      }
+      .asset-card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(15,23,42,.16); }
+      .asset-card::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(255,255,255,.08) 0%, transparent 100%);
+        pointer-events: none;
+      }
+      .asset-card.stocks  { background: linear-gradient(145deg, #0f766e, #0d9488); }
+      .asset-card.bonds   { background: linear-gradient(145deg, #0369a1, #0284c7); }
+      .asset-card.gold    { background: linear-gradient(145deg, #b45309, #d97706); }
+      .asset-card.re      { background: linear-gradient(145deg, #6d28d9, #7c3aed); }
+      .asset-card.crypto  { background: linear-gradient(145deg, #be123c, #f43f5e); }
+
+      .asset-icon { font-size: 1.6rem; margin-bottom: .5rem; display: block; }
+      .asset-name {
+        font-family: 'Inter', sans-serif;
+        font-size: .82rem;
+        font-weight: 700;
+        color: rgba(255,255,255,.92);
+        text-transform: uppercase;
+        letter-spacing: .05em;
+        margin-bottom: .6rem;
+      }
+      .asset-trait {
+        font-family: 'Inter', sans-serif;
+        font-size: .78rem;
+        color: rgba(255,255,255,.7);
+        line-height: 1.45;
+        margin-bottom: .75rem;
+      }
+      .risk-meter { display: flex; gap: 3px; }
+      .risk-dot {
+        width: 8px; height: 8px; border-radius: 50%;
+        background: rgba(255,255,255,.25);
+      }
+      .risk-dot.on { background: rgba(255,255,255,.9); }
+
+      /* ── Guide blocks ── */
+      .guide-body { display: grid; gap: 1.25rem; }
+      .guide-block {
+        background: #fff;
+        border: 1px solid rgba(13,148,136,.13);
+        border-radius: 20px;
+        padding: 1.8rem 2rem;
+        box-shadow: 0 2px 12px rgba(15,23,42,.06);
+        position: relative;
+      }
+      .guide-block-num {
+        position: absolute;
+        top: 1.5rem; right: 1.75rem;
+        font-family: 'Lora', Georgia, serif;
+        font-size: 3.5rem;
+        font-weight: 700;
+        color: rgba(13,148,136,.07);
+        line-height: 1;
+        user-select: none;
+        pointer-events: none;
+      }
+      .guide-block h3 {
+        font-family: 'Lora', Georgia, serif;
+        font-size: 1.22rem;
+        font-weight: 700;
+        color: #0f172a;
+        margin: 0 0 .85rem;
+        display: flex;
+        align-items: center;
+        gap: .55rem;
+      }
+      .guide-block h3 .hico {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px; height: 32px;
+        background: var(--teal-light);
+        border-radius: 9px;
+        font-size: 1rem;
+        flex-shrink: 0;
+      }
+      .guide-block p {
+        font-family: 'Inter', sans-serif;
+        font-size: .965rem;
+        color: #475569;
+        line-height: 1.78;
+        margin: 0 0 .85rem;
+      }
+      .guide-block p:last-child { margin-bottom: 0; }
+
+      .pull-quote {
+        border-left: 4px solid var(--teal);
+        background: var(--teal-light);
+        border-radius: 0 14px 14px 0;
+        padding: .85rem 1.1rem;
+        margin: 1rem 0;
+        font-family: 'Lora', Georgia, serif;
+        font-style: italic;
+        font-size: 1.02rem;
+        color: var(--teal-dark);
+        line-height: 1.65;
+      }
+
+      .split-visual {
+        display: flex;
+        gap: 0;
+        margin: 1rem 0;
+        height: 48px;
+        border-radius: 12px;
+        overflow: hidden;
+      }
+      .split-bar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Inter', sans-serif;
+        font-size: .8rem;
+        font-weight: 700;
+        color: #fff;
+      }
+      .split-bar.stocks { background: #0d9488; flex: 60; border-radius: 12px 0 0 12px; }
+      .split-bar.bonds  { background: #0284c7; flex: 40; border-radius: 0 12px 12px 0; }
+
+      .horizon-bar-wrap { margin: 1rem 0; }
+      .horizon-bar-label {
+        display: flex;
+        justify-content: space-between;
+        font-family: 'Inter', sans-serif;
+        font-size: .78rem;
+        color: #64748b;
+        margin-bottom: .4rem;
+      }
+      .horizon-bar {
+        height: 10px;
+        border-radius: 99px;
+        background: linear-gradient(90deg, #0284c7 0%, #0d9488 55%, #f59e0b 100%);
+        position: relative;
+      }
+      .horizon-marker {
+        position: absolute;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 16px; height: 16px;
+        border-radius: 50%;
+        background: #fff;
+        border: 3px solid;
+        box-shadow: 0 1px 4px rgba(0,0,0,.2);
+      }
+      .horizon-marker.s { left: 12%; border-color: #0284c7; }
+      .horizon-marker.m { left: 50%; border-color: #0d9488; }
+      .horizon-marker.l { left: 88%; border-color: #f59e0b; }
+      .horizon-chips { display: flex; gap: .5rem; flex-wrap: wrap; margin-top: .75rem; }
+      .hchip {
+        font-family: 'Inter', sans-serif;
+        font-size: .78rem;
+        font-weight: 600;
+        padding: .3rem .75rem;
+        border-radius: 99px;
+        border: 1.5px solid;
+      }
+      .hchip.s { color: #0369a1; border-color: #bae6fd; background: #f0f9ff; }
+      .hchip.m { color: #0f766e; border-color: #99f6e4; background: #f0fdfa; }
+      .hchip.l { color: #92400e; border-color: #fde68a; background: #fffbeb; }
+
+      /* ══════════════════════════════════
+         MORE TOOLS
+      ══════════════════════════════════ */
+      #more-tools {
+        background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        border: none;
+        border-radius: 24px;
+        padding: 2.5rem;
+        box-shadow: 0 20px 48px rgba(15,23,42,.22);
+        margin-top: 1.5rem;
+      }
+      #more-tools .tools-eyebrow {
+        font-family: 'Inter', sans-serif;
+        font-size: .72rem;
+        font-weight: 700;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+        color: #5eead4;
+        margin-bottom: .6rem;
+      }
+      #more-tools h2 {
+        font-family: 'Lora', Georgia, serif;
+        font-size: clamp(1.4rem, 3vw, 2rem);
+        font-weight: 700;
+        color: #fff;
+        border: none;
+        padding: 0;
+        margin-bottom: .5rem;
+      }
+      #more-tools .tools-sub {
+        font-family: 'Inter', sans-serif;
+        font-size: .97rem;
+        color: rgba(255,255,255,.55);
+        margin-bottom: 2rem;
+        line-height: 1.7;
+      }
+      .tools-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+      }
+      .tool-card {
+        background: rgba(255,255,255,.05);
+        border: 1px solid rgba(255,255,255,.1);
+        border-radius: 18px;
+        padding: 1.4rem 1.25rem;
+        text-decoration: none;
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+        transition: background .22s ease, transform .22s ease, border-color .22s ease;
+        position: relative;
+        overflow: hidden;
+      }
+      .tool-card::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(13,148,136,.12), transparent 60%);
+        opacity: 0;
+        transition: opacity .22s;
+      }
+      .tool-card:hover { background: rgba(255,255,255,.09); transform: translateY(-2px); border-color: rgba(13,148,136,.4); text-decoration: none; }
+      .tool-card:hover::before { opacity: 1; }
+      .tool-emoji { font-size: 1.75rem; line-height: 1; }
+      .tool-name {
+        font-family: 'Inter', sans-serif;
+        font-size: .96rem;
+        font-weight: 700;
+        color: #fff;
+        line-height: 1.3;
+      }
+      .tool-desc {
+        font-family: 'Inter', sans-serif;
+        font-size: .82rem;
+        color: rgba(255,255,255,.5);
+        line-height: 1.55;
+        flex: 1;
+      }
+      .tool-arrow {
+        font-size: .85rem;
+        color: #5eead4;
+        font-weight: 700;
+        margin-top: .25rem;
+        transition: transform .2s;
+        display: inline-block;
+      }
+      .tool-card:hover .tool-arrow { transform: translateX(4px); }
+
+      /* ══════════════════════════════════
+         FAQ
+      ══════════════════════════════════ */
+      #faq {
+        background: #fff;
+        border: 1px solid rgba(13,148,136,.13);
+        border-radius: 24px;
+        padding: 2.5rem;
+        box-shadow: 0 2px 12px rgba(15,23,42,.06);
+        margin-top: 1.5rem;
+      }
+      #faq .faq-eyebrow {
+        font-family: 'Inter', sans-serif;
+        font-size: .72rem;
+        font-weight: 700;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+        color: var(--teal);
+        margin-bottom: .6rem;
+      }
+      #faq h2 {
+        font-family: 'Lora', Georgia, serif;
+        font-size: clamp(1.4rem, 3vw, 2rem);
+        font-weight: 700;
+        color: #0f172a;
+        border: none;
+        padding: 0;
+        margin-bottom: 1.75rem;
+      }
+      .faq-list { display: flex; flex-direction: column; gap: .6rem; }
+      .faq-accordion {
+        border: 1.5px solid rgba(13,148,136,.15);
+        border-radius: 14px;
+        overflow: hidden;
+        transition: border-color .2s;
+      }
+      .faq-accordion.open { border-color: rgba(13,148,136,.35); }
+      .faq-trigger {
+        width: 100%;
+        background: none;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 1.05rem 1.25rem;
+        text-align: left;
+        transition: background .18s;
+      }
+      .faq-trigger:hover { background: rgba(13,148,136,.04); }
+      .faq-accordion.open .faq-trigger { background: rgba(13,148,136,.05); }
+      .faq-q-text {
+        font-family: 'Inter', sans-serif;
+        font-size: .96rem;
+        font-weight: 600;
+        color: #0f172a;
+        line-height: 1.4;
+      }
+      .faq-icon {
+        flex-shrink: 0;
+        width: 26px; height: 26px;
+        border-radius: 50%;
+        background: var(--teal-light);
+        color: var(--teal-dark);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.1rem;
+        font-weight: 700;
+        transition: background .2s, transform .3s;
+        line-height: 1;
+      }
+      .faq-accordion.open .faq-icon { background: var(--teal); color: #fff; transform: rotate(45deg); }
+      .faq-body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .3s ease; }
+      .faq-accordion.open .faq-body { grid-template-rows: 1fr; }
+      .faq-body-inner { overflow: hidden; padding: 0 1.25rem; }
+      .faq-accordion.open .faq-body-inner { padding-bottom: 1.1rem; }
+      .faq-body-inner p {
+        font-family: 'Inter', sans-serif;
+        font-size: .93rem;
+        color: #475569;
+        line-height: 1.72;
+        margin: 0;
+        padding-top: .1rem;
+      }
+
+      /* ══════════════════════════════════
+         DISCLAIMER
+      ══════════════════════════════════ */
+      .disclaimer-redesign {
+        margin-top: 1.5rem;
+        border-radius: 16px;
+        border: 1px dashed rgba(13,148,136,.28);
+        background: rgba(240,253,250,.6);
+        padding: 1.1rem 1.35rem;
+        display: flex;
+        gap: .75rem;
+        align-items: flex-start;
+      }
+      .disclaimer-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: .1rem; }
+      .disclaimer-text {
+        font-family: 'Inter', sans-serif;
+        font-size: .84rem;
+        color: #475569;
+        line-height: 1.65;
+      }
+      .disclaimer-text strong { color: #0f766e; }
+    </style>
+
+    <!-- GUIDE -->
+    <section id="guide">
+      <div class="guide-header reveal">
+        <div class="guide-eyebrow">Complete Beginner&#39;s Guide</div>
+        <h2>The Art &amp; Science of Asset Allocation</h2>
+        <p class="guide-lead">Most investors obsess over <strong>which</strong> assets to buy. The research consistently shows that <strong>how you divide your money</strong> across asset classes matters far more. This guide explains why — and how to think about it clearly.</p>
+      </div>
+
+      <div class="asset-showcase reveal">
+        <div class="asset-card stocks">
+          <span class="asset-icon">&#x1F4C8;</span>
+          <div class="asset-name">Stocks</div>
+          <div class="asset-trait">Highest long-term growth potential. Accepts short-term volatility as the price of admission.</div>
+          <div class="risk-meter">
+            <div class="risk-dot on"></div><div class="risk-dot on"></div><div class="risk-dot on"></div><div class="risk-dot on"></div><div class="risk-dot on"></div><div class="risk-dot on"></div><div class="risk-dot on"></div><div class="risk-dot"></div><div class="risk-dot"></div><div class="risk-dot"></div>
+          </div>
+        </div>
+        <div class="asset-card bonds">
+          <span class="asset-icon">&#x1F3DB;&#xFE0F;</span>
+          <div class="asset-name">Bonds</div>
+          <div class="asset-trait">Steady income and portfolio stability. Lower returns, but a powerful shock absorber.</div>
+          <div class="risk-meter">
+            <div class="risk-dot on"></div><div class="risk-dot on"></div><div class="risk-dot"></div><div class="risk-dot"></div><div class="risk-dot"></div><div class="risk-dot"></div><div class="risk-dot"></div><div class="risk-dot"></div><div class="risk-dot"></div><div class="risk-dot"></div>
+          </div>
+        </div>
+        <div class="asset-card gold">
+          <span class="asset-icon">&#x1FA99;</span>
+          <div class="asset-name">Gold</div>
+          <div class="asset-trait">A classic inflation hedge and safe-haven asset. Moves independently from equities.</div>
+          <div class="risk-meter">
+            <div class="risk-dot on"></div><div class="risk-dot on"></div><div class="risk-dot on"></div><div class="risk-dot on"></div><div class="risk-dot"></div><div class="risk-dot"></div><div class="risk-dot"></div><div class="risk-dot"></div><div class="risk-dot"></div><div class="risk-dot"></div>
+          </div>
+        </div>
+        <div class="asset-card re">
+          <span class="asset-icon">&#x1F3E2;</span>
+          <div class="asset-name">Real Estate</div>
+          <div class="asset-trait">Tangible income-generating asset. Adds diversification beyond financial markets.</div>
+          <div class="risk-meter">
+            <div class="risk-dot on"></div><div class="risk-dot on"></div><div class="risk-dot on"></div><div class="risk-dot on"></div><div class="risk-dot on"></div><div class="risk-dot"></div><div class="risk-dot"></div><div class="risk-dot"></div><div class="risk-dot"></div><div class="risk-dot"></div>
+          </div>
+        </div>
+        <div class="asset-card crypto">
+          <span class="asset-icon">&#x20BF;</span>
+          <div class="asset-name">Crypto</div>
+          <div class="asset-trait">Maximum upside potential. Maximum volatility. Best treated as a satellite, not a core.</div>
+          <div class="risk-meter">
+            <div class="risk-dot on"></div><div class="risk-dot on"></div><div class="risk-dot on"></div><div class="risk-dot on"></div><div class="risk-dot on"></div><div class="risk-dot on"></div><div class="risk-dot on"></div><div class="risk-dot on"></div><div class="risk-dot on"></div><div class="risk-dot on"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="guide-body">
+        <div class="guide-block reveal">
+          <div class="guide-block-num">01</div>
+          <h3><span class="hico">&#x1F4CA;</span> What Is Asset Allocation?</h3>
+          <p>Asset allocation is the process of dividing your investable money across different types of assets — stocks, bonds, gold, real estate, crypto — so your portfolio is not entirely dependent on any single source of return. It is one of the most consequential decisions in investing, yet one of the least discussed among beginners who tend to focus purely on individual stock or fund selection.</p>
+          <p>The goal is not to hold everything equally. The goal is to hold the right proportions for your personal situation: your time horizon, income stability, emotional tolerance for losses, and specific financial goals. Asset allocation is the bridge between who you are as an investor and the portfolio you actually build.</p>
+        </div>
+        <div class="guide-block reveal">
+          <div class="guide-block-num">02</div>
+          <h3><span class="hico">&#x1F310;</span> Why Diversification Is Not Optional</h3>
+          <p>Different asset classes tend to respond differently to the same economic event. When equity markets sell off sharply, high-quality bonds often hold their value or rise. Gold may rally when inflation fears increase. Real estate may be relatively uncorrelated to short-term market movements. Crypto follows its own volatile cycle.</p>
+          <div class="pull-quote">A diversified portfolio is not about chasing every type of asset. It is about making sure that no single bad cycle can destroy your entire plan.</div>
+          <p>This is the real value of diversification: not higher returns, but smoother, more survivable ones. An investor who stays invested through a downturn because the portfolio did not fall too far will almost always do better than one who panics and sells.</p>
+        </div>
+        <div class="guide-block reveal">
+          <div class="guide-block-num">03</div>
+          <h3><span class="hico">&#x2696;&#xFE0F;</span> Risk and Return Are Two Sides of the Same Coin</h3>
+          <p>Every asset in this model carries a risk weight reflecting its typical volatility. Stocks sit at 7.5 out of 10. Bonds at 2.5. Crypto at the maximum of 10. When you build a portfolio, your risk score is a weighted blend of these — meaning the more you load up on high-risk assets, the higher your portfolio&#39;s expected volatility becomes alongside its expected return.</p>
+          <p>The right balance is entirely personal. A portfolio that is too aggressive for your temperament will likely be abandoned at the worst possible moment — the bottom of a market downturn. A portfolio that is too conservative may not grow enough to meet your goals. The ideal portfolio is one you can actually stay invested in through both strong and difficult periods.</p>
+        </div>
+        <div class="guide-block reveal">
+          <div class="guide-block-num">04</div>
+          <h3><span class="hico">&#x1F9E0;</span> The 60/40 Portfolio — A Classic Starting Point</h3>
+          <p>The 60/40 model — 60% stocks, 40% bonds — became famous because it offered an elegant trade-off between growth and stability. It is still widely referenced as a baseline for balanced investors. Here is what that split looks like:</p>
+          <div class="split-visual">
+            <div class="split-bar stocks">60% Stocks</div>
+            <div class="split-bar bonds">40% Bonds</div>
+          </div>
+          <p>If stocks return 12% and bonds 7%, the weighted portfolio return is 0.60 × 12 + 0.40 × 7 = <strong>10%</strong>. Lower than a 100% stock portfolio, but with meaningfully reduced volatility. Today many investors extend this by substituting part of the bond allocation with gold, real estate, or a small crypto slice — the core idea remains: blend growth with stability deliberately.</p>
+        </div>
+        <div class="guide-block reveal">
+          <div class="guide-block-num">05</div>
+          <h3><span class="hico">&#x1F550;</span> Time Horizon Changes Everything</h3>
+          <p>Your investment horizon is not just a number you enter into a calculator. It fundamentally changes which allocations make sense.</p>
+          <div class="horizon-bar-wrap">
+            <div class="horizon-bar-label"><span>Short-term</span><span>Medium-term</span><span>Long-term</span></div>
+            <div class="horizon-bar">
+              <div class="horizon-marker s"></div>
+              <div class="horizon-marker m"></div>
+              <div class="horizon-marker l"></div>
+            </div>
+          </div>
+          <div class="horizon-chips">
+            <div class="hchip s">1–5 yrs: Prioritise stability</div>
+            <div class="hchip m">5–15 yrs: Balanced growth</div>
+            <div class="hchip l">15+ yrs: Lean into equities</div>
+          </div>
+          <p style="margin-top:.9rem">A moderate return compounded over 20 years can dramatically outperform an aggressive-looking return over 5 years, simply because time gives compounding more room to work. The horizon input in this calculator directly feeds the future value formula — it is one of the most powerful levers you have.</p>
+        </div>
+        <div class="guide-block reveal">
+          <div class="guide-block-num">06</div>
+          <h3><span class="hico">&#x1F504;</span> Allocation Is Never Set-and-Forget</h3>
+          <p>Markets move. Life changes. A portfolio that starts at 60/40 can drift to 75/25 after a sustained equity rally, meaning your risk exposure has quietly increased without any active decision on your part. That is called portfolio drift — and it is one of the main reasons why periodic rebalancing matters.</p>
+          <p>Most experienced investors review allocation once or twice a year and rebalance when the mix drifts meaningfully from its target. This is not about timing the market. It is about systematically restoring the risk level you originally chose. Disciplined, boring rebalancing typically outperforms reactive, emotional portfolio changes over the long run.</p>
+        </div>
+        <div class="guide-block reveal">
+          <div class="guide-block-num">07</div>
+          <h3><span class="hico">&#x1F4A1;</span> How to Use This Calculator Effectively</h3>
+          <p>Start with honest inputs: the amount you intend to invest as a lump sum, and the realistic number of years before you will need it. Use the auto-allocation mode first to see what a standard risk profile produces. Then switch to manual mode and start adjusting — reduce crypto, increase bonds, shift gold up or down. Watch how each change flows through the expected return, risk score, and projected future value.</p>
+          <div class="pull-quote">The goal is not to find the optimal portfolio. It is to understand why one mix may fit you better than another — and to make that decision deliberately rather than by default.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MORE TOOLS -->
+    <section id="more-tools">
+      <div class="tools-eyebrow reveal">SmartCalcWorld Suite</div>
+      <h2 class="reveal">Go Deeper with These Tools</h2>
+      <p class="tools-sub reveal">Asset allocation works best as part of a connected planning system. Each tool below extends a different dimension of your investment thinking.</p>
+      <div class="tools-grid">
+        <a class="tool-card reveal" href="https://smartcalcworld.com/finance/investment/portfolio-growth-calculator.html">
+          <div class="tool-emoji">&#x1F4C8;</div>
+          <div class="tool-name">Portfolio Growth Calculator</div>
+          <div class="tool-desc">Project how a diversified portfolio grows over time with regular contributions and scenario analysis.</div>
+          <div class="tool-arrow">Explore &#x2192;</div>
+        </a>
+        <a class="tool-card reveal" href="https://smartcalcworld.com/finance/investment/investment-goal-calculator.html">
+          <div class="tool-emoji">&#x1F3AF;</div>
+          <div class="tool-name">Investment Goal Calculator</div>
+          <div class="tool-desc">Work backward from a future target amount. Find out exactly how much you need to invest, and at what return.</div>
+          <div class="tool-arrow">Explore &#x2192;</div>
+        </a>
+        <a class="tool-card reveal" href="https://smartcalcworld.com/finance/investment/retirement-calculator.html">
+          <div class="tool-emoji">&#x1F3D6;&#xFE0F;</div>
+          <div class="tool-name">Retirement Calculator</div>
+          <div class="tool-desc">Connect your portfolio mix to long-term retirement income and corpus requirements.</div>
+          <div class="tool-arrow">Explore &#x2192;</div>
+        </a>
+        <a class="tool-card reveal" href="https://smartcalcworld.com/finance/investment/cagr-calculator.html">
+          <div class="tool-emoji">&#x1F4CA;</div>
+          <div class="tool-name">CAGR Calculator</div>
+          <div class="tool-desc">Convert total portfolio growth into an annualised rate — easier to compare across different strategies and time periods.</div>
+          <div class="tool-arrow">Explore &#x2192;</div>
+        </a>
+        <a class="tool-card reveal" href="https://smartcalcworld.com/finance/investment/real-return-calculator.html">
+          <div class="tool-emoji">&#x1F4A1;</div>
+          <div class="tool-name">Real Return Calculator</div>
+          <div class="tool-desc">Strip inflation out of your nominal return to see the true growth in purchasing power.</div>
+          <div class="tool-arrow">Explore &#x2192;</div>
+        </a>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq">
+      <div class="faq-eyebrow reveal">Common Questions</div>
+      <h2 class="reveal">Frequently Asked Questions</h2>
+      <div class="faq-list">
+        <div class="faq-accordion reveal">
+          <button class="faq-trigger" onclick="toggleFaq(this)" aria-expanded="false">
+            <span class="faq-q-text">What is asset allocation?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-body"><div class="faq-body-inner"><p>Asset allocation is the process of spreading your investable money across different asset classes — stocks, bonds, gold, real estate, and crypto — based on your goals, time horizon, and comfort with risk. It is widely considered the single most important structural decision in building an investment portfolio.</p></div></div>
+        </div>
+        <div class="faq-accordion reveal">
+          <button class="faq-trigger" onclick="toggleFaq(this)" aria-expanded="false">
+            <span class="faq-q-text">How much should I invest in stocks vs bonds?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-body"><div class="faq-body-inner"><p>There is no single right answer — it depends on your time horizon, income stability, and how much volatility you can emotionally and financially absorb. A popular starting point is the 60/40 model: 60% stocks for growth and 40% bonds for stability. Younger investors with longer horizons often tilt more toward stocks, while those nearing retirement typically shift toward bonds and defensive assets.</p></div></div>
+        </div>
+        <div class="faq-accordion reveal">
+          <button class="faq-trigger" onclick="toggleFaq(this)" aria-expanded="false">
+            <span class="faq-q-text">What is a balanced portfolio?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-body"><div class="faq-body-inner"><p>A balanced portfolio blends growth-oriented assets with stabilising ones so the overall mix can grow meaningfully over time while still surviving market downturns without catastrophic loss. The classic 60/40 split is one example, but many modern balanced portfolios also include gold, real estate, or a small alternative allocation to broaden the diversification base.</p></div></div>
+        </div>
+        <div class="faq-accordion reveal">
+          <button class="faq-trigger" onclick="toggleFaq(this)" aria-expanded="false">
+            <span class="faq-q-text">How does risk tolerance affect allocation?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-body"><div class="faq-body-inner"><p>Risk tolerance determines how much short-term volatility you are willing to accept in exchange for higher long-term returns. Higher risk tolerance typically leads to larger allocations in stocks and crypto. Lower risk tolerance pushes the portfolio toward bonds, gold, and more defensive positions that prioritise capital preservation over maximum growth.</p></div></div>
+        </div>
+        <div class="faq-accordion reveal">
+          <button class="faq-trigger" onclick="toggleFaq(this)" aria-expanded="false">
+            <span class="faq-q-text">What is diversification?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-body"><div class="faq-body-inner"><p>Diversification means building a portfolio across multiple asset classes that do not all move in the same direction at the same time. The practical benefit is that when one asset is performing poorly, others may be holding up or even rising — reducing overall portfolio volatility and making it easier to stay invested without panicking.</p></div></div>
+        </div>
+        <div class="faq-accordion reveal">
+          <button class="faq-trigger" onclick="toggleFaq(this)" aria-expanded="false">
+            <span class="faq-q-text">Is crypto part of asset allocation?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-body"><div class="faq-body-inner"><p>Crypto can be included in a portfolio, but most professional frameworks treat it as a high-risk satellite position rather than a core holding. Its extreme volatility means even a small allocation can materially raise a portfolio&#39;s risk score. If you include it, keeping it to under 10% limits the damage during severe drawdowns while still capturing upside.</p></div></div>
+        </div>
+        <div class="faq-accordion reveal">
+          <button class="faq-trigger" onclick="toggleFaq(this)" aria-expanded="false">
+            <span class="faq-q-text">How often should I review my allocation?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-body"><div class="faq-body-inner"><p>Most investors review allocation once or twice a year and rebalance when the actual mix has drifted meaningfully from the intended target. Frequent, emotional changes are typically counterproductive. A sustained equity rally can quietly shift a 60/40 portfolio to 75/25 — periodic rebalancing restores the risk level you originally chose without requiring you to time the market.</p></div></div>
+        </div>
+        <div class="faq-accordion reveal">
+          <button class="faq-trigger" onclick="toggleFaq(this)" aria-expanded="false">
+            <span class="faq-q-text">Why compare conservative, moderate, and aggressive portfolios?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-body"><div class="faq-body-inner"><p>Comparing scenarios side by side reveals trade-offs that are invisible when you look at only one portfolio. You can see exactly how moving from conservative to aggressive changes expected return, risk score, and projected future value over your specific horizon — making the decision concrete rather than abstract.</p></div></div>
+        </div>
+        <div class="faq-accordion reveal">
+          <button class="faq-trigger" onclick="toggleFaq(this)" aria-expanded="false">
+            <span class="faq-q-text">What does this asset allocation calculator estimate?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-body"><div class="faq-body-inner"><p>It calculates a weighted expected annual return based on your asset return assumptions, a portfolio risk score derived from each asset&#39;s volatility weight, a projected future value using compound growth over your chosen horizon, and a per-asset breakdown showing exactly how much each position contributes to total portfolio growth.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="disclaimer-redesign reveal">
+      <span class="disclaimer-icon">&#x2139;&#xFE0F;</span>
+      <p class="disclaimer-text"><strong>Disclaimer:</strong> This calculator is provided for educational and planning purposes only. All results are estimates based on the assumptions you enter and do not constitute financial advice. Actual investment returns, volatility, taxes, costs, and correlations between asset classes can differ materially from the simplified model used here.</p>
+    </div>
+
+    <script>
+      function toggleFaq(btn) {
+        var item = btn.closest('.faq-accordion');
+        var isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-accordion.open').forEach(function(el) {
+          el.classList.remove('open');
+          el.querySelector('.faq-trigger').setAttribute('aria-expanded', 'false');
+        });
+        if (!isOpen) {
+          item.classList.add('open');
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      }
+      var revealObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+          if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+      document.querySelectorAll('.reveal').forEach(function(el) { revealObserver.observe(el); });
+    </script>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="https://smartcalcworld.com/index.html">Home</a></li>
+          <li><a href="https://smartcalcworld.com/about.html">About</a></li>
+          <li><a href="https://smartcalcworld.com/contact.html">Contact</a></li>
+          <li><a href="https://smartcalcworld.com/privacy-policy.html">Privacy Policy</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Content</h3>
+        <ul>
+          <li><a href="#calculator">Allocation Calculator</a></li>
+          <li><a href="#guide">Allocation Guide</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Finance Tools</h3>
+        <ul>
+          <li><a href="https://smartcalcworld.com/finance/investment/investment-hub.html">Investment
+              Calculators</a></li>
+          <li><a href="https://smartcalcworld.com/finance/loan/loan-calculators.html">Loan Calculators</a></li>
+          <li><a href="https://smartcalcworld.com/finance/tax/tax-calculators.html">Tax Calculators</a></li>
+          <li><a href="https://smartcalcworld.com/finance/finance-hub.html">Finance Hub</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <div class="footer-disclaimer"><strong>SmartCalc World Note:</strong> Asset allocation becomes easier to
+          understand when you compare allocation mix, expected return, risk, and future value together instead of
+          looking only at one asset class.</div>
+      </div>
+    </div>
+    <div class="copyright">
+      <p>&copy; SmartCalc World. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    const $ = (id) => document.getElementById(id);
+
+    const assetMeta = {
+      stocks: { label: "Stocks", risk: 7.5, color: "#0d9488" },
+      bonds: { label: "Bonds", risk: 2.5, color: "#0284c7" },
+      gold: { label: "Gold", risk: 4.0, color: "#f59e0b" },
+      realestate: { label: "Real Estate", risk: 5.5, color: "#8b5cf6" },
+      crypto: { label: "Crypto", risk: 10.0, color: "#f43f5e" }
+    };
+
+    const assetKeys = Object.keys(assetMeta);
+    const riskProfiles = {
+      1: { label: "Conservative", allocations: { stocks: 20, bonds: 55, gold: 15, realestate: 10, crypto: 0 } },
+      2: { label: "Moderate", allocations: { stocks: 45, bonds: 25, gold: 10, realestate: 15, crypto: 5 } },
+      3: { label: "Aggressive", allocations: { stocks: 60, bonds: 10, gold: 10, realestate: 10, crypto: 10 } }
+    };
+
+    const currencySymbols = { USD: "$", INR: "₹", EUR: "€", GBP: "£", AUD: "$", CAD: "$" };
+    const currencyLocales = { USD: "en-US", INR: "en-IN", EUR: "en-US", GBP: "en-GB", AUD: "en-AU", CAD: "en-CA" };
+
+    const state = {
+      activeModule: "setup",
+      currentCurrency: "INR",
+      charts: { allocation: null, growth: null, riskReturn: null },
+      projectionColumns: [],
+      projectionRows: [],
+      projectionFilename: "asset_allocation_breakdown.csv",
+      copyText: "",
+      latestCurrent: null,
+      latestScenarios: []
+    };
+
+    const sliderConfigs = [
+      { input: "portfolio-amount", slider: "portfolio-amount-sl", label: "portfolio-amount-lbl", type: "money", category: "generic" },
+      { input: "portfolio-horizon", slider: "portfolio-horizon-sl", label: "portfolio-horizon-lbl", type: "years", category: "generic" },
+      { input: "risk-profile", slider: "risk-profile-sl", label: "risk-profile-lbl", type: "risk", category: "risk" },
+      { input: "stocks-return", slider: "stocks-return-sl", label: "stocks-return-lbl", type: "percent2", category: "generic" },
+      { input: "bonds-return", slider: "bonds-return-sl", label: "bonds-return-lbl", type: "percent2", category: "generic" },
+      { input: "gold-return", slider: "gold-return-sl", label: "gold-return-lbl", type: "percent2", category: "generic" },
+      { input: "realestate-return", slider: "realestate-return-sl", label: "realestate-return-lbl", type: "percent2", category: "generic" },
+      { input: "crypto-return", slider: "crypto-return-sl", label: "crypto-return-lbl", type: "percent2", category: "generic" },
+      { input: "stocks-alloc", slider: "stocks-alloc-sl", label: "stocks-alloc-lbl", type: "percent0", category: "allocation" },
+      { input: "bonds-alloc", slider: "bonds-alloc-sl", label: "bonds-alloc-lbl", type: "percent0", category: "allocation" },
+      { input: "gold-alloc", slider: "gold-alloc-sl", label: "gold-alloc-lbl", type: "percent0", category: "allocation" },
+      { input: "realestate-alloc", slider: "realestate-alloc-sl", label: "realestate-alloc-lbl", type: "percent0", category: "allocation" },
+      { input: "crypto-alloc", slider: "crypto-alloc-sl", label: "crypto-alloc-lbl", type: "percent0", category: "allocation" }
+    ];
+
+    function currentSymbol() {
+      return currencySymbols[state.currentCurrency] || "₹";
+    }
+
+    function currentLocale() {
+      return currencyLocales[state.currentCurrency] || "en-US";
+    }
+
+    function formatMoney(value, digits = 0) {
+      const number = Number(value) || 0;
+      const sign = number < 0 ? "-" : "";
+      return `${sign}${currentSymbol()}${Math.abs(number).toLocaleString(currentLocale(), { minimumFractionDigits: digits, maximumFractionDigits: digits })}`;
+    }
+
+    function formatPercentValue(value, digits = 2) {
+      return `${Number(value).toFixed(digits)}%`;
+    }
+
+    function riskProfileLabel(value) {
+      return riskProfiles[Number(value)]?.label || "Moderate";
+    }
+
+    function formatSliderValue(config, value) {
+      if (config.type === "money") return formatMoney(value, 0);
+      if (config.type === "years") return `${Number(value).toFixed(0)} years`;
+      if (config.type === "risk") return riskProfileLabel(value);
+      if (config.type === "percent0") return `${Number(value).toFixed(0)}%`;
+      if (config.type === "percent2") return `${Number(value).toFixed(2)}%`;
+      return String(value);
+    }
+
+    function destroyChart(chart) {
+      if (chart) chart.destroy();
+      return null;
+    }
+
+    function setStatus(message = "", tone = "") {
+      const banner = $("status-banner");
+      banner.className = "status-banner";
+      banner.textContent = message;
+      if (!message) return;
+      banner.classList.add(tone || "info");
+    }
+
+    function setCopyNote(message) {
+      $("copy-note").textContent = message;
+    }
+
+    function updateSliderLabel(config) {
+      const input = $(config.input);
+      const label = $(config.label);
+      if (!input || !label) return;
+      label.textContent = formatSliderValue(config, input.value);
+    }
+
+    function clampAndSync(inputEl, sliderEl) {
+      if (inputEl.value === "") {
+        inputEl.value = Number(sliderEl.min);
+      }
+      let value = Number(inputEl.value);
+      const min = Number(sliderEl.min);
+      const max = Number(sliderEl.max);
+      if (!Number.isFinite(value)) value = min;
+      value = Math.max(min, Math.min(max, value));
+      inputEl.value = value;
+      sliderEl.value = value;
+    }
+
+    function handleConfigChange(config) {
+      if (config.category === "risk" && $("auto-allocation").checked) applyAutoAllocation();
+      if (config.category === "allocation") updateAllocationTotal();
+      calculateAllocation(false);
+    }
+
+    function bindSliderPair(config) {
+      const inputEl = $(config.input);
+      const sliderEl = $(config.slider);
+      if (!inputEl || !sliderEl) return;
+      updateSliderLabel(config);
+      inputEl.addEventListener("input", () => {
+        clampAndSync(inputEl, sliderEl);
+        updateSliderLabel(config);
+        handleConfigChange(config);
+      });
+      inputEl.addEventListener("change", () => {
+        clampAndSync(inputEl, sliderEl);
+        updateSliderLabel(config);
+        handleConfigChange(config);
+      });
+      sliderEl.addEventListener("input", () => {
+        inputEl.value = sliderEl.value;
+        updateSliderLabel(config);
+        handleConfigChange(config);
+      });
+    }
+
+    function getReturnInputs() {
+      return {
+        stocks: Number($("stocks-return").value),
+        bonds: Number($("bonds-return").value),
+        gold: Number($("gold-return").value),
+        realestate: Number($("realestate-return").value),
+        crypto: Number($("crypto-return").value)
+      };
+    }
+
+    function getAllocationInputs() {
+      return {
+        stocks: Number($("stocks-alloc").value),
+        bonds: Number($("bonds-alloc").value),
+        gold: Number($("gold-alloc").value),
+        realestate: Number($("realestate-alloc").value),
+        crypto: Number($("crypto-alloc").value)
+      };
+    }
+
+    function setAllocationInputs(allocations) {
+      assetKeys.forEach((key) => {
+        const value = Number(allocations[key] || 0);
+        $(`${key}-alloc`).value = value;
+        $(`${key}-alloc-sl`).value = value;
+      });
+      sliderConfigs.filter((config) => config.category === "allocation").forEach(updateSliderLabel);
+      updateAllocationTotal();
+    }
+
+    function setAllocationInputsDisabled(disabled) {
+      assetKeys.forEach((key) => {
+        $(`${key}-alloc`).disabled = disabled;
+        $(`${key}-alloc-sl`).disabled = disabled;
+      });
+    }
+
+    function applyAutoAllocation() {
+      const preset = riskProfiles[Number($("risk-profile").value)]?.allocations || riskProfiles[2].allocations;
+      setAllocationInputs(preset);
+    }
+
+    function updateAllocationStatus() {
+      const auto = $("auto-allocation").checked;
+      $("allocation-status").textContent = auto ? `Auto-allocation active: ${riskProfileLabel($("risk-profile").value)} profile` : "Manual allocation active";
+      setAllocationInputsDisabled(auto);
+    }
+
+    function updateAllocationTotal() {
+      const total = assetKeys.reduce((sum, key) => sum + Number($(`${key}-alloc`).value || 0), 0);
+      $("allocation-total-pill").textContent = `Allocation total: ${total.toFixed(0)}%`;
+      $("allocation-total-pill").style.borderColor = Math.abs(total - 100) < 0.001 ? "rgba(13, 148, 136, .18)" : "rgba(244, 63, 94, .28)";
+      $("allocation-total-pill").style.background = Math.abs(total - 100) < 0.001 ? "rgba(209,250,229,.55)" : "rgba(255,228,230,.7)";
+      return total;
+    }
+
+    function updateCurrencyIndicators() {
+      document.querySelectorAll("[data-currency-symbol]").forEach((node) => node.textContent = currentSymbol());
+      sliderConfigs.forEach(updateSliderLabel);
+      calculateAllocation(false);
+    }
+
+    function buildPortfolioResult(profileLabel, amount, horizon, returnsMap, allocationsMap) {
+      const rows = assetKeys.map((key) => {
+        const allocationPct = Number(allocationsMap[key] || 0);
+        const expectedReturnPct = Number(returnsMap[key] || 0);
+        const investedAmount = amount * allocationPct / 100;
+        const contributionToReturnPct = allocationPct * expectedReturnPct / 100;
+        return {
+          key,
+          asset: assetMeta[key].label,
+          allocationPct,
+          investedAmount,
+          expectedReturnPct,
+          contributionToReturnPct,
+          riskWeight: assetMeta[key].risk
+        };
+      });
+
+      const portfolioReturnPct = rows.reduce((sum, row) => sum + row.contributionToReturnPct, 0);
+      const portfolioReturnDecimal = portfolioReturnPct / 100;
+      const futureValue = amount * Math.pow(1 + portfolioReturnDecimal, horizon);
+      const riskScore = rows.reduce((sum, row) => sum + (row.allocationPct / 100) * row.riskWeight, 0) * 10;
+      const largestAsset = rows.reduce((best, row) => row.allocationPct > best.allocationPct ? row : best, rows[0]);
+
+      return {
+        profileLabel,
+        amount,
+        horizon,
+        rows,
+        portfolioReturnPct,
+        portfolioReturnDecimal,
+        futureValue,
+        riskScore,
+        largestAsset,
+        allocationBreakdown: rows.map((row) => row.allocationPct.toFixed(0)).join(" / ")
+      };
+    }
+
+    function riskBand(score) {
+      if (score < 40) return "Low risk";
+      if (score < 55) return "Balanced";
+      if (score < 70) return "Growth-oriented";
+      return "High risk";
+    }
+
+    function buildResultCards(currentResult, autoMode) {
+      const formulaHtml = `<strong>Asset Allocation Formulas</strong><br>Portfolio Return = Σ (Asset Allocation × Asset Return)<br>Portfolio Risk Score = Σ (Asset Allocation × Asset Risk Weight) × 10<br>Future Value = Total Investment × (1 + Portfolio Return)^n<br>Contribution to Portfolio Growth = Asset Allocation × Asset Return`;
+      const insightHtml = `<strong>Allocation insight:</strong> Your ${autoMode ? "profile-driven" : "manual"} portfolio is led by <strong>${currentResult.largestAsset.asset}</strong> at ${currentResult.largestAsset.allocationPct.toFixed(0)}%, with an expected annual return of ${formatPercentValue(currentResult.portfolioReturnPct, 2)} and a ${riskBand(currentResult.riskScore).toLowerCase()} profile around ${currentResult.riskScore.toFixed(1)}/100.<br><br><strong>Horizon effect:</strong> At ${currentResult.horizon} years, the model projects ${formatMoney(currentResult.futureValue, 0)} from the starting amount of ${formatMoney(currentResult.amount, 0)} using compounding rather than simple growth.`;
+      const copyText = `Asset Allocation Calculator Summary\nPortfolio size: ${formatMoney(currentResult.amount, 0)}\nRisk profile: ${currentResult.profileLabel}\nInvestment horizon: ${currentResult.horizon} years\nAllocation mix: ${currentResult.allocationBreakdown}\nExpected annual return: ${formatPercentValue(currentResult.portfolioReturnPct, 2)}\nProjected future value: ${formatMoney(currentResult.futureValue, 0)}\nRisk score: ${currentResult.riskScore.toFixed(1)}/100`;
+
+      const cards = [
+        { tone: "teal", label: "Recommended Allocation Breakdown", value: currentResult.allocationBreakdown, sub: "Stocks / Bonds / Gold / Real Estate / Crypto" },
+        { tone: "amber", label: "Expected Annual Return", value: formatPercentValue(currentResult.portfolioReturnPct, 2), sub: "Weighted average return from the current allocation mix" },
+        { tone: "sky", label: "Estimated Portfolio Value", value: formatMoney(currentResult.futureValue, 0), sub: `Projected value after ${currentResult.horizon} years` },
+        { tone: "slate", label: "Risk Score", value: `${currentResult.riskScore.toFixed(1)} / 100`, sub: `${riskBand(currentResult.riskScore)} based on the weighted asset mix` }
+      ];
+
+      cards.forEach((card, index) => {
+        $(`result-card-${index}`).className = `result-card ${card.tone}`;
+        $(`result-lbl-${index}`).textContent = card.label;
+        $(`result-val-${index}`).textContent = card.value;
+        $(`result-sub-${index}`).textContent = card.sub;
+      });
+
+      $("formula-box").innerHTML = formulaHtml;
+      $("insight-box").style.display = "block";
+      $("insight-box").innerHTML = insightHtml;
+      state.copyText = copyText;
+      setCopyNote("Results ready to copy.");
+    }
+
+    function showSnapshotSummary(currentResult, totalAllocation, autoMode) {
+      const rows = [
+        { metric: "Allocation Mode", value: autoMode ? "Auto-allocation" : "Manual allocation", note: autoMode ? "The percentages follow the selected risk profile preset." : "The percentages come directly from your manual asset-weight choices." },
+        { metric: "Risk Profile", value: currentResult.profileLabel, note: "The slider shapes the auto-allocation preset and helps frame the scenario comparison." },
+        { metric: "Allocation Total", value: `${totalAllocation.toFixed(0)}%`, note: "A complete portfolio should total 100% across all asset classes." },
+        { metric: "Largest Asset", value: `${currentResult.largestAsset.asset} (${currentResult.largestAsset.allocationPct.toFixed(0)}%)`, note: "The largest allocation usually has the strongest influence on total portfolio behavior." },
+        { metric: "Expected Return", value: formatPercentValue(currentResult.portfolioReturnPct, 2), note: "This is the weighted expected annual return based on your asset-level assumptions." },
+        { metric: "Risk Score", value: `${currentResult.riskScore.toFixed(1)} / 100`, note: `${riskBand(currentResult.riskScore)} based on the weighted asset risk model used in this planner.` }
+      ];
+      $("snapshot-summary-body").innerHTML = rows.map((row) => `<tr><td>${row.metric}</td><td class="compare-a-cell">${row.value}</td><td class="compare-b-cell">${row.note}</td></tr>`).join("");
+    }
+
+    function showScenarioSummary(scenarios) {
+      $("scenario-summary-body").innerHTML = scenarios.map((scenario) => `<tr><td>${scenario.profileLabel}</td><td class="compare-a-cell">${scenario.allocationBreakdown}</td><td>${formatPercentValue(scenario.portfolioReturnPct, 2)}</td><td>${scenario.riskScore.toFixed(1)} / 100</td><td class="compare-b-cell">${formatMoney(scenario.futureValue, 0)}</td></tr>`).join("");
+    }
+
+    function updateProjection(currentResult) {
+      state.projectionColumns = [
+        { key: "asset", label: "Asset Class", type: "text" },
+        { key: "allocationPct", label: "Allocation %", type: "percent0" },
+        { key: "investedAmount", label: "Invested Amount", type: "money0" },
+        { key: "expectedReturnPct", label: "Expected Return", type: "percent2" },
+        { key: "contributionToReturnPct", label: "Contribution to Portfolio Growth", type: "percent2" }
+      ];
+      state.projectionRows = currentResult.rows;
+      state.projectionFilename = "asset_allocation_breakdown.csv";
+      $("projection-head-row").innerHTML = state.projectionColumns.map((column) => `<th>${column.label}</th>`).join("");
+      $("projection-body").innerHTML = currentResult.rows.map((row) => `<tr>${state.projectionColumns.map((column) => `<td>${formatCell(row[column.key], column.type)}</td>`).join("")}</tr>`).join("");
+    }
+
+    function formatCell(value, type) {
+      if (type === "money0") return formatMoney(value, 0);
+      if (type === "percent0") return `${Number(value).toFixed(0)}%`;
+      if (type === "percent2") return `${Number(value).toFixed(2)}%`;
+      return String(value);
+    }
+
+    function commonChartOptions() {
+      return { responsive: true, maintainAspectRatio: false, interaction: { mode: "index", intersect: false }, plugins: { legend: { position: "bottom", labels: { boxWidth: 14, usePointStyle: true } } } };
+    }
+
+    function buildGrowthSeries(result) {
+      return Array.from({ length: result.horizon + 1 }, (_, year) => result.amount * Math.pow(1 + result.portfolioReturnDecimal, year));
+    }
+
+    function renderCharts(currentResult, scenarios) {
+      if (typeof Chart === "undefined") return;
+      state.charts.allocation = destroyChart(state.charts.allocation);
+      state.charts.growth = destroyChart(state.charts.growth);
+      state.charts.riskReturn = destroyChart(state.charts.riskReturn);
+
+      state.charts.allocation = new Chart($("allocation-chart").getContext("2d"), {
+        type: "pie",
+        data: {
+          labels: currentResult.rows.map((row) => row.asset),
+          datasets: [{ data: currentResult.rows.map((row) => row.allocationPct), backgroundColor: assetKeys.map((key) => assetMeta[key].color), borderWidth: 1 }]
+        },
+        options: { ...commonChartOptions(), plugins: { ...commonChartOptions().plugins, tooltip: { callbacks: { label: (ctx) => `${ctx.label}: ${Number(ctx.parsed).toFixed(0)}%` } } } }
+      });
+
+      const growthLabels = Array.from({ length: currentResult.horizon + 1 }, (_, year) => `Year ${year}`);
+      state.charts.growth = new Chart($("growth-chart").getContext("2d"), {
+        type: "line",
+        data: {
+          labels: growthLabels,
+          datasets: [
+            { label: "Current portfolio", data: buildGrowthSeries(currentResult), borderColor: "#0d9488", backgroundColor: "rgba(13,148,136,.12)", tension: 0.28, pointRadius: 2, fill: false },
+            ...scenarios.map((scenario, index) => ({ label: scenario.profileLabel, data: buildGrowthSeries(scenario), borderColor: ["#0284c7", "#7c3aed", "#f59e0b"][index], backgroundColor: "rgba(2,132,199,.08)", tension: 0.22, pointRadius: 1.5, borderDash: index === 1 ? [6, 4] : [], fill: false }))
+          ]
+        },
+        options: { ...commonChartOptions(), scales: { y: { ticks: { callback: (value) => formatMoney(value, 0) } } }, plugins: { ...commonChartOptions().plugins, tooltip: { callbacks: { label: (ctx) => `${ctx.dataset.label}: ${formatMoney(ctx.parsed.y, 0)}` } } } }
+      });
+
+      const assetPoints = currentResult.rows.map((row) => ({ x: row.riskWeight * 10, y: row.expectedReturnPct, label: row.asset }));
+      const scenarioPoints = scenarios.map((scenario) => ({ x: scenario.riskScore, y: scenario.portfolioReturnPct, label: scenario.profileLabel }));
+      state.charts.riskReturn = new Chart($("risk-return-chart").getContext("2d"), {
+        type: "scatter",
+        data: {
+          datasets: [
+            { label: "Asset classes", data: assetPoints, backgroundColor: assetKeys.map((key) => assetMeta[key].color), borderColor: assetKeys.map((key) => assetMeta[key].color), pointRadius: 6 },
+            { label: "Current portfolio", data: [{ x: currentResult.riskScore, y: currentResult.portfolioReturnPct, label: "Current Portfolio" }], backgroundColor: "#111827", borderColor: "#111827", pointRadius: 7, pointStyle: "rectRot" },
+            { label: "Profile scenarios", data: scenarioPoints, backgroundColor: "#0284c7", borderColor: "#0284c7", pointRadius: 6, pointStyle: "triangle" }
+          ]
+        },
+        options: {
+          ...commonChartOptions(),
+          scales: {
+            x: { title: { display: true, text: "Risk Score" }, ticks: { callback: (value) => `${value}` } },
+            y: { title: { display: true, text: "Expected Return (%)" }, ticks: { callback: (value) => `${value}%` } }
+          },
+          plugins: { ...commonChartOptions().plugins, tooltip: { callbacks: { label: (ctx) => `${ctx.raw.label}: Risk ${Number(ctx.raw.x).toFixed(1)}, Return ${Number(ctx.raw.y).toFixed(2)}%` } } }
+        }
+      });
+    }
+
+    function updateComparisonPanels(currentResult, scenarios) {
+      $("compare-current-list").innerHTML = `
+        <div class="info-pill"><strong>Current mix:</strong> ${currentResult.allocationBreakdown}</div>
+        <div class="info-pill"><strong>Expected return:</strong> ${formatPercentValue(currentResult.portfolioReturnPct, 2)}</div>
+        <div class="info-pill"><strong>Risk score:</strong> ${currentResult.riskScore.toFixed(1)} / 100</div>`;
+      $("compare-profile-list").innerHTML = scenarios.map((scenario) => `<div class="info-pill"><strong>${scenario.profileLabel}:</strong> ${scenario.allocationBreakdown} | ${formatPercentValue(scenario.portfolioReturnPct, 2)} | ${scenario.riskScore.toFixed(1)} / 100</div>`).join("");
+    }
+
+    function calculateAllocation(announce = false, shouldScroll = false) {
+      const amount = Number($("portfolio-amount").value);
+      const horizon = Number($("portfolio-horizon").value);
+      const autoMode = $("auto-allocation").checked;
+      const profileLabel = riskProfileLabel($("risk-profile").value);
+      const returnsMap = getReturnInputs();
+      const allocationsMap = getAllocationInputs();
+      const totalAllocation = updateAllocationTotal();
+
+      if (!(amount > 0)) { setStatus("Total investment amount must be greater than zero.", "error"); return; }
+      if (!(horizon >= 1 && horizon <= 40)) { setStatus("Investment horizon must stay between 1 and 40 years.", "error"); return; }
+      if (assetKeys.some((key) => returnsMap[key] < 0)) { setStatus("Expected returns cannot be negative in this simplified model.", "error"); return; }
+      if (Math.abs(totalAllocation - 100) > 0.001) { setStatus("Allocation percentages must add up to exactly 100%.", "error"); return; }
+
+      const currentResult = buildPortfolioResult(profileLabel, amount, horizon, returnsMap, allocationsMap);
+      const scenarios = [1, 2, 3].map((level) => buildPortfolioResult(riskProfiles[level].label, amount, horizon, returnsMap, riskProfiles[level].allocations));
+      state.latestCurrent = currentResult;
+      state.latestScenarios = scenarios;
+
+      buildResultCards(currentResult, autoMode);
+      showSnapshotSummary(currentResult, totalAllocation, autoMode);
+      showScenarioSummary(scenarios);
+      updateProjection(currentResult);
+      updateComparisonPanels(currentResult, scenarios);
+      renderCharts(currentResult, scenarios);
+
+      $("result-mode-pill").textContent = `Latest Result: ${autoMode ? "Auto" : "Manual"} Asset Allocation Analysis`;
+      $("charts-context").textContent = autoMode ? "Charts currently reflect the profile-driven portfolio mix and the three standard risk scenarios." : "Charts currently reflect your manual portfolio mix alongside the three standard risk scenarios.";
+      setStatus(announce ? "Asset allocation analysis updated." : "", announce ? "success" : "");
+
+      state.copyText = `Asset Allocation Calculator Summary\nPortfolio amount: ${formatMoney(amount, 0)}\nHorizon: ${horizon} years\nProfile: ${profileLabel}\nAllocation: ${currentResult.allocationBreakdown}\nExpected annual return: ${formatPercentValue(currentResult.portfolioReturnPct, 2)}\nProjected future value: ${formatMoney(currentResult.futureValue, 0)}\nRisk score: ${currentResult.riskScore.toFixed(1)} / 100`;
+      if (shouldScroll) requestAnimationFrame(() => $("results-section")?.scrollIntoView({ behavior: "smooth", block: "start" }));
+    }
+
+    function copyResults() {
+      if (!state.copyText) { setCopyNote("Run a calculation first."); return; }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(state.copyText).then(() => setCopyNote("Results copied to clipboard.")).catch(() => setCopyNote("Clipboard blocked. Please copy manually."));
+      } else {
+        setCopyNote("Clipboard API is not available in this browser.");
+      }
+    }
+
+    function downloadCsv() {
+      if (!state.projectionColumns.length || !state.projectionRows.length) { setStatus("Generate an allocation before exporting CSV.", "error"); return; }
+      const lines = [state.projectionColumns.map((column) => `"${column.label}"`).join(",")];
+      state.projectionRows.forEach((row) => {
+        lines.push(state.projectionColumns.map((column) => `"${String(formatCell(row[column.key], column.type)).replace(/"/g, '""')}"`).join(","));
+      });
+      const blob = new Blob([lines.join("\n")], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = state.projectionFilename;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+      setStatus("CSV download started.", "info");
+    }
+
+    function switchModule(name) {
+      state.activeModule = name;
+      document.querySelectorAll(".module").forEach((module) => module.classList.toggle("active", module.id === `mod-${name}`));
+      document.querySelectorAll(".qnav-btn").forEach((button) => {
+        const active = button.dataset.module === name;
+        button.classList.toggle("active", active);
+        button.setAttribute("aria-selected", active ? "true" : "false");
+      });
+      setStatus("");
+      calculateAllocation(false);
+    }
+
+    function resetPlanner() {
+      $("global-currency").value = "INR";
+      state.currentCurrency = "INR";
+      $("portfolio-amount").value = 1000000;
+      $("portfolio-amount-sl").value = 1000000;
+      $("portfolio-horizon").value = 15;
+      $("portfolio-horizon-sl").value = 15;
+      $("risk-profile").value = 2;
+      $("risk-profile-sl").value = 2;
+      $("auto-allocation").checked = true;
+      $("stocks-return").value = 12; $("stocks-return-sl").value = 12;
+      $("bonds-return").value = 7; $("bonds-return-sl").value = 7;
+      $("gold-return").value = 8; $("gold-return-sl").value = 8;
+      $("realestate-return").value = 9; $("realestate-return-sl").value = 9;
+      $("crypto-return").value = 18; $("crypto-return-sl").value = 18;
+      sliderConfigs.forEach(updateSliderLabel);
+      applyAutoAllocation();
+      updateAllocationStatus();
+      document.querySelectorAll(".module").forEach((module) => module.classList.toggle("active", module.id === "mod-setup"));
+      document.querySelectorAll(".qnav-btn").forEach((button) => {
+        const active = button.dataset.module === "setup";
+        button.classList.toggle("active", active);
+        button.setAttribute("aria-selected", active ? "true" : "false");
+      });
+      updateCurrencyIndicators();
+      if (state._mirrorMainToCmp) state._mirrorMainToCmp();
+      calculateAllocation(true);
+    }
+
+    function bindCommonEvents() {
+      $("global-currency").addEventListener("change", (event) => {
+        state.currentCurrency = event.target.value;
+        updateCurrencyIndicators();
+      });
+      $("auto-allocation").addEventListener("change", () => {
+        if ($("auto-allocation").checked) applyAutoAllocation();
+        updateAllocationStatus();
+        calculateAllocation(false);
+      });
+
+      // Mini-form in Scenario Comparison — keep in sync with main inputs
+      const cmpFields = [
+        { cmpInput: "cmp-amount",  cmpSlider: "cmp-amount-sl",  cmpLbl: "cmp-amount-lbl",  mainInput: "portfolio-amount",  mainSlider: "portfolio-amount-sl",  type: "money"  },
+        { cmpInput: "cmp-horizon", cmpSlider: "cmp-horizon-sl", cmpLbl: "cmp-horizon-lbl", mainInput: "portfolio-horizon", mainSlider: "portfolio-horizon-sl", type: "years"  },
+        { cmpInput: "cmp-risk",    cmpSlider: "cmp-risk-sl",    cmpLbl: "cmp-risk-lbl",    mainInput: "risk-profile",      mainSlider: "risk-profile-sl",      type: "risk"   }
+      ];
+
+      function syncCmpToMain(field) {
+        const val = $(field.cmpInput).value;
+        $(field.mainInput).value  = val;
+        $(field.mainSlider).value = val;
+        $(field.cmpSlider).value  = val;
+        $(field.cmpLbl).textContent = field.type === "money"  ? formatMoney(val, 0)
+                                    : field.type === "years"  ? `${Number(val).toFixed(0)} years`
+                                    : field.type === "risk"   ? riskProfileLabel(val)
+                                    : val;
+        if (field.type === "risk" && $("auto-allocation").checked) applyAutoAllocation();
+        updateAllocationStatus();
+        calculateAllocation(false);
+      }
+
+      function syncCmpSliderToInput(field) {
+        $(field.cmpInput).value = $(field.cmpSlider).value;
+        syncCmpToMain(field);
+      }
+
+      cmpFields.forEach((field) => {
+        $(field.cmpInput).addEventListener("input",  () => syncCmpToMain(field));
+        $(field.cmpInput).addEventListener("change", () => syncCmpToMain(field));
+        $(field.cmpSlider).addEventListener("input", () => syncCmpSliderToInput(field));
+      });
+
+      // When main inputs change (from Setup/Allocation tabs), mirror back to mini-form
+      function mirrorMainToCmp() {
+        cmpFields.forEach((field) => {
+          const val = $(field.mainInput).value;
+          $(field.cmpInput).value  = val;
+          $(field.cmpSlider).value = val;
+          $(field.cmpLbl).textContent = field.type === "money"  ? formatMoney(val, 0)
+                                      : field.type === "years"  ? `${Number(val).toFixed(0)} years`
+                                      : field.type === "risk"   ? riskProfileLabel(val)
+                                      : val;
+        });
+      }
+
+      ["portfolio-amount", "portfolio-horizon", "risk-profile"].forEach((id) => {
+        $(id).addEventListener("change", mirrorMainToCmp);
+        $(id).addEventListener("input",  mirrorMainToCmp);
+      });
+      ["portfolio-amount-sl", "portfolio-horizon-sl", "risk-profile-sl"].forEach((id) => {
+        $(id).addEventListener("input", mirrorMainToCmp);
+      });
+
+      state._mirrorMainToCmp = mirrorMainToCmp;
+    }
+
+    function initMobileNav() {
+      const button = $("hamburgerBtn");
+      const menu = $("mobileNav");
+      button.addEventListener("click", () => {
+        const open = menu.classList.toggle("open");
+        button.setAttribute("aria-expanded", open ? "true" : "false");
+      });
+    }
+
+    function init() {
+      sliderConfigs.forEach(bindSliderPair);
+      bindCommonEvents();
+      initMobileNav();
+      state.currentCurrency = $("global-currency").value;
+      applyAutoAllocation();
+      updateAllocationStatus();
+      sliderConfigs.forEach(updateSliderLabel);
+      updateAllocationTotal();
+      calculateAllocation(false);
+    }
+
+    window.addEventListener("DOMContentLoaded", init);
+  </script>
+</body>
+
+</html>
