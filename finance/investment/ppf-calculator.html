@@ -1158,6 +1158,990 @@
         height: 240px
       }
     }
+
+    /* ═══════════════════════════════════════════════════════
+       ENHANCED VISUAL OVERRIDES — PPF Calculator
+       Improves all non-header / non-footer / non-JS sections
+    ═══════════════════════════════════════════════════════ */
+
+    /* ── Typography upgrade ── */
+    @import url('https://fonts.googleapis.com/css2?family=Lora:wght@600;700&family=DM+Sans:wght@400;500;600;700&display=swap');
+
+    h1 {
+      font-family: 'Lora', Georgia, serif;
+      font-size: clamp(2.1rem, 5.5vw, 3.4rem);
+      line-height: 1.06;
+      color: var(--slate-900);
+      letter-spacing: -.02em
+    }
+
+    .card-title {
+      font-family: 'Lora', Georgia, serif;
+      font-size: clamp(1.2rem, 2.8vw, 1.6rem);
+      font-weight: 700;
+      letter-spacing: -.01em
+    }
+
+    /* ── Body background — richer depth ── */
+    body {
+      background:
+        radial-gradient(ellipse at 0% 0%, rgba(13,148,136,.18) 0%, transparent 40%),
+        radial-gradient(ellipse at 100% 60%, rgba(2,132,199,.1) 0%, transparent 40%),
+        linear-gradient(180deg, #f8fafc 0%, #eef6ff 50%, #f0fdf9 100%)
+    }
+
+    /* ── Breadcrumb ── */
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      font-size: .82rem;
+      font-weight: 500;
+      color: var(--slate-400);
+      letter-spacing: .01em
+    }
+    .breadcrumb a { color: var(--teal); font-weight: 600 }
+
+    /* ── Hero ── */
+    .hero {
+      background:
+        linear-gradient(135deg, rgba(13,148,136,.12) 0%, rgba(2,132,199,.07) 100%),
+        #fff;
+      border: 1.5px solid rgba(13,148,136,.18);
+      border-radius: 26px;
+      padding: 2.25rem 2rem;
+      box-shadow: 0 4px 32px rgba(13,148,136,.1), 0 1px 4px rgba(15,23,42,.06);
+      overflow: hidden;
+      position: relative
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 95% 10%, rgba(13,148,136,.1), transparent 45%);
+      pointer-events: none
+    }
+    .hero-badge {
+      background: linear-gradient(135deg, #ccfbf1, #d1fae5);
+      color: #0f766e;
+      font-size: .73rem;
+      padding: .42rem 1rem;
+      letter-spacing: .08em;
+      border: 1px solid rgba(13,148,136,.2);
+      box-shadow: 0 1px 4px rgba(13,148,136,.12)
+    }
+    .hero-sub {
+      font-size: 1.02rem;
+      line-height: 1.72;
+      color: var(--slate-600);
+      max-width: 780px
+    }
+    .hero-chip {
+      border-radius: 16px;
+      padding: 1.05rem 1.1rem;
+      border: 1.5px solid rgba(13,148,136,.16);
+      background: linear-gradient(135deg, rgba(240,253,250,.9), rgba(239,246,255,.85));
+      box-shadow: 0 2px 8px rgba(13,148,136,.07);
+      transition: box-shadow .2s, border-color .2s
+    }
+    .hero-chip:hover {
+      border-color: rgba(13,148,136,.3);
+      box-shadow: 0 4px 14px rgba(13,148,136,.1)
+    }
+    .hero-chip strong {
+      font-family: 'DM Sans', sans-serif;
+      font-size: .88rem;
+      font-weight: 700;
+      color: var(--slate-900);
+      margin-bottom: .25rem
+    }
+
+    /* ── Card / calculator shell ── */
+    .card {
+      background: linear-gradient(160deg, rgba(255,255,255,.97), rgba(240,253,250,.88));
+      border: 1.5px solid rgba(13,148,136,.15);
+      border-radius: 24px;
+      padding: 1.75rem;
+      box-shadow: 0 4px 28px rgba(15,23,42,.08), 0 1px 4px rgba(15,23,42,.04)
+    }
+
+    /* ── Module intro ── */
+    .module-intro {
+      font-size: .97rem;
+      line-height: 1.75;
+      color: var(--slate-600);
+      margin-bottom: .5rem;
+      padding: .85rem 1rem;
+      background: linear-gradient(135deg, rgba(240,253,250,.85), rgba(239,246,255,.7));
+      border-left: 3px solid var(--teal);
+      border-radius: 0 12px 12px 0
+    }
+
+    /* ── Tab nav (qnav) ── */
+    .qnav {
+      margin: 1.4rem 0 1.25rem;
+      background: rgba(241,245,249,.7);
+      border: 1.5px solid rgba(13,148,136,.12);
+      border-radius: 16px;
+      padding: .35rem;
+      gap: .35rem
+    }
+    .qnav-btn {
+      border: 1.5px solid transparent;
+      background: none;
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--slate-500);
+      border-radius: 12px;
+      padding: .75rem 1rem;
+      transition: all .2s ease;
+      box-shadow: none
+    }
+    .qnav-btn:hover:not(.active) {
+      background: rgba(13,148,136,.07);
+      color: var(--teal-dark);
+      border-color: rgba(13,148,136,.15)
+    }
+    .qnav-btn.active {
+      background: linear-gradient(135deg, var(--teal-dark), var(--teal));
+      color: #fff;
+      border-color: var(--teal);
+      box-shadow: 0 4px 14px rgba(13,148,136,.28)
+    }
+
+    /* ── Inputs ── */
+    input[type="number"],
+    input[type="text"],
+    select {
+      border: 1.5px solid var(--slate-200);
+      border-radius: 11px;
+      padding: .8rem 1rem;
+      font-size: .97rem;
+      background: rgba(255,255,255,.92);
+      transition: border-color .18s, box-shadow .18s
+    }
+    input[type="number"]:focus,
+    input[type="text"]:focus,
+    select:focus {
+      border-color: var(--teal);
+      box-shadow: 0 0 0 3px rgba(13,148,136,.14)
+    }
+
+    .lbl {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 700;
+      font-size: .88rem;
+      color: var(--slate-700);
+      letter-spacing: .01em
+    }
+
+    .hint {
+      font-size: .8rem;
+      color: var(--slate-400);
+      line-height: 1.5;
+      margin-top: .2rem
+    }
+
+    .slider-lbl {
+      font-size: .83rem;
+      font-weight: 800;
+      color: var(--teal-dark);
+      background: var(--teal-light);
+      display: inline-block;
+      padding: .18rem .6rem;
+      border-radius: 99px;
+      margin-top: .3rem
+    }
+
+    /* ── Toggle chip ── */
+    .toggle-chip {
+      border: 1.5px solid rgba(13,148,136,.18);
+      border-radius: 18px;
+      padding: 1rem 1.1rem;
+      background: linear-gradient(135deg, rgba(240,253,250,.85), rgba(239,246,255,.75))
+    }
+    .toggle-label {
+      font-family: 'DM Sans', sans-serif
+    }
+
+    /* ── Toolbar box ── */
+    .toolbar-box {
+      border-radius: 18px;
+      padding: 1.1rem 1.2rem;
+      background: linear-gradient(135deg, rgba(13,148,136,.12), rgba(224,242,254,.7));
+      border: 1.5px solid rgba(13,148,136,.16)
+    }
+    .toolbar-box h2 {
+      font-family: 'Lora', Georgia, serif;
+      font-size: .98rem;
+      font-weight: 700;
+      color: var(--slate-900);
+      margin-bottom: .6rem
+    }
+
+    /* ── Info pill ── */
+    .info-pill {
+      padding: .85rem 1rem;
+      border-radius: 14px;
+      border: 1px solid rgba(13,148,136,.15);
+      background: linear-gradient(135deg, rgba(240,253,250,.88), rgba(239,246,255,.82));
+      color: var(--slate-700);
+      font-size: .9rem;
+      line-height: 1.6
+    }
+    .info-pill strong { color: var(--slate-900) }
+
+    /* ── Mini status ── */
+    .mini-status {
+      background: linear-gradient(135deg, rgba(219,234,254,.7), rgba(224,242,254,.6));
+      border: 1px solid rgba(2,132,199,.18);
+      border-radius: 10px;
+      color: #0c4a6e;
+      padding: .5rem .9rem;
+      font-size: .82rem;
+      font-weight: 600
+    }
+
+    /* ── Buttons ── */
+    .btn-primary {
+      background: linear-gradient(135deg, #0c6b62, var(--teal-dark), var(--teal));
+      border-radius: 13px;
+      box-shadow: 0 6px 20px rgba(13,148,136,.28);
+      letter-spacing: .01em;
+      transition: box-shadow .2s, transform .15s
+    }
+    .btn-primary:hover {
+      box-shadow: 0 10px 28px rgba(13,148,136,.36);
+      transform: translateY(-1px)
+    }
+    .btn-primary:active { transform: translateY(0) }
+    .btn-secondary {
+      border: 1.5px solid var(--slate-200);
+      border-radius: 13px;
+      background: linear-gradient(135deg, #fff, var(--slate-50));
+      color: var(--slate-700);
+      transition: border-color .2s, background .2s
+    }
+    .btn-secondary:hover {
+      border-color: var(--teal);
+      background: var(--teal-light);
+      color: var(--teal-dark)
+    }
+    .btn-ghost {
+      border: 1.5px solid rgba(13,148,136,.25);
+      border-radius: 13px;
+      background: rgba(13,148,136,.06);
+      color: var(--teal-dark);
+      transition: background .2s, border-color .2s
+    }
+    .btn-ghost:hover {
+      background: rgba(13,148,136,.12);
+      border-color: rgba(13,148,136,.4)
+    }
+
+    /* ── Result cards ── */
+    .result-card {
+      border-radius: 20px;
+      padding: 1.35rem 1.2rem;
+      min-height: 148px;
+      box-shadow: 0 8px 24px rgba(15,23,42,.15);
+      position: relative;
+      overflow: hidden
+    }
+    .result-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,.14) 0%, transparent 60%);
+      pointer-events: none
+    }
+    .result-card.teal {
+      background: linear-gradient(145deg, #0a5c56, #0f766e, #0d9488)
+    }
+    .result-card.amber {
+      background: linear-gradient(145deg, #a16207, #d97706, #f59e0b)
+    }
+    .result-card.sky {
+      background: linear-gradient(145deg, #075985, #0369a1, #0284c7)
+    }
+    .result-card.slate {
+      background: linear-gradient(145deg, #0f172a, #1e293b, #334155)
+    }
+    .result-card.rose {
+      background: linear-gradient(145deg, #9f1239, #be123c, #f43f5e)
+    }
+    .result-lbl {
+      font-size: .75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      opacity: .85;
+      margin-bottom: .5rem;
+      font-family: 'DM Sans', sans-serif
+    }
+    .result-val {
+      font-family: 'Lora', Georgia, serif;
+      font-size: clamp(1rem, 2.2vw, 1.6rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -.01em
+    }
+    .result-sub { font-size: .8rem; opacity: .8; line-height: 1.4; margin-top: .15rem }
+
+    /* ── Mode pill ── */
+    .mode-pill {
+      background: linear-gradient(135deg, #ccfbf1, #d1fae5);
+      color: var(--teal-dark);
+      padding: .48rem .95rem;
+      font-size: .8rem;
+      font-weight: 800;
+      border: 1px solid rgba(13,148,136,.2);
+      box-shadow: 0 1px 4px rgba(13,148,136,.1)
+    }
+
+    /* ── Status banners ── */
+    .status-banner {
+      border-radius: 13px;
+      padding: .9rem 1.1rem;
+      font-weight: 600;
+      font-size: .9rem
+    }
+    .status-banner.success {
+      background: linear-gradient(135deg, rgba(240,253,250,.9), rgba(209,250,229,.8));
+      border: 1px solid rgba(13,148,136,.22);
+      color: var(--teal-dark)
+    }
+    .status-banner.error {
+      background: linear-gradient(135deg, rgba(255,241,242,.9), rgba(255,228,230,.8));
+      border: 1px solid rgba(244,63,94,.22);
+      color: #9f1239
+    }
+    .status-banner.info {
+      background: linear-gradient(135deg, rgba(219,234,254,.9), rgba(224,242,254,.8));
+      border: 1px solid rgba(2,132,199,.2);
+      color: #0c4a6e
+    }
+
+    /* ── Insight / formula boxes ── */
+    .insight-box {
+      background: linear-gradient(135deg, rgba(254,243,199,.9), rgba(255,251,235,.85));
+      border: 1.5px solid rgba(245,158,11,.22);
+      border-radius: 16px;
+      color: #78350f;
+      padding: 1.1rem 1.2rem;
+      font-size: .93rem;
+      line-height: 1.7
+    }
+    .formula-box {
+      background: linear-gradient(135deg, rgba(240,253,250,.92), rgba(239,246,255,.88));
+      border: 1.5px solid rgba(13,148,136,.18);
+      border-left: 4px solid var(--teal);
+      border-radius: 0 16px 16px 0;
+      color: var(--slate-700);
+      padding: 1.1rem 1.2rem;
+      font-family: 'Courier New', monospace;
+      font-size: .88rem;
+      line-height: 1.65;
+      overflow-x: auto
+    }
+
+    /* ── Callout ── */
+    .callout {
+      background: linear-gradient(135deg, rgba(240,253,250,.9), rgba(239,246,255,.85));
+      border-left: 4px solid var(--teal);
+      border: 1px solid rgba(13,148,136,.16);
+      border-left-width: 4px;
+      border-radius: 0 14px 14px 0;
+      color: var(--slate-700);
+      padding: 1rem 1.2rem;
+      font-size: .93rem;
+      line-height: 1.7
+    }
+    .callout strong { color: var(--teal-dark) }
+
+    /* ── Milestone cards ── */
+    .milestone-card {
+      border-radius: 18px;
+      padding: 1.1rem 1.15rem;
+      border: 1.5px solid rgba(13,148,136,.16);
+      background: linear-gradient(135deg, rgba(240,253,250,.9), rgba(239,246,255,.82));
+      box-shadow: 0 2px 10px rgba(13,148,136,.08)
+    }
+    .milestone-card .eyebrow {
+      font-family: 'DM Sans', sans-serif;
+      font-size: .73rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      color: var(--teal-dark)
+    }
+    .milestone-card .value {
+      font-family: 'Lora', Georgia, serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--slate-900);
+      letter-spacing: -.01em
+    }
+    .milestone-card .meta { font-size: .86rem; color: var(--slate-500) }
+
+    /* ── Chart wrap ── */
+    .chart-wrap {
+      border-radius: 20px;
+      padding: 1.25rem 1.1rem;
+      border: 1.5px solid rgba(13,148,136,.13);
+      background: linear-gradient(160deg, rgba(255,255,255,.97), rgba(240,253,250,.88));
+      box-shadow: 0 2px 12px rgba(13,148,136,.07)
+    }
+    .chart-title {
+      font-family: 'Lora', Georgia, serif;
+      font-size: .98rem;
+      font-weight: 700;
+      color: var(--slate-900);
+      margin-bottom: .3rem
+    }
+    .chart-note { font-size: .82rem; color: var(--slate-400); line-height: 1.5 }
+
+    /* ── Table / tbl-wrap ── */
+    .tbl-wrap {
+      border-radius: 16px;
+      border: 1.5px solid rgba(13,148,136,.14);
+      background: rgba(255,255,255,.95);
+      box-shadow: 0 2px 10px rgba(15,23,42,.06);
+      overflow: hidden
+    }
+    table { min-width: 480px }
+    thead tr {
+      background: linear-gradient(135deg, #0a5c56, #0f766e, #0d9488)
+    }
+    th {
+      font-family: 'DM Sans', sans-serif;
+      font-size: .76rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+      padding: .85rem 1rem
+    }
+    td {
+      padding: .8rem 1rem;
+      font-size: .9rem;
+      border-bottom: 1px solid rgba(13,148,136,.07);
+      color: var(--slate-700)
+    }
+    td:first-child { font-weight: 600; color: var(--slate-900) }
+    tbody tr:nth-child(even) { background: rgba(240,253,250,.45) }
+    tbody tr:hover { background: rgba(204,251,241,.3); transition: background .15s }
+    tbody tr:last-child td { border-bottom: none }
+
+    /* ── Comparison summary tables ── */
+    .comparison-summary {
+      margin-top: 1.1rem;
+      border: 1.5px solid rgba(13,148,136,.13);
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(15,23,42,.05)
+    }
+    .comparison-summary table { min-width: 340px }
+    .comparison-summary thead tr {
+      background: linear-gradient(135deg, #0a5c56, #0f766e)
+    }
+
+    /* ── Compare boxes (A/B panels) ── */
+    .compare-box {
+      border-radius: 20px;
+      padding: 1.2rem 1.3rem;
+      box-shadow: 0 2px 10px rgba(15,23,42,.07)
+    }
+    .compare-box.compare-a {
+      background: linear-gradient(145deg, rgba(219,234,254,.85), rgba(224,242,254,.75));
+      border: 1.5px solid rgba(37,99,235,.2)
+    }
+    .compare-box.compare-b {
+      background: linear-gradient(145deg, rgba(209,250,229,.85), rgba(236,253,245,.75));
+      border: 1.5px solid rgba(13,148,136,.22)
+    }
+    .compare-tag {
+      padding: .5rem .9rem;
+      font-size: .88rem;
+      font-weight: 800;
+      letter-spacing: .01em;
+      border-radius: 10px;
+      margin-bottom: 1rem
+    }
+    .compare-letter {
+      width: 1.8rem;
+      height: 1.8rem;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .86rem;
+      font-weight: 800;
+      color: #fff
+    }
+
+    /* ── Table head bar ── */
+    .table-head { margin-bottom: 1.1rem }
+    .table-context {
+      font-size: .85rem;
+      color: var(--slate-400);
+      margin-top: .2rem;
+      line-height: 1.55
+    }
+
+    /* ════════════════════════════════════════════════════
+       DARK MODE
+    ════════════════════════════════════════════════════ */
+
+    /* Smooth transition for everything on toggle */
+    *, *::before, *::after {
+      transition-property: background-color, border-color, color, box-shadow;
+      transition-duration: .25s;
+      transition-timing-function: ease
+    }
+    /* But don't animate transform/opacity transitions */
+    .module.active, .ppf-reveal, .ppf-faq-body,
+    .btn-primary, .btn-secondary, .btn-ghost,
+    .qnav-btn, .hero-chip, .ppf-tool-card,
+    .ppf-stat-card, .ppf-guide-block, .result-card,
+    .milestone-card, .ppf-table-card, .ppf-compare-full {
+      transition-property: background-color, border-color, color, box-shadow, opacity, transform;
+      transition-duration: .25s
+    }
+
+    /* Dark theme token overrides */
+    [data-theme="dark"] {
+      --teal: #14b8a6;
+      --teal-dark: #0d9488;
+      --teal-light: rgba(20,184,166,.18);
+      --amber: #fbbf24;
+      --amber-light: rgba(251,191,36,.15);
+      --rose: #fb7185;
+      --rose-light: rgba(251,113,133,.15);
+      --sky: #38bdf8;
+      --sky-light: rgba(56,189,248,.15);
+      --slate-900: #f1f5f9;
+      --slate-800: #e2e8f0;
+      --slate-700: #cbd5e1;
+      --slate-600: #94a3b8;
+      --slate-500: #64748b;
+      --slate-400: #475569;
+      --slate-300: #334155;
+      --slate-200: #1e293b;
+      --slate-100: #162032;
+      --slate-50:  #0f172a;
+      --white: #0d1526;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,.35);
+      --shadow-md: 0 10px 28px rgba(0,0,0,.45)
+    }
+
+    /* Body */
+    [data-theme="dark"] body {
+      background:
+        radial-gradient(ellipse at 0% 0%, rgba(20,184,166,.12) 0%, transparent 40%),
+        radial-gradient(ellipse at 100% 60%, rgba(56,189,248,.07) 0%, transparent 40%),
+        linear-gradient(180deg, #090e1a 0%, #0c1424 55%, #080d18 100%);
+      color: #e2e8f0
+    }
+
+    /* Hero */
+    [data-theme="dark"] .hero {
+      background: linear-gradient(135deg, rgba(20,184,166,.1), rgba(56,189,248,.06)), #111d2e;
+      border-color: rgba(20,184,166,.22);
+      box-shadow: 0 4px 32px rgba(0,0,0,.5), 0 1px 4px rgba(0,0,0,.3)
+    }
+    [data-theme="dark"] .hero::before {
+      background: radial-gradient(circle at 95% 10%, rgba(20,184,166,.08), transparent 45%)
+    }
+    [data-theme="dark"] h1 { color: #f1f5f9 }
+    [data-theme="dark"] .hero-badge {
+      background: rgba(20,184,166,.18);
+      border-color: rgba(20,184,166,.3);
+      color: #5eead4
+    }
+    [data-theme="dark"] .hero-sub { color: #94a3b8 }
+    [data-theme="dark"] .hero-chip {
+      background: linear-gradient(135deg, rgba(20,184,166,.1), rgba(56,189,248,.08));
+      border-color: rgba(20,184,166,.22)
+    }
+    [data-theme="dark"] .hero-chip strong { color: #e2e8f0 }
+    [data-theme="dark"] .hero-chip { color: #94a3b8 }
+
+    /* Breadcrumb */
+    [data-theme="dark"] .breadcrumb { color: #475569 }
+
+    /* Cards */
+    [data-theme="dark"] .card {
+      background: linear-gradient(160deg, #111d2e, #0f1a28);
+      border-color: rgba(20,184,166,.18);
+      box-shadow: 0 4px 28px rgba(0,0,0,.45), 0 1px 4px rgba(0,0,0,.3)
+    }
+    [data-theme="dark"] .card-title { color: #e2e8f0 }
+
+    /* Module intro */
+    [data-theme="dark"] .module-intro {
+      background: linear-gradient(135deg, rgba(20,184,166,.1), rgba(56,189,248,.07));
+      border-left-color: var(--teal);
+      color: #94a3b8
+    }
+
+    /* qnav */
+    [data-theme="dark"] .qnav {
+      background: rgba(15,23,42,.6);
+      border-color: rgba(20,184,166,.18)
+    }
+    [data-theme="dark"] .qnav-btn { color: #64748b }
+    [data-theme="dark"] .qnav-btn:hover:not(.active) {
+      background: rgba(20,184,166,.1);
+      color: #5eead4;
+      border-color: rgba(20,184,166,.2)
+    }
+    [data-theme="dark"] .qnav-btn.active {
+      background: linear-gradient(135deg, #0d9488, #14b8a6);
+      box-shadow: 0 4px 14px rgba(20,184,166,.3)
+    }
+
+    /* Inputs */
+    [data-theme="dark"] input[type="number"],
+    [data-theme="dark"] input[type="text"],
+    [data-theme="dark"] select {
+      background: #0f1a2e;
+      border-color: #1e2d42;
+      color: #e2e8f0
+    }
+    [data-theme="dark"] input[type="number"]:focus,
+    [data-theme="dark"] input[type="text"]:focus,
+    [data-theme="dark"] select:focus {
+      border-color: var(--teal);
+      box-shadow: 0 0 0 3px rgba(20,184,166,.18)
+    }
+    [data-theme="dark"] input[type="number"]:disabled,
+    [data-theme="dark"] input[type="range"]:disabled {
+      opacity: .4
+    }
+    [data-theme="dark"] .lbl { color: #cbd5e1 }
+    [data-theme="dark"] .hint { color: #475569 }
+    [data-theme="dark"] .slider-lbl {
+      background: rgba(20,184,166,.2);
+      color: #5eead4
+    }
+
+    /* Toggle chip */
+    [data-theme="dark"] .toggle-chip {
+      background: linear-gradient(135deg, rgba(20,184,166,.1), rgba(56,189,248,.07));
+      border-color: rgba(20,184,166,.22)
+    }
+    [data-theme="dark"] .toggle-label { color: #cbd5e1 }
+    [data-theme="dark"] .toggle-label small { color: #475569 }
+    [data-theme="dark"] .switch-ui { background: #1e2d42 }
+
+    /* Toolbar box */
+    [data-theme="dark"] .toolbar-box {
+      background: linear-gradient(135deg, rgba(20,184,166,.12), rgba(56,189,248,.08));
+      border-color: rgba(20,184,166,.2)
+    }
+    [data-theme="dark"] .toolbar-box h2 { color: #e2e8f0 }
+
+    /* Info pill */
+    [data-theme="dark"] .info-pill {
+      background: linear-gradient(135deg, rgba(20,184,166,.1), rgba(56,189,248,.07));
+      border-color: rgba(20,184,166,.2);
+      color: #94a3b8
+    }
+    [data-theme="dark"] .info-pill strong { color: #e2e8f0 }
+
+    /* Mini status */
+    [data-theme="dark"] .mini-status {
+      background: rgba(56,189,248,.1);
+      border-color: rgba(56,189,248,.22);
+      color: #7dd3fc
+    }
+
+    /* Buttons */
+    [data-theme="dark"] .btn-primary {
+      background: linear-gradient(135deg, #0a5c56, #0d9488, #14b8a6);
+      box-shadow: 0 6px 20px rgba(20,184,166,.3)
+    }
+    [data-theme="dark"] .btn-secondary {
+      background: #111d2e;
+      border-color: #1e2d42;
+      color: #94a3b8
+    }
+    [data-theme="dark"] .btn-secondary:hover {
+      border-color: var(--teal);
+      background: rgba(20,184,166,.15);
+      color: #5eead4
+    }
+    [data-theme="dark"] .btn-ghost {
+      background: rgba(20,184,166,.08);
+      border-color: rgba(20,184,166,.25);
+      color: #5eead4
+    }
+    [data-theme="dark"] .btn-ghost:hover {
+      background: rgba(20,184,166,.16);
+      border-color: rgba(20,184,166,.45)
+    }
+
+    /* Mode pill */
+    [data-theme="dark"] .mode-pill {
+      background: rgba(20,184,166,.18);
+      border-color: rgba(20,184,166,.28);
+      color: #5eead4
+    }
+
+    /* Status banners */
+    [data-theme="dark"] .status-banner.success {
+      background: rgba(20,184,166,.12);
+      border-color: rgba(20,184,166,.25);
+      color: #5eead4
+    }
+    [data-theme="dark"] .status-banner.error {
+      background: rgba(251,113,133,.1);
+      border-color: rgba(251,113,133,.25);
+      color: #fda4af
+    }
+    [data-theme="dark"] .status-banner.info {
+      background: rgba(56,189,248,.1);
+      border-color: rgba(56,189,248,.22);
+      color: #7dd3fc
+    }
+
+    /* Result cards — keep vivid, just deepen gradients */
+    [data-theme="dark"] .result-card { box-shadow: 0 8px 28px rgba(0,0,0,.55) }
+    [data-theme="dark"] .result-card.teal  { background: linear-gradient(145deg, #062e2b, #0a4d47, #0d7a70) }
+    [data-theme="dark"] .result-card.amber { background: linear-gradient(145deg, #5c3208, #8a4f0a, #c07a12) }
+    [data-theme="dark"] .result-card.sky   { background: linear-gradient(145deg, #052844, #064872, #076db5) }
+    [data-theme="dark"] .result-card.slate { background: linear-gradient(145deg, #06080f, #0c1220, #182035) }
+    [data-theme="dark"] .result-card.rose  { background: linear-gradient(145deg, #4a0520, #7d0c34, #b5184d) }
+
+    /* Insight / formula boxes */
+    [data-theme="dark"] .insight-box {
+      background: rgba(251,191,36,.1);
+      border-color: rgba(251,191,36,.22);
+      color: #fde68a
+    }
+    [data-theme="dark"] .formula-box {
+      background: rgba(20,184,166,.08);
+      border-color: rgba(20,184,166,.22);
+      border-left-color: var(--teal);
+      color: #94a3b8
+    }
+
+    /* Callout */
+    [data-theme="dark"] .callout {
+      background: rgba(20,184,166,.08);
+      border-color: rgba(20,184,166,.2);
+      border-left-color: var(--teal);
+      color: #94a3b8
+    }
+    [data-theme="dark"] .callout strong { color: #5eead4 }
+
+    /* Milestone cards */
+    [data-theme="dark"] .milestone-card {
+      background: linear-gradient(135deg, rgba(20,184,166,.1), rgba(56,189,248,.07));
+      border-color: rgba(20,184,166,.2)
+    }
+    [data-theme="dark"] .milestone-card .eyebrow { color: #5eead4 }
+    [data-theme="dark"] .milestone-card .value { color: #e2e8f0 }
+    [data-theme="dark"] .milestone-card .meta { color: #64748b }
+
+    /* Chart wraps */
+    [data-theme="dark"] .chart-wrap {
+      background: linear-gradient(160deg, #111d2e, #0d1728);
+      border-color: rgba(20,184,166,.18)
+    }
+    [data-theme="dark"] .chart-title { color: #e2e8f0 }
+    [data-theme="dark"] .chart-note { color: #475569 }
+
+    /* Tables */
+    [data-theme="dark"] .tbl-wrap {
+      background: #0d1526;
+      border-color: rgba(20,184,166,.18)
+    }
+    [data-theme="dark"] thead tr {
+      background: linear-gradient(135deg, #062e2b, #0a4d47, #0d7a70)
+    }
+    [data-theme="dark"] td {
+      color: #94a3b8;
+      border-bottom-color: rgba(20,184,166,.08)
+    }
+    [data-theme="dark"] td:first-child { color: #e2e8f0 }
+    [data-theme="dark"] tbody tr:nth-child(even) { background: rgba(20,184,166,.05) }
+    [data-theme="dark"] tbody tr:hover { background: rgba(20,184,166,.1) }
+
+    /* Comparison summary */
+    [data-theme="dark"] .comparison-summary {
+      border-color: rgba(20,184,166,.18)
+    }
+    [data-theme="dark"] .comparison-summary thead tr {
+      background: linear-gradient(135deg, #062e2b, #0a4d47)
+    }
+    [data-theme="dark"] .comparison-summary tbody td.compare-a-cell {
+      background: rgba(56,189,248,.08);
+      color: #7dd3fc
+    }
+    [data-theme="dark"] .comparison-summary tbody td.compare-b-cell {
+      background: rgba(251,191,36,.08);
+      color: #fde68a
+    }
+
+    /* Compare boxes */
+    [data-theme="dark"] .compare-box.compare-a {
+      background: linear-gradient(145deg, rgba(56,189,248,.1), rgba(56,189,248,.06));
+      border-color: rgba(56,189,248,.22)
+    }
+    [data-theme="dark"] .compare-box.compare-b {
+      background: linear-gradient(145deg, rgba(20,184,166,.1), rgba(20,184,166,.06));
+      border-color: rgba(20,184,166,.22)
+    }
+    [data-theme="dark"] .compare-a .compare-tag { background: rgba(56,189,248,.12); color: #7dd3fc }
+    [data-theme="dark"] .compare-b .compare-tag { background: rgba(251,191,36,.12); color: #fde68a }
+
+    /* Table head */
+    [data-theme="dark"] .table-context { color: #475569 }
+
+    /* ── Content section redesigns (guide, cmp, tools, faq) ── */
+
+    /* Guide header */
+    [data-theme="dark"] .ppf-guide-header {
+      background: linear-gradient(135deg, #050d1a 0%, #062e2b 60%, #0a4d47 100%)
+    }
+
+    /* Stat cards */
+    [data-theme="dark"] .ppf-stat-card {
+      background: #111d2e;
+      border-color: rgba(20,184,166,.2)
+    }
+    [data-theme="dark"] .ppf-stat-value { color: #5eead4 }
+    [data-theme="dark"] .ppf-stat-label { color: #475569 }
+
+    /* Guide blocks */
+    [data-theme="dark"] .ppf-guide-block {
+      background: #111d2e;
+      border-color: rgba(20,184,166,.16)
+    }
+    [data-theme="dark"] .ppf-guide-block h3 { color: #e2e8f0 }
+    [data-theme="dark"] .ppf-guide-block h3 .ppf-hico { background: rgba(20,184,166,.2) }
+    [data-theme="dark"] .ppf-guide-block p { color: #64748b }
+    [data-theme="dark"] .ppf-block-num { color: rgba(20,184,166,.08) }
+    [data-theme="dark"] .ppf-pull {
+      background: rgba(20,184,166,.1);
+      border-left-color: #14b8a6;
+      color: #5eead4
+    }
+
+    /* Benefit chips */
+    [data-theme="dark"] .ppf-benefit-chip {
+      background: linear-gradient(135deg, rgba(20,184,166,.1), rgba(56,189,248,.07));
+      border-color: rgba(20,184,166,.2)
+    }
+    [data-theme="dark"] .ppf-benefit-title { color: #e2e8f0 }
+    [data-theme="dark"] .ppf-benefit-desc { color: #475569 }
+
+    /* Example box */
+    [data-theme="dark"] .ppf-example {
+      background: linear-gradient(135deg, #050d1a, #062e2b)
+    }
+    [data-theme="dark"] .ppf-example-label { color: rgba(255,255,255,.45) }
+
+    /* Comparison tables section */
+    [data-theme="dark"] .cmp-header {
+      background: linear-gradient(135deg, #060e1e 0%, #062e2b 100%)
+    }
+    [data-theme="dark"] .ppf-table-card {
+      background: #111d2e;
+      border-color: rgba(20,184,166,.18)
+    }
+    [data-theme="dark"] .ppf-table-card-header {
+      background: linear-gradient(135deg, rgba(20,184,166,.1), rgba(56,189,248,.07));
+      border-bottom-color: rgba(20,184,166,.15)
+    }
+    [data-theme="dark"] .ppf-table-card-header h3 { color: #e2e8f0 }
+    [data-theme="dark"] .ppf-table-card-header p { color: #475569 }
+    [data-theme="dark"] .ppf-compare-full {
+      background: #111d2e;
+      border-color: rgba(20,184,166,.18)
+    }
+    [data-theme="dark"] .ppf-compare-full-header {
+      background: linear-gradient(135deg, rgba(20,184,166,.1), rgba(56,189,248,.07));
+      border-bottom-color: rgba(20,184,166,.15)
+    }
+    [data-theme="dark"] .ppf-compare-full-header h3 { color: #e2e8f0 }
+    [data-theme="dark"] .ppf-compare-full-header p { color: #475569 }
+    [data-theme="dark"] .ppf-table thead th {
+      background: linear-gradient(135deg, #062e2b, #0a4d47)
+    }
+    [data-theme="dark"] .ppf-table tbody td { color: #64748b; border-bottom-color: rgba(20,184,166,.08) }
+    [data-theme="dark"] .ppf-table tbody td:first-child { color: #e2e8f0 }
+    [data-theme="dark"] .ppf-table tbody tr:nth-child(even) { background: rgba(20,184,166,.05) }
+    [data-theme="dark"] .ppf-table tbody tr:hover { background: rgba(20,184,166,.1) }
+    [data-theme="dark"] .ppf-table tbody tr:last-child td { border-bottom: none }
+    [data-theme="dark"] .badge-ppf { background: rgba(20,184,166,.2); color: #5eead4 }
+    [data-theme="dark"] .badge-fd  { background: rgba(56,189,248,.2); color: #7dd3fc }
+    [data-theme="dark"] .badge-mf  { background: rgba(251,191,36,.2); color: #fde68a }
+
+    /* More tools */
+    [data-theme="dark"] .ppf-tool-card {
+      background: rgba(255,255,255,.04);
+      border-color: rgba(255,255,255,.08)
+    }
+    [data-theme="dark"] .ppf-tool-card:hover {
+      background: rgba(255,255,255,.08);
+      border-color: rgba(20,184,166,.4)
+    }
+
+    /* FAQ */
+    [data-theme="dark"] #faq {
+      background: #111d2e;
+      border-color: rgba(20,184,166,.18)
+    }
+    [data-theme="dark"] #faq h2 { color: #e2e8f0 }
+    [data-theme="dark"] .ppf-faq-eyebrow { color: #5eead4 }
+    [data-theme="dark"] .ppf-faq-item { border-color: rgba(20,184,166,.18) }
+    [data-theme="dark"] .ppf-faq-item.open { border-color: rgba(20,184,166,.38) }
+    [data-theme="dark"] .ppf-faq-btn:hover { background: rgba(20,184,166,.06) }
+    [data-theme="dark"] .ppf-faq-item.open .ppf-faq-btn { background: rgba(20,184,166,.08) }
+    [data-theme="dark"] .ppf-faq-q { color: #e2e8f0 }
+    [data-theme="dark"] .ppf-faq-icon { background: rgba(20,184,166,.2); color: #5eead4 }
+    [data-theme="dark"] .ppf-faq-item.open .ppf-faq-icon { background: #0d9488; color: #fff }
+    [data-theme="dark"] .ppf-faq-inner p { color: #64748b }
+
+    /* Disclaimer */
+    [data-theme="dark"] .ppf-disclaimer {
+      background: rgba(20,184,166,.07);
+      border-color: rgba(20,184,166,.22)
+    }
+    [data-theme="dark"] .ppf-disclaimer-text { color: #64748b }
+    [data-theme="dark"] .ppf-disclaimer-text strong { color: #5eead4 }
+
+    /* ── Dark mode toggle button ── */
+    #dm-toggle {
+      position: fixed;
+      bottom: 1.6rem;
+      right: 1.6rem;
+      z-index: 9000;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      border: 2px solid rgba(13,148,136,.3);
+      background: #fff;
+      color: #0f766e;
+      cursor: pointer;
+      font-size: 1.3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px rgba(13,148,136,.22), 0 1px 6px rgba(15,23,42,.12);
+      transition: transform .22s ease, box-shadow .22s ease, background .25s, border-color .25s !important
+    }
+    #dm-toggle:hover {
+      transform: scale(1.1) rotate(12deg);
+      box-shadow: 0 8px 28px rgba(13,148,136,.32)
+    }
+    [data-theme="dark"] #dm-toggle {
+      background: #111d2e;
+      border-color: rgba(20,184,166,.35);
+      color: #5eead4;
+      box-shadow: 0 4px 20px rgba(20,184,166,.25)
+    }
   </style>
 </head>
 
@@ -1535,173 +2519,766 @@
       </div>
     </section>
 
-    <section class="content-section" id="guide">
-      <h2>PPF Guide for Beginners</h2>
-      <article>
-        <p>Public Provident Fund, or PPF, is one of the most trusted long-term saving options in India 🇮🇳. People
-          often choose it because it combines government backing, stable compounding, and useful tax benefits in one
-          place. For someone who is just starting their investing journey, that combination can feel reassuring. You do
-          not need to understand the stock market, company balance sheets, or day-to-day market volatility to begin. You
-          simply need to know how much you want to invest, how long you want to stay disciplined, and how compounding
-          quietly works in the background.</p>
-        <p>That is exactly why a good PPF calculator matters 💰. On paper, the product looks simple. In practice, many
-          people still want answers to basic but important questions. How much will I get after 15 years? What if I keep
-          extending the account? What if I invest monthly instead of once a year? How much of the final value is my own
-          money and how much is interest? This page is built to answer those questions in a clean, premium,
-          beginner-friendly way so that you can plan with more confidence and less guesswork.</p>
+    <!-- ═══════════════════════════════════════════════
+         PPF CONTENT SECTIONS — REDESIGNED
+    ═══════════════════════════════════════════════ -->
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,700;1,500&family=DM+Sans:wght@400;500;600;700&display=swap');
 
-        <h3>What is PPF 🇮🇳</h3>
-        <p>PPF is a government-backed small savings scheme designed for long-term wealth building. The standard maturity
-          period is 15 years, which makes it very different from short-term savings products. It is not meant for quick
-          parking of money. It is meant for patient, steady accumulation. Each year, you can contribute within the
-          scheme's minimum and maximum limits, and the account balance earns interest that is credited annually.</p>
-        <p>For many Indian families, PPF is the safe-compounding foundation of a broader financial plan. People use it
-          for retirement preparation, children's future needs, emergency backup savings, and conservative wealth
-          building. It is especially popular among savers who want stability first and return potential second. If you
-          are the kind of investor who loses sleep over market swings, PPF can feel much calmer than equity-heavy
-          products.</p>
-        <p>At the same time, PPF should not automatically replace every other investment option. It is best understood
-          as one part of a bigger plan. If you also want to explore market-linked growth, SmartCalcWorld's <a
-            href="https://smartcalcworld.com/finance/finance-sip-calculator.html">SIP Calculator</a> and <a
-            href="https://smartcalcworld.com/finance/investment/mutual-fund-calculator.html">Mutual Fund Calculator</a>
-          can show how disciplined investing works in products that may rise or fall with markets.</p>
+      /* ── Scroll reveal ── */
+      .ppf-reveal { opacity: 0; transform: translateY(26px); transition: opacity .6s ease, transform .6s ease; }
+      .ppf-reveal.visible { opacity: 1; transform: none; }
 
-        <h3>How PPF Interest is Calculated 💰</h3>
-        <p>The most important concept in PPF is compounding. Your balance does not just grow because you keep adding
-          money. It grows because last year's balance earns interest this year, and then that bigger balance can earn
-          interest again next year. This is why a 15-year or 20-year view often looks dramatically stronger than a
-          short-term view.</p>
-        <p>This calculator uses the annual compounding framework Balance<sub>next</sub> = Balance<sub>current</sub> × (1
-          + r) + yearly contribution, where <em>r</em> is the annual interest rate. That formula is helpful because it
-          shows the core idea very clearly: old money compounds, and new money keeps joining the compounding engine.
-          When you choose monthly simulation, the calculator becomes more detailed. It splits your yearly amount into 12
-          equal deposits and lets interest build across the year before crediting it annually, which better mirrors real
-          deposit behavior for many users.</p>
-        <p>In plain language, this means timing matters. If money enters the account earlier, it gets more time to work.
-          If it enters later, it gets less time. That is why many people like monthly discipline, while others prefer
-          planning around a yearly contribution. Both styles are possible, and this tool lets you compare them
-          instantly.</p>
-        <p>Interest rates can also change. PPF does not promise one permanent rate forever. That is why this page makes
-          the interest field adjustable instead of locking it. As of the official National Savings Institute table that
-          covered FY 2025-26 through March 31, 2026, PPF was listed at 7.1%, but small savings rates can be revised. A
-          flexible calculator is more useful than a rigid one because it helps you plan under different rate assumptions
-          instead of pretending the future is fixed.</p>
+      /* ══════════════════════════════════
+         GUIDE SECTION
+      ══════════════════════════════════ */
+      #guide {
+        padding: 0;
+        background: none;
+        border: none;
+        box-shadow: none;
+        margin-top: 2.5rem;
+      }
 
-        <h3>Benefits of PPF Investment 📈</h3>
-        <p>One major benefit of PPF is safety. Because it is government-backed, many savers see it as a dependable place
-          for long-term money. That does not mean it will give the highest return in every comparison, but it does mean
-          the risk profile feels very different from equity products. For conservative investors, that peace of mind
-          matters a lot.</p>
-        <p>Another big advantage is discipline. A 15-year lock-in horizon encourages patience. Short-term temptation
-          becomes less powerful because the account is built for a much longer purpose. Over time, that discipline can
-          be a strength. Many people do not fail at investing because they picked the worst product. They fail because
-          they stop too early, react emotionally, or keep changing direction. PPF's structure naturally reduces some of
-          that noise.</p>
-        <p>Tax efficiency is another reason PPF is widely discussed in India. Contributions, growth, and maturity have
-          historically been attractive from a tax perspective under the applicable rules. Since tax rules can change, it
-          is always smart to confirm the latest legal treatment, but from a planning point of view, that tax advantage
-          has made PPF a very popular long-term option for decades.</p>
-        <p>PPF is also easy to understand. That may sound small, but it is actually powerful. A financial plan you
-          understand is a plan you are more likely to follow. If you can clearly see your yearly contribution, your
-          interest, and your closing balance, you are much more likely to stay committed than if you are dealing with a
-          product that feels confusing or opaque.</p>
+      .ppf-guide-header {
+        background: linear-gradient(135deg, #0c1a2e 0%, #0f4c3a 60%, #0d766e 100%);
+        border-radius: 24px;
+        padding: 3rem 2.5rem 2.5rem;
+        margin-bottom: 2rem;
+        position: relative;
+        overflow: hidden;
+      }
+      .ppf-guide-header::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(circle at 80% 20%, rgba(13,148,136,.25) 0%, transparent 50%),
+          radial-gradient(circle at 10% 80%, rgba(245,158,11,.1) 0%, transparent 40%);
+        pointer-events: none;
+      }
+      .ppf-guide-header::after {
+        content: '₹';
+        position: absolute;
+        right: 2rem; bottom: -1rem;
+        font-size: 9rem;
+        font-weight: 900;
+        color: rgba(255,255,255,.04);
+        line-height: 1;
+        pointer-events: none;
+        user-select: none;
+      }
+      .ppf-eyebrow {
+        font-family: 'DM Sans', sans-serif;
+        font-size: .72rem;
+        font-weight: 700;
+        letter-spacing: .14em;
+        text-transform: uppercase;
+        color: #5eead4;
+        margin-bottom: .75rem;
+        display: block;
+      }
+      .ppf-guide-header h2 {
+        font-family: 'Lora', Georgia, serif;
+        font-size: clamp(1.75rem, 4.5vw, 2.75rem);
+        font-weight: 700;
+        color: #fff;
+        line-height: 1.12;
+        margin: 0 0 1rem;
+        border: none;
+        padding: 0;
+      }
+      .ppf-guide-lead {
+        font-family: 'DM Sans', sans-serif;
+        font-size: 1.05rem;
+        color: rgba(255,255,255,.75);
+        line-height: 1.78;
+        max-width: 680px;
+        margin: 0;
+      }
+      .ppf-guide-lead strong { color: #99f6e4; font-weight: 600; }
 
-        <h3>Practical Example: Investing ₹1.5 Lakh Every Year 💡</h3>
-        <p>Let us take a practical example. Suppose you invest the full ₹1.5 lakh every year, which is the maximum
-          allowed contribution under the common PPF limit. Over 15 years, your total direct contribution becomes ₹22.5
-          lakh. But your maturity value is not just ₹22.5 lakh, because every year's balance has time to earn interest
-          on top of earlier interest. That is the power of compounding in action.</p>
-        <p>If the interest assumption stays around the 7.1% level, the final amount can move into the ₹40 lakh range
-          depending on how and when you contribute during the year. If you then extend the account by 5 more years, the
-          gap between total invested amount and maturity value can widen even further. That is why extension mode is
-          important. The first 15 years build the habit and base corpus. The next 5 years often show just how strong
-          long-term compounding can become.</p>
-        <p>Now imagine that instead of keeping the amount flat, you slowly step up your yearly contribution at a modest
-          rate when your income rises. This calculator allows that too. The moment you add even a small contribution
-          growth rate, the future projection changes. Of course, PPF's yearly cap still matters, so once you hit ₹1.5
-          lakh, later contributions stop increasing. But until then, a step-up plan can meaningfully improve the
-          long-term result.</p>
+      /* ── Stat strip ── */
+      .ppf-stat-strip {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+        gap: .85rem;
+        margin: 2rem 0;
+      }
+      .ppf-stat-card {
+        background: #fff;
+        border: 1px solid rgba(13,148,136,.18);
+        border-radius: 18px;
+        padding: 1.15rem 1rem;
+        text-align: center;
+        box-shadow: 0 2px 10px rgba(15,23,42,.06);
+        transition: transform .2s ease, box-shadow .2s ease;
+      }
+      .ppf-stat-card:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(15,23,42,.1); }
+      .ppf-stat-value {
+        font-family: 'Lora', Georgia, serif;
+        font-size: 1.55rem;
+        font-weight: 700;
+        color: #0f766e;
+        line-height: 1.1;
+        margin-bottom: .35rem;
+      }
+      .ppf-stat-label {
+        font-family: 'DM Sans', sans-serif;
+        font-size: .78rem;
+        font-weight: 500;
+        color: #64748b;
+        line-height: 1.4;
+      }
 
-        <h3>What Happens After 15 Years? 🔁</h3>
-        <p>This is one of the most useful but often misunderstood parts of PPF. Many savers know about the initial
-          15-year maturity, but fewer think deeply about extension. If you do not urgently need the money, extending the
-          account in blocks of 5 years can be a smart move. Why? Because the balance you built over the first 15 years
-          is now larger, and larger balances create larger interest amounts.</p>
-        <p>Think about it this way: the early years of compounding are slower because your balance is still growing.
-          Later years often feel more rewarding because the balance is already sizable. So stopping exactly at maturity
-          is not always the best wealth-building decision. Sometimes the real compounding magic shows up in the years
-          after the original term. That is why the extension module on this page is not just a bonus feature. It is a
-          planning feature that can materially change how you think about the account.</p>
+      /* ── Guide blocks ── */
+      .ppf-guide-body { display: grid; gap: 1.2rem; }
+      .ppf-guide-block {
+        background: #fff;
+        border: 1px solid rgba(13,148,136,.12);
+        border-radius: 20px;
+        padding: 1.85rem 2rem;
+        box-shadow: 0 2px 10px rgba(15,23,42,.05);
+        position: relative;
+      }
+      .ppf-block-num {
+        position: absolute;
+        top: 1.4rem; right: 1.75rem;
+        font-family: 'Lora', Georgia, serif;
+        font-size: 3.5rem;
+        font-weight: 700;
+        color: rgba(13,148,136,.06);
+        line-height: 1;
+        user-select: none;
+        pointer-events: none;
+      }
+      .ppf-guide-block h3 {
+        font-family: 'Lora', Georgia, serif;
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: #0f172a;
+        margin: 0 0 .85rem;
+        display: flex;
+        align-items: center;
+        gap: .55rem;
+      }
+      .ppf-guide-block h3 .ppf-hico {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px; height: 32px;
+        background: #ccfbf1;
+        border-radius: 9px;
+        font-size: .95rem;
+        flex-shrink: 0;
+      }
+      .ppf-guide-block p {
+        font-family: 'DM Sans', sans-serif;
+        font-size: .97rem;
+        color: #475569;
+        line-height: 1.78;
+        margin: 0 0 .85rem;
+      }
+      .ppf-guide-block p:last-child { margin-bottom: 0; }
+      .ppf-guide-block a { color: #0f766e; font-weight: 600; }
 
-        <h3>PPF vs FD vs Mutual Funds 🧠</h3>
-        <p>Beginners often ask whether PPF is better than a fixed deposit or a mutual fund. The honest answer is that
-          these products solve different problems. PPF is built for long-term disciplined savings with government
-          backing. A fixed deposit is often easier for shorter or medium-term certainty. Mutual funds are market-linked
-          and can potentially deliver higher growth, but they also come with volatility and no guaranteed path.</p>
-        <p>If safety and tax-efficient long-term compounding are your top priorities, PPF can be a very strong fit. If
-          you need fixed tenure certainty for a near-term requirement, an FD may feel simpler. If your goal is higher
-          long-term wealth creation and you can tolerate market ups and downs, mutual funds may deserve a place in your
-          plan. In fact, many serious investors do not choose only one of these. They mix products based on goals, risk
-          tolerance, and time horizon.</p>
-        <p>That is where SmartCalcWorld's broader calculator ecosystem becomes useful. If you want to compare long-term
-          annualized performance, the <a href="https://smartcalcworld.com/finance/investment/cagr-calculator.html">CAGR
-            Calculator</a> helps convert growth into a yearly rate. If you want to test a full long-term investing path
-          across multiple assumptions, the <a
-            href="https://smartcalcworld.com/finance/investment/portfolio-growth-calculator.html">Portfolio Growth
-            Calculator</a> gives a broader planning view. If you want to work backward from a future target amount, the
-          <a href="https://smartcalcworld.com/finance/investment/investment-goal-calculator.html">Investment Goal
-            Calculator</a> can help you turn a dream number into a real monthly or yearly action plan.</p>
+      /* Pull quote */
+      .ppf-pull {
+        border-left: 4px solid #0d9488;
+        background: #f0fdfa;
+        border-radius: 0 14px 14px 0;
+        padding: .9rem 1.15rem;
+        margin: 1rem 0;
+        font-family: 'Lora', Georgia, serif;
+        font-style: italic;
+        font-size: 1.01rem;
+        color: #0f766e;
+        line-height: 1.65;
+      }
 
-        <h3>Why Scenario Comparison Helps 📊</h3>
-        <p>A single projection can be useful, but two projections are often better. That is the logic behind the
-          comparison mode on this calculator. Maybe you are not sure whether you can invest ₹1.5 lakh every year, so you
-          want to compare that with ₹1.2 lakh. Maybe you want to see how sensitive the final result is to a 7.1%
-          assumption versus 7.6%. With one click, you can compare both and make your decisions with more context.</p>
-        <p>This is a more realistic way to plan because life rarely follows one perfect path. In some years your income
-          rises. In other years your savings rate changes. A comparison tool does not predict the future, but it
-          prepares you to think clearly about different futures. That is what good financial planning really is: not
-          guessing perfectly, but staying prepared.</p>
+      /* Benefits grid */
+      .ppf-benefits {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
+        gap: .75rem;
+        margin: 1rem 0;
+      }
+      .ppf-benefit-chip {
+        background: linear-gradient(135deg, #f0fdfa, #eff6ff);
+        border: 1px solid rgba(13,148,136,.18);
+        border-radius: 14px;
+        padding: .9rem 1rem;
+      }
+      .ppf-benefit-icon { font-size: 1.3rem; margin-bottom: .4rem; display: block; }
+      .ppf-benefit-title {
+        font-family: 'DM Sans', sans-serif;
+        font-size: .82rem;
+        font-weight: 700;
+        color: #0f172a;
+        margin-bottom: .3rem;
+      }
+      .ppf-benefit-desc {
+        font-family: 'DM Sans', sans-serif;
+        font-size: .77rem;
+        color: #64748b;
+        line-height: 1.45;
+      }
 
-        <h3>How to Use This Calculator Well 🚀</h3>
-        <p>Start simple. Enter the yearly amount you think you can commit to comfortably. Keep the default 15-year
-          duration first. Then choose monthly or yearly mode depending on how you actually contribute. If your salary
-          grows over time and you expect to invest more later, add a small contribution growth rate. After that, look at
-          the result cards, the yearly growth chart, and the year-by-year table together. The combination of these views
-          makes the compounding story much easier to understand than one single final number.</p>
-        <p>Next, try extension mode. Many users are surprised by how much extra value 5 or 10 more years can add. Then
-          open scenario comparison and test one lower and one higher contribution plan. This kind of structured
-          exploration helps you build a PPF strategy that is realistic, not just optimistic. And if you want to place
-          PPF inside a broader investment journey, compare it with the <a
-            href="https://smartcalcworld.com/finance/finance-sip-calculator.html">SIP Calculator</a>, the <a
-            href="https://smartcalcworld.com/finance/investment/mutual-fund-calculator.html">Mutual Fund Calculator</a>,
-          and the goal-based tools mentioned above. Together, those calculators can help you decide how much of your
-          money belongs in safe compounding and how much belongs in market-linked growth.</p>
-      </article>
+      /* Example box */
+      .ppf-example {
+        background: linear-gradient(135deg, #0f172a, #134e4a);
+        border-radius: 16px;
+        padding: 1.4rem 1.5rem;
+        margin: 1rem 0;
+        color: #fff;
+      }
+      .ppf-example-title {
+        font-family: 'DM Sans', sans-serif;
+        font-size: .75rem;
+        font-weight: 700;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+        color: #5eead4;
+        margin-bottom: .85rem;
+      }
+      .ppf-example-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: .45rem 0;
+        border-bottom: 1px solid rgba(255,255,255,.07);
+        font-family: 'DM Sans', sans-serif;
+        font-size: .9rem;
+      }
+      .ppf-example-row:last-child { border-bottom: none; }
+      .ppf-example-label { color: rgba(255,255,255,.6); }
+      .ppf-example-value { font-weight: 700; color: #fff; }
+      .ppf-example-value.accent { color: #34d399; }
+
+      /* ══════════════════════════════════
+         COMPARISON TABLES
+      ══════════════════════════════════ */
+      #comparison-tables {
+        padding: 0;
+        background: none;
+        border: none;
+        box-shadow: none;
+        margin-top: 2rem;
+      }
+      .cmp-header {
+        background: linear-gradient(135deg, #1e3a5f 0%, #0d5c4a 100%);
+        border-radius: 24px;
+        padding: 2rem 2.5rem 2rem;
+        margin-bottom: 1.75rem;
+        position: relative;
+        overflow: hidden;
+      }
+      .cmp-header::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at 90% 50%, rgba(13,148,136,.2), transparent 55%);
+        pointer-events: none;
+      }
+      .cmp-header h2 {
+        font-family: 'Lora', Georgia, serif;
+        font-size: clamp(1.4rem, 3.5vw, 2rem);
+        font-weight: 700;
+        color: #fff;
+        border: none;
+        padding: 0;
+        margin-bottom: .5rem;
+      }
+      .cmp-header p {
+        font-family: 'DM Sans', sans-serif;
+        font-size: .97rem;
+        color: rgba(255,255,255,.62);
+        margin: 0;
+        line-height: 1.65;
+      }
+      .ppf-tables-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 1.25rem;
+      }
+      .ppf-table-card {
+        background: #fff;
+        border: 1px solid rgba(13,148,136,.15);
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 4px 18px rgba(15,23,42,.08);
+      }
+      .ppf-table-card-header {
+        background: linear-gradient(135deg, #f0fdfa, #eff6ff);
+        padding: 1.1rem 1.4rem .9rem;
+        border-bottom: 1px solid rgba(13,148,136,.12);
+      }
+      .ppf-table-card-header h3 {
+        font-family: 'Lora', Georgia, serif;
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: #0f172a;
+        margin: 0;
+      }
+      .ppf-table-card-header p {
+        font-family: 'DM Sans', sans-serif;
+        font-size: .8rem;
+        color: #64748b;
+        margin: .25rem 0 0;
+      }
+      .ppf-table-wrap { overflow-x: auto; }
+      .ppf-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-family: 'DM Sans', sans-serif;
+        font-size: .88rem;
+      }
+      .ppf-table thead th {
+        background: linear-gradient(135deg, #0f766e, #0d9488);
+        color: #fff;
+        font-weight: 700;
+        font-size: .78rem;
+        letter-spacing: .04em;
+        text-transform: uppercase;
+        padding: .75rem 1rem;
+        text-align: left;
+        white-space: nowrap;
+      }
+      .ppf-table thead th:first-child { border-radius: 0; }
+      .ppf-table tbody tr { border-bottom: 1px solid rgba(13,148,136,.08); }
+      .ppf-table tbody tr:last-child { border-bottom: none; }
+      .ppf-table tbody tr:nth-child(even) { background: rgba(240,253,250,.55); }
+      .ppf-table tbody tr:hover { background: rgba(204,251,241,.35); }
+      .ppf-table tbody td {
+        padding: .8rem 1rem;
+        color: #334155;
+        line-height: 1.5;
+        vertical-align: top;
+      }
+      .ppf-table tbody td:first-child {
+        font-weight: 700;
+        color: #0f172a;
+        white-space: nowrap;
+      }
+      /* Badge cells in comparison table */
+      .badge-ppf {
+        display: inline-block;
+        background: #ccfbf1;
+        color: #0f766e;
+        font-size: .72rem;
+        font-weight: 700;
+        padding: .15rem .55rem;
+        border-radius: 99px;
+        text-transform: uppercase;
+        letter-spacing: .04em;
+      }
+      .badge-fd {
+        display: inline-block;
+        background: #dbeafe;
+        color: #1d4ed8;
+        font-size: .72rem;
+        font-weight: 700;
+        padding: .15rem .55rem;
+        border-radius: 99px;
+        text-transform: uppercase;
+        letter-spacing: .04em;
+      }
+      .badge-mf {
+        display: inline-block;
+        background: #fef3c7;
+        color: #92400e;
+        font-size: .72rem;
+        font-weight: 700;
+        padding: .15rem .55rem;
+        border-radius: 99px;
+        text-transform: uppercase;
+        letter-spacing: .04em;
+      }
+      /* Full-width comparison table */
+      .ppf-compare-full {
+        background: #fff;
+        border: 1px solid rgba(13,148,136,.15);
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 4px 18px rgba(15,23,42,.08);
+        margin-top: 1.25rem;
+      }
+      .ppf-compare-full-header {
+        background: linear-gradient(135deg, #f0fdfa, #eff6ff);
+        padding: 1.1rem 1.4rem .9rem;
+        border-bottom: 1px solid rgba(13,148,136,.12);
+      }
+      .ppf-compare-full-header h3 {
+        font-family: 'Lora', Georgia, serif;
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: #0f172a;
+        margin: 0;
+      }
+      .ppf-compare-full-header p {
+        font-family: 'DM Sans', sans-serif;
+        font-size: .8rem;
+        color: #64748b;
+        margin: .25rem 0 0;
+      }
+
+      /* ══════════════════════════════════
+         MORE TOOLS
+      ══════════════════════════════════ */
+      #more-tools {
+        background: linear-gradient(135deg, #0c1a2e 0%, #1e293b 100%);
+        border: none;
+        border-radius: 24px;
+        padding: 2.5rem;
+        box-shadow: 0 20px 48px rgba(15,23,42,.22);
+        margin-top: 1.5rem;
+      }
+      #more-tools .ppf-tools-eyebrow {
+        font-family: 'DM Sans', sans-serif;
+        font-size: .72rem;
+        font-weight: 700;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+        color: #5eead4;
+        margin-bottom: .6rem;
+        display: block;
+      }
+      #more-tools h2 {
+        font-family: 'Lora', Georgia, serif;
+        font-size: clamp(1.4rem, 3vw, 2rem);
+        font-weight: 700;
+        color: #fff;
+        border: none;
+        padding: 0;
+        margin-bottom: .5rem;
+      }
+      #more-tools .ppf-tools-sub {
+        font-family: 'DM Sans', sans-serif;
+        font-size: .97rem;
+        color: rgba(255,255,255,.52);
+        margin-bottom: 2rem;
+        line-height: 1.7;
+      }
+      .ppf-tools-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(195px, 1fr));
+        gap: 1rem;
+      }
+      .ppf-tool-card {
+        background: rgba(255,255,255,.05);
+        border: 1px solid rgba(255,255,255,.09);
+        border-radius: 18px;
+        padding: 1.4rem 1.25rem;
+        text-decoration: none;
+        display: flex;
+        flex-direction: column;
+        gap: .45rem;
+        transition: background .22s, transform .22s, border-color .22s;
+        position: relative;
+        overflow: hidden;
+      }
+      .ppf-tool-card::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(13,148,136,.14), transparent 60%);
+        opacity: 0;
+        transition: opacity .22s;
+      }
+      .ppf-tool-card:hover { background: rgba(255,255,255,.09); transform: translateY(-2px); border-color: rgba(13,148,136,.4); text-decoration: none; }
+      .ppf-tool-card:hover::before { opacity: 1; }
+      .ppf-tool-emoji { font-size: 1.7rem; line-height: 1; }
+      .ppf-tool-name { font-family: 'DM Sans', sans-serif; font-size: .96rem; font-weight: 700; color: #fff; line-height: 1.3; }
+      .ppf-tool-desc { font-family: 'DM Sans', sans-serif; font-size: .81rem; color: rgba(255,255,255,.48); line-height: 1.55; flex: 1; }
+      .ppf-tool-arrow { font-size: .84rem; color: #5eead4; font-weight: 700; margin-top: .2rem; transition: transform .2s; display: inline-block; }
+      .ppf-tool-card:hover .ppf-tool-arrow { transform: translateX(4px); }
+
+      /* ══════════════════════════════════
+         FAQ
+      ══════════════════════════════════ */
+      #faq {
+        background: #fff;
+        border: 1px solid rgba(13,148,136,.13);
+        border-radius: 24px;
+        padding: 2.5rem;
+        box-shadow: 0 2px 14px rgba(15,23,42,.06);
+        margin-top: 1.5rem;
+      }
+      #faq .ppf-faq-eyebrow {
+        font-family: 'DM Sans', sans-serif;
+        font-size: .72rem;
+        font-weight: 700;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+        color: #0d9488;
+        margin-bottom: .6rem;
+        display: block;
+      }
+      #faq h2 {
+        font-family: 'Lora', Georgia, serif;
+        font-size: clamp(1.4rem, 3vw, 2rem);
+        font-weight: 700;
+        color: #0f172a;
+        border: none;
+        padding: 0;
+        margin-bottom: 1.75rem;
+      }
+      .ppf-faq-list { display: flex; flex-direction: column; gap: .6rem; }
+      .ppf-faq-item {
+        border: 1.5px solid rgba(13,148,136,.14);
+        border-radius: 14px;
+        overflow: hidden;
+        transition: border-color .2s;
+      }
+      .ppf-faq-item.open { border-color: rgba(13,148,136,.38); }
+      .ppf-faq-btn {
+        width: 100%;
+        background: none;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 1.05rem 1.25rem;
+        text-align: left;
+        transition: background .18s;
+      }
+      .ppf-faq-btn:hover { background: rgba(13,148,136,.04); }
+      .ppf-faq-item.open .ppf-faq-btn { background: rgba(13,148,136,.05); }
+      .ppf-faq-q {
+        font-family: 'DM Sans', sans-serif;
+        font-size: .96rem;
+        font-weight: 600;
+        color: #0f172a;
+        line-height: 1.4;
+      }
+      .ppf-faq-icon {
+        flex-shrink: 0;
+        width: 26px; height: 26px;
+        border-radius: 50%;
+        background: #ccfbf1;
+        color: #0f766e;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.1rem;
+        font-weight: 700;
+        transition: background .2s, transform .3s;
+        line-height: 1;
+      }
+      .ppf-faq-item.open .ppf-faq-icon { background: #0d9488; color: #fff; transform: rotate(45deg); }
+      .ppf-faq-body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .3s ease; }
+      .ppf-faq-item.open .ppf-faq-body { grid-template-rows: 1fr; }
+      .ppf-faq-inner { overflow: hidden; padding: 0 1.25rem; }
+      .ppf-faq-item.open .ppf-faq-inner { padding-bottom: 1.1rem; }
+      .ppf-faq-inner p {
+        font-family: 'DM Sans', sans-serif;
+        font-size: .93rem;
+        color: #475569;
+        line-height: 1.72;
+        margin: 0;
+        padding-top: .1rem;
+      }
+
+      /* ══════════════════════════════════
+         DISCLAIMER
+      ══════════════════════════════════ */
+      .ppf-disclaimer {
+        margin-top: 1.5rem;
+        border-radius: 16px;
+        border: 1px dashed rgba(13,148,136,.28);
+        background: rgba(240,253,250,.6);
+        padding: 1.1rem 1.35rem;
+        display: flex;
+        gap: .75rem;
+        align-items: flex-start;
+      }
+      .ppf-disclaimer-icon { font-size: 1.15rem; flex-shrink: 0; margin-top: .1rem; }
+      .ppf-disclaimer-text {
+        font-family: 'DM Sans', sans-serif;
+        font-size: .84rem;
+        color: #475569;
+        line-height: 1.65;
+      }
+      .ppf-disclaimer-text strong { color: #0f766e; }
+
+      @media (max-width: 640px) {
+        .ppf-guide-header { padding: 2rem 1.5rem 1.75rem; }
+        .ppf-guide-header::after { display: none; }
+        #more-tools, #faq { padding: 1.75rem 1.25rem; }
+        .cmp-header { padding: 1.5rem 1.25rem; }
+      }
+    </style>
+
+    <!-- ══════════════════════════════════
+         GUIDE
+    ══════════════════════════════════ -->
+    <section id="guide">
+      <div class="ppf-guide-header ppf-reveal">
+        <span class="ppf-eyebrow">Complete PPF Guide</span>
+        <h2>Your Patient Path to<br>Tax-Efficient Wealth</h2>
+        <p class="ppf-guide-lead">PPF is not a product you pick because it is exciting. You pick it because <strong>stability, government backing, and compounding</strong> matter more to you than chasing market highs. This guide explains exactly how it works — and how to make it work harder for you.</p>
+      </div>
+
+      <!-- Stat strip -->
+      <div class="ppf-stat-strip ppf-reveal">
+        <div class="ppf-stat-card">
+          <div class="ppf-stat-value">&#x20B9;500</div>
+          <div class="ppf-stat-label">Minimum yearly contribution</div>
+        </div>
+        <div class="ppf-stat-card">
+          <div class="ppf-stat-value">&#x20B9;1.5L</div>
+          <div class="ppf-stat-label">Maximum yearly contribution</div>
+        </div>
+        <div class="ppf-stat-card">
+          <div class="ppf-stat-value">15 yrs</div>
+          <div class="ppf-stat-label">Standard maturity period</div>
+        </div>
+        <div class="ppf-stat-card">
+          <div class="ppf-stat-value">5-yr</div>
+          <div class="ppf-stat-label">Extension blocks available</div>
+        </div>
+        <div class="ppf-stat-card">
+          <div class="ppf-stat-value">7.1%</div>
+          <div class="ppf-stat-label">Reference rate FY 2025&#8211;26</div>
+        </div>
+      </div>
+
+      <div class="ppf-guide-body">
+
+        <div class="ppf-guide-block ppf-reveal">
+          <div class="ppf-block-num">01</div>
+          <h3><span class="ppf-hico">&#x1F1EE;&#x1F1F3;</span> What Is PPF?</h3>
+          <p>Public Provident Fund is a government-backed long-term savings scheme designed for patient wealth accumulation. Unlike market-linked products, PPF has no exposure to equity volatility — the interest rate is declared by the government, and your principal is fully protected. The standard maturity period is 15 years, which naturally enforces discipline and makes it especially powerful when used as the safe-compounding anchor of a broader financial plan.</p>
+          <p>People use PPF for retirement preparation, children's education funding, building emergency backup savings, and conservative long-term wealth creation. If you are the kind of investor who loses sleep over market swings, PPF's structure is likely to feel calmer and more manageable than equity-heavy products — while still delivering meaningful compounding growth over time.</p>
+        </div>
+
+        <div class="ppf-guide-block ppf-reveal">
+          <div class="ppf-block-num">02</div>
+          <h3><span class="ppf-hico">&#x1F4B0;</span> How PPF Interest Works</h3>
+          <p>The most important concept in PPF is annual compounding. Your balance does not just grow because you keep adding money. It grows because last year's balance earns interest this year — and then that larger balance earns interest next year. The basic formula is:</p>
+          <div class="ppf-pull">Balance<sub>next</sub> = Balance<sub>current</sub> &times; (1 + r) + yearly contribution</div>
+          <p>Every rupee you add joins this compounding engine. Old money compounds; new money starts compounding. When you select monthly simulation mode, the calculator splits your yearly amount into 12 equal deposits and tracks interest through the year before crediting it annually — which more closely mirrors how most people actually contribute.</p>
+          <p>Timing also matters within the year. Money deposited earlier earns more days of interest than money deposited later. That is why monthly discipline can meaningfully outperform a single year-end lump-sum deposit over a 15-year horizon, even when the total annual amount is identical.</p>
+        </div>
+
+        <div class="ppf-guide-block ppf-reveal">
+          <div class="ppf-block-num">03</div>
+          <h3><span class="ppf-hico">&#x2728;</span> Why People Choose PPF</h3>
+          <div class="ppf-benefits">
+            <div class="ppf-benefit-chip">
+              <span class="ppf-benefit-icon">&#x1F6E1;&#xFE0F;</span>
+              <div class="ppf-benefit-title">Government Backing</div>
+              <div class="ppf-benefit-desc">Sovereign guarantee makes PPF one of the safest investment products available in India.</div>
+            </div>
+            <div class="ppf-benefit-chip">
+              <span class="ppf-benefit-icon">&#x1F4C8;</span>
+              <div class="ppf-benefit-title">Annual Compounding</div>
+              <div class="ppf-benefit-desc">Interest earned adds to the principal, creating a growing compounding base year after year.</div>
+            </div>
+            <div class="ppf-benefit-chip">
+              <span class="ppf-benefit-icon">&#x1F4CA;</span>
+              <div class="ppf-benefit-title">Tax Efficiency</div>
+              <div class="ppf-benefit-desc">Historically attractive tax treatment on contributions, interest, and maturity under applicable rules.</div>
+            </div>
+            <div class="ppf-benefit-chip">
+              <span class="ppf-benefit-icon">&#x1F9D8;</span>
+              <div class="ppf-benefit-title">Enforced Discipline</div>
+              <div class="ppf-benefit-desc">The 15-year structure naturally limits emotional decisions and encourages long-term commitment.</div>
+            </div>
+            <div class="ppf-benefit-chip">
+              <span class="ppf-benefit-icon">&#x1F4D6;</span>
+              <div class="ppf-benefit-title">Easy to Understand</div>
+              <div class="ppf-benefit-desc">A plan you understand is a plan you follow. PPF's transparency is a genuine strength.</div>
+            </div>
+          </div>
+          <p>Tax efficiency is a major reason PPF remains one of India's most popular savings instruments decade after decade. Since tax rules can evolve, confirm the current treatment with a professional — but the planning advantage has been consistently strong.</p>
+        </div>
+
+        <div class="ppf-guide-block ppf-reveal">
+          <div class="ppf-block-num">04</div>
+          <h3><span class="ppf-hico">&#x1F4A1;</span> Practical Example: Investing &#x20B9;1.5 Lakh Every Year</h3>
+          <div class="ppf-example">
+            <div class="ppf-example-title">Illustrative projection @ 7.1% for 15 years</div>
+            <div class="ppf-example-row">
+              <span class="ppf-example-label">Annual contribution</span>
+              <span class="ppf-example-value">&#x20B9;1,50,000</span>
+            </div>
+            <div class="ppf-example-row">
+              <span class="ppf-example-label">Total contributed over 15 years</span>
+              <span class="ppf-example-value">&#x20B9;22,50,000</span>
+            </div>
+            <div class="ppf-example-row">
+              <span class="ppf-example-label">Estimated maturity value</span>
+              <span class="ppf-example-value accent">~&#x20B9;40+ lakhs</span>
+            </div>
+            <div class="ppf-example-row">
+              <span class="ppf-example-label">Interest earned (compounding)</span>
+              <span class="ppf-example-value accent">~&#x20B9;17&#8211;18 lakhs</span>
+            </div>
+          </div>
+          <p>The gap between &#x20B9;22.5 lakh contributed and &#x20B9;40+ lakh received is entirely compounding doing its work over time. Extend the account by 5 more years and that gap widens further — because the larger your base, the larger each year's interest becomes. That is why extension mode is not just a feature, it is a serious planning tool.</p>
+        </div>
+
+        <div class="ppf-guide-block ppf-reveal">
+          <div class="ppf-block-num">05</div>
+          <h3><span class="ppf-hico">&#x1F504;</span> What Happens After 15 Years?</h3>
+          <p>This is one of the most underutilised parts of PPF planning. If you do not urgently need the money at maturity, extending in 5-year blocks is frequently the better wealth-building decision. Here is the key insight: the early years of compounding are slower because the balance is small. Later years feel dramatically more rewarding because the balance is large — and a large balance multiplied by even a stable rate produces sizeable annual interest.</p>
+          <div class="ppf-pull">The real compounding magic in PPF often shows up after year 15, not before it. Stopping at maturity is a choice — not a requirement.</div>
+          <p>An account that has grown to &#x20B9;40 lakh at year 15 might add &#x20B9;2.8 lakh or more in interest in its first year of extension alone — far more than the early years of the account produced. That scale effect is why this calculator's extension mode is one of its most valuable planning tools.</p>
+        </div>
+
+        <div class="ppf-guide-block ppf-reveal">
+          <div class="ppf-block-num">06</div>
+          <h3><span class="ppf-hico">&#x1F4CA;</span> Why Scenario Comparison Changes How You Plan</h3>
+          <p>A single projection is a starting point. Two projections are a conversation. The comparison mode lets you test &#x20B9;1.5 lakh versus &#x20B9;1.2 lakh, or 7.1% versus 7.6%, and see the full 15-year difference in one view. These numbers are not abstract — they represent real planning choices about what you can commit to and how sensitive the outcome is to each variable.</p>
+          <p>This is more realistic planning because life rarely follows one perfect path. In some years income rises and contributions can increase. In others, savings rates tighten. A comparison view does not predict the future, but it prepares you to think clearly about different possible futures — which is what good financial planning is really about.</p>
+        </div>
+
+        <div class="ppf-guide-block ppf-reveal">
+          <div class="ppf-block-num">07</div>
+          <h3><span class="ppf-hico">&#x1F680;</span> How to Use This Calculator Effectively</h3>
+          <p>Start with an amount you can commit to comfortably — not optimistically. Use monthly mode if your contributions are spread across the year, or yearly mode if you invest in one annual deposit. If you expect income to grow over time, add a small contribution growth rate and watch the projection improve. Then explore extension mode to see what staying invested beyond 15 years could mean for your final corpus.</p>
+          <p>Finally, open the comparison panel. Test one lower and one higher contribution scenario. Look at the result cards, the yearly growth chart, and the year-by-year table together. The combination of those views makes the compounding story far more vivid than any single summary number. PPF works best when you understand it deeply — this calculator is designed to help you do exactly that.</p>
+        </div>
+
+      </div>
     </section>
 
-    <section class="content-section" id="comparison-tables">
-      <h2>Quick PPF Comparison Tables</h2>
-      <p>These simple reference tables make PPF easier to understand for beginners who want the big picture before
-        deciding how it fits into a larger investment plan.</p>
-      <div class="comparison-grid">
-        <div>
-          <h3>PPF Key Planning Rules</h3>
-          <div class="tbl-wrap">
-            <table>
+    <!-- ══════════════════════════════════
+         COMPARISON TABLES
+    ══════════════════════════════════ -->
+    <section id="comparison-tables">
+      <div class="cmp-header ppf-reveal">
+        <span class="ppf-eyebrow">Quick Reference</span>
+        <h2>PPF at a Glance</h2>
+        <p>These tables give beginners the essential rules and product comparisons needed to understand where PPF fits — before running detailed projections.</p>
+      </div>
+
+      <div class="ppf-tables-grid ppf-reveal">
+        <!-- Table 1: Key Rules -->
+        <div class="ppf-table-card">
+          <div class="ppf-table-card-header">
+            <h3>&#x1F4CB; PPF Key Planning Rules</h3>
+            <p>Essential parameters that govern how PPF works</p>
+          </div>
+          <div class="ppf-table-wrap">
+            <table class="ppf-table">
               <thead>
                 <tr>
                   <th>Rule</th>
-                  <th>Meaning</th>
+                  <th>Detail</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <td>Minimum contribution</td>
-                  <td>₹500 per year</td>
+                  <td>&#x20B9;500 per year</td>
                 </tr>
                 <tr>
                   <td>Maximum contribution</td>
-                  <td>₹1.5 lakh per year</td>
+                  <td>&#x20B9;1.5 lakh per year</td>
                 </tr>
                 <tr>
                   <td>Standard maturity</td>
@@ -1712,150 +3289,212 @@
                   <td>5-year blocks after maturity</td>
                 </tr>
                 <tr>
-                  <td>Compounding view used here</td>
-                  <td>Annual credit of interest with yearly or monthly contribution simulation</td>
+                  <td>Interest credit timing</td>
+                  <td>Annually, at year-end</td>
+                </tr>
+                <tr>
+                  <td>Compounding model used</td>
+                  <td>Annual credit; monthly simulation also available</td>
                 </tr>
               </tbody>
             </table>
           </div>
         </div>
-        <div>
-          <h3>PPF vs FD vs Mutual Funds</h3>
-          <div class="tbl-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Factor</th>
-                  <th>PPF</th>
-                  <th>FD</th>
-                  <th>Mutual Funds</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Risk profile</td>
-                  <td>Government-backed, low risk</td>
-                  <td>Generally low to moderate depending on bank and structure</td>
-                  <td>Market-linked, can be volatile</td>
-                </tr>
-                <tr>
-                  <td>Best for</td>
-                  <td>Long-term disciplined saving</td>
-                  <td>Capital parking and short to medium-term certainty</td>
-                  <td>Long-term growth seekers</td>
-                </tr>
-                <tr>
-                  <td>Return path</td>
-                  <td>Interest rate declared by government</td>
-                  <td>Fixed or predetermined for the tenure</td>
-                  <td>Depends on market performance</td>
-                </tr>
-                <tr>
-                  <td>Liquidity</td>
-                  <td>Limited, long-term product</td>
-                  <td>Usually easier than PPF, may involve penalty</td>
-                  <td>Depends on scheme type and market conditions</td>
-                </tr>
-                <tr>
-                  <td>Growth potential</td>
-                  <td>Stable and compounding-focused</td>
-                  <td>Stable but often lower than equity-linked products</td>
-                  <td>Potentially higher over long periods, not guaranteed</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+
+      </div>
+
+      <!-- Full-width comparison table -->
+      <div class="ppf-compare-full ppf-reveal">
+        <div class="ppf-compare-full-header">
+          <h3>&#x2696;&#xFE0F; PPF vs Fixed Deposit vs Mutual Funds</h3>
+          <p>Understanding these differences helps you decide how much of your plan each product should cover</p>
+        </div>
+        <div class="ppf-table-wrap">
+          <table class="ppf-table">
+            <thead>
+              <tr>
+                <th>Factor</th>
+                <th><span class="badge-ppf">PPF</span></th>
+                <th><span class="badge-fd">Fixed Deposit</span></th>
+                <th><span class="badge-mf">Mutual Funds</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Risk profile</td>
+                <td>Government-backed, very low risk</td>
+                <td>Generally low to moderate depending on institution</td>
+                <td>Market-linked; can be highly volatile</td>
+              </tr>
+              <tr>
+                <td>Best suited for</td>
+                <td>Long-term disciplined savers who value safety</td>
+                <td>Capital parking and short to medium-term certainty</td>
+                <td>Long-term wealth creators comfortable with market swings</td>
+              </tr>
+              <tr>
+                <td>Return path</td>
+                <td>Government-declared interest rate, annually credited</td>
+                <td>Fixed or predetermined rate for the chosen tenure</td>
+                <td>Depends entirely on market performance — not guaranteed</td>
+              </tr>
+              <tr>
+                <td>Liquidity</td>
+                <td>Limited; long-term lock-in with partial rules</td>
+                <td>Usually accessible with a penalty before maturity</td>
+                <td>Varies by scheme type; open-ended funds are generally liquid</td>
+              </tr>
+              <tr>
+                <td>Growth potential</td>
+                <td>Stable compounding; predictable growth curve</td>
+                <td>Stable but typically lower than equity-linked products</td>
+                <td>Potentially higher over long periods; not guaranteed</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </section>
 
-    <section class="content-section" id="more-tools">
-      <h2>Explore More Investment Tools</h2>
-      <p>PPF planning becomes stronger when you connect it with recurring investing, market-linked return analysis,
-        long-term portfolio growth, and target-based investing across SmartCalcWorld.</p>
-      <div class="links-grid">
-        <a class="link-card" href="https://smartcalcworld.com/finance/finance-sip-calculator.html"><span
-            class="link-icon">📈</span><strong>SIP Calculator</strong>
-          <p>See how monthly mutual fund investing compares with the safer and steadier PPF route.</p>
+    <!-- ══════════════════════════════════
+         MORE TOOLS
+    ══════════════════════════════════ -->
+    <section id="more-tools">
+      <span class="ppf-tools-eyebrow ppf-reveal">SmartCalcWorld Suite</span>
+      <h2 class="ppf-reveal">Go Further with These Tools</h2>
+      <p class="ppf-tools-sub ppf-reveal">PPF planning becomes much more powerful when connected to broader investment planning. Each tool below answers a different dimension of the same long-term wealth question.</p>
+      <div class="ppf-tools-grid">
+        <a class="ppf-tool-card ppf-reveal" href="https://smartcalcworld.com/finance/finance-sip-calculator.html">
+          <div class="ppf-tool-emoji">&#x1F4C8;</div>
+          <div class="ppf-tool-name">SIP Calculator</div>
+          <div class="ppf-tool-desc">See how disciplined monthly mutual fund investing compares with the safer, steadier PPF route.</div>
+          <span class="ppf-tool-arrow">Explore &#x2192;</span>
         </a>
-        <a class="link-card" href="https://smartcalcworld.com/finance/investment/mutual-fund-calculator.html"><span
-            class="link-icon">💹</span><strong>Mutual Fund Calculator</strong>
-          <p>Model market-linked growth if you want to compare PPF with long-term fund investing.</p>
+        <a class="ppf-tool-card ppf-reveal" href="https://smartcalcworld.com/finance/investment/mutual-fund-calculator.html">
+          <div class="ppf-tool-emoji">&#x1F4B9;</div>
+          <div class="ppf-tool-name">Mutual Fund Calculator</div>
+          <div class="ppf-tool-desc">Model market-linked growth across different return scenarios and compare with PPF outcomes.</div>
+          <span class="ppf-tool-arrow">Explore &#x2192;</span>
         </a>
-        <a class="link-card" href="https://smartcalcworld.com/finance/investment/cagr-calculator.html"><span
-            class="link-icon">📊</span><strong>CAGR Calculator</strong>
-          <p>Turn long-term growth into an annualized rate for easier investment comparison.</p>
+        <a class="ppf-tool-card ppf-reveal" href="https://smartcalcworld.com/finance/investment/cagr-calculator.html">
+          <div class="ppf-tool-emoji">&#x1F4CA;</div>
+          <div class="ppf-tool-name">CAGR Calculator</div>
+          <div class="ppf-tool-desc">Convert total portfolio growth into an annualised rate for easier cross-product comparison.</div>
+          <span class="ppf-tool-arrow">Explore &#x2192;</span>
         </a>
-        <a class="link-card" href="https://smartcalcworld.com/finance/investment/portfolio-growth-calculator.html"><span
-            class="link-icon">🧠</span><strong>Portfolio Growth Calculator</strong>
-          <p>Plan beyond one product and build a broader long-term investing roadmap.</p>
+        <a class="ppf-tool-card ppf-reveal" href="https://smartcalcworld.com/finance/investment/portfolio-growth-calculator.html">
+          <div class="ppf-tool-emoji">&#x1F9E0;</div>
+          <div class="ppf-tool-name">Portfolio Growth Calculator</div>
+          <div class="ppf-tool-desc">Build a broader long-term investing roadmap — see PPF as one piece of a complete plan.</div>
+          <span class="ppf-tool-arrow">Explore &#x2192;</span>
         </a>
-        <a class="link-card" href="https://smartcalcworld.com/finance/investment/investment-goal-calculator.html"><span
-            class="link-icon">🎯</span><strong>Investment Goal Calculator</strong>
-          <p>Work backward from a future target and decide how PPF fits into the journey.</p>
+        <a class="ppf-tool-card ppf-reveal" href="https://smartcalcworld.com/finance/investment/investment-goal-calculator.html">
+          <div class="ppf-tool-emoji">&#x1F3AF;</div>
+          <div class="ppf-tool-name">Investment Goal Calculator</div>
+          <div class="ppf-tool-desc">Work backward from a future target to decide how much PPF should contribute to the journey.</div>
+          <span class="ppf-tool-arrow">Explore &#x2192;</span>
         </a>
       </div>
     </section>
 
-    <section class="content-section" id="faq">
-      <h2>Frequently Asked Questions</h2>
-      <div class="faq-item">
-        <div class="faq-q">What is PPF?</div>
-        <div class="faq-a">PPF or Public Provident Fund is a long-term savings scheme backed by the Government of India.
-          It is known for stable compounding, a 15-year maturity term, and strong popularity among conservative savers.
+    <!-- ══════════════════════════════════
+         FAQ
+    ══════════════════════════════════ -->
+    <section id="faq">
+      <span class="ppf-faq-eyebrow ppf-reveal">Common Questions</span>
+      <h2 class="ppf-reveal">Frequently Asked Questions</h2>
+      <div class="ppf-faq-list">
+        <div class="ppf-faq-item ppf-reveal">
+          <button class="ppf-faq-btn" onclick="ppfToggleFaq(this)" aria-expanded="false">
+            <span class="ppf-faq-q">What is PPF?</span>
+            <span class="ppf-faq-icon">+</span>
+          </button>
+          <div class="ppf-faq-body"><div class="ppf-faq-inner"><p>Public Provident Fund is a long-term savings scheme backed by the Government of India. It is known for stable compounding, a 15-year maturity term, and consistently strong popularity among conservative savers who prioritise capital safety over market-linked returns.</p></div></div>
+        </div>
+        <div class="ppf-faq-item ppf-reveal">
+          <button class="ppf-faq-btn" onclick="ppfToggleFaq(this)" aria-expanded="false">
+            <span class="ppf-faq-q">What is the current PPF interest rate?</span>
+            <span class="ppf-faq-icon">+</span>
+          </button>
+          <div class="ppf-faq-body"><div class="ppf-faq-inner"><p>PPF interest rates are revised quarterly by the government and can change. This calculator loads 7.1% as the default reference because the official National Savings Institute table listed 7.1% through March 31, 2026 for FY 2025&#8211;26. Always verify the latest notification before making planning decisions.</p></div></div>
+        </div>
+        <div class="ppf-faq-item ppf-reveal">
+          <button class="ppf-faq-btn" onclick="ppfToggleFaq(this)" aria-expanded="false">
+            <span class="ppf-faq-q">How is PPF interest calculated?</span>
+            <span class="ppf-faq-icon">+</span>
+          </button>
+          <div class="ppf-faq-body"><div class="ppf-faq-inner"><p>Interest is credited annually at the end of each financial year. In this calculator, yearly mode uses the annual compounding formula directly, while monthly mode splits the yearly amount into 12 equal deposits, accrues interest on the running monthly balance, and still credits the full year's interest at year-end — closely mirroring real PPF deposit behaviour.</p></div></div>
+        </div>
+        <div class="ppf-faq-item ppf-reveal">
+          <button class="ppf-faq-btn" onclick="ppfToggleFaq(this)" aria-expanded="false">
+            <span class="ppf-faq-q">Can I invest monthly in PPF?</span>
+            <span class="ppf-faq-icon">+</span>
+          </button>
+          <div class="ppf-faq-body"><div class="ppf-faq-inner"><p>Yes. Many investors contribute to their PPF account on a monthly basis throughout the year, which mirrors a salary-linked savings habit. This calculator's monthly simulation mode is designed exactly for that use case and shows you how spreading deposits across the year changes the yearly balance path compared to a single annual deposit.</p></div></div>
+        </div>
+        <div class="ppf-faq-item ppf-reveal">
+          <button class="ppf-faq-btn" onclick="ppfToggleFaq(this)" aria-expanded="false">
+            <span class="ppf-faq-q">What happens after 15 years?</span>
+            <span class="ppf-faq-icon">+</span>
+          </button>
+          <div class="ppf-faq-body"><div class="ppf-faq-inner"><p>After the initial 15-year maturity, a PPF account can be extended in blocks of 5 years with or without further contributions. This is often one of the most financially powerful decisions an account holder can make, because the large corpus built over 15 years then compounds at an even larger scale. The extension module in this calculator lets you project exactly how much additional value those extra years could create.</p></div></div>
+        </div>
+        <div class="ppf-faq-item ppf-reveal">
+          <button class="ppf-faq-btn" onclick="ppfToggleFaq(this)" aria-expanded="false">
+            <span class="ppf-faq-q">Is PPF tax-free?</span>
+            <span class="ppf-faq-icon">+</span>
+          </button>
+          <div class="ppf-faq-body"><div class="ppf-faq-inner"><p>PPF is widely known for favourable tax treatment under the applicable Indian income tax rules, covering contributions, earned interest, and maturity proceeds. Tax laws can change, so it is prudent to confirm the current position with a chartered accountant or tax professional before making decisions based on tax treatment.</p></div></div>
+        </div>
+        <div class="ppf-faq-item ppf-reveal">
+          <button class="ppf-faq-btn" onclick="ppfToggleFaq(this)" aria-expanded="false">
+            <span class="ppf-faq-q">Can I withdraw early from PPF?</span>
+            <span class="ppf-faq-icon">+</span>
+          </button>
+          <div class="ppf-faq-body"><div class="ppf-faq-inner"><p>PPF is intentionally designed as a long-term product, so early full withdrawal is not permitted. Partial withdrawals are allowed under specific conditions after the 7th year. Loans against the PPF balance are also available in certain years. This calculator focuses on long-term maturity and extension planning rather than partial withdrawal timing, so always check current PPF rules for withdrawal-specific guidance.</p></div></div>
+        </div>
+        <div class="ppf-faq-item ppf-reveal">
+          <button class="ppf-faq-btn" onclick="ppfToggleFaq(this)" aria-expanded="false">
+            <span class="ppf-faq-q">Is PPF better than mutual funds?</span>
+            <span class="ppf-faq-icon">+</span>
+          </button>
+          <div class="ppf-faq-body"><div class="ppf-faq-inner"><p>They are fundamentally different products solving different problems. PPF offers government-backed safety, predictable compounding, and tax efficiency. Mutual funds are market-linked and can potentially deliver higher returns over long periods, but they also come with volatility, no capital guarantee, and returns that depend entirely on market performance. Many serious investors use both — PPF as the safe core and mutual funds for growth — rather than choosing one exclusively.</p></div></div>
+        </div>
+        <div class="ppf-faq-item ppf-reveal">
+          <button class="ppf-faq-btn" onclick="ppfToggleFaq(this)" aria-expanded="false">
+            <span class="ppf-faq-q">Why should I compare different PPF scenarios?</span>
+            <span class="ppf-faq-icon">+</span>
+          </button>
+          <div class="ppf-faq-body"><div class="ppf-faq-inner"><p>A single projection assumes everything goes exactly as planned. Scenario comparison acknowledges that life is variable. You can test a lower yearly contribution, a different rate assumption, or both, and see precisely how much the final maturity value changes. That comparison gives you a realistic range of outcomes rather than a single number — which makes your long-term planning more robust and honest.</p></div></div>
         </div>
       </div>
-      <div class="faq-item">
-        <div class="faq-q">What is current PPF interest rate?</div>
-        <div class="faq-a">PPF interest rates can change, so always verify the latest government notification. This
-          calculator loads 7.1% as a default reference because the official National Savings Institute table showed 7.1%
-          through March 31, 2026 for FY 2025-26.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">How is PPF interest calculated?</div>
-        <div class="faq-a">Interest is credited annually. In this calculator, yearly mode uses the annual compounding
-          shortcut, while monthly mode splits the yearly amount across 12 deposits and still credits total interest only
-          once at year end.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">Can I invest monthly in PPF?</div>
-        <div class="faq-a">Yes. Many people contribute across the year. This calculator's monthly mode is designed for
-          that use case and helps you see how monthly deposits change the yearly balance path.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">What happens after 15 years?</div>
-        <div class="faq-a">A PPF account can be extended in blocks of 5 years. Extension mode in this calculator shows
-          how the maturity value may grow if you continue instead of stopping at year 15.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">Is PPF tax-free?</div>
-        <div class="faq-a">PPF is widely known for favorable tax treatment under the applicable rules in India. Tax laws
-          can change, so it is wise to check the current law or consult a tax professional for personal guidance.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">Can I withdraw early from PPF?</div>
-        <div class="faq-a">PPF is intended to be a long-term scheme, so early access is limited and subject to the
-          relevant rules. This calculator focuses on long-term maturity and extension planning rather than partial
-          withdrawal timing.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">Is PPF better than mutual funds?</div>
-        <div class="faq-a">They are different products. PPF is safer and more predictable, while mutual funds are
-          market-linked and can deliver higher or lower returns depending on performance. Your choice depends on your
-          comfort with risk and your long-term goals.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">Why should I compare different PPF scenarios?</div>
-        <div class="faq-a">Comparing scenarios helps you plan with more realism. You can test a lower yearly
-          contribution, a different rate assumption, or both, and see how much the maturity value changes before
-          committing to a long-term target.</div>
-      </div>
     </section>
 
-    <div class="disclaimer1"><strong>Disclaimer:</strong> This PPF calculator is for educational and planning use only.
-      Results are estimates based on the assumptions you enter and may differ from official institution-specific
-      calculations because actual deposit timing, interest notifications, taxes, partial withdrawals, loans, and rule
-      changes can affect the final outcome. Always confirm current PPF rules before making financial decisions.</div>
+    <div class="ppf-disclaimer ppf-reveal">
+      <span class="ppf-disclaimer-icon">&#x2139;&#xFE0F;</span>
+      <p class="ppf-disclaimer-text"><strong>Disclaimer:</strong> This PPF calculator is for educational and planning use only. Results are estimates based on the assumptions you enter and may differ from institution-specific calculations because actual deposit timing, interest notifications, taxes, partial withdrawals, loans, and rule changes can affect the final outcome. Always confirm current PPF rules before making financial decisions.</p>
+    </div>
+
+    <script>
+      function ppfToggleFaq(btn) {
+        var item = btn.closest('.ppf-faq-item');
+        var isOpen = item.classList.contains('open');
+        document.querySelectorAll('.ppf-faq-item.open').forEach(function(el) {
+          el.classList.remove('open');
+          el.querySelector('.ppf-faq-btn').setAttribute('aria-expanded', 'false');
+        });
+        if (!isOpen) {
+          item.classList.add('open');
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      }
+      var ppfRevealObs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+          if (e.isIntersecting) { e.target.classList.add('visible'); ppfRevealObs.unobserve(e.target); }
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -36px 0px' });
+      document.querySelectorAll('.ppf-reveal').forEach(function(el) { ppfRevealObs.observe(el); });
+    </script>
   </main>
 
   <footer>
@@ -2407,6 +4046,46 @@
     }
 
     window.addEventListener("DOMContentLoaded", init);
+  </script>
+
+  <!-- Dark mode toggle -->
+  <button id="dm-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">🌙</button>
+
+  <script>
+    (function () {
+      var html = document.documentElement;
+      var btn  = document.getElementById("dm-toggle");
+      var DARK = "dark";
+      var KEY  = "ppf-theme";
+
+      // Apply saved preference or system preference on load
+      var saved = localStorage.getItem(KEY);
+      var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      var isDark = saved ? saved === DARK : prefersDark;
+      if (isDark) html.setAttribute("data-theme", DARK);
+      btn.textContent = isDark ? "☀️" : "🌙";
+
+      btn.addEventListener("click", function () {
+        isDark = html.getAttribute("data-theme") === DARK;
+        if (isDark) {
+          html.removeAttribute("data-theme");
+          localStorage.setItem(KEY, "light");
+          btn.textContent = "🌙";
+        } else {
+          html.setAttribute("data-theme", DARK);
+          localStorage.setItem(KEY, DARK);
+          btn.textContent = "☀️";
+        }
+      });
+
+      // Keep in sync if system preference changes
+      window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function (e) {
+        if (!localStorage.getItem(KEY)) {
+          if (e.matches) { html.setAttribute("data-theme", DARK); btn.textContent = "☀️"; }
+          else           { html.removeAttribute("data-theme");     btn.textContent = "🌙"; }
+        }
+      });
+    })();
   </script>
 </body>
 
